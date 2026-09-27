@@ -27,7 +27,7 @@ Module 1 draft (9 slides, s0–s8) is in the file. Edwin's verdict: it does not 
 
 | # | The reader must believe | Evidence (dossier IDs) | Class |
 |---|---|---|---|
-| 1 | What the thing is and what it is for: a model looping look → think → act, one full model call per step, tens to hundreds of steps per real task; one example (the same expense report a thousand times a month, started from zero each time) | none needed; a loop diagram | — |
+| 1 | What the thing is and what it is for: a model looping look → think → act, one full model call per step, tens to hundreds of steps per real task; one generic example of a repeated web workflow (not ExpenseAI — Edwin's decision 2026-09-27: the deck does not use the Concur self-measurement as evidence or as its running example) | none needed; a loop diagram | — |
 | 2 | Today it is slow, expensive and unreliable: hour-scale tasks take ~318 calls (mean), the best agent completes ~20%, ≈$72 per attempt ≈ $351 per success (calc.) | E6/D3, E41, E5/D2 (1.6 h is an annotator estimate) | D (OSWorld team) |
 | 3 | Why, and why waiting for faster models is not enough: the time and cost come from the loop's structure (serial round-trips, history re-sent every step → quadratic growth, convex cost of accuracy), not from one slow part | E22, E45 (A); 6× / 9× / 9.6× (three D-class) | A + D |
 | 4 | This is not small: agents are the majority workload; speed is already sold as a paid tier | OpenRouter (B), Gartner (C), MAP (A); fast-tier existence and pricing (B), multipliers labelled vendor-stated | A/B/C |
