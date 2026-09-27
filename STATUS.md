@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-09-27, by Claude (project thread, §8.3 follow-ups) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md` · **Current milestone:** v2.1 done → working toward **v3**
+**Last updated:** 2026-09-27, by Claude (project thread, v3 merge) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -8,7 +8,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 | What | Path | Notes |
 |---|---|---|
-| Canonical dossier | `Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md` | E1–E93 evidence, D1–D94 discrepancies, Parts I–VIII, Appendices A–B. Never overwrite; new versions get new filenames (`…-v2.1-…`, `…-v3-…`). |
+| Canonical dossier | `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` | E1–E211 evidence, D1–D140 discrepancies, Parts I–VIII, Appendices A–B. Never overwrite; new versions get new filenames (`…-v3.1-…`, `…-v4-…`). v2 and v2.1 are kept unchanged beside it. |
 | Raw research inputs | `archive/` | 16 deep-research outputs (5 prompts × Claude/ChatGPT/Gemini + the Project's P3 survey). Provenance only — superseded by the dossier. Do not cite them as independent evidence. |
 | Thread outputs | `research/` *(create on first use)* | One file per thread: `YYYY-MM-DD-<topic>.md`. Patch format: (1) evidence/verification table, (2) D-ledger additions, (3) E-ledger patches as exact replacement text, (4) still-open list. |
 | Rules | `README.md` → Working rules; Project instructions in the Claude Project | ID scheme, measurement distinctions, source labels. |
@@ -24,9 +24,10 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Next (in order)
 
-1. **Merge the six follow-ups into v3 (renumber EF/DF IDs to E94+ / D95+).** Inputs: `research/2026-09-27-followup-1-latency-decomposition.md` … `-6-vendor-speed-tiers.md`; apply their §3 patches to a new `…-v3-<date>.md`, never overwrite v2.1.
-2. [x] ~~**Six follow-up investigations.** Prompts in dossier Part VIII §8.3 (1 latency decomposition; 2 speculation safety incl. EchoPath, Cordon; 3 enterprise RPA + LLM fallback; 4 human-time baselines; 5 2026 agent-serving papers; 6 vendor speed tiers).~~ **Done 2026-09-27:** six files `research/2026-09-27-followup-{1..6}-*.md` (EF1–EF6: 118 entries, DF1–DF6: 43 entries), three numbers per file spot-checked by the lead.
-3. **Slides** for a senior ML professor, built from v3 only. Not before v3.
+1. **English slide outline from notes/ brief (after Edwin's review).** Built from v3 only.
+2. [x] ~~**Merge the six follow-ups into v3 (renumber EF/DF IDs to E94+ / D95+).**~~ **Done 2026-09-27:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` (E94–E211, D95–D140); mapping, checks and conflicts in `research/2026-09-27-v3-merge-log.md`. §8.3 prompts were not struck through (no follow-up supplied that text).
+3. [x] ~~**Six follow-up investigations.** Prompts in dossier Part VIII §8.3 (1 latency decomposition; 2 speculation safety incl. EchoPath, Cordon; 3 enterprise RPA + LLM fallback; 4 human-time baselines; 5 2026 agent-serving papers; 6 vendor speed tiers).~~ **Done 2026-09-27:** six files `research/2026-09-27-followup-{1..6}-*.md` (EF1–EF6: 118 entries, DF1–DF6: 43 entries), three numbers per file spot-checked by the lead.
+4. **Slides** for a senior ML professor, built from v3 only (follows item 1).
 
 ## Open questions parked (do not re-research; decide when relevant)
 
@@ -35,6 +36,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-09-27 — project thread — Built dossier v3 (`Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md`, 1288 lines): merged all six follow-ups; EF → E94–E211 (118), DF → D95–D137 (43), plus D138–D140 recording three same-text conflicts kept side by side (E87 and one §8.1 bullet: follow-ups 3 vs 6; §3.4 DeltaBox v2 vs v1: follow-ups 2 vs 5); script checks in `research/2026-09-27-v3-merge-log.md`: 0 EF/DF left, E1–E211 and D1–D140 once each, 247/250 operations exact doc-wide (3 pass on their row), 0 unexpected diff lines, 0 patches unapplied. Canonical document now v3; CLAUDE.md and README.md updated.
 - 2026-09-27 — project thread — All six §8.3 follow-ups committed (9006757, d205d1a, bcf0f78, 17f3193, 5ed12d0, d2a3e26); Next item 2 ticked; Next item 1 is now the v3 merge (EF/DF → E94+ / D95+); v2.1 build note moved to Done.
 - 2026-09-27 — project thread — Follow-up 4 (human-time baselines, §8.3 item 4): `research/2026-09-27-followup-4-human-time-baselines.md`, EF4-1–11, DF4-1–6, patches to §1.1 (E5, E12, E14–E16, new §1.1a matrix of 18 benchmarks: stopwatch vs estimate, who performed, same sample) and §8.1 first bullet. No standard CUA/web benchmark pairs agent and human wall-clock on the same tasks; AXIS user study is the cleanest same-task pair (UI agent 1.69× slower than manual on L1, calc.); E12 "only stopwatch baseline" wrong and WebArena human avg 110 s (DF4-1, DF4-2); E14 Mind2Web 2 compares different samples (DF4-3). Lead spot-checked AXIS Table 3, WebArena v4 §3.2, FrontierFinance v1 §4.1: all match.
 - 2026-09-27 — project thread — Follow-up 3 (enterprise RPA + LLM fallback products, §8.3 item 3): `research/2026-09-27-followup-3-rpa-llm-fallback.md`, EF3-1–22, DF3-1–6, 8 patches to §5.3 rows 11/20 and §5.5 baseline (3). Replay-then-heal ships at UiPath, Power Automate, Automation Anywhere, Stagehand, Skyvern, HyperAgent, but no vendor publishes measured heal/replay success, heal latency or cost per success (EF3-22); LOOP "99%" is a model, bash/file replay, no LLM fallback (DF3-1); Stagehand DOM-hash pre-check is the closest shipped guard (DF3-6). Lead spot-checked LOOP 2605.14237v1 §5.4 and §6.2, UiPath Healing Agent licensing: all match.

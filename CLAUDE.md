@@ -9,15 +9,15 @@ This repository is the evidence base for a research investigation into why LLM c
 
 ## What is canonical
 
-- The canonical document is the dossier named in `STATUS.md` (currently `Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md`). Never overwrite it; a new version gets a new filename (`…-v2.1-<date>.md`, `…-v3-<date>.md`).
+- The canonical document is the dossier named in `STATUS.md` (currently `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md`). Never overwrite it; a new version gets a new filename (`…-v3.1-<date>.md`, `…-v4-<date>.md`).
 - `archive/` holds the 16 raw deep-research outputs the dossier merged. They are provenance only — superseded by the dossier. Do not cite them as independent evidence and do not re-merge them.
 - Thread / session outputs go in `research/` as `YYYY-MM-DD-<topic>.md`, one file per task.
 
 ## Evidence rules
 
-- Cite the dossier by its IDs: E1–E90 evidence entries, D1–D55 discrepancy entries, §-numbered sections. Do not re-summarize or re-derive its content; extend it by patches.
+- Cite the ledger IDs (E- and D-, ranges as in `STATUS.md`) and §-numbered sections. Do not re-summarize or re-derive its content; extend it by patches.
 - Every new number carries five things: the figure, the exact measurement definition, the source URL, the date, and a primary/secondary label — the same schema as the dossier's evidence tables.
-- A conflict with the dossier becomes a new D-entry (D56 onward), never a silent overwrite. New evidence gets E91 onward.
+- A conflict with the dossier becomes a new D-entry, never a silent overwrite; new evidence and new discrepancies continue the numbering.
 - Always distinguish: model calls ≠ tool calls ≠ steps ≠ turns; inference time ≠ wall-clock; cost per attempt ≠ cost per success; author estimate ≠ stopwatch measurement; arXiv version numbers matter (several headline numbers changed between versions — see D5, D13–D15, D44, D48).
 - Prefer primary sources (paper, leaderboard, vendor docs, official survey). If only a secondary source exists, say so. If a source is paywalled or unreachable, report that instead of guessing.
 - Vendor-marketing numbers are labeled as such. Numbers computed by you are labeled "calc.".
@@ -27,7 +27,7 @@ This repository is the evidence base for a research investigation into why LLM c
 Four sections, in this order, written so they can be merged into the dossier without rewriting it:
 
 1. Verification table or evidence table (ID, claim as recorded, what the primary source says with a verbatim quote and location, verdict).
-2. D-ledger additions (D56+).
+2. D-ledger additions (next free D-IDs).
 3. E-ledger patches: the exact replacement text for each dossier line changed, with its E-ID.
 4. Still-open list.
 
@@ -35,7 +35,7 @@ No prose rewrite of the dossier.
 
 ## Roadmap
 
-v2 (current) → v2.1 (verification queue in dossier Part VIII §8.2 resolved) → v3 (six follow-up investigations in Part VIII §8.3 merged) → slides. Slides are built from v3 only.
+v3 (current) → slides. Slides are built from v3 only.
 
 ## Git conventions
 
