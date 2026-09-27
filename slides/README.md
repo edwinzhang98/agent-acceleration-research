@@ -1,16 +1,8 @@
 # slides/ — the boss deck
 
-`agent-acceleration.html` is a self-contained HTML deck (open the file in a browser; ← → or click to move, N toggles the Chinese speaker notes, `#sN` deep-links a slide). It is built from dossier v3 only. Every citation on a slide carries its source class:
+`agent-acceleration.html` is a self-contained HTML deck (open the file in a browser; ← → or click to move, N toggles the Chinese speaker notes, `#sN` deep-links a slide). It is built from dossier v3 only.
 
-| Class | Meaning | Cited? |
-|---|---|---|
-| A | peer-reviewed venue (published version cited when a preprint was accepted) | yes |
-| B | frontier-lab or big-company primary data (pricing, changelogs, usage data) | yes; vendor-stated multipliers labelled as such |
-| C | industry survey with stated method (Gartner, LangChain) | yes |
-| D | arXiv preprint; authors' institution shown on the slide | yes, flagged |
-| E | vendor marketing | no |
-
-On-slide tags are `[Author et al., Venue Year]`, `[Org, Year]` or `[Title, arXiv id Mon Year · Institution]`; the last slide of each module is an ACM-style reference list. Entries marked "authors to confirm" wait for the references pass (`references.md`, `references.bib`, requested from the project thread).
+Citations (agreed 2026-09-27, replaces the A–E class letters): author–year tags on the slide — `(Abhyankar et al., 2026)`, `(XLANG Lab, 2026)`, `(Anthropic, 2026a)` — with the dossier ledger ID in square brackets `[E22]` for traceability, and a full reference list per module (clickable or an appendix when the slide has no room). Source types are written in words: conference/journal paper, preprint (institution shown), vendor primary material, industry report, code, third-party measurement, our own calculation (calc.); vendor marketing is not cited. The verified list, with what each entry backs, is `references.md`. The current draft deck still uses the old class badges and must be reworked to this scheme.
 
 ## Structure (six modules)
 
