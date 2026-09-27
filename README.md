@@ -10,6 +10,7 @@ Evidence base for a research investigation into why LLM computer-use / web agent
 | `STATUS.md` | **Start here.** One-screen index: current canonical version, what is done, what the next thread should do, log. Updated at the end of every thread. |
 | `research/` | Thread outputs (verification results, follow-up research), one file per thread in patch format. Created on first use. |
 | `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` | **Canonical document.** Cross-validated synthesis of all 16 research outputs plus the six follow-up investigations: evidence ledger (E1–E211), inference→agent mapping, 8-family landscape, evaluation protocol and API budget, novelty assessment, discrepancy ledger (D1–D140), provider scorecard, verification queue and follow-up research prompts. |
+| `slides/` | Slide deck built from dossier v3 (`agent-acceleration.html`, plan in `slides/README.md`) and its references. `references.md`: formal reference list (one entry per work, classes A–D citable, class E excluded, with short on-slide tags, ACM references, E/D IDs, verification notes, URL and row maps); `references.bib`: BibTeX with the same keys; `check_references.py`: re-checks both against the dossier. |
 | `archive/` | The 16 raw deep-research outputs the dossier merges: 5 prompts × (Claude / ChatGPT / Gemini), plus the Project's P3 landscape survey. Provenance only — superseded by the dossier. |
 
 ## Working rules
