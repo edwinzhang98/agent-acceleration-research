@@ -9,7 +9,7 @@ Evidence base for a research investigation into why LLM computer-use / web agent
 | `CLAUDE.md` | Rules every Claude session follows in this repo (auto-loaded by Claude Code; the Claude Project's instructions point here). Single source of truth for the working rules below. |
 | `STATUS.md` | **Start here.** One-screen index: current canonical version, what is done, what the next thread should do, log. Updated at the end of every thread. |
 | `research/` | Thread outputs (verification results, follow-up research), one file per thread in patch format. Created on first use. |
-| `Agent-Acceleration-Consolidated-Dossier-v2-2026-09-26.md` | **Canonical document.** Cross-validated synthesis of all 16 research outputs: evidence ledger (E1–E90), inference→agent mapping, 8-family landscape, evaluation protocol and API budget, novelty assessment, discrepancy ledger (D1–D55), provider scorecard, verification queue and follow-up research prompts. |
+| `Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md` | **Canonical document.** Cross-validated synthesis of all 16 research outputs: evidence ledger (E1–E93), inference→agent mapping, 8-family landscape, evaluation protocol and API budget, novelty assessment, discrepancy ledger (D1–D94), provider scorecard, verification queue and follow-up research prompts. |
 | `archive/` | The 16 raw deep-research outputs the dossier merges: 5 prompts × (Claude / ChatGPT / Gemini), plus the Project's P3 landscape survey. Provenance only — superseded by the dossier. |
 
 ## Working rules

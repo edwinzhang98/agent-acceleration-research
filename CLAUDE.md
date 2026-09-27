@@ -9,7 +9,7 @@ This repository is the evidence base for a research investigation into why LLM c
 
 ## What is canonical
 
-- The canonical document is the dossier named in `STATUS.md` (currently `Agent-Acceleration-Consolidated-Dossier-v2-2026-09-26.md`). Never overwrite it; a new version gets a new filename (`…-v2.1-<date>.md`, `…-v3-<date>.md`).
+- The canonical document is the dossier named in `STATUS.md` (currently `Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md`). Never overwrite it; a new version gets a new filename (`…-v2.1-<date>.md`, `…-v3-<date>.md`).
 - `archive/` holds the 16 raw deep-research outputs the dossier merged. They are provenance only — superseded by the dossier. Do not cite them as independent evidence and do not re-merge them.
 - Thread / session outputs go in `research/` as `YYYY-MM-DD-<topic>.md`, one file per task.
 
