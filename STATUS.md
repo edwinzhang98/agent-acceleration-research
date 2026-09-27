@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-09-27, by Claude (project thread, v3 merge) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-09-27, by Claude (cowork session, slides Module 1 draft) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -12,6 +12,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 | Raw research inputs | `archive/` | 16 deep-research outputs (5 prompts × Claude/ChatGPT/Gemini + the Project's P3 survey). Provenance only — superseded by the dossier. Do not cite them as independent evidence. |
 | Thread outputs | `research/` *(create on first use)* | One file per thread: `YYYY-MM-DD-<topic>.md`. Patch format: (1) evidence/verification table, (2) D-ledger additions, (3) E-ledger patches as exact replacement text, (4) still-open list. |
 | Rules | `README.md` → Working rules; Project instructions in the Claude Project | ID scheme, measurement distinctions, source labels. |
+| Slides | `slides/agent-acceleration.html` (HTML deck; ← → to move, N for Chinese speaker notes) · `slides/README.md` | Six-module structure, source classes A–E, and the Module 1 rework plan are in `slides/README.md`. Built from v3 only. |
 
 ## Done
 
@@ -24,10 +25,10 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Next (in order)
 
-1. **English slide outline from notes/ brief (after Edwin's review).** Built from v3 only.
+1. **Slides, module by module (Edwin reviews each before the next).** Module 1 draft is in `slides/agent-acceleration.html` but judged unclear; rebuild it to the five-point plan in `slides/README.md`, then Modules 2–6. Waiting on Edwin: does the boss hear the deck or read it alone (sets text density). Also pending: references pass (`slides/references.md`, `.bib`) from the project thread; the Chinese brief ("Agent 加速白话版", a Claude Doc) to be saved as `notes/2026-09-27-brief-zh-claude.md` after Edwin's review; a ChatGPT/Codex brief expected at `notes/2026-09-27-brief-zh-codex.md` for comparison.
 2. [x] ~~**Merge the six follow-ups into v3 (renumber EF/DF IDs to E94+ / D95+).**~~ **Done 2026-09-27:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` (E94–E211, D95–D140); mapping, checks and conflicts in `research/2026-09-27-v3-merge-log.md`. §8.3 prompts were not struck through (no follow-up supplied that text).
 3. [x] ~~**Six follow-up investigations.** Prompts in dossier Part VIII §8.3 (1 latency decomposition; 2 speculation safety incl. EchoPath, Cordon; 3 enterprise RPA + LLM fallback; 4 human-time baselines; 5 2026 agent-serving papers; 6 vendor speed tiers).~~ **Done 2026-09-27:** six files `research/2026-09-27-followup-{1..6}-*.md` (EF1–EF6: 118 entries, DF1–DF6: 43 entries), three numbers per file spot-checked by the lead.
-4. **Slides** for a senior ML professor, built from v3 only (follows item 1).
+4. ~~**Slides** for a senior ML professor, built from v3 only (follows item 1).~~ Merged into item 1. Audience is now the senior boss of Edwin's friend: general challenge → what we want to do → what resources (money and compute only), one web-agent application as illustration; detail kept in speaker notes.
 
 ## Open questions parked (do not re-research; decide when relevant)
 
@@ -36,6 +37,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-09-27 — cowork session — Deck venue and format settled (HTML, built here, committed under `slides/`, published as an artifact link when a module is approved); six-module structure, source classes A–E (E never cited) and academic citation format agreed. Module 1 draft (9 slides, Chinese speaker notes with E/D IDs) written to `slides/agent-acceleration.html`, rendered headlessly without errors, not yet published; Edwin judged it unclear (evidence cards without an argument). Five-point rework plan and the slide-by-slide changes recorded in `slides/README.md`. Uses E5/D2, E6/D3, E22, E23, E41, E45, E97/D95, E161; no dossier text changed.
 - 2026-09-27 — project thread — Built dossier v3 (`Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md`, 1288 lines): merged all six follow-ups; EF → E94–E211 (118), DF → D95–D137 (43), plus D138–D140 recording three same-text conflicts kept side by side (E87 and one §8.1 bullet: follow-ups 3 vs 6; §3.4 DeltaBox v2 vs v1: follow-ups 2 vs 5); script checks in `research/2026-09-27-v3-merge-log.md`: 0 EF/DF left, E1–E211 and D1–D140 once each, 247/250 operations exact doc-wide (3 pass on their row), 0 unexpected diff lines, 0 patches unapplied. Canonical document now v3; CLAUDE.md and README.md updated.
 - 2026-09-27 — project thread — All six §8.3 follow-ups committed (9006757, d205d1a, bcf0f78, 17f3193, 5ed12d0, d2a3e26); Next item 2 ticked; Next item 1 is now the v3 merge (EF/DF → E94+ / D95+); v2.1 build note moved to Done.
 - 2026-09-27 — project thread — Follow-up 4 (human-time baselines, §8.3 item 4): `research/2026-09-27-followup-4-human-time-baselines.md`, EF4-1–11, DF4-1–6, patches to §1.1 (E5, E12, E14–E16, new §1.1a matrix of 18 benchmarks: stopwatch vs estimate, who performed, same sample) and §8.1 first bullet. No standard CUA/web benchmark pairs agent and human wall-clock on the same tasks; AXIS user study is the cleanest same-task pair (UI agent 1.69× slower than manual on L1, calc.); E12 "only stopwatch baseline" wrong and WebArena human avg 110 s (DF4-1, DF4-2); E14 Mind2Web 2 compares different samples (DF4-3). Lead spot-checked AXIS Table 3, WebArena v4 §3.2, FrontierFinance v1 §4.1: all match.

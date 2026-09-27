@@ -1,0 +1,555 @@
+<title>Agent Acceleration</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #F6F7F5;
+    --ink: #17201E;
+    --muted: #5B6663;
+    --line: #D3D9D6;
+    --tile: #FFFFFF;
+    --accent: #0E6F63;
+    --cls-a: #0E6F63;
+    --cls-b: #2F5D8C;
+    --cls-c: #A66200;
+    --cls-d: #6B7270;
+    --bar: #EDF0EE;
+    --focus: #2F5D8C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #111514;
+      --ink: #E8ECEA;
+      --muted: #9AA5A1;
+      --line: #2A3230;
+      --tile: #1A201E;
+      --accent: #4CC1B0;
+      --cls-a: #4CC1B0;
+      --cls-b: #7FA9D9;
+      --cls-c: #E0A24A;
+      --cls-d: #A2ABA8;
+      --bar: #171C1A;
+      --focus: #7FA9D9;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #111514;
+    --ink: #E8ECEA;
+    --muted: #9AA5A1;
+    --line: #2A3230;
+    --tile: #1A201E;
+    --accent: #4CC1B0;
+    --cls-a: #4CC1B0;
+    --cls-b: #7FA9D9;
+    --cls-c: #E0A24A;
+    --cls-d: #A2ABA8;
+    --bar: #171C1A;
+    --focus: #7FA9D9;
+  }
+
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    overflow: hidden;
+  }
+  .mono { font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace; }
+
+  /* Frame: stage + bottom bar */
+  .frame {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .viewport {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 0 16px;
+  }
+  .stage {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    transform-origin: center center;
+    background: var(--tile);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  }
+
+  /* Slides */
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 44px 64px 28px;
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 15px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .eyebrow .num { font-variant-numeric: tabular-nums; }
+  .body { display: grid; align-content: start; gap: 22px; padding-top: 22px; }
+  h1, h2 { margin: 0; text-wrap: balance; }
+  h2 { font-size: 40px; font-weight: 600; line-height: 1.12; letter-spacing: -.01em; }
+  h1 { font-size: 64px; font-weight: 700; line-height: 1.05; letter-spacing: -.02em; }
+  .lede { font-size: 26px; line-height: 1.35; color: var(--muted); max-width: 30em; }
+  ul.points { margin: 0; padding: 0; list-style: none; display: grid; gap: 16px; max-width: 34em; }
+  ul.points li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 26px;
+    line-height: 1.32;
+  }
+  ul.points li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: .58em;
+    width: 12px; height: 3px;
+    background: var(--accent);
+  }
+  ul.points li small { display: block; font-size: 19px; color: var(--muted); margin-top: 4px; }
+
+  .big {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .big .n {
+    font-size: 120px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -.03em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .big .cap { font-size: 24px; line-height: 1.35; max-width: 22em; }
+
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tile {
+    border: 1px solid var(--line);
+    padding: 22px 24px;
+    background: var(--bg);
+  }
+  .tile .n { font-size: 56px; font-weight: 700; color: var(--accent); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .tile .cap { font-size: 18px; line-height: 1.35; margin-top: 12px; }
+
+  .defs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; font-size: 22px; }
+  .defs .row { display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .defs .row b { font-weight: 600; }
+  .defs .row span { color: var(--muted); }
+
+  .thesis { font-size: 34px; line-height: 1.3; font-weight: 500; max-width: 26em; }
+  .thesis em { font-style: normal; color: var(--accent); }
+
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    align-items: center;
+    font-size: 14px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .cite { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+  .cls {
+    display: inline-grid; place-items: center;
+    width: 18px; height: 18px;
+    font-size: 11px; font-weight: 600;
+    color: #fff; border-radius: 2px;
+  }
+  .cls.a { background: var(--cls-a); }
+  .cls.b { background: var(--cls-b); }
+  .cls.c { background: var(--cls-c); }
+  .cls.d { background: var(--cls-d); }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 15px; color: var(--muted); }
+  .legend span { display: inline-flex; gap: 6px; align-items: center; }
+
+  .refs { display: grid; gap: 10px; font-size: 16.5px; line-height: 1.35; max-width: 66em; }
+  .refs .r { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; }
+  .refs .tbc { color: var(--muted); font-style: italic; }
+
+  /* Speaker notes (hidden inside slides) */
+  .notes { display: none; }
+
+  /* Bottom bar */
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 16px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    background: var(--bar);
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .bar .ctrl { display: flex; gap: 6px; align-items: center; }
+  .bar button {
+    font: inherit;
+    color: var(--ink);
+    background: var(--tile);
+    border: 1px solid var(--line);
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .bar button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .bar .counter { font-variant-numeric: tabular-nums; }
+
+  /* Notes panel */
+  .panel {
+    position: fixed;
+    right: 16px;
+    bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+    width: min(420px, calc(100vw - 32px));
+    max-height: 45vh;
+    overflow: auto;
+    background: var(--tile);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 24px rgba(0,0,0,.12);
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .panel h3 { margin: 0 0 6px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .panel p { margin: 0 0 8px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .slide { transition: opacity .18s ease; }
+  }
+  @media print {
+    body { overflow: visible; }
+    .frame { position: static; display: block; }
+    .viewport { display: block; padding: 0; }
+    .stage { transform: none !important; margin: 0 auto 24px; page-break-after: always; }
+    .slide { position: relative; }
+    .slide[hidden] { display: grid !important; }
+    .bar, .panel { display: none !important; }
+  }
+</style>
+
+<div class="frame">
+  <div class="viewport" id="viewport">
+    <div class="stage" id="stage">
+
+      <!-- 0 · Title -->
+      <section class="slide" id="s0">
+        <div class="eyebrow"><span>Research proposal · 27 Sep 2026</span><span class="num mono">0</span></div>
+        <div class="body" style="align-content:center; gap:26px">
+          <h1>Agent Acceleration</h1>
+          <p class="lede">Why computer-use agents are slow and expensive, and what it would take to fix it.</p>
+          <div class="legend">
+            <span><i class="cls a">A</i> peer-reviewed venue</span>
+            <span><i class="cls b">B</i> lab or company primary data</span>
+            <span><i class="cls c">C</i> industry survey</span>
+            <span><i class="cls d">D</i> arXiv preprint, institution shown</span>
+          </div>
+        </div>
+        <div class="foot"><span>Evidence base: consolidated dossier v3 (211 sourced entries, 140 resolved discrepancies). Every source on a slide carries its class.</span></div>
+        <aside class="notes">
+          <p>开场一句话：这是一份关于"问题、方法、资源"的提案，不是产品汇报。</p>
+          <p>右下角的 A/B/C/D 是来源等级，后面每一页页脚都有；老板可以自己判断每个数字的分量。</p>
+        </aside>
+      </section>
+
+      <!-- 1 · Definition -->
+      <section class="slide" id="s1" hidden>
+        <div class="eyebrow"><span>1 · The problem</span><span class="num mono">1</span></div>
+        <div class="body">
+          <h2>What we mean by slow and expensive</h2>
+          <ul class="points">
+            <li>One task is measured by four things: wall-clock, dollars per attempt, model calls, per-field accuracy.</li>
+            <li>"Faster" counts only if per-field accuracy does not fall.</li>
+          </ul>
+          <div class="defs">
+            <div class="row"><b>model calls</b><span>≠ steps ≠ turns</span></div>
+            <div class="row"><b>inference time</b><span>≠ wall-clock</span></div>
+            <div class="row"><b>cost per attempt</b><span>≠ cost per success</span></div>
+            <div class="row"><b>estimate</b><span>≠ stopwatch</span></div>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="cite"><i class="cls a">A</i>Kapoor et al., TMLR 2025 (cost-controlled evaluation)</span>
+          <span>Measurement rules: dossier §0.3</span>
+        </div>
+        <aside class="notes">
+          <p>先定义再举证。四个量：每任务 wall-clock、每次尝试的美元、模型调用次数、字段级准确率。</p>
+          <p>四条"不等于"是后面每个数字的阅读规则：调用不等于步数不等于 turn；inference 时间不等于 wall-clock；每次尝试不等于每次成功；估计不等于掐表。</p>
+          <p>来源：Kapoor et al. "AI Agents That Matter"（TMLR 2025）提出成本受控的 agent 评测；规则本身汇总在 dossier §0.3。</p>
+        </aside>
+      </section>
+
+      <!-- 2 · Scale -->
+      <section class="slide" id="s2" hidden>
+        <div class="eyebrow"><span>1 · The problem</span><span class="num mono">2</span></div>
+        <div class="body">
+          <h2>Hundreds of model calls per task</h2>
+          <div class="big">
+            <div class="n">318</div>
+            <div class="cap">tool calls per task (mean), Claude Opus 4.7, single-action setting, OSWorld 2.0.</div>
+          </div>
+          <ul class="points">
+            <li>The best agent completes about 20% of these tasks.</li>
+            <li>Tasks are sized at ~1.6 hours of skilled human work.<small>Annotator estimate, not a stopwatch.</small></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cite"><i class="cls d">D</i>OSWorld 2.0, arXiv 2606.29537 (Jul 2026) · XLANG Lab, HKU</span>
+        </div>
+        <aside class="notes">
+          <p>最新的桌面任务 benchmark（OSWorld 2.0），任务按"人要做一个多小时"的尺度设计。E6：318 是平均值不是中位数（D3），且是单动作设置下的 Opus 4.7。</p>
+          <p>E41：最好的 agent 也只完成约 20%。E5/D2：人类 1.6 小时是标注者记录的估计。</p>
+          <p>来源等级 D：预印本，但出自 OSWorld 原团队（原 OSWorld 发表于 NeurIPS 2024；OpenAI、Anthropic 发布 computer-use 模型时都引用这个 benchmark）。作者名单待 references pass 补齐。</p>
+        </aside>
+      </section>
+
+      <!-- 3 · Where the time goes -->
+      <section class="slide" id="s3" hidden>
+        <div class="eyebrow"><span>1 · The problem</span><span class="num mono">3</span></div>
+        <div class="body">
+          <h2>Where the time goes</h2>
+          <div class="big">
+            <div class="n">87–97%</div>
+            <div class="cap">of wall-clock is the model: planning, judging, reflecting. Screenshots and actions: under 3.5%.</div>
+          </div>
+          <ul class="points">
+            <li>Later steps run up to 3× slower: every call re-sends the screenshot history.</li>
+            <li>Contrary measurement: one 2026 study finds the desktop sandbox above 70% of execution time.<small>Neither study controlled caching. Screenshot-based agents only.</small></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cite"><i class="cls a">A</i>Abhyankar et al., MLSys 2026</span>
+          <span class="cite"><i class="cls d">D</i>AgentSysBench, arXiv 2608.15127 (Aug 2026)</span>
+        </div>
+        <aside class="notes">
+          <p>E22：OSWorld-Human 把两个 agent 每一步拆开量，87–97% 在模型的 planning/judging/reflection；截图和执行动作不到 3.5%。E23：越靠后越慢，最多 3 倍，因为每步重发全部历史截图。</p>
+          <p>主动说出相反的测量：E97/D95，AgentSysBench 测到 sandbox 占 70% 以上；D101，两边都没控制 cache 状态。所以这页只能说"对截图型 agent、在这次测量里"。</p>
+          <p>来源等级：MLSys 2026 是 A；AgentSysBench 是预印本 D。</p>
+        </aside>
+      </section>
+
+      <!-- 4 · Convexity -->
+      <section class="slide" id="s4" hidden>
+        <div class="eyebrow"><span>1 · The problem</span><span class="num mono">4</span></div>
+        <div class="body">
+          <h2>Accuracy is convex-expensive</h2>
+          <div class="tiles">
+            <div class="tile"><div class="n">~6×</div><div class="cap">output tokens for 13.0% → 20.6% completion: $25.5 → $72.4 per task</div></div>
+            <div class="tile"><div class="n">9×</div><div class="cap">cost for a 2-point difference: $171 vs $1,577 per 300 tasks</div></div>
+            <div class="tile"><div class="n">9.6×</div><div class="cap">tokens for +4.4 points, same model, more samples</div></div>
+          </div>
+          <ul class="points">
+            <li>Mechanism: cost accumulates quadratically over steps, because each step re-reads the history.</li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cite"><i class="cls d">D</i>OSWorld 2.0, arXiv (Jul 2026) · HKU</span>
+          <span class="cite"><i class="cls d">D</i>HAL, arXiv 2510.11977 (Oct 2025) · Princeton</span>
+          <span class="cite"><i class="cls d">D</i>Agentic Test-Time Scaling for WebAgents, arXiv 2602.12276 (Feb 2026)</span>
+          <span class="cite"><i class="cls a">A</i>Abhyankar et al., MLSys 2026 (mechanism)</span>
+        </div>
+        <aside class="notes">
+          <p>三个独立来源、同一个形状。E41：OSWorld 2.0，13.0→20.6% 要约 6 倍 output token，论文原话"每多一个点约 25–30K tokens"。E43：HAL，差 2 个点成本差 9 倍，贵到 Opus 4.1 没跑（约 $20,000 一次）。E44：唯一固定模型的实验，9.6 倍 token 换 4.4 个点。</p>
+          <p>注意：三个 headline 数字全是预印本（D）；机制上的支撑是 MLSys 那篇的"成本随步数二次增长"（E45）。前两个是跨模型比较。如果老板不接受预印本，这页降级为补充证据。</p>
+        </aside>
+      </section>
+
+      <!-- 5 · Demand -->
+      <section class="slide" id="s5" hidden>
+        <div class="eyebrow"><span>1 · The problem</span><span class="num mono">5</span></div>
+        <div class="body">
+          <h2>Why now: agents are the majority workload</h2>
+          <ul class="points">
+            <li>Agentic tokens overtook human tokens on OpenRouter around 1 Feb 2026; an agent request uses ~15× the tokens of a human request.</li>
+            <li>Gartner: agentic models need 5–30× the tokens per task of a chatbot; cost per agentic workflow to rise more than 5× by 2028.</li>
+            <li>Practitioners: latency is the #2 production barrier (20% of 1,340), yet only 14.8% of deployed teams call it critical.<small>It shapes which tasks get deployed and how, not whether.</small></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cite"><i class="cls b">B</i>OpenRouter, Jun 2026</span>
+          <span class="cite"><i class="cls c">C</i>Gartner, Mar &amp; Aug 2026</span>
+          <span class="cite"><i class="cls c">C</i>LangChain, 2026</span>
+          <span class="cite"><i class="cls a">A</i>Measuring Agents in Production, ICML 2026</span>
+        </div>
+        <aside class="notes">
+          <p>E57：OpenRouter 自家 telemetry（450T+ tokens，2026 上半年），agent 流量约 2 月 1 日超过人类；每请求约 15 倍 token。只是一个平台，不是全行业。</p>
+          <p>E62/E55：Gartner 是分析师估计，没有公开样本。E68：LangChain 1,340 人调查，自选样本。E69/D80：MAP（ICML 2026 Oral）已部署团队里 14.8% 认为 latency 关键，15/20 系统"可以异步运行"——所以结论是 latency 决定部署方式，不是阻止部署。</p>
+          <p>不要用 88%、14×、70% cached 这几个数（D19、D70、D71，来源不足）。</p>
+        </aside>
+      </section>
+
+      <!-- 6 · Speed for sale -->
+      <section class="slide" id="s6" hidden>
+        <div class="eyebrow"><span>1 · The problem</span><span class="num mono">6</span></div>
+        <div class="body">
+          <h2>Why now: speed is already for sale</h2>
+          <ul class="points">
+            <li>Anthropic and OpenAI sell "fast mode": 2× the price for up to 2.5× the output speed.</li>
+            <li>OpenAI "Ultrafast": up to 14× output speed (preview, unpriced).</li>
+            <li>Anthropic moved Claude in Chrome's default to the smaller Haiku 4.5 "for faster, more responsive browsing".</li>
+            <li>Meanwhile the price of a token keeps falling: GPT-6 Luna lists at $0.10 / $0.50 per million.<small>Cheaper tokens have not made tasks cheap.</small></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cite"><i class="cls b">B</i>Anthropic pricing &amp; release notes, 2026</span>
+          <span class="cite"><i class="cls b">B</i>OpenAI pricing &amp; API changelog, 2026</span>
+        </div>
+        <aside class="notes">
+          <p>E76/E77：两家的 fast mode 都是 2 倍价格换最多 2.5 倍输出速度；E194：OpenAI 8 月的 Ultrafast 最高 14 倍（预览、未定价）；E80：Claude in Chrome 默认换成 Haiku 4.5。</p>
+          <p>§4.4：GPT-6 Luna 每百万 token $0.10/$0.50——token 在暴跌，但每任务成本没有跟着跌（E55）。这就引出下一页：成本单位不是 token。</p>
+          <p>来源全是 B：厂商价目表和发布说明是事实性一手资料，不是营销数字。</p>
+        </aside>
+      </section>
+
+      <!-- 7 · One sentence -->
+      <section class="slide" id="s7" hidden>
+        <div class="eyebrow"><span>1 · The problem</span><span class="num mono">7</span></div>
+        <div class="body" style="gap:28px">
+          <h2>The problem in one sentence</h2>
+          <p class="thesis">An agent is a program, not a prompt: <em>a chain of dependent model calls over a growing context</em>, plus waits for tools. Cheaper tokens do not shorten the chain. Fewer, cheaper steps do.</p>
+          <ul class="points">
+            <li>Still unmeasured anywhere: a clean agent-vs-human wall-clock on the same tasks.<small>Closest pair: a UI agent 1.69× slower than a person on simple Word tasks, 0.93× on harder ones (20 participants).</small></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span class="cite"><i class="cls a">A</i>Lu et al., ACL 2025 (AXIS user study)</span>
+          <span>Synthesis: dossier §2.3, §2.5</span>
+        </div>
+        <aside class="notes">
+          <p>§2.3/§2.5 的合并结论：成本单位是"一步决策"，不是 token。这句话是整份 deck 的主线，后面"别人做了什么"和"我们做什么"都围绕"少走几步、每步更便宜"。</p>
+          <p>E161（AXIS 用户实验，ACL 2025）：目前唯一一对同任务、同参与者的 agent vs 人计时。follow-up 4 查了 17 个 benchmark，没有更干净的。所以不写"agent 比人慢 N 倍"，写"没人认真测过"，这本身是后面要做的事之一。</p>
+        </aside>
+      </section>
+
+      <!-- 8 · References -->
+      <section class="slide" id="s8" hidden>
+        <div class="eyebrow"><span>References · module 1</span><span class="num mono">8</span></div>
+        <div class="body" style="padding-top:16px; gap:14px">
+          <h2 style="font-size:30px">References</h2>
+          <div class="refs">
+            <div class="r"><i class="cls a">A</i><span>R. Abhyankar, Q. Qi, and Y. Zhang. 2026. OSWorld-Human: Benchmarking the Efficiency of Computer-Use Agents. In <i>Proceedings of Machine Learning and Systems (MLSys 2026)</i>.</span></div>
+            <div class="r"><i class="cls a">A</i><span>Lu et al. 2025. AXIS: Efficient Human-Agent-Computer Interaction with API-First LLM-Based Agents. In <i>Proc. ACL 2025 (Long Papers)</i>, 7711–7743.</span></div>
+            <div class="r"><i class="cls a">A</i><span>S. Kapoor et al. 2025. AI Agents That Matter. <i>Transactions on Machine Learning Research</i>.</span></div>
+            <div class="r"><i class="cls a">A</i><span>Characterizing Agents in Production (arXiv title: Measuring Agents in Production). 2026. In <i>Proc. ICML 2026</i> (oral). arXiv:2512.04123. <span class="tbc">authors to confirm</span></span></div>
+            <div class="r"><i class="cls b">B</i><span>OpenRouter. 2026. DeepSeek V4 Is Earning Agentic Token Share. <i>OpenRouter Insights</i>, 30 Jun 2026. openrouter.ai/blog/insights/deepseek-v4-adoption (accessed 27 Sep 2026).</span></div>
+            <div class="r"><i class="cls b">B</i><span>Anthropic. 2026. Claude API pricing; Claude in Chrome release notes. OpenAI. 2026. API pricing and changelog (Fast mode, 30 Jul 2026; Ultrafast, Aug 2026). (accessed 26–27 Sep 2026)</span></div>
+            <div class="r"><i class="cls c">C</i><span>Gartner. 2026. Press releases of 25 Mar 2026 (5–30× tokens per task) and 17 Aug 2026 (inference cost per agentic workflow). LangChain. 2026. State of Agent Engineering (N = 1,340).</span></div>
+            <div class="r"><i class="cls d">D</i><span>OSWorld 2.0. 2026. arXiv:2606.29537 (v2, 13 Jul 2026). XLANG Lab, University of Hong Kong. <span class="tbc">authors to confirm</span></span></div>
+            <div class="r"><i class="cls d">D</i><span>HAL: Holistic Agent Leaderboard. 2025. arXiv:2510.11977 (Oct 2025). Princeton University. <span class="tbc">authors to confirm</span></span></div>
+            <div class="r"><i class="cls d">D</i><span>Agentic Test-Time Scaling for WebAgents. 2026. arXiv:2602.12276 (v2, Feb 2026). <span class="tbc">authors and institution to confirm</span></span></div>
+            <div class="r"><i class="cls d">D</i><span>From LLM Inference to Agentic Workloads: Characterization and Implications for Serving Systems (AgentSysBench). 2026. arXiv:2608.15127 (Aug 2026). <span class="tbc">authors and institution to confirm</span></span></div>
+          </div>
+        </div>
+        <div class="foot"><span>Entries marked "to confirm" are filled by the references pass (slides/references.md).</span></div>
+        <aside class="notes">
+          <p>这一页是模块 1 用到的全部来源，ACM 格式。标 "to confirm" 的条目等仓库里的 references pass 补齐作者和机构后替换。</p>
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="bar">
+    <div class="ctrl">
+      <button type="button" id="prev" aria-label="Previous slide">‹ Prev</button>
+      <button type="button" id="next" aria-label="Next slide">Next ›</button>
+      <span class="counter mono" id="counter">1 / 9</span>
+    </div>
+    <div class="ctrl">
+      <span>← → to move · N for notes</span>
+      <button type="button" id="notesBtn" aria-pressed="false">Notes</button>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="panel" hidden>
+  <h3>Speaker notes</h3>
+  <div id="panelBody"></div>
+</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var stage = document.getElementById('stage');
+  var viewport = document.getElementById('viewport');
+  var counter = document.getElementById('counter');
+  var panel = document.getElementById('panel');
+  var panelBody = document.getElementById('panelBody');
+  var notesBtn = document.getElementById('notesBtn');
+  var idx = 0;
+
+  function fit() {
+    var w = viewport.clientWidth - 32;
+    var h = viewport.clientHeight - 24;
+    var s = Math.min(w / 1280, h / 720);
+    if (!(s > 0)) s = 0.3;
+    stage.style.transform = 'scale(' + s + ')';
+  }
+
+  function show(i) {
+    if (i < 0) i = 0;
+    if (i > slides.length - 1) i = slides.length - 1;
+    idx = i;
+    slides.forEach(function (s, k) { s.hidden = (k !== idx); });
+    counter.textContent = (idx + 1) + ' / ' + slides.length;
+    var notes = slides[idx].querySelector('.notes');
+    panelBody.innerHTML = notes ? notes.innerHTML : '<p>—</p>';
+    try { history.replaceState(null, '', '#' + slides[idx].id); } catch (e) {}
+  }
+
+  function fromHash() {
+    var h = (location.hash || '').replace('#', '');
+    var k = slides.findIndex(function (s) { return s.id === h; });
+    show(k >= 0 ? k : 0);
+  }
+
+  function toggleNotes() {
+    panel.hidden = !panel.hidden;
+    notesBtn.setAttribute('aria-pressed', panel.hidden ? 'false' : 'true');
+  }
+
+  document.getElementById('prev').addEventListener('click', function () { show(idx - 1); });
+  document.getElementById('next').addEventListener('click', function () { show(idx + 1); });
+  notesBtn.addEventListener('click', toggleNotes);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /input|textarea/i.test(e.target.tagName)) return;
+    switch (e.key) {
+      case 'ArrowRight': case ' ': case 'PageDown': case 'Enter': e.preventDefault(); show(idx + 1); break;
+      case 'ArrowLeft': case 'PageUp': case 'Backspace': e.preventDefault(); show(idx - 1); break;
+      case 'Home': show(0); break;
+      case 'End': show(slides.length - 1); break;
+      case 'n': case 'N': toggleNotes(); break;
+    }
+  });
+
+  stage.addEventListener('click', function (e) {
+    if (e.target.closest('a')) return;
+    var r = stage.getBoundingClientRect();
+    var x = e.clientX - r.left;
+    show(x < r.width * 0.25 ? idx - 1 : idx + 1);
+  });
+
+  window.addEventListener('resize', fit);
+  window.addEventListener('hashchange', fromHash);
+  fit();
+  fromHash();
+})();
+</script>
