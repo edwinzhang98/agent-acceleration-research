@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-09-27, by Claude (project thread, dossier v2.1 built) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md` · **Current milestone:** v2.1 done → working toward **v3**
+**Last updated:** 2026-09-27, by Claude (project thread, §8.3 follow-ups) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md` · **Current milestone:** v2.1 done → working toward **v3**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -34,6 +34,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-09-27 — project thread — Follow-up 5 (2026 agent-serving papers, §8.3 item 5): `research/2026-09-27-followup-5-agent-serving-2026.md`, EF5-1–18, DF5-1–9, 15 patches to §3.6/§4.1. None of 15 systems tests a GUI/computer-use workload (§8.1 gap holds); D55 resolved (CacheScout 2608.14624 v1); Agentix is 4–15× (15× = Mixed max); ThunderAgent vs Continuum rankings conflict (DF5-8). Lead spot-checked Agentix 4–15×, ThunderAgent 1.17–3.31×, CacheScout abstract: all match.
 - 2026-09-27 — project thread — Built dossier v2.1 (`Agent-Acceleration-Consolidated-Dossier-v2.1-2026-09-27.md`): applied all 134 patches (82 whole-line, 52 fragment) from the two verification files, added E91–E93 and D56–D94, new version line and change paragraph; script checks (fragments, rows, E1–E93/D1–D94 uniqueness, diff scope) in `research/2026-09-27-v2.1-apply-log.md`; 0 unexpected changed lines, 0 patches unapplied. Canonical document now v2.1.
 - 2026-09-27 — project thread — Added `.claude/settings.json` allow list (WebFetch, WebSearch, read-only shell and git read commands) to cut approval prompts in future threads; no ask/deny rules, so git push behaviour is unchanged.
 - 2026-09-27 — project thread — P0 2–7, P1 8–13f verified (`research/2026-09-27-verification-P0-P1.md`, D57–D94, E91–E93). No Top-10 number changed; ranks 6, 9, 10 reworded (OpenRouter 15× is per request; MAP "can operate" async; Gartner >90% is provider cost). Main corrections: FocusAgent no sign flip (D48), TraceLab 5.3× not in paper, Continuum not version drift, AXIS −65–70% is vs humans, EchoPath 87.3–92.8% with Synapse at 91.8%.
