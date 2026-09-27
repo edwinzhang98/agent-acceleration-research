@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-09-27, by Claude (project thread, P0 items 2–7 and P1 items 8–13f) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v2-2026-09-26.md` · **Current milestone:** v2 done → working toward **v2.1**
+**Last updated:** 2026-09-27, by Claude (project thread, P0 items 2–7 and P1 items 8–13f; permission allow list) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v2-2026-09-26.md` · **Current milestone:** v2 done → working toward **v2.1**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -34,6 +34,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-09-27 — project thread — Added `.claude/settings.json` allow list (WebFetch, WebSearch, read-only shell and git read commands) to cut approval prompts in future threads; no ask/deny rules, so git push behaviour is unchanged.
 - 2026-09-27 — project thread — P0 2–7, P1 8–13f verified (`research/2026-09-27-verification-P0-P1.md`, D57–D94, E91–E93). No Top-10 number changed; ranks 6, 9, 10 reworded (OpenRouter 15× is per request; MAP "can operate" async; Gartner >90% is provider cost). Main corrections: FocusAgent no sign flip (D48), TraceLab 5.3× not in paper, Continuum not version drift, AXIS −65–70% is vs humans, EchoPath 87.3–92.8% with Synapse at 91.8%.
 - 2026-09-27 — project thread — P0 item 1: D7 resolved. Table 3 = GTA1 totals over 39 tasks, no repeat runs stated → $7.87/task (calc.); the paper's $2.43 and 87/13/<1 split match output-token cost only (inferred). D56 added ("6×" planning/judging = 5.3× on totals). Patches for E45, D7, lines 236/580/871 in `research/2026-09-27-verification-P0-item1.md`.
 - 2026-09-26 — cowork session — Dossier v2 built and pushed; README, .gitignore, STATUS.md added. Next: verification pass (P0 1–7).
