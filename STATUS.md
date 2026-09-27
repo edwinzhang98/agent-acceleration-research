@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-09-27 04:20 UTC, by Claude (project thread, P0 item 1) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v2-2026-09-26.md` · **Current milestone:** v2 done → working toward **v2.1**
+**Last updated:** 2026-09-27, by Claude (project thread, P0 items 2–7 and P1 items 8–13f) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v2-2026-09-26.md` · **Current milestone:** v2 done → working toward **v2.1**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -19,10 +19,11 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - [x] Project's P3 survey (doc 15) merged by delta into dossier **v2**; D41–D55 logged; 5 primary sources re-verified (marked [V] in the dossier).
 - [x] Repo created and pushed; local clone on Edwin's Mac at `~/projects/agent-acceleration-research`.
 - [x] P0 item 1 (OSWorld-Human $2.43 vs Table 3, D7) verified: `research/2026-09-27-verification-P0-item1.md`. Patches not yet applied to a v2.1 copy.
+- [x] P0 items 2–7 and P1 items 8–13, 13a–13f verified: `research/2026-09-27-verification-P0-P1.md` (D57–D94, E91–E93; patch index by dossier line in §3). Patches not yet applied to a v2.1 copy.
 
 ## Next (in order)
 
-1. **Verification pass → v2.1.** Run dossier Part VIII §8.2: P0 items 2–7 (item 1 done), then P1 items 8–13 and 13a–13f (13a EchoPath and 13b FocusAgent v1-vs-TMLR first). Output to `research/2026-MM-DD-verification-P0-P1.md` in patch format. Then apply the patches to a copy named `Agent-Acceleration-Consolidated-Dossier-v2.1-<date>.md` and update the "Canonical document" line above.
+1. **Build v2.1.** Apply the patches in `research/2026-09-27-verification-P0-item1.md` and `research/2026-09-27-verification-P0-P1.md` to a copy named `Agent-Acceleration-Consolidated-Dossier-v2.1-<date>.md` (line numbers refer to v2 at c18e2fe; use the patch index), then update the "Canonical document" line above. Human-only checks listed in the P0-P1 file's §4 (two LinkedIn posts behind E58/E59, MAP v4 appendix B.4.2, PASTE Fig. 10, FocusAgent Table 1 pruning, Temporal Chart 3.4 options) can follow v2.1. Re-check dated items later: SMC at MLSP 2026 (after 1 Oct), SPACE at EMNLP 2026 (after 29 Oct), AAPT at AAAI-27 (after 30 Nov), EchoPath code link.
 2. **Six follow-up investigations → v3.** Prompts are in dossier Part VIII §8.3 (1 latency decomposition by architecture; 2 speculation safety semantics — add EchoPath and Cordon to its scope; 3 enterprise RPA + LLM fallback products; 4 human-time baselines; 5 2026 agent-serving papers; 6 vendor speed tiers). One thread each, output to `research/`, patch format. Merge into v3.
 3. **Slides** for a senior ML professor, built from v3 only. Not before v3.
 
@@ -33,6 +34,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-09-27 — project thread — P0 2–7, P1 8–13f verified (`research/2026-09-27-verification-P0-P1.md`, D57–D94, E91–E93). No Top-10 number changed; ranks 6, 9, 10 reworded (OpenRouter 15× is per request; MAP "can operate" async; Gartner >90% is provider cost). Main corrections: FocusAgent no sign flip (D48), TraceLab 5.3× not in paper, Continuum not version drift, AXIS −65–70% is vs humans, EchoPath 87.3–92.8% with Synapse at 91.8%.
 - 2026-09-27 — project thread — P0 item 1: D7 resolved. Table 3 = GTA1 totals over 39 tasks, no repeat runs stated → $7.87/task (calc.); the paper's $2.43 and 87/13/<1 split match output-token cost only (inferred). D56 added ("6×" planning/judging = 5.3× on totals). Patches for E45, D7, lines 236/580/871 in `research/2026-09-27-verification-P0-item1.md`.
 - 2026-09-26 — cowork session — Dossier v2 built and pushed; README, .gitignore, STATUS.md added. Next: verification pass (P0 1–7).
 
