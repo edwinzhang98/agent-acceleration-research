@@ -307,6 +307,10 @@ def defs(items, cols=3):
     """A grid of symbol definitions: [(latex, text), ...] — every symbol at its first appearance."""
     return (f'<div class="defs c{cols}">' + "".join(f'<div>{tex(a, 12)} <span>{b}</span></div>' for a, b in items) + '</div>')
 
+def defs2(items):
+    """A bulleted glossary: [(latex, meaning, origin), ...]; the origin is 'as in …', 'adapted from …' or 'self-defined'."""
+    return ('<ul class="defs2">' + "".join(f'<li>{tex(a, 12)} {b} <span class="src">({c})</span></li>' for a, b, c in items) + '</ul>')
+
 SLIDES = []   # dicts: id, label, title, hl, crumb, callout(html), body(html), foot, chip(href,text), notes, kind
 
 def slide(id_, title, body, *, label=None, hl=(), crumb="", callout="", foot="", chip=None, notes="", kind="main", cover=False, thumb=False, part=1):
@@ -346,6 +350,8 @@ CITE = {   # short in-text forms, all in the reference list
     "asyncfc": "Feng et al., 2026",
     "frugal": "Chen, Zaharia &amp; Zou, 2024",
     "agentix": "Luo et al., 2026",
+    "speedrunner": "Huang et al., 2026",
+    "specactions": "Ye et al., 2026",
 }
 def ci(*keys):
     return "(" + "; ".join(CITE[k] for k in keys) + ")"
@@ -400,22 +406,23 @@ slide("s02", "One attempt of an agent, step by step",
       callout=f"""<p><b>One attempt is {tex("N", 15)} steps; each step is some model calls plus everything that is not a model call.</b> Every variable below is defined here once; pages 3–4 add them up.</p>""",
       body=f"""
 <div class="fig-loop2">{loop_svg(cls="big-svg", big=True)}</div>
-{defs([
-  (r"i,\ N", "step (one observe–decide–act–wait round); steps in the attempt"),
-  (r"J_i,\ j", "model calls in step " + tex("i", 12) + " (planner, judge, retries …); call index"),
-  (r"\ell_{ij}", "latency of call " + tex("j", 12) + " of step " + tex("i", 12)),
-  (r"\mathrm{TTFT}_{ij}", "time to the first generated token: queueing, sending, prefill of the uncached input"),
-  (r"n^{\mathrm{out}}_{ij},\ \mathrm{TPOT}_{ij}", "output tokens of the call, thinking included; time per output token after the first"),
-  (r"D_i,\ E_i", "model time of step " + tex("i", 12) + "; all its other time (observe, act, wait, harness gaps, back-off)"),
-  (r"T_{\mathrm{saving}}", "time hidden because some of it ran at the same time (AsyncFC’s term, intervals widened); 0 if strictly serial"),
-  (r"o_{a,i}", "tokens the result or screenshot of step " + tex("i", 12) + " adds to the prompt of agent " + tex("a", 12)),
-  (r"|H_{a,i}|,\ \Phi(z_{a,i})", "length in tokens of the prompt that step " + tex("i", 12) + "’s call reads (one call per step); the call’s output as written into that history"),
-  (r"n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{unc}}", "input tokens read from the cache, stored in it (a cache write, 5-min or 1-h: " + tex(r"n^{\mathrm{w}}=n^{\mathrm{w5m}}+n^{\mathrm{w1h}}", 12) + "), or uncached"),
-  (r"c_{\kappa}(\mu),\ x_{\mathrm{env}}", "price per token of class " + tex(r"\kappa", 12) + " on serving model " + tex(r"\mu", 12) + "; billed environment usage (e.g. sandbox hours)"),
-  (r"\mathrm{reading,\ writing}", "reading = prefill of input tokens; writing = decoding output tokens (a cache write is storage, not output)"),
-  (r"R_m(p)", "probability that one attempt of design " + tex("m", 12) + " on task " + tex("p", 12) + " succeeds"),
+{defs2([
+  (r"i,\ N", "step (one observe–decide–act–wait round); steps in the attempt", "i as in " + CITE['aospec'] + "; " + CITE['yuan'] + " · N self-defined"),
+  (r"J_i,\ j", "model calls in step " + tex("i", 12) + " (planner, judge, retries …); call index", "self-defined"),
+  (r"\ell_{ij}", "latency of call " + tex("j", 12) + " of step " + tex("i", 12), "ℓ as in " + CITE['swm'] + " · indices self-defined"),
+  (r"\mathrm{TTFT}_{ij}", "time to the first generated token: queueing, sending, prefill of the uncached input", "as in " + CITE['aa']),
+  (r"n^{\mathrm{out}}_{ij},\ \mathrm{TPOT}_{ij}", "output tokens of the call, thinking included; time per output token after the first", "n as in " + CITE['cop'] + " · TPOT as in " + CITE['aospec']),
+  (r"D_i,\ E_i", "model time of step " + tex("i", 12) + "; all its other time (observe, act, wait, harness gaps, back-off)", "D_i adapted from " + CITE['aospec'] + " · E_i self-defined, replacing their T_i"),
+  (r"T_{\mathrm{saving}}", "time hidden because some of it ran at the same time; 0 if strictly serial", "adapted from " + CITE['asyncfc'] + ", intervals widened"),
+  (r"o_{a,i},\ a", "tokens the result or screenshot of step " + tex("i", 12) + " adds to the prompt; agent index", "as in " + CITE['yuan']),
+  (r"|H_{a,i}|,\ \Phi,\ z_{a,i}", "length of the prompt step " + tex("i", 12) + "’s call reads (one call per step); chat template; the call’s output", "H, Φ as in " + CITE['yuan'] + " · z self-defined for their (θ, m, u)"),
+  (r"n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{unc}}", "input tokens read from the cache, written to it (5-min or 1-h), or uncached; " + tex(r"n^{\mathrm{w}}=n^{\mathrm{w5m}}+n^{\mathrm{w1h}}", 12), "classes as billed by " + CITE['anth-b'] + " · hit as in " + CITE['tokenpilot'] + " · unc as in " + CITE['speedrunner']),
+  (r"c_{\kappa}(\mu),\ \kappa,\ \mu", "price per token of billing class " + tex(r"\kappa", 12) + " on serving model " + tex(r"\mu", 12), "c adapted from " + CITE['cop'] + " · κ, μ self-defined"),
+  (r"x_{\mathrm{env}}", "billed environment usage (e.g. sandbox hours)", "x as in " + CITE['cop'] + ", App. D.1 · env self-defined"),
+  (r"R_m(p),\ m,\ p", "probability that one attempt of design " + tex("m", 12) + " (model + harness) on task " + tex("p", 12) + " succeeds", "as in " + CITE['cop']),
+  (r"\mathrm{reading,\ writing}", "reading = prefill of input tokens; writing = decoding output tokens (a cache write is storage)", "self-defined wording"),
 ])}""",
-      foot="SOURCES · symbols follow the sources of pages 3–4 wherever they have one; the full symbol table is Appendix A0 · 4/5",
+      foot="SOURCES · after each symbol, its origin: “as in” = the source’s own symbol and meaning; “adapted from” = renamed or widened, reasons in Appendix A0; self-defined = used by no source · table with locations: Appendix A0 · 4/5",
       chip=("#a0-4", "Appendix A0"))
 
 slide("s03", "The problem, defined (1/2): the time of one attempt, and the growing prompt",
@@ -709,6 +716,7 @@ REFS_P1 = [
  "Erol, M. H., El, B., Suzgun, M., Yuksekgonul, M., &amp; Zou, J. (2026). Cost-of-Pass: An economic framework for evaluating language models. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2504.13359v2. Stanford University.",
  "Feng, G., Mao, H., Dutta, P., &amp; Gonzalez, J. E. (2026). Concurrency without model changes: Future-based asynchronous function calling for LLMs (AsyncFC). arXiv:2605.15077. University of California, Berkeley.",
  "Google. (2026). <i>Gemini Developer API pricing</i> (read 28 September 2026). https://ai.google.dev/gemini-api/docs/pricing",
+ "Huang, Z., Wang, X., Wang, A., Jurayj, W., Jiménez Gutiérrez, B., Khashabi, D., &amp; Andrews, N. (2026). Better, faster, stronger: Programmatic skill learning best reduces agent cost (SpeedRunner). arXiv:2608.11338v1. Johns Hopkins University.",
  "Kang, H., Li, Z., Yang, X., Xu, W., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, poster. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI.",
  "Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., &amp; Narayanan, A. (2025). AI agents that matter. <i>Transactions on Machine Learning Research</i>. arXiv:2407.01502. Princeton University.",
  "Kapoor, S., Stroebl, B., Kirgis, P., Nadgir, N., Siegel, Z. S., Wei, B., … Narayanan, A. (2026). Holistic Agent Leaderboard: The missing infrastructure for AI agent evaluation. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2510.11977. Princeton University et al.",
@@ -727,6 +735,7 @@ REFS_P1 = [
  "XLANG Lab. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537. The University of Hong Kong (authored as “XLANG Lab and Collaborators”; the full author list is in the paper’s Appendix A).",
  "xlang-ai. (2026). <i>OSWorld</i> [Source code], desktop_env/desktop_env.py and run.py at commit b138d348. https://github.com/xlang-ai/OSWorld",
  "Xu, B., Xue, Z., Chen, D., Fu, C., Wu, C., Huang, C., … Zhang, N. (2026). TokenPilot: Cache-efficient context management for LLM agents. arXiv:2606.17016. Zhejiang University; University of Electronic Science and Technology of China; Xidian University; HomologyAI.",
+ "Ye, N., Ahuja, A., Liargkovas, G., Lu, Y., Kaffes, K., &amp; Peng, T. (2026). Speculative actions: A lossless framework for faster AI agents. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>, oral. arXiv:2510.04371. Columbia University.",
  "Yuan, Y., Nayak, A., Kundu, S., &amp; Talati, N. (2026). Agentic AI workload characteristics. arXiv:2605.26297v2 (21 September 2026). University of Illinois Urbana-Champaign; Gimlet Labs; Intel.",
  "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., … Zhang, D. (2026). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft.",
  "Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., &amp; Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560. University of Washington.",
@@ -780,19 +789,19 @@ A("a0-3", "A0 · 3/5", "A0 · Money, per success, and the goal",
   ], ["22%", "9%", "37%", "32%"]))
 
 A("a0-4", "A0 · 4/5", "A0 · Every symbol, its unit, and where it comes from",
-  crumb="symbols follow their source wherever the source has one; ours are marked",
+  crumb="origin of each symbol: “as in” a source (its own symbol and meaning), “adapted from” a source (renamed or widened), or self-defined",
   body=table(["symbol", "meaning", "unit", "origin"], [
-   [tex(r"i,\ N,\ j,\ J_i,\ a", 11), "step (i = 0: calls outside any step); steps; model call; calls in step i; agent", "—; steps; —; calls; —", "i as in AOSpec and Yuan et al.; j, J_i ours (calls ≠ steps); a from Yuan et al."],
-   [tex(r"D_i,\ E_i,\ T_{\mathrm{attempt}},\ T_{\mathrm{saving}},\ T_{\mathrm{seq}}", 11), "model time; non-model time of step i; wall-clock of one attempt; time hidden by concurrency; a separate serial run", "s", "D from AOSpec, widened; E ours (letter from AsyncFC’s ℰ, AsyncLM’s E); T_saving AsyncFC, widened; T_seq from speculation papers"],
-   [tex(r"\mathcal{S},\ \mathcal{D},\ \mathcal{M},\ \mathcal{E},\ \triangleq", 11), "summed length; length of a union; model-call and non-model intervals; defined as", "s", "AsyncFC (intervals widened)"],
-   [tex(r"\ell_{ij},\ \mathrm{TTFT}_{ij},\ \mathrm{TPOT}_{ij}", 11), "call latency; time to first token; time per output token", "s; s; s/token", "ℓ as in " + ci('swm') + "; TTFT " + ci('aa') + "; TPOT as in " + ci('aospec')],
-   [tex(r"t^{\mathrm{queue}},\ t^{\mathrm{net}},\ t^{\mathrm{prefill}},\ t^{\mathrm{first}}", 11), "parts of TTFT: queueing, network, prefill of uncached input, first decode step", "s", "ours (A0 · 1/5)"],
-   [tex(r"n^{\mathrm{in}},\ n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{w5m}},\ n^{\mathrm{w1h}},\ n^{\mathrm{unc}},\ n^{\mathrm{out}}", 11), "tokens: all input (= hit + w + unc); cache read; cache write (= w5m + w1h); uncached input; output", "tokens", "classes from Anthropic’s usage fields; hit as in TokenPilot, unc as in SpeedRunner; n from Cost-of-Pass"],
-   [tex(r"\kappa,\ K,\ \mu_{ij},\ c_{\kappa}(\mu)", 11), "billing class; the set {hit, w5m, w1h, unc, out}; serving model; price per token of class κ on μ", "—; —; —; $/token", "ours; c as in Cost-of-Pass"],
-   [tex(r"x_{\mathrm{env}},\ c_{\mathrm{env}},\ w,\ x_m(p)", 11), "billed environment usage; its price; price vector; quantity vector per attempt", "h; $/h; $/unit; units", "Cost-of-Pass App. D.1"],
-   [tex(r"H_{a,i},\ \Phi,\ z_{a,i},\ o_{a,i},\ g_i,\ \bar{g},\ N^{*}", 11), "context before step i of agent a; chat template; the step’s output; its tool result; tokens added; weighted mean; crossover", "tokens; —; tokens; tokens; tokens; tokens; steps", "Yuan et al.; g, ḡ, N* ours (calc.)"],
-   [tex(r"m,\ p,\ c_m(p),\ C_m(p),\ R_m(p),\ v(m,p),\ R_0,\ \mathbb{E},\ \mathrm{Var}", 11), "design (model + harness); task; dollars of one attempt; expected; success probability; dollars per success; success floor; expectation; variance", "—; —; $; $; prob.; $; prob.", "Cost-of-Pass; R_0 ours"],
-  ], ["27%", "38%", "13%", "22%"]))
+   [tex(r"i,\ N,\ j,\ J_i,\ a", 11), "step (i = 0: calls outside any step); steps; model call; calls in step i; agent", "—; steps; —; calls; —", "i as in " + CITE['aospec'] + " §3 and " + CITE['yuan'] + " §II-C · a as in Yuan et al., §II-C · N, j, J_i self-defined (calls ≠ steps)"],
+   [tex(r"D_i,\ E_i,\ T_{\mathrm{attempt}},\ T_{\mathrm{saving}},\ T_{\mathrm{seq}}", 11), "model time; non-model time of step i; wall-clock of one attempt; time hidden by concurrency; a separate serial run", "s", "D adapted from " + CITE['aospec'] + " §3 (all calls of a step) · E self-defined (replaces their T_i) · T_attempt self-defined · T_saving adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened) · T_seq as in " + CITE['specactions'] + " §3.1.2"],
+   [tex(r"\mathcal{S},\ \mathcal{D},\ \mathcal{M},\ \mathcal{E},\ \triangleq", 11), "summed length; length of a union; model-call and non-model intervals; defined as", "s", "adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened)"],
+   [tex(r"\ell_{ij},\ \mathrm{TTFT}_{ij},\ \mathrm{TPOT}_{ij}", 11), "call latency; time to first token; time per output token", "s; s; s/token", "ℓ as in " + CITE['swm'] + " §2.1 (ℓ_LLM) · TTFT as in " + CITE['aa'] + ", definitions · TPOT as in " + CITE['aospec'] + " §5.1 · indices self-defined"],
+   [tex(r"t^{\mathrm{queue}},\ t^{\mathrm{net}},\ t^{\mathrm{prefill}},\ t^{\mathrm{first}}", 11), "parts of TTFT: queueing, network, prefill of uncached input, first decode step", "s", "self-defined (A0 · 1/5)"],
+   [tex(r"n^{\mathrm{in}},\ n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{w5m}},\ n^{\mathrm{w1h}},\ n^{\mathrm{unc}},\ n^{\mathrm{out}}", 11), "tokens: all input (= hit + w + unc); cache read; cache write (= w5m + w1h); uncached input; output", "tokens", "n as in " + CITE['cop'] + " (n_in, n_out) · classes as billed by " + CITE['anth-b'] + " (usage fields) · hit as in " + CITE['tokenpilot'] + " App. A.2 · unc as in " + CITE['speedrunner'] + " App. A.3 · w5m, w1h self-defined"],
+   [tex(r"\kappa,\ K,\ \mu_{ij},\ c_{\kappa}(\mu)", 11), "billing class; the set {hit, w5m, w1h, unc, out}; serving model; price per token of class κ on μ", "—; —; —; $/token", "c adapted from " + CITE['cop'] + " Eq. 13 (c_in, c_out) · κ, K, μ self-defined"],
+   [tex(r"x_{\mathrm{env}},\ c_{\mathrm{env}},\ w,\ x_m(p)", 11), "billed environment usage; its price; price vector; quantity vector per attempt", "h; $/h; $/unit; units", "as in " + CITE['cop'] + " App. D.1 · env subscript self-defined"],
+   [tex(r"H_{a,i},\ \Phi,\ z_{a,i},\ o_{a,i},\ g_i,\ \bar{g},\ N^{*}", 11), "context before step i of agent a; chat template; the step’s output; its tool result; tokens added; weighted mean; crossover", "tokens; —; tokens; tokens; tokens; tokens; steps", "H, Φ, o as in " + CITE['yuan'] + " Eqs. 1–3 · z self-defined (their (θ, m, u)) · g, ḡ, N* self-defined (calc.)"],
+   [tex(r"m,\ p,\ c_m(p),\ C_m(p),\ R_m(p),\ v(m,p),\ R_0,\ \mathbb{E},\ \mathrm{Var}", 11), "design (model + harness); task; dollars of one attempt; expected; success probability; dollars per success; success floor; expectation; variance", "—; —; $; $; prob.; $; prob.", "as in " + CITE['cop'] + " §2.2, Eq. 2, App. B · R_0 self-defined · 𝔼, Var standard"],
+  ], ["24%", "34%", "11%", "31%"]))
 
 A("a0-5", "A0 · 5/5", "A0 · What a published number covers: map it onto the terms before comparing",
   crumb="the measurement boundary · a figure is comparable only with what it includes stated",
@@ -1826,6 +1835,9 @@ svg.tex{display:inline-block;height:auto}
 .defs{display:grid;column-gap:18px;row-gap:3px;font-size:11.5px;line-height:1.35;color:var(--ink2);flex:none;border-top:1px solid var(--rule);padding-top:6px}
 .defs.c3{grid-template-columns:repeat(3,1fr)}.defs.c2{grid-template-columns:repeat(2,1fr)}
 .defs svg.tex{vertical-align:middle}.defs>div{min-width:0}
+.defs2{columns:3;column-gap:22px;margin:0;padding:6px 0 0 16px;border-top:1px solid var(--rule);font-size:11.5px;line-height:1.33;color:var(--ink2);flex:none}
+.defs2 li{break-inside:avoid;margin:0 0 3px 0}.defs2 svg.tex{vertical-align:middle}
+.defs2 .src{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.6px;color:var(--mute)}
 .statusleg{font-size:11.5px;color:var(--mute);flex:none}
 svg .brk{fill:none;stroke:#8a96a3;stroke-width:1.2}
 .eqtab{display:grid;grid-template-columns:76px 520px 1fr;column-gap:16px;flex:none;border-top:1px solid var(--accent)}
@@ -1961,7 +1973,8 @@ def word_report():
             continue
         text = s["callout"] + " " + s["body"]
         text = re.sub(r"<svg.*?</svg>", " ", text, flags=re.S)
-        text = re.sub(r'<div class="(?:eqcite|cc|wcite)">.*?</div>', " ", text, flags=re.S)   # source lines are citations, not counted
+        text = re.sub(r'<div class="(?:eqcite|cc|wcite)">.*?</div>', " ", text, flags=re.S)
+        text = re.sub(r'<span class="src">.*?</span>', " ", text, flags=re.S)   # symbol origins are citations too   # source lines are citations, not counted
         text = re.sub(r"<[^>]+>", " ", text)
         text = html.unescape(text)
         text = re.sub(r"\([^()]*\d{4}[a-z]?(;[^()]*\d{4}[a-z]?)*\)", " ", text)   # (Author, 2026; ...) citations
