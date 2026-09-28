@@ -50,6 +50,8 @@ Ledger (2026-09-28): `references-ledger.md` maps every source of dossier v3 to o
 - Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., Wang, L., Yang, F., Zhao, P., Qiao, B., Du, C., Li, L., Kang, Y., Jiang, P., Zheng, S., Wang, R., Qian, J., Ma, M., Lou, J.-G., Lin, Q., Rajmohan, S., & Zhang, D. (2026). UFO2: The desktop AgentOS. *Transactions on Machine Learning Research* (May 2026). https://openreview.net/forum?id=iAuZVWCduc . arXiv:2504.14603v2 (25 Apr 2025; 21 authors: no Bo Qiao, and "Zhao Jiang" where TMLR has Paul Jiang). Microsoft (with ZJU-UIUC Institute, Nanjing University, Peking University). — journal paper (venue, year and the 22 authors from the TMLR BibTeX; resolves D147, see D152). Backs E94.
 - Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., & Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560v2 (30 Jun 2026). University of Washington (Ma: Wuhan University of Technology; Pan: Shanghai Jiao Tong University). — preprint. Backs E19, E105.
 
+Also cited in Part 1 since 2026-09-28 (page 2 and Appendix A0, the formula sources of the page-2 equations); their entries stay where they are listed below: Kim et al. (2024), LLMCompiler; Feng et al. (2026), AsyncFC; Luo et al. (2026), Agentix; Chen, Zaharia & Zou (2024), FrugalGPT (TMLR 2024); Erol et al. (2026), Cost-of-Pass (under "Found by following citations"; now a Part 1 reference).
+
 ## Still to confirm
 
 - ~~BrowserGym: institutions and whether the v4 preprint was published (TMLR?).~~ Resolved 2026-09-28: TMLR 2025 (entry above).

@@ -26,6 +26,8 @@ The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px'
 - Density: Edwin’s instruction of 2026-09-27 — the non-appendix part is about half of the first draft; roughly 200–300 words of body text per main page (chart labels included, references excluded); appendix pages are dense tables in the style of the reference deck’s appendix.
 - Language: English on the pages, Chinese in the speaker notes (toggle N). The sources not used under the credibility rule (`references.md`, “Not used”) do not appear in the deck.
 
+**Structure since 2026-09-28:** s00 is the unnumbered deck title (Agent acceleration), s01 the Part 1 title with its contents, s02 the loop with the variable and a page tag at each step plus four equation rows (time with the overlap term O, prompt growth, money by billing class plus machine hours, cost per success and the goal), each row credited to its source; Appendix A0 (2 pages) gives each row's source form and what the page leaves out. The thumbnail on pages 3–12 is page 2's loop in miniature. 24 pages; `check_deck.py` exempts s00 and s01.
+
 ## State (2026-09-28)
 
 Part 1 built (21 pages: 12 main + 9 appendix, after halving the main part on Edwin’s review of the first 20-page draft and then cutting every card to one example on his density review of 2026-09-28) and awaiting his next review; the earlier 9-page Module 1 draft is superseded (git history keeps it). The Chinese docs that are the content source are saved as markdown snapshots in `notes/` (2026-09-28; the Claude Docs remain the working copies Edwin comments on). Part 2 follows once Part 1 is approved.

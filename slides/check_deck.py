@@ -15,8 +15,8 @@ Report (JSON, one entry per page id):
            second, otherwise the page overflows.
   bad      elements whose bottom comes within 24 px of the slide's bottom edge or whose right
            edge passes the slide's right edge, as class:bottom/right in px; must be empty.
-  s01 is the full-bleed cover: it has no content box (content is null) and always lists its
-  `cover` boxes under bad — ignore it.
+  s00 (deck title) and s01 (Part 1 title) are full-bleed covers: no content box (content is null),
+  and their `cover` boxes are listed under bad — ignore them.
 A summary line follows the report. Exit code: 0 when every page other than s01 fits, 1 when any
 page overflows, 2 when the check cannot run (deck not built, unknown page id).
 
@@ -34,7 +34,7 @@ from playwright.async_api import async_playwright
 ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "slides" / "agent-acceleration.html"
 DEFAULT_OUT = ROOT / "slides" / "shots"
-COVER = "s01"   # full-bleed cover page, exempt from the check
+COVER = ("s00", "s01")   # title pages, exempt from the check
 
 # per page: elements that reach into the bottom 24 px of the slide or past its right edge,
 # and the content box's scrollHeight/clientHeight
@@ -88,11 +88,11 @@ async def main(ids=None, pdf=None, out=DEFAULT_OUT):
             await pg.pdf(path=str(pdf), width="1280px", height="720px", print_background=True, prefer_css_page_size=True)
             print("pdf", pdf)
         await b.close()
-    failed = [sid for sid, entry in report.items() if sid != COVER and overflows(entry)]
+    failed = [sid for sid, entry in report.items() if sid not in COVER and overflows(entry)]
     if failed:
         print(f"FAIL: {len(failed)} of {len(report)} pages overflow: " + ", ".join(f"{sid} ({report[sid]['content']})" for sid in failed))
         return 1
-    print(f"OK: all {len(report)} pages fit" + (f" ({COVER}, the full-bleed cover, is exempt)" if COVER in report else "")
+    print(f"OK: all {len(report)} pages fit" + (" (the title pages s00 and s01 are exempt)" if set(COVER) & set(report) else "")
           + f"; screenshots in {out}")
     return 0
 
