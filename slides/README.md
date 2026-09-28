@@ -10,7 +10,7 @@ The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px'
 
 ## Structure
 
-- **Part 1 · Where the time and the money go** (pages 01–20 + Appendix A1–A6). Main pages carry the conclusions and a few representative numbers per class; every paper-by-paper table with its measurement conditions is an appendix page, reachable from the “Appendix …” chip on the page it backs. Order: the loop and its two equations (02) → why reading grows quadratically (03) → five sources of slowness, one page each (04–09) → which term dominates per kind of agent (10) → six sources of cost (11–15, incl. the four accounting conventions and the environment machines) → how slow and expensive are linked, the levers, the gaps (16–18) → references (19–20).
+- **Part 1 · Where the time and the money go** (pages 01–12 + Appendix A1–A6). Main pages carry the conclusions and a few representative numbers per class; every paper-by-paper table with its measurement conditions is an appendix page, reachable from the “Appendix …” chip on the page it backs. Order: the loop, its two equations (typeset at build time with matplotlib mathtext, Computer Modern) and the quadratic reading term (02) → five sources of slowness (03) and their numbers (04–05) → which term dominates per kind of agent (06) → six sources of cost (07), the four accounting conventions and the environment machines (08) → how slow and expensive are linked (09) → the levers and what is still unmeasured (10) → references (11–12).
 - **Part 2 · What the literature has done about each lever** — to be appended after Part 1, with its own appendix after Part 1’s, in the same order.
 
 ## Conventions (agreed with Edwin 2026-09-27, after the ExpenseAI intro deck of 2026-09-22 as the style reference)
@@ -19,9 +19,9 @@ The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px'
 - Citations: author–year in the text — `(Abhyankar, Qi & Zhang, 2026)`, `(XLANG Lab, 2026)`, `(Anthropic, 2026b)` — and a full reference list at the end of the part (published version where one exists; otherwise arXiv number and the authors’ institutions). No source-type words (“preprint”, “paper”) on the slides; dossier E/D ledger IDs appear only in the Chinese speaker notes, never on the page.
 - Every number carries its measurement conditions in a full sentence (benchmark, task count, model, baseline, what was measured); our own arithmetic is marked “calc.”; vendor-stated speed multipliers are marked as such; vendor marketing is not cited.
 - Plain words instead of jargon: “reading the prompt” / “writing the answer” (prefill / decode named once), “the harness — the program around the model”, “accessibility tree (the text list of on-screen elements)”, “elapsed time”, “cache of already-read prompt (the KV cache)”.
-- Density: roughly 150–300 words of body text per main page (chart labels included, references excluded); appendix pages are dense tables in the style of the reference deck’s appendix.
+- Density: Edwin’s instruction of 2026-09-27 — the non-appendix part is about half of the first draft; roughly 200–300 words of body text per main page (chart labels included, references excluded); appendix pages are dense tables in the style of the reference deck’s appendix.
 - Language: English on the pages, Chinese in the speaker notes (toggle N). The sources not used under the credibility rule (`references.md`, “Not used”) do not appear in the deck.
 
 ## State (2026-09-27)
 
-Part 1 built (29 pages: 20 main + 9 appendix) and awaiting Edwin’s review; the earlier 9-page Module 1 draft is superseded (git history keeps it). Open: the Chinese docs are the content source and are not yet saved in the repo (`notes/`); Part 2 follows once Part 1 is approved.
+Part 1 built (21 pages: 12 main + 9 appendix, after halving the main part on Edwin’s review of the first 20-page draft) and awaiting his next review; the earlier 9-page Module 1 draft is superseded (git history keeps it). Open: the Chinese docs are the content source and are not yet saved in the repo (`notes/`); Part 2 follows once Part 1 is approved.
