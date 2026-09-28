@@ -4,6 +4,7 @@
 
 ```
 python3 slides/build_deck.py --fonts slides/fonts      # writes agent-acceleration.html (IBM Plex embedded)
+python3 slides/check_deck.py --pdf=slides/agent-acceleration-part1.pdf   # fit check (every page must report content ≤ box and bad: []), screenshots to slides/shots/, PDF export
 ```
 
 The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px', height='720px')` with print media). The deck is built from dossier v3 only, through the two Chinese study documents (《Agent 慢和贵的逻辑链》→ Part 1; 《Agent 加速：别人做到哪了》→ Part 2, not yet built).
@@ -27,4 +28,4 @@ The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px'
 
 ## State (2026-09-28)
 
-Part 1 built (21 pages: 12 main + 9 appendix, after halving the main part on Edwin’s review of the first 20-page draft and then cutting every card to one example on his density review of 2026-09-28) and awaiting his next review; the earlier 9-page Module 1 draft is superseded (git history keeps it). Open: the Chinese docs are the content source and are not yet saved in the repo (`notes/`); Part 2 follows once Part 1 is approved.
+Part 1 built (21 pages: 12 main + 9 appendix, after halving the main part on Edwin’s review of the first 20-page draft and then cutting every card to one example on his density review of 2026-09-28) and awaiting his next review; the earlier 9-page Module 1 draft is superseded (git history keeps it). The Chinese docs that are the content source are saved as markdown snapshots in `notes/` (2026-09-28; the Claude Docs remain the working copies Edwin comments on). Part 2 follows once Part 1 is approved.
