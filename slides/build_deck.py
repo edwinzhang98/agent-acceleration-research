@@ -307,6 +307,10 @@ def defs(items, cols=3):
     """A grid of symbol definitions: [(latex, text), ...] — every symbol at its first appearance."""
     return (f'<div class="defs c{cols}">' + "".join(f'<div>{tex(a, 12)} <span>{b}</span></div>' for a, b in items) + '</div>')
 
+def defs1(items):
+    """defs2 in one column, for the gloss cell of an equation row."""
+    return defs2(items).replace('<ul class="defs2">', '<ul class="defs2 one">', 1)
+
 def defs2(items):
     """A bulleted glossary: [(latex, meaning, origin), ...]; the origin is 'as in …', 'adapted from …' or 'self-defined'."""
     return ('<ul class="defs2">' + "".join(f'<li>{tex(a, 12)} {b} <span class="src">({c})</span></li>' for a, b, c in items) + '</ul>')
@@ -429,12 +433,24 @@ slide("s03", "The problem, defined (1/2): the time of one attempt, and the growi
       crumb="from the loop → here: time as a sum over steps and calls, and why the prompt grows → to: money, success and the goal",
       body=f"""
 <div class="statusleg">each row says whether it is <b>verbatim</b> from its source, <b>adapted</b> (reason in Appendix A0) or <b>our distillation</b> (no source writes it as a formula) · calc. = our algebra</div>
-<div class="eqtab">
+<div class="eqtab narroweq">
 {eqrow("time", "one attempt", ["time", "call", "saving"],
-       tex(r"T_{\mathrm{attempt}}", 11) + ": wall-clock of one attempt, from hand-over to result. Model and non-model time add over the steps (" + tex("i=0", 11) + " holds calls outside any step). " + tex(r"\triangleq", 11) + ": defined as; " + tex(r"\mathcal{S}", 11) + ": summed length of intervals; " + tex(r"\mathcal{D}", 11) + ": length of their union (not the model time " + tex("D_i", 11) + "); " + tex(r"\mathcal{M},\ \mathcal{E}", 11) + ": model-call and non-model intervals of the trace.",
+       defs1([
+        (r"T_{\mathrm{attempt}}", "wall-clock time of one attempt: the real time that passes from handing over the task to getting the result, so work done at the same time counts once", "self-defined"),
+        (r"i=0", "a step-0 bucket for calls outside any step, e.g. a plan made before step 1", "self-defined"),
+        (r"\mathcal{M},\ \mathcal{E}", "the time intervals in the trace when a model call is running; when anything else is", "adapted from " + CITE['asyncfc'] + ": decoding and function intervals"),
+        (r"\mathcal{S}(\cdot),\ \mathcal{D}(\cdot)", "intervals’ lengths added up (overlap counted twice); length of their union (overlap counted once) — not the model time " + tex("D_i", 12) + ". A 2-s tool call run during a model call: " + tex(r"T_{\mathrm{saving}}", 12) + " = 2 s", "as in " + CITE['asyncfc']),
+        (r"\triangleq", "“defined as”", "standard notation"),
+        (r"D_i,\ E_i,\ \ell_{ij},\ \mathrm{TTFT},\ n^{\mathrm{out}},\ \mathrm{TPOT}", "as on page 2", "origins there"),
+       ]),
        "sum: " + CITE['aospec'] + " · calls within a step: our distillation, evidence " + CITE['osh'] + " · call: " + CITE['aa'] + " (third-party) · saving: " + CITE['asyncfc'] + ", intervals widened", "adapted · our distillation", stack=True, fs=12.5)}
 {eqrow("prompt", "grows", ["ctx", "ctxsum"],
-       "Each step appends its output and its result to the next prompt (one call per step, full history kept). " + tex(r"\bar{g}", 11) + ": the added tokens per step, weighted by how often they are re-read. The " + tex("N^2", 11) + " term dominates beyond " + tex(r"N^{*}=2|H_{a,1}|/\bar{g}+1", 11) + " (calc.).",
+       defs1([
+        (r"|H_{a,i+1}|", "each step appends its output and its result to the next prompt (one call per step, full history kept); symbols as on page 2", "adapted from " + CITE['yuan'] + ", lengths of its Eq. 3"),
+        (r"|H_{a,1}|", "the first prompt (system prompt and task); the left-hand sum is all prompt tokens read over the attempt", "self-defined"),
+        (r"g_i,\ \bar{g}", "tokens step " + tex("i", 12) + " adds, " + tex(r"g_i=|\Phi(z_{a,i})|+|o_{a,i}|", 12) + "; their mean, weighted by the " + tex("N-i", 12) + " later steps that re-read them", "self-defined (calc.)"),
+        (r"N^{*}=2|H_{a,1}|/\bar{g}+1", "the step count beyond which the " + tex("N^2", 12) + " term outweighs " + tex(r"N|H_{a,1}|", 12), "self-defined (calc.)"),
+       ]),
        "recurrence: " + CITE['yuan'] + " (lengths of its Eq. 3) · sum: our distillation (calc.) · re-sent history, measured: " + CITE['osh'], "adapted · our distillation (calc.)", stack=True, fs=12.5)}
 </div>""",
       foot="SOURCES · as cited in each row · simplified: one call per step in the prompt row; times are per attempt, not distributions — Appendix A0",
@@ -1836,7 +1852,9 @@ svg.tex{display:inline-block;height:auto}
 .defs.c3{grid-template-columns:repeat(3,1fr)}.defs.c2{grid-template-columns:repeat(2,1fr)}
 .defs svg.tex{vertical-align:middle}.defs>div{min-width:0}
 .defs2{columns:3;column-gap:22px;margin:0;padding:6px 0 0 16px;border-top:1px solid var(--rule);font-size:11.5px;line-height:1.33;color:var(--ink2);flex:none}
-.defs2 li{break-inside:avoid;margin:0 0 3px 0}.defs2 svg.tex{vertical-align:middle}
+.defs2 li{break-inside:avoid;margin:0 0 3px 0}
+.eqtab.narroweq{grid-template-columns:76px 420px 1fr}
+.defs2.one{columns:1;border-top:none;padding:0 0 0 16px;margin:0 0 3px 0;font-size:12px}.defs2 svg.tex{vertical-align:middle}
 .defs2 .src{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.6px;color:var(--mute)}
 .statusleg{font-size:11.5px;color:var(--mute);flex:none}
 svg .brk{fill:none;stroke:#8a96a3;stroke-width:1.2}
