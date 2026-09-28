@@ -421,6 +421,10 @@ Map every published number onto these terms before comparing.
 
 ---
 
+### 0.6 Changes after the independent review of the deck (28 Sep 2026)
+
+Three reviewers checked the rebuilt Part 1 against this definition (50 findings, all addressed). Notation and wording changes to this definition: the billing-class index is κ ∈ K = {hit, w5m, w1h, unc, out} instead of x ∈ X, because x is Cost-of-Pass's quantity (x_env, x_m(p)); "write" on its own means decoding output tokens and a cache write is always called a cache write (n^w = n^w5m + n^w1h); T_saving is called small, not ≈ 0 — the only evidence is one production trace's intra-turn concurrency of 1.15 (a call count); the strips on deck pages 5, 11 and 13 were corrected to bracket the step sum and the expectation (Σ_i[Σ_j ℓ_ij + E_i] − T_saving; v = 𝔼[c_m(p)]/R_m(p)).
+
 ## 1. Verification table
 
 The "Extract" rows were checked by earlier extraction agents against the named arXiv PDF (pdftotext) and the HTML LaTeX alttext, or against the rendered vendor or AA page. "Re-checked" means grepped this pass against the local text layers in the scratchpad (`wf-define/`, `attr/`, `src4/`), fetched again on 28 Sep 2026.
