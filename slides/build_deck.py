@@ -296,6 +296,9 @@ CITE = {   # short in-text forms, all in the reference list
     "anth-a": "Anthropic, 2026a",
     "anth-b": "Anthropic, 2026b",
     "openai": "OpenAI, 2026",
+    "deepseek": "DeepSeek, 2026",
+    "google": "Google, 2026",
+    "xai": "xAI, 2026",
     "aa": "Artificial Analysis, 2026",
     "code": "xlang-ai, 2026",
     "jit": "Winston et al., 2026",
@@ -371,7 +374,7 @@ slide("s02", "The loop, with every term on it",
   <div class="eqs">
     <div class="eqrow"><span class="eql">time</span>{eq_svg("time")}</div>
     <div class="eqrow"><span class="eql">money</span>{eq_svg("money")}</div>
-    <div class="eqnote">{tex("N", 13)} passes · {tex("c_k", 13)} model calls in pass {tex("k", 13)} · {tex("R_k, W_k", 13)} tokens read and written · {tex("p", 13)} prices (a cached read costs 0.1×) · {T_ENV} environment time. The <b>harness</b> — the program around the model — sets {tex("c_k", 13)}, the observation size and the sleeps.</div>
+    <div class="eqnote">{tex("N", 13)} passes · {tex("c_k", 13)} model calls in pass {tex("k", 13)} · {tex("R_k, W_k", 13)} tokens read and written · {tex("p", 13)} prices (e.g. DeepSeek-V4.1-Flash: $0.30 per million tokens read, $0.006 when cached; {CITE['deepseek']}) · {T_ENV} environment time. The <b>harness</b> — the program around the model — sets {tex("c_k", 13)}, the observation size and the sleeps.</div>
   </div>
 </div>
 <div class="quadgrid">
@@ -382,7 +385,7 @@ slide("s02", "The loop, with every term on it",
           ["Measured on real runs, cost “grows quadratically with the number of steps” and a late step takes up to 3× longer than an early one, because pass " + tex("k", 13) + " re-sends the " + tex("k-1", 13) + " earlier screenshots — GTA1 harness, 39 OSWorld tasks"], ci('osh'))}
   </div>
 </div>""",
-      foot=f"SOURCES · {CITE['anth-b']}; {CITE['openai']} (prices) · {CITE['osh']}",
+      foot=f"SOURCES · {CITE['anth-b']}; {CITE['openai']}; {CITE['deepseek']} (prices) · {CITE['osh']}",
       chip=("#a1-1", "Appendix A1"),
       notes="""对应文档零节。读 = prefill，写 = decode（Opus 5.5 实测 81.7 token/s [E208]）；写的单价是读的 5 倍（定价页）。环境时间和排队只进时间式子，读写 token 两个式子都进——这是第 9 页“慢和贵怎么连”的底层结构。右下：""" + tex(r"R_k \approx k\,r", 14) + """，求和 """ + tex(r"\approx \frac{N^2}{2}\, r", 14) + """，10 步 55 份、20 步 210 份（calc.）；实测 OSWorld-Human“成本随步数二次增长”[E45]，靠后的步最多慢 3 倍 [E23]；截图 1,000–1,800 tokens [E31]。harness 一词在这页定义。""")
 
@@ -490,7 +493,7 @@ slide("s06", "Which term dominates depends on the harness, not on the kind of ag
 slide("s07", "Cost has six sources",
       hl=("n-rtok", "n-wtok", "n-price", "n-succ", "n-calls", "n-steps"),
       crumb="from where the time goes → here: every cause of cost, in six classes → to: four accounting conventions, and the environment machine",
-      callout=f"""<p><b>Money comes from two things only — tokens read and tokens written, each times a price.</b> Writing costs 5× reading; a cached read costs 0.1×; fast mode costs 2× {ci('anth-b','openai')}. Three of the other sources multiply those token counts; the sixth, the environment machine, is outside the API bill.</p>""",
+      callout=f"""<p><b>Money comes from two things only — tokens read and tokens written, each times a price.</b> Writing costs 5× reading; a cached read costs a small fraction of a normal read (DeepSeek-V4.1-Flash: $0.006 vs $0.30 per million tokens; other vendors in Appendix A3); fast mode costs 2× {ci('anth-b','openai','deepseek')}. Three of the other sources multiply those token counts; the sixth, the environment machine, is outside the API bill.</p>""",
       body=f"""
 {cost_strip()}
 <div class="rows6">
@@ -509,7 +512,7 @@ slide("s07", "Cost has six sources",
 </div>""",
       foot="SOURCES · one representative number per class; the complete tables with conditions are in Appendix A3",
       chip=("#a3-1", "Appendix A3"),
-      notes="""文档第三节。三个比例：写 = 读 × 5；缓存读 0.1 倍；fast mode 2 倍（Anthropic 2026b；OpenAI 2026，2026 年 9 月定价页）。第一类 [E45][E31][E98][E44][E19]；第二类 [E41][D7]（$2.43 只算输出、$7.87 全算，输出 31%）；第三类 [E25][E44]；第四类 [E41] $72.4/20.6%≈$351（calc.）、[E45] $8.47、[E43] HAL 约 $40,000（21,730 次运行，每配置一次）；第五类定价页 [E190][E192]；第六类追加调查 7（E212–E223）。""")
+      notes="""文档第三节。三个比例：写 = 读 × 5；缓存读只是正常读的一小部分（DeepSeek-V4.1-Flash 例子：$0.006 vs $0.30 每百万 token；各家 0.02–0.25×，见附录 A3）；fast mode 2 倍（Anthropic 2026b；OpenAI 2026；DeepSeek 2026，2026 年 9 月定价页）。第一类 [E45][E31][E98][E44][E19]；第二类 [E41][D7]（$2.43 只算输出、$7.87 全算，输出 31%）；第三类 [E25][E44]；第四类 [E41] $72.4/20.6%≈$351（calc.）、[E45] $8.47、[E43] HAL 约 $40,000（21,730 次运行，每配置一次）；第五类定价页 [E190][E192]；第六类追加调查 7（E212–E223）。""")
 
 # --- 08 conventions + machines ----------------------------------------------------
 slide("s08", "Four accounting conventions for one task, and the cost of the environment machine",
@@ -525,7 +528,7 @@ slide("s08", "Four accounting conventions for one task, and the cost of the envi
   <tbody>
   <tr><td class="rk">output only vs all tokens</td><td>GTA1 on 39 OSWorld tasks, o3 list price, no cache: $2.43 counting output only; $7.87 counting all tokens {ci('osh')}</td><td>3.2×</td></tr>
   <tr><td class="rk">per attempt vs per success</td><td>OSWorld 2.0, Claude Opus 4.8: $72.4 per attempt at 20.6% completion → ≈ $351 (calc.; not the cost of retrying to success) {ci('osw2')}</td><td>4.9×</td></tr>
-  <tr><td class="rk">uncached vs cached</td><td>A cached read costs 0.1×; but at a 95.7% hit rate, prefix tokens were still 59.5% of the bill (4,265 Claude Code / Codex sessions) {ci('anth-b','tracelab')}</td><td>10× read price only</td></tr>
+  <tr><td class="rk">uncached vs cached</td><td>A cached read costs a fraction of a normal read (DeepSeek-V4.1-Flash: $0.006 vs $0.30 per million tokens; other vendors in A3); but at a 95.7% hit rate, prefix tokens were still 59.5% of the bill (4,265 Claude Code / Codex sessions) {ci('deepseek','tracelab')}</td><td>4–50× on the read price only, by vendor (calc.)</td></tr>
   <tr><td class="rk">standard vs fast mode</td><td>Claude Opus 5.5 $4 / $20 → $8 / $40; OpenAI 2× on every listed model; up to 2.5× faster writing (vendor-stated), reading unchanged {ci('anth-b','openai')}</td><td>2×</td></tr>
   </tbody></table>
   <div class="figcap">The three that apply to a whole bill compound to about 31× (3.2 × 4.9 × 2, calc.). Screenshot-agent measurements do not report their cache state.</div>
@@ -536,9 +539,9 @@ slide("s08", "Four accounting conventions for one task, and the cost of the envi
     {hbars("A one-hour CPU environment as a share of a $7.87 API bill (calc.)", [("Browser Use cloud browser",0.25,"0.25%"),("AWS t3.medium",0.5,"0.5%"),("Browserbase",1.5,"1.5%"),("E2B / Daytona 2 vCPU",2.1,"2.1%"),("Modal 2 vCPU",3.0,"3.0%"),("AWS t3.2xlarge (OSWorld 2.0)",4.2,"4.2%"),("OpenAI hosted container 4 GB",4.6,"4.6%")], "vendor price pages, read 2026-09-27 · full price table in Appendix A3", width=520, height_row=17)}
   </div>
 </div>""",
-      foot=f"SOURCES · {CITE['osh']} · {CITE['osw2']} · {CITE['tracelab']} · {CITE['anth-b']} · {CITE['openai']} · AWS, Browser Use, Browserbase, E2B, Daytona, Modal, OpenAI price pages",
+      foot=f"SOURCES · {CITE['osh']} · {CITE['osw2']} · {CITE['tracelab']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['deepseek']} · AWS, Browser Use, Browserbase, E2B, Daytona, Modal, OpenAI price pages",
       chip=("#a3-3", "Appendix A3"),
-      notes="""文档第三节“四种口径”和第六类。只算写 vs 全算 3.2 倍 [D7]；每次尝试 vs 每次成功 4.9 倍 [E41]（calc.）；无缓存 vs 有缓存：读价 10 倍，但 [E19] 命中 95.7% 仍占 59.5%，截图型没报缓存状态 [D101]；标准 vs fast mode 2 倍 [E190][E192]，切换会丢缓存；3.2×4.9×2≈31。机器：追加调查 7（E212–E223）：1 小时 CPU 环境 $0.02–0.36，占 $7.87 的 0.3–4.6%；四个例外（月费、代理 $5–12/GB、wall-clock 计费而中位会话只 20% 在执行、GPU 沙箱 H100 $3.95/h）；Meta Muse 专属云端电脑、ChatGPT agent 虚拟电脑，不公布价格。""")
+      notes="""文档第三节“四种口径”和第六类。只算写 vs 全算 3.2 倍 [D7]；每次尝试 vs 每次成功 4.9 倍 [E41]（calc.）；无缓存 vs 有缓存：读价差 4–50 倍（calc.；DeepSeek-V4.1-Flash 例子；各家 0.02–0.25×，见附录 A3），但 [E19] 命中 95.7% 仍占 59.5%，截图型没报缓存状态 [D101]；标准 vs fast mode 2 倍 [E190][E192]，切换会丢缓存；3.2×4.9×2≈31。机器：追加调查 7（E212–E223）：1 小时 CPU 环境 $0.02–0.36，占 $7.87 的 0.3–4.6%；四个例外（月费、代理 $5–12/GB、wall-clock 计费而中位会话只 20% 在执行、GPU 沙箱 H100 $3.95/h）；Meta Muse 专属云端电脑、ChatGPT agent 虚拟电脑，不公布价格。""")
 
 # --- 09 how they link ---------------------------------------------------------------
 slide("s09", "How slow and expensive are linked: three kinds of relationship",
@@ -596,9 +599,11 @@ slide("s10", "The levers, and what is still unmeasured",
 REFS_P1 = [
  "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of the 9th Conference on Machine Learning and Systems (MLSys 2026)</i>. arXiv:2506.16042. University of California, San Diego.",
  "Anthropic. (2026a, May 13). <i>Best practices for computer and browser use with Claude</i>. https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude",
- "Anthropic. (2026b). <i>Claude API pricing</i>; <i>Fast mode</i> (developer documentation, read 27 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/fast-mode",
+ "Anthropic. (2026b). <i>Claude API pricing</i>; <i>Fast mode</i> (developer documentation, read 28 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/fast-mode",
  "Bian, S., Yan, M., Jayarajan, A., Pekhimenko, G., &amp; Venkataraman, S. (2025). What limits agentic systems efficiency? arXiv:2510.16276. University of Wisconsin–Madison; University of Toronto; NVIDIA.",
  "Chang, C., Zhou, Y., Fu, K., An, D., Feng, T., Lu, H., Yao, S., Guo, P., Yu, Y., Shan, Y., Li, B., Yuan, B., &amp; Wang, W. (2026). From LLM inference to agentic workloads: Characterization and implications for serving systems (AgentSysBench). arXiv:2608.15127. Hong Kong University of Science and Technology; Alibaba Group; ByteDance.",
+ "DeepSeek. (2026). <i>Models &amp; pricing</i> (API documentation, read 28 September 2026); <i>DeepSeek-V4.1-Flash release</i> (10 September 2026). https://api-docs.deepseek.com/quick_start/pricing; https://api-docs.deepseek.com/news/news260910",
+ "Google. (2026). <i>Gemini Developer API pricing</i> (read 28 September 2026). https://ai.google.dev/gemini-api/docs/pricing",
  "Kang, H., Li, Z., Yang, X., Xu, W., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, poster. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI.",
  "Kapoor, S., Stroebl, B., Kirgis, P., Nadgir, N., Siegel, Z. S., Wei, B., … Narayanan, A. (2026). Holistic Agent Leaderboard: The missing infrastructure for AI agent evaluation. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2510.11977. Princeton University et al.",
  "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., … Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i>. arXiv:2412.05467. ServiceNow Research et al. (figure not re-verified; used only in Appendix A1)",
@@ -607,9 +612,10 @@ REFS_P1 = [
  "Lu, J., Zhang, Z., Yang, F., Zhang, J., Wang, L., Du, C., Lin, Q., Rajmohan, S., Zhang, D., &amp; Zhang, Q. (2025). AXIS: Efficient human-agent-computer interaction with API-first LLM-based agents. <i>Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</i>, 7711–7743. https://doi.org/10.18653/v1/2025.acl-long.381. Microsoft.",
  "Meta. (2026, September 8). <i>Introducing Muse, your personal AI agent</i> [Newsroom post]. https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/",
  "OpenAI. (2025). <i>Introducing Operator</i> (23 January 2025); <i>Introducing ChatGPT agent</i> (17 July 2025). https://openai.com/index/introducing-operator/; https://openai.com/index/introducing-chatgpt-agent/",
- "OpenAI. (2026). <i>API pricing</i>; <i>API changelog</i> (fast mode, 30 July 2026; Ultrafast, 13 August 2026) (read 27 September 2026). https://developers.openai.com/api/docs/pricing; https://developers.openai.com/api/docs/changelog",
+ "OpenAI. (2026). <i>API pricing</i>; <i>API changelog</i> (fast mode, 30 July 2026; Ultrafast, 13 August 2026) (read 28 September 2026). https://developers.openai.com/api/docs/pricing; https://developers.openai.com/api/docs/changelog",
  "Winston, C., Wang, R. Y., Mirhoseini, A., &amp; Kozyrakis, C. (2026). Agent JIT compilation for latency-optimizing web agent planning and scheduling. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306. arXiv:2605.21470. Stanford University.",
  "Wong, M., Hsieh, K., Nath, S., &amp; Netravali, R. (2026). Skim: Speculative execution for fast and efficient web agents. arXiv:2605.16565. Princeton University; Microsoft Research.",
+ "xAI. (2026). <i>Grok 4.7</i> model page, SpaceXAI Docs (read 28 September 2026). https://docs.x.ai/developers/models/grok-4.7",
  "xlang-ai. (2026). <i>OSWorld</i> [Source code], desktop_env/desktop_env.py and run.py at commit b138d348. https://github.com/xlang-ai/OSWorld",
  "XLANG Lab. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537. The University of Hong Kong (authored as “XLANG Lab and Collaborators”; the full author list is in the paper’s Appendix A).",
  "Yuan, Y., Nayak, A., Kundu, S., &amp; Talati, N. (2026). Agentic AI workload characteristics. arXiv:2605.26297. University of Illinois Urbana-Champaign; Gimlet Labs; Intel.",
@@ -716,7 +722,13 @@ A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — 3. calls, 4. failures, 5. un
    ["4-3", "Evaluation itself is too expensive to repeat", "Single runs, no repeats", "Holistic Agent Leaderboard: 9 benchmarks, 21,730 runs, one run per configuration, about $40,000 in total; Claude Opus 4.1 not run on Online-Mind2Web because the estimate was $20,000", ci('hal')],
    ["5-1", "Model tier", "Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written", "Vendor price pages, 27 September 2026", ci('anth-b','openai')],
    ["5-2", "Fast mode", "2× on both vendors; switching speed tiers invalidates the cache", "Anthropic: Claude Opus 5.5 $8 / $40, up to 2.5× output speed (vendor-stated), first-token wait unchanged. OpenAI: 2× on all listed models; “up to 2.5×” stated only for GPT-5.6 Sol", ci('anth-b','openai')],
-   ["5-3", "Cache write and read", "Writing to the cache 1.25×; reading from it 0.1×", "Vendor price pages", ci('anth-b','openai')],
+   ["5-3", "Cache write and read", "Latest model of each vendor, per million tokens, normal read → cached read (ratios calc.):"
+          "<br>DeepSeek-V4.1-Flash $0.30 → $0.006 (0.02×; peak rate, both halve off-peak)"
+          "<br>Claude Opus 5.5 $4 → $0.20 (0.05×; other Claude models 0.1×, Fable 5.1 0.025×; cache writes 1.25× for 5 min, 2× for 1 hour)"
+          "<br>GPT-6 Sol $2 → $0.20 and GPT-6 Luna $0.10 → $0.01 (0.1×; cache writes 1.25×)"
+          "<br>Gemini 3.8 Flash $0.75 → $0.075 (0.1×; plus $0.50 per million tokens per hour of storage; introductory to 31 Dec 2026)"
+          "<br>Grok 4.7 $2 → $0.50 (0.25×)",
+    "Vendor price pages, read 28 September 2026", ci('deepseek','anth-b','openai','google','xai')],
    ["5-4", "Long-context surcharge", "OpenAI: 2× the read price above 272K tokens", "Vendor price page", ci('openai')],
   ], w_cost),
   notes="附录 A3 第 2 页：文档第三节第三类（[E25][E44]）、第四类（Ⅳ-1…Ⅳ-3，[E41][E45][E43]）、第五类（Ⅴ-1…Ⅴ-4，[E190][E192]）。")
@@ -733,7 +745,7 @@ A("a3-3", "A3 · 3/3", "A3 · Cost — 6. the environment machine, and the four 
    ["AWS t3.2xlarge (8 vCPU / 32 GiB, OSWorld 2.0’s default instance)", "$0.3341 per hour", "$0.334", "$0.084", "4.2%", "0.46%"],
    ["OpenAI hosted container (Hosted Shell / Code Interpreter, 4 GB)", "$0.12 per 20-minute session → $0.36 per hour; 1 GB $0.03, 16 GB $0.48, 64 GB $1.92 per 20 minutes", "$0.36", "$0.12", "4.6%", "0.50%"],
   ], ["22%", "42%", "8%", "8%", "10%", "10%"]) + """
-<div class="apx-note"><b>The four accounting conventions (page 8), in one line each:</b> output only vs all tokens — 3.2× (OSWorld-Human, $2.43 vs $7.87); per attempt vs per success — 4.9× (OSWorld 2.0, $72.4 ÷ 20.6%); uncached vs cached — 10× on the read price, far less on the bill (TraceLab: 95.7% hits, prefix still 59.5% of cost); standard vs fast mode — 2× (both vendors), buying only writing speed.</div>""",
+<div class="apx-note"><b>The four accounting conventions (page 8), in one line each:</b> output only vs all tokens — 3.2× (OSWorld-Human, $2.43 vs $7.87); per attempt vs per success — 4.9× (OSWorld 2.0, $72.4 ÷ 20.6%); uncached vs cached — 4–50× on the read price by vendor (calc.), far less on the bill (TraceLab: 95.7% hits, prefix still 59.5% of cost); standard vs fast mode — 2× (both vendors), buying only writing speed.</div>""",
   notes="附录 A3 第 3 页：文档第三节第六类的环境价格表（追加调查 7，E212–E218 计算）和四种口径的一句话版。")
 
 A("a5-1", "A5", "A5 · Each cause’s effect on time and on money",
@@ -744,7 +756,7 @@ A("a5-1", "A5", "A5 · Each cause’s effect on time and on money",
    ["Many calls per pass " + tex("(c_k)", 12), "linear", "linear", "<b>same source</b>"],
    ["Reading a lot (history, screenshots, rich observations)", "Reading time, longer every step", "Read-token bill", "<b>same source</b> — the same tokens cost time and money"],
    ["Writing a lot (thinking)", "Generation time, roughly 12 ms per token", "Write-token bill at 5× the read price", "<b>same source</b>, and the dearest time: writing is the slowest and the most expensive token"],
-   ["Cache hits", "Saves reading time", "Read price 0.1×", "<b>same source</b>, but fragile: editing the history or switching to fast mode invalidates it"],
+   ["Cache hits", "Saves reading time", "Read price 0.02–0.25× of a normal read, by vendor (A3)", "<b>same source</b>, but fragile: editing the history or switching to fast mode invalidates it"],
    ["Queueing", "slow", "free", "<b>slow but not expensive</b>; escaping it means a fast or priority tier at 2×"],
    ["Environment waits (page loads, fixed sleeps)", "slow", "No API cost; machine time by the hour — CPU sandboxes $0.02–0.36 per hour, usually under 5% of the API bill", "<b>slow but not expensive</b>"],
    ["Tool tails (tests, builds)", "slow", "No API cost", "<b>slow but not expensive</b>"],
@@ -791,7 +803,7 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 /* cards */
 .cards3,.cards4,.rows5,.rows6,.figs3{display:grid;gap:12px}
 .cards3{grid-template-columns:repeat(3,1fr)}.cards4{grid-template-columns:repeat(4,1fr)}
-.rows6 .card{padding:10px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13.5px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr)}
+.rows6 .card{padding:8px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13.5px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr)}
 .figs3{grid-template-columns:repeat(3,1fr);gap:20px;flex:none}
 .figs1{display:flex;flex:none}.figs1 .fig{width:600px;max-width:100%}
 .card{border:1px solid var(--rule);border-radius:4px;padding:11px 13px;background:#fff;display:flex;flex-direction:column;gap:5px;min-height:0}
