@@ -7,7 +7,7 @@ python3 slides/build_deck.py --fonts slides/fonts      # writes agent-accelerati
 python3 slides/check_deck.py --pdf=slides/agent-acceleration-part1.pdf   # fit check (every page must report content ≤ box and bad: []), screenshots to slides/shots/, PDF export
 ```
 
-The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px', height='720px')` with print media). On Edwin's Mac (checked 2026-09-28) neither matplotlib nor Playwright is installed, so `build_deck.py` cannot run there: build where both exist (the cowork environment) or install matplotlib first. Headless Chrome's `--print-to-pdf` also gives 21 pages at 1280×720, because the print CSS sets `@page`. The deck is built from dossier v3 only, through the two Chinese study documents (《Agent 慢和贵的逻辑链》→ Part 1; 《Agent 加速：别人做到哪了》→ Part 2, not yet built).
+The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px', height='720px')` with print media). Environment: a Python 3.12 venv at the repository root with the versions pinned in `slides/requirements.txt` — matplotlib 3.10.9 reproduces the committed math SVGs byte for byte (3.11 lays the formulas out slightly differently), Playwright 1.62.0 drives Chromium v1234. Set it up once with `uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -r slides/requirements.txt && .venv/bin/playwright install chromium` (Playwright's browsers are shared across projects in `~/Library/Caches/ms-playwright`), then `source .venv/bin/activate` before the commands above. The deck is built from dossier v3 only, through the two Chinese study documents (《Agent 慢和贵的逻辑链》→ Part 1; 《Agent 加速：别人做到哪了》→ Part 2, not yet built).
 
 ## Structure
 

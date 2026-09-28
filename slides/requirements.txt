@@ -1,0 +1,5 @@
+# Deck build environment (Python 3.12 venv at the repo root; set-up in slides/README.md).
+# matplotlib 3.10.9 reproduces the committed math SVGs byte for byte; 3.11.x lays out the formulas slightly differently.
+matplotlib==3.10.9
+# playwright 1.62.0 drives Chromium v1234 for check_deck.py (fit check, screenshots, PDF export).
+playwright==1.62.0
