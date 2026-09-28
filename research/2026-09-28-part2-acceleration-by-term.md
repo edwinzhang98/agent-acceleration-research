@@ -82,7 +82,7 @@ One row per work whose numbers the deck uses. Verdict, location and numbers are 
 | LLMCompiler | 20.47→5.47 s (3.74×); −73% (calc.); 72.47→77.13%; 20,000→2,800 tokens; WebShop 5.98→10.48 s | confirmed | v3 Table 1 p.6; Table 2; Table 3 | arXiv:2312.04511v3 PDF (5 Jun 2024), which carries the ICML 2024 / PMLR 235 head | primary |
 | W&D | 1,522.6→904.2 s; $102.5→$65.7; 66→68%; $1.55→$0.97 per correct (calc.) | confirmed | v1 §3.2 p.4; Table 1 | https://arxiv.org/abs/2602.07359 | primary |
 | AsyncFC | 1.44×, 1.21×; 47.6→44.3%; 300 tasks | corrected | v1 SWE-bench Lite result (Fig./text §5) | https://arxiv.org/html/2605.15077v1 | primary |
-| SPORK | 131.9→108.1 s (−18%); EM within 1 pp; 165 tasks | confirmed | v1 abstract; §6.2–6.3 | https://arxiv.org/pdf/2607.03333v1 | primary |
+| SPORK (page 10 after review) | p50 34.7→31.2 s (−10%); p95 131.9→108.1 s (−18%); EM within 1 pp; 165 tasks; baseline already n-gram speculative decoding | confirmed | v1 abstract; §6.2–6.3 | https://arxiv.org/pdf/2607.03333v1 | primary |
 | ParaGUI | 46.4 vs 33.5%; 38.7 vs 75.9 steps; 38.7 vs 36.7 (Seed-1.8); 233 tasks | confirmed | v1 Table III | https://arxiv.org/pdf/2607.22689v1 | primary |
 | Speculative Actions | −19.5% time; 54.7% accuracy; ≤50% under Prop. 1 | confirmed | v2 §3.1.2 Fig. 2; §2 Prop. 1 | https://arxiv.org/pdf/2510.04371v2 | primary |
 | ISP | 182.70→105.42 s (−42.3%); $0.2160→$0.2973; 117 tasks; SD 421.49 | confirmed | ICLR'25 §4.1 Table 2 | https://proceedings.iclr.cc/paper_files/paper/2025/file/25458943db16e0f78f748ca5bc34fff6-Paper-Conference.pdf | primary |
@@ -97,7 +97,7 @@ One row per work whose numbers the deck uses. Verdict, location and numbers are 
 | Observation masking | $1.29→$0.61; 53.4→54.8%; 500 instances; summary +15% N | corrected | v3 Table 1 §4; §4.4 | https://arxiv.org/pdf/2508.21433v3 | primary |
 | AgentDiet | −39.9 to −59.7% input; −21.1 to −35.9% cost; −1 to +2 pp | confirmed | v2 Table 4; §5.2.1 | https://arxiv.org/pdf/2509.23586v2 | primary |
 | TokenPilot | $8.31→$3.22; $81.52→$10.58; 38.7→79.2%; +0.5/+2.1, −1.4/−2.6; $4.22→$2.79; 26.7M→8.6M | confirmed | v2 Tables 1–4; §4.4 | https://arxiv.org/html/2606.17016v2 | primary |
-| Vendor cache prices | 0.02×, 0.05×, 0.1×, 0.25×; writes 1.25×/2×; Google storage $0.50/1M/h; OpenAI 1.35× vs 2×, 2.15× vs 10× | corrected (OpenAI write) | Anthropic prompt-caching docs; OpenAI prompt-caching guide + pricing; DeepSeek, Google, xAI pricing pages (28 Sep 2026) | https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md | vendor |
+| Vendor cache prices | 0.02×, 0.05×, 0.1×, 0.25×; Fable 5.1 / Mythos 5.1 0.025×; writes 1.25×/2×; Google storage $0.50/1M/h; OpenAI 1.35× vs 2×, 2.15× vs 10× | corrected (OpenAI write) | Anthropic prompt-caching docs; OpenAI prompt-caching guide + pricing; DeepSeek, Google, xAI pricing pages (28 Sep 2026) | https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md | vendor |
 | Don't Break the Cache | −41 to −80%; TTFT −6 to −31%; GPT-4o −8.8% (slower); 40 sessions | corrected | v2 Tables 1–2; §4.1 | https://arxiv.org/html/2601.06007v2 | primary |
 | TraceLab | 12.8% (paper); 15.8% (dashboard) | corrected | v2 §7.5 Table 13; dashboard detail page (28 Sep 2026) | https://tracelab.cs.washington.edu | primary |
 | StepWise | $0.881→$0.224; 58.1→55.4%; 6.4→4.1 s | corrected | v1 Table 1 p.6 | https://arxiv.org/pdf/2604.27151v1 | primary |
@@ -119,14 +119,14 @@ One row per work whose numbers the deck uses. Verdict, location and numbers are 
 | App. B1: AutoTool | LLM calls 24.1→20.4 (AlfWorld); 15–25% per text | corrected | AAAI Table 3 p.6 | https://arxiv.org/pdf/2511.14650v1 | primary |
 | App. B1: EAM | AndroidWorld 34.5→52.6% (per-step latency benchmark unstated) | corrected | v1 Table 1 | https://arxiv.org/pdf/2605.12294v1 | primary |
 | App. B1: UiPath | 3 Platform Units per heal | confirmed | Licensing page | docs.uipath.com, Agents user guide for Healing Agent (undated), fetched with cur | vendor |
-| App. B4: SGLang | up to 6.4× throughput vs vLLM v0.2.5 | confirmed | NeurIPS'24 §6.2 | https://arxiv.org/pdf/2312.07104v2 | primary |
+| App. B3: SGLang | up to 6.4× throughput, 3.7× latency vs vLLM v0.2.5, Guidance, LMQL (which gives the maximum not stated) | confirmed | NeurIPS'24 §6.2 | https://arxiv.org/pdf/2312.07104v2 | primary |
 | App. B4: Preble | 1.5–14.5× mean latency | confirmed | ICLR'25 abstract | https://arxiv.org/pdf/2407.00023v2 | primary |
 | App. B4: Parrot | up to 11.7× (MetaGPT, LLaMA 13B) | confirmed | OSDI'24 §8.4 | https://www.usenix.org/system/files/osdi24-lin-chaofan.pdf | primary |
 | App. B4: KVFlow | 1.24× vs HiCache; PEER 1.12×/1.08× | corrected | NeurIPS camera-ready §4.1, §4.2 | https://arxiv.org/pdf/2507.07400v1 | primary |
 | App. B4: Helium | up to 1.56× vs KVFlow | corrected | v1 §7.1 Table 2 | https://arxiv.org/pdf/2603.16104v1 | primary |
 | App. B4: KVCOMM | 7.82× TTFT at agent 5 (HF, approximate) | confirmed | v2 Table 2 | https://arxiv.org/pdf/2510.12872v2 | primary |
 | App. B4: DroidSpeak | prefill 1.7–3.1× | corrected | NSDI'26 §5.2 | https://www.usenix.org/system/files/nsdi26-liu-yuhan.pdf | primary |
-| App. B4: AsymCache | +Continuum −18.1% average job latency; alone 0.4–4.2% | corrected | v1 §6.5 Fig. 15 | https://arxiv.org/abs/2606.02964 | primary |
+| App. B3: AsymCache | with Continuum 4.4–18.1% below Continuum alone; alone 0.4–4.2% below vLLM-LRU | corrected | v1 §6.5 Fig. 15 | https://arxiv.org/abs/2606.02964 | primary |
 | App. B4: CacheBlend | TTFT 2.2–3.3× (RAG) | confirmed | EuroSys'25 §7.2 | https://arxiv.org/pdf/2405.16444v3 | primary |
 | App. B5: LineRetriever | observation −61%; SR 52.7→44.8% (WorkArena L1) | confirmed | v1 Table 1 | https://arxiv.org/pdf/2507.00210v1 | primary |
 | App. B5: SimpAgent | FLOPs 11.90→8.71 T | confirmed | ICCV Table 5 | https://arxiv.org/pdf/2507.03730v1 | primary |
@@ -272,6 +272,60 @@ Optional, flagged:
 - RouteLLM 3.66× described as "vs GPT-4".
 - UFO2 "51.5% lower inference cost" (an author claim restating a step count).
 - WALT "1.3–1.4× average" (a range across splits).
+### 1e. Independent review of the pages (28 Sep 2026)
+
+**Set-up.** Workflow `wf_202d4d4b` ran three reviewers: numbers against the source records; classification and formulas against Part 1; citations, credibility and wording. Each was followed by a verifier that re-checked every finding. Of 93 findings, 62 were confirmed, 28 partly confirmed (with the fix corrected), and 3 rejected. All 90 confirmed or partly confirmed findings were applied. The pages were then re-measured: all 67 pages fit, and main pages are 189–272 words (pages 03 and 10 are slightly over 250).
+
+**High severity: a wrong number, direction or attribution, or an unsupported claim.**
+1. B6: “other Claude models 0.1×” now also lists Fable 5.1 and Mythos 5.1 at 0.025×.
+2. Page 12 title: the 87% is TokenPilot’s full system (placeholders + trimming + eviction). It now reads “41–80% against no caching; with trimming and eviction, by up to 87%”.
+3. Page 3: JIT-Planner drafts plans in parallel calls, not one call.
+4. Page 8: Skim’s “300+”-task headline is now flagged as condition (iii) pending.
+
+**Classification changes.**
+- SPORK moved from page 9 (independent calls) to page 10 (speculation). Page 9’s range became 31–73% and page 10’s 5–45%, both calc. from the rows. Ghost Tool Calls’ naive 5.4% is now inside the range.
+- ThunderAgent’s environment-time cut (4.8 → 0.3 s) is sandbox preparation overlapped with waiting. It is therefore T_saving, not E_i, and moved from page 8 to B5.
+- FireAct moved from B7 (cheaper model) to B4 (shorter prompt). Its price per token rises 8×.
+- IdleSpec is marked as a counter case in B5: its tool-wait overlap buys accuracy, not time.
+
+**Formula-strip marks corrected.**
+- E_i is no longer marked unchanged on page 3.
+- The ḡ ↓ mark is removed on page 6: FocusAgent prunes only the current page.
+- Page 9: J_i is marked “↑ or ↓”.
+- Page 10: the exchange is in calls and tokens, not in the price.
+- Page 11: N² is marked “removed by a plan”, and the money exchange reads “hit → miss, write”.
+- Page 12: the mark reads “unc → hit”.
+- The time row now starts at i = 0, and its TTFT simplification is stated on page 2.
+
+**Conditions added.**
+- FocusAgent’s per-step latency is from 33 tasks with one seed.
+- Don’t Break the Cache’s baseline is a forced no-cache run, on a web-search research agent.
+- GUI-G1 compares two differently trained models.
+- SMC: −40.4% of AppWorld’s −44.9% already comes from one-step guessing; actor and drafter models named.
+- AgentDiet: 200 + 300 tasks from two benchmarks.
+- The OSWorld 2.0 3-s pause is per action; whether it applies per batched call is not stated.
+- Atomix, Safe to Resume? and Ghost Tool Calls use author-built test suites.
+- Task counts not printed for ARES, Overthinking, StepWise and Fara-7B. These are listed in a new B9 row, “shown with a flag, pending the same decision”.
+
+**Titles and claims brought in line with the rows.**
+- Page 4: 38–46%, not “halves”.
+- Page 8: “in one browser-agent study”, with the Browser-Use 73% counter-profile from Winston et al.
+- Page 11: “only compiled plans are shown to remove the square”.
+- Page 12: “cuts that input’s price by 75–98% (calc.)” replaces “the largest money lever”.
+- Page 14: an actual case of a dearer attempt with a cheaper success (Beyond Browsing).
+- Page 7: fast tiers labelled vendor.
+- Page 9: T_saving is “small today” (as in Part 1), not ≈ 0.
+- Page 9: the 2× cap now carries its condition T_cp = T_tool.
+- Vendor marketing (Stagehand “~80%”, Automation Anywhere “over 60%”, the Cerebras chart) is no longer shown as a number.
+- Gap lines narrowed where a record shows a measurement: a web-search agent’s billing split; set-up included, but only outside web or GUI.
+
+**Appendix B0.** Symbols now explained where the verbatim formulas use them without saying: T*_base, L_serial, L_total, T_s, the limit “→”, C_act, and InferCept’s i and j. Also corrected: InferCept’s Eq. 5 minimum and AsyncFC’s equation location.
+
+**Rejected.**
+1. TokenPilot’s local eviction is correctly described.
+2. SPORK’s break-even α·t_overlap ≥ T_oh is exact without its third design.
+3. The 2× cap is our labelled arithmetic. It is kept, with its condition now stated.
+
 ## 2. D-ledger additions
 
 (to follow)

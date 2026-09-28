@@ -1174,7 +1174,7 @@ def wk(name, *keys):
 
 # The Part 1 formulas as rows of terms; a page marks the term its family of work changes.
 FX = {
- "time":   [("op", r"T_{\mathrm{attempt}}\approx"), ("N", r"\sum_{i=1}^{N}"), ("op", r"["), ("J", r"\sum_{j=1}^{J_i}"), ("op", r"("),
+ "time":   [("op", r"T_{\mathrm{attempt}}\approx"), ("N", r"\sum_{i=0}^{N}"), ("op", r"["), ("J", r"\sum_{j=1}^{J_i}"), ("op", r"("),
             ("queue", r"t^{\mathrm{queue}}_{ij}"), ("op", "+"), ("prefill", r"t^{\mathrm{prefill}}_{ij}"), ("op", "+"),
             ("nout", r"n^{\mathrm{out}}_{ij}"), ("tpot", r"\mathrm{TPOT}_{ij}"), ("op", r")+"), ("E", r"E_i"), ("op", r"]-"),
             ("save", r"T_{\mathrm{saving}}")],
@@ -1232,7 +1232,7 @@ slide("t01", "Acceleration, term by term", cover=True, part=2,
 </div>""")
 
 # --- Part 2 · 02 the map ----------------------------------------------------------------
-slide("t02", "The map: each family of work changes one term, and most grow another", part=2,
+slide("t02", "The map: each family of work targets one term or a pair, and most grow another", part=2,
       crumb="from Part 1’s formulas → here: which term each family of work changes → to: one page per term",
       callout=f"""<p><b>Each work sits on the term it changes: it shrinks a term, removes a structure, or adds overlap {tex(r"T_{\mathrm{saving}}", 15)}; most also grow another term.</b> Speed-up = baseline time ÷ new time on the same tasks; each row says what was timed.</p>""",
       body=f"""
@@ -1243,47 +1243,47 @@ slide("t02", "The map: each family of work changes one term, and most grow anoth
   [tex(r"t^{\mathrm{queue}},\ t^{\mathrm{prefill}}", 12), "shorter on self-hosted serving: whole programs scheduled, cache kept across tool waits", "agent-aware serving", "05"],
   [tex(r"|o_{a,i}|\rightarrow t^{\mathrm{prefill}}", 12), "less of each page shown to the model", "observation reduction", "06"],
   [tex(r"n^{\mathrm{out}},\ \mathrm{TPOT}", 12), "less thinking; faster decoding, at a price", "decoding", "07"],
-  [tex("E_i", 12), "fewer or cheaper environment actions and set-ups", "environment", "08"],
+  [tex("E_i", 12), "fewer or cheaper environment actions", "environment", "08"],
   [tex(r"T_{\mathrm{saving}}", 12), "added: independent calls run at once, or the next step guessed and run early", "parallel calls; speculation", "09–10"],
   [tex(r"\bar{g},\ N^2", 12), "a flatter slope; or the square removed", "context management", "11"],
   [tex(r"n^{\kappa}", 12), "input moved from uncached to cache hit", "caching", "12"],
   [tex(r"c_{\kappa}(\mu_{ij})", 12), "a cheaper model or tier for most calls", "routing, small models, tiers", "13"],
   [tex("R_m(p)", 12) + ", set-up", "higher success; a one-time set-up spread over the tasks", "cost per success", "14"],
  ], ["20%", "47%", "25%", "8%"], cls="tbl p2 map")}""",
-      foot="SOURCES · the formulas and symbols are Part 1’s (pages 2–4, Appendix A0); the works are cited on each page · works held back or dropped, with reasons: Appendix B9",
+      foot="SOURCES · Part 1’s formulas (pages 2–4, Appendix A0); the time row as on Part 1 page 13: TTFT shown as t^queue + t^prefill (network and first-token time left out), i = 0 holds calls outside any step · held-back works: Appendix B9",
       chip=("#b9-1", "Appendix B9"))
 
 # --- Part 2 · 03 compile or replay ----------------------------------------------------------
-slide("t03", "Compiling or replaying the loop removes most model calls; time falls less, because the actions still run", part=2,
-      crumb="term: J_i → 0 on steps run as code or replayed · E_i unchanged · a set-up cost appears outside the formula (page 14)",
-      callout=f"""<p><b>Code or a recorded trajectory takes the model out of most steps, so {tex("D_i", 15)} → 0 there; the actions in {tex("E_i", 15)} still run.</b> Replay alone cut tokens by 96.5% but time by 59.6% (calc., EchoPath).</p>""",
+slide("t03", "Compiling or replaying the loop removes most model calls; where the actions still run, time falls less", part=2,
+      crumb="term: J_i → 0 on steps run as code or replayed · E_i unchanged on replay; JIT-Planner’s cached site tools also shorten it · a set-up cost sits outside the formula (page 14)",
+      callout=f"""<p><b>Code or a recorded trajectory takes the model out of most steps, so {tex("D_i", 15)} → 0 there; the actions in {tex("E_i", 15)} still run unless the code replaces them too.</b> Against Synapse, a planning agent, replay cut median tokens by 96.5% but median time by 59.6% (calc., EchoPath).</p>""",
       body=f"""
-{fx(("time", {"J": ZERO, "E": KEEP}))}
+{fx(("time", {"J": ZERO}))}
 {ptab([
-  [wk("JIT-Planner", "jit"), "One call writes a code plan over cached, checked site tools", "Task time 150.1 → 15.4 s (9.7×), success 61 → 90% — 37 tasks on 5 web apps, 3 runs, GPT-4.1, vs Browser-Use on the same model", "Set-up of 25–90 + 25–45 min per app, excluded"],
-  [wk("ActionEngine", "actionengine"), "An offline state graph; one call writes a program, graph search compiles it", "Model calls 10.2 → 1.8, task time 237 → 118 s, success 66 → 95% — 106 WebArena Reddit tasks", "Baseline is another agent on another model; crawl cost not reported"],
-  [wk("AutoDroid-V2", "autodroid2"), "A local model writes one script per task, not one call per step", "Model time 669.2 → 46.3 s per task (screen actions excluded), success 43.9 → 54.4% — 158 DroidTask tasks, same 8B model", "Offline app analysis: $82.42 of GPT-4o calls per app (calc.)"],
-  [wk("EchoPath", "echopath"), "Validated trajectories kept as callable memories and replayed", "Median tokens 586,386 → 20,370, median time 315.7 → 127.5 s, success 91.8 → 91.2% — OSWorld-Verified, 159 replayable tasks, vs Synapse", "First pass ≈ 572k tokens and ≈ 4.5 min per task, not counted"],
+  [wk("JIT-Planner", "jit"), "Parallel calls draft code plans over cached, checked site tools; the cheapest valid one runs", "Task time 150.1 → 15.4 s (9.7×), success 61 → 90% — 37 tasks on 5 web apps (18 author-written), 3 runs, GPT-4.1, vs Browser-Use, same model", "Set-up of 25–90 + 25–45 min per app, excluded"],
+  [wk("ActionEngine", "actionengine"), "An offline state graph; one call writes a program, graph search compiles it", "Model calls 10.2 → 1.8, task time 237 → 118 s, success 66 → 95% — 106 WebArena Reddit tasks", "Baseline: another agent and model; crawl cost unreported"],
+  [wk("AutoDroid-V2", "autodroid2"), "A local model writes one script per task, not one call per step", "Model time 669.2 → 46.3 s per task (screen actions excluded), success 43.9 → 54.4% — 158 DroidTask tasks, same 8B model", "$82.42 of GPT-4o calls per app, offline (calc.)"],
+  [wk("EchoPath", "echopath"), "Validated trajectories kept as callable memories and replayed", "Median tokens 586,386 → 20,370, median time 315.7 → 127.5 s, success 91.8 → 91.2% — OSWorld-Verified, 159 replayable tasks, Codex GPT-5.5, vs Synapse", "First pass ≈ 572k tokens and ≈ 4.5 min per task, not counted"],
  ])}
-<div class="figcap">Vendor automation tools replay recorded steps and call a model only to repair a failed one; none publishes a replay or repair success rate (Appendix B1).</div>""",
+<div class="figcap">Vendor tools replay recorded steps and call a model only to repair a failure; none publishes a repair rate with a defined sample (B1).</div>""",
       foot="NOT YET MEASURED · replay under live application change (EchoPath’s only change: a new screen resolution) · cost per success with set-up included · SOURCES · as cited in each row; full conditions in Appendix B1",
       chip=("#b1-1", "Appendix B1"))
 
 # --- Part 2 · 04 fewer steps -------------------------------------------------------------
-slide("t04", "Fewer steps: more work per call halves the steps; skills cut fewer and cost prompt tokens", part=2,
-      crumb="term: N ↓ · actions per step grow · skill text lengthens the prompt |H_{a,i}|",
-      callout=f"""<p><b>One call that issues an API call or a batch of actions roughly halves {tex("N", 15)}; the actions still run, and only AXIS timed the task.</b> Skills cut 11–21% of steps (calc.) and raise success, but a plain agent on the same token budget did better.</p>""",
+slide("t04", "Fewer steps: more work per call cut steps by 38⁠–⁠46%; skills cut fewer and cost prompt tokens", part=2,
+      crumb="term: N ↓ · actions per step grow with batching, fall with API calls (page 8) · skills add module calls (J_i ↑) and lengthen the prompt |H_{a,i}|",
+      callout=f"""<p><b>One call that issues an API call or a batch of actions cut {tex("N", 15)} by 38–46% (calc.); the actions still run, and only AXIS timed the task.</b> Skills cut 11–21% of steps (calc.) and raise success; a plain agent given 15 steps instead of 10 used 31% fewer tokens (calc.) and did better.</p>""",
       body=f"""
-{fx(("time", {"N": DN, "prefill": UP, "E": UP}))}
+{fx(("time", {"N": DN, "J": UP, "prefill": UP}))}
 {ptab([
   [wk("AXIS", "axis"), "Application API calls instead of UI sequences", "Steps 3.2 → 2.0, task time 59.5 → 29.9 s, success 52 → 84% — 50 Word tasks, GPT-4o, vs the UFO agent", "One application; the API must exist"],
   [wk("OSWorld 2.0, batched", "osw2"), "One call emits several actions", "Steps 190.5 → 103, success 18.5 → 20.6%, ~$76.1 → ~$72.4 per task — 108 tasks, Claude Opus 4.8, one run", "Tool calls 190.5 → 481.8; no wall-clock"],
   [wk("ASI", "asi"), "Verified Python skills induced from the agent’s own successes", "Steps 5.6 → 5.0 (−10.7%, calc.), success 32.7 → 40.4% — 812 WebArena tasks, Claude 3.5 Sonnet", "Induction calls not counted; no time or $"],
-  [wk("WALT", "walt"), "Site tools learned by exploration", "Steps 8.9 → 7.0, success 57.5 → 64.1% — 234 VisualWebArena tasks, GPT-5 planner, GPT-5-mini executor", "Exploration cost per site, not quantified"],
-  [wk("Same token budget", "hajimiri"), "Plain 15-step agent with a pruned page tree", "Plain 44.78% at 73.6K tokens per task vs ASI 41.02% at 107.3K — 655 WebArena tasks, Gemini 3 Flash, 3 runs", "Skills add prompt tokens and calls"],
+  [wk("WALT", "walt"), "Site tools learned by exploration", "Steps 8.9 → 7.0, success 57.5 → 64.1% — 234 VisualWebArena tasks, GPT-5 planner, GPT-5-mini executor", "Exploration cost not quantified"],
+  [wk("Plain agent, 15 steps", "hajimiri"), "No skill or memory module; a pruned page tree", "Plain 44.78% at 73.6K tokens per task vs ASI 41.02% at 107.3K — 655 WebArena tasks, Gemini 3 Flash, 3 runs", "Skills add tokens and calls"],
  ])}
 <div class="figcap">Headroom: grouping actions by screenshot needs 1.35× (Chrome) to 2.93× (Calc) fewer steps in human reference runs (calc.) {c2('osh')}.</div>""",
-      foot="NOT YET MEASURED · task time for batched actions (each followed by a 3-s pause in OSWorld 2.0) · SOURCES · as cited in each row; more rows and stopping rules in Appendix B2",
+      foot="NOT YET MEASURED · task time for batched actions (OSWorld 2.0 pauses 3 s after each action; whether after each batched call is not stated) · SOURCES · as cited; 38–46% and 11–21% are calc. from the rows; more rows and stopping rules in Appendix B2",
       chip=("#b2-1", "Appendix B2"))
 
 # --- Part 2 · 05 serving --------------------------------------------------------------
@@ -1303,12 +1303,12 @@ slide("t05", "Serving the agent as one program cuts queueing and re-reading, on 
 
 # --- Part 2 · 06 prefill: observation reduction -----------------------------------------------
 slide("t06", "Showing the model less of the page cuts prefill; a reader call can cost more time than it saves", part=2,
-      crumb="term: |o_{a,i}| ↓ → t^prefill and n^unc ↓ · J_i + 1 when a model does the reducing · success can fall",
-      callout=f"""<p><b>Pruning the page before the model reads it shortens this and every later prompt, but a separate reader call adds a model call per step.</b> A pruning program without a model halved step time and kept 84% of the successes.</p>""",
+      crumb="term: |o_{a,i}| ↓ → the actor’s t^prefill and n^unc ↓ · J_i + 1 when a model does the reducing; that reader reads the full page · success can fall",
+      callout=f"""<p><b>Pruning the page before the model reads it shortens the actor’s prompt at that step, and later prompts only where old pages stay in the history; a separate reader call adds a model call per step.</b> A pruning program without a model halved step time and kept 84% of the successes.</p>""",
       body=f"""
-{fx(("time", {"prefill": DN, "J": UP}), ("prompt", {"g": DN}))}
+{fx(("time", {"prefill": DN, "J": UP}))}
 {ptab([
-  [wk("FocusAgent", "focusagent"), "A small model picks the relevant page-tree lines for the actor", "Input cost −19%, success 53.6 → 51.5%; model time per step 2.5 → 10.1 s — 330 WorkArena L1 episodes, GPT-4.1 actor, GPT-4.1-mini reader", "One reader call per step; the time excludes the browser"],
+  [wk("FocusAgent", "focusagent"), "A small model picks the relevant page-tree lines for the actor", "Input cost −19%, success 53.6 → 51.5% — 330 WorkArena L1 episodes; model time per step 2.5 → 10.1 s on 33 tasks, one seed — GPT-4.1 actor, GPT-4.1-mini reader", "One reader call per step; the time excludes the browser"],
   [wk("Evolved pruning program", "enomoto"), "An offline-evolved program keeps ~20% of the HTML; no model at run time", "Step time 65.7 → 30.2 s (2.2×), 84% of successes kept — 33 WorkArena L1 tasks, Qwen3.5-122B, 2 runs", "Success falls; timed per step"],
   [wk("Aguvis", "aguvis"), "A screenshot instead of HTML, read by a self-hosted 72B model", "Input tokens per step 1,196 vs ~4,000 (−70%), success 22.1 → 27.1% — 104 Mind2Web-Live tasks, vs GPT-4o on HTML", "The model changes too"],
   [wk("AgentOccam (counter)", "agentoccam"), "Simplified page and pruned history, aimed at accuracy", "Success 16.5 → 43.1%, observation tokens per step +33%, steps +45% (calc.) — 812 WebArena tasks, GPT-4-Turbo", "Prefill grows"],
@@ -1319,82 +1319,81 @@ slide("t06", "Showing the model less of the page cuts prefill; a reader call can
 # --- Part 2 · 07 decoding -----------------------------------------------------------------
 slide("t07", "Less thinking and faster decoding shorten the writing; neither touches the environment", part=2,
       crumb="terms: n^out ↓ (thinking included) · TPOT ↓ at a higher price per token",
-      callout=f"""<p><b>Choosing the reasoning effort per step cut reasoning tokens by 45% at equal success; fast tiers raise output speed up to 2.5× for twice the price.</b> Both shorten {tex("D_i", 15)} only.</p>""",
+      callout=f"""<p><b>Choosing the reasoning effort per step cut reasoning tokens by 45% at equal success; fast tiers are stated by their vendors to be up to 2.5× faster for twice the price.</b> Both shorten {tex("D_i", 15)} only.</p>""",
       body=f"""
 {fx(("time", {"nout": DN, "tpot": DN, "J": UP}), ("money", {"c": UP}))}
 {ptab([
-  [wk("ARES", "ares"), "A 1.7B router picks the reasoning effort for each step", "Reasoning tokens per task 21,424 → 11,723 (−45%), success 45.0 → 46.5%; low effort throughout −7.6 points (calc.) — WebArena, ~129 tasks (calc.), gpt-oss-20b", "A router call per step, cost not reported; no wall-clock"],
-  [wk("Overthinking", "overthinking"), "Two low-effort runs; keep the one that overthinks least", "$1,400 → $800 for the whole run, solved 29.1 → 27.3% — SWE-bench Verified, o1", "Two attempts per task"],
-  [wk("GUI-G1", "guig1"), "RL-trained grounding without a thinking section", "Output tokens ~107 → ~38 per example, ScreenSpot 87.5 → 90.3% (baseline from its own paper)", "Grounding only; no timing"],
+  [wk("ARES", "ares"), "A 1.7B router picks the reasoning effort for each step", "Reasoning tokens per task 21,424 → 11,723 (−45%), success 45.0 → 46.5%; low effort throughout −7.6 points (calc.) — WebArena, ~129 tasks (calc.; count not printed, B9), gpt-oss-20b", "A router call per step, cost not reported; no wall-clock"],
+  [wk("Overthinking", "overthinking"), "Two low-effort runs; keep the one that overthinks least", "$1,400 → $800 for the whole run, solved 29.1 → 27.3% — SWE-bench Verified (count not printed, B9), o1", "Two attempts per task"],
+  [wk("GUI-G1", "guig1"), "RL-trained grounding without a thinking section", "Output tokens 107–114 → 37–39 per example, ScreenSpot 87.5 → 90.3% — InfiGUI-R1-3B (accuracy from its own paper) vs GUI-G1-3B, two differently trained models", "Grounding only; no timing"],
   [wk("ToolSpec", "toolspec"), "Schema-aware drafts of tool-call tokens, verified losslessly", "Tool-call generation 3.5–4.2× faster — API-Bank, ToolAlpaca, BFCLv2; batch 1; 3–14B open models", "Decoding speed, not task time"],
-  [wk("Fast tiers (vendor)", "anth-b", "openai"), "The same model, served faster", "Anthropic: up to 2.5× output tokens per second, first-token time unchanged. OpenAI: up to 2.5× faster, ‘speed’ undefined", "Price 2×; switching speed invalidates Anthropic’s message cache"],
+  [wk("Fast tiers (vendor)", "anth-b", "openai"), "The same model, served faster", "Anthropic: up to 2.5× output tokens per second; the gain is in output speed, not first-token time. OpenAI: up to 2.5× faster, ‘speed’ undefined", "Price 2×; switching speed invalidates Anthropic’s message cache"],
  ])}""",
-      foot="NOT YET MEASURED · independent task-level timing of fast tiers · the net effect of per-step effort changes, which invalidate Anthropic’s message cache · SOURCES · as cited; more rows in Appendix B4",
-      chip=("#b4-1", "Appendix B4"))
+      foot="NOT YET MEASURED · independent task-level timing of fast tiers · the net effect of per-step effort changes, which invalidate Anthropic’s message cache · SOURCES · as cited; more rows in Appendix B4 (2/2)",
+      chip=("#b4-2", "Appendix B4"))
 
 # --- Part 2 · 08 environment -----------------------------------------------------------------
-slide("t08", "Time outside the model: in browser agents it matches model time, yet few works shrink it", part=2,
-      crumb="term: E_i ↓ — fewer environment actions, cached tool results, faster sandbox set-up · x_env priced by the hour",
-      callout=f"""<p><b>A browser-agent step spends a median 6.6 s in the browser and 4.7 s in the model {c2('skim')}; the works that shrink {tex("E_i", 15)} skip the browser, cache tool results or prepare sandboxes early.</b> Batching actions moves the other way.</p>""",
+slide("t08", "Time outside the model: in one browser-agent study it exceeded model time, and few works shrink it", part=2,
+      crumb="term: E_i ↓ — fewer environment actions, cached tool results · x_env priced by the hour",
+      callout=f"""<p><b>On 151 WebVoyager tasks run by three GPT-4o agents on live sites, the median step spent 6.6 s in the browser and 4.7 s in the model (medians, not additive) {c2('skim')}; Browser-Use on five web apps spent 73% of its time in model calls {c2('jit')}.</b> The works that shrink {tex("E_i", 15)} skip the browser or cache tool results; batching actions moves the other way.</p>""",
       body=f"""
 {fx(("time", {"E": DN}))}
 {ptab([
-  [wk("Skim", "skim"), "Fetches a synthesized URL over HTTP instead of driving the browser; a verifier falls back to the agent", "Median cost 1.9× lower, latency −33.4%, accuracy kept — WebVoyager and WebShop, 300+ tasks, GPT-4o agents", "Read-only tasks; site profiling not counted"],
+  [wk("Skim", "skim"), "Fetches a synthesized URL over HTTP instead of driving the browser; a verifier falls back to the agent", "Median cost 1.9× lower, latency −33.4%, accuracy kept — WebVoyager and WebShop, “300+” tasks (count not stated; condition (iii) pending, B9), GPT-4o agents", "Read-only tasks; site profiling not counted"],
   [wk("ToolCaching", "toolcaching"), "Caches tool results, with learned admission", "Latency 16.2 → 10.7 s vs no cache at a 0.514 hit ratio — 500 Movie Recommendation queries, LLMCompiler, DeepSeek V3", "Accuracy not reported"],
   [wk("AXIS", "axis"), "API calls replace clicks", "UI actions 103 → 48 over 50 Word tasks", "The API must exist"],
-  [wk("ThunderAgent", "thunder"), "Restores the sandbox before GPU memory is allocated", "Environment time 4.8 → 0.3 s — OpenHands rollouts", "Self-hosted rollouts"],
-  [wk("OSWorld 2.0 (counter)", "osw2"), "More actions per call", "Tool calls ×2.5 (calc.), each followed by a 3-s pause; no wall-clock", "N falls, actions per step grow"],
+  [wk("OSWorld 2.0 (counter)", "osw2"), "More actions per call", "Tool calls ×2.5 (calc.); a 3-s pause follows each action, whether after each batched call is not stated; no wall-clock", "N falls, actions per step grow"],
  ])}
 <div class="figcap">Billed environment usage {tex(r"x_{\mathrm{env}}c_{\mathrm{env}}", 11)}: a cloud browser costs $0.10–0.12 per hour above the plan allowance (vendor price) {c2('browserbase')}.</div>""",
-      foot="NOT YET MEASURED · page-load and wait time in write-heavy web workflows · wall-clock of batched actions · SOURCES · as cited in each row; details in Appendix B1–B2",
-      chip=("#b2-1", "Appendix B2"))
+      foot="NOT YET MEASURED · page-load and wait time in write-heavy web workflows · wall-clock of batched actions · SOURCES · as cited in each row; details in Appendix B5 (Skim, sandboxes) and B2 (batched actions)",
+      chip=("#b5-1", "Appendix B5"))
 
 # --- Part 2 · 09 overlap: parallel and asynchronous ---------------------------------------------
-slide("t09", "Overlap (1): running independent calls and tools together saved 18⁠–⁠73% of task time", part=2,
-      crumb="term: T_saving added where it is ≈ 0 today · tokens can fall (fewer turns) or rise (probes, workers)",
-      callout=f"""<p><b>Running independent calls or tools together creates {tex(r"T_{\mathrm{saving}}", 15)}; the longest dependent chain sets the limit.</b> Speed-up ≤ {tex(r"(T_{\mathrm{LLM}}+T_{\mathrm{tool}})/\max(T_{\mathrm{LLM}},T_{\mathrm{cp}})", 15)}: decoding, tool and critical-path tool time {c2('asyncfc')}; one tool call per step gives at most 2× (calc.).</p>""",
+slide("t09", "Overlap (1): running independent calls and tools together saved 31⁠–⁠73% of task time; one workload got slower", part=2,
+      crumb="term: T_saving raised where it is small today · calls and tokens fall with fewer turns (LLMCompiler, W&D) or rise with more workers (ParaGUI)",
+      callout=f"""<p><b>Running independent calls or tools together creates {tex(r"T_{\mathrm{saving}}", 15)}; the longest dependent chain sets the limit.</b> Speed-up ≤ {tex(r"(T_{\mathrm{LLM}}+T_{\mathrm{tool}})/\max(T_{\mathrm{LLM}},T_{\mathrm{cp}})", 15)}: decoding, tool and critical-path tool time {c2('asyncfc')}; at most 2× when every tool call waits for the one before ({tex(r"T_{\mathrm{cp}}=T_{\mathrm{tool}}", 15)}; calc.).</p>""",
       body=f"""
-{fx(("time", {"save": UPG, "J": UP}))}
+{fx(("time", {"save": UPG, "J": ("bad", "↑ or ↓")}))}
 {ptab([
   [wk("LLMCompiler", "llmc"), "A planner builds a dependency graph; independent calls run at once", "Task time 20.47 → 5.47 s (3.74×), accuracy 72.47 → 77.13%, input tokens 20,000 → 2,800 — 500 Movie Recommendation questions, gpt-3.5-turbo", "WebShop got slower: 5.98 → 10.48 s"],
   [wk("W&amp;D", "wd"), "Three or more tool calls per turn", "Time per task 1,522.6 → 904.2 s (−40.6%), $102.5 → $65.7 per 100 tasks, 66 → 68% — first 100 BrowseComp tasks, GPT-5, one run", "Call counts forced; $ include search"],
   [wk("AsyncFC", "asyncfc"), "Tool calls return futures; the model keeps decoding until it needs a result", "1.44× vs the plain agent (1.21× with parallel calls alone), resolved 47.6 → 44.3% — 300 SWE-bench Lite tasks, GPT-5.2, tool latency doubled", "Resolution −3.3 points"],
-  [wk("SPORK", "spork"), "Runs read-only probe calls early from a fork of the model’s cache", "p95 task time 131.9 → 108.1 s (−18%), exact match within 1 point — 165 GAIA tasks, Qwen3-32B, baseline already speculative-decoding", "Probe calls"],
   [wk("ParaGUI", "paragui"), "A planner sends sub-tasks to up to 5 GUI workers on separate desktops", "Critical-path steps 38.7 vs 75.9, success 46.4 vs 33.5%, vs Claude Sonnet 4.6 — 233 tasks; vs its own worker model 38.7 vs 36.7", "Desktops × workers; no wall-clock"],
  ])}""",
-      foot="NOT YET MEASURED · wall-clock of parallel GUI workers · overlap of actions that write · SOURCES · as cited; 18–73% is calc. from the rows; the bound is AsyncFC’s Eq. 1 (its R, renamed to avoid R_m(p)) — Appendix B0",
+      foot="NOT YET MEASURED · wall-clock of parallel GUI workers · overlap of actions that write · SOURCES · as cited; 31–73% is calc. from the rows; the bound is AsyncFC’s Eq. 1 (its R, renamed to avoid R_m(p)) — Appendix B0",
       chip=("#b0-1", "Appendix B0"))
 
 # --- Part 2 · 10 overlap: speculation, and safety ----------------------------------------------
-slide("t10", "Overlap (2): guessing the next step saved 19⁠–⁠45% of task time, always paid in extra calls", part=2,
-      crumb="term: T_saving added by guessing · J_i, money and GPU hours grow · safe only for effects that can wait for a commit",
-      callout="""<p><b>A cheaper model guesses the next action and runs it early: a right guess hides a wait, a wrong one is discarded but still paid for.</b> Only effects that can be held back or undone may run early.</p>""",
+slide("t10", "Overlap (2): guessing the next step saved 5⁠–⁠45% of task time, always paid in extra calls", part=2,
+      crumb="term: T_saving added by guessing · calls, tokens and GPU hours grow · safe only for effects that can wait for a commit",
+      callout="""<p><b>A guesser (a cheaper model or setting, or the model itself) runs the predicted next action early: a right guess hides a wait, a wrong one is discarded but paid for.</b> Steps with side effects need the rule on the right.</p>""",
       body=f"""
-{fx(("time", {"save": UPG, "J": UP}), ("money", {"c": UP}))}
+{fx(("time", {"save": UPG, "J": UP}), ("money", {"J": UP, "n": UP}))}
 <div class="twocol">
 {ptab([
-  [wk("Speculative Actions", "specactions"), "Time −19.5% at 54.7% guess accuracy — chess, 5 runs of 30 steps, GPT-5 high effort guessed by GPT-5 low", "Guess calls; at most 50% under its own model"],
+  [wk("Speculative Actions", "specactions"), "Time −19.5%, guesses 54.7% right — chess, 5 × 30 steps, GPT-5 high effort guessed by GPT-5 low", "Guess calls; ≤ 50% saving in its model"],
   [wk("ISP", "isp"), "Total time 182.70 → 105.42 s (−42.3%), $0.2160 → $0.2973 per plan — 117 OpenAGI tasks, GPT-4-turbo", "Baseline spread 2.3× its mean"],
-  [wk("SMC", "smc"), "Task time 27.60 → 22.47 s (−18.6%), outcomes unchanged, 2,285 τ² Telecom tasks (calc.); 355.7 → 195.9 s (−44.9%), −2 of 168 AppWorld tasks", "3 GPUs instead of 1"],
-  [wk("Ghost Tool Calls", "ghost"), "Naive asynchronous speculation: p50 −5.4%, p99 11.56 → 14.22 s; calls seen by the provider 4.03 vs 1.03 per task — 30 tasks × 3 seeds", "Abandoned calls reveal intent to the provider"],
- ], widths=("21%", "54%", "25%"), headers=("work", "measured effect, and its conditions", "paid in"))}
-{card("WHEN THE STEP HAS SIDE EFFECTS", "Hold the effect until commit; undoing it afterwards leaks",
-      [f"Held until commit, 0 of 500 aborted sends leaked; compensation afterwards leaked 400, checkpoint-and-replay 200, mislabelled effects 300 {c2('atomix')}",
-       f"Resuming from a checkpoint repeated or skipped an effect in 90 and 93 of 96 workflows, incl. a duplicate payment {c2('saferesume')}",
-       f"About 37% of actions flagged destructive before execution were destructive {c2('weboperator')}"])}
+  [wk("SMC", "smc"), "τ² Telecom, 2,285 tasks (calc.): 27.60 → 22.47 s (−18.6%), outcomes unchanged; AppWorld: 355.7 → 195.9 s (−44.9%; −40.4% already from one-step guessing), −2 of 168 — Qwen3.5-27B, 4B drafter", "3 GPUs instead of 1"],
+  [wk("SPORK", "spork"), "p50 task time 34.7 → 31.2 s (−10%), p95 131.9 → 108.1 s (−18%), exact match within 1 point — 165 GAIA tasks, Qwen3-32B, baseline already speculative-decoding", "Probe calls, wasted tool runs"],
+  [wk("Ghost Tool Calls", "ghost"), "Naive speculation: p50 −5.4%, p99 11.56 → 14.22 s; tool calls seen by the provider 4.03 vs 1.03 per task — 30 author-built tasks × 3 seeds", "Abandoned calls reveal intent"],
+ ], widths=("20%", "57%", "23%"), headers=("work", "measured effect, and its conditions", "paid in"))}
+{card("WHEN THE STEP HAS SIDE EFFECTS", "Hold irreversible effects until commit; compensating them afterwards leaks",
+      [f"Held until commit: 0 of 500 aborted sends leaked; compensation 400, checkpoint-and-replay 200, mislabelled effects 300 — one author-built workflow, 5 abort causes × 100 {c2('atomix')}",
+       f"Resuming from a checkpoint repeated or skipped an effect in 90 and 93 of 96 author-built workflows; a case study paid an invoice twice {c2('saferesume')}",
+       f"Only ~37% of actions flagged destructive in advance were {c2('weboperator')}"])}
 </div>""",
-      foot="NOT YET MEASURED · speculation on a live web GUI with side effects held until commit · cost per success of any speculation method · SOURCES · as cited; formulas and further works in Appendix B0 and B5",
+      foot="NOT YET MEASURED · speculation on a live web GUI with side effects held until commit · cost per success of any speculation method · SOURCES · as cited; 5–45% is calc. from the rows; author-built suites flagged in B9; formulas and more works in B0, B5",
       chip=("#b5-1", "Appendix B5"))
 
 # --- Part 2 · 11 the growing prompt -------------------------------------------------------------
-slide("t11", "The growing prompt: masking old observations halved the bill; only plans remove the square", part=2,
-      crumb="terms: ḡ ↓ (mask, trim, evict) or the N² structure removed (a plan instead of the history) · edits to old context break the cache",
-      callout=f"""<p><b>Placeholders for old observations lower the tokens added per step {tex(r"\bar{g}", 15)}, a flatter slope of the {tex("N^2", 15)} term but the same shape.</b> A compiled plan removes the square: the prompt holds the plan, not the history.</p>""",
+slide("t11", "The growing prompt: masking old observations halved the bill; only compiled plans are shown to remove the square", part=2,
+      crumb="terms: ḡ ↓ (mask, trim, evict) or the N² structure removed (a plan instead of the history) · edits to old context turn some cache hits into misses or cache writes",
+      callout=f"""<p><b>Placeholders remove each old observation once it is 10 turns old: a smaller effective {tex(r"\bar{g}", 15)}, a flatter slope of the {tex("N^2", 15)} term but the same shape.</b> A compiled plan removes the square: the prompt holds the plan, not the history.</p>""",
       body=f"""
-{fx(("prompt", {"g": DN, "N2": KEEP}), ("money", {"n": UP}))}
+{fx(("prompt", {"g": DN, "N2": ("good", "removed by a plan")}), ("money", {"n": ("bad", "hit → miss, write")}))}
 {ptab([
   [wk("Observation masking", "masking"), "Observations older than 10 turns become a placeholder", "Cost per task $1.29 → $0.61, solved 53.4 → 54.8% — 500 SWE-bench Verified tasks, Qwen3-Coder-480B; cost = tokens × list price", "Model summaries instead lengthened runs by ~15%"],
-  [wk("AgentDiet", "agentdiet"), "A cheaper model deletes useless or expired content two steps back", "Input tokens −39.9 to −59.7%, cost −21.1 to −35.9% with the reducer, success −1 to +2 points — 500 SWE-bench tasks, Claude 4 Sonnet, Gemini 2.5 Pro", "A reducer call per step"],
+  [wk("AgentDiet", "agentdiet"), "A cheaper model deletes useless or expired content two steps back", "Input tokens −39.9 to −59.7%, cost −21.1 to −35.9% with the reducer, success −1 to +2 points — 200 SWE-bench Verified + 300 Multi-SWE-bench Flash tasks, Claude 4 Sonnet, Gemini 2.5 Pro, one run", "A reducer call per step"],
   [wk("TokenPilot eviction", "tokenpilot"), "Evicts stale segments every 3 turns", "Cost $4.22 → $2.79 while cache-hit tokens fell 26.7M → 8.6M — PinchBench continuous sessions, GPT-5.4-mini", "Fewer tokens, fewer of them cached"],
   [wk("A plan, not the history", "actionengine", "llmc"), "The prompt carries a compiled plan instead of every observation", "Input tokens per task 62.3k → 8.1k (ActionEngine); 20,000 → 2,800 (LLMCompiler)", "Only on compiled steps"],
  ])}""",
@@ -1402,14 +1401,14 @@ slide("t11", "The growing prompt: masking old observations halved the bill; only
       chip=("#b4-1", "Appendix B4"))
 
 # --- Part 2 · 12 the bill by class ------------------------------------------------------------
-slide("t12", "The bill by class: a stable prompt prefix cut agent bills by 41⁠–⁠87%", part=2,
+slide("t12", "The bill by class: caching a stable prefix cut agent bills by 41⁠–⁠80% against no caching; with trimming and eviction, by up to 87%", part=2,
       crumb="term: n^unc → n^hit (input read from the cache) · cache writes n^w grow · the price c_κ(μ) unchanged",
-      callout=f"""<p><b>A cache hit costs 2–25% of an uncached input token (by vendor), so moving input into the hit class is the largest money lever that leaves the model unchanged.</b> A change of speed, of tools or of old context turns hits back into writes and misses.</p>""",
+      callout=f"""<p><b>A cache hit costs 2–25% of an uncached input token (by vendor), so moving input into the hit class cuts that input’s price by 75–98% (calc.) without changing the model.</b> A change of speed, of tools or of old context turns hits back into writes and misses.</p>""",
       body=f"""
-{fx(("money", {"n": DN, "c": KEEP}))}
+{fx(("money", {"n": ("good", "unc → hit"), "c": KEEP}))}
 {ptab([
-  [wk("Don’t Break the Cache", "dbtc"), "Measures caching the stable prefix and leaving tool results out", "Cost −41 to −80%, first-token time −6 to −31% — 40 sessions per condition, 4 models, a 10K-token system prompt", "Caching the whole context made GPT-4o’s first token 8.8% slower"],
-  [wk("TokenPilot", "tokenpilot"), "Stable placeholders for changing fields, trimming, eviction", "Cost $8.31 → $3.22 (123 PinchBench tasks, one per session), $81.52 → $10.58 (Claw-Eval, continuous); hit rate 38.7 → 79.2% — GPT-5.4-mini", "Scores +2.1 to −2.6 points"],
+  [wk("Don’t Break the Cache", "dbtc"), "Measures caching the stable prefix and leaving tool results out", "Cost −41 to −80%, first-token time −6 to −31% vs a forced no-cache baseline — a web-search research agent on DeepResearch Bench, 40 sessions per condition, 4 models, a 10K-token system prompt", "Caching the whole context made GPT-4o’s first token 8.8% slower"],
+  [wk("TokenPilot", "tokenpilot"), "Stable placeholders for changing fields, trimming, eviction", "Cost $8.31 → $3.22 (123 PinchBench tasks, one per session), $81.52 → $10.58 (Claw-Eval, continuous); hit rate 38.7 → 79.2% — GPT-5.4-mini", "Score change −2.6 to +2.1 points"],
   [wk("TraceLab counterfactual", "tracelab"), "Keeps the cache alive through the user’s think time", "At most −12.8% of the priced cost (paper; 15.8% on the live dashboard) — coding-agent traces", "An estimate, not a measurement"],
  ])}
 {table(["latest model (vendor price pages, read 28 Sep 2026)", "cache hit ÷ uncached input", "cache write"], [
@@ -1419,7 +1418,7 @@ slide("t12", "The bill by class: a stable prompt prefix cut agent bills by 41⁠
   ["Gemini 3.8 Flash", "0.1×", "storage $0.50 per million tokens per hour"],
   ["Grok 4.7", "0.25×", "not listed"],
  ], ["44%", "22%", "34%"], cls="tbl p2 price")}""",
-      foot=f"NOT YET MEASURED · a GUI or web agent’s tokens split by billing class, cache writes included · SOURCES · as cited; prices {c2('deepseek', 'anth-b', 'openai', 'google', 'xai')}; per vendor in Appendix B6",
+      foot=f"NOT YET MEASURED · a GUI or browser agent’s tokens split by billing class, cache writes included (Don’t Break the Cache covers a web-search agent) · SOURCES · as cited; prices {c2('deepseek', 'anth-b', 'openai', 'google', 'xai')}; Appendix B6",
       chip=("#b6-1", "Appendix B6"))
 
 # --- Part 2 · 13 a cheaper model per call -----------------------------------------------------------
@@ -1429,9 +1428,9 @@ slide("t13", "A cheaper model for most calls cut dollars per task by 50⁠–⁠
       body=f"""
 {fx(("money", {"c": DN, "N": UP, "R": DNB}))}
 {ptab([
-  [wk("StepWise", "stepwise"), "An 8B model by default; the large model when the small one is stuck", "$0.881 → $0.224 per task (−74.6%), success 58.1 → 55.4%, time per request 6.4 → 4.1 s — OSWorld, EvoCUA-8B + Claude Sonnet 4.5 vs Sonnet 4.5 alone", "Steps 25.4 → 26.2"],
+  [wk("StepWise", "stepwise"), "An 8B model by default; the large model when the small one is stuck", "$0.881 → $0.224 per task (−74.6%), success 58.1 → 55.4%, time per request 6.4 → 4.1 s — OSWorld (count not printed, B9), EvoCUA-8B + Claude Sonnet 4.5 vs Sonnet 4.5 alone", "Steps 25.4 → 26.2"],
   [wk("WebRouter", "webrouter"), "A router picks one of three models for each step", "$0.98 → $0.12 per task, accuracy 86.1 → 82.3%, ~14% slower — 5 WebVoyager sites, ≥ 46 tasks each, vs GPT-4o", "Steps 7.63 → 8.38"],
-  [wk("Fara-7B", "fara"), "A 7B screenshot agent instead of a frontier computer-use model", "$0.913 → $0.025 per task, success 70.9 → 73.5% — WebVoyager, 3 runs; but Online-Mind2Web 42.9 → 34.1%", "7B priced at $0.20 per million tokens, no caching"],
+  [wk("Fara-7B", "fara"), "A 7B screenshot agent instead of a frontier computer-use model", "$0.913 → $0.025 per task, success 70.9 → 73.5% — WebVoyager (count not printed, B9), 3 runs; but Online-Mind2Web 42.9 → 34.1%", "7B priced at $0.20 per million tokens, no caching"],
   [wk("Agentic plan caching", "apc"), "Cached plan templates, adapted by a small model", "Cost −50.31% on average, at 96.61% of the best accuracy — 5 workloads; latency −27.28% on one FinanceBench run", "3.99 s to build each cache entry"],
  ])}
 <div class="figcap">Tier prices (vendor, read 28 Sep 2026): OpenAI Flex and Batch 0.5×, Fast 2×; Google Priority 1.8× (Preview); Microsoft Foundry priority 1.75–2.5× (calc.) {c2('openai', 'google', 'microsoft')}.</div>""",
@@ -1442,19 +1441,19 @@ slide("t13", "A cheaper model for most calls cut dollars per task by 50⁠–⁠
 EQ["amort"] = r"$v_n(m,p)\;=\;\dfrac{C_{\mathrm{setup}}}{n}\;+\;\dfrac{C_m(p)}{R_m(p)}$"
 slide("t14", "Cost per success moves with the success rate, and a set-up cost must be spread over the tasks", part=2,
       crumb="terms: R_m(p) in v(m,p) = C_m(p) / R_m(p) · plus a one-time set-up cost that Part 1’s per-attempt formula leaves out",
-      callout="""<p><b>A dearer attempt can give a cheaper success, and a cheaper attempt a dearer one; few papers report the ratio, so the figures here are our calculations from their tables.</b> Methods that first build code, tools or memories add a set-up cost that no headline includes.</p>""",
+      callout="""<p><b>A dearer attempt can give a cheaper success: Beyond Browsing’s hybrid agent costs $1.4 per attempt against $1.2 for API calls alone, but $3.60 against $4.11 per success (calc.).</b> Few papers report the ratio, so the figures here are our calculations. Set-up costs are left out of most headlines; SpeedRunner spreads them over its runs, EET prints them apart (B8).</p>""",
       body=f"""
 <div class="eqtab">
 {eqrow("per task", "set-up spread", ["amort"],
-       tex(r"C_{\mathrm{setup}}", 11) + ": one-time cost of building the code, tools or memories; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ". A method with set-up pays off against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " once " + tex(r"n>C_{\mathrm{setup}}/(v_{\mathrm{base}}-v)", 11) + " (calc.).",
-       "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); " + tex("O(nc+C)", 10) + ": " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
+       tex(r"C_{\mathrm{setup}}", 11) + ": one-time cost of building the code, tools or memories; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{setup}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
+       "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); one large tool-making call spread over n cheap calls, O(nc + C) with C, c the cost of one large- and one small-model call: " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
 </div>
 <div class="twocol">
 {table(["work", "cost per success (calc. unless stated)", "why it moved"], [
   [wk("AXIS", "axis"), "$0.77 → $0.24", "cheaper and more successful"],
   [wk("W&amp;D", "wd"), "$1.55 → $0.97 per correct answer", "cheaper per attempt"],
   [wk("OSWorld 2.0, batched", "osw2"), "$411 → $351", "Opus 4.8; success 18.5 → 20.6%"],
-  [wk("Beyond Browsing", "beyondbrowsing"), "browsing ≈ $0.68 vs hybrid ≈ $3.60", "higher success, dearer success"],
+  [wk("Beyond Browsing", "beyondbrowsing"), "browsing ≈ $0.68 · API only ≈ $4.11 · hybrid ≈ $3.60", "dearer attempt, cheaper success (hybrid vs API)"],
   [wk("BATS", "bats"), "$0.79 → $4.47", "success 12.6 → 24.6%, cost ×11"],
   [wk("AI Agents That Matter", "kapoor25"), "93.2% for $2.45 vs 88.0% for $134.50 (run totals, stated)", "simpler agent, better and cheaper"],
  ], ["26%", "44%", "30%"], cls="tbl p2")}
@@ -1463,14 +1462,14 @@ slide("t14", "Cost per success moves with the success rate, and a set-up cost mu
        f"EchoPath: a first pass of ≈ 572k tokens and ≈ 4.5 min per task {c2('echopath')}",
        f"AutoDroid-V2: $82.42 of GPT-4o calls per app (calc.) {c2('autodroid2')}"])}
 </div>""",
-      foot="NOT YET MEASURED · time, money and success, set-up included, on one benchmark · SOURCES · as cited; the calculations with their inputs and rounding are in Appendix B8",
+      foot="NOT YET MEASURED · time, money and success, set-up included, on one web or GUI benchmark · SOURCES · as cited; the calculations with their inputs and rounding are in Appendix B8",
       chip=("#b8-1", "Appendix B8"))
 
 # --- references (part 2) ---------------------------------------------------
 for _n in range(P2_REF_PAGES):
     _chunk = [r for _, _, r in REFS_P2][_n * P2_REFS_PER_PAGE:(_n + 1) * P2_REFS_PER_PAGE]
     slide(f"t{15 + _n}", f"References · Part 2 ({_n + 1} of {P2_REF_PAGES})", kind="refs", part=2,
-          crumb=("author–year tags on the Part 2 pages refer to these entries · a, b, c separate works with the same first author and year within Part 2 · published version where one exists, otherwise the arXiv number and the authors’ institutions" if _n == 0 else "continued"),
+          crumb=("author–year tags on the Part 2 pages refer to these entries · a, b, c separate works whose first authors share a surname and year within Part 2 · published version where one exists, otherwise the arXiv number and the authors’ institutions" if _n == 0 else "continued"),
           body='<div class="refs2">' + refs_html(_chunk, start=_n * P2_REFS_PER_PAGE + 1) + '</div>')
 
 # =====================================================================
@@ -1485,20 +1484,20 @@ h_f = ["source, location", "the formula in the source’s own symbols", "its sym
 B("b0-1", "B0 · 1/3", "B0 · Source formulas for overlap: how much concurrency can save",
   crumb="verbatim from each source, in its own symbols; the right-hand column maps them onto Part 1 · behind pages 9–10",
   body=table(h_f, [
-   [wk("AsyncFC, Eq. 1 (App. B)", "asyncfc"), tex(r"R=\dfrac{T_{\mathrm{LLM}}+T_{\mathrm{tool}}}{\max(T_{\mathrm{LLM}},\,T_{\mathrm{cp}})}", 12), tex(r"T_{\mathrm{LLM}}", 10) + " total decoding time; " + tex(r"T_{\mathrm{tool}}", 10) + " total function time; " + tex(r"T_{\mathrm{cp}}", 10) + " function time on the critical path of the dependency graph", "the largest speed-up that " + tex(r"T_{\mathrm{saving}}", 10) + " can give; decoding sits in " + tex("D_i", 10) + ", functions in " + tex("E_i", 10) + "; its R is not the success probability " + tex("R_m(p)", 10) + " (page 9 writes “speed-up”)"],
+   [wk("AsyncFC, §4 Eq. 1 (= App. B Eq. 2)", "asyncfc"), tex(r"R=\dfrac{T_{\mathrm{LLM}}+T_{\mathrm{tool}}}{\max(T_{\mathrm{LLM}},\,T_{\mathrm{cp}})}", 12), tex(r"T_{\mathrm{LLM}}", 10) + " total decoding time; " + tex(r"T_{\mathrm{tool}}", 10) + " total function time; " + tex(r"T_{\mathrm{cp}}", 10) + " function time on the critical path of the dependency graph", "the largest speed-up that " + tex(r"T_{\mathrm{saving}}", 10) + " can give; decoding sits in " + tex("D_i", 10) + ", functions in " + tex("E_i", 10) + "; its R is not the success probability " + tex("R_m(p)", 10) + " (page 9 writes “speed-up”)"],
    [wk("LLMCompiler, App. E.1", "llmc"), tex(r"T^{R}=\sum_{i=1}^{N}(T_P^{R}(P_i)+T_E(E_i))", 11) + "<br>" + tex(r"T^{C}=\sum_{i=1}^{N}T_P^{C}(P_i)+\max_k T_E(E_k)", 11) + "<br>" + tex(r"\gamma=T^R/T^C", 11), "N planned tasks (not our steps); " + tex("P_i", 10) + " planning and " + tex("E_i", 10) + " execution of task i (not our " + tex("E_i", 10) + "); R: ReAct, C: compiled", "serial against parallel execution; " + tex(r"\gamma_{\max}\approx N", 10) + " when execution dominates and all calls take equally long, ≈ 1 when planning dominates"],
    [wk("Speculative tool calls, Eq. 2 and Lemma 1", "nichols"), tex(r"S_{\mathrm{spec}}=\dfrac{G+T}{\alpha\max\{G,g+T\}+(1-\alpha)(G+T)}", 11) + "<br>" + tex(r"S_{\max}=\dfrac{G+T}{\max\{G,g+T\}}<2", 11), "G mean generation time of the main model; g of the speculator; T mean tool time; α acceptance rate", "one model call overlapped with one tool call: under 2× per step, whatever the guesser"],
-   [wk("SPORK, EQ1 and App. A", "spork"), tex(r"\mathrm{Ratio}=\dfrac{T_{\mathrm{base}}}{T^{*}_{\mathrm{base}}-\alpha\,t_{\mathrm{overlap}}+T_{\mathrm{oh}}}", 11) + "<br>" + tex(r"S_{\max}=\dfrac{1}{1-f_{\mathrm{tool}}}", 11), tex(r"T_{\mathrm{base}}=T_{\mathrm{dec}}+T_{\mathrm{tool}}", 10) + "; α accepted share of tool-call turns; " + tex(r"t_{\mathrm{overlap}}", 10) + " overlap per accepted turn; " + tex(r"T_{\mathrm{oh}}", 10) + " probe overhead; " + tex(r"f_{\mathrm{tool}}=T_{\mathrm{tool}}/T_{\mathrm{base}}", 10), "break-even: " + tex(r"\alpha\,t_{\mathrm{overlap}}\geq T_{\mathrm{oh}}", 10) + " (without its third design); the ceiling is Amdahl’s law on the tool share"],
-   [wk("ParaGUI, §III-C", "paragui"), tex(r"L_{\mathrm{parallel}}=\sum_{r=1}^{R}\max_{k}s_{r,k}", 11) + "<br>" + tex(r"S=L_{\mathrm{serial}}/L_{\mathrm{parallel}},\ \ P=L_{\mathrm{total}}/L_{\mathrm{parallel}}", 11), tex(r"s_{r,k}", 10) + " GUI steps of worker k in round r; R rounds (not " + tex("R_m(p)", 10) + ")", "steps on the critical path against total work: P = 2.13 means 2.13 desktops busy on average — machine hours " + tex(r"x_{\mathrm{env}}", 10) + " for time"],
+   [wk("SPORK, EQ1 and App. A", "spork"), tex(r"\mathrm{Ratio}=\dfrac{T_{\mathrm{base}}}{T^{*}_{\mathrm{base}}-\alpha\,t_{\mathrm{overlap}}+T_{\mathrm{oh}}}", 11) + "<br>" + tex(r"S_{\max}=\dfrac{1}{1-f_{\mathrm{tool}}}", 11), tex(r"T_{\mathrm{base}}=T_{\mathrm{dec}}+T_{\mathrm{tool}}", 10) + "; " + tex(r"T^{*}_{\mathrm{base}}=T_{\mathrm{base}}-T_{D3}", 10) + ", less the decoding saved by its third design (D3: a rejected probe’s prefix reused as draft tokens); α accepted share of tool-call turns; " + tex(r"t_{\mathrm{overlap}}", 10) + " overlap per accepted turn; " + tex(r"T_{\mathrm{oh}}", 10) + " probe overhead; " + tex(r"f_{\mathrm{tool}}=T_{\mathrm{tool}}/T_{\mathrm{base}}", 10), "break-even: " + tex(r"\alpha\,t_{\mathrm{overlap}}\geq T_{\mathrm{oh}}", 10) + " (without its third design); the ceiling is Amdahl’s law on the tool share"],
+   [wk("ParaGUI, §III-C", "paragui"), tex(r"L_{\mathrm{parallel}}=\sum_{r=1}^{R}\max_{k}s_{r,k}", 11) + "<br>" + tex(r"S=L_{\mathrm{serial}}/L_{\mathrm{parallel}},\ \ P=L_{\mathrm{total}}/L_{\mathrm{parallel}}", 11), tex(r"s_{r,k}", 10) + " GUI steps of worker k in round r; R rounds (not " + tex("R_m(p)", 10) + "); " + tex(r"L_{\mathrm{serial}}", 10) + " steps of a single-agent serial run; " + tex(r"L_{\mathrm{total}}", 10) + " all worker steps", "steps on the critical path against total work: P = 2.13 means 2.13 desktops busy on average — machine hours " + tex(r"x_{\mathrm{env}}", 10) + " for time"],
   ], w_f))
 
 B("b0-2", "B0 · 2/3", "B0 · Source formulas for speculation, cache retention and a reader call",
   crumb="verbatim from each source, in its own symbols · behind pages 5, 6 and 10",
   body=table(h_f, [
-   [wk("Speculative Actions, Prop. 1 and Thm 3", "specactions"), tex(r"\dfrac{\mathbb{E}[T_s]}{\mathbb{E}[T_{\mathrm{seq}}]}\rightarrow 1-\dfrac{p(k)}{1+p(k)}\cdot\dfrac{\alpha}{\alpha+\beta}", 11) + "<br>" + tex(r"\dfrac{\mathbb{E}[M_{\mathrm{spec}}-M_{\mathrm{seq}}]}{\mathbb{E}[M_{\mathrm{seq}}]}\rightarrow\tilde{k}-(\tilde{k}+\dfrac{\alpha}{\alpha+\beta})\,\dfrac{p(k)}{1+p(k)}", 11), tex(r"p(k)=1-(1-p)^k", 10) + ", k guesses of accuracy p; speculator and API latencies exponential with rates α, β; " + tex(r"\tilde{k}", 10) + " distinct guessed actions; M money", "time saved and money added from the same guess accuracy; the time ratio never falls below 1/2 (calc.), so at most 50% is saved — under its exponential-latency model"],
-   [wk("Speculate with memory, §2.1 and §4.3", "swm"), "saving per hit " + tex(r"=\min(\ell_{\mathrm{env}},\ \ell_{\mathrm{LLM}}-\ell_{\mathrm{spec}})", 11) + " (guess the action) or " + tex(r"\min(\ell_{\mathrm{LLM}},\ \ell_{\mathrm{env}}-\ell_{\mathrm{spec}})", 11) + " (guess the observation); extra cost " + tex(r"=k\,C_S+(1-\mathrm{acc})\,C_{\mathrm{act}}", 11), tex(r"\ell", 10) + " latencies of the environment, the model and the speculator; k speculators of cost " + tex("C_S", 10) + "; acc hit rate; " + tex(r"C_{\mathrm{act}}", 10) + " cost of a wasted action", "a hit can hide at most the idle window of the other side; its App. A uses slightly different per-type forms"],
+   [wk("Speculative Actions, Prop. 1 and Thm 3", "specactions"), tex(r"\dfrac{\mathbb{E}[T_s]}{\mathbb{E}[T_{\mathrm{seq}}]}\rightarrow 1-\dfrac{p(k)}{1+p(k)}\cdot\dfrac{\alpha}{\alpha+\beta}", 11) + "<br>" + tex(r"\dfrac{\mathbb{E}[M_{\mathrm{spec}}-M_{\mathrm{seq}}]}{\mathbb{E}[M_{\mathrm{seq}}]}\rightarrow\tilde{k}-(\tilde{k}+\dfrac{\alpha}{\alpha+\beta})\,\dfrac{p(k)}{1+p(k)}", 11), tex(r"p(k)=1-(1-p)^k", 10) + ", k guesses of accuracy p; speculator and API latencies exponential with rates α, β; " + tex(r"T_s,\ T_{\mathrm{seq}}", 10) + " time with and without speculation; → the limit as the number of steps grows; " + tex(r"\tilde{k}", 10) + " distinct guessed actions; M money", "time saved and money added from the same guess accuracy; in the limit the time ratio stays above 1/2 (calc.), so at most 50% is saved — under its exponential-latency model"],
+   [wk("Speculate with memory, §2.1 and §4.3", "swm"), "saving per hit " + tex(r"=\min(\ell_{\mathrm{env}},\ \ell_{\mathrm{LLM}}-\ell_{\mathrm{spec}})", 11) + " (guess the action) or " + tex(r"\min(\ell_{\mathrm{LLM}},\ \ell_{\mathrm{env}}-\ell_{\mathrm{spec}})", 11) + " (guess the observation); extra cost " + tex(r"=k\,C_S+(1-\mathrm{acc})\,C_{\mathrm{act}}", 11), tex(r"\ell", 10) + " latencies of the environment, the model and the speculator; k speculators of cost " + tex("C_S", 10) + "; acc hit rate; " + tex(r"C_{\mathrm{act}}", 10) + " cost of the pre-launched actor call a miss wastes (the extra-cost form holds for observation and chained guesses)", "a hit can hide at most the idle window of the other side; its App. A uses slightly different per-type forms"],
    [wk("Continuum, Eqs. 1–2", "continuum"), tex(r"\tau^{*}=\arg\max_{\tau}\ \mathcal{P}(\tau,f)\,\mathrm{Benefit}(r)-\mathrm{Cost}(\tau,r)", 11), tex(r"\mathcal{P}(\tau,f)", 10) + " empirical probability that tool f returns within τ; Benefit: reload and reordering cost avoided; Cost: memory held for τ", "how long to keep a run’s cache through a tool wait: " + tex(r"t^{\mathrm{queue}}", 10) + " and re-prefill against GPU memory"],
-   [wk("InferCept, Eqs. 1–5", "infercept"), tex(r"\mathrm{Waste}_{\mathrm{preserve}}=T_{\mathrm{INT}}\,C_i^j\,M", 11) + "; also discard, swap and chunked discard; " + tex(r"\mathrm{Waste}=\min(\cdot)", 11), tex(r"T_{\mathrm{INT}}", 10) + " duration of the tool call; " + tex("C", 10) + " context tokens; " + tex("M", 10) + " memory per token", "the same trade inside the server: keep the cache during " + tex("E_i", 10) + ", or pay " + tex(r"t^{\mathrm{prefill}}", 10) + " again"],
+   [wk("InferCept, Eqs. 1–5", "infercept"), tex(r"\mathrm{Waste}_{\mathrm{preserve}}=T_{\mathrm{INT}}\,C_i^j\,M", 11) + "; also discard, swap and chunked discard; " + tex(r"\mathrm{Waste}=\min(\mathrm{Waste}_{\mathrm{preserve}},\mathrm{Waste}_{\mathrm{chunkD}})", 11) + " (Eq. 5)", tex(r"T_{\mathrm{INT}}", 10) + " duration of the tool call; " + tex("C", 10) + " context tokens; " + tex("M", 10) + " memory per token; i request, j interception (not Part 1’s step and call)", "the same trade inside the server: keep the cache during " + tex("E_i", 10) + ", or pay " + tex(r"t^{\mathrm{prefill}}", 10) + " again"],
    [wk("FocusAgent, App. H.1", "focusagent"), tex(r"C_S|o_i|+C_L|o_r|\leq C_L|o_i|\ \Leftrightarrow\ \alpha\leq\dfrac{C_L-C_S}{C_L}", 11), tex("C_S, C_L", 10) + " prices of the small reader and the large actor; " + tex(r"|o_i|,|o_r|", 10) + " observation before and after reduction; " + tex(r"\alpha=|o_r|/|o_i|", 10), "when a reader call pays in money; the paper notes it ignores API latency — the time can still grow (page 6)"],
   ], w_f))
 
@@ -1519,7 +1518,7 @@ h_d = ["work", "mechanism", "measured effect, with its conditions", "left out, o
 B("b1-1", "B1 · 1/2", "B1 · Compile or replay: the research systems, with full conditions",
   crumb="behind page 3 · term J_i → 0 on compiled or replayed steps · calc. = our arithmetic",
   body=table(h_d, [
-   [wk("JIT-Planner", "jit"), "Code plan over cached site tools with pre/postcondition checks; a scheduler can hedge by running candidate plans at once", "Wall-clock from submission to completion, planning included: 150.1 → 15.4 s (9.7×, its Table 1), success 61 → 90%. 37 tasks in 5 apps (18 written by the authors), 3 runs, GPT-4.1; Browser-Use v0.7.10 on the same model. Three-model average 10.4×", "Tool synthesis 25–90 min + traces 25–45 min per app; no tokens or $ reported"],
+   [wk("JIT-Planner", "jit"), "Candidate code plans over cached site tools with pre/postcondition checks, drafted by parallel planning calls; a separate scheduler (not in the headline) can hedge by running up to 4 copies of the chosen plan", "Wall-clock from submission to completion, planning included: 150.1 → 15.4 s (9.7×, its Table 1), success 61 → 90%. 37 tasks in 5 apps (18 written by the authors), 3 runs, GPT-4.1; Browser-Use v0.7.10 on the same model. Three-model average 10.4×", "Tool synthesis 25–90 min + traces 25–45 min per app; no tokens or $ reported"],
    [wk("ActionEngine", "actionengine"), "Offline state-machine graph of the site; one sketch-program call compiled by graph search", "106 WebArena Reddit tasks: success 66 → 95%, end-to-end latency 237 → 118 s, model calls 10.2 → 1.8, input tokens 62.3k → 8.1k, $0.71 → $0.06 per task (tokens × list price). AgentOccam on GPT-4-Turbo vs ActionEngine on Claude Sonnet 4.5", "About 2.5× of the 11.8× $ gap is the cheaper model’s price (calc.); crawl cost not reported"],
    [wk("AutoDroid-V2", "autodroid2"), "A local model writes a whole-task script from an offline app document", "Model inference time 669.2 → 46.3 s per task (prompt to last token, screen actions excluded); uncached input 3,021 → 68 tokens; success 43.9 → 54.4%. 158 DroidTask tasks, fine-tuned Llama-3.1-8B on a phone, both sides", "Offline GPT-4o $4.11 + $7.83 + $70.48 = $82.42 per app (calc.), ~2.5 GPU-hours of fine-tuning"],
    [wk("EchoPath", "echopath"), "Validated trajectories kept as executable memories; a gate checks the start state", "Second pass, medians: tokens 586,386 → 20,370 (−96.5%), time 315.7 → 127.5 s (−59.6%), success 91.8 → 91.2% (calc. for the %). OSWorld-Verified, 159 replayable tasks, Codex GPT-5.5, vs Synapse; the second pass changes the resolution", "First pass ≈ 572k tokens, ≈ 4.5 min per task; the gate accepted 22% of incompatible starts (calc.)"],
@@ -1534,8 +1533,8 @@ B("b1-2", "B1 · 2/2", "B1 · Compile or replay in products: replay first, a mod
   body=table(["product", "what replays, and when a model is called", "published numbers", "what is missing"], [
    [wk("UiPath Healing Agent", "uipath"), "Recorded automation; a model recommends or applies a fix when a step fails", "Price only: one heal = 3 Platform Units; failed heals free; healing is not kept for the next run", "Heal success rate, heal latency"],
    [wk("Power Automate self-healing", "powerautomate"), "Desktop flows repaired with Copilot", "None; free on premium accounts", "Any measured rate"],
-   [wk("Automation Anywhere Generative Recorder", "aa-recorder"), "Recorded bot with a generative fallback", "“Nearly 50%” of failures fixed in customer previews, and “over 60%” fewer failures: vendor statements with no sample, period or definition", "A defined, sampled rate"],
-   [wk("Stagehand cache", "stagehand"), "An action’s model output is cached; the second run of the same action makes no call", "“As high as ~80%” faster for one action run twice (vendor best case)", "Whole-workflow numbers, sample, model"],
+   [wk("Automation Anywhere Generative Recorder", "aa-recorder"), "Recorded bot with a generative fallback", "“Nearly 50%” of failures fixed in customer previews: a vendor statement with no sample, period or definition (the product page’s “over 60%” is marketing, not cited)", "A defined, sampled rate"],
+   [wk("Stagehand cache", "stagehand"), "An action’s model output is cached; the second run of the same action makes no call", "None usable: the blog’s “as high as ~80%” (one action run twice) is vendor marketing, not cited", "Whole-workflow numbers, sample, model"],
    [wk("Skyvern code cache", "skyvern"), "Generated code re-run without a model", "None (“faster, cheaper”); plans imply about $0.024 per action (calc.)", "Any measured rate"],
    [wk("HyperAgent action cache", "hyperagent"), "Replay by XPath; the model only when the page has changed", "None; the docs concede that a fallback adds latency and cost", "Replay and fallback rates"],
   ], ["18%", "32%", "30%", "20%"]) + """
@@ -1547,12 +1546,12 @@ B("b2-1", "B2 · 1/2", "B2 · Fewer steps: more rows, with full conditions",
    [wk("UFO2, GUI + API", "ufo2"), "Native API calls replace GUI sequences in Office apps", "Model-involved steps 16.0 → 6.6 with o1, but 13.8 → 12.9 with GPT-4o, on tasks both settings completed; 12 hand-built APIs", "No wall-clock"],
    [wk("CUA-Verse", "cuaverse"), "A command-line tool added to a fine-tuned 9B agent", "OSWorld subset of 244 tasks, same model: success 23.4 → 40.2%, mean steps 39.6 → 28.6, tokens 325.7K → 286.5K", "Training on 4,923 episodes"],
    [wk("SPACE", "space"), "RL-trained variable-length action chunks", "ALFWorld unseen split, Qwen3-4B: model rounds 20.9 → 4.4, success 81.3 → 96.9% vs the best baseline (multi-action GRPO)", "Text environments only; no time or tokens"],
-   [wk("SpeedRunner", "speedrunner"), "A coding agent refactors the skill library for cost", "Crafter: model calls −94% over training; Gemini-3-Flash, 3 seeds", "Text game"],
+   [wk("SpeedRunner", "speedrunner"), "A coding agent refactors the skill library for cost", "Crafter: model calls −94% over training; Gemini-3-Flash, 3 seeds", "Text game; with Gemini-3-Flash success fell significantly below the OPO baseline on every benchmark"],
    [wk("AWM", "awm"), "Induced workflows injected into the prompt", "WebArena 812 tasks: success 15.0 → 35.5%, steps 7.9 → 5.9 vs the page-tree baseline; +10.8% computation for induction (its App. D). In ASI’s re-run: 5.9 steps vs 5.6 plain", "Prompt grows"],
    [wk("Beyond Browsing", "beyondbrowsing"), "API calls and API documentation in context, with browsing as fallback", "WebArena, GPT-4o: success 14.8 → 38.9% (hybrid), steps 8.4 → 8.5, $0.1 → $1.4 per task", "API documents lengthen the prompt"],
    [wk("ComputerRL", "computerrl"), "An API-GUI action space", "OSWorld, prompted GPT-4o: success 11.2 → 26.2%", "No step, time or $ figures"],
    [wk("CoAct-1", "coact1"), "An orchestrator hands sub-tasks to a coding agent or a GUI agent", "OSWorld-Verified: success 53.07 → 59.93% vs GTA-1-7B with o3; 10.15 vs 15.22 steps per passed task", "Step budget behind 10.15 ambiguous"],
-   [wk("OSWorld-Human", "osh"), "Human reference trajectories, grouped by screenshot", "Steps per trajectory, single → grouped: Chrome 5.8 → 4.3 (1.35×) to Calc 13.2 → 4.5 (2.93×) (calc.); 369 tasks", "A bound, not a method"],
+   [wk("OSWorld-Human", "osh"), "Human reference trajectories, grouped by screenshot", "Steps per trajectory, single → grouped: Chrome 5.8 → 4.3 (1.35×) to Calc 13.2 → 4.5 (2.93×) (calc.); 369 tasks", "A human-reference headroom estimate, not a method or a strict bound"],
   ], w_d))
 
 B("b2-2", "B2 · 2/2", "B2 · Capping the steps: stopping rules and budgets",
@@ -1568,14 +1567,14 @@ B("b2-2", "B2 · 2/2", "B2 · Capping the steps: stopping rules and budgets",
 B("b3-1", "B3", "B3 · Agent-aware serving: more systems",
   crumb="behind page 5 · terms t^queue and t^prefill · self-hosted engines; all figures are throughput or latency under load, none reports task quality unless stated",
   body=table(["system", "mechanism", "measured effect, with its conditions", "baseline"], [
-   [wk("SGLang", "sglang"), "Prefix sharing in a radix tree of KV caches", "Up to 6.4× throughput, 3.7× lower latency; Llama-7B on one A10G; 12 workloads incl. ReAct and generative agents (replayed)", "vLLM v0.2.5"],
+   [wk("SGLang", "sglang"), "Prefix sharing in a radix tree of KV caches", "Up to 6.4× throughput, 3.7× lower latency; Llama-7B on one A10G; 12 workloads incl. ReAct and generative agents (replayed)", "vLLM v0.2.5, Guidance, LMQL (which gives the maximum is not stated)"],
    [wk("Preble", "preble"), "Prompt-sharing-aware scheduling across GPUs", "1.5–14.5× lower mean and 2–10× lower p99 latency; tool use, embodied agent, program generation, video and long-document QA; Mistral 7B, Llama-3 70B", "Data-parallel SGLang"],
    [wk("Parrot", "parrot"), "Semantic variables expose a program’s structure to the server", "Up to 11.7× lower end-to-end latency; MetaGPT multi-agent programming, LLaMA 13B, one A100", "Latency-centric vLLM"],
    [wk("KVFlow", "kvflow"), "Workflow-aware cache eviction and prefetching", "1.24× vs SGLang with hierarchical cache (camera-ready, Qwen2.5-32B, one H100); the 1.83× headline is from the v1 A10G set-up only", "SGLang HiCache"],
    [wk("Helium", "helium"), "Workflow-level optimisation of batched agent queries", "Up to 1.56× vs KVFlow (end-to-end latency of a batch, optimisation included)", "KVFlow"],
    [wk("KVCOMM", "kvcomm"), "Reuses KV caches across agents with offset correction", "First-token time 7.82× lower at the fifth agent (428.6 → 54.8 ms); Llama-3.1-8B, one H100, HuggingFace", "Full prefill"],
    [wk("DroidSpeak", "droidspeak"), "Shares KV caches between fine-tuned variants of one model", "Prefill 1.7–3.1× faster (average 2.1×); eight model pairs, three datasets each", "Full prefill"],
-   [wk("AsymCache", "asymcache"), "Asymmetric cache eviction for multi-session serving", "With Continuum, −18.1% average job latency; alone 0.4–4.2%; its own headline ranges are inconsistent", "vLLM-LRU and others"],
+   [wk("AsymCache", "asymcache"), "Asymmetric cache eviction for multi-session serving", "With Continuum, average job latency 4.4–18.1% below Continuum alone; alone 0.4–4.2% below vLLM-LRU (BFCL web search, no task count); its own headline ranges are inconsistent", "Continuum; vLLM-LRU"],
    [wk("CacheBlend", "cacheblend"), "Blends precomputed chunk caches, recomputing a few tokens", "First-token time 2.2–3.3× lower, quality within 0.02 F1 — RAG, not agents", "Full recompute"],
   ], ["15%", "27%", "43%", "15%"]))
 
@@ -1588,7 +1587,8 @@ B("b4-1", "B4 · 1/2", "B4 · Prefill and context: more rows, with full conditio
    [wk("SimpAgent", "simpagent"), "Masks irrelevant screenshot regions and compresses history", "FLOPs per step 11.90 → 8.71 T; offline step success 69.0 → 71.3% (AITW), Qwen2-VL-2B", "Offline steps"],
    [wk("ScreenSeekeR (counter)", "screenseeker"), "A planner searches the screen recursively for the target", "Grounding 18.9 → 48.1% on 1,581 ScreenSpot-Pro instructions, GPT-4o planner", "More model calls per step"],
    [wk("Observation masking, other models", "masking"), "As on page 11", "Gemini 2.5 Flash $0.41 → $0.18, 32.8 → 35.6%; with thinking 40.4 → 36.4% (significant); Qwen3-32B $1.12 → $0.55, 17.0 → 15.0%", "Success can fall"],
-   [wk("AgentDiet, per task", "agentdiet"), "As on page 11", "$0.535 → $0.422 (Claude, SWE-bench Verified), $0.701 → $0.449 (Gemini, Multi-SWE-bench Flash); cached-input discount applied", "Reducer 5–10% of the original cost"],
+   [wk("AgentDiet, per task", "agentdiet"), "As on page 11", "$0.535 → $0.422 (Claude, SWE-bench Verified), $0.701 → $0.449 (Gemini, Multi-SWE-bench Flash); cached-input discount applied", "Reducer 5.5–11.8% of the original cost"],
+   [wk("FireAct", "fireact"), "A fine-tuned GPT-3.5 drops the few-shot examples from every prompt", "HotpotQA 500 questions: 9.0 → 2.7 s per trial, $2.6e-3 → $2.2e-3, EM 31.4 → 39.2", "Price per token ×8 (c_κ(μ) ↑)"],
    [wk("TokenPilot, mixed sessions", "tokenpilot"), "As on page 12", "123 tasks shuffled into 10 sessions: $21.16 → $4.83 (−77%, calc.), score 68.77 → 69.10", "Partial-credit scores"],
   ], w_d))
 
@@ -1598,10 +1598,10 @@ B("b4-2", "B4 · 2/2", "B4 · Decoding: more rows, with full conditions",
    [wk("Think Twice, Click Once", "thinktwice"), "Switches between a fast and a slow grounding mode", "Time per sample 3.2 → 2.6 s, accuracy 74.8 → 77.4%; slow mode only 5.4 s — 1,272 samples, Qwen2-VL-2B, same model with and without its switch threshold", "Grounding only"],
    [wk("Does CoT help mobile agents?", "cotmobile"), "Caps the reasoning tokens", "AndroidControl, GLM-4.6V: action accuracy 71.55% at 128 tokens vs 70.41% unlimited and 70.32% without reasoning", "Sample size not stated"],
    [wk("TSDS", "tsds"), "Short edge thinking, deferral to the cloud when unsure", "MBPP (257 problems, single step): edge thinking tokens 1,183 → 422, reward 0.719 → 0.714", "Cloud deferral rate 0.346; cloud tokens not counted"],
-   [wk("GUI-KV", "guikv"), "Keeps 40% of the KV cache of old screenshots", "Decoding MFLOPs per token −38.9%, offline step accuracy 17.5 → 21.6% (AgentNetBench); OSWorld 26.0 → 25.1%", "No wall-clock"],
-   [wk("Agent-X", "agentx"), "Prompt-aware caching and speculative execution on a laptop", "Task time 1.61× faster on 1,022 TinyAgent examples, Mac mini M4 Pro", "On-device only"],
+   [wk("GUI-KV", "guikv"), "Keeps 40% of the KV cache per layer (5 screenshots in context, UI-TARS-1.5-7B)", "Decoding MFLOPs per token −38.9%, offline step accuracy 17.5 → 21.6% (AgentNetBench); OSWorld 26.0 → 25.1%", "No wall-clock"],
+   [wk("Agent-X", "agentx"), "A precomputed prompt-prefix cache and speculative decoding on a Mac mini", "Task time 1.61× faster (prefill 1.97×, decode 1.73×) on 1,022 TinyAgent examples, Mac mini M4 Pro", "On-device only"],
    [wk("Effort guidance (vendor)", "anth-a"), "Medium instead of high reasoning effort", "“Roughly half the output tokens of high” with close to the best success, and the same success once retries are allowed — internal UI-automation suite, no counts", "Vendor statement"],
-   [wk("Ultrafast (vendor)", "openai", "cerebras"), "GPT-5.6 Sol on Cerebras hardware", "Up to 14× faster than Standard, up to 750 output tokens per second; limited preview, no price; a vendor chart of 6 tasks: 7.7 min → 83.0 s, non-inference time 14.2 → 14.9 s", "Vendor statements"],
+   [wk("Ultrafast (vendor)", "openai", "cerebras"), "GPT-5.6 Sol on Cerebras hardware", "Up to 14× faster than Standard, up to 750 output tokens per second; limited preview, no price", "OpenAI vendor statements; a hardware partner’s 6-task chart is marketing, not cited"],
   ], w_d))
 
 B("b5-1", "B5", "B5 · Environment and overlap: more rows, with full conditions",
@@ -1609,12 +1609,13 @@ B("b5-1", "B5", "B5 · Environment and overlap: more rows, with full conditions"
   body=table(h_d, [
    [wk("Skim, details", "skim"), "As on page 8; a local Qwen2.5-14B runs the fast path and the verifier", "Accuracy vs the default agent: 40.6 vs 37.6 (WebVoyager agent), 52.0 vs 49.6 (AgentOccam), 45.6 vs 45.0 (BrowserUse); verifier precision 82.0%, recall 86.2%", "Site profiling 6–24 s per site"],
    [wk("TPS-Bench", "tpsbench"), "RL-trained scheduling of dependent tool calls", "TPS-Bench-Hard, 100 tasks, Qwen3-1.7B: time 42.0 → 34.8 s per task (−17.1%, calc.), completion 26.75 → 35.17%", "Its text gives 14% and 6% (from v1)"],
-   [wk("AsyncLM", "asynclm"), "Asynchronous function calls with interrupts", "Local Llama-3.2 on one RTX 4090: 1.6–2.4× lower latency (first to last generated token); cloud figures emulated", "Emulated for GPT-4o"],
+   [wk("AsyncLM", "asynclm"), "Asynchronous function calls with interrupts", "Local fine-tuned Llama-3.2 on one RTX 4090: 1.6–2.4× lower latency than sequential calls, 1.23–1.5× than parallel calls (calc.; first to last generated token); cloud figures emulated", "Emulated for GPT-4o"],
    [wk("Speculative tool calls", "nichols"), "Client- and engine-side speculation of tool calls", "6–21% of time saved with synthetic tool latencies and cached tool outputs; BFCL, 32 tasks per agent", "Synthetic latencies"],
    [wk("DSP", "dsp"), "Learns how many steps ahead to speculate", "OpenAGI 312 tasks, GPT-4.1-mini: −37.09% latency at +62.99% cost; the cost is against the sequential cost of both agents", "Cost vs a target-only agent not reported"],
    [wk("Speculate with memory", "swm"), "Guesses from a memory of past runs", "Analytical peak 1.128×; HotpotQA 1.05× — replay estimates", "Not end-to-end"],
    [wk("AgenticCache", "agenticcache"), "Cached plans for embodied agents", "TDW-COOK, 18 episodes: 12.86 → 1.75 h, $21.0 → $4.4, success 94.44 → 100%; TDW-MAT 1.86× (calc.)", "Embodied simulator"],
-   [wk("IdleSpec", "idlespec"), "Drafts plans while tools run", "GAIA 165 + FRAMES 50, Gemini-2.5-Flash: accuracy 50.5 → 55.6%, wall-clock about unchanged; output tokens +58% (calc., Qwen3.5-4B)", "An accuracy method, not a speed-up"],
+   [wk("IdleSpec (counter)", "idlespec"), "Drafts plans while tools run", "GAIA 165 + FRAMES 50, Gemini-2.5-Flash: accuracy 50.5 → 55.6%, wall-clock about unchanged; output tokens +58% (calc., Qwen3.5-4B)", "Tool-wait overlap spent on accuracy (R_m(p) ↑), not on time"],
+   [wk("ThunderAgent", "thunder"), "Prepares the sandbox while the program waits for GPU memory (overlap, T_saving)", "Environment time 4.8 → 0.3 s — OpenHands rollouts, self-hosted (its Fig. 6a)", "Throughput system; no task success"],
    [wk("TClone · DeltaBox", "tclone", "deltabox"), "Fast container clone; millisecond checkpoint and rollback", "Clone for one OSWorld branch point 18.2 → 3.7 s vs KVM; rollback 1.86 ms on the fast path (9.29 ms slow path)", "Cost of branching E_i"],
   ], w_d))
 
@@ -1622,7 +1623,7 @@ B("b6-1", "B6", "B6 · Prices by billing class and tier, per vendor",
   crumb="behind pages 12–13 · vendor price pages and documentation, read 28 September 2026 · ratios are our arithmetic (calc.)",
   body=table(["vendor, latest model", "uncached → cache hit (per 1M input tokens)", "cache write, storage, lifetime", "tiers"], [
    [wk("DeepSeek-V4.1-Flash", "deepseek"), "$0.30 → $0.006 (0.02×), peak; off-peak half", "none listed", "—"],
-   [wk("Anthropic, Claude Opus 5.5", "anth-b"), "$4 → $0.20 (0.05×); other Claude models 0.1×", "1.25× for 5 min, 2× for 1 h; refreshed free on each use; a change of speed, tools, thinking or effort invalidates parts of the cache", "Fast mode 2× ($8 / $40), up to 2.5× output speed"],
+   [wk("Anthropic, Claude Opus 5.5", "anth-b"), "$4 → $0.20 (0.05×); Fable 5.1 and Mythos 5.1 0.025×; other Claude models 0.1×", "1.25× for 5 min, 2× for 1 h; refreshed free on each use; a change of speed, tools, thinking or effort invalidates parts of the cache", "Fast mode 2× ($8 / $40), up to 2.5× output speed"],
    [wk("OpenAI, GPT-6 Sol / Luna", "openai"), "$2 → $0.20; $0.10 → $0.01 (0.1×)", "1.25× from GPT-5.6 on; at least 30 min", "Fast 2×; Flex and Batch 0.5×"],
    [wk("Google, Gemini 3.8 Flash", "google"), "$0.75 → $0.075 (0.1×), to 31 Dec 2026", "storage $0.50 per 1M tokens per hour", "Priority 1.8× on every listed price (text says 75–100%), Preview"],
    [wk("xAI, Grok 4.7", "xai"), "$2 → $0.50 (0.25×)", "none listed", "—"],
@@ -1638,7 +1639,6 @@ B("b7-1", "B7", "B7 · A cheaper model per call: more rows, with full conditions
    [wk("Agentic plan caching, per workload", "apc"), "As on page 13", "FinanceBench $4.03 → $1.86, 91.0 → 85.5%; QASPER $2.14 → $0.78; GAIA $69.02 → $16.27, 37.58 → 36.97%", "GAIA task count not stated"],
    [wk("RouteLLM", "routellm"), "A learned router between a strong and a weak model", "3.66× fewer GPT-4 calls than a random router at equal quality (MT-Bench); 1.41× (MMLU), 1.49× (GSM8K)", "Single-turn; not against always-GPT-4"],
    [wk("FrugalGPT", "frugal"), "A cascade of models with a stopping scorer", "Up to 98% lower cost at equal accuracy on one single-query dataset (HEADLINES)", "Single-turn"],
-   [wk("FireAct", "fireact"), "A fine-tuned GPT-3.5 instead of few-shot prompting", "HotpotQA 500 questions: 9.0 → 2.7 s per trial, $2.6e-3 → $2.2e-3, EM 31.4 → 39.2", "Fine-tuned tokens priced 8×"],
   ], w_d))
 
 def _cps(c, r):
@@ -1664,6 +1664,7 @@ B("b9-1", "B9", "B9 · Works held back or dropped, and why",
   crumb="the source-credibility rule of slides/references.md · (iii) = numbers from a public benchmark with the task count and model stated",
   body=table(["status", "works", "reason"], [
    ["Held back: condition (iii) not met as written, pending Edwin’s decision", "SpecHop (arXiv:2605.21965), PASTE (2603.18897), AOSpec (2608.00881), TAB, CacheScout (2608.14624), DualPath, PBKV, AgentKVShift, SpecBox (2607.23933), LLM-Tool Compiler, Cordon (2606.17573), GoClick, BAVT; DualSpec’s XBench row; Continuum’s real-run 8.18×", "No task count, internal traces, or an unnamed model; their numbers stay off the pages"],
+   ["Shown with a flag, pending the same decision", "Skim (“300+” tasks, page 8); ARES (~129 WebArena tasks, calc.), Overthinking (SWE-bench Verified), StepWise (OSWorld), Fara-7B (WebVoyager): task counts not printed; the author-built test suites of Atomix (leak test), Safe to Resume? (96 workflows) and Ghost Tool Calls (30 tasks)", "Counts derived by us, implied by the benchmark, or from suites the authors built; labelled on the pages"],
    ["Dropped: fail the rule", "Octopus v2, GPA, SkillDroid (qualitative only), AgentServe, Stateful Inference (Norgren), Cost-Aware Speculative Execution (Fareed), Dynamic ReAct, AdaGUI-R1, a speculative-tools GitHub repository", "In-house sets without counts, single authors without measurements, no institution, or unreadable"],
    ["Could not be read or found", "OS-Catalyst; ToolSEE; the Self-Guide “+22%”, VITA-VLA “−76%” and “2,000–8,000 schema tokens” figures", "The figures are not in the sources"],
    ["Off-topic", "SEAR, DREAM-Chunk (robotics); VITA-VLA, m2mKD (not LLM agents); SRMT (not an LLM); MemRefine (offline storage); DARE (math reasoning); Self-Guide (no efficiency measure)", "No Part 1 term"],
@@ -1680,10 +1681,10 @@ B("b10-1", "B10", "B10 · What no retained work measures yet, by term",
    [tex(r"n^{\mathrm{out}},\ \mathrm{TPOT}", 11), "The net effect of per-step effort changes that invalidate the message cache; independent task-level timing of fast tiers"],
    [tex("E_i", 11), "Page-load and wait time in write-heavy web workflows (Skim is read-only); wall-clock of batched actions"],
    [tex(r"T_{\mathrm{saving}}", 11), "Speculation on a live web GUI with side effects held until commit; cost per success of any speculation method; several speed figures are analytical or replayed"],
-   [tex(r"\bar{g},\ N^2", 11), "The N² token volume together with the cache hit rate in a GUI agent; structural removal is shown only by compiled plans"],
-   [tex(r"n^{\kappa},\ x_{\mathrm{env}}", 11), "A GUI or web agent’s tokens split by billing class, cache writes included; environment hours priced beyond a vendor list price (coding agents only in TraceLab)"],
+   [tex(r"\bar{g},\ N^2", 11), "The N² token volume together with the cache hit rate in a GUI agent; structural removal is shown only by compiled plans; eviction (TokenPilot) may change the shape but is not measured as such"],
+   [tex(r"n^{\kappa},\ x_{\mathrm{env}}", 11), "A GUI or browser agent’s tokens split by billing class, cache writes included (Don’t Break the Cache covers a web-search agent); environment hours priced beyond a vendor list price (coding agents only in TraceLab)"],
    [tex(r"c_{\kappa}(\mu_{ij})", 11), "The router’s own cost; small-model losses on enterprise forms; routing with cached prices"],
-   [tex("R_m(p)", 11) + ", set-up", "Cost per success reported by the papers themselves; time, money and success, set-up included, on one benchmark"],
+   [tex("R_m(p)", 11) + ", set-up", "Cost per success reported by the papers themselves; time, money and success, set-up included, on one web or GUI benchmark"],
   ], ["22%", "78%"]))
 
 # ---------------------------------------------------------------- render

@@ -7,7 +7,7 @@ with --pdf, prints the deck to PDF (print media, one 1280 x 720 px page per slid
 Usage (run from anywhere; relative paths are resolved against the repository root):
   python3 slides/check_deck.py                                            # all pages
   python3 slides/check_deck.py s07 a3-1                                   # some pages
-  python3 slides/check_deck.py --pdf=slides/agent-acceleration-part1.pdf  # also export the PDF
+  python3 slides/check_deck.py --pdf=slides/agent-acceleration.pdf  # also export the PDF (both parts)
   --out=<dir>   write the screenshots to <dir> instead of slides/shots/
 
 Report (JSON, one entry per page id):
