@@ -74,7 +74,8 @@ def loop_svg(hl=(), cls="thumb-svg", formulas=True):
     parts.append(pill("n-queue", 268, 86, 120, 34, "queue"))
     parts.append(pill("n-read", 404, 86, 150, 34, "read the prompt"))
     parts.append(pill("n-write", 570, 86, 134, 34, "write the answer"))
-    parts.append(pill("n-calls", 250, 14, 160, 28, "c calls per step", fs=14))
+    parts.append(pill("n-calls", 250, 14, 160, 28, "", fs=14))
+    parts.append(nest_math(r"$c_k\ \mathrm{calls\ per\ pass}$", 330, 19, 18, color=("#ffffff" if "n-calls" in hl else "#1b2733"), anchor="middle")[0])
     parts.append(arrow(330, 42, 330, 52))
     parts.append(node("n-act", 770, 60, 170, 70, "Act", "click · type · run a tool"))
     parts.append(node("n-wait", 990, 60, 180, 70, "Wait", "page load · sleep · tool run"))
@@ -82,57 +83,114 @@ def loop_svg(hl=(), cls="thumb-svg", formulas=True):
     parts += [arrow(200, 95, 250, 95), arrow(720, 95, 770, 95), arrow(940, 95, 990, 95)]
     # loop back
     parts.append(f'<path class="arr" d="M1080 130 L1080 178 L115 178 L115 132" marker-end="url(#{mid})"/>')
-    parts.append(pill("n-steps", 540, 164, 130, 28, "× N steps", fs=14))
+    parts.append(pill("n-steps", 540, 164, 130, 28, "", fs=14))
+    parts.append(nest_math(r"$\times\, N\ \mathrm{passes}$", 605, 169, 18, color=("#ffffff" if "n-steps" in hl else "#1b2733"), anchor="middle")[0])
     # formulas
     if not formulas:
         parts.append("</svg>")
         return "".join(parts)
     parts.append('<line class="rl" x1="30" y1="212" x2="1170" y2="212"/>')
-    parts.append(ftext(30, 240, "time per task  ≈  Σ over steps [ c × ( queue + read + write ) + observe + act + wait ]", 16))
-    parts.append(ftext(30, 278, "money per task  ≈  Σ over steps  c × (", 16))
-    parts.append(pill("n-rtok", 356, 258, 112, 28, "read tokens", fs=14))
-    parts.append(ftext(474, 278, "×", 16))
-    parts.append(pill("n-price", 492, 258, 112, 28, "read price", fs=14))
-    parts.append(ftext(612, 278, "+", 16))
-    parts.append(pill("n-wtok", 632, 258, 116, 28, "write tokens", fs=14))
-    parts.append(ftext(756, 278, "× write price )   ÷", 16))
-    parts.append(pill("n-succ", 918, 258, 124, 28, "success rate", fs=14))
-    parts.append(ftext(1052, 278, "= per success", 16))
+    parts.append(nest_math(EQ["time"], 30, 222, 34)[0])
+    x = 30
+    frag, w = nest_math(r"$\mathrm{Cost}_{\mathrm{task}} \;\approx\; \sum_{k=1}^{N} c_k\,($", x, 256, 34); parts.append(frag); x += w + 8
+    def mpill(id_, label, x, w_):
+        c = " hl" if id_ in hl else ""
+        col = "#ffffff" if id_ in hl else "#1b2733"
+        parts.append(f'<g id="{mid}-{id_}" class="node pill{c}"><rect x="{x}" y="264" width="{w_}" height="28" rx="14"/></g>')
+        parts.append(nest_math(label, x + w_/2, 269, 18, color=col, anchor="middle")[0])
+        return x + w_ + 8
+    x = mpill("n-rtok", r"$R_k$", x, 54)
+    frag, w = nest_math(r"$\times$", x, 272, 12); parts.append(frag); x += w + 8
+    x = mpill("n-price", r"$p_{\mathrm{read}}$", x, 74)
+    frag, w = nest_math(r"$+$", x, 271, 14); parts.append(frag); x += w + 8
+    x = mpill("n-wtok", r"$W_k$", x, 60)
+    frag, w = nest_math(r"$\times\, p_{\mathrm{write}}\,)\ \div$", x, 266, 24); parts.append(frag); x += w + 8
+    x = mpill("n-succ", r"$\mathrm{success\ rate}$", x, 122)
+    frag, w = nest_math(r"$=\ \mathrm{Cost}_{\mathrm{success}}$", x, 268, 20); parts.append(frag)
     parts.append("</svg>")
     return "".join(parts)
 
 
-# ---------------------------------------------------------------- formulas (LaTeX-style, rendered at build time)
+# ---------------------------------------------------------------- formulas (LaTeX-style, typeset at build time)
+# Everything mathematical on the pages — the two equations and every variable such as N, c_k, R_k — is typeset with
+# matplotlib's mathtext (Computer Modern) into inline SVG, so the deck stays self-contained (no KaTeX at runtime).
 EQ = {
  "time":  r"$T_{\mathrm{task}} \;\approx\; \sum_{k=1}^{N}\left[\, c_k\left(t_{\mathrm{queue}} + t_{\mathrm{read}}(R_k) + t_{\mathrm{write}}(W_k)\right) + t_{\mathrm{obs}} + t_{\mathrm{act}} + t_{\mathrm{wait}} \right]$",
  "money": r"$\mathrm{Cost}_{\mathrm{task}} \;\approx\; \sum_{k=1}^{N} c_k \left( R_k\, p_{\mathrm{read}} + W_k\, p_{\mathrm{write}} \right), \qquad \mathrm{Cost}_{\mathrm{success}} = \dfrac{\mathrm{Cost}_{\mathrm{task}}}{\mathrm{success\ rate}}$",
  "quad":  r"$\sum_{k=1}^{N} R_k \;\approx\; \sum_{k=1}^{N} k\,r \;=\; \dfrac{N(N+1)}{2}\, r \qquad \sum_{k=1}^{N} W_k \;\approx\; N\,w$",
 }
-_EQ_CACHE = {}
-def eq_svg(name, fontsize=17, cls="eq"):
-    """Render a formula to an inline SVG with matplotlib's mathtext (Computer Modern), so the deck stays self-contained."""
-    if name in _EQ_CACHE:
-        return _EQ_CACHE[name]
-    try:
-        import io, matplotlib
+_TEX_CACHE = {}
+_TEX_N = [0]
+_MPL = None
+def _mpl():
+    global _MPL
+    if _MPL is None:
+        import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
+        from matplotlib import mathtext
+        from matplotlib.font_manager import FontProperties
         plt.rcParams["mathtext.fontset"] = "cm"
         plt.rcParams["svg.fonttype"] = "path"
-        fig = plt.figure(figsize=(0.01, 0.01))
-        fig.text(0, 0, EQ[name], fontsize=fontsize, color="#1b2733")
-        buf = io.StringIO()
-        fig.savefig(buf, format="svg", bbox_inches="tight", pad_inches=0.04, transparent=True)
-        plt.close(fig)
-        svg = buf.getvalue()
-        svg = svg[svg.find("<svg"):]
-        svg = re.sub(r'<metadata>.*?</metadata>', '', svg, flags=re.S)
-        svg = svg.replace('<svg ', f'<svg class="{cls}" ', 1)
-        out = svg
-    except Exception as e:  # matplotlib missing: plain-text fallback
-        out = f'<div class="eq-fallback">{html.escape(EQ[name])}</div>'
-    _EQ_CACHE[name] = out
+        _MPL = (plt, mathtext, FontProperties)
+    return _MPL
+
+def _render_tex(src, pt, color, pad_in=0.02):
+    """Returns (svg string with unique ids, width_pt, height_pt, depth_below_baseline_pt)."""
+    plt, mathtext, FontProperties = _mpl()
+    prop = FontProperties(size=pt)
+    parser = mathtext.MathTextParser("path")
+    w, h, d, _, _ = parser.parse(src, dpi=72, prop=prop)
+    fig = plt.figure(figsize=(0.01, 0.01))
+    fig.text(0, 0, src, fontsize=pt, color=color)
+    import io
+    buf = io.StringIO()
+    fig.savefig(buf, format="svg", bbox_inches="tight", pad_inches=pad_in, transparent=True)
+    plt.close(fig)
+    svg = buf.getvalue()
+    svg = svg[svg.find("<svg"):]
+    svg = re.sub(r"<metadata>.*?</metadata>", "", svg, flags=re.S)
+    _TEX_N[0] += 1
+    uid = f"m{_TEX_N[0]}"
+    ids = set(re.findall(r'id="([^"]+)"', svg))
+    for i in sorted(ids, key=len, reverse=True):
+        svg = svg.replace(f'id="{i}"', f'id="{uid}-{i}"').replace(f'href="#{i}"', f'href="#{uid}-{i}"').replace(f'url(#{i})', f'url(#{uid}-{i})')
+    mw = re.search(r'width="([\d.]+)pt"', svg); mh = re.search(r'height="([\d.]+)pt"', svg)
+    return svg, float(mw.group(1)), float(mh.group(1)), d + pad_in*72
+
+def tex(src, px=14, color="#1b2733", cls="tex"):
+    """Inline math for running text: `src` is LaTeX, px the surrounding font size."""
+    if "$" not in src:
+        src = "$" + src + "$"
+    key = (src, px, color, cls)
+    if key in _TEX_CACHE:
+        return _TEX_CACHE[key]
+    try:
+        svg, w, h, d = _render_tex(src, px*0.9, color)
+        out = svg.replace("<svg ", f'<svg class="{cls}" style="vertical-align:-{d:.2f}pt" ', 1)
+    except Exception:
+        out = f'<span class="eq-fallback">{html.escape(src)}</span>'
+    _TEX_CACHE[key] = out
     return out
+
+def nest_math(src, x, y, h, color="#1b2733", anchor="start"):
+    """Math placed inside one of our own SVG diagrams: an <svg> child at (x, y) with height h (viewBox units). Returns (svg, width)."""
+    if "$" not in src:
+        src = "$" + src + "$"
+    svg, w, hh, d = _render_tex(src, 12, color)
+    ww = w * h / hh
+    if anchor == "middle":
+        x = x - ww/2
+    svg = re.sub(r'<svg ([^>]*?)width="[\d.]+pt" height="[\d.]+pt"', lambda m: f'<svg {m.group(1)}x="{x:.1f}" y="{y:.1f}" width="{ww:.1f}" height="{h:.1f}"', svg, count=1)
+    return svg, ww
+
+def eq_svg(name, fontsize=17, cls="eq"):
+    """One of the display equations, as an inline SVG block."""
+    try:
+        svg, w, h, d = _render_tex(EQ[name], fontsize, "#1b2733", pad_in=0.04)
+        return svg.replace("<svg ", f'<svg class="{cls}" ', 1)
+    except Exception:
+        return f'<div class="eq-fallback">{html.escape(EQ[name])}</div>'
 
 # ---------------------------------------------------------------- helpers
 def esc(s):
@@ -181,29 +239,34 @@ def hbars(title, rows, caption="", labelw=150, width=380, maxv=None, height_row=
 
 def eq_strip():
     """The time equation with the five classes of slowness mapped onto its terms (page 4)."""
-    terms = [("Σ over N steps", "I · steps", "n-steps"), ("c ×", "II · calls per step", "n-calls"),
-             ("( queue + read + write )", "III · each call", "n-read"), ("+ observe + act + wait", "IV · environment", "n-wait"),
-             ("all added, never overlapped", "V · serial", "")]
-    s = ['<div class="eqstrip"><div class="eqt">time per task =</div>']
-    for t, c, _ in terms:
-        s.append(f'<div class="eqterm"><div class="eqx">{html.escape(t)}</div><div class="eqc">{html.escape(c)}</div></div>')
+    terms = [(tex(r"\sum_{k=1..N}", 15), "I · passes"), (tex(r"c_k \times", 15), "II · calls per pass"),
+             (tex(r"(t_{\mathrm{queue}} + t_{\mathrm{read}} + t_{\mathrm{write}})", 15), "III · each call"),
+             (tex(r"+\ t_{\mathrm{obs}} + t_{\mathrm{act}} + t_{\mathrm{wait}}", 15), "IV · environment"),
+             ("all added, never overlapped", "V · serial")]
+    s = ['<div class="eqstrip"><div class="eqt">' + tex(r"T_{\mathrm{task}} \approx", 15) + '</div>']
+    for t, c in terms:
+        s.append(f'<div class="eqterm"><div class="eqx">{t}</div><div class="eqc">{html.escape(c)}</div></div>')
     return "".join(s) + "</div>"
 
 def cost_strip():
     """The money equation with the six classes of cost mapped onto its terms (page 11)."""
-    terms = [("Σ over N steps · c ×", "3 · number of calls"), ("read tokens", "1 · tokens read"), ("+ write tokens × 5", "2 · tokens written"),
-             ("× price", "5 · unit price"), ("÷ success rate", "4 · failures, retries"), ("+ machine hours", "6 · the machines")]
-    out = ['<div class="eqstrip"><div class="eqt">money per task =</div>']
+    terms = [(tex(r"\sum_{k=1..N} c_k", 15), "3 · number of calls"), (tex(r"(\, R_k", 15), "1 · tokens read"),
+             (tex(r"+\ W_k \cdot 5", 15), "2 · tokens written"), (tex(r")\times p", 15), "5 · unit price"),
+             (tex(r"\div\ \mathrm{success\ rate}", 15), "4 · failures, retries"), ("+ machine hours", "6 · the machines")]
+    out = ['<div class="eqstrip"><div class="eqt">' + tex(r"\mathrm{Cost} \approx", 15) + '</div>']
     for t, c in terms:
-        out.append(f'<div class="eqterm"><div class="eqx">{html.escape(t)}</div><div class="eqc">{html.escape(c)}</div></div>')
+        out.append(f'<div class="eqterm"><div class="eqx">{t}</div><div class="eqc">{html.escape(c)}</div></div>')
     return "".join(out) + "</div>"
 
 def link_fig():
     """Two equations with terms coloured by their relationship (page 16)."""
-    def pill(txt, kind):
-        return f'<span class="lp {kind}">{html.escape(txt)}</span>'
-    t = [pill("N steps","same"), pill("c calls","same"), "× (", pill("queue","time"), "+", pill("read","same"), "+", pill("write","same"), ") +", pill("observe","time"), "+", pill("act","time"), "+", pill("wait","time")]
-    m = [pill("N steps","same"), pill("c calls","same"), "× (", pill("read tokens","same"), "×", pill("price","buy"), "+", pill("write tokens","same"), "× 5 ×", pill("price","buy"), ") ÷", pill("success rate","same")]
+    def pill(src, kind):
+        col = "#ffffff" if kind == "same" else ("#b3600c" if kind == "buy" else "#3d4b58")
+        return f'<span class="lp {kind}">{tex(src, 13, color=col)}</span>'
+    def op(src):
+        return tex(src, 13)
+    t = [pill(r"\sum_{k=1..N}","same"), pill(r"c_k","same"), op(r"\times\ ("), pill(r"t_{\mathrm{queue}}","time"), op("+"), pill(r"t_{\mathrm{read}}","same"), op("+"), pill(r"t_{\mathrm{write}}","same"), op(r")\ +"), pill(r"t_{\mathrm{obs}}","time"), op("+"), pill(r"t_{\mathrm{act}}","time"), op("+"), pill(r"t_{\mathrm{wait}}","time")]
+    m = [pill(r"\sum_{k=1..N}","same"), pill(r"c_k","same"), op(r"\times\ ("), pill(r"R_k","same"), op(r"\times"), pill(r"p_{\mathrm{read}}","buy"), op("+"), pill(r"W_k","same"), op(r"\times"), pill(r"p_{\mathrm{write}}","buy"), op(r")\ \div"), pill(r"\mathrm{success\ rate}","same")]
     return ('<div class="linkfig"><div class="lrow"><span class="lk">time</span>' + " ".join(t) + '</div>'
             '<div class="lrow"><span class="lk">money</span>' + " ".join(m) + '</div>'
             '<div class="lleg"><span class="lp same">in both equations — same source</span><span class="lp time">time equation only — slow but not expensive</span><span class="lp buy">the price — money for time or accuracy</span></div></div>')
@@ -269,10 +332,10 @@ def quad_chart():
     N = 20
     reads = [n*(n+1)//2 for n in range(1, N+1)]
     writes = list(range(1, N+1))
-    ox, oy, w, h = 82, 24, 550, 200
+    ox, oy, w, h = 82, 14, 550, 175
     maxv = 210
     def y(v): return oy + h - v/maxv*h
-    s = ['<svg class="chart" viewBox="0 0 660 270" xmlns="http://www.w3.org/2000/svg">']
+    s = ['<svg class="chart" viewBox="0 0 660 232" xmlns="http://www.w3.org/2000/svg">']
     for v in (0, 55, 105, 155, 210):
         s.append(f'<line class="grid" x1="{ox}" y1="{y(v):.1f}" x2="{ox+w}" y2="{y(v):.1f}"/>')
         s.append(f'<text class="ax" x="{ox-8}" y="{y(v)+4:.1f}" text-anchor="end">{v}</text>')
@@ -286,31 +349,34 @@ def quad_chart():
             s.append(f'<text class="ax" x="{x+bw/2:.1f}" y="{oy+h+16}" text-anchor="middle">{n}</text>')
     s.append(f'<text class="ax" x="{ox+w/2}" y="{oy+h+34}" text-anchor="middle">passes taken, N</text>')
     s.append(f'<text class="ax" x="{ox-8}" y="{oy-8}" text-anchor="end">step-units</text>')
-    s.append(f'<rect class="b-read" x="{ox+14}" y="{oy+2}" width="12" height="12"/><text class="ax" x="{ox+30}" y="{oy+13}">tokens read, cumulative = N(N+1)/2</text>')
-    s.append(f'<rect class="b-write" x="{ox+14}" y="{oy+22}" width="12" height="12"/><text class="ax" x="{ox+30}" y="{oy+33}">tokens written, cumulative = N</text>')
     s.append('</svg>')
-    return "".join(s)
+    legend = ('<div class="legend"><span><i class="sw b-read"></i>tokens read, cumulative ' + tex(r"= \frac{N(N+1)}{2}", 12) + '</span>'
+              '<span><i class="sw b-write"></i>tokens written, cumulative ' + tex(r"= N", 12) + '</span></div>')
+    return legend + "".join(s)
+
+T_ENV = tex(r"t_{\mathrm{obs}}, t_{\mathrm{act}}, t_{\mathrm{wait}}", 13)
+T_NC = tex(r"N \cdot c_k", 15)
 
 # --- 02 the loop + the quadratic term ---------------------------------------
 slide("s02", "The loop, with every term on it",
       crumb="here: the loop, its two equations, and the one term that grows fastest → to: the five sources of slowness",
       callout=f"""
-<p><b>One task = one loop run N times.</b> Each pass observes the screen, makes at least one model call, acts, and waits. A call has three segments: <b>queueing</b>; <b>reading</b> the prompt, all tokens at once; <b>writing</b> the answer, one token at a time — 81.7 tokens per second for Claude Opus 5.5 ({CITE['aa']}) — at 5× the read price. <b>Observation, action, waiting and queueing enter only the time equation; read and write tokens enter both.</b></p>""",
+<p><b>One task = one loop run {tex("N", 15)} times.</b> Each pass observes the screen, makes at least one model call, acts, and waits. A call has three segments: <b>queueing</b>; <b>reading</b> the prompt, all tokens at once; <b>writing</b> the answer, one token at a time — 81.7 tokens per second for Claude Opus 5.5 ({CITE['aa']}) — at 5× the read price. <b>Observation, action, waiting and queueing enter only the time equation; read and write tokens enter both.</b></p>""",
       body=f"""
 <div class="loopgrid">
   <div class="fig-loop">{loop_svg(cls="big-svg", formulas=False)}</div>
   <div class="eqs">
     <div class="eqrow"><span class="eql">time</span>{eq_svg("time")}</div>
     <div class="eqrow"><span class="eql">money</span>{eq_svg("money")}</div>
-    <div class="eqnote">N passes · c<sub>k</sub> model calls in pass k · R<sub>k</sub>, W<sub>k</sub> tokens read and written · p prices (a cached read costs 0.1×) · t<sub>obs</sub>, t<sub>act</sub>, t<sub>wait</sub> environment time. The <b>harness</b> — the program around the model — sets c, the observation size and the sleeps.</div>
+    <div class="eqnote">{tex("N", 13)} passes · {tex("c_k", 13)} model calls in pass {tex("k", 13)} · {tex("R_k, W_k", 13)} tokens read and written · {tex("p", 13)} prices (a cached read costs 0.1×) · {T_ENV} environment time. The <b>harness</b> — the program around the model — sets {tex("c_k", 13)}, the observation size and the sleeps.</div>
   </div>
 </div>
 <div class="quadgrid">
-  <div>{quad_chart()}<div class="figcap">Tokens read and written over a task, in units of “tokens added per pass”, with the full history re-sent and no cache (calc.).</div></div>
+  <div>{quad_chart()}<div class="figcap">Cumulative tokens over a task, in units of “tokens added per pass”; full history re-sent, no cache (calc.).</div></div>
   <div class="stack">
     <div class="eqrow small">{eq_svg("quad", fontsize=15)}</div>
     {card("READING GROWS WITH THE SQUARE OF THE PASSES", "10 passes re-read 55 units of history, 20 passes 210 (calc.)",
-          "Pass k re-sends the k−1 earlier screenshots (1,000–1,800 tokens each; " + CITE['anth-a'] + "): doubling the passes quadruples the reading and only doubles the writing. Caching cuts the read price to 0.1× but not the shape. Measured: cost “grows quadratically with the number of steps”, later steps up to 3× slower " + ci('osh') + ".")}
+          "Pass " + tex("k", 13) + " re-sends the " + tex("k-1", 13) + " earlier screenshots (1,000–1,800 tokens each; " + CITE['anth-a'] + "): doubling the passes quadruples the reading and only doubles the writing. Caching cuts the read price to 0.1× but not the shape. Measured: cost “grows quadratically with the number of steps”, later steps up to 3× slower " + ci('osh') + ".")}
   </div>
 </div>""",
       foot=f"SOURCES · {CITE['aa']} (third-party measurement) · {CITE['anth-b']}; {CITE['openai']} (prices) · {CITE['anth-a']} · {CITE['osh']}",
@@ -325,9 +391,9 @@ slide("s03", "Slowness has five sources",
       body=f"""
 {eq_strip()}
 <div class="rows5 big">
-  {card("I · TOO MANY PASSES (N)", "318 tool calls per task",
+  {card("I · TOO MANY PASSES " + tex("(N)", 11), "318 tool calls per task",
         "OSWorld 2.0, 108 hour-scale desktop tasks, Claude Opus 4.7, one action per step.", ci('osw2'))}
-  {card("II · TOO MANY CALLS PER PASS (c)", "4–12 planning calls per judging call",
+  {card("II · TOO MANY CALLS PER PASS " + tex("(c_k)", 11), "4–12 planning calls per judging call",
         "GTA1 harness: plan, retry, judge. Sampling candidates multiplies the calls again.", ci('osh'))}
   {card("III · EACH CALL IS SLOW", "queue up to 69× · read up to 3× slower by the late passes · write 91–98.6% of model time",
         "Identical requests by time of day; screenshots accumulate in the prompt; token-by-token writing.", ci('bian','osh','yuan'))}
@@ -343,8 +409,8 @@ slide("s03", "Slowness has five sources",
 # --- 04 classes I–II ----------------------------------------------------------
 slide("s04", "I–II · Too many passes, too many calls per pass",
       hl=("n-steps", "n-calls"),
-      crumb="from the five classes → here: the multipliers N and c → to: what happens inside a call and around it",
-      callout="""<p><b>N multiplies everything and c multiplies N.</b> Passes pile up because tasks are long, each pass does one action, navigation-only passes still go through the model, and the agent idles or loops; calls pile up because the harness plans, judges and reflects, or samples several candidates per step.</p>""",
+      crumb="from the five classes → here: the two multipliers, passes and calls per pass → to: what happens inside a call and around it",
+      callout="""<p><b>{tex("N", 15)} multiplies everything and {tex("c_k", 15)} multiplies {tex("N", 15)}.</b> Passes pile up because tasks are long, each pass does one action, navigation-only passes still go through the model, and the agent idles or loops; calls pile up because the harness plans, judges and reflects, or samples several candidates per step.</p>""",
       body=f"""
 <div class="cards4">
   {card("I-1, I-2 · LONG TASKS, ONE ACTION PER PASS", "318 tool calls per task",
@@ -373,7 +439,7 @@ slide("s05", "III–V · Inside a call, around it, and in sequence",
       body=f"""
 <div class="cards4">
   {card("III-1, III-2 · QUEUEING AND READING", "up to 69× by time of day · up to 3× slower by the late passes · 7.14× when the cache is evicted",
-        "15 models at 5 providers; the prompt at pass k carries k−1 screenshots; a richer observation multiplied the input 4.8×; GLM-4.6 on 8 H100s under load.", ci('bian','osh','asb','thunder'))}
+        "15 models at 5 providers; the prompt at pass " + tex("k", 13) + " carries " + tex("k-1", 13) + " screenshots; a richer observation multiplied the input 4.8×; GLM-4.6 on 8 H100s under load.", ci('bian','osh','asb','thunder'))}
   {card("III-3, III-4 · WRITING AND THINKING", "91–98.6% of model time · 224K vs 37K output tokens per task",
         "Warm cache, local 27–31B models; Claude Opus 4.8 vs GPT-5.5 on the same 108 tasks. More reasoning effort lowered accuracy in 21 of 36 pairs (21,730 runs).", ci('yuan','osw2','hal'))}
   {card("IV · THE ENVIRONMENT", "3–26 s per accessibility tree · 6.6 s browser vs 4.7 s model per step · 2–3 s sleep per action",
@@ -394,7 +460,7 @@ slide("s05", "III–V · Inside a call, around it, and in sequence",
 slide("s06", "Which term dominates depends on the harness, not on the kind of agent",
       hl=("n-read", "n-wait", "n-write"),
       crumb="from the five classes → here: the shares, per kind of agent → to: the six sources of cost",
-      callout="""<p><b>All five classes exist in every agent; the heaviest term differs, and it flips when the harness changes.</b> The one multiplier common to all three kinds is the number of passes, N.</p>""",
+      callout="""<p><b>All five classes exist in every agent; the heaviest term differs, and it flips when the harness changes.</b> The one multiplier common to all three kinds is the number of passes, {tex("N", 15)}.</p>""",
       body=f"""
 <table class="tbl three">
 <colgroup><col style="width:10%"><col style="width:30%"><col style="width:30%"><col style="width:30%"></colgroup>
@@ -415,7 +481,7 @@ slide("s06", "Which term dominates depends on the harness, not on the kind of ag
 </tbody></table>
 <div class="concl">
   <div><b>1 · The harness sets the dominant term</b> — calls per pass, observation size, fixed sleeps, cache on or off. “Agents are slow because inference is slow” holds only for multi-call screenshot agents.</div>
-  <div><b>2 · N multiplies every term</b> — one pass fewer saves a whole pass of time and money in all three kinds; OSWorld 2.0’s authors list “fewer environment rounds” as a goal in its own right.</div>
+  <div><b>2 · {tex("N", 14)} multiplies every term</b> — one pass fewer saves a whole pass of time and money in all three kinds; OSWorld 2.0’s authors list “fewer environment rounds” as a goal in its own right.</div>
 </div>""",
       foot="SOURCES · as cited in each cell; the same table with every measurement condition is Appendix A2",
       chip=("#a2-1", "Appendix A2"),
@@ -433,7 +499,7 @@ slide("s07", "Cost has six sources",
         "1,000–1,800 tokens per screenshot; rich observations 4.8×; sampling 96K → 920K; even at a 95.7% cache hit rate, prefix tokens are 59.5% of the bill.", ci('osh','anth-a','asb','atts','tracelab'))}
   {card("2 · TOKENS WRITTEN", "5× the price, billed while thinking — yet 31% of an uncached bill",
         "224K vs 37K output tokens per task (Claude Opus 4.8 vs GPT-5.5); GTA1 on 39 OSWorld tasks: $2.43 output only, $7.87 all tokens.", ci('osw2','osh'))}
-  {card("3 · NUMBER OF CALLS", "N × c multiplies both bills",
+  {card("3 · NUMBER OF CALLS", T_NC + " multiplies both bills",
         "5–13× the calls of a single-call harness per step (GTA1, calc.); sampling multiplies by the candidate count.", ci('osh','atts'))}
   {card("4 · FAILURES AND RETRIES", "$72.4 per attempt → ≈ $351 per success",
         "OSWorld 2.0’s best agent completes 20.6% (calc.; an accounting conversion). A dead loop bills $8.47; one leaderboard run cost ≈ $40,000.", ci('osw2','osh','hal'))}
@@ -484,7 +550,7 @@ slide("s09", "How slow and expensive are linked: three kinds of relationship",
 {link_fig()}
 <div class="cards3 rel">
   {card("SAME SOURCE — in both equations", "fix it, and time and money fall together",
-        "<b>Passes</b> (time ≈ linear, read tokens quadratic), <b>calls per pass</b>, <b>reading</b>, <b>writing</b> (the slowest and dearest token), <b>cache hits</b> (fragile: editing the history or switching to fast mode invalidates them), <b>failures and idle loops</b> (which also turn “per attempt” into “per success”).", ci('osh','anth-b'))}
+        "<b>Passes " + tex("N", 13) + "</b> (time ≈ linear, read tokens quadratic), <b>calls per pass " + tex("c_k", 13) + "</b>, <b>reading</b>, <b>writing</b> (the slowest and dearest token), <b>cache hits</b> (fragile: editing the history or switching to fast mode invalidates them), <b>failures and idle loops</b> (which also turn “per attempt” into “per success”).", ci('osh','anth-b'))}
   {card("SLOW BUT NOT EXPENSIVE — time equation only", "fix it, and only time falls",
         "<b>Queueing</b>, <b>page loads and fixed sleeps</b>, <b>tool tails</b>. None produces a token; the machine behind them is billed by the hour, usually under 5% of the API bill. Escaping the queue means a fast or priority tier — at 2× the price.")}
   {card("MONEY FOR TIME OR FOR ACCURACY — opposite signs", "buying speed buys only the writing segment",
@@ -633,7 +699,7 @@ A("a3-1", "A3 · 1/3", "A3 · Cost, every cause — 1. tokens read and 2. tokens
   hl=("n-rtok", "n-wtok"),
   crumb="the complete table behind page 7 · prices are list prices from the vendors’ own pages, September 2026",
   body=table(th_cost, [
-   ["1-1", "History re-sent", "Call k reads everything from the k−1 earlier steps; total reading ≈ steps squared", "“Cost grows quadratically with the number of steps” — OSWorld-Human, real runs", ci('osh')],
+   ["1-1", "History re-sent", "Call " + tex("k", 12) + " reads everything from the " + tex("k-1", 12) + " earlier steps; total reading " + tex(r"\approx N^2", 12), "“Cost grows quadratically with the number of steps” — OSWorld-Human, real runs", ci('osh')],
    ["1-2", "Large screenshots", "1,000–1,800 tokens per image; 100 images fill a 200K context", "Anthropic’s engineering guidance for computer and browser use", ci('anth-a')],
    ["1-3", "Rich observation formats", "Accessibility tree + HTML + screenshot together: 4.8× the input", "AgentSysBench, WebArena agent, Kimi-K2.6", ci('asb')],
    ["1-4", "Sampling", "Several candidates per step, mostly read tokens", "gpt-oss-120b + ReAct on 165 WebArena-Lite tasks: 1 → 10 candidates per step, 96K → 920K tokens per task", ci('atts')],
@@ -647,7 +713,7 @@ A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — 3. calls, 4. failures, 5. un
   hl=("n-calls", "n-succ", "n-price"),
   crumb="the complete table behind page 7 (calls, failures, unit price)",
   body=table(th_cost, [
-   ["3", "Number of calls", "Steps × calls per step scales both token bills", "GTA1: 4 parallel planners per step, up to 3 retry rounds, one judging call → 4–12 planning calls per judging call, i.e. 5–13× the calls of a single-call harness (calc.). Agentic test-time scaling: 5–20 candidates per step multiply the calls by the candidate count. The same extra calls cost time and money at once", ci('osh','atts')],
+   ["3", "Number of calls", tex(r"N \cdot c_k", 12) + " scales both token bills", "GTA1: 4 parallel planners per step, up to 3 retry rounds, one judging call → 4–12 planning calls per judging call, i.e. 5–13× the calls of a single-call harness (calc.). Agentic test-time scaling: 5–20 candidates per step multiply the calls by the candidate count. The same extra calls cost time and money at once", ci('osh','atts')],
    ["4-1", "Failed attempts are billed", "Cost per success = cost per attempt ÷ success rate", "OSWorld 2.0: the best agent (Claude Opus 4.8) costs about $72.4 per attempt at 20.6% completion → about $351 per success (calc.). An accounting conversion, not the real price of retrying one task until it succeeds", ci('osw2')],
    ["4-2", "Idle steps are billed in full", "Every pass of a dead loop is a full read and write", "OSWorld-Human, GTA1 on 39 OSWorld tasks: one element-locating loop repeated the same step 18 times — 27 minutes, $8.47 at list price without caching; in failed tasks over 50 steps, 66% of steps were such repeats", ci('osh')],
    ["4-3", "Evaluation itself is too expensive to repeat", "Single runs, no repeats", "Holistic Agent Leaderboard: 9 benchmarks, 21,730 runs, one run per configuration, about $40,000 in total; Claude Opus 4.1 not run on Online-Mind2Web because the estimate was $20,000", ci('hal')],
@@ -677,8 +743,8 @@ A("a5-1", "A5", "A5 · Each cause’s effect on time and on money",
   hl=("n-rtok", "n-wtok", "n-queue", "n-wait"),
   crumb="the complete table behind pages 9–10",
   body=table(["cause", "effect on time", "effect on money", "relationship"], [
-   ["Many steps (N)", "Roughly linear: one more step is one more call and one more wait (later steps somewhat slower, up to 3×)", "Write tokens linear in N; read tokens quadratic, because every step re-reads the whole history", "<b>same source</b> — double the steps: about 2× the time, about 4× the read bill (uncached)"],
-   ["Many calls per step (c)", "linear", "linear", "<b>same source</b>"],
+   ["Many passes " + tex("(N)", 12), "Roughly linear: one more step is one more call and one more wait (later steps somewhat slower, up to 3×)", "Write tokens linear in " + tex("N", 12) + "; read tokens quadratic, because every step re-reads the whole history", "<b>same source</b> — double the steps: about 2× the time, about 4× the read bill (uncached)"],
+   ["Many calls per pass " + tex("(c_k)", 12), "linear", "linear", "<b>same source</b>"],
    ["Reading a lot (history, screenshots, rich observations)", "Reading time, longer every step", "Read-token bill", "<b>same source</b> — the same tokens cost time and money"],
    ["Writing a lot (thinking)", "Generation time, roughly 12 ms per token", "Write-token bill at 5× the read price", "<b>same source</b>, and the dearest time: writing is the slowest and the most expensive token"],
    ["Cache hits", "Saves reading time", "Read price 0.1×", "<b>same source</b>, but fragile: editing the history or switching to fast mode invalidates it"],
@@ -717,7 +783,7 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 .rule{height:1px;background:var(--rule);margin-top:14px;flex:none}
 .crumb{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11.5px;color:var(--mute);letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:10px;flex:none}
 .thumb{position:absolute;right:40px;top:10px;width:305px;height:95px;border:1px solid var(--rule);border-radius:4px;background:#fff;padding:5px 6px;display:flex;align-items:center}
-.thumb svg{width:100%;height:100%}
+.thumb > svg{width:100%;height:100%}
 .content{flex:1;min-height:0;margin-top:14px;margin-bottom:34px;display:flex;flex-direction:column;gap:12px}
 .callout{background:var(--callout);border-radius:4px;padding:11px 18px;font-size:14.5px;line-height:1.42;flex:none}
 .callout p{margin:0 0 5px 0}.callout p:last-child{margin:0}
@@ -753,6 +819,13 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 .hb .hl-lab{fill:var(--ink2);font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px}
 .hb .hl-val{fill:var(--ink);font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;font-weight:500}
 .hb .hl-bar{fill:var(--accent)}
+/* inline math */
+svg.tex{display:inline-block;height:auto}
+.legend{display:flex;gap:18px;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;color:var(--mute);margin:0 0 2px 82px;align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.sw{display:inline-block;width:11px;height:11px}
+.sw.b-read{background:var(--accent)}.sw.b-write{background:#b9c7d1}
+.eqstrip .eqx svg.tex,.lp svg.tex,.eqt svg.tex{vertical-align:middle}
 /* page 2 layout */
 .loopgrid{display:grid;grid-template-columns:690px 1fr;gap:22px;align-items:start;flex:none}
 .fig-loop{width:690px}
@@ -770,7 +843,7 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 .gapcol ul{margin:6px 0 0 0;padding-left:16px;font-size:12.5px;line-height:1.4;color:var(--ink2)}
 .gapcol li{margin-bottom:7px}
 /* equation strip (page 4) */
-.eqstrip{display:flex;align-items:stretch;gap:10px;border:1px solid var(--rule);border-radius:4px;padding:10px 14px;flex:none}
+.eqstrip{display:flex;align-items:flex-end;gap:10px;border:1px solid var(--rule);border-radius:4px;padding:10px 14px;flex:none}
 .eqt{font-size:14px;font-weight:600;align-self:center;white-space:nowrap}
 .eqterm{flex:1;border-left:2px solid var(--accent);padding:2px 10px}
 .eqx{font-size:14px;color:var(--ink);white-space:nowrap}
