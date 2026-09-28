@@ -6,7 +6,7 @@
 python3 slides/build_deck.py --fonts slides/fonts      # writes agent-acceleration.html (IBM Plex embedded)
 ```
 
-The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px', height='720px')` with print media). The deck is built from dossier v3 only, through the two Chinese study documents (《Agent 慢和贵的逻辑链》→ Part 1; 《Agent 加速：别人做到哪了》→ Part 2, not yet built).
+The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px', height='720px')` with print media). On Edwin's Mac (checked 2026-09-28) neither matplotlib nor Playwright is installed, so `build_deck.py` cannot run there: build where both exist (the cowork environment) or install matplotlib first. Headless Chrome's `--print-to-pdf` also gives 21 pages at 1280×720, because the print CSS sets `@page`. The deck is built from dossier v3 only, through the two Chinese study documents (《Agent 慢和贵的逻辑链》→ Part 1; 《Agent 加速：别人做到哪了》→ Part 2, not yet built).
 
 ## Structure
 
