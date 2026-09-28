@@ -4,7 +4,7 @@
 Part 1 (this file's content): where the time and the money go, built from the
 Chinese study document《Agent 慢和贵的逻辑链》(2026-09-27), which is itself built
 from dossier v3. Numbers are the dossier's; the ledger IDs live in the Chinese
-speaker notes (press N), not on the slides.
+the dossier and research/, not on the slides.
 
 Usage: python3 slides/build_deck.py [--fonts DIR]   (DIR holds the IBM Plex woff2
 files; without it the deck falls back to system fonts).
@@ -92,7 +92,7 @@ def loop_svg(hl=(), cls="thumb-svg", big=False):
     p.append(arrow(338, 26, 338, 34))
     if big:
         p.append(txt(480, 19, "set by the harness — the program around the model", 12.5, "start", "f"))
-    p.append(mpill("n-overlap", 916, 2, 280, 24, r"O\ \mathrm{=\ time\ in\ which\ steps\ overlap}", 14))
+    p.append(mpill("n-overlap", 916, 2, 280, 24, r"T_{\mathrm{saving}}\ \mathrm{=\ time\ saved\ by\ overlap}", 14))
     # main row
     p.append(node("n-observe", 14, 46, 128, 72, "Observe", "screenshot · page text", r"t_{\mathrm{obs}}"))
     p.append(arrow(142, 82, 160, 82))
@@ -132,10 +132,10 @@ def loop_svg(hl=(), cls="thumb-svg", big=False):
 # Everything mathematical on the pages — the two equations and every variable such as N, c_k, R_k — is typeset with
 # matplotlib's mathtext (Computer Modern) into inline SVG, so the deck stays self-contained (no KaTeX at runtime).
 EQ = {
- "time":  r"$T_{\mathrm{task}} \;=\; \sum_{k=1}^{N}\left[\,\sum_{j=1}^{c_k}\ell_{kj} + t_{\mathrm{obs}} + t_{\mathrm{act}} + t_{\mathrm{wait}}\right] \;-\; O$",
- "call":  r"$\ell_{kj} \;=\; t_{\mathrm{queue}} + t_{\mathrm{read}}(R_{kj} - R^{\mathrm{hit}}_{kj}) + t_{\mathrm{write}}(W_{kj}), \qquad O \,\geq\, 0$",
+ "time":  r"$T_{\mathrm{task}} \;=\; \sum_{k=1}^{N}\left[\,\sum_{j=1}^{c_k}\ell_{kj} + t_{\mathrm{obs}} + t_{\mathrm{act}} + t_{\mathrm{wait}}\right] \;-\; T_{\mathrm{saving}}$",
+ "call":  r"$\ell_{kj} \;=\; t_{\mathrm{queue}} + t_{\mathrm{read}}(R_{kj} - R^{\mathrm{hit}}_{kj}) + t_{\mathrm{write}}(W_{kj}), \qquad T_{\mathrm{saving}} \,\geq\, 0$",
  "ctx":   r"$R_{k+1} \;\approx\; R_k + W_k + o_{k+1} \quad\Rightarrow\quad \sum_{k=1}^{N} R_k \;\approx\; N R_1 + \dfrac{N(N-1)}{2}\,(\bar{w} + \bar{o})$",
- "money": r"$\mathrm{Cost}_{\mathrm{task}} \;=\; \sum_{k,j}\left(R^{\mathrm{hit}} p_{\mathrm{hit}} + R^{\mathrm{new}} p_{\mathrm{read}} + R^{\mathrm{cw}} p_{\mathrm{cw}} + W p_{\mathrm{write}}\right) \;+\; \tau\, p_{\mathrm{env}}$",
+ "money": r"$\mathrm{Cost}_{\mathrm{task}} \;=\; \sum_{k,j}\left(R^{\mathrm{hit}} p_{\mathrm{hit}} + R^{\mathrm{miss}} p_{\mathrm{miss}} + R^{\mathrm{store}} p_{\mathrm{store}} + W p_{\mathrm{write}}\right) \;+\; \tau\, p_{\mathrm{env}}$",
  "succ":  r"$\mathrm{Cost}_{\mathrm{success}} \;=\; \dfrac{\mathbb{E}[\mathrm{Cost}_{\mathrm{task}}]}{\Pr[\mathrm{success}]}$",
  "goal":  r"$\min\ \left(\mathbb{E}[T_{\mathrm{task}}],\ \mathrm{Cost}_{\mathrm{success}}\right)\quad \mathrm{s.t.}\quad \Pr[\mathrm{success}] \,\geq\, s_0$",
 }
@@ -265,7 +265,7 @@ def eq_strip():
     terms = [(tex(r"\sum_{k}", 15), "I · passes"), (tex(r"\sum_{j \leq c_k}", 15), "II · calls per pass"),
              (tex(r"(t_{\mathrm{queue}} + t_{\mathrm{read}} + t_{\mathrm{write}})", 15), "III · each call"),
              (tex(r"+\ t_{\mathrm{obs}} + t_{\mathrm{act}} + t_{\mathrm{wait}}", 15), "IV · environment"),
-             (tex(r"-\ O,\ \ O \approx 0", 15), "V · serial: little overlaps")]
+             (tex(r"-\ T_{\mathrm{saving}},\ \ T_{\mathrm{saving}} \approx 0", 15), "V · serial: little overlaps")]
     s = ['<div class="eqstrip"><div class="eqt">' + tex(r"T_{\mathrm{task}} =", 15) + '</div>']
     for t, c in terms:
         s.append(f'<div class="eqterm"><div class="eqx">{t}</div><div class="eqc">{html.escape(c)}</div></div>')
@@ -274,9 +274,9 @@ def eq_strip():
 def cost_strip():
     """The money equation with the six classes of cost mapped onto its terms (page 7)."""
     terms = [(tex(r"\sum_{k}\sum_{j \leq c_k}", 15), "3 · number of calls"),
-             (tex(r"(\,R^{\mathrm{hit}}, R^{\mathrm{new}}, R^{\mathrm{cw}}", 15), "1 · tokens read"),
+             (tex(r"(\,R^{\mathrm{hit}}, R^{\mathrm{miss}}, R^{\mathrm{store}}", 15), "1 · tokens read"),
              (tex(r",\ W\,)", 15), "2 · tokens written"), (tex(r"\cdot\ p", 15), "5 · price per class"),
-             (tex(r"+\ \tau\,p_{\mathrm{env}}", 15), "6 · environment machine"),
+             (tex(r"+\ \tau\,p_{\mathrm{env}}", 15), "6 · environment"),
              (tex(r"\div\ \Pr[\mathrm{success}]", 15), "4 · failures, retries")]
     out = ['<div class="eqstrip"><div class="eqt">' + tex(r"\mathrm{Cost}_{\mathrm{success}} \approx", 15) + '</div>']
     for t, c in terms:
@@ -290,11 +290,21 @@ def link_fig():
         return f'<span class="lp {kind}">{tex(src, 13, color=col)}</span>'
     def op(src):
         return tex(src, 13)
-    t = [pill(r"\sum_{k}","same"), pill(r"\sum_{j}","same"), op(r"("), pill(r"t_{\mathrm{queue}}","time"), op("+"), pill(r"t_{\mathrm{read}}(R-R^{\mathrm{hit}})","same"), op("+"), pill(r"t_{\mathrm{write}}(W)","same"), op(r")\ +"), pill(r"t_{\mathrm{obs}}","time"), op("+"), pill(r"t_{\mathrm{act}}","time"), op("+"), pill(r"t_{\mathrm{wait}}","time"), op("-"), pill(r"O","time")]
-    m = [pill(r"\sum_{k}","same"), pill(r"\sum_{j}","same"), op(r"("), pill(r"R^{\mathrm{hit}}","same"), pill(r"p_{\mathrm{hit}}","buy"), op("+"), pill(r"R^{\mathrm{new}}","same"), pill(r"p_{\mathrm{read}}","buy"), op("+"), pill(r"R^{\mathrm{cw}}","same"), pill(r"p_{\mathrm{cw}}","buy"), op("+"), pill(r"W","same"), pill(r"p_{\mathrm{write}}","buy"), op(r")\ +"), pill(r"\tau","time"), pill(r"p_{\mathrm{env}}","buy"), op(r"\div"), pill(r"\Pr[\mathrm{success}]","same")]
+    t = [pill(r"\sum_{k}","same"), pill(r"\sum_{j}","same"), op(r"("), pill(r"t_{\mathrm{queue}}","time"), op("+"), pill(r"t_{\mathrm{read}}(R-R^{\mathrm{hit}})","same"), op("+"), pill(r"t_{\mathrm{write}}(W)","same"), op(r")\ +"), pill(r"t_{\mathrm{obs}}","time"), op("+"), pill(r"t_{\mathrm{act}}","time"), op("+"), pill(r"t_{\mathrm{wait}}","time"), op("-"), pill(r"T_{\mathrm{saving}}","time")]
+    m = [pill(r"\sum_{k}","same"), pill(r"\sum_{j}","same"), op(r"("), pill(r"R^{\mathrm{hit}}","same"), pill(r"p_{\mathrm{hit}}","buy"), op("+"), pill(r"R^{\mathrm{miss}}","same"), pill(r"p_{\mathrm{miss}}","buy"), op("+"), pill(r"R^{\mathrm{store}}","same"), pill(r"p_{\mathrm{store}}","buy"), op("+"), pill(r"W","same"), pill(r"p_{\mathrm{write}}","buy"), op(r")\ +"), pill(r"\tau","time"), pill(r"p_{\mathrm{env}}","buy"), op(r"\div"), pill(r"\Pr[\mathrm{success}]","same")]
     return ('<div class="linkfig"><div class="lrow"><span class="lk">time</span>' + " ".join(t) + '</div>'
             '<div class="lrow"><span class="lk">money</span>' + " ".join(m) + '</div>'
             '<div class="lleg"><span class="lp same">in both equations — same source</span><span class="lp time">no tokens, money only as machine hours — slow but not expensive</span><span class="lp buy">the price — money for time or accuracy</span></div></div>')
+
+
+def symleg(parts):
+    """One line under an equation strip: every symbol in it, briefly."""
+    return '<div class="symleg">' + " · ".join(tex(a, 11) + " " + html.escape(b) for a, b in parts) + "</div>"
+SYM_TIME = [(r"N", "passes per task"), (r"c_k", "model calls in pass k"), (r"t_{\mathrm{queue}}, t_{\mathrm{read}}, t_{\mathrm{write}}", "one call: queueing, reading the prompt (prefill), writing the answer (decode)"),
+            (r"t_{\mathrm{obs}}, t_{\mathrm{act}}, t_{\mathrm{wait}}", "observe, act, wait"), (r"T_{\mathrm{saving}}", "time saved by running steps at the same time")]
+SYM_COST = [(r"k, j", "pass, call"), (r"R^{\mathrm{hit}}, R^{\mathrm{miss}}, R^{\mathrm{store}}", "prompt tokens from the cache, not in it, stored into it"), (r"W", "written tokens"),
+            (r"p", "price per token of each class"), (r"\tau\,p_{\mathrm{env}}", "machine hours × hourly price"), (r"\Pr[\mathrm{success}]", "success rate")]
+SYM_LINK = [(r"\Sigma_k, \Sigma_j", "over passes, over calls")] + SYM_TIME[2:] + SYM_COST[1:]
 
 SLIDES = []   # dicts: id, label, title, hl, crumb, callout(html), body(html), foot, chip(href,text), notes, kind
 
@@ -329,6 +339,7 @@ CITE = {   # short in-text forms, all in the reference list
     "meta": "Meta, 2026",
     "openai25": "OpenAI, 2025",
     "llmc": "Kim et al., 2024",
+    "tokenpilot": "Xu et al., 2026",
     "cop": "Erol et al., 2026",
     "asyncfc": "Feng et al., 2026",
     "frugal": "Chen, Zaharia &amp; Zou, 2024",
@@ -351,8 +362,7 @@ slide("s00", "Agent acceleration", kind="title", cover=True,
     <p class="cover-sub2">Computer-use, web and coding agents, which work a desktop, a browser or a code base one step at a time through a model.</p>
     <p class="cover-date">September 2026</p>
   </div>
-</div>""",
-      notes="""开场页，整套报告的主题：agent 加速——让操作软件的 LLM agent 用更少的时间、更少的钱完成一个任务，而且完成的任务不变少。第 2 页把这句话写成一个目标式。第一部分讲时间和钱花在哪；第二部分讲文献在每个杠杆上做到了哪一步（待做）。这一页不编号，所以第一部分的页码不变。""")
+</div>""")
 
 # --- 01 Part 1 title ------------------------------------------------------------
 slide("s01", "Where the time and the money go", cover=True,
@@ -374,8 +384,7 @@ slide("s01", "Where the time and the money go", cover=True,
       <li><span>11–12</span>References · Appendix A0–A6</li>
     </ol>
   </div>
-</div>""",
-      notes="""第一部分标题页。对应文档《Agent 慢和贵的逻辑链》。讲法：先在第 2 页讲清一圈循环、每一步的变量，以及时间和钱怎么由这些变量加起来；后面每页展开其中几项：慢的五类（3–6 页）、贵的六类和四种口径（7–8 页）、两者怎么连（9 页）、杠杆和缺口（10 页）。第 2 页式子的出处和简化在附录 A0，文献细节表在附录 A1–A6。""")
+</div>""")
 
 # --- 02 the loop, the variable at each step, and how they add up -------------------
 def eqrow(key, sub, eqs, gloss, cite, pg, stack=False):
@@ -385,42 +394,33 @@ def eqrow(key, sub, eqs, gloss, cite, pg, stack=False):
 
 slide("s02", "The agent loop and the variables at each step", thumb=False,
       crumb="here: the steps of one pass, the variable at each step, and how the variables add up to time and cost → to: the five sources of slowness",
-      callout=f"""
-<p><b>One task is one loop run {tex("N", 15)} times, and every term of its time and its cost sits at one step of this loop.</b></p>""",
       body=f"""
 <div class="fig-loop2">{loop_svg(cls="big-svg", big=True)}</div>
 <div class="eqtab">
 {eqrow("time", "elapsed", ["time", "call"],
-       "Passes add; inside a pass, " + tex("c_k", 11) + " calls and the environment steps add. A call: queueing, reading the tokens not in the cache, writing. " + tex("O", 11) + ": time in which steps overlap, 0 if all serial.",
+       "Time of one attempt" + tex(r"T_{\mathrm{task}}", 11) + ": pass " + tex(r"k", 11) + " runs from 1 to " + tex(r"N", 11) + ", call " + tex(r"j", 11) + " from 1 to " + tex(r"c_k", 11) + ". " + tex(r"\ell_{kj}", 11) + " is one call: queueing, reading the prompt tokens not in the cache (" + tex(r"R - R^{\mathrm{hit}}", 11) + ", prefill) and writing its " + tex(r"W", 11) + " tokens (decode). " + tex(r"t_{\mathrm{obs}}, t_{\mathrm{act}}, t_{\mathrm{wait}}", 11) + ": observe, act, wait. " + tex(r"T_{\mathrm{saving}}", 11) + ": time saved by running steps at the same time; 0 if all serial.",
        "serial form: " + CITE['llmc'] + " · overlap: " + CITE['asyncfc'] + " · per-call split: " + CITE['tracelab'], "p. 3–6", stack=True)}
 {eqrow("prompt", "grows", ["ctx"],
-       "Main call, full history kept: each prompt adds the answer and the next observation, so reading grows with " + tex("N^2", 11) + " (calc.); measured on 39 OSWorld tasks: cost “grows quadratically with the number of steps”.",
+       tex(r"R_k", 11) + ": prompt tokens of pass " + tex(r"k", 11) + " (" + tex(r"R_1", 11) + ": system prompt and task). Each prompt adds the answer " + tex(r"W_k", 11) + " and the next observation " + tex(r"o_{k+1}", 11) + "; " + tex(r"\bar{w}, \bar{o}", 11) + ": their means per pass. So reading grows with " + tex(r"N^2", 11) + " (calc.); measured on 39 OSWorld tasks: cost “grows quadratically with the number of steps”.",
        "recurrence: " + CITE['yuan'] + " · measured, GTA1 harness: " + CITE['osh'], "p. 5, 7")}
 {eqrow("money", "per attempt", ["money"],
-       "Prompt tokens are billed by class: from the cache (hit), new, or written to the cache (cw); written tokens, thinking included, at the write price. Plus the machine’s billed hours " + tex(r"\tau \geq T_{\mathrm{task}}", 11) + ".",
+       "Prompt tokens by billing class: " + tex(r"R^{\mathrm{hit}}", 11) + " read from the cache, " + tex(r"R^{\mathrm{miss}}", 11) + " not in it, " + tex(r"R^{\mathrm{store}}", 11) + " stored into it; " + tex(r"W", 11) + " written tokens, thinking included; each " + tex(r"p", 11) + " is the price per token of its class. " + tex(r"\tau", 11) + ": hours the environment machine is billed (" + tex(r"\tau \geq T_{\mathrm{task}}", 11) + "); " + tex(r"p_{\mathrm{env}}", 11) + ": its hourly price.",
        CITE['anth-b'] + "; " + CITE['openai'] + " · cached vs new: " + CITE['tracelab'] + " · machine: page 8", "p. 7–8")}
 {eqrow("success", "and goal", ["succ", "goal"],
-       "Failed attempts are billed in full. Acceleration, as used here: lower expected time or cost per success, raise neither, and keep the success rate at " + tex("s_0", 11) + ", its level before the change.",
+       tex(r"\mathbb{E}[\cdot]", 11) + ": mean over attempts; " + tex(r"\Pr[\mathrm{success}]", 11) + ": chance that one attempt succeeds. Failed attempts are billed, so cost per success = mean cost per attempt ÷ success rate. Goal: lower time or cost per success without raising the other, keeping the success rate at least " + tex(r"s_0", 11) + ", its level before the change.",
        "cost per success: " + CITE['cop'] + " (per task; the benchmark average is ours) · goal: ours", "p. 7–10")}
 </div>""",
       foot="SOURCES · as cited in each row · simplified: times are means, not distributions; cache expiry and per-call fees left out — Appendix A0",
-      chip=("#a0-1", "Appendix A0"),
-      notes="""对应文档零节，按 Edwin 2026-09-28 的意见重做：不再是两条式子加一张示意柱状图，而是先讲清一圈循环的每一步、每一步带哪个变量，变量旁的页码就是后面展开它的那一页。
-图：观察（t_obs，并往这一轮的提示里加 o_k 个 token）→ 决策（每轮 c_k 次模型调用；每次调用分三段：排队 t_queue、读 = prefill，整段提示一次处理，只处理没命中缓存的部分、写 = decode，一个 token 一个 token 生成，含思考 token；Opus 5.5 实测输出 81.7 token/s [E208]）→ 执行 t_act → 等待 t_wait，重复 N 轮。harness 一词在这页定义：模型外面那层程序，决定每轮调几次模型、观察多大、停顿多久。循环的出口是 agent 自己说完成或到了步数上限；成功与否在结束后由基准判定一次，所以成功率画在循环外面。
-四行式子：
-① 时间 = 各轮相加：每轮 = 这一轮 c_k 次调用的时长之和 + 环境三项，再减去重叠 O。串行形式是 LLMCompiler 的 ReAct 基线（Kim et al., 2024）；O 的定义取自 AsyncFC（Feng et al., 2026）：模型区间和执行区间的长度之和减去合并后的时长；不算空闲时间（harness 自己的代码、人在两轮之间思考）。实测的 harness 大多接近串行，O 很小但不为零：GTA1 每步四个规划器并行 [E25]，Copilot 一轮内并发 1.15 [E20]。加速文献做的事就是把 O 变大，第二部分讲。每次调用的拆法（排队 + 首 token + 逐 token 写）取自 TraceLab（Zhu et al., 2026）；读的时间只算没命中缓存的 token，是我们对它的前缀/追加拆分的理解；没有文献把读的时间写成 token 数的公式，所以 t_read、t_write 只当测量量。
-② 提示递推（Yuan et al., 2026 式 (1)–(3)，原文按调用编号）：每轮主调用的提示 = 上一轮的提示 + 上一轮写的答案 + 这一轮的新观察。观察在决策之前，所以下标是 o_{k+1}。保留全部历史、每轮新增大致固定时，读的总量 ≈ N·R_1 + N(N−1)/2·(w̄+ō)（calc.；10 轮 45 份、20 轮 190 份新增，再加 N·R_1），这就是原来柱状图想说的平方项。实测：OSWorld-Human“成本随步数二次增长”[E45]，靠后的步最多慢 3 倍 [E23]，一张截图 1,000–1,800 token [E31]。缓存活着时，平方项的大部分按缓存读价计费，只有每轮新增的部分按全价或写缓存价。
-③ 钱：提示 token 按计费类别算——缓存读（hit）、新读（new）、写入缓存（cw，Anthropic 5 分钟 1.25 倍、1 小时 2 倍；OpenAI 1.25 倍 calc.），写的 token（含思考）按写价；缓存读是正常读价的 0.02–0.25 倍，各家不同 [E224][E225]（D156）；fast、batch、长上下文倍数都并进单价。再加环境机器的计费小时 τ，τ 不小于任务时长，因为机器在模型思考时也在计费（第 8 页）。所以第 9 页“环境时间和排队只进时间式子”改成了“只通过机器小时进钱的式子”。
-④ 每次成功的成本 = 一次尝试的期望成本 ÷ 成功概率（Erol et al., 2026, Cost-of-Pass，原文按单个任务定义）。整个基准上我们用“平均每次尝试的成本 ÷ 成功率”，这一步是我们做的；只有每个任务成功率都一样时，它才等于把一个任务重试到成功的期望成本。目标一行是我们自己对问题的表述：降低期望时间或每次成功的成本、另一项不升，同时成功率不低于改动前的 s_0；FrugalGPT 的“预算约束下最大化质量”是同一问题的预算形式，放在附录 A0。
-式子有意没写的（页脚和附录 A0）：各项是随机量，有尾部延迟；缓存 5 分钟或 1 小时过期；排队随服务端负载变化；按次固定费和工具费。""")
+      chip=("#a0-1", "Appendix A0"))
 
 # --- 03 five sources ------------------------------------------------------
 slide("s03", "Slowness has five sources",
       hl=("n-steps", "n-calls", "n-queue", "n-read", "n-write", "n-observe", "n-act", "n-wait", "n-overlap"),
       crumb="from the time equation → here: every cause of slowness, in five classes → to: the numbers behind each class",
-      callout=f"""<p><b>Four of the five are terms of the time equation; the fifth is how they combine: the overlap term {tex("O", 15)} is close to zero, so the terms add.</b> Which class dominates depends on the harness, not on the kind of agent (page 6). Cause-by-cause tables with measurement conditions: Appendix A1.</p>""",
+      callout=f"""<p><b>Four of the five are terms of the time equation; the fifth is how they combine: the overlap term {tex(r"T_{\mathrm{saving}}", 15)} is close to zero, so the terms add.</b> Which class dominates depends on the harness, not on the kind of agent (page 6). Cause-by-cause tables with measurement conditions: Appendix A1.</p>""",
       body=f"""
 {eq_strip()}
+{symleg(SYM_TIME)}
 <div class="rows5 big">
   {card("I · TOO MANY PASSES " + tex("(N)", 11), "Hour-scale tasks take hundreds of passes, and every pass is a full round trip",
         ["318 tool calls per task on OSWorld 2.0 — 108 desktop tasks, Claude Opus 4.7, one action per step"], ci('osw2'))}
@@ -434,8 +434,7 @@ slide("s03", "Slowness has five sources",
         ["Concurrency within a turn: 1.15 — GitHub Copilot production telemetry"], ci('copilot'))}
 </div>""",
       foot="SOURCES · one representative number per class; conditions on the next two pages and in Appendix A1",
-      chip=("#a1-1", "Appendix A1"),
-      notes="""文档第一节五类总览。每类一个代表数：I [E6]；II [E25]；III [E101][E23][E29]；IV [E24][E17][E111][E19]；V [E20] 并发 1.15。第五类是结构性乘数：时间是各项之和，所以要先知道占比（第 6 页）。""")
+      chip=("#a1-1", "Appendix A1"))
 
 # --- 04 classes I–II ----------------------------------------------------------
 slide("s04", "I–II · Too many passes, too many calls per pass",
@@ -457,8 +456,7 @@ slide("s04", "I–II · Too many passes, too many calls per pass",
   {hbars("Steps per task on OSWorld 2.0, 108 tasks", [("Opus 4.7 · one action per step",318,"318"),("Opus 4.7 · batched actions",160.7,"160.7"),("Opus 4.8 · batched",103,"103"),("GPT-5.5 · batched",95.2,"95.2")], "XLANG Lab, 2026 · mean over tasks", width=600)}
 </div>""",
       foot=f"SOURCES · {CITE['osw2']} · {CITE['skim']} · {CITE['osh']} · {CITE['atts']} — full rows with conditions in Appendix A1",
-      chip=("#a1-1", "Appendix A1"),
-      notes="""文档第一节第一、二类。I-1/I-2 [E6]：Opus 4.7 单动作 318 步，批量 160.7；Opus 4.8 批量 103 步（481.8 次调用）；GPT-5.5 95.2 步。I-3 [E17]：Browser-Use、AgentOccam、WebVoyager 三个 agent，66.7% 纯导航。I-4 [E45]：o3 规划判断、GTA1-7B 定位；66% 无效重复；死循环 18 次、27 分钟、$8.47。I-5 stale state 只在附录。II-1 [E25][E22]：每判断 4–12 次规划；Agent S2 规划 53%、反思 34%。II-2 [E44]。II-3 [E20]：Copilot 2026 年 6 月第一周 1,350 万 session。""")
+      chip=("#a1-1", "Appendix A1"))
 
 # --- 05 classes III–V --------------------------------------------------------
 slide("s05", "III–V · Inside a call, around it, and in sequence",
@@ -480,8 +478,7 @@ slide("s05", "III–V · Inside a call, around it, and in sequence",
   {hbars("Where a Claude Code / Codex request’s 4.3 minutes go", [("tools",59.8,"59.8%"),("model",41.0,"41.0%")], "Zhu et al., 2026 · 4,265 sessions, 43 developers", maxv=100, width=600, labelw=60)}
 </div>""",
       foot=f"SOURCES · {CITE['bian']} · {CITE['osw2']} · {CITE['code']} · {CITE['tracelab']} · {CITE['copilot']} — full rows with conditions in Appendix A1",
-      chip=("#a1-2", "Appendix A1"),
-      notes="""文档第一节第三、四、五类。III-1 [E101] 69 倍；III-2 [E23] 靠后步慢 3 倍、[E98] AgentSysBench 4.8 倍输入（模型占比 46.9→61.6%）、[E108] ThunderAgent 7.14 倍；III-3 [E29] 91–98.6%，[E94] UFO2 每调用约 10 秒只在附录；III-4 [E41] 22.4 万 vs 3.7 万，[E43] HAL 21/36。IV-1 [E24][E22]；IV-2 [E17]；IV-3 [E111][E6][E97]；IV-4 [E19][E105]。V [E20] 1.15；人思考时间 80–92% [E105][E106]。""")
+      chip=("#a1-2", "Appendix A1"))
 
 # --- 06 harness decides -------------------------------------------------------
 slide("s06", "Which term dominates depends on the harness, not on the kind of agent",
@@ -511,16 +508,16 @@ slide("s06", "Which term dominates depends on the harness, not on the kind of ag
   <div><b>2 · {tex("N", 14)} multiplies every term</b> — one pass fewer saves a whole pass of time and money in all three kinds; OSWorld 2.0’s authors list “fewer environment rounds” as a goal in its own right.</div>
 </div>""",
       foot="SOURCES · as cited in each cell; the same table with every measurement condition is Appendix A2",
-      chip=("#a2-1", "Appendix A2"),
-      notes="""文档第二节。大头：截图型多调用 87–97% 在模型 [E22]；文本型浏览器 6.6 s vs 模型 4.7 s [E17]；coding decode 91–98.6% [E29]、工具 59.8% vs 模型 41.0% [E105]、Copilot 模型 13.7% vs 工具 2% [E106]。翻转：[E97][E111][E6]、[E98][E100]、[E108]。两个结论：大头由框架决定（D95、D96、D99）；步数 N 乘在所有项前面（§1.8）。""")
+      chip=("#a2-1", "Appendix A2"))
 
 # --- 07 six sources of cost ------------------------------------------------------
 slide("s07", "Cost has six sources",
       hl=("n-rtok", "n-wtok", "n-price", "n-succ", "n-calls", "n-steps", "n-machine"),
       crumb="from where the time goes → here: every cause of cost, in six classes → to: four accounting conventions, and the environment machine",
-      callout=f"""<p><b>Money comes from two things only — tokens read and tokens written, each times a price.</b> Writing costs 5× reading; a cached read costs a small fraction of a normal read (DeepSeek-V4.1-Flash: $0.006 vs $0.30 per million tokens; other vendors in Appendix A3); fast mode costs 2× {ci('anth-b','openai','deepseek')}. Three of the other sources multiply those token counts; the sixth, the environment machine, is outside the API bill.</p>""",
+      callout=f"""<p><b>Money comes from two things only — tokens read and tokens written, each times a price.</b> Writing costs 5× reading; a cached read costs a small fraction of a normal read (DeepSeek-V4.1-Flash: $0.006 vs $0.30 per million tokens; other vendors in Appendix A3); fast mode costs 2× {ci('anth-b','openai','deepseek')}.</p>""",
       body=f"""
 {cost_strip()}
+{symleg(SYM_COST)}
 <div class="rows6">
   {card("1 · TOKENS READ", "Reading is the larger bill, it grows with the square of the passes, and caching does not remove it",
         ["Even at a 95.7% cache hit rate, prefix tokens are still 59.5% of the bill — 4,265 Claude Code / Codex sessions"], ci('tracelab'))}
@@ -536,8 +533,7 @@ slide("s07", "Cost has six sources",
         ["A one-hour CPU environment costs $0.02–0.36 at list prices: 0.3–4.6% of a $7.87 bill (calc.; next page)"], "vendor price pages, read 2026-09-27")}
 </div>""",
       foot="SOURCES · one representative number per class; the complete tables with conditions are in Appendix A3",
-      chip=("#a3-1", "Appendix A3"),
-      notes="""文档第三节。三个比例：写 = 读 × 5；缓存读只是正常读的一小部分（DeepSeek-V4.1-Flash 例子：$0.006 vs $0.30 每百万 token；各家 0.02–0.25×，见附录 A3）；fast mode 2 倍（Anthropic 2026b；OpenAI 2026；DeepSeek 2026，2026 年 9 月定价页）。第一类 [E45][E31][E98][E44][E19]；第二类 [E41][D7]（$2.43 只算输出、$7.87 全算，输出 31%）；第三类 [E25][E44]；第四类 [E41] $72.4/20.6%≈$351（calc.）、[E45] $8.47、[E43] HAL 约 $40,000（21,730 次运行，每配置一次）；第五类定价页 [E190][E192]；第六类追加调查 7（E212–E223）。""")
+      chip=("#a3-1", "Appendix A3"))
 
 # --- 08 conventions + machines ----------------------------------------------------
 slide("s08", "Four accounting conventions for one task, and the cost of the environment machine",
@@ -565,8 +561,7 @@ slide("s08", "Four accounting conventions for one task, and the cost of the envi
   </div>
 </div>""",
       foot=f"SOURCES · {CITE['osh']} · {CITE['osw2']} · {CITE['tracelab']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['deepseek']} · AWS, Browser Use, Browserbase, E2B, Daytona, Modal, OpenAI price pages",
-      chip=("#a3-3", "Appendix A3"),
-      notes="""文档第三节“四种口径”和第六类。只算写 vs 全算 3.2 倍 [D7]；每次尝试 vs 每次成功 4.9 倍 [E41]（calc.）；无缓存 vs 有缓存：读价差 4–50 倍（calc.；DeepSeek-V4.1-Flash 例子；各家 0.02–0.25×，见附录 A3），但 [E19] 命中 95.7% 仍占 59.5%，截图型没报缓存状态 [D101]；标准 vs fast mode 2 倍 [E190][E192]，切换会丢缓存；3.2×4.9×2≈31。机器：追加调查 7（E212–E223）：1 小时 CPU 环境 $0.02–0.36，占 $7.87 的 0.3–4.6%；四个例外（月费、代理 $5–12/GB、wall-clock 计费而中位会话只 20% 在执行、GPU 沙箱 H100 $3.95/h）；Meta Muse 专属云端电脑、ChatGPT agent 虚拟电脑，不公布价格。""")
+      chip=("#a3-3", "Appendix A3"))
 
 # --- 09 how they link ---------------------------------------------------------------
 slide("s09", "How slow and expensive are linked: three kinds of relationship",
@@ -575,6 +570,7 @@ slide("s09", "How slow and expensive are linked: three kinds of relationship",
       callout="""<p><b>The two equations share the read and write tokens; environment time and queueing reach the money equation only through the environment machine’s hours.</b> So every cause relates to time and money in exactly one of three ways.</p>""",
       body=f"""
 {link_fig()}
+{symleg(SYM_LINK)}
 <div class="cards3 rel">
   {card("SAME SOURCE — in both equations", "fix it, and time and money fall together",
         ["Passes " + tex("N", 13) + ", calls per pass " + tex("c_k", 13) + ", reading, writing, cache hits, failures — every one of them lives in the token counts"], ci('osh','anth-b'))}
@@ -584,8 +580,7 @@ slide("s09", "How slow and expensive are linked: three kinds of relationship",
         ["Fast mode: up to 2.5× faster writing (vendor-stated) at 2× the price, reading unchanged"], "(" + CITE['anth-b'] + "; " + CITE['openai'] + "; accuracy: Appendix A5)")}
 </div>""",
       foot=f"SOURCES · {CITE['osh']} · {CITE['anth-b']} · {CITE['openai']} — the cause-by-cause table, with the convexity evidence, is Appendix A5",
-      chip=("#a5-1", "Appendix A5"),
-      notes="""文档第四节。三种关系：同源（步数、调用、读、写、缓存、失败）；只慢不贵（排队、页面等待和固定停顿、工具长尾）；用钱换时间或准确率（fast mode 2 倍 [E190][E192]；大模型和思考：凸，边际 token 10.1 万→57.5 万 [E44]，6× [E41] / 9× [E43] / 9.6× [E44]，多思考未必更准 [E43]；小模型反弹为推断，只在附录 A5）。一句话：出在 token 上的修了时间和钱一起省；出在等待上的只省时间；花钱买速度只买得到写的那段。""")
+      chip=("#a5-1", "Appendix A5"))
 
 # --- 10 levers + gaps ---------------------------------------------------------------
 slide("s10", "The levers, and what is still unmeasured",
@@ -617,8 +612,7 @@ slide("s10", "The levers, and what is still unmeasured",
   </div>
 </div>""",
       foot=f"SOURCES · levers derived from the equations on page 2 · gaps: {CITE['yuan']} · {CITE['axis']} · {CITE['osw2']} · Appendix A5 and A6",
-      chip=("#a5-1", "Appendix A5"),
-      notes="""文档第四节“修什么能省什么”和第五节缺口。杠杆：少转圈（平方项）、少读、少写、少调、把等待重叠（只省时间）、买 fast/priority（只提写速、贵 2 倍、丢缓存）、不重试失败。缺口：前沿 API 模型的读写拆分 + 缓存命中率（[E29][D101]）；比人慢多少（AXIS 1.69 倍 [E161]）；OSWorld-Human 的“动作”是否含 2 秒停顿 [E111]；慢对准确率的影响（stale state 无比例）和小模型反弹（推断）。环境的钱这一缺口已在第 8 页讲过。""")
+      chip=("#a5-1", "Appendix A5"))
 
 # --- references (part 1) ---------------------------------------------------
 REFS_P1 = [
@@ -649,6 +643,7 @@ REFS_P1 = [
  "xAI. (2026). <i>Grok 4.7</i> model page, SpaceXAI Docs (read 28 September 2026). https://docs.x.ai/developers/models/grok-4.7",
  "XLANG Lab. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537. The University of Hong Kong (authored as “XLANG Lab and Collaborators”; the full author list is in the paper’s Appendix A).",
  "xlang-ai. (2026). <i>OSWorld</i> [Source code], desktop_env/desktop_env.py and run.py at commit b138d348. https://github.com/xlang-ai/OSWorld",
+ "Xu, B., Xue, Z., Chen, D., Fu, C., Wu, C., Huang, C., … Zhang, N. (2026). TokenPilot: Cache-efficient context management for LLM agents. arXiv:2606.17016. Zhejiang University; University of Electronic Science and Technology of China; Xidian University; HomologyAI.",
  "Yuan, Y., Nayak, A., Kundu, S., &amp; Talati, N. (2026). Agentic AI workload characteristics. arXiv:2605.26297. University of Illinois Urbana-Champaign; Gimlet Labs; Intel.",
  "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., … Zhang, D. (2026). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft.",
  "Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., &amp; Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560. University of Washington.",
@@ -660,12 +655,10 @@ def refs_html(items, start=1):
 half = (len(REFS_P1) + 1) // 2
 slide("s11", "References · Part 1 (1 of 2)", kind="refs",
       crumb="author–year tags on the pages refer to these entries · published version where one exists, otherwise the arXiv number and the authors’ institutions",
-      body=refs_html(REFS_P1[:half]),
-      notes="""参考文献第一页。格式：作者（年份）。题目。会议或期刊（已录用的按发表版本）/ arXiv 编号。机构。厂商定价页注明读取日期。""")
+      body=refs_html(REFS_P1[:half]))
 slide("s12", "References · Part 1 (2 of 2)", kind="refs",
       crumb="continued",
-      body=refs_html(REFS_P1[half:], start=half+1),
-      notes="""参考文献第二页。""")
+      body=refs_html(REFS_P1[half:], start=half+1))
 
 # =====================================================================
 # APPENDIX — Part 1
@@ -677,16 +670,15 @@ th_slow = ["id", "cause", "mechanism", "evidence, with the conditions of the mea
 w_slow = ["4%", "11%", "15%", "47%", "13%", "10%"]
 
 A("a0-1", "A0 · 1/2", "A0 · Page 2’s equations: the source form of each row, and what the page leaves out",
-  crumb="the derivation behind page 2 · each row is credited to the source that writes it; our own steps are marked calc. or ours",
-  body=table(["row", "on page 2", "what the source writes", "what page 2 simplifies"], [
-   ["time", "Passes, calls and environment steps add; minus the overlap " + tex("O", 12), "Serial agent: time = sum over subtasks of planning time + execution time; parallel execution replaces the sum of execution times by their maximum " + ci('llmc') + ". Overlap saved = summed length of model and execution intervals − their merged elapsed time " + ci('asyncfc'), "Summing the calls inside a pass is our step; parallel calls (GTA1’s four planners) enter through " + tex("O", 12) + ". Idle gaps (harness code, a person thinking) are outside " + tex(r"T_{\mathrm{task}}", 12) + ". Every time is a mean; the literature also uses distributions and tails"],
-   ["call", "Queueing + reading the uncached prompt + writing", "Latency = waiting + execution + interceptions (in words) " + ci('agentix') + "; prompt tokens split into a cached prefix and an appended part; time to first token and per-token decode latency reconstructed from timestamps " + ci('tracelab'), "Reading and writing times are measured quantities: no scanned source writes reading time as a formula of token count. That reading depends only on uncached tokens is our reading of the prefix / append split"],
-   ["prompt", tex(r"R_{k+1} \approx R_k + W_k + o_{k+1}", 12) + "; the " + tex("N^2", 12) + " sum (calc.)", "The prompt of the next call is the history of this call plus its formatted output (thinking, message, tool call) plus the tool result " + ci('yuan') + " — indexed per call", "Written per pass for the main call; vendors may drop earlier thinking from the history, hence ≈. The sum assumes full history, no trimming and a constant addition per pass. A screenshot adds 1,000–1,800 tokens " + ci('anth-a')],
-   ["money", "Cached, new and cache-write tokens, written tokens, each at its price; plus machine hours", "Anthropic bills input, output, cache writes (1.25× for 5 min, 2× for 1 h) and cache reads; OpenAI bills input, cached input, cache writes and output " + ci('anth-b','openai') + "; machine prices on page 8", "The two cache-write lifetimes are merged into one price; multipliers sit inside each price; per-call and tool fees are left out; a cache unused for 5 min or 1 h expires and its prefix is paid again as new or cache-write tokens"],
-   ["per success", "Expected cost per attempt ÷ probability of success", "Cost per correct answer = expected cost of one attempt ÷ probability that it is correct, per model and problem " + ci('cop'), "Over a benchmark we divide the mean cost by the success rate. That equals the expected cost of retrying a task until it succeeds only if every task had the same success chance"],
-   ["goal", "Lower time or cost per success without raising the other, at a success rate of at least " + tex("s_0", 12), "A budgeted form: maximise expected quality subject to expected cost ≤ a budget " + ci('frugal'), "Our statement, with two objectives; the success rate is held at its level before the change"],
-  ], ["8%", "22%", "38%", "32%"]),
-  notes="""附录 A0 第 1 页：第 2 页每一行式子的原文形式（公式扫描 research/2026-09-28-formulas-in-the-literature.md 及中文公式文档，核验状态按那两份文件记录）和第 2 页简化了什么。我们自己的步骤：一轮内调用求和、t_read 只取未命中缓存的 token、按轮写的递推和它的平方和（calc.）、整个基准上的平均、目标式。""")
+  crumb="page 2 writes all rows in one notation · here each source in its own · our own steps are marked calc. or ours",
+  body=table(["row", "on page 2", "the source’s own formula, in its notation", "what page 2 simplifies"], [
+   ["time", "Passes, calls and environment steps add; minus the overlap " + tex(r"T_{\mathrm{saving}}", 12), tex(r"T^{R}=\sum_i\,(T_P^{R}(P_i)+T_E(E_i))", 12) + " sequential, " + tex(r"T^{C}=\sum_i T_P^{C}(P_i)+\max_k T_E(E_k)", 12) + " parallel; " + tex(r"T_P", 12) + " planner time, " + tex(r"T_E", 12) + " executor time " + ci('llmc') + ". " + tex(r"T_{\mathrm{saving}}=S(M)+S(E)-D(M\cup E)", 12) + ": summed lengths of the model and execution intervals minus their merged elapsed time " + ci('asyncfc'), "Summing the calls inside a pass is our step; parallel calls (GTA1’s four planners) enter through " + tex(r"T_{\mathrm{saving}}", 12) + ". Idle gaps (harness code, a person thinking) are outside " + tex(r"T_{\mathrm{task}}", 12) + ". Every time is a mean; the literature also uses distributions and tails"],
+   ["call", "Queueing + reading the uncached prompt + writing", "Prompt split into a cached prefix " + tex(r"P", 12) + " and an appended part " + tex(r"A", 12) + "; time to first token and per-token decode latency " + tex(r"\hat{\ell}", 12) + " reconstructed from timestamps " + ci('tracelab') + ". Latency = waiting + execution + interceptions, in words " + ci('agentix'), "Reading and writing times are measured quantities: no scanned source writes reading time as a formula of token count. That reading depends only on uncached tokens is our reading of the prefix / append split"],
+   ["prompt", tex(r"R_{k+1} \approx R_k + W_k + o_{k+1}", 12) + " (prompt, written and observed tokens of pass " + tex("k", 12) + "); the " + tex("N^2", 12) + " sum (calc.)", tex(r"H_{a,i+1}=H_{a,i}\,\Vert\,\Phi(\theta,m,u)\,\Vert\,o_{a,i}", 12) + ", " + tex(r"C_{a,i}=|H_{a,i}|", 12) + ": the history of agent " + tex(r"a", 12) + " after call " + tex(r"i", 12) + " is the previous history, the formatted output " + tex(r"\Phi", 12) + " (thinking " + tex(r"\theta", 12) + ", message " + tex(r"m", 12) + ", tool call " + tex(r"u", 12) + ") and the tool result " + tex(r"o", 12) + "; " + tex(r"C", 12) + " is its length " + ci('yuan'), "Written per pass for the main call; vendors may drop earlier thinking from the history, hence ≈. The sum assumes full history, no trimming and a constant addition per pass. A screenshot adds 1,000–1,800 tokens " + ci('anth-a')],
+   ["money", "Cache-hit, cache-miss and cache-store tokens, written tokens, each at its price; plus machine hours", tex(r"\mathrm{Cost}=|C'_{\mathrm{hit}}|\,p_{\mathrm{hit}}+|C'_{\mathrm{miss}}|\,p_{\mathrm{miss}}+H_{\mathrm{out}}\,p_{\mathrm{out}}", 12) + ": cached and uncached context tokens and output tokens, each at its price " + ci('tokenpilot') + ". Vendors also bill cache writes: 1.25× for 5 min, 2× for 1 h (Anthropic), 1.25× (OpenAI) " + ci('anth-b','openai'), "The two cache-write lifetimes are merged into one price; multipliers sit inside each price; per-call and tool fees are left out; a cache unused for 5 min or 1 h expires and its prefix is paid again as cache-miss or cache-store tokens"],
+   ["per success", "Expected cost per attempt ÷ probability of success", tex(r"v(m,p)=C_m(p)\,/\,R_m(p)", 12) + ", " + tex(r"c_m(p)=n_{\mathrm{in}}\,c_{\mathrm{in}}+n_{\mathrm{out}}\,c_{\mathrm{out}}", 12) + ": expected cost " + tex(r"C", 12) + " of model " + tex(r"m", 12) + " on problem " + tex(r"p", 12) + " divided by its expected accuracy " + tex(r"R", 12) + " " + ci('cop'), "Over a benchmark we divide the mean cost by the success rate. That equals the expected cost of retrying a task until it succeeds only if every task had the same success chance"],
+   ["goal", "Lower time or cost per success without raising the other, at a success rate of at least " + tex("s_0", 12), tex(r"\max_s\ \mathbb{E}[r(a,\hat{a}(s,q))]\ \ \mathrm{s.t.}\ \ \mathbb{E}[c(s,q)]\leq b", 12) + ": maximise the expected quality " + tex(r"r", 12) + " of strategy " + tex(r"s", 12) + " with expected cost " + tex(r"c", 12) + " within budget " + tex(r"b", 12) + " " + ci('frugal'), "Our statement, with two objectives; the success rate is held at its level before the change"],
+  ], ["8%", "22%", "38%", "32%"]))
 
 A("a0-2", "A0 · 2/2", "A0 · Page 2’s variables, the step each belongs to, and the pages that expand it",
   crumb="every symbol on page 2 · the same terms light up in the loop thumbnail at the top right of each page",
@@ -699,15 +691,14 @@ A("a0-2", "A0 · 2/2", "A0 · Page 2’s variables, the step each belongs to, an
    [tex(r"t_{\mathrm{read}}", 12), "reading the prompt, all tokens at once (prefill); only tokens not served from the cache", "decide · read", "pages 5–6 · A1-2, A2"],
    [tex(r"t_{\mathrm{write}}", 12), "writing the answer one token at a time (decode), thinking included", "decide · write", "pages 5–6 · A1-2"],
    [tex(r"t_{\mathrm{obs}},\ t_{\mathrm{act}},\ t_{\mathrm{wait}}", 12), "producing the observation; executing the action; page loads, fixed sleeps, tool runs", "observe; act; wait", "pages 5–6, 9 · A1-3"],
-   [tex("O", 12), "time in which steps overlap; zero when everything runs in sequence", "the loop", "pages 3, 5, 10 · A1-3"],
-   [tex(r"R = R^{\mathrm{hit}} + R^{\mathrm{new}} + R^{\mathrm{cw}}", 12), "tokens a call reads: from the cache, new, written into the cache", "decide · read", "pages 7–8 · A3-1, A3-2"],
+   [tex(r"T_{\mathrm{saving}}", 12), "time saved because steps run at the same time; zero when everything runs in sequence", "the loop", "pages 3, 5, 10 · A1-3"],
+   [tex(r"R = R^{\mathrm{hit}} + R^{\mathrm{miss}} + R^{\mathrm{store}}", 12), "tokens a call reads: from the cache (hit), not in it (miss), stored into it (store)", "decide · read", "pages 7–8 · A3-1, A3-2"],
    [tex(r"o_k,\ \bar{o}", 12), "tokens the observation of pass " + tex("k", 12) + " adds to the prompt; their mean per pass", "observe", "pages 5, 7 · A1-2, A3-1"],
    [tex(r"W,\ \bar{w}", 12), "tokens written by a call, thinking included; mean per pass", "decide · write", "pages 5, 7 · A3-1"],
-   [tex(r"p_{\mathrm{hit}},\ p_{\mathrm{read}},\ p_{\mathrm{cw}},\ p_{\mathrm{write}}", 12), "price per token of each class, for the model and tier used", "decide", "pages 7–8 · A3-2, A3-3"],
+   [tex(r"p_{\mathrm{hit}},\ p_{\mathrm{miss}},\ p_{\mathrm{store}},\ p_{\mathrm{write}}", 12), "price per token of each class, for the model and tier used", "decide", "pages 7–8 · A3-2, A3-3"],
    [tex(r"\tau,\ p_{\mathrm{env}}", 12), "hours the environment machine is billed (at least " + tex(r"T_{\mathrm{task}}", 12) + "); its hourly price", "wait", "page 8 · A3-3"],
    [tex(r"\Pr[\mathrm{success}],\ s_0", 12), "probability that one attempt completes the task; its level before a change", "end (judged afterwards)", "pages 7–8, 10 · A3-2"],
-  ], ["22%", "46%", "14%", "18%"]),
-  notes="""附录 A0 第 2 页：第 2 页所有符号、属于循环的哪一步、在哪一页展开。每页右上角缩略图里亮起的就是这里的项；新增两项：O（重叠，第 3、5、10 页和 A1-3）和 τ·p_env（机器小时，第 7–9 页和 A3-3、A5）。""")
+  ], ["22%", "46%", "14%", "18%"]))
 
 A("a1-1", "A1 · 1/3", "A1 · Slowness, every cause — I. steps and II. calls per step",
   hl=("n-steps", "n-calls"),
@@ -721,8 +712,7 @@ A("a1-1", "A1 · 1/3", "A1 · Slowness, every cause — I. steps and II. calls p
    ["II-1", "Multi-call harness", "One step = plan + judge + reflect, several calls in series", "OSWorld-Human, two harnesses: GTA1 runs 4 parallel planners per step, retries up to 3 rounds, then one judging call picks — 4–12 planning calls per judging call; Agent S2 adds a reflection call per step, so planning is 53% and reflection 34% of task time", ci('osh'), "screenshot"],
    ["II-2", "Sampling for accuracy", "5–20 candidates per step, then pick one", "Same model and harness (gpt-oss-120b, ReAct) on 165 WebArena-Lite tasks: 1 → 10 candidates per step raises success from 38.8% to 43.2% and tokens per task from 96K to 920K — 9.6× the tokens for 4.4 points", ci('atts'), "text"],
    ["II-3", "Coding agents call repeatedly within a turn", "The model is called back and forth inside one user turn", "GitHub Copilot coding agent production telemetry (first week of June 2026, 13.5 million sessions): 6.6 model calls per user turn on average", ci('copilot'), "coding"],
-  ], w_slow),
-  notes="附录 A1 第 1 页：文档第一节第一类（I-1…I-5，[E6][E17][E45][§1.8]）和第二类（II-1…II-3，[E25][E22][E44][E20]）。")
+  ], w_slow))
 
 A("a1-2", "A1 · 2/3", "A1 · Slowness, every cause — III. each call is slow",
   hl=("n-queue", "n-read", "n-write"),
@@ -732,8 +722,7 @@ A("a1-2", "A1 · 2/3", "A1 · Slowness, every cause — III. each call is slow",
    ["III-2", "Reading (the prompt is re-processed every call)", "Every call re-reads the whole history; more screenshots, slower", "OSWorld-Human, multi-call harnesses: later steps up to 3× slower because the prompt at step " + tex("k", 12) + " holds the " + tex("k-1", 12) + " earlier screenshots — “dominated by prefill”. One screenshot is 1,000–1,800 tokens. AgentSysBench’s WebArena agent (Kimi-K2.6): observation switched from a single format to accessibility tree + HTML + screenshot → input 4.8×, model share of time 46.9% → 61.6%. Under load the cache is evicted and re-read: SWE-Agent / OpenHands running GLM-4.6 on 8 H100s for SWE-bench Lite, request latency up to 7.14× as concurrency rises", ci('osh','anth-a','asb','thunder'), "screenshot; text with rich observations; coding under load"],
    ["III-3", "Writing (one token at a time)", "Token-by-token generation, strictly serial", "Locally served ReAct agents (Qwen3.6-27B / Gemma4-31B, vLLM, 2 H100s) on five benchmarks: with the cache warm, generation is 91–98.6% of model time. Windows desktop agent UFO2 (GPT-4o / o1 API): about 10 s per model call, the largest item per step in every configuration", ci('yuan','ufo2'), "coding; single-call screenshot"],
    ["III-4", "Thinking modes and larger models", "Thinking writes more tokens; larger models are slower per token", "OSWorld 2.0, same 108 tasks: Claude Opus 4.8 writes 224K output tokens per task, GPT-5.5 37K. Holistic Agent Leaderboard, 9 benchmarks, 21,730 runs: raising reasoning effort lowered accuracy in 21 of 36 pairs", ci('osw2','hal'), "all"],
-  ], w_slow),
-  notes="附录 A1 第 2 页：文档第一节第三类（III-1…III-4，[E101][E23][E31][E98][E108][E29][E94][E41][E43]）。")
+  ], w_slow))
 
 A("a1-3", "A1 · 3/3", "A1 · Slowness, every cause — IV. environment, V. serial",
   hl=("n-observe", "n-act", "n-wait", "n-overlap"),
@@ -744,8 +733,7 @@ A("a1-3", "A1 · 3/3", "A1 · Slowness, every cause — IV. environment, V. seri
    ["IV-3", "Fixed sleeps", "The agent cannot tell when the page is ready, so it sleeps a fixed number of seconds", "OSWorld’s environment code sleeps 2 s after every action; OSWorld 2.0 prescribes 3 s, so 318 steps are about 16 minutes of pure waiting (calc.). AgentSysBench: a single-call GUI agent (ReAct, Kimi-K2.6 API) spends over 70% of its OSWorld execution time in the desktop sandbox", ci('code','osw2','asb'), "screenshot (caused by the benchmark harness)"],
    ["IV-4", "Tool tails", "Tests and builds take minutes", "TraceLab, 4,265 Claude Code / Codex sessions from 43 developers (September 2025 – June 2026): tool calls over 1 minute are 4% of calls but 85% of tool time; a request averages 4.3 minutes — tools 2.5 (59.8%), model 1.7 (41.0%)", ci('tracelab'), "coding"],
    ["V", "Serial structure", "The four stages never overlap, so task time is the sum of every term, not the largest one; fixing one term saves only its share", "Concurrency within a turn is 1.15 in Copilot telemetry. Separately, 80–92% of a coding session’s elapsed time is the human thinking between turns — strip it before reading any total", ci('copilot','tracelab'), "all"],
-  ], w_slow),
-  notes="附录 A1 第 3 页：文档第一节第四类（IV-1…IV-4，[E24][E22][E94][E17][E26][E111][E97][E19][E105]）和第五类（[E20][E105][E106]）。")
+  ], w_slow))
 
 A("a2-1", "A2", "A2 · Where the arrows land, with every measurement condition",
   hl=("n-read", "n-wait", "n-write"),
@@ -756,8 +744,7 @@ A("a2-1", "A2", "A2 · Where the arrows land, with every measurement condition",
    ["negligible", f"Producing the observation and executing the action: under 3.5% together {ci('osh')}", "Nothing: model and browser are close; which is larger depends on observation size and model speed", "Navigation-only steps: a coding agent has no pages to turn"],
    ["counter-example", f"A single-call agent is different: AgentSysBench’s one-call GUI agent (Kimi-K2.6) spends over 70% of its OSWorld time in the desktop sandbox {ci('asb')}, because the harness sleeps after every action — 2 s in OSWorld’s code {ci('code')}, 3 s in OSWorld 2.0 {ci('osw2')}", f"Browser-Use: 73% of latency in model calls, not the browser {ci('jit')}", f"Two production records point opposite ways: heavy tools in Claude Code / Codex (tools 59.8% > model 41.0%) {ci('tracelab')}; light tools in Copilot (model 13.7% > tools 2%) {ci('copilot')}. The difference is the kind of tool (tests and builds vs file reads), not a contradiction"],
    ["in one line", "Slow in reading: every step re-reads the screenshot history, more as the task goes on", "Slow in the environment (browser and page waits); once the observation grows, slow in reading again", "Reading is cached away; slow in writing and in the tools"],
-  ], ["9%", "31%", "30%", "30%"], cls="tbl three"),
-  notes="附录 A2：文档第二节整表，含每个数字的测量条件 [E22][E17][E29][E105][E106][E98][E100][E108][E97][E111][E6]。")
+  ], ["9%", "31%", "30%", "30%"], cls="tbl three"))
 
 th_cost = ["id", "cause", "mechanism", "evidence, with the conditions of the measurement", "source"]
 w_cost = ["5%", "13%", "20%", "47%", "15%"]
@@ -772,8 +759,7 @@ A("a3-1", "A3 · 1/3", "A3 · Cost, every cause — 1. tokens read and 2. tokens
    ["1-5", "The cache is not a cure", "However high the hit rate, a long history keeps reading dominant; a miss re-reads everything", "TraceLab, 4,265 Claude Code / Codex sessions: prefix-cache hit rate 95.7%, prefix tokens still 59.5% of list-price cost; on a miss the re-read is 3.8× the genuinely new content", ci('tracelab')],
    ["2-1", "Thinking modes", "Thinking tokens are billed as output; when they cannot be switched off they are a fixed overhead", "OSWorld 2.0, same tasks: Claude Opus 4.8 224K output tokens per task, GPT-5.5 37K; Claude Opus 5.5: “thinking cannot be disabled and is billed as output”", ci('osw2','anth-b')],
    ["2-2", "But writing is not always the larger bill", "In an uncached screenshot agent, output was 31% of the total", "OSWorld-Human, GTA1: the paper’s $2.43 counts output only; Table 3’s input and output give $7.87", ci('osh')],
-  ], w_cost),
-  notes="附录 A3 第 1 页：文档第三节第一类（Ⅰ-1…Ⅰ-5，[E45][E31][E98][E44][E19]）和第二类（Ⅱ-1、Ⅱ-2，[E41]、Anthropic 2026b、[D7]）。")
+  ], w_cost))
 
 A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — 3. calls, 4. failures, 5. unit price",
   hl=("n-calls", "n-succ", "n-price"),
@@ -793,8 +779,7 @@ A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — 3. calls, 4. failures, 5. un
           "<br>Grok 4.7 $2 → $0.50 (0.25×)",
     "Vendor price pages, read 28 September 2026", ci('deepseek','anth-b','openai','google','xai')],
    ["5-4", "Long-context surcharge", "OpenAI: 2× the read price above 272K tokens", "Vendor price page", ci('openai')],
-  ], w_cost),
-  notes="附录 A3 第 2 页：文档第三节第三类（[E25][E44]）、第四类（Ⅳ-1…Ⅳ-3，[E41][E45][E43]）、第五类（Ⅴ-1…Ⅴ-4，[E190][E192]）。")
+  ], w_cost))
 
 A("a3-3", "A3 · 3/3", "A3 · Cost — 6. the environment machine, and the four conventions",
   hl=("n-machine", "n-price", "n-succ"),
@@ -808,8 +793,7 @@ A("a3-3", "A3 · 3/3", "A3 · Cost — 6. the environment machine, and the four 
    ["AWS t3.2xlarge (8 vCPU / 32 GiB, OSWorld 2.0’s default instance)", "$0.3341 per hour", "$0.334", "$0.084", "4.2%", "0.46%"],
    ["OpenAI hosted container (Hosted Shell / Code Interpreter, 4 GB)", "$0.12 per 20-minute session → $0.36 per hour; 1 GB $0.03, 16 GB $0.48, 64 GB $1.92 per 20 minutes", "$0.36", "$0.12", "4.6%", "0.50%"],
   ], ["22%", "42%", "8%", "8%", "10%", "10%"]) + """
-<div class="apx-note"><b>The four accounting conventions (page 8), in one line each:</b> output only vs all tokens — 3.2× (OSWorld-Human, $2.43 vs $7.87); per attempt vs per success — 4.9× (OSWorld 2.0, $72.4 ÷ 20.6%); uncached vs cached — 4–50× on the read price by vendor (calc.), far less on the bill (TraceLab: 95.7% hits, prefix still 59.5% of cost); standard vs fast mode — 2× (both vendors), buying only writing speed.</div>""",
-  notes="附录 A3 第 3 页：文档第三节第六类的环境价格表（追加调查 7，E212–E218 计算）和四种口径的一句话版。")
+<div class="apx-note"><b>The four accounting conventions (page 8), in one line each:</b> output only vs all tokens — 3.2× (OSWorld-Human, $2.43 vs $7.87); per attempt vs per success — 4.9× (OSWorld 2.0, $72.4 ÷ 20.6%); uncached vs cached — 4–50× on the read price by vendor (calc.), far less on the bill (TraceLab: 95.7% hits, prefix still 59.5% of cost); standard vs fast mode — 2× (both vendors), buying only writing speed.</div>""")
 
 A("a5-1", "A5", "A5 · Each cause’s effect on time and on money",
   hl=("n-rtok", "n-wtok", "n-queue", "n-wait", "n-machine"),
@@ -827,8 +811,7 @@ A("a5-1", "A5", "A5 · Each cause’s effect on time and on money",
    ["Fast mode", "Writing up to 2.5× faster (vendor-stated); reading unchanged", "2× the price", "<b>money for time</b>"],
    ["Bigger models, more thinking", "slower", "dearer", f"<b>money and time for accuracy</b>, convex: marginal tokens per point 101K → 575K on one model; 6× / 9× / 9.6× tokens for a few points; more thinking not always more accurate {ci('atts','osw2','hal')}"],
    ["Smaller models", "faster", "cheaper", "but if accuracy falls, steps and retries rise — possibly slower and dearer again (inference, no direct evidence)"],
-  ], ["22%", "26%", "26%", "26%"]),
-  notes="附录 A5：文档第四节关系表整表 [E23][E45][E190][E44][E41][E43]。")
+  ], ["22%", "26%", "26%", "26%"]))
 
 A("a6-1", "A6", "A6 · The gaps in the evidence, and what each one blocks",
   crumb="the complete table behind page 10",
@@ -839,8 +822,7 @@ A("a6-1", "A6", "A6 · The gaps in the evidence, and what each one blocks",
    ["Whether OSWorld-Human’s “action” includes the 2-s sleep after each step", f"Not stated {ci('code')}; if it does, “actions under 2%” implies more than 100 s per step (calc.)", "“Environment under 3.5%” may understate the waiting"],
    ["The rebound from a smaller model", "No direct evidence on how many extra steps and retries a drop in accuracy causes", "The last row of the relationship table stays marked “inference”"],
    ["How much slowness hurts accuracy", f"Only OSWorld 2.0 records the stale-state failure mode, without its share of failures {ci('osw2')}", "“It exists” can be said; “how large” cannot"],
-  ], ["27%", "45%", "28%"]),
-  notes="附录 A6：文档第五节缺口表 [E29][D101][E161][E111]。")
+  ], ["27%", "45%", "28%"]))
 
 # ---------------------------------------------------------------- render
 CSS = r"""
@@ -866,7 +848,7 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 /* cards */
 .cards3,.cards4,.rows5,.rows6,.figs3{display:grid;gap:12px}
 .cards3{grid-template-columns:repeat(3,1fr)}.cards4{grid-template-columns:repeat(4,1fr)}
-.rows6 .card{padding:8px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13.5px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr)}
+.rows6 .card{padding:6px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13.5px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr);gap:9px}
 .figs3{grid-template-columns:repeat(3,1fr);gap:20px;flex:none}
 .figs1{display:flex;flex:none}.figs1 .fig{width:600px;max-width:100%}
 .card{border:1px solid var(--rule);border-radius:4px;padding:11px 13px;background:#fff;display:flex;flex-direction:column;gap:5px;min-height:0}
@@ -1010,16 +992,15 @@ svg .rl{stroke:var(--rule);stroke-width:1}
 .chart .grid{stroke:var(--rule);stroke-width:1}
 .chart .ax{fill:var(--mute);font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px}
 .chart .b-read{fill:var(--accent)}.chart .b-write{fill:#b9c7d1}
-/* notes */
-#notes{display:none;position:fixed;left:0;right:0;bottom:0;max-height:34vh;overflow:auto;background:#fff8e6;color:#222;font-size:14px;line-height:1.5;padding:12px 24px;border-top:2px solid #d8b24a;font-family:'IBM Plex Sans',-apple-system,'PingFang SC','Noto Sans CJK SC','Microsoft YaHei',sans-serif;z-index:5}
-#notes.on{display:block}
+.symleg{font-size:11.5px;line-height:1.45;color:var(--ink2);margin:0 2px;flex:none}
+.symleg svg.tex{vertical-align:middle}
 #help{position:fixed;right:12px;top:8px;font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;color:#c8d0d6;background:rgba(32,38,44,.85);padding:4px 10px;border-radius:10px;z-index:4;transition:opacity .6s}
 #help.gone{opacity:0;pointer-events:none}
 @media print{
   html,body{background:#fff;height:auto}
   #stage{position:static;transform:none!important;box-shadow:none;width:1280px;height:auto;left:0;top:0}
   .slide{display:flex;position:relative;page-break-after:always;break-after:page}
-  #notes,#help{display:none!important}
+  #help{display:none!important}
   @page{size:1280px 720px;margin:0}
 }
 """
@@ -1028,15 +1009,15 @@ JS = r"""
 (function(){
   const slides=[...document.querySelectorAll('.slide')];
   const stage=document.getElementById('stage');
-  const notes=document.getElementById('notes');
+  
   let cur=0, lastMain=0;
   function fit(){const s=Math.min(innerWidth/1280, innerHeight/720);stage.style.transform=`translate(-50%,-50%) scale(${s})`;stage.style.transformOrigin='center';stage.style.left='50%';stage.style.top='50%';}
-  function show(i,push){i=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.classList.toggle('on',k===i));cur=i;if(!slides[i].classList.contains('appendix'))lastMain=i;const n=slides[i].querySelector('.notes');notes.innerHTML=n?n.innerHTML:'';if(push!==false){history.replaceState(null,'','#'+slides[i].id);}}
+  function show(i,push){i=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.classList.toggle('on',k===i));cur=i;if(!slides[i].classList.contains('appendix'))lastMain=i;if(push!==false){history.replaceState(null,'','#'+slides[i].id);}}
   function fromHash(){const h=location.hash.replace('#','');const i=slides.findIndex(s=>s.id===h);show(i<0?0:i,false);}
   addEventListener('resize',fit);
   addEventListener('hashchange',fromHash);
-  addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(cur+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(cur-1);}else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(slides.length-1);}else if(e.key==='n'||e.key==='N'){notes.classList.toggle('on');}else if(e.key==='b'||e.key==='B'){show(lastMain);}});
-  document.addEventListener('click',e=>{const a=e.target.closest('a');if(a){if(a.getAttribute('href')==='#back'){e.preventDefault();show(lastMain);}return;}if(e.target.closest('#notes'))return;show(cur+1);});
+  addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(cur+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(cur-1);}else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(slides.length-1);}else if(e.key==='b'||e.key==='B'){show(lastMain);}});
+  document.addEventListener('click',e=>{const a=e.target.closest('a');if(a){if(a.getAttribute('href')==='#back'){e.preventDefault();show(lastMain);}return;}show(cur+1);});
   fit();fromHash();setTimeout(()=>document.getElementById('help').classList.add('gone'),6000);
 })();
 """
@@ -1079,7 +1060,7 @@ def render(font_dir=None):
         if s["notes"]:
             parts.append(f'<aside class="notes" hidden>{esc(s["notes"])}</aside>')
         parts.append('</section>')
-    parts.append('</div><div id="notes"></div><div id="help">← → move · N notes · B back · #sNN links a page</div>')
+    parts.append('</div><div id="help">← → move · B back · #sNN links a page</div>')
     parts.append(f'<script>{JS}</script></body></html>')
     return "".join(parts)
 
