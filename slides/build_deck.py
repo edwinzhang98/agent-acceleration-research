@@ -64,17 +64,15 @@ def loop_svg(hl=(), cls="thumb-svg", big=False):
         x0 = x - ww/2 if anchor == "middle" else (x - ww if anchor == "end" else x)
         return re.sub(r'<svg ([^>]*?)width="[\d.]+pt" height="[\d.]+pt"',
                       lambda mm: f'<svg {mm.group(1)}x="{x0:.1f}" y="{yc - h2/2:.1f}" width="{ww:.1f}" height="{h2:.1f}"', svg, count=1)
-    def tag(x, y, t, anchor="start"):
-        return f'<text class="pg" x="{x}" y="{y}" font-size="11.5" text-anchor="{anchor}">{html.escape(t)}</text>' if big else ""
     def txt(x, y, t, fs=11, anchor="middle", cls_="fm"):
         return f'<text class="{cls_}" x="{x}" y="{y}" font-size="{fs}" text-anchor="{anchor}">{html.escape(t)}</text>'
-    def node(id_, x, y, w, h, title, sub, msrc, pg):
+    def node(id_, x, y, w, h, title, sub, msrc):
         c = " hl" if id_ in hl else ""
         s = f'<g id="{mid}-{id_}" class="node{c}"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6"/>'
         s += f'<text class="t" x="{x+w/2}" y="{y+24}" font-size="18" text-anchor="middle">{html.escape(title)}</text>'
         s += f'<text class="s" x="{x+w/2}" y="{y+41}" font-size="11.5" text-anchor="middle">{html.escape(sub)}</text>'
         s += m(msrc, x+w/2, y+57, 15, col(id_)) + "</g>"
-        return s + tag(x+w, y-5, pg, "end")
+        return s
     def pill(id_, x, y, w, h, title, fs=14):
         c = " hl" if id_ in hl else ""
         return (f'<g id="{mid}-{id_}" class="node pill{c}"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{h/2}"/>'
@@ -92,18 +90,15 @@ def loop_svg(hl=(), cls="thumb-svg", big=False):
     # top band: calls per pass (set by the harness); overlap
     p.append(mpill("n-calls", 240, 2, 196, 24, r"c_k\ \mathrm{calls\ in\ pass}\ k", 15))
     p.append(arrow(338, 26, 338, 34))
-    p.append(tag(444, 19, "p. 4"))
     if big:
         p.append(txt(480, 19, "set by the harness — the program around the model", 12.5, "start", "f"))
     p.append(mpill("n-overlap", 916, 2, 280, 24, r"O\ \mathrm{=\ time\ in\ which\ steps\ overlap}", 14))
-    p.append(tag(910, 19, "p. 3, 5, 10", "end"))
     # main row
-    p.append(node("n-observe", 14, 46, 128, 72, "Observe", "screenshot · page text", r"t_{\mathrm{obs}}", "p. 5"))
+    p.append(node("n-observe", 14, 46, 128, 72, "Observe", "screenshot · page text", r"t_{\mathrm{obs}}"))
     p.append(arrow(142, 82, 160, 82))
     c = " hl" if "n-decide" in hl else ""
     p.append(f'<g id="{mid}-n-decide" class="box{c}"><rect x="160" y="34" width="570" height="92" rx="8"/>'
              f'<text class="bt" x="172" y="50" font-size="12">DECIDE · one model call</text></g>')
-    p.append(tag(722, 50, "p. 5", "end"))
     p.append(pill("n-queue", 172, 58, 90, 28, "queue", 13.5))
     p.append(pill("n-read", 272, 58, 206, 28, "read the prompt, all at once", 13))
     p.append(pill("n-write", 488, 58, 230, 28, "write the answer, token by token", 13))
@@ -111,29 +106,25 @@ def loop_svg(hl=(), cls="thumb-svg", big=False):
     p.append(m(r"t_{\mathrm{read}}(R-R^{\mathrm{hit}})", 375, 106, 14))
     p.append(m(r"t_{\mathrm{write}}(W)", 603, 106, 14))
     p.append(arrow(730, 82, 748, 82))
-    p.append(node("n-act", 748, 46, 122, 72, "Act", "click · type · run a tool", r"t_{\mathrm{act}}", "p. 5"))
+    p.append(node("n-act", 748, 46, 122, 72, "Act", "click · type · run a tool", r"t_{\mathrm{act}}"))
     p.append(arrow(870, 82, 886, 82))
-    p.append(node("n-wait", 886, 46, 146, 72, "Wait", "page load · sleep · tool run", r"t_{\mathrm{wait}}", "p. 5"))
+    p.append(node("n-wait", 886, 46, 146, 72, "Wait", "page load · sleep · tool run", r"t_{\mathrm{wait}}"))
     # exit: the agent stops (it says it is done, or hits the step cap); success is judged once, afterwards
     p.append(arrow(1032, 82, 1084, 82))
     p.append(txt(1066, 76, "stop", 10.5))
-    p.append(node("n-succ", 1084, 46, 112, 72, "End", "judged afterwards", r"\Pr[\mathrm{success}]", "p. 7–8"))
+    p.append(node("n-succ", 1084, 46, 112, 72, "End", "judged afterwards", r"\Pr[\mathrm{success}]"))
     # token and price band
     p.append(m(r"o_k\ \mathrm{tokens}", 78, 146, 14))
     p.append(arrow(120, 146, 270, 146))
     p.append(mpill("n-rtok", 272, 134, 206, 24, r"R\ \mathrm{read}:\ R^{\mathrm{hit}}\ \mathrm{from\ cache}"))
     p.append(mpill("n-wtok", 488, 134, 118, 24, r"W\ \mathrm{written}"))
     p.append(mpill("n-price", 614, 134, 104, 24, r"\times\ p\ \mathrm{prices}"))
-    p.append(tag(722, 151, "p. 7"))
     p.append(mpill("n-machine", 886, 134, 146, 24, r"\tau\ \mathrm{machine\ hours}"))
-    p.append(tag(1040, 151, "p. 8"))
     # loop back: not stopped -> next pass
     p.append(f'<path class="arr" d="M1058 82 L1058 180 L6 180 L6 82 L12 82" marker-end="url(#{mid})"/>')
     p.append(txt(1064, 172, "else", 10.5, "start"))
     p.append(mpill("n-steps", 272, 168, 150, 24, r"\times\ N\ \mathrm{passes}", 15))
-    p.append(tag(430, 185, "p. 4"))
     p.append(mpill("", 480, 168, 330, 24, r"\mathrm{next\ prompt:}\ \ R_{k+1} \approx R_k + W_k + o_{k+1}"))
-    p.append(tag(818, 185, "p. 5, 7"))
     p.append("</svg>")
     return "".join(p)
 
@@ -395,7 +386,7 @@ def eqrow(key, sub, eqs, gloss, cite, pg, stack=False):
 slide("s02", "The agent loop and the variables at each step", thumb=False,
       crumb="here: the steps of one pass, the variable at each step, and how the variables add up to time and cost → to: the five sources of slowness",
       callout=f"""
-<p><b>One task is one loop run {tex("N", 15)} times, and every term of its time and its cost sits at one step of this loop.</b> Page tags show where each term is measured.</p>""",
+<p><b>One task is one loop run {tex("N", 15)} times, and every term of its time and its cost sits at one step of this loop.</b></p>""",
       body=f"""
 <div class="fig-loop2">{loop_svg(cls="big-svg", big=True)}</div>
 <div class="eqtab">
