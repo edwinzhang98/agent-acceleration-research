@@ -223,8 +223,8 @@ def hbars(title, rows, caption="", labelw=150, width=380, maxv=None, height_row=
     """Horizontal bars: rows = [(label, value, shown_text)] — like the reference deck's share bars."""
     vals = [r[1] for r in rows]
     maxv = maxv or max(vals) or 1
-    labelw = max(labelw, int(max(len(r[0]) for r in rows) * 6.8) + 14)
-    valw = int(max(len(r[2]) for r in rows) * 6.8) + 12
+    labelw = max(labelw, int(max(len(r[0]) for r in rows) * 7.0) + 14)
+    valw = int(max(len(r[2]) for r in rows) * 7.0) + 12
     n = len(rows)
     h = 6 + n*height_row
     barw = max(40, width - labelw - valw)
@@ -364,7 +364,7 @@ T_NC = tex(r"N \cdot c_k", 15)
 slide("s02", "The loop, with every term on it",
       crumb="here: the loop, its two equations, and the one term that grows fastest → to: the five sources of slowness",
       callout=f"""
-<p><b>One task = one loop run {tex("N", 15)} times.</b> Each pass observes the screen, makes at least one model call, acts, and waits. A call has three segments: <b>queueing</b>; <b>reading</b> the prompt, all tokens at once; <b>writing</b> the answer, one token at a time — 81.7 tokens per second for Claude Opus 5.5 ({CITE['aa']}) — at 5× the read price. <b>Observation, action, waiting and queueing enter only the time equation; read and write tokens enter both.</b></p>""",
+<p><b>One task = one loop run {tex("N", 15)} times.</b> A call has three segments: <b>queueing</b>; <b>reading</b> the prompt, all tokens at once; <b>writing</b> the answer, one token at a time, at 5× the read price. <b>Observation, action, waiting and queueing enter only the time equation; read and write tokens enter both.</b></p>""",
       body=f"""
 <div class="loopgrid">
   <div class="fig-loop">{loop_svg(cls="big-svg", formulas=False)}</div>
@@ -379,13 +379,10 @@ slide("s02", "The loop, with every term on it",
   <div class="stack">
     <div class="eqrow small">{eq_svg("quad", fontsize=15)}</div>
     {card("READING GROWS WITH THE SQUARE OF THE PASSES", "Reading, not writing, is the term that runs away — the cheapest token is the one never re-read",
-          ["Pass " + tex("k", 13) + " re-sends the " + tex("k-1", 13) + " earlier screenshots, 1,000–1,800 tokens each " + ci('anth-a'),
-           "10 passes re-read 55 units of history, 20 passes 210: double the passes, 4× the reading, 2× the writing (calc.)",
-           "Caching cuts the read price to 0.1× but not the shape",
-           "Measured on real runs: cost “grows quadratically with the number of steps”; later steps up to 3× slower " + ci('osh')])}
+          ["Measured on real runs, cost “grows quadratically with the number of steps” and a late step takes up to 3× longer than an early one, because pass " + tex("k", 13) + " re-sends the " + tex("k-1", 13) + " earlier screenshots — GTA1 harness, 39 OSWorld tasks"], ci('osh'))}
   </div>
 </div>""",
-      foot=f"SOURCES · {CITE['aa']} (third-party measurement) · {CITE['anth-b']}; {CITE['openai']} (prices) · {CITE['anth-a']} · {CITE['osh']}",
+      foot=f"SOURCES · {CITE['anth-b']}; {CITE['openai']} (prices) · {CITE['osh']}",
       chip=("#a1-1", "Appendix A1"),
       notes="""对应文档零节。读 = prefill，写 = decode（Opus 5.5 实测 81.7 token/s [E208]）；写的单价是读的 5 倍（定价页）。环境时间和排队只进时间式子，读写 token 两个式子都进——这是第 9 页“慢和贵怎么连”的底层结构。右下：""" + tex(r"R_k \approx k\,r", 14) + """，求和 """ + tex(r"\approx \frac{N^2}{2}\, r", 14) + """，10 步 55 份、20 步 210 份（calc.）；实测 OSWorld-Human“成本随步数二次增长”[E45]，靠后的步最多慢 3 倍 [E23]；截图 1,000–1,800 tokens [E31]。harness 一词在这页定义。""")
 
@@ -400,11 +397,11 @@ slide("s03", "Slowness has five sources",
   {card("I · TOO MANY PASSES " + tex("(N)", 11), "Hour-scale tasks take hundreds of passes, and every pass is a full round trip",
         ["318 tool calls per task on OSWorld 2.0 — 108 desktop tasks, Claude Opus 4.7, one action per step"], ci('osw2'))}
   {card("II · TOO MANY CALLS PER PASS " + tex("(c_k)", 11), "A harness that plans, judges and reflects multiplies every pass",
-        ["4–12 planning calls per judging call in the GTA1 harness", "Sampling several candidates per step multiplies the calls again"], ci('osh'))}
+        ["4–12 planning calls per judging call — GTA1 harness: four parallel planners, up to three retries, one judge"], ci('osh'))}
   {card("III · EACH CALL IS SLOW", "Inside a call, waiting, reading and writing are three separate delays",
-        ["Queueing: identical requests vary up to 69× by time of day", "Reading: late passes up to 3× slower as screenshots accumulate", "Writing, one token at a time: 91–98.6% of model time"], ci('bian','osh','yuan'))}
+        ["Writing, one token at a time, is 91–98.6% of model time — local 27–31B models with a warm cache"], ci('yuan'))}
   {card("IV · THE ENVIRONMENT IS SLOW", "The environment costs time whether or not the model is running",
-        ["3–26 s to build one accessibility tree", "6.6 s per browser action, median", "A fixed 2–3 s sleep after every action", "4% of tool calls take 85% of tool time"], ci('osh','skim','tracelab'))}
+        ["6.6 s per browser action vs 4.7 s per model call, median — 151 WebVoyager live-site tasks, GPT-4o"], ci('skim'))}
   {card("V · EVERYTHING IS SERIAL", "Nothing overlaps, so task time is a sum: fixing one term saves only its own share",
         ["Concurrency within a turn: 1.15 — GitHub Copilot production telemetry"], ci('copilot'))}
 </div>""",
@@ -420,20 +417,18 @@ slide("s04", "I–II · Too many passes, too many calls per pass",
       body=f"""
 <div class="cards4">
   {card("I-1, I-2 · LONG TASKS, ONE ACTION PER PASS", "Long tasks with one action per pass need hundreds of passes; several actions per call cut them by half or more",
-        ["318 tool calls per task with one action per step — OSWorld 2.0, 108 long tasks, Claude Opus 4.7", "160.7 with several actions per call, same model; 103 with Claude Opus 4.8"], ci('osw2'))}
+        ["318 tool calls per task with one action per step, 160.7 with several actions per call — OSWorld 2.0, 108 long tasks, Claude Opus 4.7"], ci('osw2'))}
   {card("I-3 · NAVIGATION-ONLY PASSES", "Most passes are navigation that needs no thinking, yet each one is a model call",
-        ["66.7% of the steps in the median task are pure navigation", "151 WebVoyager tasks on live websites; three text agents driven by GPT-4o"], ci('skim'))}
+        ["66.7% of the steps in the median task are pure navigation — 151 WebVoyager tasks on live websites, three text agents driven by GPT-4o"], ci('skim'))}
   {card("I-4 · IDLING AND DEAD LOOPS", "When an agent is stuck, every repeated pass is billed and timed in full",
-        ["66% of the steps in failed tasks past 50 steps were repeats — GTA1 harness, 39 OSWorld tasks", "One element-locating loop repeated a step 18 times: 27 minutes, $8.47 at list price without caching"], ci('osh'))}
+        ["One element-locating loop repeated a step 18 times: 27 minutes and $8.47 at list price without caching — GTA1 harness, OSWorld"], ci('osh'))}
   {card("II · PLANNING, JUDGING, SAMPLING", "Extra calls per pass buy accuracy, at a steep rate",
-        ["4–12 planning calls per judging call — GTA1: four parallel planners, up to three retries, one judge", "10 candidates per step instead of 1: 38.8% → 43.2% success for 96K → 920K tokens per task — gpt-oss-120b, 165 WebArena-Lite tasks", "6.6 model calls per user turn — GitHub Copilot"], ci('osh','atts','copilot'))}
+        ["10 candidates per step instead of 1: 38.8% → 43.2% success for 96K → 920K tokens per task — gpt-oss-120b, 165 WebArena-Lite tasks"], ci('atts'))}
 </div>
-<div class="figs3">
-  {hbars("Steps per task on OSWorld 2.0, 108 tasks", [("Opus 4.7 · one action per step",318,"318"),("Opus 4.7 · batched actions",160.7,"160.7"),("Opus 4.8 · batched",103,"103"),("GPT-5.5 · batched",95.2,"95.2")], "XLANG Lab, 2026 · mean over tasks")}
-  {hbars("Steps in the median WebVoyager task, 151 live-site tasks, GPT-4o", [("navigation only",66.7,"66.7%"),("needs a decision",33.3,"33.3%")], "Wong et al., 2026")}
-  {hbars("Tokens per task vs candidates per step, WebArena-Lite", [("1 candidate · 38.8% success",96,"96K"),("10 candidates · 43.2% success",920,"920K")], "Lee et al., 2026 · gpt-oss-120b, 165 tasks")}
+<div class="figs1">
+  {hbars("Steps per task on OSWorld 2.0, 108 tasks", [("Opus 4.7 · one action per step",318,"318"),("Opus 4.7 · batched actions",160.7,"160.7"),("Opus 4.8 · batched",103,"103"),("GPT-5.5 · batched",95.2,"95.2")], "XLANG Lab, 2026 · mean over tasks", width=600)}
 </div>""",
-      foot=f"SOURCES · {CITE['osw2']} · {CITE['skim']} · {CITE['osh']} · {CITE['atts']} · {CITE['copilot']} — full rows with conditions in Appendix A1",
+      foot=f"SOURCES · {CITE['osw2']} · {CITE['skim']} · {CITE['osh']} · {CITE['atts']} — full rows with conditions in Appendix A1",
       chip=("#a1-1", "Appendix A1"),
       notes="""文档第一节第一、二类。I-1/I-2 [E6]：Opus 4.7 单动作 318 步，批量 160.7；Opus 4.8 批量 103 步（481.8 次调用）；GPT-5.5 95.2 步。I-3 [E17]：Browser-Use、AgentOccam、WebVoyager 三个 agent，66.7% 纯导航。I-4 [E45]：o3 规划判断、GTA1-7B 定位；66% 无效重复；死循环 18 次、27 分钟、$8.47。I-5 stale state 只在附录。II-1 [E25][E22]：每判断 4–12 次规划；Agent S2 规划 53%、反思 34%。II-2 [E44]。II-3 [E20]：Copilot 2026 年 6 月第一周 1,350 万 session。""")
 
@@ -445,20 +440,18 @@ slide("s05", "III–V · Inside a call, around it, and in sequence",
       body=f"""
 <div class="cards4">
   {card("III-1, III-2 · QUEUEING AND READING", "Before a single token is written, the call has waited in a queue and re-read the whole history",
-        ["Identical requests vary up to 69× by time of day — 15 models, 5 providers", "The prompt at pass " + tex("k", 13) + " carries " + tex("k-1", 13) + " screenshots: late passes up to 3× slower", "A richer observation (tree + HTML + screenshot) multiplied the input 4.8×", "An evicted cache costs up to 7.14× — GLM-4.6 on 8 H100s under load"], ci('bian','osh','asb','thunder'))}
+        ["Identical requests take up to 69× longer depending on the time of day — 15 models, 5 providers"], ci('bian'))}
   {card("III-3, III-4 · WRITING AND THINKING", "Writing is the slowest segment per token, and thinking modes write far more tokens without reliably buying accuracy",
-        ["91–98.6% of model time is writing, with a warm cache — local 27–31B models", "224K vs 37K output tokens per task — Claude Opus 4.8 vs GPT-5.5, same 108 tasks", "More reasoning effort lowered accuracy in 21 of 36 pairs — 21,730 runs"], ci('yuan','osw2','hal'))}
+        ["224K vs 37K output tokens per task — Claude Opus 4.8 vs GPT-5.5 on the same 108 OSWorld 2.0 tasks"], ci('osw2'))}
   {card("IV · THE ENVIRONMENT", "The environment is slow on its own, and the benchmarks add fixed sleeps on top",
-        ["3–26 s per accessibility tree — OSWorld desktop apps", "6.6 s browser vs 4.7 s model per step — 151 WebVoyager live-site tasks, GPT-4o", "OSWorld 2.0’s 3 s sleep × 318 steps ≈ 16 min of pure waiting (calc.)", "4% of coding tool calls take 85% of tool time"], ci('osh','skim','code','osw2','tracelab'))}
+        ["OSWorld 2.0 sleeps 3 s after every action: × 318 steps ≈ 16 min of pure waiting per task (calc.)"], ci('osw2','code'))}
   {card("V · SERIAL", "Nothing overlaps, so task time is a sum — and a “total time” often includes the human",
-        ["Concurrency within a turn: 1.15 — GitHub Copilot telemetry", "Fixing one term saves only its own share", "80–92% of a coding session’s elapsed time is the person thinking between turns — strip it first"], ci('copilot','tracelab'))}
+        ["80–92% of a coding session’s elapsed time is the person thinking between turns — GitHub Copilot telemetry (median) and 4,265 Claude Code / Codex sessions"], ci('copilot','tracelab'))}
 </div>
-<div class="figs3">
-  {hbars("Seconds per step, median, 151 WebVoyager live-site tasks, GPT-4o", [("browser action",6.6,"6.6 s"),("model call",4.7,"4.7 s")], "Wong et al., 2026")}
-  {hbars("Where a Claude Code / Codex request’s 4.3 minutes go", [("tools",59.8,"59.8%"),("model",41.0,"41.0%")], "Zhu et al., 2026 · 4,265 sessions, 43 developers", maxv=100)}
-  {hbars("Output tokens per task, same 108 OSWorld 2.0 tasks", [("Claude Opus 4.8",224,"224K"),("GPT-5.5",37,"37K")], "XLANG Lab, 2026")}
+<div class="figs1">
+  {hbars("Where a Claude Code / Codex request’s 4.3 minutes go", [("tools",59.8,"59.8%"),("model",41.0,"41.0%")], "Zhu et al., 2026 · 4,265 sessions, 43 developers", maxv=100, width=600, labelw=60)}
 </div>""",
-      foot=f"SOURCES · {CITE['bian']} · {CITE['osh']} · {CITE['asb']} · {CITE['thunder']} · {CITE['yuan']} · {CITE['osw2']} · {CITE['hal']} · {CITE['skim']} · {CITE['code']} · {CITE['tracelab']} · {CITE['copilot']}",
+      foot=f"SOURCES · {CITE['bian']} · {CITE['osw2']} · {CITE['code']} · {CITE['tracelab']} · {CITE['copilot']} — full rows with conditions in Appendix A1",
       chip=("#a1-2", "Appendix A1"),
       notes="""文档第一节第三、四、五类。III-1 [E101] 69 倍；III-2 [E23] 靠后步慢 3 倍、[E98] AgentSysBench 4.8 倍输入（模型占比 46.9→61.6%）、[E108] ThunderAgent 7.14 倍；III-3 [E29] 91–98.6%，[E94] UFO2 每调用约 10 秒只在附录；III-4 [E41] 22.4 万 vs 3.7 万，[E43] HAL 21/36。IV-1 [E24][E22]；IV-2 [E17]；IV-3 [E111][E6][E97]；IV-4 [E19][E105]。V [E20] 1.15；人思考时间 80–92% [E105][E106]。""")
 
@@ -473,12 +466,12 @@ slide("s06", "Which term dominates depends on the harness, not on the kind of ag
 <thead><tr><th></th><th>Screenshot desktop agent, multi-call harness</th><th>Text web agent</th><th>Coding agent with a prompt cache</th></tr></thead>
 <tbody>
 <tr><td class="rk">heaviest</td>
-<td><b>Reading × calls per pass × passes.</b> 87–97% of task time in planning, judging and reflection calls; screenshots and actions under 3.5% together (GTA1, Agent S2; 39 OSWorld tasks) {ci('osh')}</td>
+<td><b>Reading × calls per pass × passes.</b> 87–97% of task time is planning, judging and reflection calls (GTA1, Agent S2; 39 OSWorld tasks) {ci('osh')}</td>
 <td><b>Browser execution and waiting.</b> Per step, median: browser 6.6 s, model 4.7 s (151 WebVoyager live-site tasks, GPT-4o) {ci('skim')}</td>
-<td><b>Writing, or tool tails.</b> Writing is 91–98.6% of model time {ci('yuan')}; Claude Code / Codex requests: tools 59.8%, model 41.0% {ci('tracelab')}; Copilot: model 13.7%, tools 2% {ci('copilot')}</td></tr>
+<td><b>Writing, or tool tails.</b> Writing is 91–98.6% of model time {ci('yuan')}; in Claude Code / Codex requests tools take 59.8%, the model 41.0% {ci('tracelab')}</td></tr>
 <tr><td class="rk">flips when</td>
 <td>The harness makes one call per pass: over 70% of the time is then the sandbox, because the benchmark sleeps 2–3 s after every action {ci('asb','code','osw2')}</td>
-<td>The observation grows: 4.8× input moved the model’s share from 46.9% to 61.6% {ci('asb')}; the Browser-Use harness spends 73% of its latency in model calls {ci('jit')}</td>
+<td>The observation grows: 4.8× the input moved the model’s share of step time from 46.9% to 61.6% {ci('asb')}</td>
 <td>Load evicts the cache: latency up to 7.14× {ci('thunder')}; or the tools are light and the model dominates again (Copilot)</td></tr>
 <tr><td class="rk">in one line</td>
 <td>Slow in reading: every pass re-reads the growing screenshot history</td>
@@ -502,17 +495,17 @@ slide("s07", "Cost has six sources",
 {cost_strip()}
 <div class="rows6">
   {card("1 · TOKENS READ", "Reading is the larger bill, it grows with the square of the passes, and caching does not remove it",
-        ["1,000–1,800 tokens per screenshot; rich observations 4.8×; sampling 96K → 920K tokens per task", "At a 95.7% cache hit rate, prefix tokens are still 59.5% of the bill"], ci('osh','anth-a','asb','atts','tracelab'))}
+        ["Even at a 95.7% cache hit rate, prefix tokens are still 59.5% of the bill — 4,265 Claude Code / Codex sessions"], ci('tracelab'))}
   {card("2 · TOKENS WRITTEN", "Writing is the dearer token and thinking is billed as writing — but it is not the larger bill",
-        ["5× the read price; 224K vs 37K output tokens per task — Claude Opus 4.8 vs GPT-5.5", "31% of an uncached screenshot agent’s bill: $2.43 output only vs $7.87 all tokens — GTA1, 39 OSWorld tasks"], ci('osw2','osh'))}
+        ["31% of an uncached screenshot agent’s bill: $2.43 counting output only vs $7.87 counting all tokens — GTA1, 39 OSWorld tasks (calc.)"], ci('osh'))}
   {card("3 · NUMBER OF CALLS", "The calls that made the agent slow are the same calls that make it expensive",
-        [T_NC + " multiplies both token bills", "5–13× the calls of a single-call harness per step — GTA1 (calc.)", "Sampling multiplies the calls by the candidate count"], ci('osh','atts'))}
+        ["5–13× the calls of a single-call harness per step — GTA1: planners, retries and a judge (calc.)"], ci('osh'))}
   {card("4 · FAILURES AND RETRIES", "What a task costs is what a success costs, and failed attempts are billed in full",
-        ["$72.4 per attempt ÷ 20.6% completion ≈ $351 per success — OSWorld 2.0, best agent (calc.)", "A dead loop bills $8.47; one leaderboard run cost ≈ $40,000"], ci('osw2','osh','hal'))}
+        ["$72.4 per attempt ÷ 20.6% completion ≈ $351 per success — OSWorld 2.0, best agent (calc.)"], ci('osw2'))}
   {card("5 · UNIT PRICE", "The price list sets the constant; speed tiers and long contexts double it",
-        ["Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written", "Fast mode 2× (and it drops the cache); above 272K tokens, 2× the read price (OpenAI)"], ci('anth-b','openai'))}
+        ["Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written — a 40× spread between two vendors’ list prices (calc.)"], ci('anth-b','openai'))}
   {card("6 · THE MACHINES", "The machines are missing from every published cost, and for CPU environments they are small",
-        ["No benchmark reports machine dollars — every “cost per task” is an API bill", "A one-hour CPU environment costs $0.02–0.36 at list prices: 0.3–4.6% of a $7.87 bill (calc.; next page)"], "vendor price pages, read 2026-09-27")}
+        ["A one-hour CPU environment costs $0.02–0.36 at list prices: 0.3–4.6% of a $7.87 bill (calc.; next page)"], "vendor price pages, read 2026-09-27")}
 </div>""",
       foot="SOURCES · one representative number per class; the complete tables with conditions are in Appendix A3",
       chip=("#a3-1", "Appendix A3"),
@@ -539,7 +532,7 @@ slide("s08", "Counting the same task four ways, and the machines nobody counts",
   </div>
   <div class="stack">
     {card("6 · THE MACHINES, FROM LIST PRICES", "For CPU environments the machine is a small addition — until idle time, proxies or GPUs enter",
-          ["A one-hour CPU environment costs $0.02–0.36: 0.3–4.6% of a $7.87 bill, 0.03–0.5% of $72.4 (calc.)", "Benchmarks name their instances but never their cost; Meta Muse and ChatGPT agent run a dedicated cloud machine per user and publish no price", "It grows with plan fees, proxy traffic ($5–12 per GB), billing while the agent waits (the median AgentSysBench session is active 20% of its lifetime) and GPU sandboxes (an H100 at $3.95 per hour is half of a $7.87 bill)"], "vendor price pages, read 2026-09-27; " + CITE['asb'] + "; " + CITE['meta'])}
+          ["An H100 sandbox at $3.95 per hour is already half of a $7.87 bill, and hourly billing runs while the agent waits — the median AgentSysBench session is active only 20% of its lifetime"], "vendor price pages, read 2026-09-27; " + CITE['asb'])}
     {hbars("A one-hour CPU environment as a share of a $7.87 API bill (calc.)", [("Browser Use cloud browser",0.25,"0.25%"),("AWS t3.medium",0.5,"0.5%"),("Browserbase",1.5,"1.5%"),("E2B / Daytona 2 vCPU",2.1,"2.1%"),("Modal 2 vCPU",3.0,"3.0%"),("AWS t3.2xlarge (OSWorld 2.0)",4.2,"4.2%"),("OpenAI hosted container 4 GB",4.6,"4.6%")], "vendor price pages, read 2026-09-27 · full price table in Appendix A3", width=520, height_row=17)}
   </div>
 </div>""",
@@ -556,14 +549,13 @@ slide("s09", "How slow and expensive are linked: three kinds of relationship",
 {link_fig()}
 <div class="cards3 rel">
   {card("SAME SOURCE — in both equations", "fix it, and time and money fall together",
-        ["<b>Passes " + tex("N", 13) + "</b> — time ≈ linear, read tokens quadratic", "<b>Calls per pass " + tex("c_k", 13) + "</b>, <b>reading</b>, <b>writing</b> — the slowest and dearest token", "<b>Cache hits</b> — fragile: editing the history or switching to fast mode invalidates them", "<b>Failures and idle loops</b> — and they turn “per attempt” into “per success”"], ci('osh','anth-b'))}
+        ["Passes " + tex("N", 13) + ", calls per pass " + tex("c_k", 13) + ", reading, writing, cache hits, failures — every one of them lives in the token counts"], ci('osh','anth-b'))}
   {card("SLOW BUT NOT EXPENSIVE — time equation only", "fix it, and only time falls",
-        ["<b>Queueing</b>, <b>page loads and fixed sleeps</b>, <b>tool tails</b> — none produces a token", "The machine behind them is billed by the hour: usually under 5% of the API bill", "Escaping the queue means a fast or priority tier, at 2× the price"])}
-  {card("MONEY FOR TIME OR FOR ACCURACY — opposite signs", "buying speed buys only the writing segment",
-        ["<b>Fast mode</b> — up to 2.5× faster writing (vendor-stated), reading unchanged, 2× the price", "<b>Bigger models, more thinking</b> — cost versus accuracy is convex: each extra point costs more than the last (marginal tokens per point 101K → 575K; 6×, 9×, 9.6× the tokens for a few points)", "More thinking is not always more accurate"], ci('anth-b','openai','osw2','hal','atts'))}
-</div>
-<div class="oneline"><b>In one line:</b> a cause that lives in tokens — fix it and time and money fall together; a cause that lives in waiting — fix it and only time falls; paying for speed buys only the writing segment.</div>""",
-      foot=f"SOURCES · {CITE['osh']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['osw2']} · {CITE['hal']} · {CITE['atts']} — the cause-by-cause table is Appendix A5",
+        ["Queueing, page loads, fixed sleeps, tool tails — none produces a token; the machine behind them is billed by the hour, usually under 5% of the API bill"])}
+  {card("MONEY FOR TIME OR FOR ACCURACY — opposite signs", "buying speed buys only the writing segment; buying accuracy gets dearer with every point",
+        ["Fast mode: up to 2.5× faster writing (vendor-stated) at 2× the price, reading unchanged"], "(" + CITE['anth-b'] + "; " + CITE['openai'] + "; accuracy: Appendix A5)")}
+</div>""",
+      foot=f"SOURCES · {CITE['osh']} · {CITE['anth-b']} · {CITE['openai']} — the cause-by-cause table, with the convexity evidence, is Appendix A5",
       chip=("#a5-1", "Appendix A5"),
       notes="""文档第四节。三种关系：同源（步数、调用、读、写、缓存、失败）；只慢不贵（排队、页面等待和固定停顿、工具长尾）；用钱换时间或准确率（fast mode 2 倍 [E190][E192]；大模型和思考：凸，边际 token 10.1 万→57.5 万 [E44]，6× [E41] / 9× [E43] / 9.6× [E44]，多思考未必更准 [E43]；小模型反弹为推断，只在附录 A5）。一句话：出在 token 上的修了时间和钱一起省；出在等待上的只省时间；花钱买速度只买得到写的那段。""")
 
@@ -605,7 +597,6 @@ REFS_P1 = [
  "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of the 9th Conference on Machine Learning and Systems (MLSys 2026)</i>. arXiv:2506.16042. University of California, San Diego.",
  "Anthropic. (2026a, May 13). <i>Best practices for computer and browser use with Claude</i>. https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude",
  "Anthropic. (2026b). <i>Claude API pricing</i>; <i>Fast mode</i> (developer documentation, read 27 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/fast-mode",
- "Artificial Analysis. (2026). <i>Claude Opus 5.5 (high): model page</i> and <i>Methodology</i> (read September 2026). https://artificialanalysis.ai/models/claude-opus-5-5-high; https://artificialanalysis.ai/methodology",
  "Bian, S., Yan, M., Jayarajan, A., Pekhimenko, G., &amp; Venkataraman, S. (2025). What limits agentic systems efficiency? arXiv:2510.16276. University of Wisconsin–Madison; University of Toronto; NVIDIA.",
  "Chang, C., Zhou, Y., Fu, K., An, D., Feng, T., Lu, H., Yao, S., Guo, P., Yu, Y., Shan, Y., Li, B., Yuan, B., &amp; Wang, W. (2026). From LLM inference to agentic workloads: Characterization and implications for serving systems (AgentSysBench). arXiv:2608.15127. Hong Kong University of Science and Technology; Alibaba Group; ByteDance.",
  "Kang, H., Li, Z., Xu, W., Yang, X., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A simple, fast and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, poster. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI.",
@@ -759,7 +750,7 @@ A("a5-1", "A5", "A5 · Each cause’s effect on time and on money",
    ["Tool tails (tests, builds)", "slow", "No API cost", "<b>slow but not expensive</b>"],
    ["Failures, idling, retries", "slow", "expensive", "<b>same source</b>, and it turns “per attempt” into “per success”"],
    ["Fast mode", "Writing up to 2.5× faster (vendor-stated); reading unchanged", "2× the price", "<b>money for time</b>"],
-   ["Bigger models, more thinking", "slower", "dearer", "<b>money and time for accuracy</b>, convex: marginal tokens per point 101K → 575K on one model; 6× / 9× / 9.6× tokens for a few points; more thinking not always more accurate"],
+   ["Bigger models, more thinking", "slower", "dearer", f"<b>money and time for accuracy</b>, convex: marginal tokens per point 101K → 575K on one model; 6× / 9× / 9.6× tokens for a few points; more thinking not always more accurate {ci('atts','osw2','hal')}"],
    ["Smaller models", "faster", "cheaper", "but if accuracy falls, steps and retries rise — possibly slower and dearer again (inference, no direct evidence)"],
   ], ["22%", "26%", "26%", "26%"]),
   notes="附录 A5：文档第四节关系表整表 [E23][E45][E190][E44][E41][E43]。")
@@ -800,12 +791,13 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 /* cards */
 .cards3,.cards4,.rows5,.rows6,.figs3{display:grid;gap:12px}
 .cards3{grid-template-columns:repeat(3,1fr)}.cards4{grid-template-columns:repeat(4,1fr)}
-.rows6 .card{padding:8px 12px;gap:4px}.rows6 .cv,.stack .cv{font-size:13.5px}.rows6 .cd,.stack .cd{font-size:12px;line-height:1.35}.rows6 ul.cd li,.stack ul.cd li{margin-bottom:2px}.rows6 .cc{font-size:9.5px;padding-top:3px}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr)}
+.rows6 .card{padding:10px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13.5px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr)}
 .figs3{grid-template-columns:repeat(3,1fr);gap:20px;flex:none}
+.figs1{display:flex;flex:none}.figs1 .fig{width:600px;max-width:100%}
 .card{border:1px solid var(--rule);border-radius:4px;padding:11px 13px;background:#fff;display:flex;flex-direction:column;gap:5px;min-height:0}
 .ck{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.cv{font-size:14.5px;font-weight:700;line-height:1.28;letter-spacing:-.005em}
-.cd{font-size:12.5px;line-height:1.4;color:var(--ink2)}
+.cv{font-size:15px;font-weight:700;line-height:1.28;letter-spacing:-.005em}
+.cd{font-size:13px;line-height:1.42;color:var(--ink2)}
 ul.cd{margin:0;padding-left:15px}
 ul.cd li{margin:0 0 4px 0;padding-left:1px}
 ul.cd li::marker{color:var(--accent)}
