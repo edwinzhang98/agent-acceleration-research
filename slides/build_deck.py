@@ -1280,7 +1280,7 @@ slide("t04", "Fewer steps: more work per call cut steps by 38⁠–⁠46%; skill
   [wk("OSWorld 2.0, batched", "osw2"), "One call emits several actions", "Steps 190.5 → 103, success 18.5 → 20.6%, ~$76.1 → ~$72.4 per task — 108 tasks, Claude Opus 4.8, one run", "Tool calls 190.5 → 481.8; no wall-clock"],
   [wk("ASI", "asi"), "Verified Python skills induced from the agent’s own successes", "Steps 5.6 → 5.0 (−10.7%, calc.), success 32.7 → 40.4% — 812 WebArena tasks, Claude 3.5 Sonnet", "Induction calls not counted; no time or $"],
   [wk("WALT", "walt"), "Site tools learned by exploration", "Steps 8.9 → 7.0, success 57.5 → 64.1% — 234 VisualWebArena tasks, GPT-5 planner, GPT-5-mini executor", "Exploration cost not quantified"],
-  [wk("Plain agent, 15 steps", "hajimiri"), "No skill or memory module; a pruned page tree", "Plain 44.78% at 73.6K tokens per task vs ASI 41.02% at 107.3K — 655 WebArena tasks, Gemini 3 Flash, 3 runs", "Skills add tokens and calls"],
+  [wk("Plain agent, 15 steps", "hajimiri"), "No skill or memory module; a pruned page tree", "Plain 44.78% at 73.6K tokens per task vs ASI 41.02% at 107.3K — 655 WebArena tasks (calc.), Gemini 3 Flash, 3 runs", "Skills add tokens and calls"],
  ])}
 <div class="figcap">Headroom: grouping actions by screenshot needs 1.35× (Chrome) to 2.93× (Calc) fewer steps in human reference runs (calc.) {c2('osh')}.</div>""",
       foot="NOT YET MEASURED · task time for batched actions (OSWorld 2.0 pauses 3 s after each action; whether after each batched call is not stated) · SOURCES · as cited; 38–46% and 11–21% are calc. from the rows; more rows and stopping rules in Appendix B2",
