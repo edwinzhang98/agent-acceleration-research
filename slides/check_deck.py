@@ -34,7 +34,7 @@ from playwright.async_api import async_playwright
 ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "slides" / "agent-acceleration.html"
 DEFAULT_OUT = ROOT / "slides" / "shots"
-COVER = ("s00", "s01")   # title pages, exempt from the check
+COVER = ("s00", "s01", "t01")   # title pages, exempt from the check
 
 # per page: elements that reach into the bottom 24 px of the slide or past its right edge,
 # and the content box's scrollHeight/clientHeight
@@ -92,7 +92,7 @@ async def main(ids=None, pdf=None, out=DEFAULT_OUT):
     if failed:
         print(f"FAIL: {len(failed)} of {len(report)} pages overflow: " + ", ".join(f"{sid} ({report[sid]['content']})" for sid in failed))
         return 1
-    print(f"OK: all {len(report)} pages fit" + (" (the title pages s00 and s01 are exempt)" if set(COVER) & set(report) else "")
+    print(f"OK: all {len(report)} pages fit" + (" (the title pages s00, s01 and t01 are exempt)" if set(COVER) & set(report) else "")
           + f"; screenshots in {out}")
     return 0
 
