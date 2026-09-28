@@ -28,11 +28,11 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 /* cards */
 .cards3,.cards4,.rows5,.rows6,.figs3{display:grid;gap:12px}
 .cards3{grid-template-columns:repeat(3,1fr)}.cards4{grid-template-columns:repeat(4,1fr)}
-.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr)}
+.rows6 .card{padding:9px 12px}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr)}
 .figs3{grid-template-columns:repeat(3,1fr);gap:20px;flex:none}
 .card{border:1px solid var(--rule);border-radius:4px;padding:11px 13px;background:#fff;display:flex;flex-direction:column;gap:5px;min-height:0}
 .ck{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.cv{font-size:15.5px;font-weight:700;line-height:1.25;letter-spacing:-.005em}
+.cv{font-size:14.5px;font-weight:700;line-height:1.28;letter-spacing:-.005em}
 .cd{font-size:12.5px;line-height:1.4;color:var(--ink2)}
 .cc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;color:var(--mute);margin-top:auto;padding-top:4px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:0}
@@ -47,7 +47,7 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 .oneline{background:var(--callout);border-radius:4px;padding:9px 14px;font-size:13.5px;line-height:1.4}
 /* figures (horizontal bars) */
 .fig{display:flex;flex-direction:column;gap:4px;min-width:0}
-.ft{font-size:11.5px;font-weight:600;line-height:1.3}
+.ft{font-size:11.5px;font-weight:500;line-height:1.3;color:var(--ink2)}
 .fc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);line-height:1.35}
 .hb{width:100%;height:auto;display:block}
 .hb .hl-lab{fill:var(--ink2);font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px}
@@ -13399,7 +13399,7 @@ z
  </g>
 </svg>
 </div>
-    <div class="card"><div class="ck">READING GROWS WITH THE SQUARE OF THE PASSES</div><div class="cv">10 passes re-read 55 units of history, 20 passes 210 (calc.)</div><div class="cd">Pass <svg class="tex" style="vertical-align:-2.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.081pt" height="14.203406pt" viewBox="0 0 9.081 14.203406" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <div class="card"><div class="ck">READING GROWS WITH THE SQUARE OF THE PASSES</div><div class="cv">Reading, not writing, is the term that runs away — the cheapest token is the one never re-read</div><div class="cd">Pass <svg class="tex" style="vertical-align:-2.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.081pt" height="14.203406pt" viewBox="0 0 9.081 14.203406" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -13598,7 +13598,7 @@ z
   </g>
  </g>
 </svg>
- earlier screenshots (1,000–1,800 tokens each; Anthropic, 2026a): doubling the passes quadruples the reading and only doubles the writing. Caching cuts the read price to 0.1× but not the shape. Measured: cost “grows quadratically with the number of steps”, later steps up to 3× slower (Abhyankar, Qi &amp; Zhang, 2026).</div></div>
+ earlier screenshots (1,000–1,800 tokens each; Anthropic, 2026a): 10 passes re-read 55 units of history, 20 passes 210 (calc.), so doubling the passes quadruples the reading and only doubles the writing. Caching cuts the read price to 0.1× but not the shape. Measured on real runs: cost “grows quadratically with the number of steps”, later steps up to 3× slower (Abhyankar, Qi &amp; Zhang, 2026).</div></div>
   </div>
 </div></div></div><div class="foot">SOURCES · Artificial Analysis, 2026 (third-party measurement) · Anthropic, 2026b; OpenAI, 2026 (prices) · Anthropic, 2026a · Abhyankar, Qi &amp; Zhang, 2026</div><a class="chip" href="#a1-1">Appendix A1 ↗</a><aside class="notes" hidden>对应文档零节。读 = prefill，写 = decode（Opus 5.5 实测 81.7 token/s [E208]）；写的单价是读的 5 倍（定价页）。环境时间和排队只进时间式子，读写 token 两个式子都进——这是第 9 页“慢和贵怎么连”的底层结构。右下：&lt;svg class="tex" style="vertical-align:-4.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="46.224pt" height="15.074438pt" viewBox="0 0 46.224 15.074438" xmlns="http://www.w3.org/2000/svg" version="1.1"&gt;
  
@@ -18301,7 +18301,7 @@ z
   </g>
  </g>
 </svg>
-</div><div class="eqterm"><div class="eqx"><svg class="tex" style="vertical-align:-16.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="39.33pt" height="31.095pt" viewBox="0 0 39.33 31.095" xmlns="http://www.w3.org/2000/svg" version="1.1">
+</div><div class="eqterm"><div class="eqx"><svg class="tex" style="vertical-align:-16.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="20.97pt" height="31.095pt" viewBox="0 0 20.97 31.095" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -18309,15 +18309,15 @@ z
  <g id="m34-figure_1">
   <g id="m34-patch_1">
    <path d="M -0 31.095 
-L 39.33 31.095 
-L 39.33 0 
+L 20.97 31.095 
+L 20.97 0 
 L -0 0 
 L -0 31.095 
 z
 " style="fill: none"/>
   </g>
   <g id="m34-text_1">
-   <!-- $\sum_{k=1..N}$ -->
+   <!-- $\sum_{k}$ -->
    <g style="fill: #1b2733" transform="translate(1.44 15.48) scale(0.135 -0.135)">
     <defs>
      <path id="m34-Cmex10-58" d="M 422 -8959 
@@ -18408,112 +18408,9 @@ Q 456 -72 398 -17
 Q 341 38 341 116 
 z
 " transform="scale(0.015625)"/>
-     <path id="m34-Cmr10-3d" d="M 481 850 
-Q 428 850 393 890 
-Q 359 931 359 978 
-Q 359 1031 393 1068 
-Q 428 1106 481 1106 
-L 4500 1106 
-Q 4547 1106 4581 1068 
-Q 4616 1031 4616 978 
-Q 4616 931 4581 890 
-Q 4547 850 4500 850 
-L 481 850 
-z
-M 481 2094 
-Q 428 2094 393 2131 
-Q 359 2169 359 2222 
-Q 359 2269 393 2309 
-Q 428 2350 481 2350 
-L 4500 2350 
-Q 4547 2350 4581 2309 
-Q 4616 2269 4616 2222 
-Q 4616 2169 4581 2131 
-Q 4547 2094 4500 2094 
-L 481 2094 
-z
-" transform="scale(0.015625)"/>
-     <path id="m34-Cmr10-31" d="M 594 0 
-L 594 225 
-Q 1394 225 1394 428 
-L 1394 3788 
-Q 1063 3628 556 3628 
-L 556 3853 
-Q 1341 3853 1741 4263 
-L 1831 4263 
-Q 1853 4263 1873 4245 
-Q 1894 4228 1894 4206 
-L 1894 428 
-Q 1894 225 2694 225 
-L 2694 0 
-L 594 0 
-z
-" transform="scale(0.015625)"/>
-     <path id="m34-Cmmi10-3a" d="M 538 353 
-Q 538 497 644 600 
-Q 750 703 891 703 
-Q 978 703 1062 656 
-Q 1147 609 1194 525 
-Q 1241 441 1241 353 
-Q 1241 213 1137 106 
-Q 1034 0 891 0 
-Q 750 0 644 106 
-Q 538 213 538 353 
-z
-" transform="scale(0.015625)"/>
-     <path id="m34-Cmmi10-4e" d="M 300 0 
-Q 238 0 238 84 
-Q 241 100 250 139 
-Q 259 178 276 201 
-Q 294 225 319 225 
-Q 931 225 1031 616 
-L 1900 4116 
-Q 1722 4147 1338 4147 
-Q 1275 4147 1275 4231 
-Q 1278 4247 1287 4286 
-Q 1297 4325 1314 4348 
-Q 1331 4372 1356 4372 
-L 2463 4372 
-Q 2509 4372 2522 4331 
-L 3944 947 
-L 4653 3781 
-Q 4666 3850 4666 3878 
-Q 4666 4147 4172 4147 
-Q 4109 4147 4109 4231 
-Q 4131 4313 4143 4342 
-Q 4156 4372 4219 4372 
-L 5588 4372 
-Q 5650 4372 5650 4288 
-Q 5647 4272 5637 4233 
-Q 5628 4194 5611 4170 
-Q 5594 4147 5569 4147 
-Q 4956 4147 4856 3756 
-L 3938 56 
-Q 3916 0 3872 0 
-L 3794 0 
-Q 3750 0 3738 44 
-L 2106 3916 
-L 2094 3956 
-Q 2081 3969 2081 3975 
-L 1234 588 
-Q 1228 572 1225 548 
-Q 1222 525 1216 494 
-Q 1216 328 1359 276 
-Q 1503 225 1716 225 
-Q 1778 225 1778 141 
-Q 1756 53 1740 26 
-Q 1725 0 1672 0 
-L 300 0 
-z
-" transform="scale(0.015625)"/>
     </defs>
-    <use xlink:href="#m34-Cmex10-58" transform="translate(68 104)"/>
-    <use xlink:href="#m34-Cmmi10-6b" transform="translate(0 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m34-Cmr10-3d" transform="translate(48.692383 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m34-Cmr10-31" transform="translate(115.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m34-Cmmi10-3a" transform="translate(150.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m34-Cmmi10-3a" transform="translate(182.03418 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m34-Cmmi10-4e" transform="translate(213.705078 -103.307813) scale(0.7)"/>
+    <use xlink:href="#m34-Cmex10-58" transform="translate(0 104)"/>
+    <use xlink:href="#m34-Cmmi10-6b" transform="translate(48 -103.307813) scale(0.7)"/>
    </g>
   </g>
  </g>
@@ -19663,7 +19560,7 @@ z
   </g>
  </g>
 </svg>
-</div><div class="cv">318 tool calls per task</div><div class="cd">OSWorld 2.0, 108 hour-scale desktop tasks, Claude Opus 4.7, one action per step.</div><div class="cc">(XLANG Lab, 2026)</div></div>
+</div><div class="cv">Hour-scale tasks take hundreds of passes, and every pass is a full round trip</div><div class="cd">318 tool calls per task on OSWorld 2.0 (108 desktop tasks, Claude Opus 4.7, one action per step).</div><div class="cc">(XLANG Lab, 2026)</div></div>
   <div class="card"><div class="ck">II · TOO MANY CALLS PER PASS <svg class="tex" style="vertical-align:-4.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.116pt" height="12.78pt" viewBox="0 0 19.116 12.78" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
@@ -19831,10 +19728,10 @@ z
   </g>
  </g>
 </svg>
-</div><div class="cv">4–12 planning calls per judging call</div><div class="cd">GTA1 harness: plan, retry, judge. Sampling candidates multiplies the calls again.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026)</div></div>
-  <div class="card"><div class="ck">III · EACH CALL IS SLOW</div><div class="cv">queue up to 69× · read up to 3× slower by the late passes · write 91–98.6% of model time</div><div class="cd">Identical requests by time of day; screenshots accumulate in the prompt; token-by-token writing.</div><div class="cc">(Bian et al., 2025; Abhyankar, Qi &amp; Zhang, 2026; Yuan et al., 2026)</div></div>
-  <div class="card"><div class="ck">IV · THE ENVIRONMENT IS SLOW</div><div class="cv">3–26 s per observation · 6.6 s per browser action · 2–3 s sleep per action</div><div class="cd">Accessibility tree, browser execution, fixed sleeps; tool runs: 4% of calls take 85% of tool time.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Wong et al., 2026; Zhu et al., 2026)</div></div>
-  <div class="card"><div class="ck">V · EVERYTHING IS SERIAL</div><div class="cv">concurrency within a turn: 1.15</div><div class="cd">Nothing overlaps: task time is the sum of the classes above, so fixing one term saves only its share.</div><div class="cc">(Liu et al., 2026)</div></div>
+</div><div class="cv">A harness that plans, judges and reflects multiplies every pass</div><div class="cd">4–12 planning calls per judging call in the GTA1 harness; sampling candidates multiplies the calls again.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026)</div></div>
+  <div class="card"><div class="ck">III · EACH CALL IS SLOW</div><div class="cv">Inside a call, waiting, reading and writing are three separate delays</div><div class="cd">Queueing spreads identical requests up to 69× by time of day; reading slows the late passes up to 3× as screenshots accumulate; writing, one token at a time, takes 91–98.6% of model time.</div><div class="cc">(Bian et al., 2025; Abhyankar, Qi &amp; Zhang, 2026; Yuan et al., 2026)</div></div>
+  <div class="card"><div class="ck">IV · THE ENVIRONMENT IS SLOW</div><div class="cv">The environment costs time whether or not the model is running</div><div class="cd">3–26 s per accessibility tree; 6.6 s per browser action; a fixed 2–3 s sleep after every action; 4% of tool calls take 85% of tool time.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Wong et al., 2026; Zhu et al., 2026)</div></div>
+  <div class="card"><div class="ck">V · EVERYTHING IS SERIAL</div><div class="cv">Nothing overlaps, so task time is a sum: fixing one term saves only its own share</div><div class="cd">Concurrency within a turn: 1.15 (GitHub Copilot production telemetry).</div><div class="cc">(Liu et al., 2026)</div></div>
 </div></div></div><div class="foot">SOURCES · one representative number per class; conditions on the next two pages and in Appendix A1</div><a class="chip" href="#a1-1">Appendix A1 ↗</a><aside class="notes" hidden>文档第一节五类总览。每类一个代表数：I [E6]；II [E25]；III [E101][E23][E29]；IV [E24][E17][E111][E19]；V [E20] 并发 1.15。第五类是结构性乘数：时间是各项之和，所以要先知道占比（第 6 页）。</aside></section><section class="slide main" id="s04"><div class="head"><div class="label">AGENT ACCELERATION · PART 1 · 04</div><h1>I–II · Too many passes, too many calls per pass</h1></div><div class="thumb"><svg class="thumb-svg" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The agent loop"><defs><marker id="ah5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ahp"/></marker></defs><g id="ah5-n-observe" class="node"><rect x="30" y="60" width="170" height="70" rx="6"/><text class="t" x="115.0" y="96.0" font-size="20" text-anchor="middle">Observe</text><text class="s" x="115.0" y="114.0" font-size="12" text-anchor="middle">screenshot · page text</text></g><g id="ah5-n-decide" class="box"><rect x="250" y="52" width="470" height="86" rx="8"/><text class="bt" x="262" y="72" font-size="13">DECIDE · one model call</text></g><g id="ah5-n-queue" class="node pill"><rect x="268" y="86" width="120" height="34" rx="17.0"/><text class="t" x="328.0" y="108.4" font-size="15" text-anchor="middle">queue</text></g><g id="ah5-n-read" class="node pill"><rect x="404" y="86" width="150" height="34" rx="17.0"/><text class="t" x="479.0" y="108.4" font-size="15" text-anchor="middle">read the prompt</text></g><g id="ah5-n-write" class="node pill"><rect x="570" y="86" width="134" height="34" rx="17.0"/><text class="t" x="637.0" y="108.4" font-size="15" text-anchor="middle">write the answer</text></g><g id="ah5-n-calls" class="node pill hl"><rect x="250" y="14" width="160" height="28" rx="14.0"/><text class="t" x="330.0" y="33.0" font-size="14" text-anchor="middle"></text></g><svg xmlns:xlink="http://www.w3.org/1999/xlink" x="277.0" y="19.0" width="106.0" height="18.0" viewBox="0 0 85.32 14.49375" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
@@ -24045,10 +23942,10 @@ z
 </svg>
 .</b> Passes pile up because tasks are long, each pass does one action, navigation-only passes still go through the model, and the agent idles or loops; calls pile up because the harness plans, judges and reflects, or samples several candidates per step.</p></div><div class="body">
 <div class="cards4">
-  <div class="card"><div class="ck">I-1, I-2 · LONG TASKS, ONE ACTION PER PASS</div><div class="cv">318 tool calls per task</div><div class="cd">OSWorld 2.0, 108 long tasks, Claude Opus 4.7, one action per step. Several actions per call: 160.7 for the same model, 103 for Claude Opus 4.8.</div><div class="cc">(XLANG Lab, 2026)</div></div>
-  <div class="card"><div class="ck">I-3 · NAVIGATION-ONLY PASSES</div><div class="cv">66.7% of steps are pure navigation</div><div class="cd">Median of 151 WebVoyager tasks on live websites; three text agents driven by GPT-4o.</div><div class="cc">(Wong et al., 2026)</div></div>
-  <div class="card"><div class="ck">I-4 · IDLING AND DEAD LOOPS</div><div class="cv">66% of steps wasted · one loop: 27 min, $8.47</div><div class="cd">GTA1 harness on 39 OSWorld tasks: failed tasks past 50 steps; one element-locating loop repeated a step 18 times, at list price without caching.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026)</div></div>
-  <div class="card"><div class="ck">II · PLAN + JUDGE + REFLECT, OR SAMPLE</div><div class="cv">4–12 planning calls per judging call · 9.6× tokens for 4.4 points</div><div class="cd">GTA1: four parallel planners, up to three retries, one judge. Sampling 1 → 10 candidates per step: 38.8% → 43.2% success, 96K → 920K tokens (gpt-oss-120b, 165 WebArena-Lite tasks). GitHub Copilot: 6.6 model calls per user turn.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Lee et al., 2026; Liu et al., 2026)</div></div>
+  <div class="card"><div class="ck">I-1, I-2 · LONG TASKS, ONE ACTION PER PASS</div><div class="cv">Long tasks with one action per pass need hundreds of passes; several actions per call cut them by half or more</div><div class="cd">OSWorld 2.0, 108 long tasks: 318 tool calls per task with one action per step (Claude Opus 4.7); 160.7 with several actions per call (same model), 103 with Claude Opus 4.8.</div><div class="cc">(XLANG Lab, 2026)</div></div>
+  <div class="card"><div class="ck">I-3 · NAVIGATION-ONLY PASSES</div><div class="cv">Most passes are navigation that needs no thinking, yet each one is a model call</div><div class="cd">66.7% of steps in the median task are pure navigation — 151 WebVoyager tasks on live websites, three text agents driven by GPT-4o.</div><div class="cc">(Wong et al., 2026)</div></div>
+  <div class="card"><div class="ck">I-4 · IDLING AND DEAD LOOPS</div><div class="cv">When an agent is stuck, every repeated pass is billed and timed in full</div><div class="cd">GTA1 harness on 39 OSWorld tasks: in failed tasks past 50 steps, 66% of the steps were repeats; one element-locating loop repeated a step 18 times — 27 minutes, $8.47 at list price without caching.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026)</div></div>
+  <div class="card"><div class="ck">II · PLAN + JUDGE + REFLECT, OR SAMPLE</div><div class="cv">Judging, reflecting and sampling buy accuracy with extra calls, at a steep rate</div><div class="cd">GTA1: 4–12 planning calls per judging call (four parallel planners, up to three retries, one judge). Sampling 1 → 10 candidates per step: 38.8% → 43.2% success for 96K → 920K tokens (gpt-oss-120b, 165 WebArena-Lite tasks). GitHub Copilot: 6.6 model calls per user turn.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Lee et al., 2026; Liu et al., 2026)</div></div>
 </div>
 <div class="figs3">
   <div class="fig"><div class="ft">Steps per task on OSWorld 2.0, 108 tasks</div><svg class="hb" viewBox="0 0 380 94" xmlns="http://www.w3.org/2000/svg"><text class="hl-lab" x="210" y="15" text-anchor="end">Opus 4.7 · one action per step</text><rect class="hl-bar" x="218" y="4" width="116.0" height="14" rx="1"/><text class="hl-val" x="340.0" y="15">318</text><text class="hl-lab" x="210" y="37" text-anchor="end">Opus 4.7 · batched actions</text><rect class="hl-bar" x="218" y="26" width="58.6" height="14" rx="1"/><text class="hl-val" x="282.6" y="37">160.7</text><text class="hl-lab" x="210" y="59" text-anchor="end">Opus 4.8 · batched</text><rect class="hl-bar" x="218" y="48" width="37.6" height="14" rx="1"/><text class="hl-val" x="261.6" y="59">103</text><text class="hl-lab" x="210" y="81" text-anchor="end">GPT-5.5 · batched</text><rect class="hl-bar" x="218" y="70" width="34.7" height="14" rx="1"/><text class="hl-val" x="258.7" y="81">95.2</text></svg><div class="fc">XLANG Lab, 2026 · mean over tasks</div></div>
@@ -28006,7 +27903,7 @@ z
 </svg>
 </svg></div><div class="rule"></div><div class="crumb">from the multipliers → here: the per-call and per-pass terms → to: which term dominates</div><div class="content"><div class="callout"><p><b>Inside a call: queueing, reading, writing. Around it: observation, execution, fixed sleeps, tool runs.</b> All of it runs strictly in sequence, so task time is the sum, not the largest term.</p></div><div class="body">
 <div class="cards4">
-  <div class="card"><div class="ck">III-1, III-2 · QUEUEING AND READING</div><div class="cv">up to 69× by time of day · up to 3× slower by the late passes · 7.14× when the cache is evicted</div><div class="cd">15 models at 5 providers; the prompt at pass <svg class="tex" style="vertical-align:-2.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.081pt" height="14.203406pt" viewBox="0 0 9.081 14.203406" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <div class="card"><div class="ck">III-1, III-2 · QUEUEING AND READING</div><div class="cv">Before a single token is written, the call has waited in a queue and re-read the whole history</div><div class="cd">Identical requests vary up to 69× by time of day (15 models, 5 providers); the prompt at pass <svg class="tex" style="vertical-align:-2.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.081pt" height="14.203406pt" viewBox="0 0 9.081 14.203406" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -28205,10 +28102,10 @@ z
   </g>
  </g>
 </svg>
- screenshots; a richer observation multiplied the input 4.8×; GLM-4.6 on 8 H100s under load.</div><div class="cc">(Bian et al., 2025; Abhyankar, Qi &amp; Zhang, 2026; Chang et al., 2026; Kang et al., 2026)</div></div>
-  <div class="card"><div class="ck">III-3, III-4 · WRITING AND THINKING</div><div class="cv">91–98.6% of model time · 224K vs 37K output tokens per task</div><div class="cd">Warm cache, local 27–31B models; Claude Opus 4.8 vs GPT-5.5 on the same 108 tasks. More reasoning effort lowered accuracy in 21 of 36 pairs (21,730 runs).</div><div class="cc">(Yuan et al., 2026; XLANG Lab, 2026; Kapoor et al., 2025)</div></div>
-  <div class="card"><div class="ck">IV · THE ENVIRONMENT</div><div class="cv">3–26 s per accessibility tree · 6.6 s browser vs 4.7 s model per step · 2–3 s sleep per action</div><div class="cd">OSWorld desktop apps; 151 WebVoyager live-site tasks (GPT-4o); OSWorld 2.0’s sleep × 318 steps ≈ 16 min (calc.). Coding: 4% of tool calls take 85% of tool time.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Wong et al., 2026; xlang-ai, 2026; XLANG Lab, 2026; Zhu et al., 2026)</div></div>
-  <div class="card"><div class="ck">V · SERIAL</div><div class="cv">concurrency within a turn: 1.15</div><div class="cd">GitHub Copilot telemetry. Fixing one term saves only its own share. Strip the human first: 80–92% of a coding session’s elapsed time is the person thinking.</div><div class="cc">(Liu et al., 2026; Zhu et al., 2026)</div></div>
+ screenshots, so late passes are up to 3× slower; a richer observation multiplied the input 4.8×; an evicted cache costs up to 7.14× (GLM-4.6 on 8 H100s under load).</div><div class="cc">(Bian et al., 2025; Abhyankar, Qi &amp; Zhang, 2026; Chang et al., 2026; Kang et al., 2026)</div></div>
+  <div class="card"><div class="ck">III-3, III-4 · WRITING AND THINKING</div><div class="cv">Writing is the slowest segment per token, and thinking modes write far more tokens without reliably buying accuracy</div><div class="cd">91–98.6% of model time with a warm cache (local 27–31B models); 224K vs 37K output tokens per task, Claude Opus 4.8 vs GPT-5.5 on the same 108 tasks; more reasoning effort lowered accuracy in 21 of 36 pairs (21,730 runs).</div><div class="cc">(Yuan et al., 2026; XLANG Lab, 2026; Kapoor et al., 2025)</div></div>
+  <div class="card"><div class="ck">IV · THE ENVIRONMENT</div><div class="cv">The environment is slow on its own, and the benchmarks add fixed sleeps on top</div><div class="cd">3–26 s per accessibility tree (OSWorld desktop apps); 6.6 s browser vs 4.7 s model per step (151 WebVoyager live-site tasks, GPT-4o); OSWorld 2.0’s 3 s sleep × 318 steps ≈ 16 min (calc.); 4% of coding tool calls take 85% of tool time.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Wong et al., 2026; xlang-ai, 2026; XLANG Lab, 2026; Zhu et al., 2026)</div></div>
+  <div class="card"><div class="ck">V · SERIAL</div><div class="cv">Nothing overlaps, so task time is a sum — and a “total time” often includes the human</div><div class="cd">Concurrency within a turn: 1.15 (GitHub Copilot telemetry); fixing one term saves only its own share. 80–92% of a coding session’s elapsed time is the person thinking between turns — strip it first.</div><div class="cc">(Liu et al., 2026; Zhu et al., 2026)</div></div>
 </div>
 <div class="figs3">
   <div class="fig"><div class="ft">Seconds per step, median, 151 WebVoyager live-site tasks, GPT-4o</div><svg class="hb" viewBox="0 0 380 50" xmlns="http://www.w3.org/2000/svg"><text class="hl-lab" x="142" y="15" text-anchor="end">browser action</text><rect class="hl-bar" x="150" y="4" width="184.0" height="14" rx="1"/><text class="hl-val" x="340.0" y="15">6.6 s</text><text class="hl-lab" x="142" y="37" text-anchor="end">model call</text><rect class="hl-bar" x="150" y="26" width="131.0" height="14" rx="1"/><text class="hl-val" x="287.0" y="37">4.7 s</text></svg><div class="fc">Wong et al., 2026</div></div>
@@ -36509,7 +36406,7 @@ z
   </g>
  </g>
 </svg>
-</div><div class="eqterm"><div class="eqx"><svg class="tex" style="vertical-align:-16.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="50.94pt" height="31.095pt" viewBox="0 0 50.94 31.095" xmlns="http://www.w3.org/2000/svg" version="1.1">
+</div><div class="eqterm"><div class="eqx"><svg class="tex" style="vertical-align:-16.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="32.58pt" height="31.095pt" viewBox="0 0 32.58 31.095" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -36517,15 +36414,15 @@ z
  <g id="m43-figure_1">
   <g id="m43-patch_1">
    <path d="M -0 31.095 
-L 50.94 31.095 
-L 50.94 0 
+L 32.58 31.095 
+L 32.58 0 
 L -0 0 
 L -0 31.095 
 z
 " style="fill: none"/>
   </g>
   <g id="m43-text_1">
-   <!-- $\sum_{k=1..N} c_k$ -->
+   <!-- $\sum_{k} c_k$ -->
    <g style="fill: #1b2733" transform="translate(1.44 15.48) scale(0.135 -0.135)">
     <defs>
      <path id="m43-Cmex10-58" d="M 422 -8959 
@@ -36616,104 +36513,6 @@ Q 456 -72 398 -17
 Q 341 38 341 116 
 z
 " transform="scale(0.015625)"/>
-     <path id="m43-Cmr10-3d" d="M 481 850 
-Q 428 850 393 890 
-Q 359 931 359 978 
-Q 359 1031 393 1068 
-Q 428 1106 481 1106 
-L 4500 1106 
-Q 4547 1106 4581 1068 
-Q 4616 1031 4616 978 
-Q 4616 931 4581 890 
-Q 4547 850 4500 850 
-L 481 850 
-z
-M 481 2094 
-Q 428 2094 393 2131 
-Q 359 2169 359 2222 
-Q 359 2269 393 2309 
-Q 428 2350 481 2350 
-L 4500 2350 
-Q 4547 2350 4581 2309 
-Q 4616 2269 4616 2222 
-Q 4616 2169 4581 2131 
-Q 4547 2094 4500 2094 
-L 481 2094 
-z
-" transform="scale(0.015625)"/>
-     <path id="m43-Cmr10-31" d="M 594 0 
-L 594 225 
-Q 1394 225 1394 428 
-L 1394 3788 
-Q 1063 3628 556 3628 
-L 556 3853 
-Q 1341 3853 1741 4263 
-L 1831 4263 
-Q 1853 4263 1873 4245 
-Q 1894 4228 1894 4206 
-L 1894 428 
-Q 1894 225 2694 225 
-L 2694 0 
-L 594 0 
-z
-" transform="scale(0.015625)"/>
-     <path id="m43-Cmmi10-3a" d="M 538 353 
-Q 538 497 644 600 
-Q 750 703 891 703 
-Q 978 703 1062 656 
-Q 1147 609 1194 525 
-Q 1241 441 1241 353 
-Q 1241 213 1137 106 
-Q 1034 0 891 0 
-Q 750 0 644 106 
-Q 538 213 538 353 
-z
-" transform="scale(0.015625)"/>
-     <path id="m43-Cmmi10-4e" d="M 300 0 
-Q 238 0 238 84 
-Q 241 100 250 139 
-Q 259 178 276 201 
-Q 294 225 319 225 
-Q 931 225 1031 616 
-L 1900 4116 
-Q 1722 4147 1338 4147 
-Q 1275 4147 1275 4231 
-Q 1278 4247 1287 4286 
-Q 1297 4325 1314 4348 
-Q 1331 4372 1356 4372 
-L 2463 4372 
-Q 2509 4372 2522 4331 
-L 3944 947 
-L 4653 3781 
-Q 4666 3850 4666 3878 
-Q 4666 4147 4172 4147 
-Q 4109 4147 4109 4231 
-Q 4131 4313 4143 4342 
-Q 4156 4372 4219 4372 
-L 5588 4372 
-Q 5650 4372 5650 4288 
-Q 5647 4272 5637 4233 
-Q 5628 4194 5611 4170 
-Q 5594 4147 5569 4147 
-Q 4956 4147 4856 3756 
-L 3938 56 
-Q 3916 0 3872 0 
-L 3794 0 
-Q 3750 0 3738 44 
-L 2106 3916 
-L 2094 3956 
-Q 2081 3969 2081 3975 
-L 1234 588 
-Q 1228 572 1225 548 
-Q 1222 525 1216 494 
-Q 1216 328 1359 276 
-Q 1503 225 1716 225 
-Q 1778 225 1778 141 
-Q 1756 53 1740 26 
-Q 1725 0 1672 0 
-L 300 0 
-z
-" transform="scale(0.015625)"/>
      <path id="m43-Cmmi10-63" d="M 750 763 
 Q 750 484 892 290 
 Q 1034 97 1300 97 
@@ -36748,15 +36547,10 @@ Q 750 1131 750 763
 z
 " transform="scale(0.015625)"/>
     </defs>
-    <use xlink:href="#m43-Cmex10-58" transform="translate(68 104)"/>
-    <use xlink:href="#m43-Cmmi10-6b" transform="translate(0 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m43-Cmr10-3d" transform="translate(48.692383 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m43-Cmr10-31" transform="translate(115.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m43-Cmmi10-3a" transform="translate(150.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m43-Cmmi10-3a" transform="translate(182.03418 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m43-Cmmi10-4e" transform="translate(213.705078 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m43-Cmmi10-63" transform="translate(269.930664 0.674479)"/>
-    <use xlink:href="#m43-Cmmi10-6b" transform="translate(313.143555 -16.331771) scale(0.7)"/>
+    <use xlink:href="#m43-Cmex10-58" transform="translate(0 104)"/>
+    <use xlink:href="#m43-Cmmi10-6b" transform="translate(48 -103.307813) scale(0.7)"/>
+    <use xlink:href="#m43-Cmmi10-63" transform="translate(133.09375 0.674479)"/>
+    <use xlink:href="#m43-Cmmi10-6b" transform="translate(176.306641 -16.331771) scale(0.7)"/>
    </g>
   </g>
  </g>
@@ -37633,9 +37427,9 @@ z
 </svg>
 </div><div class="eqc">4 · failures, retries</div></div><div class="eqterm"><div class="eqx">+ machine hours</div><div class="eqc">6 · the machines</div></div></div>
 <div class="rows6">
-  <div class="card"><div class="ck">1 · TOKENS READ</div><div class="cv">quadratic in the passes</div><div class="cd">1,000–1,800 tokens per screenshot; rich observations 4.8×; sampling 96K → 920K; even at a 95.7% cache hit rate, prefix tokens are 59.5% of the bill.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Anthropic, 2026a; Chang et al., 2026; Lee et al., 2026; Zhu et al., 2026)</div></div>
-  <div class="card"><div class="ck">2 · TOKENS WRITTEN</div><div class="cv">5× the price, billed while thinking — yet 31% of an uncached bill</div><div class="cd">224K vs 37K output tokens per task (Claude Opus 4.8 vs GPT-5.5); GTA1 on 39 OSWorld tasks: $2.43 output only, $7.87 all tokens.</div><div class="cc">(XLANG Lab, 2026; Abhyankar, Qi &amp; Zhang, 2026)</div></div>
-  <div class="card"><div class="ck">3 · NUMBER OF CALLS</div><div class="cv"><svg class="tex" style="vertical-align:-4.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="33.93pt" height="15.945469pt" viewBox="0 0 33.93 15.945469" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <div class="card"><div class="ck">1 · TOKENS READ</div><div class="cv">Reading is the larger bill, it grows with the square of the passes, and caching does not remove it</div><div class="cd">1,000–1,800 tokens per screenshot; rich observations 4.8×; sampling 96K → 920K tokens per task; even at a 95.7% cache hit rate, prefix tokens are 59.5% of the bill.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Anthropic, 2026a; Chang et al., 2026; Lee et al., 2026; Zhu et al., 2026)</div></div>
+  <div class="card"><div class="ck">2 · TOKENS WRITTEN</div><div class="cv">Writing is the dearer token and thinking is billed as writing — but it is not the larger bill</div><div class="cd">5× the read price; 224K vs 37K output tokens per task (Claude Opus 4.8 vs GPT-5.5); in an uncached screenshot agent output was 31% of the bill — $2.43 output only vs $7.87 all tokens (GTA1, 39 OSWorld tasks).</div><div class="cc">(XLANG Lab, 2026; Abhyankar, Qi &amp; Zhang, 2026)</div></div>
+  <div class="card"><div class="ck">3 · NUMBER OF CALLS</div><div class="cv">The calls that made the agent slow are the same calls that make it expensive</div><div class="cd"><svg class="tex" style="vertical-align:-4.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="33.93pt" height="15.945469pt" viewBox="0 0 33.93 15.945469" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -37813,10 +37607,10 @@ z
   </g>
  </g>
 </svg>
- multiplies both bills</div><div class="cd">5–13× the calls of a single-call harness per step (GTA1, calc.); sampling multiplies by the candidate count.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Lee et al., 2026)</div></div>
-  <div class="card"><div class="ck">4 · FAILURES AND RETRIES</div><div class="cv">$72.4 per attempt → ≈ $351 per success</div><div class="cd">OSWorld 2.0’s best agent completes 20.6% (calc.; an accounting conversion). A dead loop bills $8.47; one leaderboard run cost ≈ $40,000.</div><div class="cc">(XLANG Lab, 2026; Abhyankar, Qi &amp; Zhang, 2026; Kapoor et al., 2025)</div></div>
-  <div class="card"><div class="ck">5 · UNIT PRICE</div><div class="cv">$4 / $20 vs $0.10 / $0.50 per million tokens</div><div class="cd">Claude Opus 5.5 vs GPT-6 Luna, read / write; fast mode 2× and it drops the cache; cache write 1.25×, read 0.1×; above 272K tokens 2× (OpenAI).</div><div class="cc">(Anthropic, 2026b; OpenAI, 2026)</div></div>
-  <div class="card"><div class="ck">6 · THE MACHINES</div><div class="cv">0.3–4.6% of a $7.87 bill for a one-hour CPU environment (calc.)</div><div class="cd">No benchmark reports machine dollars — every “cost per task” is an API bill; from hourly list prices, $0.02–0.36 per hour (next page).</div><div class="cc">vendor price pages, read 2026-09-27</div></div>
+ multiplies both token bills: 5–13× the calls of a single-call harness per step (GTA1, calc.); sampling multiplies by the candidate count.</div><div class="cc">(Abhyankar, Qi &amp; Zhang, 2026; Lee et al., 2026)</div></div>
+  <div class="card"><div class="ck">4 · FAILURES AND RETRIES</div><div class="cv">What a task costs is what a success costs, and failed attempts are billed in full</div><div class="cd">$72.4 per attempt ÷ 20.6% completion ≈ $351 per success (OSWorld 2.0’s best agent; calc., an accounting conversion); a dead loop bills $8.47; one leaderboard run cost ≈ $40,000.</div><div class="cc">(XLANG Lab, 2026; Abhyankar, Qi &amp; Zhang, 2026; Kapoor et al., 2025)</div></div>
+  <div class="card"><div class="ck">5 · UNIT PRICE</div><div class="cv">The price list sets the constant; speed tiers and long contexts double it</div><div class="cd">Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written; fast mode 2× and it drops the cache; cache write 1.25×, read 0.1×; above 272K tokens 2× (OpenAI).</div><div class="cc">(Anthropic, 2026b; OpenAI, 2026)</div></div>
+  <div class="card"><div class="ck">6 · THE MACHINES</div><div class="cv">The machines are missing from every published cost, and for CPU environments they are small</div><div class="cd">No benchmark reports machine dollars — every “cost per task” is an API bill; from hourly list prices a one-hour CPU environment costs $0.02–0.36, 0.3–4.6% of a $7.87 bill (calc.; next page).</div><div class="cc">vendor price pages, read 2026-09-27</div></div>
 </div></div></div><div class="foot">SOURCES · one representative number per class; the complete tables with conditions are in Appendix A3</div><a class="chip" href="#a3-1">Appendix A3 ↗</a><aside class="notes" hidden>文档第三节。三个比例：写 = 读 × 5；缓存读 0.1 倍；fast mode 2 倍（Anthropic 2026b；OpenAI 2026，2026 年 9 月定价页）。第一类 [E45][E31][E98][E44][E19]；第二类 [E41][D7]（$2.43 只算输出、$7.87 全算，输出 31%）；第三类 [E25][E44]；第四类 [E41] $72.4/20.6%≈$351（calc.）、[E45] $8.47、[E43] HAL 约 $40,000（21,730 次运行，每配置一次）；第五类定价页 [E190][E192]；第六类追加调查 7（E212–E223）。</aside></section><section class="slide main" id="s08"><div class="head"><div class="label">AGENT ACCELERATION · PART 1 · 08</div><h1>Counting the same task four ways, and the machines nobody counts</h1></div><div class="thumb"><svg class="thumb-svg" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The agent loop"><defs><marker id="ah9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ahp"/></marker></defs><g id="ah9-n-observe" class="node"><rect x="30" y="60" width="170" height="70" rx="6"/><text class="t" x="115.0" y="96.0" font-size="20" text-anchor="middle">Observe</text><text class="s" x="115.0" y="114.0" font-size="12" text-anchor="middle">screenshot · page text</text></g><g id="ah9-n-decide" class="box"><rect x="250" y="52" width="470" height="86" rx="8"/><text class="bt" x="262" y="72" font-size="13">DECIDE · one model call</text></g><g id="ah9-n-queue" class="node pill"><rect x="268" y="86" width="120" height="34" rx="17.0"/><text class="t" x="328.0" y="108.4" font-size="15" text-anchor="middle">queue</text></g><g id="ah9-n-read" class="node pill"><rect x="404" y="86" width="150" height="34" rx="17.0"/><text class="t" x="479.0" y="108.4" font-size="15" text-anchor="middle">read the prompt</text></g><g id="ah9-n-write" class="node pill"><rect x="570" y="86" width="134" height="34" rx="17.0"/><text class="t" x="637.0" y="108.4" font-size="15" text-anchor="middle">write the answer</text></g><g id="ah9-n-calls" class="node pill"><rect x="250" y="14" width="160" height="28" rx="14.0"/><text class="t" x="330.0" y="33.0" font-size="14" text-anchor="middle"></text></g><svg xmlns:xlink="http://www.w3.org/1999/xlink" x="277.0" y="19.0" width="106.0" height="18.0" viewBox="0 0 85.32 14.49375" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
@@ -41774,15 +41568,15 @@ z
   <colgroup><col style="width:30%"><col style="width:55%"><col style="width:15%"></colgroup>
   <thead><tr><th>convention</th><th>the same run, counted both ways</th><th>gap</th></tr></thead>
   <tbody>
-  <tr><td class="rk">output only vs all tokens</td><td>GTA1 on 39 OSWorld tasks, o3 list price, no cache: $2.43 counting output only; $7.87 counting all tokens (Abhyankar, Qi &amp; Zhang, 2026)</td><td><b>3.2×</b></td></tr>
-  <tr><td class="rk">per attempt vs per success</td><td>OSWorld 2.0, Claude Opus 4.8: $72.4 per attempt at 20.6% completion → ≈ $351 (calc.; not the cost of retrying to success) (XLANG Lab, 2026)</td><td><b>4.9×</b></td></tr>
-  <tr><td class="rk">uncached vs cached</td><td>A cached read costs 0.1×; but at a 95.7% hit rate, prefix tokens were still 59.5% of the bill (4,265 Claude Code / Codex sessions) (Anthropic, 2026b; Zhu et al., 2026)</td><td><b>10×</b> read price only</td></tr>
-  <tr><td class="rk">standard vs fast mode</td><td>Claude Opus 5.5 $4 / $20 → $8 / $40; OpenAI 2× on every listed model; up to 2.5× faster writing (vendor-stated), reading unchanged (Anthropic, 2026b; OpenAI, 2026)</td><td><b>2×</b></td></tr>
+  <tr><td class="rk">output only vs all tokens</td><td>GTA1 on 39 OSWorld tasks, o3 list price, no cache: $2.43 counting output only; $7.87 counting all tokens (Abhyankar, Qi &amp; Zhang, 2026)</td><td>3.2×</td></tr>
+  <tr><td class="rk">per attempt vs per success</td><td>OSWorld 2.0, Claude Opus 4.8: $72.4 per attempt at 20.6% completion → ≈ $351 (calc.; not the cost of retrying to success) (XLANG Lab, 2026)</td><td>4.9×</td></tr>
+  <tr><td class="rk">uncached vs cached</td><td>A cached read costs 0.1×; but at a 95.7% hit rate, prefix tokens were still 59.5% of the bill (4,265 Claude Code / Codex sessions) (Anthropic, 2026b; Zhu et al., 2026)</td><td>10× read price only</td></tr>
+  <tr><td class="rk">standard vs fast mode</td><td>Claude Opus 5.5 $4 / $20 → $8 / $40; OpenAI 2× on every listed model; up to 2.5× faster writing (vendor-stated), reading unchanged (Anthropic, 2026b; OpenAI, 2026)</td><td>2×</td></tr>
   </tbody></table>
   <div class="figcap">The three that apply to a whole bill compound to about 31× (3.2 × 4.9 × 2, calc.). Screenshot-agent measurements do not report their cache state.</div>
   </div>
   <div class="stack">
-    <div class="card"><div class="ck">6 · THE MACHINES, FROM LIST PRICES</div><div class="cv">a one-hour CPU environment: $0.02–0.36 → 0.3–4.6% of a $7.87 bill, 0.03–0.5% of $72.4 (calc.)</div><div class="cd">Benchmarks name their instances but never their cost; products (Meta Muse, ChatGPT agent) run a dedicated cloud machine per user and publish no price. It grows large with plan fees, residential-proxy traffic ($5–12 per GB), wall-clock billing while the agent waits (the median AgentSysBench session is active 20% of its lifetime), and GPU sandboxes (an H100 at $3.95 per hour is half of a $7.87 bill).</div><div class="cc">vendor price pages, read 2026-09-27; Chang et al., 2026; Meta, 2026</div></div>
+    <div class="card"><div class="ck">6 · THE MACHINES, FROM LIST PRICES</div><div class="cv">For CPU environments the machine is a small addition — until idle time, proxies or GPUs enter</div><div class="cd">A one-hour CPU environment costs $0.02–0.36 — 0.3–4.6% of a $7.87 bill, 0.03–0.5% of $72.4 (calc.). Benchmarks name their instances but never their cost; products (Meta Muse, ChatGPT agent) run a dedicated cloud machine per user and publish no price. It grows large with plan fees, residential-proxy traffic ($5–12 per GB), wall-clock billing while the agent waits (the median AgentSysBench session is active 20% of its lifetime), and GPU sandboxes (an H100 at $3.95 per hour is half of a $7.87 bill).</div><div class="cc">vendor price pages, read 2026-09-27; Chang et al., 2026; Meta, 2026</div></div>
     <div class="fig"><div class="ft">A one-hour CPU environment as a share of a $7.87 API bill (calc.)</div><svg class="hb" viewBox="0 0 520 139" xmlns="http://www.w3.org/2000/svg"><text class="hl-lab" x="196" y="15" text-anchor="end">Browser Use cloud browser</text><rect class="hl-bar" x="204" y="4" width="14.7" height="14" rx="1"/><text class="hl-val" x="224.7" y="15">0.25%</text><text class="hl-lab" x="196" y="34" text-anchor="end">AWS t3.medium</text><rect class="hl-bar" x="204" y="23" width="29.3" height="14" rx="1"/><text class="hl-val" x="239.3" y="34">0.5%</text><text class="hl-lab" x="196" y="53" text-anchor="end">Browserbase</text><rect class="hl-bar" x="204" y="42" width="88.0" height="14" rx="1"/><text class="hl-val" x="298.0" y="53">1.5%</text><text class="hl-lab" x="196" y="72" text-anchor="end">E2B / Daytona 2 vCPU</text><rect class="hl-bar" x="204" y="61" width="123.3" height="14" rx="1"/><text class="hl-val" x="333.3" y="72">2.1%</text><text class="hl-lab" x="196" y="91" text-anchor="end">Modal 2 vCPU</text><rect class="hl-bar" x="204" y="80" width="176.1" height="14" rx="1"/><text class="hl-val" x="386.1" y="91">3.0%</text><text class="hl-lab" x="196" y="110" text-anchor="end">AWS t3.2xlarge (OSWorld 2.0)</text><rect class="hl-bar" x="204" y="99" width="246.5" height="14" rx="1"/><text class="hl-val" x="456.5" y="110">4.2%</text><text class="hl-lab" x="196" y="129" text-anchor="end">OpenAI hosted container 4 GB</text><rect class="hl-bar" x="204" y="118" width="270.0" height="14" rx="1"/><text class="hl-val" x="480.0" y="129">4.6%</text></svg><div class="fc">vendor price pages, read 2026-09-27 · full price table in Appendix A3</div></div>
   </div>
 </div></div></div><div class="foot">SOURCES · Abhyankar, Qi &amp; Zhang, 2026 · XLANG Lab, 2026 · Zhu et al., 2026 · Anthropic, 2026b · OpenAI, 2026 · AWS, Browser Use, Browserbase, E2B, Daytona, Modal, OpenAI price pages</div><a class="chip" href="#a3-3">Appendix A3 ↗</a><aside class="notes" hidden>文档第三节“四种口径”和第六类。只算写 vs 全算 3.2 倍 [D7]；每次尝试 vs 每次成功 4.9 倍 [E41]（calc.）；无缓存 vs 有缓存：读价 10 倍，但 [E19] 命中 95.7% 仍占 59.5%，截图型没报缓存状态 [D101]；标准 vs fast mode 2 倍 [E190][E192]，切换会丢缓存；3.2×4.9×2≈31。机器：追加调查 7（E212–E223）：1 小时 CPU 环境 $0.02–0.36，占 $7.87 的 0.3–4.6%；四个例外（月费、代理 $5–12/GB、wall-clock 计费而中位会话只 20% 在执行、GPU 沙箱 H100 $3.95/h）；Meta Muse 专属云端电脑、ChatGPT agent 虚拟电脑，不公布价格。</aside></section><section class="slide main" id="s09"><div class="head"><div class="label">AGENT ACCELERATION · PART 1 · 09</div><h1>How slow and expensive are linked: three kinds of relationship</h1></div><div class="thumb"><svg class="thumb-svg" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The agent loop"><defs><marker id="ah10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ahp"/></marker></defs><g id="ah10-n-observe" class="node"><rect x="30" y="60" width="170" height="70" rx="6"/><text class="t" x="115.0" y="96.0" font-size="20" text-anchor="middle">Observe</text><text class="s" x="115.0" y="114.0" font-size="12" text-anchor="middle">screenshot · page text</text></g><g id="ah10-n-decide" class="box"><rect x="250" y="52" width="470" height="86" rx="8"/><text class="bt" x="262" y="72" font-size="13">DECIDE · one model call</text></g><g id="ah10-n-queue" class="node pill hl"><rect x="268" y="86" width="120" height="34" rx="17.0"/><text class="t" x="328.0" y="108.4" font-size="15" text-anchor="middle">queue</text></g><g id="ah10-n-read" class="node pill"><rect x="404" y="86" width="150" height="34" rx="17.0"/><text class="t" x="479.0" y="108.4" font-size="15" text-anchor="middle">read the prompt</text></g><g id="ah10-n-write" class="node pill"><rect x="570" y="86" width="134" height="34" rx="17.0"/><text class="t" x="637.0" y="108.4" font-size="15" text-anchor="middle">write the answer</text></g><g id="ah10-n-calls" class="node pill"><rect x="250" y="14" width="160" height="28" rx="14.0"/><text class="t" x="330.0" y="33.0" font-size="14" text-anchor="middle"></text></g><svg xmlns:xlink="http://www.w3.org/1999/xlink" x="277.0" y="19.0" width="106.0" height="18.0" viewBox="0 0 85.32 14.49375" xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -45736,7 +45530,7 @@ z
  </g>
 </svg>
 </svg></div><div class="rule"></div><div class="crumb">from the two bills → here: what each cause does to time and to money → to: the levers</div><div class="content"><div class="callout"><p><b>The two equations share the read and write tokens; environment time and queueing appear only in the time equation.</b> So every cause relates to time and money in exactly one of three ways.</p></div><div class="body">
-<div class="linkfig"><div class="lrow"><span class="lk">time</span><span class="lp same"><svg class="tex" style="vertical-align:-14.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="34.47pt" height="27.333pt" viewBox="0 0 34.47 27.333" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<div class="linkfig"><div class="lrow"><span class="lk">time</span><span class="lp same"><svg class="tex" style="vertical-align:-14.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="18.558pt" height="27.333pt" viewBox="0 0 18.558 27.333" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -45744,15 +45538,15 @@ z
  <g id="m49-figure_1">
   <g id="m49-patch_1">
    <path d="M -0 27.333 
-L 34.47 27.333 
-L 34.47 -0 
+L 18.558 27.333 
+L 18.558 -0 
 L -0 -0 
 L -0 27.333 
 z
 " style="fill: none"/>
   </g>
   <g id="m49-text_1">
-   <!-- $\sum_{k=1..N}$ -->
+   <!-- $\sum_{k}$ -->
    <g style="fill: #ffffff" transform="translate(1.44 13.608) scale(0.117 -0.117)">
     <defs>
      <path id="m49-Cmex10-58" d="M 422 -8959 
@@ -45843,112 +45637,9 @@ Q 456 -72 398 -17
 Q 341 38 341 116 
 z
 " transform="scale(0.015625)"/>
-     <path id="m49-Cmr10-3d" d="M 481 850 
-Q 428 850 393 890 
-Q 359 931 359 978 
-Q 359 1031 393 1068 
-Q 428 1106 481 1106 
-L 4500 1106 
-Q 4547 1106 4581 1068 
-Q 4616 1031 4616 978 
-Q 4616 931 4581 890 
-Q 4547 850 4500 850 
-L 481 850 
-z
-M 481 2094 
-Q 428 2094 393 2131 
-Q 359 2169 359 2222 
-Q 359 2269 393 2309 
-Q 428 2350 481 2350 
-L 4500 2350 
-Q 4547 2350 4581 2309 
-Q 4616 2269 4616 2222 
-Q 4616 2169 4581 2131 
-Q 4547 2094 4500 2094 
-L 481 2094 
-z
-" transform="scale(0.015625)"/>
-     <path id="m49-Cmr10-31" d="M 594 0 
-L 594 225 
-Q 1394 225 1394 428 
-L 1394 3788 
-Q 1063 3628 556 3628 
-L 556 3853 
-Q 1341 3853 1741 4263 
-L 1831 4263 
-Q 1853 4263 1873 4245 
-Q 1894 4228 1894 4206 
-L 1894 428 
-Q 1894 225 2694 225 
-L 2694 0 
-L 594 0 
-z
-" transform="scale(0.015625)"/>
-     <path id="m49-Cmmi10-3a" d="M 538 353 
-Q 538 497 644 600 
-Q 750 703 891 703 
-Q 978 703 1062 656 
-Q 1147 609 1194 525 
-Q 1241 441 1241 353 
-Q 1241 213 1137 106 
-Q 1034 0 891 0 
-Q 750 0 644 106 
-Q 538 213 538 353 
-z
-" transform="scale(0.015625)"/>
-     <path id="m49-Cmmi10-4e" d="M 300 0 
-Q 238 0 238 84 
-Q 241 100 250 139 
-Q 259 178 276 201 
-Q 294 225 319 225 
-Q 931 225 1031 616 
-L 1900 4116 
-Q 1722 4147 1338 4147 
-Q 1275 4147 1275 4231 
-Q 1278 4247 1287 4286 
-Q 1297 4325 1314 4348 
-Q 1331 4372 1356 4372 
-L 2463 4372 
-Q 2509 4372 2522 4331 
-L 3944 947 
-L 4653 3781 
-Q 4666 3850 4666 3878 
-Q 4666 4147 4172 4147 
-Q 4109 4147 4109 4231 
-Q 4131 4313 4143 4342 
-Q 4156 4372 4219 4372 
-L 5588 4372 
-Q 5650 4372 5650 4288 
-Q 5647 4272 5637 4233 
-Q 5628 4194 5611 4170 
-Q 5594 4147 5569 4147 
-Q 4956 4147 4856 3756 
-L 3938 56 
-Q 3916 0 3872 0 
-L 3794 0 
-Q 3750 0 3738 44 
-L 2106 3916 
-L 2094 3956 
-Q 2081 3969 2081 3975 
-L 1234 588 
-Q 1228 572 1225 548 
-Q 1222 525 1216 494 
-Q 1216 328 1359 276 
-Q 1503 225 1716 225 
-Q 1778 225 1778 141 
-Q 1756 53 1740 26 
-Q 1725 0 1672 0 
-L 300 0 
-z
-" transform="scale(0.015625)"/>
     </defs>
-    <use xlink:href="#m49-Cmex10-58" transform="translate(68 104)"/>
-    <use xlink:href="#m49-Cmmi10-6b" transform="translate(0 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmr10-3d" transform="translate(48.692383 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmr10-31" transform="translate(115.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmmi10-3a" transform="translate(150.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmmi10-3a" transform="translate(182.03418 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmmi10-4e" transform="translate(213.705078 -103.307813) scale(0.7)"/>
+    <use xlink:href="#m49-Cmex10-58" transform="translate(0 104)"/>
+    <use xlink:href="#m49-Cmmi10-6b" transform="translate(48 -103.307813) scale(0.7)"/>
    </g>
   </g>
  </g>
@@ -47623,7 +47314,7 @@ z
   </g>
  </g>
 </svg>
-</span></div><div class="lrow"><span class="lk">money</span><span class="lp same"><svg class="tex" style="vertical-align:-14.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="34.47pt" height="27.333pt" viewBox="0 0 34.47 27.333" xmlns="http://www.w3.org/2000/svg" version="1.1">
+</span></div><div class="lrow"><span class="lk">money</span><span class="lp same"><svg class="tex" style="vertical-align:-14.44pt" xmlns:xlink="http://www.w3.org/1999/xlink" width="18.558pt" height="27.333pt" viewBox="0 0 18.558 27.333" xmlns="http://www.w3.org/2000/svg" version="1.1">
  
  <defs>
   <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
@@ -47631,15 +47322,15 @@ z
  <g id="m49-figure_1">
   <g id="m49-patch_1">
    <path d="M -0 27.333 
-L 34.47 27.333 
-L 34.47 -0 
+L 18.558 27.333 
+L 18.558 -0 
 L -0 -0 
 L -0 27.333 
 z
 " style="fill: none"/>
   </g>
   <g id="m49-text_1">
-   <!-- $\sum_{k=1..N}$ -->
+   <!-- $\sum_{k}$ -->
    <g style="fill: #ffffff" transform="translate(1.44 13.608) scale(0.117 -0.117)">
     <defs>
      <path id="m49-Cmex10-58" d="M 422 -8959 
@@ -47730,112 +47421,9 @@ Q 456 -72 398 -17
 Q 341 38 341 116 
 z
 " transform="scale(0.015625)"/>
-     <path id="m49-Cmr10-3d" d="M 481 850 
-Q 428 850 393 890 
-Q 359 931 359 978 
-Q 359 1031 393 1068 
-Q 428 1106 481 1106 
-L 4500 1106 
-Q 4547 1106 4581 1068 
-Q 4616 1031 4616 978 
-Q 4616 931 4581 890 
-Q 4547 850 4500 850 
-L 481 850 
-z
-M 481 2094 
-Q 428 2094 393 2131 
-Q 359 2169 359 2222 
-Q 359 2269 393 2309 
-Q 428 2350 481 2350 
-L 4500 2350 
-Q 4547 2350 4581 2309 
-Q 4616 2269 4616 2222 
-Q 4616 2169 4581 2131 
-Q 4547 2094 4500 2094 
-L 481 2094 
-z
-" transform="scale(0.015625)"/>
-     <path id="m49-Cmr10-31" d="M 594 0 
-L 594 225 
-Q 1394 225 1394 428 
-L 1394 3788 
-Q 1063 3628 556 3628 
-L 556 3853 
-Q 1341 3853 1741 4263 
-L 1831 4263 
-Q 1853 4263 1873 4245 
-Q 1894 4228 1894 4206 
-L 1894 428 
-Q 1894 225 2694 225 
-L 2694 0 
-L 594 0 
-z
-" transform="scale(0.015625)"/>
-     <path id="m49-Cmmi10-3a" d="M 538 353 
-Q 538 497 644 600 
-Q 750 703 891 703 
-Q 978 703 1062 656 
-Q 1147 609 1194 525 
-Q 1241 441 1241 353 
-Q 1241 213 1137 106 
-Q 1034 0 891 0 
-Q 750 0 644 106 
-Q 538 213 538 353 
-z
-" transform="scale(0.015625)"/>
-     <path id="m49-Cmmi10-4e" d="M 300 0 
-Q 238 0 238 84 
-Q 241 100 250 139 
-Q 259 178 276 201 
-Q 294 225 319 225 
-Q 931 225 1031 616 
-L 1900 4116 
-Q 1722 4147 1338 4147 
-Q 1275 4147 1275 4231 
-Q 1278 4247 1287 4286 
-Q 1297 4325 1314 4348 
-Q 1331 4372 1356 4372 
-L 2463 4372 
-Q 2509 4372 2522 4331 
-L 3944 947 
-L 4653 3781 
-Q 4666 3850 4666 3878 
-Q 4666 4147 4172 4147 
-Q 4109 4147 4109 4231 
-Q 4131 4313 4143 4342 
-Q 4156 4372 4219 4372 
-L 5588 4372 
-Q 5650 4372 5650 4288 
-Q 5647 4272 5637 4233 
-Q 5628 4194 5611 4170 
-Q 5594 4147 5569 4147 
-Q 4956 4147 4856 3756 
-L 3938 56 
-Q 3916 0 3872 0 
-L 3794 0 
-Q 3750 0 3738 44 
-L 2106 3916 
-L 2094 3956 
-Q 2081 3969 2081 3975 
-L 1234 588 
-Q 1228 572 1225 548 
-Q 1222 525 1216 494 
-Q 1216 328 1359 276 
-Q 1503 225 1716 225 
-Q 1778 225 1778 141 
-Q 1756 53 1740 26 
-Q 1725 0 1672 0 
-L 300 0 
-z
-" transform="scale(0.015625)"/>
     </defs>
-    <use xlink:href="#m49-Cmex10-58" transform="translate(68 104)"/>
-    <use xlink:href="#m49-Cmmi10-6b" transform="translate(0 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmr10-3d" transform="translate(48.692383 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmr10-31" transform="translate(115.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmmi10-3a" transform="translate(150.363281 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmmi10-3a" transform="translate(182.03418 -103.307813) scale(0.7)"/>
-    <use xlink:href="#m49-Cmmi10-4e" transform="translate(213.705078 -103.307813) scale(0.7)"/>
+    <use xlink:href="#m49-Cmex10-58" transform="translate(0 104)"/>
+    <use xlink:href="#m49-Cmmi10-6b" transform="translate(48 -103.307813) scale(0.7)"/>
    </g>
   </g>
  </g>
