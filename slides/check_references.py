@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check slides/references.md and slides/references.bib against the canonical dossier.
+"""Check slides/references-ledger.md and slides/references.bib against the canonical dossier.
 
 Checks:
  1. Every URL in Appendix A and in the E/D rows of the dossier appears exactly once in the URL map,
@@ -11,14 +11,14 @@ Checks:
  4. references.bib has exactly the keys of the reference table.
 Prints counts per class. Exit status 1 on any failure.
 
-Usage: python3 slides/check_references.py [--write]   (--write puts the output into references.md)
+Usage: python3 slides/check_references.py [--write]   (--write puts the output into references-ledger.md)
 """
 import collections, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DOSSIER = os.path.join(ROOT, 'Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md')
-MD = os.path.join(HERE, 'references.md')
+MD = os.path.join(HERE, 'references-ledger.md')
 BIB = os.path.join(HERE, 'references.bib')
 
 url_re = re.compile(r'https?://[^\s)\]|,;>"`]+')
