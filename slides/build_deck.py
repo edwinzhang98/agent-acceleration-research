@@ -322,7 +322,7 @@ slide("s01", "Where the time and the money go", cover=True,
   <div class="cover-r">
     <div class="cover-fig-title">The loop every agent runs — Part 1 puts a number on each term</div>
     {loop_svg(cls="cover-svg")}
-    <div class="cover-fig-cap">read: the prompt is processed all at once · write: the answer comes out one token at a time · N passes, c model calls per pass</div>
+    <div class="cover-fig-cap">read: the prompt is processed all at once · write: the answer comes out one token at a time · {tex("N", 12)} passes, {tex("c_k", 12)} model calls per pass {tex("k", 12)}</div>
   </div>
 </div>""",
       notes="""封面。这一部分对应文档《Agent 慢和贵的逻辑链》。讲法：先把循环讲清（第 2 页），再把慢的五类、贵的六类各给一页总览加几页代表性例子，最后讲两者怎么连、修什么能省什么、还有什么没人测过。所有文献细节表放在附录 A1–A6。""")
@@ -381,7 +381,7 @@ slide("s02", "The loop, with every term on it",
 </div>""",
       foot=f"SOURCES · {CITE['aa']} (third-party measurement) · {CITE['anth-b']}; {CITE['openai']} (prices) · {CITE['anth-a']} · {CITE['osh']}",
       chip=("#a1-1", "Appendix A1"),
-      notes="""对应文档零节。读 = prefill，写 = decode（Opus 5.5 实测 81.7 token/s [E208]）；写的单价是读的 5 倍（定价页）。环境时间和排队只进时间式子，读写 token 两个式子都进——这是第 9 页“慢和贵怎么连”的底层结构。右下：R_k ≈ k·r，求和 ≈ N²/2·r，10 步 55 份、20 步 210 份（calc.）；实测 OSWorld-Human“成本随步数二次增长”[E45]，靠后的步最多慢 3 倍 [E23]；截图 1,000–1,800 tokens [E31]。harness 一词在这页定义。""")
+      notes="""对应文档零节。读 = prefill，写 = decode（Opus 5.5 实测 81.7 token/s [E208]）；写的单价是读的 5 倍（定价页）。环境时间和排队只进时间式子，读写 token 两个式子都进——这是第 9 页“慢和贵怎么连”的底层结构。右下：""" + tex(r"R_k \approx k\,r", 14) + """，求和 """ + tex(r"\approx \frac{N^2}{2}\, r", 14) + """，10 步 55 份、20 步 210 份（calc.）；实测 OSWorld-Human“成本随步数二次增长”[E45]，靠后的步最多慢 3 倍 [E23]；截图 1,000–1,800 tokens [E31]。harness 一词在这页定义。""")
 
 # --- 03 five sources ------------------------------------------------------
 slide("s03", "Slowness has five sources",
@@ -410,7 +410,7 @@ slide("s03", "Slowness has five sources",
 slide("s04", "I–II · Too many passes, too many calls per pass",
       hl=("n-steps", "n-calls"),
       crumb="from the five classes → here: the two multipliers, passes and calls per pass → to: what happens inside a call and around it",
-      callout="""<p><b>{tex("N", 15)} multiplies everything and {tex("c_k", 15)} multiplies {tex("N", 15)}.</b> Passes pile up because tasks are long, each pass does one action, navigation-only passes still go through the model, and the agent idles or loops; calls pile up because the harness plans, judges and reflects, or samples several candidates per step.</p>""",
+      callout=f"""<p><b>{tex("N", 15)} multiplies everything and {tex("c_k", 15)} multiplies {tex("N", 15)}.</b> Passes pile up because tasks are long, each pass does one action, navigation-only passes still go through the model, and the agent idles or loops; calls pile up because the harness plans, judges and reflects, or samples several candidates per step.</p>""",
       body=f"""
 <div class="cards4">
   {card("I-1, I-2 · LONG TASKS, ONE ACTION PER PASS", "318 tool calls per task",
@@ -460,7 +460,7 @@ slide("s05", "III–V · Inside a call, around it, and in sequence",
 slide("s06", "Which term dominates depends on the harness, not on the kind of agent",
       hl=("n-read", "n-wait", "n-write"),
       crumb="from the five classes → here: the shares, per kind of agent → to: the six sources of cost",
-      callout="""<p><b>All five classes exist in every agent; the heaviest term differs, and it flips when the harness changes.</b> The one multiplier common to all three kinds is the number of passes, {tex("N", 15)}.</p>""",
+      callout=f"""<p><b>All five classes exist in every agent; the heaviest term differs, and it flips when the harness changes.</b> The one multiplier common to all three kinds is the number of passes, {tex("N", 15)}.</p>""",
       body=f"""
 <table class="tbl three">
 <colgroup><col style="width:10%"><col style="width:30%"><col style="width:30%"><col style="width:30%"></colgroup>
@@ -663,7 +663,7 @@ A("a1-2", "A1 · 2/3", "A1 · Slowness, every cause — III. each call is slow",
   crumb="the complete table behind page 5",
   body=table(th_slow, [
    ["III-1", "Queueing", "The request waits at the provider; unbilled, but counted as model time", "Client-side measurement of 15 models across 5 providers: requests of the same length differ in latency by up to 69× depending on when they are sent", ci('bian'), "all"],
-   ["III-2", "Reading (the prompt is re-processed every call)", "Every call re-reads the whole history; more screenshots, slower", "OSWorld-Human, multi-call harnesses: later steps up to 3× slower because the prompt at step k holds the k−1 earlier screenshots — “dominated by prefill”. One screenshot is 1,000–1,800 tokens. AgentSysBench’s WebArena agent (Kimi-K2.6): observation switched from a single format to accessibility tree + HTML + screenshot → input 4.8×, model share of time 46.9% → 61.6%. Under load the cache is evicted and re-read: SWE-Agent / OpenHands running GLM-4.6 on 8 H100s for SWE-bench Lite, request latency up to 7.14× as concurrency rises", ci('osh','anth-a','asb','thunder'), "screenshot; text with rich observations; coding under load"],
+   ["III-2", "Reading (the prompt is re-processed every call)", "Every call re-reads the whole history; more screenshots, slower", "OSWorld-Human, multi-call harnesses: later steps up to 3× slower because the prompt at step " + tex("k", 12) + " holds the " + tex("k-1", 12) + " earlier screenshots — “dominated by prefill”. One screenshot is 1,000–1,800 tokens. AgentSysBench’s WebArena agent (Kimi-K2.6): observation switched from a single format to accessibility tree + HTML + screenshot → input 4.8×, model share of time 46.9% → 61.6%. Under load the cache is evicted and re-read: SWE-Agent / OpenHands running GLM-4.6 on 8 H100s for SWE-bench Lite, request latency up to 7.14× as concurrency rises", ci('osh','anth-a','asb','thunder'), "screenshot; text with rich observations; coding under load"],
    ["III-3", "Writing (one token at a time)", "Token-by-token generation, strictly serial", "Locally served ReAct agents (Qwen3.6-27B / Gemma4-31B, vLLM, 2 H100s) on five benchmarks: with the cache warm, generation is 91–98.6% of model time. Windows desktop agent UFO2 (GPT-4o / o1 API): about 10 s per model call, the largest item per step in every configuration", ci('yuan','ufo2'), "coding; single-call screenshot"],
    ["III-4", "Thinking modes and larger models", "Thinking writes more tokens; larger models are slower per token", "OSWorld 2.0, same 108 tasks: Claude Opus 4.8 writes 224K output tokens per task, GPT-5.5 37K. Holistic Agent Leaderboard, 9 benchmarks, 21,730 runs: raising reasoning effort lowered accuracy in 21 of 36 pairs", ci('osw2','hal'), "all"],
   ], w_slow),
