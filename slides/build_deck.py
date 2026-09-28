@@ -255,7 +255,7 @@ def cost_strip():
     """The money equation with the six classes of cost mapped onto its terms (page 11)."""
     terms = [(tex(r"\sum_{k} c_k", 15), "3 · number of calls"), (tex(r"(\, R_k", 15), "1 · tokens read"),
              (tex(r"+\ W_k \cdot 5", 15), "2 · tokens written"), (tex(r")\times p", 15), "5 · unit price"),
-             (tex(r"\div\ \mathrm{success\ rate}", 15), "4 · failures, retries"), ("+ machine hours", "6 · the machines")]
+             (tex(r"\div\ \mathrm{success\ rate}", 15), "4 · failures, retries"), ("+ machine hours", "6 · environment")]
     out = ['<div class="eqstrip"><div class="eqt">' + tex(r"\mathrm{Cost} \approx", 15) + '</div>']
     for t, c in terms:
         out.append(f'<div class="eqterm"><div class="eqx">{t}</div><div class="eqc">{html.escape(c)}</div></div>')
@@ -323,7 +323,7 @@ slide("s01", "Where the time and the money go", cover=True,
     <p class="cover-date">September 2026</p>
   </div>
   <div class="cover-r">
-    <div class="cover-fig-title">The loop every agent runs — Part 1 puts a number on each term</div>
+    <div class="cover-fig-title">The loop every agent runs — Part 1 gives the measured size of each term</div>
     {loop_svg(cls="cover-svg")}
     <div class="cover-fig-cap">read: the prompt is processed all at once · write: the answer comes out one token at a time · {tex("N", 12)} passes, {tex("c_k", 12)} model calls per pass {tex("k", 12)}</div>
   </div>
@@ -378,7 +378,7 @@ slide("s02", "The loop, with every term on it",
   <div>{quad_chart()}<div class="figcap">Cumulative tokens over a task, in units of “tokens added per pass”; full history re-sent, no cache (calc.).</div></div>
   <div class="stack">
     <div class="eqrow small">{eq_svg("quad", fontsize=15)}</div>
-    {card("READING GROWS WITH THE SQUARE OF THE PASSES", "Reading, not writing, is the term that runs away — the cheapest token is the one never re-read",
+    {card("THE QUADRATIC TERM", "Read tokens grow with the square of the number of passes, because every pass re-sends the whole history; write tokens grow linearly",
           ["Measured on real runs, cost “grows quadratically with the number of steps” and a late step takes up to 3× longer than an early one, because pass " + tex("k", 13) + " re-sends the " + tex("k-1", 13) + " earlier screenshots — GTA1 harness, 39 OSWorld tasks"], ci('osh'))}
   </div>
 </div>""",
@@ -413,7 +413,7 @@ slide("s03", "Slowness has five sources",
 slide("s04", "I–II · Too many passes, too many calls per pass",
       hl=("n-steps", "n-calls"),
       crumb="from the five classes → here: the two multipliers, passes and calls per pass → to: what happens inside a call and around it",
-      callout=f"""<p><b>{tex("N", 15)} multiplies everything and {tex("c_k", 15)} multiplies {tex("N", 15)}.</b> Passes pile up because tasks are long, each pass does one action, navigation-only passes still go through the model, and the agent idles or loops; calls pile up because the harness plans, judges and reflects, or samples several candidates per step.</p>""",
+      callout=f"""<p><b>{tex("N", 15)} multiplies every term and {tex("c_k", 15)} multiplies {tex("N", 15)}.</b> Passes accumulate because tasks are long, each pass does one action, navigation-only passes still go through the model, and the agent idles or loops; calls accumulate because the harness plans, judges and reflects, or samples several candidates per step.</p>""",
       body=f"""
 <div class="cards4">
   {card("I-1, I-2 · LONG TASKS, ONE ACTION PER PASS", "Long tasks with one action per pass need hundreds of passes; several actions per call cut them by half or more",
@@ -422,7 +422,7 @@ slide("s04", "I–II · Too many passes, too many calls per pass",
         ["66.7% of the steps in the median task are pure navigation — 151 WebVoyager tasks on live websites, three text agents driven by GPT-4o"], ci('skim'))}
   {card("I-4 · IDLING AND DEAD LOOPS", "When an agent is stuck, every repeated pass is billed and timed in full",
         ["One element-locating loop repeated a step 18 times: 27 minutes and $8.47 at list price without caching — GTA1 harness, OSWorld"], ci('osh'))}
-  {card("II · PLANNING, JUDGING, SAMPLING", "Extra calls per pass buy accuracy, at a steep rate",
+  {card("II · PLANNING, JUDGING, SAMPLING", "Extra calls per pass buy accuracy at a rising token cost per point",
         ["10 candidates per step instead of 1: 38.8% → 43.2% success for 96K → 920K tokens per task — gpt-oss-120b, 165 WebArena-Lite tasks"], ci('atts'))}
 </div>
 <div class="figs1">
@@ -479,7 +479,7 @@ slide("s06", "Which term dominates depends on the harness, not on the kind of ag
 <td>Reading is cached away; slow in writing and in the tools</td></tr>
 </tbody></table>
 <div class="concl">
-  <div><b>1 · The harness sets the dominant term</b> — calls per pass, observation size, fixed sleeps, cache on or off. “Agents are slow because inference is slow” holds only for multi-call screenshot agents.</div>
+  <div><b>1 · The harness sets the dominant term</b> — calls per pass, observation size, fixed sleeps, cache on or off. The explanation “agents are slow because inference is slow” is accurate only for multi-call screenshot agents.</div>
   <div><b>2 · {tex("N", 14)} multiplies every term</b> — one pass fewer saves a whole pass of time and money in all three kinds; OSWorld 2.0’s authors list “fewer environment rounds” as a goal in its own right.</div>
 </div>""",
       foot="SOURCES · as cited in each cell; the same table with every measurement condition is Appendix A2",
@@ -489,8 +489,8 @@ slide("s06", "Which term dominates depends on the harness, not on the kind of ag
 # --- 07 six sources of cost ------------------------------------------------------
 slide("s07", "Cost has six sources",
       hl=("n-rtok", "n-wtok", "n-price", "n-succ", "n-calls", "n-steps"),
-      crumb="from where the time goes → here: every cause of cost, in six classes → to: four ways of counting, and the machines",
-      callout=f"""<p><b>Money comes from two things only — tokens read and tokens written, each times a price.</b> Writing costs 5× reading; a cached read costs 0.1×; fast mode costs 2× {ci('anth-b','openai')}. Three of the other sources multiply those two tokens; the last is the one nobody counts.</p>""",
+      crumb="from where the time goes → here: every cause of cost, in six classes → to: four accounting conventions, and the environment machine",
+      callout=f"""<p><b>Money comes from two things only — tokens read and tokens written, each times a price.</b> Writing costs 5× reading; a cached read costs 0.1×; fast mode costs 2× {ci('anth-b','openai')}. Three of the other sources multiply those token counts; the sixth, the environment machine, is outside the API bill.</p>""",
       body=f"""
 {cost_strip()}
 <div class="rows6">
@@ -504,7 +504,7 @@ slide("s07", "Cost has six sources",
         ["$72.4 per attempt ÷ 20.6% completion ≈ $351 per success — OSWorld 2.0, best agent (calc.)"], ci('osw2'))}
   {card("5 · UNIT PRICE", "The price list sets the constant; speed tiers and long contexts double it",
         ["Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written — a 40× spread between two vendors’ list prices (calc.)"], ci('anth-b','openai'))}
-  {card("6 · THE MACHINES", "The machines are missing from every published cost, and for CPU environments they are small",
+  {card("6 · THE ENVIRONMENT MACHINE", "Published task costs are API bills only; a CPU environment adds a small amount on top",
         ["A one-hour CPU environment costs $0.02–0.36 at list prices: 0.3–4.6% of a $7.87 bill (calc.; next page)"], "vendor price pages, read 2026-09-27")}
 </div>""",
       foot="SOURCES · one representative number per class; the complete tables with conditions are in Appendix A3",
@@ -512,10 +512,10 @@ slide("s07", "Cost has six sources",
       notes="""文档第三节。三个比例：写 = 读 × 5；缓存读 0.1 倍；fast mode 2 倍（Anthropic 2026b；OpenAI 2026，2026 年 9 月定价页）。第一类 [E45][E31][E98][E44][E19]；第二类 [E41][D7]（$2.43 只算输出、$7.87 全算，输出 31%）；第三类 [E25][E44]；第四类 [E41] $72.4/20.6%≈$351（calc.）、[E45] $8.47、[E43] HAL 约 $40,000（21,730 次运行，每配置一次）；第五类定价页 [E190][E192]；第六类追加调查 7（E212–E223）。""")
 
 # --- 08 conventions + machines ----------------------------------------------------
-slide("s08", "Counting the same task four ways, and the machines nobody counts",
+slide("s08", "Four accounting conventions for one task, and the cost of the environment machine",
       hl=("n-price", "n-succ", "n-wait"),
       crumb="from the six classes → here: which convention a cost figure uses, and what the environment adds → to: how slow and expensive are linked",
-      callout="""<p><b>“What does one task cost?” has four honest answers up to 30× apart, and none of them includes the machine.</b> The first question back is always: under which convention?</p>""",
+      callout="""<p><b>The cost of one task depends on the accounting convention: the four conventions in use differ by up to 30×, and none includes the environment machine.</b> A cost figure is comparable only with its convention stated.</p>""",
       body=f"""
 <div class="two">
   <div>
@@ -531,7 +531,7 @@ slide("s08", "Counting the same task four ways, and the machines nobody counts",
   <div class="figcap">The three that apply to a whole bill compound to about 31× (3.2 × 4.9 × 2, calc.). Screenshot-agent measurements do not report their cache state.</div>
   </div>
   <div class="stack">
-    {card("6 · THE MACHINES, FROM LIST PRICES", "For CPU environments the machine is a small addition — until idle time, proxies or GPUs enter",
+    {card("6 · THE ENVIRONMENT MACHINE, FROM LIST PRICES", "For CPU environments the machine is a small addition; idle time, proxy traffic and GPUs change that",
           ["An H100 sandbox at $3.95 per hour is already half of a $7.87 bill, and hourly billing runs while the agent waits — the median AgentSysBench session is active only 20% of its lifetime"], "vendor price pages, read 2026-09-27; " + CITE['asb'])}
     {hbars("A one-hour CPU environment as a share of a $7.87 API bill (calc.)", [("Browser Use cloud browser",0.25,"0.25%"),("AWS t3.medium",0.5,"0.5%"),("Browserbase",1.5,"1.5%"),("E2B / Daytona 2 vCPU",2.1,"2.1%"),("Modal 2 vCPU",3.0,"3.0%"),("AWS t3.2xlarge (OSWorld 2.0)",4.2,"4.2%"),("OpenAI hosted container 4 GB",4.6,"4.6%")], "vendor price pages, read 2026-09-27 · full price table in Appendix A3", width=520, height_row=17)}
   </div>
@@ -552,7 +552,7 @@ slide("s09", "How slow and expensive are linked: three kinds of relationship",
         ["Passes " + tex("N", 13) + ", calls per pass " + tex("c_k", 13) + ", reading, writing, cache hits, failures — every one of them lives in the token counts"], ci('osh','anth-b'))}
   {card("SLOW BUT NOT EXPENSIVE — time equation only", "fix it, and only time falls",
         ["Queueing, page loads, fixed sleeps, tool tails — none produces a token; the machine behind them is billed by the hour, usually under 5% of the API bill"])}
-  {card("MONEY FOR TIME OR FOR ACCURACY — opposite signs", "buying speed buys only the writing segment; buying accuracy gets dearer with every point",
+  {card("MONEY FOR TIME OR FOR ACCURACY — opposite signs", "paying for speed shortens only the writing segment; paying for accuracy costs more tokens per point as accuracy rises",
         ["Fast mode: up to 2.5× faster writing (vendor-stated) at 2× the price, reading unchanged"], "(" + CITE['anth-b'] + "; " + CITE['openai'] + "; accuracy: Appendix A5)")}
 </div>""",
       foot=f"SOURCES · {CITE['osh']} · {CITE['anth-b']} · {CITE['openai']} — the cause-by-cause table, with the convexity evidence, is Appendix A5",
@@ -576,7 +576,7 @@ slide("s10", "The levers, and what is still unmeasured",
   <tr><td><b>Fewer calls per pass</b> — drop judging and reflection</td><td>yes</td><td>yes</td><td>fewer errors caught</td></tr>
   <tr><td><b>Overlap the waiting</b> — pre-load, parallel tools, page-ready events</td><td>yes</td><td>no</td><td>only where the environment dominates</td></tr>
   <tr><td><b>Buy a fast or priority tier</b></td><td>writing only</td><td>no — 2× more</td><td>reading unchanged; cache dropped</td></tr>
-  <tr><td><b>Stop retrying failures</b> — early stop, detect dead loops</td><td>yes</td><td>yes</td><td>kills some attempts that would succeed</td></tr>
+  <tr><td><b>Stop retrying failures</b> — early stop, detect dead loops</td><td>yes</td><td>yes</td><td>stops some attempts that would have succeeded</td></tr>
   </tbody></table>
   <div class="gapcol">
     <div class="ck">NOT YET MEASURED</div>
@@ -721,7 +721,7 @@ A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — 3. calls, 4. failures, 5. un
   ], w_cost),
   notes="附录 A3 第 2 页：文档第三节第三类（[E25][E44]）、第四类（Ⅳ-1…Ⅳ-3，[E41][E45][E43]）、第五类（Ⅴ-1…Ⅴ-4，[E190][E192]）。")
 
-A("a3-3", "A3 · 3/3", "A3 · Cost — 6. the machines, and the four conventions",
+A("a3-3", "A3 · 3/3", "A3 · Cost — 6. the environment machine, and the four conventions",
   hl=("n-wait", "n-price", "n-succ"),
   crumb="the complete tables behind page 8 · vendor price pages read 2026-09-27 · per-task amounts and shares are our own arithmetic (calc.)",
   body=table(["environment", "price (vendor page)", "1-hour task", "15-min task", "share of a $7.87 API bill", "share of $72.4"], [
