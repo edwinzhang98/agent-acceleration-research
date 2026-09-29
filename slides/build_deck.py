@@ -1550,7 +1550,10 @@ slide("t12", "10 · Tokens by billing class: read input from the cache", part=2,
   [wk("TokenPilot", "tokenpilot"), 'Stable placeholders for changing fields, trimmed tool outputs, and a side model evicting finished segments', NR + ' (tokens and dollars only)', 'PinchBench $8.31 → $3.22 (−61%); Claw-Eval continuous $81.52 → $10.58 (−87%)', '80.5 → 81.0 and 63.4 → 60.8 (partial-credit score)', 'PinchBench (123 tasks), Claw-Eval (161); GPT-5.4-mini; vs OpenClaw', 'A side-model call every 3 turns, left out of the totals (under $0.03 per stream)'],
   [wk("TraceLab counterfactual", "tracelab"), 'Counterfactual: keep the prompt cache alive through the user’s think time between steps', NR + ' (a cost counterfactual)', 'Upper bound: $40,431 → $35,242 (−12.8%)', NR + ' (a cost counterfactual)', 'Recorded Claude Code and Codex traces, 33,960 user-initiated steps; list prices', 'Holds cache storage through idle time; no gain without human pauses (≈ 0 in autonomous runs)'],
  ])}
-<div class="figcap">Cache hit ÷ uncached input price, latest models (vendor price pages, read 28 Sep 2026): DeepSeek-V4.1-Flash 0.02×, Claude Opus 5.5 0.05× (writes 1.25× for 5 min, 2× for 1 h), GPT-6 0.1× (writes 1.25×), Gemini 3.8 Flash 0.1× (storage $0.50 per million tokens per hour), Grok 4.7 0.25× {c2('deepseek', 'anth-b', 'openai', 'google', 'xai')}.</div>""",
+{table(["latest model, price page read 28 Sep 2026", "cache hit ÷ uncached input", "cache write ÷ uncached input"], [
+  ["Claude Opus 5.5 " + c2('anth-b'), "0.05×", "1.25× (kept 5 min), 2× (kept 1 h)"],
+  ["GPT-6 Sol, GPT-6 Luna " + c2('openai'), "0.1×", "1.25×"],
+ ], ["44%", "22%", "34%"], cls="tbl p2 price")}""",
       foot=f"NOT YET MEASURED · a GUI or browser agent’s tokens split by billing class, cache writes included (Don’t Break the Cache covers a web-search agent) · prices {c2('deepseek', 'anth-b', 'openai', 'google', 'xai')}; Appendix B6",
       chip=("#b6-1", "Appendix B6"))
 
@@ -2193,7 +2196,8 @@ def page_refs_html(refs, small=False):
 for _s in SLIDES:
     if _s["kind"] != "main":
         continue
-    _text = html.unescape(re.sub(r"<[^>]+>", " ", " ".join([_s["title"], _s["callout"], _s["body"], _s["foot"] or ""])))
+    _foot = (_s["foot"] or "") if _s["part"] == 1 else ""   # Part 2 foots are not shown, so they cite nothing
+    _text = html.unescape(re.sub(r"<[^>]+>", " ", " ".join([_s["title"], _s["callout"], _s["body"], _foot])))
     if 'class="p3refs"' not in _s["body"] and _s["id"] not in REFS_NONE:
         if _s["part"] == 1:
             _refs = []
