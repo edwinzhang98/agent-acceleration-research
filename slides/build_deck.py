@@ -1571,9 +1571,13 @@ slide("t13", "11 · Price per token: a cheaper model for most calls", part=2,
 
 # --- Part 2 · 14 success and cost per success ----------------------------------------------------------
 EQ["amort"] = r"$v_n(m,p)\;=\;\dfrac{C_{\mathrm{setup}}}{n}\;+\;\dfrac{C_m(p)}{R_m(p)}$"
+def _cps(c, r):
+    v = c / r
+    return f"${v:,.0f}" if v >= 100 else f"${v:,.2f}"
+
 slide("t14", "12 · Success rate and set-up: the cost of one success", part=2,
       crumb="terms: R_m(p) in v(m,p) = C_m(p) / R_m(p) · plus a one-time set-up cost that Part 1’s per-attempt formula leaves out",
-      callout="""<p><b>Cost per success is cost per attempt divided by the success rate, so a dearer attempt can give a cheaper success; a one-time set-up must be spread over the tasks that use it.</b></p>""",
+      callout="""<p><b>Few papers report the cost of one success, so this page computes it for works on the earlier pages: cost per attempt ÷ success rate, plus any one-time set-up spread over the tasks it serves.</b></p>""",
       body=f"""
 <div class="eqtab">
 {eqrow("per task", "set-up spread", ["amort"],
@@ -1581,14 +1585,15 @@ slide("t14", "12 · Success rate and set-up: the cost of one success", part=2,
        "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); one large tool-making call spread over n cheap calls, O(nc + C) with C, c the cost of one large- and one small-model call: " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
 </div>
 <div class="twocol">
-{table(["work", "cost per success (calc. unless stated)", "why it moved"], [
-  [wk("AXIS", "axis"), "$0.77 → $0.24", "cheaper and more successful"],
-  [wk("W&amp;D", "wd"), "$1.55 → $0.97 per correct answer", "cheaper per attempt"],
-  [wk("OSWorld 2.0, batched", "osw2"), "$411 → $351", "Opus 4.8; success 18.5 → 20.6%"],
-  [wk("Beyond Browsing", "beyondbrowsing"), "browsing ≈ $0.68 · API only ≈ $4.11 · hybrid ≈ $3.60", "dearer attempt, cheaper success (hybrid vs API)"],
-  [wk("BATS", "bats"), "$0.79 → $4.47", "success 12.6 → 24.6%, cost ×11"],
-  [wk("AI Agents That Matter", "kapoor25"), "93.2% for $2.45 vs 88.0% for $134.50 (run totals, stated)", "simpler agent, better and cheaper"],
- ], ["26%", "44%", "30%"], cls="tbl p2")}
+{table(["work (page)", "cost per attempt", "success", "cost per success (calc.)"], [
+  [wk("AXIS (4)", "axis"), "$0.4 → $0.2", "52 → 84%", f"{_cps(0.4, .52)} → {_cps(0.2, .84)}"],
+  [wk("OSWorld 2.0, batched (4)", "osw2"), "~$76.1 → ~$72.4", "18.5 → 20.6%", f"{_cps(76.1, .185)} → {_cps(72.4, .206)}"],
+  [wk("W&amp;D (9)", "wd"), "$1.025 → $0.657", "66 → 68%", f"{_cps(1.025, .66)} → {_cps(0.657, .68)}"],
+  [wk("StepWise (13)", "stepwise"), "$0.881 → $0.224", "58.1 → 55.4%", f"{_cps(0.881, .581)} → {_cps(0.224, .554)}"],
+  [wk("WebRouter (13)", "webrouter"), "$0.98 → $0.12", "86.1 → 82.3%", f"{_cps(0.98, .861)} → {_cps(0.12, .823)}"],
+  [wk("Beyond Browsing, API only → hybrid", "beyondbrowsing"), "$1.2 → $1.4", "29.2 → 38.9%", f"{_cps(1.2, .292)} → {_cps(1.4, .389)}"],
+  [wk("BATS, vs ReAct@100", "bats"), "9.9¢ → $1.1", "12.6 → 24.6%", f"{_cps(0.099, .126)} → {_cps(1.1, .246)}"],
+ ], ["34%", "22%", "18%", "26%"], cls="tbl p2")}
 {card("SET-UP COSTS LEFT OUT OF THE HEADLINES", "Each needs n tasks to pay off",
       [f"JIT-Planner: 25–90 min of tool building plus 25–45 min of traces per app {c2('jit')}",
        f"EET (Agentless, GPT-5-mini): $4.3 to build its experience base once, against a 500-task SWE-bench Verified run cut from $13.77 to $6.18 — repaid within that run; with Mini-SWE-Agent the $7.1 set-up exceeds one run’s $3.11 saving (calc.) {c2('eet')}",
@@ -1782,9 +1787,6 @@ B("b7-1", "B7", "B7 · A cheaper model per call: more rows, with full conditions
    [wk("FrugalGPT", "frugal"), "A cascade of models with a stopping scorer", "Up to 98% lower cost at equal accuracy on one single-query dataset (HEADLINES)", "Single-turn"],
   ], w_d))
 
-def _cps(c, r):
-    v = c / r
-    return f"${v:,.0f}" if v >= 100 else f"${v:,.2f}"
 B("b8-1", "B8", "B8 · Cost per success: the inputs, the formula and the rounding",
   crumb="behind page 14 · v = cost per attempt ÷ success rate (Cost-of-Pass, Eq. 2) · all results are calc. unless stated",
   body=table(["work", "cost per attempt (as printed)", "success rate", "cost per success (calc.)", "note"], [
