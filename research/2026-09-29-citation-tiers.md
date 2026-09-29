@@ -244,7 +244,7 @@ None. The venue changes are reference metadata. The E-lines that name these work
 
 ## 4. Still open
 
-1. **Main-text priority swaps: 42 proposals.**
+1. **Main-text priority swaps: 42 proposals** (applied in the second round, §5).
    - 19 replace a source, 18 add a higher-tier source alongside, 5 move a row to the appendix; 80 citations were kept (no higher-tier source found).
    - They await Edwin's decision; the record is `scratchpad` `tier-audit.json`, summarised in the session.
    - The formula-source upgrades verified here:
@@ -252,3 +252,53 @@ None. The venue changes are reference metadata. The E-lines that name these work
      - DistServe (OSDI 2024), footnote 1: "The overall request latency equals TTFT plus TPOT times the number of generated tokens…" — a tier-A source for the call latency.
 2. Whether workshop acceptances (non-archival) count as peer-reviewed for the in-text marker. Currently they do: they are unmarked, and their venue is in the reference list.
 3. Pages 3–4 restructure (two target formulas, identical to Part 2's strips; sub-formulas as term definitions): proposed, awaiting Edwin.
+
+## 5. Second round (29 Sep 2026): source replacements applied
+
+Edwin approved the recommended column: formula sources replaced or joined by tier-A sources, with the formulas themselves unchanged; evidence swaps where a higher-tier work makes the same point; "keep" where the swap would weaken the evidence.
+
+**Formula sources, pages 2–4 and Appendix A0.**
+- The time sum: Interactive Speculative Planning (Hua et al., ICLR 2025, §3): "the time taken to generate and execute the whole plan is Σi≤n (time(T, si) + e(si))". AOSpec stays as the same form and the letter D.
+- The call latency and the TTFT/TPOT definitions: DistServe (Zhong et al., OSDI 2024), fn. 1: "The overall request latency equals TTFT plus TPOT times the number of generated tokens in the decoding phase". §3.1 Eq. 1 gives TTFT as execution time plus queuing delay (an M/D/1 average; fn. 3 for one request). Artificial Analysis stays for network time.
+- Precedents and co-sources:
+  - LLMCompiler (ICML 2024, App. E.1) is a precedent for T_saving; it is not the origin of the symbol.
+  - ReAct (ICLR 2023, §2): the full history as context, and o.
+  - SGLang (NeurIPS 2024, §3): cached prompt tokens counted as cache hits.
+
+**Evidence swaps.**
+- Part 1:
+  - UFO2 (TMLR): about 10 s per inference (s05).
+  - DistServe on how TTFT is measured (s07).
+  - The code citation is dropped where OSWorld 2.0's paper states the 3-s pause (s09).
+  - JIT-Planner's 73% as a second flip condition (s10).
+  - Cost-of-Pass for the per-success rule (s11, s12).
+  - CPU environment prices from AWS and OpenAI only; smaller vendors are in A3 (s11, s12).
+- Part 2:
+  - MobileGPT (MobiCom 2024) replaces ActionEngine on t03.
+  - Continuum moves to B3 (InferCept covers the mechanism).
+  - Agent-X (MobiSys 2026) replaces ToolSpec on t07.
+  - BrowserGym (TMLR) numbers and the AWS AgentCore price on t08.
+  - TPS-Bench (ACL 2026) replaces ParaGUI on t09, and LLMCompiler's bound is added.
+  - DSP (ICLR 2026) replaces SPORK on t10, and Speculative Actions' reversibility rule replaces WebOperator's figure; ParaGUI, SPORK and WebOperator move to B5 (now two pages).
+  - SWE-agent (NeurIPS 2024) is named as the origin of observation masking (t11).
+  - EET (Findings of ACL 2026) replaces EchoPath's set-up example (t14).
+- Kept, as recommended: OSWorld 2.0 on t04; Overthinking on t07; Safe to Resume? on t10.
+
+**Independent verification.** Workflow `wf_4a895b30`: three agents checked numbers, formula sources and references at the primary sources. They returned 29 findings; all were applied. Among them:
+- **DSP:** its −37.09% is the debate-target setting; it is −25.26% with ReAct.
+- **EET:** repaid within one run only for Agentless with GPT-5-mini (Mini-SWE-Agent: $7.1 set-up against a $3.11 saving).
+- **MobileGPT:** the 10–15 min is an offline exploration before any task.
+- **BrowserGym:** its environment share rests on 8-CPU VMs.
+- **TPS-Bench:** parallelism is inferred, not measured.
+- **JIT's five apps:** three are hosted REAL clones.
+- **t^first:** emitting the first token, not a decode step.
+- **Consistency:** the A0 symbol table and page-2 tags now agree.
+
+## 6. D-ledger additions (second round)
+
+| ID | Work | File says | Source says (location) | Resolution |
+|---|---|---|---|---|
+| D297 | TTFT split (F4) | research/2026-09-28-problem-definition.md F4: "no source writes TTFT as a sum" (our distillation) | DistServe (OSDI 2024): latency "comprises both execution time and queuing delay" (fn. 3); Avg_TTFT = D + RD²/(2(1−RD)) (§3.1, Eq. 1) | F4 becomes adapted: t^queue and t^prefill from DistServe; t^net and t^first ours. Deck A0 1/5 and 4/5 updated. |
+| D298 | Serial sum over steps (F1) | F1: adapted from AOSpec (arXiv) | Hua et al. (ICLR 2025) §3 gives the same sum, Σi≤n (time(T, si) + e(si)) | Cite ISP as the tier-A source; AOSpec kept for the letters. |
+| D299 | Call latency (F3) | F3: adapted from Artificial Analysis (website) | DistServe fn. 1: latency = TTFT + TPOT × decode-phase tokens (= n_out − 1) | Cite DistServe; the ≈ stays (one TPOT). AA kept for network time on APIs. |
+| D300 | BrowserGym step time (E26) | E26: "not re-verified" | arXiv v4, App. G, Table 7: WebArena mean step 12.2 s, environment 7.6 s, 5,493 steps; WorkArena L2 10.7 / 4.9 s; 8-CPU VMs limited speed | Verified; E26 to be relabelled at the v3.1 merge. |

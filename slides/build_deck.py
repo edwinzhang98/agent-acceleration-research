@@ -355,6 +355,11 @@ CITE = {   # short in-text forms, all in the reference list
     "frugal": "Chen, Zaharia &amp; Zou, 2024",
     "agentix": "Luo et al., 2026",
     "speedrunner": "Huang et al., 2026",
+    "isp": "Hua et al., 2025",
+    "distserve": "Zhong et al., 2024",
+    "react": "Yao et al., 2023",
+    "sglang": "Zheng et al., 2024",
+    "aws": "Amazon Web Services, 2026",
     "specactions": "Ye et al., 2026",
 }
 
@@ -414,7 +419,7 @@ slide("s01", "Where the time and the money go", cover=True,
     <li><span>05–10</span>Where the time goes, term by term</li>
     <li><span>11–12</span>Where the money goes, term by term, and per success</li>
     <li><span>13–14</span>How time and money are linked, and the levers</li>
-    <li><span>15–16</span>References · Appendix A0–A5</li>
+    <li><span>15–17</span>References · Appendix A0–A5</li>
     </ol>
   </div>
 </div>""")
@@ -431,16 +436,16 @@ slide("s02", "One attempt of an agent, step by step",
       body=f"""
 <div class="fig-loop2">{loop_svg(cls="big-svg", big=True)}</div>
 {defs2([
-  (r"i,\ N", "step (one observe–decide–act–wait round); steps in the attempt", CITE['aospec'] + "; " + CITE['yuan']),
+  (r"i,\ N", "step (one observe–decide–act–wait round); steps in the attempt", CITE['isp']),
   (r"J_i,\ j", "model calls in step " + tex("i", 12) + " (planner, judge, retries …); call index", "self-defined"),
   (r"\ell_{ij}", "latency of call " + tex("j", 12) + " of step " + tex("i", 12), CITE['swm']),
-  (r"\mathrm{TTFT}_{ij}", "time to the first generated token: queueing, sending, prefill of the uncached input", CITE['aa']),
-  (r"n^{\mathrm{out}}_{ij},\ \mathrm{TPOT}_{ij}", "output tokens of the call, thinking included; time per output token after the first", CITE['cop'] + "; " + CITE['aospec']),
-  (r"D_i,\ E_i", "model time of step " + tex("i", 12) + "; all its other time (observe, act, wait, harness gaps, back-off)", CITE['aospec']),
-  (r"T_{\mathrm{saving}}", "time hidden because some of it ran at the same time; 0 if strictly serial", CITE['asyncfc']),
-  (r"o_{a,i},\ a", "tokens the result or screenshot of step " + tex("i", 12) + " adds to the prompt; agent index", CITE['yuan']),
+  (r"\mathrm{TTFT}_{ij}", "time to the first generated token: queueing, sending, prefill of the uncached input", CITE['distserve'] + "; " + CITE['aa']),
+  (r"n^{\mathrm{out}}_{ij},\ \mathrm{TPOT}_{ij}", "output tokens of the call, thinking included; time per output token after the first", CITE['cop'] + "; " + CITE['distserve']),
+  (r"D_i,\ E_i", "model time of step " + tex("i", 12) + "; all its other time (observe, act, wait, harness gaps, back-off)", CITE['isp'] + "; " + CITE['aospec']),
+  (r"T_{\mathrm{saving}}", "time hidden because some of it ran at the same time; 0 if strictly serial", CITE['asyncfc'] + "; precedent " + CITE['llmc']),
+  (r"o_{a,i},\ a", "tokens the result or screenshot of step " + tex("i", 12) + " adds to the prompt; agent index", CITE['react'] + "; " + CITE['yuan']),
   (r"|H_{a,i}|,\ \Phi,\ z_{a,i}", "length of the prompt step " + tex("i", 12) + "’s call reads (one call per step); chat template; the call’s output: thinking, message and tool-call tokens", CITE['yuan']),
-  (r"n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{unc}}", "input tokens read from the cache, written to it (5-min or 1-h), or uncached; " + tex(r"n^{\mathrm{w}}=n^{\mathrm{w5m}}+n^{\mathrm{w1h}}", 12), CITE['anth-b'] + "; " + CITE['tokenpilot'] + "; " + CITE['speedrunner']),
+  (r"n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{unc}}", "input tokens read from the cache, written to it (5-min or 1-h), or uncached; " + tex(r"n^{\mathrm{w}}=n^{\mathrm{w5m}}+n^{\mathrm{w1h}}", 12), CITE['anth-b'] + "; " + CITE['tokenpilot'] + "; " + CITE['sglang'] + "; " + CITE['speedrunner']),
   (r"c_{\kappa}(\mu),\ \kappa,\ \mu", "price per token of billing class " + tex(r"\kappa", 12) + " on serving model " + tex(r"\mu", 12), CITE['cop']),
   (r"x_{\mathrm{env}}", "billed environment usage (e.g. sandbox hours)", CITE['cop']),
   (r"R_m(p),\ m,\ p", "probability that one attempt of design " + tex("m", 12) + " (model + harness) on task " + tex("p", 12) + " succeeds", CITE['cop']),
@@ -481,7 +486,7 @@ slide("s03", "The problem, defined (1/2): one formula for time, one for money, a
     (r"i=0", "a step-0 bucket for calls outside any step, e.g. a plan made before step 1", "self-defined"),
     (r"\mathrm{III},\ \mathrm{V}", "written out on page 4; the other symbols are page 2’s", ""),
    ]),
-   "sum: " + CITE['aospec'] + " · calls within a step: our distillation, evidence " + CITE['osh'] + " · saving: " + CITE['asyncfc'], "adapted · our distillation")}
+   "sum: " + CITE['isp'] + ", §3 · calls within a step: our distillation, evidence " + CITE['osh'] + " · saving: " + CITE['asyncfc'] + "; precedent " + CITE['llmc'] + ", App. E.1", "adapted · our distillation")}
 {eqrow_html("money", "one attempt", mainf("", [
     ("op", r"c_m(p)="), ("term", r"\sum_{i}\sum_{j}", "3 · calls"), ("term", r"\sum_{\kappa}n^{\kappa}_{ij}", "1, 2 · tokens by class"),
     ("term", r"c_{\kappa}(\mu_{ij})", "5 · price per class"), ("op", "+"), ("term", r"x_{\mathrm{env}}\,c_{\mathrm{env}}", "6 · environment")]),
@@ -506,20 +511,20 @@ slide("s04", "The problem, defined (2/2): what is inside the terms",
       crumb="from the two formulas → here: four expansions, each of one term named in its first column → to: where the time goes",
       body=table(["expands", "formula", "its symbols", "status · source", "pages"], [
    ["<b>III · one call</b> " + tex(r"\ell_{ij}", 12) + " of the time formula", eq_svg("call", fontsize=11.5, cls="eqn") + eq_svg("ttft", fontsize=11.5, cls="eqn"),
-    defs1([(r"t^{\mathrm{queue}},\ t^{\mathrm{net}}", "waiting in the server’s queue; network time", "self-defined"),
-           (r"t^{\mathrm{prefill}},\ t^{\mathrm{first}}", "reading the uncached input; the first decoding step", "self-defined")]),
-    "call: adapted · " + CITE['aa'] + "<br>TTFT split: our distillation", "5–7; Part 2: 5–7"],
+    defs1([(r"t^{\mathrm{queue}},\ t^{\mathrm{net}}", "waiting in the server’s queue; network time", "t^queue: " + CITE['distserve'] + "; t^net self-defined"),
+           (r"t^{\mathrm{prefill}},\ t^{\mathrm{first}}", "reading the uncached input (this also computes the first token); emitting the first token", "t^prefill: " + CITE['distserve'] + "; t^first self-defined")]),
+    "call: adapted · " + CITE['distserve'] + ", fn. 1<br>TTFT split: adapted · " + CITE['distserve'] + ", Eq. 1 (prefill + queueing); network time: " + CITE['aa'], "5–7; Part 2: 5–7"],
    ["<b>V · overlap</b> " + tex(r"T_{\mathrm{saving}}", 12) + " of the time formula", eq_svg("saving", fontsize=11.5, cls="eqn"),
     defs1([(r"\mathcal{M},\ \mathcal{E}", "the intervals when a model call runs; when anything else runs", CITE['asyncfc']),
            (r"\mathcal{S},\ \mathcal{D},\ \triangleq", "lengths added up (overlap twice); length of their union (overlap once); defined as. A 2-s tool call during a model call gives 2 s", CITE['asyncfc'])]),
-    "adapted · " + CITE['asyncfc'] + ", intervals widened", "9; Part 2: 9–10"],
+    "adapted · " + CITE['asyncfc'] + ", intervals widened; precedent " + CITE['llmc'] + ", App. E.1", "9; Part 2: 9–10"],
    ["<b>The input each call reads</b> — inside III (its prefill) and 1, 2 (its tokens)", eq_svg("ctx", fontsize=11.5, cls="eqn") + eq_svg("ctxsum", fontsize=11.5, cls="eqn"),
     defs1([(r"|H_{a,1}|,\ g_i", "the first prompt; tokens step " + tex("i", 12) + " adds, " + tex(r"|\Phi(z_{a,i})|+|o_{a,i}|", 12), "self-defined"),
            (r"\bar{g},\ N^{*}=2|H_{a,1}|/\bar{g}+1", "mean of " + tex("g_i", 12) + ", weighted by the later steps that re-read it; the step count beyond which the " + tex("N^2", 12) + " term dominates", "self-defined (calc.)")]),
-    "recurrence: adapted · " + CITE['yuan'] + "<br>sum: our distillation (calc.)", "8; Part 2: 6, 11"],
+    "recurrence: adapted · " + CITE['yuan'] + "; full history: " + CITE['react'] + "<br>sum: our distillation (calc.)", "8; Part 2: 6, 11"],
    ["<b>1, 2 · tokens by class</b> " + tex(r"n^{\kappa}_{ij}", 12) + " of the money formula", eq_svg("classes", fontsize=11.5, cls="eqn") + eq_svg("nin", fontsize=11.5, cls="eqn"),
     defs1([(r"\mathrm{hit,\ w5m,\ w1h,\ unc,\ out}", "cache read; cache write kept 5 min or 1 h; uncached input; output", CITE['anth-b'])]),
-    "adapted · " + CITE['anth-b'] + " (billed input = read + written + uncached)", "11–12; Part 2: 12"],
+    "adapted · " + CITE['anth-b'] + " (billed input = read + written + uncached); cache hits: " + CITE['sglang'], "11–12; Part 2: 12"],
   ], ["17%", "31%", "32%", "13%", "7%"], cls="tbl p2 expand") + """
 <div class="figcap">What no formula shows: the terms are coupled — the prompt length drives both reading time and the input bill, and a slow step can turn cache reads into cache writes (page 13).</div>""",
       foot="SOURCES · as cited in each row · the full derivations, each source’s own formula and every symbol with its origin: Appendix A0",
@@ -538,7 +543,7 @@ slide("s05", "Where the time goes: five classes, one per term",
   {card("II · TOO MANY CALLS PER STEP " + tex("(J_i)", 11), "A harness that plans, judges and reflects multiplies every step",
         ["4–12 planning calls per judging call — GTA1 harness: four parallel planners, up to three retries, one judge"], ci('osh'))}
   {card("III · EACH CALL IS SLOW " + tex(r"(\ell_{ij})", 11), "Inside a call, waiting, reading and writing are three separate delays",
-        ["Writing, one token at a time, is 91–98.6% of model time — local 27–31B models with a warm cache"], ci('yuan'))}
+        [f"Writing, one token at a time, is 91–98.6% of model time — local 27–31B models with a warm cache {ci('yuan')}", f"About 10 s per model call, the largest phase of a step — UFO2 desktop agent, GPT-4o and o1 {ci('ufo2')}"], "")}
   {card("IV · NON-MODEL TIME " + tex("(E_i)", 11), "The environment costs time whether or not the model is running",
         ["6.6 s per browser action vs 4.7 s per model call, median — 151 WebVoyager live-site tasks, GPT-4o"], ci('skim'))}
   {card("V · LITTLE RUNS CONCURRENTLY " + tex(r"(T_{\mathrm{saving}})", 11), "Almost nothing overlaps, so task time is close to a sum: fixing one term saves only its own share",
@@ -583,7 +588,7 @@ slide("s07", "III · Inside one call: first token, then decoding",
         ["224K vs 37K output tokens per task — Claude Opus 4.8 vs GPT-5.5 on the same 108 OSWorld 2.0 tasks",
          "Writing is 91–98.6% of model time — local 27–31B models with a warm cache"], ci('osw2','yuan'))}
   {card("HOW TTFT IS MEASURED", "Published first-token times lump queueing, network and prefill together",
-        ["Time to first token is measured from the request being sent and “includes network latency”; output speed excludes the first chunk"], ci('aa'))}
+        [f"Serving papers model first-token time as prefill plus queueing {ci('distserve')}", f"API measurements start when the request is sent and “include network latency”; output speed excludes the first chunk {ci('aa')}"], "")}
 </div>""",
       foot=f"SOURCES · {CITE['bian']} · {CITE['osh']} · {CITE['osw2']} · {CITE['yuan']} · {CITE['aa']} (third-party measurement definitions) — full rows in Appendix A1",
       chip=("#a1-2", "Appendix A1"))
@@ -615,8 +620,8 @@ slide("s09", "IV–V · The time outside the model, and how little of it overlap
 <div class="two">
   <div class="stack">
   {card("IV · NON-MODEL TIME", "The environment is slow on its own, and the benchmarks add fixed sleeps on top",
-        ["OSWorld 2.0 sleeps 3 s after every action: × 318 steps ≈ 16 min of pure waiting per task (calc.)",
-         "6.6 s per browser action vs 4.7 s per model call, median — 151 WebVoyager live-site tasks, GPT-4o"], ci('osw2','code','skim'))}
+        [f"OSWorld 2.0 pauses 3 s after every action: × 318 steps (Claude Opus 4.7, one action per step) ≈ 16 min of pure waiting per task (calc.) {ci('osw2')}",
+         f"6.6 s per browser action vs 4.7 s per model call, median — 151 WebVoyager live-site tasks, GPT-4o {ci('skim')}"], "")}
   {card("V · CONCURRENCY", "Almost nothing overlaps, so fixing one term saves only its own share",
         ["Concurrency within a turn: 1.15 — GitHub Copilot production telemetry"], ci('copilot'))}
   </div>
@@ -645,11 +650,11 @@ slide("s10", "Which term dominates depends on the harness, not on the kind of ag
 <td><b>Writing, or tool tails.</b> Writing is 91–98.6% of model time {ci('yuan')}; in Claude Code / Codex requests tools take 59.8%, the model 41.0% {ci('tracelab')}</td></tr>
 <tr><td class="rk">flips when</td>
 <td>The harness makes one call per step: over 70% of the time is then the sandbox, because the benchmark sleeps 2–3 s after every action {ci('asb','code','osw2')}</td>
-<td>The observation grows: 4.8× the input moved the model’s share of step time from 46.9% to 61.6% {ci('asb')}</td>
+<td>The observation grows: 4.8× the input moved the model’s share of step time from 46.9% to 61.6% {ci('asb')}. The site is a fast benchmark sandbox: on five benchmark web apps, model calls are 73% of Browser-Use’s latency, averaged over three models {ci('jit')}</td>
 <td>Load evicts the cache: latency up to 7.14× {ci('thunder')}</td></tr>
 <tr><td class="rk">in one line</td>
 <td>Slow in reading: every step re-reads the growing screenshot history</td>
-<td>Slow in the environment — until the observation grows, then slow in reading</td>
+<td>Slow in the environment — until the observation grows or the site is a fast sandbox, then slow in reading</td>
 <td>Reading is cached away; slow in writing and in the tools</td></tr>
 </tbody></table>
 <div class="concl">
@@ -674,11 +679,11 @@ slide("s11", "Where the money goes: six classes, one per term",
   {card("3 · NUMBER OF CALLS", "The calls that make the agent slow also make it expensive",
         ["5–13× the calls of a single-call harness per step — GTA1: planners, retries and a judge (calc.)"], ci('osh'))}
   {card("4 · FAILURES AND RETRIES", "Failed attempts are billed in full",
-        ["$72.4 per attempt ÷ 20.6% completion ≈ $351 per success — OSWorld 2.0, best agent (calc.)"], ci('osw2'))}
+        [f"$72.4 per attempt ÷ 20.6% completion ≈ $351 per success — OSWorld 2.0, Claude Opus 4.8, 108 tasks (calc.) {ci('osw2')}; cost per success = cost per attempt ÷ success rate {ci('cop')}"], "")}
   {card("5 · UNIT PRICE", "The price list sets the constant; fast tiers double it",
         ["Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written — a 40× spread (calc.)"], ci('anth-b','openai'))}
   {card("6 · THE ENVIRONMENT MACHINE", "Published costs are API bills only; a CPU environment adds little",
-        ["$0.02–0.36 for a one-hour CPU environment: 0.3–4.6% of a $7.87 bill (calc.; next page)"], "vendor price pages, read 2026-09-27")}
+        ["$0.04–0.36 for a one-hour CPU environment: 0.5–4.6% of a $7.87 bill (calc.; an AWS t3.medium VM to an OpenAI 4 GB container; next page)"], ci('aws','openai'))}
 </div>""",
       foot="SOURCES · one representative number per class; the complete tables with conditions are in Appendix A3",
       chip=("#a3-1", "Appendix A3"))
@@ -696,7 +701,7 @@ slide("s12", "Four accounting conventions for one task, and the cost of the envi
   <thead><tr><th>convention</th><th>the same run, counted both ways</th><th>gap</th></tr></thead>
   <tbody>
   <tr><td class="rk">output only vs all tokens</td><td>GTA1 on 39 OSWorld tasks, o3 list price, no cache: $2.43 counting output only; $7.87 counting all tokens {ci('osh')}</td><td>3.2×</td></tr>
-  <tr><td class="rk">per attempt vs per success</td><td>OSWorld 2.0, Claude Opus 4.8: $72.4 per attempt at 20.6% completion → ≈ $351 (calc.; a benchmark average) {ci('osw2')}</td><td>4.9×</td></tr>
+  <tr><td class="rk">per attempt vs per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: $72.4 per attempt at 20.6% completion → ≈ $351 (calc.; a benchmark average) {ci('osw2')}; per success = per attempt ÷ success rate {ci('cop')}</td><td>4.9×</td></tr>
   <tr><td class="rk">uncached vs cached</td><td>A cached read costs a fraction of a normal read (DeepSeek-V4.1-Flash: $0.006 vs $0.30 per million tokens; other vendors in A3) {ci('deepseek')}</td><td>4–50× on the read price only, by vendor (calc.)</td></tr>
   <tr><td class="rk">standard vs fast mode</td><td>Claude Opus 5.5 $4 / $20 → $8 / $40; OpenAI 2× on every listed model; up to 2.5× faster writing (vendor-stated), reading unchanged {ci('anth-b','openai')}</td><td>2×</td></tr>
   </tbody></table>
@@ -705,10 +710,10 @@ slide("s12", "Four accounting conventions for one task, and the cost of the envi
   <div class="stack">
     {card("6 · THE ENVIRONMENT MACHINE, FROM LIST PRICES", "For CPU environments the machine is a small addition; idle time, proxy traffic and GPUs change that",
           ["An H100 sandbox at $3.95 per hour is already half of a $7.87 bill, and hourly billing runs while the agent waits — the median AgentSysBench session is active only 20% of its lifetime"], "vendor price pages, read 2026-09-27; " + CITE['asb'])}
-    {hbars("A one-hour CPU environment as a share of a $7.87 API bill (calc.)", [("Browser Use cloud browser",0.25,"0.25%"),("AWS t3.medium",0.5,"0.5%"),("Browserbase",1.5,"1.5%"),("E2B / Daytona 2 vCPU",2.1,"2.1%"),("Modal 2 vCPU",3.0,"3.0%"),("AWS t3.2xlarge (OSWorld 2.0)",4.2,"4.2%"),("OpenAI hosted container 4 GB",4.6,"4.6%")], "vendor price pages, read 2026-09-27 · full price table in Appendix A3", width=520, height_row=17)}
+    {hbars("A one-hour CPU environment as a share of a $7.87 API bill (calc.)", [("AWS t3.medium",0.5,"0.5%"),("AWS t3.2xlarge (OSWorld 2.0)",4.2,"4.2%"),("OpenAI hosted container 4 GB",4.6,"4.6%")], "AWS and OpenAI price pages · smaller vendors (Browser Use, Browserbase, E2B, Daytona, Modal) in Appendix A3", width=520, height_row=20)}
   </div>
 </div>""",
-      foot=f"SOURCES · {CITE['osh']} · {CITE['osw2']} · {CITE['asb']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['deepseek']} · AWS, Browser Use, Browserbase, E2B, Daytona, Modal, OpenAI price pages",
+      foot=f"SOURCES · {CITE['osh']} · {CITE['osw2']} · {CITE['cop']} · {CITE['asb']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['deepseek']} · {CITE['aws']} · the H100 price: Daytona, Pricing, on-demand GPU (read 27 Sep 2026)",
       chip=("#a3-3", "Appendix A3"))
 
 # --- 13 how time and money are linked -------------------------------------------------
@@ -767,6 +772,7 @@ slide("s14", "The levers, and what is still unmeasured",
 # --- references (part 1) ---------------------------------------------------
 REFS_P1 = [
  "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of Machine Learning and Systems 8 (MLSys 2026)</i>. arXiv:2506.16042v2. University of California, San Diego.",
+ "Amazon Web Services. (2026). <i>Amazon EC2 T3 instances</i>, on-demand prices, Linux, US East (N. Virginia) (read 27 and 29 September 2026). https://aws.amazon.com/ec2/instance-types/t3/",
  "Anthropic. (2026a, May 13). <i>Best practices for computer and browser use with Claude</i>. https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude",
  "Anthropic. (2026b). <i>Claude API pricing</i>; <i>Prompt caching</i>; <i>Fast mode</i>; <i>Vision</i> (developer documentation, read 28 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/prompt-caching; https://platform.claude.com/docs/en/build-with-claude/fast-mode; https://platform.claude.com/docs/en/build-with-claude/vision",
  "Artificial Analysis. (2026). <i>Methodology</i>; <i>Performance benchmarking methodology</i> (read 28 September 2026). https://artificialanalysis.ai/methodology; https://artificialanalysis.ai/methodology/performance-benchmarking — third-party measurement definitions.",
@@ -778,41 +784,44 @@ REFS_P1 = [
  "Erol, M. H., El, B., Suzgun, M., Yuksekgonul, M., &amp; Zou, J. (2026). Cost-of-Pass: An economic framework for evaluating language models. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2504.13359v2. Stanford University.",
  "Feng, G., Mao, H., Dutta, P., &amp; Gonzalez, J. E. (2026). Concurrency without model changes: Future-based asynchronous function calling for LLMs (AsyncFC). arXiv:2605.15077. University of California, Berkeley.",
  "Google. (2026). <i>Gemini Developer API pricing</i> (read 28 September 2026). https://ai.google.dev/gemini-api/docs/pricing",
+ "Hua, W., Wan, M., Vadrevu, S., Nadel, R., Zhang, Y., &amp; Wang, C. (2025). Interactive speculative planning: Enhance agent efficiency through co-design of system and user interface (ISP). <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2410.00079. Rutgers University; Microsoft; Google DeepMind.",
  "Huang, Z., Wang, X., Wang, A., Jurayj, W., Jiménez Gutiérrez, B., Khashabi, D., &amp; Andrews, N. (2026). Better, faster, stronger: Programmatic skill learning best reduces agent cost (SpeedRunner). arXiv:2608.11338v1. Johns Hopkins University.",
  "Kang, H., Li, Z., Yang, X., Xu, W., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, poster. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI.",
- "Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., &amp; Narayanan, A. (2025). AI agents that matter. <i>Transactions on Machine Learning Research</i>. arXiv:2407.01502. Princeton University.",
  "Kapoor, S., Stroebl, B., Kirgis, P., Nadgir, N., Siegel, Z. S., Wei, B., … Narayanan, A. (2026). Holistic Agent Leaderboard: The missing infrastructure for AI agent evaluation. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2510.11977. Princeton University et al.",
+ "Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., &amp; Narayanan, A. (2025). AI agents that matter. <i>Transactions on Machine Learning Research</i>. arXiv:2407.01502. Princeton University.",
  "Kim, S., Moon, S., Tabrizi, R., Lee, N., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2024). An LLM compiler for parallel function calling. <i>Proceedings of the 41st International Conference on Machine Learning (ICML 2024)</i>, PMLR 235, 24370–24391. arXiv:2312.04511. University of California, Berkeley; International Computer Science Institute; Lawrence Berkeley National Laboratory.",
- "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., … Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i> (Expert Certification). https://openreview.net/forum?id=5298fKGmv3. arXiv:2412.05467. ServiceNow Research; Mila; Polytechnique Montréal; Carnegie Mellon University; McGill University; Tel Aviv University; Université de Montréal; iMean AI.",
+ "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., … Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i> (Expert Certification). https://openreview.net/forum?id=5298fKGmv3. arXiv:2412.05467v4. ServiceNow Research; Mila; Polytechnique Montréal; Carnegie Mellon University; McGill University; Tel Aviv University; Université de Montréal; iMean AI.",
  "Lee, N., Erdogan, L. E., John, C. J., Krishnapillai, S., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2026). Agentic test-time scaling for WebAgents. <i>COLM 2026 Workshop on Efficient Reasoning</i> (non-archival). arXiv:2602.12276v2. University of California, Berkeley.",
  "Li, Y., Ye, Q., Choubey, P. K., Zhang, J., &amp; Wu, C.-S. (2026). Speculate with memory. arXiv:2607.12236. Salesforce Research.",
  "Liu, B., Qiu, H., Goiri, Í., Fonseca, R., Bianchini, R., &amp; Choukse, E. (2026). Agentic coding in the wild: Characterizing GitHub Copilot traces at production scale. arXiv:2608.00101. University of Illinois Urbana-Champaign; Microsoft Azure Research.",
  "Lu, J., Zhang, Z., Yang, F., Zhang, J., Wang, L., Du, C., Lin, Q., Rajmohan, S., Zhang, D., &amp; Zhang, Q. (2025). AXIS: Efficient human-agent-computer interaction with API-first LLM-based agents. <i>Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</i>, 7711–7743. https://doi.org/10.18653/v1/2025.acl-long.381. Microsoft.",
  "Luo, M., Shi, X., Cai, C., Zhang, T., Wong, J., Wang, Y., Wang, C., Huang, Y., Chen, Z., Gonzalez, J. E., &amp; Stoica, I. (2026). Agentix: An efficient serving engine for LLM agents as general programs. <i>23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI 26)</i>, 2443–2459. https://www.usenix.org/conference/nsdi26/presentation/luo. arXiv:2502.13965 (as Autellix). University of California, Berkeley; Google DeepMind; Shanghai Jiao Tong University.",
  "OpenAI. (2026). <i>API pricing</i>; <i>API changelog</i> (fast mode, 30 July 2026; Ultrafast, 13 August 2026) (read 28 September 2026). https://developers.openai.com/api/docs/pricing; https://developers.openai.com/api/docs/changelog",
- "Vendor price pages used on pages 11–12 and in Appendix A3 (all read 27 September 2026): AWS, <i>Amazon EC2 T3 instances</i>; Browser Use, <i>Pricing</i> and <i>API v4: create browser session</i>; Browserbase, <i>Pricing</i> and <i>Billing plans</i>; Daytona, <i>Pricing</i> and <i>Billing</i>; E2B, <i>Pricing</i>; Modal, <i>Pricing</i> and <i>Sandbox resources</i>.",
+ "Vendor price pages used on page 12 and in Appendix A3 (all read 27 September 2026): Browser Use, <i>Pricing</i> and <i>API v4: create browser session</i>; Browserbase, <i>Pricing</i> and <i>Billing plans</i>; Daytona, <i>Pricing</i> and <i>Billing</i>; E2B, <i>Pricing</i>; Modal, <i>Pricing</i> and <i>Sandbox resources</i>.",
  "Winston, C., Wang, R. Y., Mirhoseini, A., &amp; Kozyrakis, C. (2026). Agent JIT compilation for latency-optimizing web agent planning and scheduling. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306. arXiv:2605.21470. Stanford University.",
  "Wong, M., Hsieh, K., Nath, S., &amp; Netravali, R. (2026). Skim: Speculative execution for fast and efficient web agents. arXiv:2605.16565. Princeton University; Microsoft Research.",
  "xAI. (2026). <i>Grok 4.7</i> model page, SpaceXAI Docs (read 28 September 2026). https://docs.x.ai/developers/models/grok-4.7",
  "XLANG Lab. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537. The University of Hong Kong (authored as “XLANG Lab and Collaborators”; the full author list is in the paper’s Appendix A).",
  "xlang-ai. (2026). <i>OSWorld</i> [Source code], desktop_env/desktop_env.py and run.py at commit b138d348. https://github.com/xlang-ai/OSWorld",
  "Xu, B., Xue, Z., Chen, D., Fu, C., Wu, C., Huang, C., … Zhang, N. (2026). TokenPilot: Cache-efficient context management for LLM agents. <i>Findings of the Association for Computational Linguistics: EMNLP 2026</i> (to appear). arXiv:2606.17016v2. Zhejiang University; University of Electronic Science and Technology of China; Xidian University; HomologyAI.",
+ "Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., &amp; Cao, Y. (2023). ReAct: Synergizing reasoning and acting in language models. <i>The Eleventh International Conference on Learning Representations (ICLR 2023)</i>. arXiv:2210.03629. Princeton University; Google Research.",
  "Ye, N., Ahuja, A., Liargkovas, G., Lu, Y., Kaffes, K., &amp; Peng, T. (2026). Speculative actions: A lossless framework for faster AI agents. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>, oral. arXiv:2510.04371. Columbia University.",
  "Yuan, Y., Nayak, A., Kundu, S., &amp; Talati, N. (2026). Agentic AI workload characterization. <i>Proceedings of the 2026 IEEE International Symposium on Workload Characterization (IISWC 2026)</i>, Boulder, CO. arXiv:2605.26297v2 (21 September 2026; arXiv title “Agentic AI workload characteristics”). University of Illinois Urbana-Champaign; Gimlet Labs; Intel.",
- "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., … Zhang, D. (2026). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft.",
+ "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., … Zhang, D. (2026). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft; ZJU-UIUC Institute; Nanjing University; Peking University.",
+ "Zheng, L., Yin, L., Xie, Z., Sun, C., Huang, J., Yu, C. H., Cao, S., Kozyrakis, C., Stoica, I., Gonzalez, J. E., Barrett, C., &amp; Sheng, Y. (2024). SGLang: Efficient execution of structured language model programs. <i>Advances in Neural Information Processing Systems 37 (NeurIPS 2024)</i>, 62557–62583. https://doi.org/10.52202/079017-2000. arXiv:2312.07104. Stanford University; University of California, Berkeley; Shanghai Jiao Tong University; Texas A&amp;M University; independent researcher.",
+ "Zhong, Y., Liu, S., Chen, J., Hu, J., Zhu, Y., Liu, X., Jin, X., &amp; Zhang, H. (2024). DistServe: Disaggregating prefill and decoding for goodput-optimized large language model serving. <i>18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)</i>, 193–210. https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin. arXiv:2401.09670. Peking University; StepFun; University of California, San Diego.",
  "Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., &amp; Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560. University of Washington.",
 ]
 
 def refs_html(items, start=1):
     return f'<ol class="reflist" start="{start}">' + "".join(f"<li>{r}</li>" for r in items) + "</ol>"
 
-half = (len(REFS_P1) + 1) // 2
-slide("s15", "References · Part 1 (1 of 2)", kind="refs",
-      crumb="author–year tags on the pages refer to these entries · published version where one exists, otherwise the arXiv number and the authors’ institutions",
-      body=refs_html(REFS_P1[:half]))
-slide("s16", "References · Part 1 (2 of 2)", kind="refs",
-      crumb="continued",
-      body=refs_html(REFS_P1[half:], start=half+1))
+_P1_PER = 14
+_p1n = -(-len(REFS_P1) // _P1_PER)
+for _n in range(_p1n):
+    slide(f"s{15 + _n}", f"References · Part 1 ({_n + 1} of {_p1n})", kind="refs",
+          crumb=("author–year tags on the pages refer to these entries · “arXiv · institution” in the text marks a work with no peer-reviewed venue · published version where one exists" if _n == 0 else "continued"),
+          body=refs_html(REFS_P1[_n * _P1_PER:(_n + 1) * _P1_PER], start=_n * _P1_PER + 1))
 
 # =====================================================================
 # APPENDIX — Part 1
@@ -827,17 +836,17 @@ A("a0-1", "A0 · 1/5", "A0 · The time of one attempt: each source’s own formu
   crumb="the derivation behind pages 3–4 · verbatim / adapted / our distillation · calc. = our algebra",
   body=table(["formula (pages 3–4)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"T_{\mathrm{attempt}}\triangleq t_{\mathrm{end}}-t_{\mathrm{start}}=\mathcal{D}(\mathcal{M}\cup\mathcal{E})=\sum_{i=0}^{N}(D_i+E_i)-T_{\mathrm{saving}}", 11), "adapted", tex(r"T_{\mathrm{saving}}", 11) + " is “defined as the difference between the serialized baseline and the observed end-to-end asynchronous latency” (App. B.2) " + ci('asyncfc') + ", combined with the sum below", "one attempt, not one task (a task may take several); exact because the non-model intervals cover every instant; " + tex(r"T_{\mathrm{saving}}\geq 0", 11) + " (calc.); exact with measured call times, approximate once " + tex(r"\ell\approx\mathrm{TTFT}+n\,\mathrm{TPOT}", 11)],
-   [tex(r"\sum_{i=0}^{N}(D_i+E_i)", 11), "adapted", "“At step i, the actor takes " + tex("D_i", 11) + " time to generate action " + tex("a_i", 11) + ", and the runtime takes " + tex("T_i", 11) + " time to execute it … yielding serial latency " + tex(r"\sum_i(D_i+T_i)", 11) + "” (§3) " + ci('aospec'), tex("T_i", 11) + " → " + tex("E_i", 11) + " (T is kept for totals); " + tex("D_i", 11) + " covers all calls of a step, " + tex("E_i", 11) + " every non-model interval, both as summed lengths; " + tex("i=0", 11) + " holds calls outside any step; AOSpec’s " + tex("a_i", 11) + " is an action, not our agent index; preferred to " + ci('llmc') + ", whose N counts the function calls of one plan"],
+   [tex(r"\sum_{i=0}^{N}(D_i+E_i)", 11), "adapted", "“When we do not utilize speculative planning, the time taken to generate and execute the whole plan is " + tex(r"\Sigma_{i\leq n}(\mathrm{time}(T,s_i)+e(s_i))", 11) + "” (§3) " + ci('isp') + "; the same form with the letters " + tex("D_i", 11) + ", " + tex("T_i", 11) + ", " + tex(r"\sum_i(D_i+T_i)", 11) + " (§3) " + ci('aospec'), tex(r"\mathrm{time}(T,s_i)", 11) + " → " + tex("D_i", 11) + " (AOSpec’s letter), widened to all model calls of the step; " + tex("e(s_i)", 11) + " → " + tex("E_i", 11) + ", widened to every non-model interval, both as summed lengths; n → N; " + tex("i=0", 11) + " holds calls outside any step; preferred to " + ci('llmc') + ", whose N counts the function calls of one plan"],
    [tex(r"D_i=\sum_j \ell_{ij}", 11), "our distillation", "No source sums the calls of a step. GTA1 makes “4 parallel calls” per planning step and “between 4 and 12 planning calls” per judging call " + ci('osh'), "parallel calls add here; their overlap is credited to " + tex(r"T_{\mathrm{saving}}", 11) + "; the letter ℓ as in " + ci('swm')],
-   [tex(r"\ell_{ij}\approx\mathrm{TTFT}_{ij}+n^{\mathrm{out}}_{ij}\mathrm{TPOT}_{ij}", 11), "adapted", "Total Response Time = Time to First Token + 100 / Output Speed " + ci('aa'), "100 → the call’s own output tokens, thinking included; 1/speed → TPOT; ≈ because output speed excludes the first chunk; TTFT runs to the first token of any kind, reasoning included"],
-   [tex(r"\mathrm{TTFT}_{ij}\approx t^{\mathrm{queue}}+t^{\mathrm{net}}+t^{\mathrm{prefill}}(n^{\mathrm{unc}}+n^{\mathrm{w}};\,n^{\mathrm{hit}})+t^{\mathrm{first}}", 11), "our distillation", "No source writes TTFT as a sum. A program’s latency “comprises three components”, the first the “queuing time” of its calls " + ci('agentix') + "; TTFT “includes network latency” " + ci('aa'), "the split used on page 13; " + tex(r"t^{\mathrm{net}}", 11) + ": network time, " + tex(r"t^{\mathrm{first}}", 11) + ": first decode step; the shape of " + tex(r"t^{\mathrm{prefill}}", 11) + " is not given by any verified source"],
+   [tex(r"\ell_{ij}\approx\mathrm{TTFT}_{ij}+n^{\mathrm{out}}_{ij}\mathrm{TPOT}_{ij}", 11), "adapted", "“The overall request latency equals TTFT plus TPOT times the number of generated tokens in the decoding phase” (fn. 1) " + ci('distserve') + "; API form: Total Response Time = Time to First Token + 100 / Output Speed " + ci('aa'), "the decoding-phase tokens are " + tex(r"n^{\mathrm{out}}-1", 11) + " (the first comes with TTFT), hence ≈ with " + tex(r"n^{\mathrm{out}}", 11) + "; output tokens include thinking; TTFT runs to the first token of any kind; on an API it also includes network time"],
+   [tex(r"\mathrm{TTFT}_{ij}\approx t^{\mathrm{queue}}+t^{\mathrm{net}}+t^{\mathrm{prefill}}(n^{\mathrm{unc}}+n^{\mathrm{w}};\,n^{\mathrm{hit}})+t^{\mathrm{first}}", 11), "adapted", "latency “comprises both execution time and queuing delay” (fn. 3); for prefill, the average " + tex(r"\mathrm{Avg\_TTFT}=D+\dfrac{RD^2}{2(1-RD)}", 11) + " of an M/D/1 queue (§3.1, Eq. 1) " + ci('distserve') + "; a program’s latency “comprises three components”, the first the “queuing time” of its calls " + ci('agentix') + "; TTFT “includes network latency” " + ci('aa'), "network time and " + tex(r"t^{\mathrm{first}}", 11) + " added to DistServe’s two terms, and its M/D/1 average becomes one call’s time; DistServe’s prefill already produces the first token, so " + tex(r"t^{\mathrm{first}}", 11) + " is only emitting it (≈ 0 on the server); the split used on page 13; without a cache, DistServe App. A.2 models prefill time from the batch’s token counts; the shape with a cached prefix, our second argument, is given by no verified source"],
   ], ["26%", "9%", "34%", "31%"]))
 
 A("a0-2", "A0 · 2/5", "A0 · Time hidden by concurrency, and the growing prompt",
   crumb="the derivation behind page 4 · verbatim / adapted / our distillation · calc. = our algebra",
   body=table(["formula (page 4)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
-   [tex(r"T_{\mathrm{saving}}\triangleq\mathcal{S}(\mathcal{M})+\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})", 11), "adapted", "the same formula, continued " + tex(r"=\Delta_{F\parallel F}+\Delta_{D\parallel E}", 11) + ", with " + tex(r"\mathcal{M},\ \mathcal{E}", 11) + " “the sequence of time intervals for model decoding and function execution” (App. B.2) " + ci('asyncfc'), "intervals widened to whole calls and all non-model time, so values are not comparable with AsyncFC’s; the split becomes (calc.) " + tex(r"[\mathcal{S}(\mathcal{M})-\mathcal{D}(\mathcal{M})]+[\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{E})]+[\mathcal{D}(\mathcal{M})+\mathcal{D}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})]", 11) + ", each ≥ 0; it can include extra work that concurrency causes, so it is not the saving against a separate serial run (speed-ups use " + tex(r"T_{\mathrm{seq}}/T_{\mathrm{attempt}}", 11) + ", Part 2)"],
-   [tex(r"|H_{a,i+1}|=|H_{a,i}|+|\Phi(z_{a,i})|+|o_{a,i}|", 11), "adapted", tex(r"H_{a,i+1}=H_{a,i}\,\Vert\,\Phi(\theta_{a,i},m_{a,i},u_{a,i})\,\Vert\,o_{a,i}", 11) + ", " + tex(r"C_{a,i}=|H_{a,i}|", 11) + " (Eqs. 1–3, v2 §II-C) " + ci('yuan'), "lengths of the concatenation; " + tex(r"\Phi(z_{a,i})", 11) + " written with Yuan’s own " + tex(r"z=(\theta,m,u)", 11) + " of its Eq. 2 (thinking, message, tool-call tokens), because its m would clash with the design m and its " + tex(r"C_{a,i}", 11) + " with the cost " + tex("C_m(p)", 11) + "; exact with one call per step and full history; in general add " + tex(r"h^{+}_i-h^{-}_i", 11) + " (other calls’ output; compaction)"],
+   [tex(r"T_{\mathrm{saving}}\triangleq\mathcal{S}(\mathcal{M})+\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})", 11), "adapted", "the same formula, continued " + tex(r"=\Delta_{F\parallel F}+\Delta_{D\parallel E}", 11) + ", with " + tex(r"\mathcal{M},\ \mathcal{E}", 11) + " “the sequence of time intervals for model decoding and function execution” (App. B.2) " + ci('asyncfc') + "; precedent for the effect: parallel tasks’ latency “is determined by the slowest task”, " + tex(r"T^C=\sum_i T_P^C(P_i)+\max_k T_E(E_k)", 11) + " against the serial " + tex(r"\sum_i(T_P^R(P_i)+T_E(E_i))", 11) + " (App. E.1, Eqs. 1–2) " + ci('llmc'), "intervals widened to whole calls and all non-model time, so values are not comparable with AsyncFC’s; the split becomes (calc.) " + tex(r"[\mathcal{S}(\mathcal{M})-\mathcal{D}(\mathcal{M})]+[\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{E})]+[\mathcal{D}(\mathcal{M})+\mathcal{D}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})]", 11) + ", each ≥ 0; it can include extra work that concurrency causes, so it is not the saving against a separate serial run (speed-ups use " + tex(r"T_{\mathrm{seq}}/T_{\mathrm{attempt}}", 11) + ", Part 2)"],
+   [tex(r"|H_{a,i+1}|=|H_{a,i}|+|\Phi(z_{a,i})|+|o_{a,i}|", 11), "adapted", tex(r"H_{a,i+1}=H_{a,i}\,\Vert\,\Phi(\theta_{a,i},m_{a,i},u_{a,i})\,\Vert\,o_{a,i}", 11) + ", " + tex(r"C_{a,i}=|H_{a,i}|", 11) + " (Eqs. 1–3, v2 §II-C) " + ci('yuan') + "; the full history as context: " + tex(r"c_t=(o_1,a_1,\ldots,o_{t-1},a_{t-1},o_t)", 11) + " (§2) " + ci('react'), "lengths of the concatenation; " + tex(r"\Phi(z_{a,i})", 11) + " written with Yuan’s own " + tex(r"z=(\theta,m,u)", 11) + " of its Eq. 2 (thinking, message, tool-call tokens), because its m would clash with the design m and its " + tex(r"C_{a,i}", 11) + " with the cost " + tex("C_m(p)", 11) + "; exact with one call per step and full history; in general add " + tex(r"h^{+}_i-h^{-}_i", 11) + " (other calls’ output; compaction)"],
    [tex(r"\sum_{i=1}^{N}|H_{a,i}|=N|H_{a,1}|+\frac{N(N-1)}{2}\bar{g}", 11), "our distillation (calc.)", "no source writes the sum; “at each step, the prompt sent to the LLM includes the history of all previous steps” " + ci('osh'), tex(r"g_i=|\Phi(z_{a,i})|+|o_{a,i}|", 11) + ", " + tex(r"\bar{g}=\sum_i(N-i)g_i\,/\,\frac{N(N-1)}{2}", 11) + " makes it exact; over a random step count " + tex(r"\mathbb{E}[\sum|H|]\approx\mathbb{E}[N]|H_{a,1}|+\frac{\bar{g}}{2}(\mathbb{E}[N]^2+\mathrm{Var}[N]-\mathbb{E}[N])", 11) + "; crossover " + tex(r"N^{*}=2|H_{a,1}|/\bar{g}+1", 11)],
   ], ["22%", "9%", "33%", "36%"]))
 
@@ -853,17 +862,17 @@ A("a0-3", "A0 · 3/5", "A0 · Money, per success, and the goal",
 A("a0-4", "A0 · 4/5", "A0 · Every symbol, its unit, and where it comes from",
   crumb="origin of each symbol: “as in” a source (its own symbol and meaning), “adapted from” a source (renamed or widened), or self-defined",
   body=table(["symbol", "meaning", "unit", "origin"], [
-   [tex(r"i,\ N,\ j,\ J_i,\ a", 11), "step (i = 0: calls outside any step); steps; model call; calls in step i; agent", "—; steps; —; calls; —", "i as in " + CITE['aospec'] + " §3 and " + CITE['yuan'] + " §II-C · a as in Yuan et al., §II-C · N, j, J_i self-defined (calls ≠ steps)"],
-   [tex(r"D_i,\ E_i,\ T_{\mathrm{attempt}},\ T_{\mathrm{saving}},\ T_{\mathrm{seq}}", 11), "model time; non-model time of step i; wall-clock of one attempt; time hidden by concurrency; a separate serial run", "s", "D adapted from " + CITE['aospec'] + " §3 (all calls of a step) · E self-defined (replaces their T_i) · T_attempt self-defined · T_saving adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened) · T_seq as in " + CITE['specactions'] + " §3.1.2"],
+   [tex(r"i,\ N,\ j,\ J_i,\ a", 11), "step (i = 0: calls outside any step); steps; model call; calls in step i; agent", "—; steps; —; calls; —", "i as in " + CITE['isp'] + " §3 (their " + tex("s_i", 10) + ", n steps) · a as in " + CITE['yuan'] + " §II-C (whose i counts LLM invocations) · N adapted from Hua et al.’s n · j, J_i self-defined (calls ≠ steps)"],
+   [tex(r"D_i,\ E_i,\ T_{\mathrm{attempt}},\ T_{\mathrm{saving}},\ T_{\mathrm{seq}}", 11), "model time; non-model time of step i; wall-clock of one attempt; time hidden by concurrency; a separate serial run", "s", "D: the quantity of " + CITE['isp'] + " time(T, s_i) and the letter of " + CITE['aospec'] + ", widened to all calls of a step · E adapted from Hua et al.’s e(s_i) (AOSpec’s T_i) · T_attempt self-defined · T_saving adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened; precedent for the effect, not the symbol: " + CITE['llmc'] + " App. E.1, Eqs. 1–2) · T_seq as in " + CITE['specactions'] + " §3.1.2"],
    [tex(r"\mathcal{S},\ \mathcal{D},\ \mathcal{M},\ \mathcal{E},\ \triangleq", 11), "summed length; length of a union; model-call and non-model intervals; defined as", "s", "adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened)"],
-   [tex(r"\ell_{ij},\ \mathrm{TTFT}_{ij},\ \mathrm{TPOT}_{ij}", 11), "call latency; time to first token; time per output token", "s; s; s/token", "ℓ as in " + CITE['swm'] + " §2.1 (ℓ_LLM) · TTFT as in " + CITE['aa'] + ", definitions · TPOT as in " + CITE['aospec'] + " §5.1 · indices self-defined"],
-   [tex(r"t^{\mathrm{queue}},\ t^{\mathrm{net}},\ t^{\mathrm{prefill}},\ t^{\mathrm{first}}", 11), "parts of TTFT: queueing, network, prefill of uncached input, first decode step", "s", "self-defined (A0 · 1/5)"],
-   [tex(r"n^{\mathrm{in}},\ n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{w5m}},\ n^{\mathrm{w1h}},\ n^{\mathrm{unc}},\ n^{\mathrm{out}}", 11), "tokens: all input (= hit + w + unc); cache read; cache write (= w5m + w1h); uncached input; output", "tokens", "n as in " + CITE['cop'] + " (n_in, n_out) · classes as billed by " + CITE['anth-b'] + " (usage fields) · hit as in " + CITE['tokenpilot'] + " App. A.2 · unc adapted from " + CITE['speedrunner'] + " App. A.3 (“uncached”) · w5m, w1h self-defined"],
+   [tex(r"\ell_{ij},\ \mathrm{TTFT}_{ij},\ \mathrm{TPOT}_{ij}", 11), "call latency; time to first token; time per output token", "s; s; s/token", "ℓ as in " + CITE['swm'] + " §2.1 (ℓ_LLM) · TPOT as in " + CITE['distserve'] + " §1 · TTFT adapted from " + CITE['distserve'] + " §1 (“the duration of the prefill phase”) and §3.1 Eq. 1 (plus queuing delay), widened by network time as in " + CITE['aa'] + " · indices self-defined"],
+   [tex(r"t^{\mathrm{queue}},\ t^{\mathrm{net}},\ t^{\mathrm{prefill}},\ t^{\mathrm{first}}", 11), "parts of TTFT: queueing, network, prefill of uncached input, emitting the first token", "s", "t^queue, t^prefill adapted from " + CITE['distserve'] + " §3.1 Eq. 1 (queuing delay; prefill execution time) · t^net, t^first self-defined (A0 · 1/5)"],
+   [tex(r"n^{\mathrm{in}},\ n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{w5m}},\ n^{\mathrm{w1h}},\ n^{\mathrm{unc}},\ n^{\mathrm{out}}", 11), "tokens: all input (= hit + w + unc); cache read; cache write (= w5m + w1h); uncached input; output", "tokens", "n as in " + CITE['cop'] + " (n_in, n_out) · classes as billed by " + CITE['anth-b'] + " (usage fields) · hit as in " + CITE['tokenpilot'] + " App. A.2 (cached prompt tokens as cache hits: " + CITE['sglang'] + " §3) · unc adapted from " + CITE['speedrunner'] + " App. A.3 (“uncached”) · w5m, w1h self-defined"],
    [tex(r"\kappa,\ K,\ \mu_{ij},\ c_{\kappa}(\mu)", 11), "billing class; the set {hit, w5m, w1h, unc, out}; serving model; price per token of class κ on μ", "—; —; —; $/token", "c adapted from " + CITE['cop'] + " Eq. 13 (c_in, c_out) · κ, K, μ self-defined"],
    [tex(r"x_{\mathrm{env}},\ c_{\mathrm{env}},\ w,\ x_m(p)", 11), "billed environment usage; its price; price vector; quantity vector per attempt", "h; $/h; $/unit; units", "as in " + CITE['cop'] + " App. D.1 · env subscript self-defined"],
-   [tex(r"H_{a,i},\ \Phi,\ z_{a,i},\ o_{a,i},\ g_i,\ \bar{g},\ N^{*}", 11), "context before step i of agent a; chat template; the step’s output; its tool result; tokens added; weighted mean; crossover", "tokens; —; tokens; tokens; tokens; tokens; steps", "H, Φ, o, z as in " + CITE['yuan'] + " Eqs. 1–3, z = (θ, m, u) = (thinking, message, tool call) in its Eq. 2; writing Φ(z) for Φ(θ, m, u) is our shorthand · g, ḡ, N* self-defined (calc.)"],
+   [tex(r"H_{a,i},\ \Phi,\ z_{a,i},\ o_{a,i},\ g_i,\ \bar{g},\ N^{*}", 11), "context before step i of agent a; chat template; the step’s output; its tool result; tokens added; weighted mean; crossover", "tokens; —; tokens; tokens; tokens; tokens; steps", "H, Φ, o, z as in " + CITE['yuan'] + " Eqs. 1–3 (o also " + CITE['react'] + " §2), z = (θ, m, u) = (thinking, message, tool call) in its Eq. 2; writing Φ(z) for Φ(θ, m, u) is our shorthand · g, ḡ, N* self-defined (calc.)"],
    [tex(r"m,\ p,\ c_m(p),\ C_m(p),\ R_m(p),\ v(m,p),\ R_0,\ \mathbb{E},\ \mathrm{Var}", 11), "design (model + harness); task; dollars of one attempt; expected; success probability; dollars per success; success floor; expectation; variance", "—; —; $; $; prob.; $; prob.", "as in " + CITE['cop'] + " §2.2, Eq. 2, App. B · R_0 self-defined · 𝔼, Var standard"],
-  ], ["24%", "34%", "11%", "31%"]))
+  ], ["22%", "31%", "10%", "37%"], cls="tbl dense"))
 
 A("a0-5", "A0 · 5/5", "A0 · What a published number covers: map it onto the terms before comparing",
   crumb="the measurement boundary · a figure is comparable only with what it includes stated",
@@ -907,7 +916,7 @@ A("a1-3", "A1 · 3/3", "A1 · Slowness, every cause — IV. environment, V. seri
   crumb="the complete table behind page 9 (non-model time and concurrency)",
   body=table(th_slow, [
    ["IV-1", "Producing the observation", "Extracting the accessibility tree or detecting elements takes time", "OSWorld desktop applications: 3–26 s to generate one accessibility tree; the screenshot itself is under 2% of task time. UFO2: OmniParser element detection adds about 1 s per step", ci('osh','ufo2'), "screenshot"],
-   ["IV-2", "Browser execution and page load", "After a click the agent waits for the page", "151 WebVoyager live-site tasks: per step, median browser action 6.6 s vs model call 4.7 s. WebArena with GenericAgent + Claude 3.5 Sonnet: 7.6 s of a 12.2 s step in the browser (this figure was not re-verified)", ci('skim','bgym'), "text"],
+   ["IV-2", "Browser execution and page load", "After a click the agent waits for the page", "151 WebVoyager live-site tasks: per step, median browser action 6.6 s vs model call 4.7 s. WebArena with GenericAgent + Claude 3.5 Sonnet: mean step 12.2 s, 7.6 s of it in the environment (5,493 steps; arXiv v4, App. G, Table 7)", ci('skim','bgym'), "text"],
    ["IV-3", "Fixed sleeps", "The agent cannot tell when the page is ready, so it sleeps a fixed number of seconds", "OSWorld’s environment code sleeps 2 s after every action; OSWorld 2.0 prescribes 3 s, so 318 steps are about 16 minutes of pure waiting (calc.). AgentSysBench: a single-call GUI agent (ReAct, Kimi-K2.6 API) spends over 70% of its OSWorld execution time in the desktop sandbox", ci('code','osw2','asb'), "screenshot (caused by the benchmark harness)"],
    ["IV-4", "Tool tails", "Tests and builds take minutes", "TraceLab, 4,265 Claude Code / Codex sessions from 43 developers (September 2025 – June 2026): tool calls over 1 minute are 4% of calls but 85% of tool time; a request averages 4.3 minutes — tools 2.5 (59.8%), model 1.7 (41.0%)", ci('tracelab'), "coding"],
    ["V", "Serial structure", "The four stages never overlap, so task time is the sum of every term, not the largest one; fixing one term saves only its share", "Concurrency within a turn is 1.15 in Copilot telemetry. Separately, 80–92% of a coding session’s elapsed time is the human thinking between turns — strip it before reading any total", ci('copilot','tracelab'), "all"],
@@ -961,7 +970,7 @@ A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — 3. calls, 4. failures, 5. un
 
 A("a3-3", "A3 · 3/3", "A3 · Cost — 6. the environment machine, and the four conventions",
   hl=("n-machine", "n-price", "n-succ"),
-  crumb="the complete tables behind page 12 · vendor price pages read 2026-09-27 · per-task amounts and shares are our own arithmetic (calc.)",
+  crumb="the complete tables behind page 12 · AWS rows: Amazon Web Services, 2026 (read 27 and 29 Sep 2026) · OpenAI container: OpenAI, 2026 · other vendors: vendor price pages, read 27 Sep 2026 · shares are our arithmetic (calc.)",
   body=table(["environment", "price (vendor page)", "1-hour task", "15-min task", "share of a $7.87 API bill", "share of $72.4"], [
    ["Browser Use cloud browser", "$0.02 per browser-hour, billed by the minute, 1-minute minimum; traffic extra (residential proxy $5/GB, direct $0.20/GB); sessions capped at 240 minutes", "$0.020", "$0.005", "0.25%", "0.03%"],
    ["AWS t3.medium (2 vCPU / 4 GiB, Linux, us-east-1)", "$0.0418 per hour on the T3 product page; another AWS page says $0.0416 (0.5% apart)", "$0.042", "$0.010", "0.5%", "0.06%"],
@@ -1013,6 +1022,8 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
   "Abhyankar, R., He, Z., Srivatsa, V., Zhang, H., &amp; Zhang, Y. (2024). InferCept: Efficient intercept support for augmented large language model inference. <i>Proceedings of the 41st International Conference on Machine Learning (ICML 2024)</i>, PMLR 235, 81–95. arXiv:2402.01869. University of California, San Diego."),
  ("osh", "Abhyankar, Qi &amp; Zhang, 2026",
   "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of Machine Learning and Systems 8 (MLSys 2026)</i>. arXiv:2506.16042v2. University of California, San Diego."),
+ ("aws", "Amazon Web Services, 2026",
+  "Amazon Web Services. (2026). <i>Amazon Bedrock AgentCore pricing</i>, Browser Tool (read 29 September 2026). https://aws.amazon.com/bedrock/agentcore/pricing/ — vendor pricing."),
  ("anth-a", "Anthropic, 2026a",
   "Anthropic. (2026a, May 13). <i>Best practices for computer and browser use with Claude</i>. https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude"),
  ("anth-b", "Anthropic, 2026b",
@@ -1068,7 +1079,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("hajimiri", "Hajimiri et al., 2026",
   "Hajimiri, S., Aminbeidokhti, M., Dolz, J., Ben Ayed, I., Laradji, I. H., Gella, S., &amp; Gontier, N. (2026). Are online skill and memory modules always worth their tokens? A budget-constrained study of web agents. <i>Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP 2026)</i> (to appear). arXiv:2606.15017v2. ServiceNow AI Research; ÉTS Montréal; University of British Columbia; McGill University."),
  ("isp", "Hua et al., 2025",
-  "Hua, W., Wan, M., Vadrevu, S., Nadel, R., Zhang, Y., &amp; Wang, C. (2025). Interactive speculative planning: Enhance agent efficiency through co-design of system and user interface. <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2410.00079. Rutgers University; Microsoft; Google DeepMind."),
+  "Hua, W., Wan, M., Vadrevu, S., Nadel, R., Zhang, Y., &amp; Wang, C. (2025). Interactive speculative planning: Enhance agent efficiency through co-design of system and user interface (ISP). <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2410.00079. Rutgers University; Microsoft; Google DeepMind."),
  ("guikv", "Huang et al., 2026a",
   "Huang, K.-H., Qiu, H., Dai, Y., Xiong, C., &amp; Wu, C.-S. (2026a). GUI-KV: Efficient GUI agents via KV cache with spatio-temporal awareness. <i>Transactions on Machine Learning Research</i>. arXiv:2510.00536. Salesforce AI Research; University of California, Los Angeles."),
  ("tclone", "Huang et al., 2026b",
@@ -1095,6 +1106,10 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
   "Kim, S., Moon, S., Tabrizi, R., Lee, N., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2024). An LLM compiler for parallel function calling. <i>Proceedings of the 41st International Conference on Machine Learning (ICML 2024)</i>, PMLR 235, 24370–24391. arXiv:2312.04511. University of California, Berkeley; International Computer Science Institute; Lawrence Berkeley National Laboratory."),
  ("computerrl", "Lai et al., 2026",
   "Lai, H., Liu, X., Zhao, Y., Xu, H., Zhang, H., Jing, B., Ren, Y., Yao, S., Dong, Y., &amp; Tang, J. (2026). ComputerRL: Scaling end-to-end online reinforcement learning for computer use agents. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2508.14040. Tsinghua University; Z.AI; University of Chinese Academy of Sciences."),
+ ("bgym", "Le Sellier de Chezelles et al., 2025",
+  "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., … Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i> (Expert Certification). https://openreview.net/forum?id=5298fKGmv3. arXiv:2412.05467v4. ServiceNow Research; Mila; Polytechnique Montréal; Carnegie Mellon University; McGill University; Tel Aviv University; Université de Montréal; iMean AI."),
+ ("mobilegpt", "Lee et al., 2024",
+  "Lee, S., Choi, J., Lee, J., Wasi, M. H., Choi, H., Ko, S., Oh, S., &amp; Shin, I. (2024). MobileGPT: Augmenting LLM with human-like app memory for mobile task automation. <i>Proceedings of the 30th Annual International Conference on Mobile Computing and Networking (MobiCom ’24)</i>, 1119–1133. https://doi.org/10.1145/3636534.3690682. arXiv:2312.03003v3. KAIST; Simon Fraser University; Korea University."),
  ("agentreuse", "Li et al., 2024",
   "Li, G., Wu, R., Tan, H., &amp; Chen, G. (2024). A plan reuse mechanism for LLM-driven agent. <i>Journal of Computer Research and Development, 61</i>(11), 2706–2720. https://doi.org/10.7544/issn1000-1239.202440380. English version: Li, G., Wu, R., &amp; Tan, H. (2025), arXiv:2512.21309v2. University of Science and Technology of China."),
  ("continuum", "Li et al., 2026a",
@@ -1197,6 +1212,8 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
   "Xu, Y., Wang, Z., Wang, J., Lu, D., Xie, T., Saha, A., Sahoo, D., Yu, T., &amp; Xiong, C. (2025). Aguvis: Unified pure vision agents for autonomous GUI interaction. <i>Proceedings of the 42nd International Conference on Machine Learning (ICML 2025)</i>, PMLR 267, 69772–69805. https://proceedings.mlr.press/v267/xu25ae.html. arXiv:2412.04454. The University of Hong Kong; Salesforce Research."),
  ("ares", "Yang et al., 2026a",
   "Yang, J., Hou, B., Wei, W., Bao, Y., &amp; Chang, S. (2026a). Ares: Adaptive reasoning effort selection for efficient LLM agents. arXiv:2603.07915v1. University of California, Santa Barbara; Accenture."),
+ ("sweagent", "Yang et al., 2024",
+  "Yang, J., Jimenez, C. E., Wettig, A., Lieret, K., Yao, S., Narasimhan, K., &amp; Press, O. (2024). SWE-agent: Agent-computer interfaces enable automated software engineering. <i>Advances in Neural Information Processing Systems 37 (NeurIPS 2024)</i>, 50528–50652. https://doi.org/10.52202/079017-1601. arXiv:2405.15793v3. Princeton University."),
  ("agentoccam", "Yang et al., 2025",
   "Yang, K., Liu, Y., Chaudhary, S., Fakoor, R., Chaudhari, P., Karypis, G., &amp; Rangwala, H. (2025). AgentOccam: A simple yet strong baseline for LLM-based web agents. <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2410.13825. University of Illinois Urbana-Champaign; Amazon."),
  ("space", "Yang et al., 2026b",
@@ -1224,7 +1241,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("echopath", "Zhao et al., 2026",
   "Zhao, Y., Shanmugham, A., Roy, S., &amp; Xu, Y. (2026). EchoPath: Execution-level replayable memory for GUI agents. arXiv:2609.16635v1. Johns Hopkins University; Amazon AGI."),
  ("sglang", "Zheng et al., 2024",
-  "Zheng, L., Yin, L., Xie, Z., Sun, C., Huang, J., Yu, C. H., Cao, S., Kozyrakis, C., Stoica, I., Gonzalez, J. E., Barrett, C., &amp; Sheng, Y. (2024). SGLang: Efficient execution of structured language model programs. <i>Advances in Neural Information Processing Systems 37 (NeurIPS 2024)</i>. https://doi.org/10.52202/079017-2000. arXiv:2312.07104. Stanford University; University of California, Berkeley; Shanghai Jiao Tong University; Texas A&amp;M University; independent researcher."),
+  "Zheng, L., Yin, L., Xie, Z., Sun, C., Huang, J., Yu, C. H., Cao, S., Kozyrakis, C., Stoica, I., Gonzalez, J. E., Barrett, C., &amp; Sheng, Y. (2024). SGLang: Efficient execution of structured language model programs. <i>Advances in Neural Information Processing Systems 37 (NeurIPS 2024)</i>, 62557–62583. https://doi.org/10.52202/079017-2000. arXiv:2312.07104. Stanford University; University of California, Berkeley; Shanghai Jiao Tong University; Texas A&amp;M University; independent researcher."),
  ("actionengine", "Zhong et al., 2026",
   "Zhong, H., Faisal, F., França, L., Leesatapornwongsa, T., Szekeres, A., Rong, K., &amp; Nath, S. (2026). ActionEngine: From reactive to programmatic GUI agents via state machine memory. arXiv:2602.20502v1 (24 February 2026; v2 of 28 September 2026 is retitled ‘…Programmatic web agents…’ and reports new results). Georgia Institute of Technology; Microsoft Research."),
  ("guig1", "Zhou et al., 2025",
@@ -1332,7 +1349,7 @@ slide("t03", "Compiling or replaying the loop removes most model calls; where th
 {fx(("time", {"J": ZERO}))}
 {ptab([
   [wk("JIT-Planner", "jit"), "Parallel calls draft code plans over cached, checked site tools; the cheapest valid one runs", "Task time 150.1 → 15.4 s (9.7×), success 61 → 90% — 37 tasks on 5 web apps (18 author-written), 3 runs, GPT-4.1, vs Browser-Use, same model", "Set-up of 25–90 + 25–45 min per app, excluded"],
-  [wk("ActionEngine", "actionengine"), "An offline state graph; one call writes a program, graph search compiles it", "Model calls 10.2 → 1.8, task time 237 → 118 s, success 66 → 95% — 106 WebArena Reddit tasks", "Baseline: another agent and model; crawl cost unreported"],
+  [wk("MobileGPT", "mobilegpt"), "Sub-tasks learned once are recalled from app memory; the model fills only what memory lacks", "Repeat runs with new parameters: 70.6–98.6% of actions from memory, latency −62.5%, cost −68.8% — 80 tasks, 8 Android apps, GPT-4-Turbo, vs deriving every action", "An offline explorer runs 10–15 min per app before any task ($10.78 in all); GPT-3.5 fills slots"],
   [wk("AutoDroid-V2", "autodroid2"), "A local model writes one script per task, not one call per step", "Model time 669.2 → 46.3 s per task (screen actions excluded), success 43.9 → 54.4% — 158 DroidTask tasks, same 8B model", "$82.42 of GPT-4o calls per app, offline (calc.)"],
   [wk("EchoPath", "echopath"), "Validated trajectories kept as callable memories and replayed", "Median tokens 586,386 → 20,370, median time 315.7 → 127.5 s, success 91.8 → 91.2% — OSWorld-Verified, 159 replayable tasks, Codex GPT-5.5, vs Synapse", "First pass ≈ 572k tokens and ≈ 4.5 min per task, not counted"],
  ])}
@@ -1360,12 +1377,11 @@ slide("t04", "Fewer steps: more work per call cut steps by 38⁠–⁠46%; skill
 # --- Part 2 · 05 serving --------------------------------------------------------------
 slide("t05", "Serving the agent as one program cuts queueing and re-reading, on self-hosted models only", part=2,
       crumb="terms: t^queue and t^prefill ↓ under load · self-hosted serving only; an API user cannot apply these",
-      callout=f"""<p><b>Schedulers that treat a whole agent run as the unit, and keep its cache through tool waits, give 1.1–15× better delay or throughput than vLLM-based baselines.</b> All are measured under load on self-hosted models; none reports task success.</p>""",
+      callout=f"""<p><b>Schedulers that treat a whole agent run as the unit, and keep its cache through tool waits, give 1.2–15× more throughput or load than vLLM-based baselines.</b> All are measured under load on self-hosted models; none reports task success.</p>""",
       body=f"""
 {fx(("time", {"queue": DN, "prefill": DN}))}
 {ptab([
   [wk("Agentix", "agentix"), "Program-level preemptive scheduling; cache-aware routing", "Program throughput up to 15× vLLM and 2–5× vLLM with prefix caching, at equal latency — Llama-3.1 8B/70B and Falcon-180B on A100s", "No task quality: scheduling only"],
-  [wk("Continuum", "continuum"), "Keeps a run’s KV cache for a predicted tool-wait time", "Job delay 1.12–3.66× lower — replayed SWE-bench, BFCL and OpenHands traces; Llama-3.1 8B/70B, Gemma-3 12B", "GPU memory held during waits; replay, no quality metric"],
   [wk("InferCept", "infercept"), "During a tool call, keeps, swaps or recomputes the cache, whichever wastes least", "1.6–2× the load of vLLM at similar per-token latency (1.25× for 13B on one GPU) — six tool-augmented workloads", "Baseline spent 37–40% of forward time recomputing"],
   [wk("ThunderAgent", "thunder"), "The program and its tool sandboxes are the scheduling unit", "Steps per minute 1.24–3.58× vLLM (calc. from its figure) — GLM-4.6 and Qwen-3 on 8×H100", "Throughput, not task time"],
  ])}""",
@@ -1397,16 +1413,16 @@ slide("t07", "Less thinking and faster decoding shorten the writing; neither tou
   [wk("ARES", "ares"), "A 1.7B router picks the reasoning effort for each step", "Reasoning tokens per task 21,424 → 11,723 (−45%), success 45.0 → 46.5%; low effort throughout −7.6 points (calc.) — WebArena, ~129 tasks (calc.; count not printed, B9), gpt-oss-20b", "A router call per step, cost not reported; no wall-clock"],
   [wk("Overthinking", "overthinking"), "Two low-effort runs; keep the one that overthinks least", "$1,400 → $800 for the whole run, solved 29.1 → 27.3% — SWE-bench Verified (count not printed, B9), o1", "Two attempts per task"],
   [wk("GUI-G1", "guig1"), "RL-trained grounding without a thinking section", "Output tokens 107–114 → 37–39 per example, ScreenSpot 87.5 → 90.3% — InfiGUI-R1-3B (accuracy from its own paper) vs GUI-G1-3B, two differently trained models", "Grounding only; no timing"],
-  [wk("ToolSpec", "toolspec"), "Schema-aware drafts of tool-call tokens, verified losslessly", "Tool-call generation 3.5–4.2× faster — API-Bank, ToolAlpaca, BFCLv2; batch 1; 3–14B open models", "Decoding speed, not task time"],
+  [wk("Agent-X", "agentx"), "Draft tokens looked up from the prompt’s tool-use examples, verified by the model", "Decoding 1.73× faster; task time 1.43× faster from this alone (1.61× with its prompt cache) — 1,022 TinyAgent tool-calling examples, 7B model on a Mac mini", "On-device only"],
   [wk("Fast tiers (vendor)", "anth-b", "openai"), "The same model, served faster", "Anthropic: up to 2.5× output tokens per second; the gain is in output speed, not first-token time. OpenAI: up to 2.5× faster, ‘speed’ undefined", "Price 2×; switching speed invalidates Anthropic’s message cache"],
  ])}""",
       foot="NOT YET MEASURED · independent task-level timing of fast tiers · the net effect of per-step effort changes, which invalidate Anthropic’s message cache · SOURCES · as cited; more rows in Appendix B4 (2/2)",
       chip=("#b4-2", "Appendix B4"))
 
 # --- Part 2 · 08 environment -----------------------------------------------------------------
-slide("t08", "Time outside the model: in one browser-agent study it exceeded model time, and few works shrink it", part=2,
+slide("t08", "Time outside the model: on self-hosted WebArena it exceeded model time, and few works shrink it", part=2,
       crumb="term: E_i ↓ — fewer environment actions, cached tool results · x_env priced by the hour",
-      callout=f"""<p><b>On 151 WebVoyager tasks run by three GPT-4o agents on live sites, the median step spent 6.6 s in the browser and 4.7 s in the model (medians, not additive) {c2('skim')}; Browser-Use on five web apps spent 73% of its time in model calls {c2('jit')}.</b> The works that shrink {tex("E_i", 15)} skip the browser or cache tool results; batching actions moves the other way.</p>""",
+      callout=f"""<p><b>With one agent on self-hosted WebArena, the mean step took 12.2 s, 7.6 s of it outside the model (Claude 3.5 Sonnet, 5,493 steps, on 8-CPU VMs the authors say limited speed; WorkArena L2: 4.9 of 10.7 s) {c2('bgym')}; Browser-Use on five web apps spent 73% of its time in model calls {c2('jit')}.</b> The works that shrink {tex("E_i", 15)} skip the browser or cache tool results; batching actions moves the other way.</p>""",
       body=f"""
 {fx(("time", {"E": DN}))}
 {ptab([
@@ -1415,23 +1431,23 @@ slide("t08", "Time outside the model: in one browser-agent study it exceeded mod
   [wk("AXIS", "axis"), "API calls replace clicks", "UI actions 103 → 48 over 50 Word tasks", "The API must exist"],
   [wk("OSWorld 2.0 (counter)", "osw2"), "More actions per call", "Tool calls ×2.5 (calc.); a 3-s pause follows each action, whether after each batched call is not stated; no wall-clock", "N falls, actions per step grow"],
  ])}
-<div class="figcap">Billed environment usage {tex(r"x_{\mathrm{env}}c_{\mathrm{env}}", 11)}: a cloud browser costs $0.10–0.12 per hour above the plan allowance (vendor price) {c2('browserbase')}.</div>""",
+<div class="figcap">Billed environment usage {tex(r"x_{\mathrm{env}}c_{\mathrm{env}}", 11)}: a managed cloud browser for agents is billed per second at $0.0895 per vCPU-hour used and $0.00945 per GB-hour of peak memory, with no CPU charge while it waits on I/O (vendor price) {c2('aws')}.</div>""",
       foot="NOT YET MEASURED · page-load and wait time in write-heavy web workflows · wall-clock of batched actions · SOURCES · as cited in each row; details in Appendix B5 (Skim, sandboxes) and B2 (batched actions)",
       chip=("#b5-1", "Appendix B5"))
 
 # --- Part 2 · 09 overlap: parallel and asynchronous ---------------------------------------------
-slide("t09", "Overlap (1): running independent calls and tools together saved 31⁠–⁠73% of task time; one workload got slower", part=2,
-      crumb="term: T_saving raised where it is small today · calls and tokens fall with fewer turns (LLMCompiler, W&D) or rise with more workers (ParaGUI)",
-      callout=f"""<p><b>Running independent calls or tools together creates {tex(r"T_{\mathrm{saving}}", 15)}; the longest dependent chain sets the limit.</b> Speed-up ≤ {tex(r"(T_{\mathrm{LLM}}+T_{\mathrm{tool}})/\max(T_{\mathrm{LLM}},T_{\mathrm{cp}})", 15)}: decoding, tool and critical-path tool time {c2('asyncfc')}; at most 2× when every tool call waits for the one before ({tex(r"T_{\mathrm{cp}}=T_{\mathrm{tool}}", 15)}; calc.).</p>""",
+slide("t09", "Overlap (1): running independent calls and tools together saved 17⁠–⁠73% of task time; one workload got slower", part=2,
+      crumb="term: T_saving raised where it is small today · calls, turns and tokens fall when independent calls share a turn (LLMCompiler, W&D, TPS-Bench)",
+      callout=f"""<p><b>Running independent calls or tools together creates {tex(r"T_{\mathrm{saving}}", 15)}; the longest dependent chain sets the limit.</b> Speed-up ≤ {tex(r"(T_{\mathrm{LLM}}+T_{\mathrm{tool}})/\max(T_{\mathrm{LLM}},T_{\mathrm{cp}})", 15)}: decoding, tool and critical-path tool time {c2('asyncfc')}; for parallel calls the slowest one sets the time {c2('llmc')}; at most 2× when every tool call waits for the one before ({tex(r"T_{\mathrm{cp}}=T_{\mathrm{tool}}", 15)}; calc.).</p>""",
       body=f"""
 {fx(("time", {"save": UPG, "J": ("bad", "↑ or ↓")}))}
 {ptab([
   [wk("LLMCompiler", "llmc"), "A planner builds a dependency graph; independent calls run at once", "Task time 20.47 → 5.47 s (3.74×), accuracy 72.47 → 77.13%, input tokens 20,000 → 2,800 — 500 Movie Recommendation questions, gpt-3.5-turbo", "WebShop got slower: 5.98 → 10.48 s"],
   [wk("W&amp;D", "wd"), "Three or more tool calls per turn", "Time per task 1,522.6 → 904.2 s (−40.6%), $102.5 → $65.7 per 100 tasks, 66 → 68% — first 100 BrowseComp tasks, GPT-5, one run", "Call counts forced; $ include search"],
   [wk("AsyncFC", "asyncfc"), "Tool calls return futures; the model keeps decoding until it needs a result", "1.44× vs the plain agent (1.21× with parallel calls alone), resolved 47.6 → 44.3% — 300 SWE-bench Lite tasks, GPT-5.2, tool latency doubled", "Resolution −3.3 points"],
-  [wk("ParaGUI", "paragui"), "A planner sends sub-tasks to up to 5 GUI workers on separate desktops", "Critical-path steps 38.7 vs 75.9, success 46.4 vs 33.5%, vs Claude Sonnet 4.6 — 233 tasks; vs its own worker model 38.7 vs 36.7", "Desktops × workers; no wall-clock"],
+  [wk("TPS-Bench", "tpsbench"), "RL training teaches a small model to issue independent tool calls in the same turn", "Time per task 42.0 → 34.8 s (−17%, calc.), completion 26.75 → 35.17%, turns 2.4 → 1.9, output tokens 2.2k → 1.6k — 100 TPS-Bench-Hard tasks, Qwen3-1.7B before and after RL", "Parallelism inferred from fewer turns, not measured; no $"],
  ])}""",
-      foot="NOT YET MEASURED · wall-clock of parallel GUI workers · overlap of actions that write · SOURCES · as cited; 31–73% is calc. from the rows; the bound is AsyncFC’s Eq. 1 (its R, renamed to avoid R_m(p)) — Appendix B0",
+      foot="NOT YET MEASURED · wall-clock of parallel GUI workers · overlap of actions that write · SOURCES · as cited; 17–73% is calc. from the rows; parallel GUI workers (ParaGUI) in B5; the bound is AsyncFC’s Eq. 1 (its R, renamed to avoid R_m(p)) — Appendix B0",
       chip=("#b0-1", "Appendix B0"))
 
 # --- Part 2 · 10 overlap: speculation, and safety ----------------------------------------------
@@ -1445,16 +1461,16 @@ slide("t10", "Overlap (2): guessing the next step saved 5⁠–⁠45% of task ti
   [wk("Speculative Actions", "specactions"), "Time −19.5%, guesses 54.7% right — chess, 5 × 30 steps, GPT-5 high effort guessed by GPT-5 low", "Guess calls; ≤ 50% saving in its model"],
   [wk("ISP", "isp"), "Total time 182.70 → 105.42 s (−42.3%), $0.2160 → $0.2973 per plan — 117 OpenAGI tasks, GPT-4-turbo", "Baseline spread 2.3× its mean"],
   [wk("SMC", "smc"), "τ² Telecom, 2,285 tasks (calc.): 27.60 → 22.47 s (−18.6%), outcomes unchanged; AppWorld: 355.7 → 195.9 s (−44.9%; −40.4% already from one-step guessing), −2 of 168 — Qwen3.5-27B, 4B drafter", "3 GPUs instead of 1"],
-  [wk("SPORK", "spork"), "p50 task time 34.7 → 31.2 s (−10%), p95 131.9 → 108.1 s (−18%), exact match within 1 point — 165 GAIA tasks, Qwen3-32B, baseline already speculative-decoding", "Probe calls, wasted tool runs"],
+  [wk("DSP", "dsp"), "Time −37.09% at +62.99% cost with a debate target (−25.26% at +69.36% with ReAct) — 312 OpenAGI tasks, GPT-4.1-mini; cost vs both agents in sequence", "Guess calls; cost vs one agent not reported"],
   [wk("Ghost Tool Calls", "ghost"), "Naive speculation: p50 −5.4%, p99 11.56 → 14.22 s; tool calls seen by the provider 4.03 vs 1.03 per task — 30 author-built tasks × 3 seeds", "Abandoned calls reveal intent"],
  ], widths=("20%", "57%", "23%"), headers=("work", "measured effect, and its conditions", "paid in"))}
 {card("WHEN THE STEP HAS SIDE EFFECTS", "Hold irreversible effects until commit; compensating them afterwards leaks",
       [f"Held until commit: 0 of 500 aborted sends leaked; compensation 400, checkpoint-and-replay 200, mislabelled effects 300 — one author-built workflow, 5 abort causes × 100 {c2('atomix')}",
        f"Resuming from a checkpoint repeated or skipped an effect in 90 and 93 of 96 author-built workflows; a case study paid an invoice twice {c2('saferesume')}",
-       f"Only ~37% of actions flagged destructive in advance were {c2('weboperator')}"])}
+       f"Speculate only where a wrong guess can be undone; for deleting records or placing orders, naive speculation is harmful {c2('specactions')}"])}
 </div>""",
       foot="NOT YET MEASURED · speculation on a live web GUI with side effects held until commit · cost per success of any speculation method · SOURCES · as cited; 5–45% is calc. from the rows; author-built suites flagged in B9; formulas and more works in B0, B5",
-      chip=("#b5-1", "Appendix B5"))
+      chip=("#b5-2", "Appendix B5"))
 
 # --- Part 2 · 11 the growing prompt -------------------------------------------------------------
 slide("t11", "The growing prompt: masking old observations halved the bill; only compiled plans are shown to remove the square", part=2,
@@ -1463,10 +1479,10 @@ slide("t11", "The growing prompt: masking old observations halved the bill; only
       body=f"""
 {fx(("prompt", {"g": DN, "N2": ("good", "removed by a plan")}), ("money", {"n": ("bad", "hit → miss, write")}))}
 {ptab([
-  [wk("Observation masking", "masking"), "Observations older than 10 turns become a placeholder", "Cost per task $1.29 → $0.61, solved 53.4 → 54.8% — 500 SWE-bench Verified tasks, Qwen3-Coder-480B; cost = tokens × list price", "Model summaries instead lengthened runs by ~15%"],
+  [wk("Observation masking", "masking", "sweagent"), "Observations older than 10 turns become a placeholder (SWE-agent’s method, there 5)", "Cost per task $1.29 → $0.61, solved 53.4 → 54.8% — 500 SWE-bench Verified tasks, Qwen3-Coder-480B; cost = tokens × list price", "Model summaries instead lengthened runs by ~15%"],
   [wk("AgentDiet", "agentdiet"), "A cheaper model deletes useless or expired content two steps back", "Input tokens −39.9 to −59.7%, cost −21.1 to −35.9% with the reducer, success −1 to +2 points — 200 SWE-bench Verified + 300 Multi-SWE-bench Flash tasks, Claude 4 Sonnet, Gemini 2.5 Pro, one run", "A reducer call per step"],
   [wk("TokenPilot eviction", "tokenpilot"), "Evicts stale segments every 3 turns", "Cost $4.22 → $2.79 while cache-hit tokens fell 26.7M → 8.6M — PinchBench continuous sessions, GPT-5.4-mini", "Fewer tokens, fewer of them cached"],
-  [wk("A plan, not the history", "actionengine", "llmc"), "The prompt carries a compiled plan instead of every observation", "Input tokens per task 62.3k → 8.1k (ActionEngine); 20,000 → 2,800 (LLMCompiler)", "Only on compiled steps"],
+  [wk("A plan, not the history", "llmc"), "The prompt carries a compiled plan instead of every observation", "Input tokens per question 20,000 → 2,800 — 500 Movie Recommendation questions, gpt-3.5-turbo", "Only on compiled steps"],
  ])}""",
       foot="NOT YET MEASURED · the N² token volume and the cache hit rate together, in a GUI agent · SOURCES · as cited in each row; more rows in Appendix B4",
       chip=("#b4-1", "Appendix B4"))
@@ -1512,7 +1528,7 @@ slide("t13", "A cheaper model for most calls cut dollars per task by 50⁠–⁠
 EQ["amort"] = r"$v_n(m,p)\;=\;\dfrac{C_{\mathrm{setup}}}{n}\;+\;\dfrac{C_m(p)}{R_m(p)}$"
 slide("t14", "Cost per success moves with the success rate, and a set-up cost must be spread over the tasks", part=2,
       crumb="terms: R_m(p) in v(m,p) = C_m(p) / R_m(p) · plus a one-time set-up cost that Part 1’s per-attempt formula leaves out",
-      callout="""<p><b>A dearer attempt can give a cheaper success: Beyond Browsing’s hybrid agent costs $1.4 per attempt against $1.2 for API calls alone, but $3.60 against $4.11 per success (calc.).</b> Few papers report the ratio, so the figures here are our calculations. Set-up costs are left out of most headlines; SpeedRunner spreads them over its runs, EET prints them apart (B8).</p>""",
+      callout="""<p><b>A dearer attempt can give a cheaper success: Beyond Browsing’s hybrid agent costs $1.4 per attempt against $1.2 for API calls alone, but $3.60 against $4.11 per success (calc.).</b> Few papers report the ratio, so the figures here are our calculations. Set-up costs are left out of most headlines; SpeedRunner spreads them over its runs (B8).</p>""",
       body=f"""
 <div class="eqtab">
 {eqrow("per task", "set-up spread", ["amort"],
@@ -1530,7 +1546,7 @@ slide("t14", "Cost per success moves with the success rate, and a set-up cost mu
  ], ["26%", "44%", "30%"], cls="tbl p2")}
 {card("SET-UP COSTS LEFT OUT OF THE HEADLINES", "Each needs n tasks to pay off",
       [f"JIT-Planner: 25–90 min of tool building plus 25–45 min of traces per app {c2('jit')}",
-       f"EchoPath: a first pass of ≈ 572k tokens and ≈ 4.5 min per task {c2('echopath')}",
+       f"EET (Agentless, GPT-5-mini): $4.3 to build its experience base once, against a 500-task SWE-bench Verified run cut from $13.77 to $6.18 — repaid within that run; with Mini-SWE-Agent the $7.1 set-up exceeds one run’s $3.11 saving (calc.) {c2('eet')}",
        f"AutoDroid-V2: $82.42 of GPT-4o calls per app (calc.) {c2('autodroid2')}"])}
 </div>""",
       foot="NOT YET MEASURED · time, money and success, set-up included, on one web or GUI benchmark · SOURCES · as cited; the calculations with their inputs and rounding are in Appendix B8",
@@ -1593,6 +1609,7 @@ B("b1-1", "B1 · 1/2", "B1 · Compile or replay: the research systems, with full
    [wk("ActionEngine", "actionengine"), "Offline state-machine graph of the site; one sketch-program call compiled by graph search", "106 WebArena Reddit tasks: success 66 → 95%, end-to-end latency 237 → 118 s, model calls 10.2 → 1.8, input tokens 62.3k → 8.1k, $0.71 → $0.06 per task (tokens × list price). AgentOccam on GPT-4-Turbo vs ActionEngine on Claude Sonnet 4.5", "About 2.5× of the 11.8× $ gap is the cheaper model’s price (calc.); crawl cost not reported"],
    [wk("AutoDroid-V2", "autodroid2"), "A local model writes a whole-task script from an offline app document", "Model inference time 669.2 → 46.3 s per task (prompt to last token, screen actions excluded); uncached input 3,021 → 68 tokens; success 43.9 → 54.4%. 158 DroidTask tasks, fine-tuned Llama-3.1-8B on a phone, both sides", "Offline GPT-4o $4.11 + $7.83 + $70.48 = $82.42 per app (calc.), ~2.5 GPU-hours of fine-tuning"],
    [wk("EchoPath", "echopath"), "Validated trajectories kept as executable memories; a gate checks the start state", "Second pass, medians: tokens 586,386 → 20,370 (−96.5%), time 315.7 → 127.5 s (−59.6%), success 91.8 → 91.2% (calc. for the %). OSWorld-Verified, 159 replayable tasks, Codex GPT-5.5, vs Synapse; the second pass changes the resolution", "First pass ≈ 572k tokens, ≈ 4.5 min per task; the gate accepted 22% of incompatible starts (calc.)"],
+   [wk("MobileGPT", "mobilegpt"), "App memory of learned sub-tasks; recall with slot filling, the model only for what memory lacks", "Warm start (same task, new parameters) vs a GPT-4-Turbo baseline with the same prompts that derives every action: latency −62.5%, cost −68.8%; 70.6% (Gmail) to 98.6% (Telegram) of actions from memory. 80 tasks (160 instructions), 8 Android apps", "Offline exploration 10–15 min per app, $10.78 in all; slot filling on GPT-3.5 Turbo, so part of the cost cut is price"],
    [wk("AppAgentX", "appagentx"), "Frequent action sequences evolved into shortcut actions", "AndroidWorld, 116 tasks, GPT-4o: task time 147.17 → 59.74 s, tokens 18.9k → 6.2k, success 41.7 → 62.5%; time compared only on tasks every method completed", "Evolution runs before the test"],
    [wk("AutoTool", "autotool"), "Repeated tool calls issued from a usage graph without a model call, capped at 30% of operations", "Model calls 24.1 → 20.4 (ALFWorld), 23.3 → 17.8 (ScienceWorld); progress rate 0.394 → 0.531 and 0.716 → 0.708 — Llama4-Scout-17B", "No wall-clock; calls used as the proxy"],
    [wk("EAM", "eam"), "Executable memory of sub-tasks for mobile agents", "Per step 9.3 → 2.8 s and 50.8K → 8.3K tokens vs GPT-4o (benchmark not named); AndroidWorld success 34.5 → 52.6%, 3 runs", "Per step, not per task"],
@@ -1646,6 +1663,7 @@ B("b3-1", "B3", "B3 · Agent-aware serving: more systems",
    [wk("KVCOMM", "kvcomm"), "Reuses KV caches across agents with offset correction", "First-token time 7.82× lower at the fifth agent (428.6 → 54.8 ms); Llama-3.1-8B, one H100, HuggingFace", "Full prefill"],
    [wk("DroidSpeak", "droidspeak"), "Shares KV caches between fine-tuned variants of one model", "Prefill 1.7–3.1× faster (average 2.1×); eight model pairs, three datasets each", "Full prefill"],
    [wk("AsymCache", "asymcache"), "Asymmetric cache eviction for multi-session serving", "With Continuum, average job latency 4.4–18.1% below Continuum alone; alone 0.4–4.2% below vLLM-LRU (BFCL web search, no task count); its own headline ranges are inconsistent", "Continuum; vLLM-LRU"],
+   [wk("Continuum", "continuum"), "Keeps a run’s KV cache for a predicted tool-wait time", "Job delay 1.12–3.66× lower — replayed SWE-bench, BFCL and OpenHands traces; Llama-3.1 8B/70B, Gemma-3 12B; no quality metric; GPU memory held during waits", "not named for the range (evaluated against vLLM, LMCache, Autellix, InferCept)"],
    [wk("CacheBlend", "cacheblend"), "Blends precomputed chunk caches, recomputing a few tokens", "First-token time 2.2–3.3× lower, quality within 0.02 F1 — RAG, not agents", "Full recompute"],
   ], ["15%", "27%", "43%", "15%"]))
 
@@ -1670,24 +1688,30 @@ B("b4-2", "B4 · 2/2", "B4 · Decoding: more rows, with full conditions",
    [wk("Does CoT help mobile agents?", "cotmobile"), "Caps the reasoning tokens", "AndroidControl, GLM-4.6V: action accuracy 71.55% at 128 tokens vs 70.41% unlimited and 70.32% without reasoning", "Sample size not stated"],
    [wk("TSDS", "tsds"), "Short edge thinking, deferral to the cloud when unsure", "MBPP (257 problems, single step): edge thinking tokens 1,183 → 422, reward 0.719 → 0.714", "Cloud deferral rate 0.346; cloud tokens not counted"],
    [wk("GUI-KV", "guikv"), "Keeps 40% of the KV cache per layer (5 screenshots in context, UI-TARS-1.5-7B)", "Decoding MFLOPs per token −38.9%, offline step accuracy 17.5 → 21.6% (AgentNetBench); OSWorld 26.0 → 25.1%", "No wall-clock"],
-   [wk("Agent-X", "agentx"), "A precomputed prompt-prefix cache and speculative decoding on a Mac mini", "Task time 1.61× faster (prefill 1.97×, decode 1.73×) on 1,022 TinyAgent examples, Mac mini M4 Pro", "On-device only"],
+   [wk("ToolSpec", "toolspec"), "Schema-aware drafts of tool-call tokens, verified losslessly", "Tool-call generation 3.5–4.2× faster — API-Bank, ToolAlpaca, BFCLv2; batch 1; 3–14B open models on GPUs", "Decoding speed, not task time"],
    [wk("Effort guidance (vendor)", "anth-a"), "Medium instead of high reasoning effort", "“Roughly half the output tokens of high” with close to the best success, and the same success once retries are allowed — internal UI-automation suite, no counts", "Vendor statement"],
    [wk("Ultrafast (vendor)", "openai", "cerebras"), "GPT-5.6 Sol on Cerebras hardware", "Up to 14× faster than Standard, up to 750 output tokens per second; limited preview, no price", "OpenAI vendor statements; a hardware partner’s 6-task chart is marketing, not cited"],
   ], w_d))
 
-B("b5-1", "B5", "B5 · Environment and overlap: more rows, with full conditions",
-  crumb="behind pages 8–10 · terms E_i and T_saving · calc. = our arithmetic",
+B("b5-1", "B5 · 1/2", "B5 · Environment and parallel calls: more rows, with full conditions",
+  crumb="behind pages 8–9 · terms E_i and T_saving · calc. = our arithmetic",
   body=table(h_d, [
    [wk("Skim, details", "skim"), "As on page 8; a local Qwen2.5-14B runs the fast path and the verifier", "Accuracy vs the default agent: 40.6 vs 37.6 (WebVoyager agent), 52.0 vs 49.6 (AgentOccam), 45.6 vs 45.0 (BrowserUse); verifier precision 82.0%, recall 86.2%", "Site profiling 6–24 s per site"],
-   [wk("TPS-Bench", "tpsbench"), "RL-trained scheduling of dependent tool calls", "TPS-Bench-Hard, 100 tasks, Qwen3-1.7B: time 42.0 → 34.8 s per task (−17.1%, calc.), completion 26.75 → 35.17%", "Its text gives 14% and 6% (from v1)"],
+   [wk("ParaGUI", "paragui"), "A planner sends sub-tasks to up to 5 GUI workers on separate desktops", "233 tasks: critical-path steps 38.7 vs 75.9, success 46.4 vs 33.5% vs Claude Sonnet 4.6; vs its own worker model 38.7 vs 36.7 steps", "Desktops × workers; no wall-clock"],
    [wk("AsyncLM", "asynclm"), "Asynchronous function calls with interrupts", "Local fine-tuned Llama-3.2 on one RTX 4090: 1.6–2.4× lower latency than sequential calls, 1.23–1.5× than parallel calls (calc.; first to last generated token); cloud figures emulated", "Emulated for GPT-4o"],
-   [wk("Speculative tool calls", "nichols"), "Client- and engine-side speculation of tool calls", "6–21% of time saved with synthetic tool latencies and cached tool outputs; BFCL, 32 tasks per agent", "Synthetic latencies"],
-   [wk("DSP", "dsp"), "Learns how many steps ahead to speculate", "OpenAGI 312 tasks, GPT-4.1-mini: −37.09% latency at +62.99% cost; the cost is against the sequential cost of both agents", "Cost vs a target-only agent not reported"],
-   [wk("Speculate with memory", "swm"), "Guesses from a memory of past runs", "Analytical peak 1.128×; HotpotQA 1.05× — replay estimates", "Not end-to-end"],
-   [wk("AgenticCache", "agenticcache"), "Cached plans for embodied agents", "TDW-COOK, 18 episodes: 12.86 → 1.75 h, $21.0 → $4.4, success 94.44 → 100%; TDW-MAT 1.86× (calc.)", "Embodied simulator"],
-   [wk("IdleSpec (counter)", "idlespec"), "Drafts plans while tools run", "GAIA 165 + FRAMES 50, Gemini-2.5-Flash: accuracy 50.5 → 55.6%, wall-clock about unchanged; output tokens +58% (calc., Qwen3.5-4B)", "Tool-wait overlap spent on accuracy (R_m(p) ↑), not on time"],
    [wk("ThunderAgent", "thunder"), "Prepares the sandbox while the program waits for GPU memory (overlap, T_saving)", "Environment time 4.8 → 0.3 s — OpenHands rollouts, self-hosted (its Fig. 6a)", "Throughput system; no task success"],
    [wk("TClone · DeltaBox", "tclone", "deltabox"), "Fast container clone; millisecond checkpoint and rollback", "Clone for one OSWorld branch point 18.2 → 3.7 s vs KVM; rollback 1.86 ms on the fast path (9.29 ms slow path)", "Cost of branching E_i"],
+   [wk("IdleSpec (counter)", "idlespec"), "Drafts plans while tools run", "GAIA 165 + FRAMES 50, Gemini-2.5-Flash: accuracy 50.5 → 55.6%, wall-clock about unchanged; output tokens +58% (calc., Qwen3.5-4B)", "Tool-wait overlap spent on accuracy (R_m(p) ↑), not on time"],
+  ], w_d))
+
+B("b5-2", "B5 · 2/2", "B5 · Speculation and its safety: more rows, with full conditions",
+  crumb="behind page 10 · term T_saving by guessing · calc. = our arithmetic",
+  body=table(h_d, [
+   [wk("Speculative tool calls", "nichols"), "Client- and engine-side speculation of tool calls", "6–21% of time saved with synthetic tool latencies and cached tool outputs; BFCL, 32 tasks per agent", "Synthetic latencies"],
+   [wk("SPORK", "spork"), "Probe calls from a fork of the model’s own cache", "GAIA 165 tasks, Qwen3-32B: p50 34.7 → 31.2 s (−10%), p95 131.9 → 108.1 s (−18%), exact match within 1 point; baseline already speculative-decoding", "Probe calls, wasted tool runs"],
+   [wk("Speculate with memory", "swm"), "Guesses from a memory of past runs", "Analytical peak 1.128×; HotpotQA 1.05× — replay estimates", "Not end-to-end"],
+   [wk("AgenticCache", "agenticcache"), "Cached plans for embodied agents", "TDW-COOK, 18 episodes: 12.86 → 1.75 h, $21.0 → $4.4, success 94.44 → 100%; TDW-MAT 1.86× (calc.)", "Embodied simulator"],
+   [wk("WebOperator", "weboperator"), "A check before executing actions flagged as destructive", "About 37% of pre-flagged actions were truly destructive — WebArena, gpt-4o", "arXiv; rejected at two venues"],
   ], w_d))
 
 B("b6-1", "B6", "B6 · Prices by billing class and tier, per vendor",
@@ -1698,6 +1722,7 @@ B("b6-1", "B6", "B6 · Prices by billing class and tier, per vendor",
    [wk("OpenAI, GPT-6 Sol / Luna", "openai"), "$2 → $0.20; $0.10 → $0.01 (0.1×)", "1.25× from GPT-5.6 on; at least 30 min", "Fast 2×; Flex and Batch 0.5×"],
    [wk("Google, Gemini 3.8 Flash", "google"), "$0.75 → $0.075 (0.1×), to 31 Dec 2026", "storage $0.50 per 1M tokens per hour", "Priority 1.8× on every listed price (text says 75–100%), Preview"],
    [wk("xAI, Grok 4.7", "xai"), "$2 → $0.50 (0.25×)", "none listed", "—"],
+   [wk("Browserbase", "browserbase"), "—", "—", "Cloud browser $0.10–0.12 per hour above the plan allowance (smaller vendor)"],
    [wk("Microsoft Foundry", "microsoft"), "—", "—", "Priority processing 1.75–2.5× (calc., from the pricing page’s HTML)"],
   ], ["20%", "27%", "30%", "23%"]) + """
 <div class="apx-note">Worked example (OpenAI, GPT-5.6 and later): one write and one read cost 1.25 + 0.1 = 1.35× against 2× uncached; one write and nine reads cost 2.15× against 10× (calc.).</div>""")
@@ -1729,7 +1754,7 @@ B("b8-1", "B8", "B8 · Cost per success: the inputs, the formula and the roundin
    [wk("Fara-7B vs computer-use-preview", "fara"), "$0.913 → $0.025", "70.9 → 73.5%", f"{_cps(0.913, .709)} → {_cps(0.025, .735)}", "WebVoyager"],
    [wk("AI Agents That Matter", "kapoor25"), "LATS $134.50 vs warming $2.45 (164-problem run totals)", "88.0 vs 93.2%", "stated totals, not per success", "HumanEval, GPT-4"],
   ], ["20%", "22%", "15%", "18%", "25%"]) + """
-<div class="apx-note">With a set-up cost (page 14): <b>v<sub>n</sub> = C<sub>setup</sub>/n + v</b>. Two retained works print both parts. EET’s experience base cost $4.3 once, against a benchmark run of $13.77 → $6.18 (500 tasks), so it pays off within the first run: $10.48 with the set-up charged to it (calc.). SpeedRunner already spreads its skill-inducer calls over the runs they serve. The page-3 systems print their set-up in minutes, tokens or GPT-4o dollars, never next to a per-task dollar figure.</div>""")
+<div class="apx-note">With a set-up cost (page 14): <b>v<sub>n</sub> = C<sub>setup</sub>/n + v</b>. Two retained works print both parts. EET’s experience base (Agentless, GPT-5-mini) cost $4.3 once, against a benchmark run of $13.77 → $6.18 (500 tasks), so it pays off within the first run: $10.48 with the set-up charged to it (calc.). SpeedRunner already spreads its skill-inducer calls over the runs they serve. The page-3 systems print their set-up in minutes, tokens or GPT-4o dollars, never next to a per-task dollar figure.</div>""")
 
 B("b9-1", "B9 · 1/4", "B9 · Works held back or dropped, and why",
   crumb="the source-credibility rule of slides/references.md · (iii) = numbers from a public benchmark with the task count and model stated",
@@ -1926,6 +1951,7 @@ svg.tex{display:inline-block;height:auto}
 .appendix .tbl{font-size:10.6px;line-height:1.32}
 .appendix .tbl td{padding:4px 7px 4px 4px}
 .appendix .tbl td:first-child{font-size:10px}
+.appendix .tbl.dense{font-size:10px;line-height:1.28}.appendix .tbl.dense td{padding:3px 6px 3px 4px}
 .apx-note{margin-top:8px;font-size:11.5px;line-height:1.4;color:var(--ink2);background:var(--callout);border-radius:4px;padding:8px 12px}
 /* references */
 .reflist{margin:0;padding-left:20px;font-size:11.6px;line-height:1.38;color:var(--ink2);columns:2;column-gap:28px}
