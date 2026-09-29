@@ -313,7 +313,7 @@ def defs1(items):
 
 def defs2(items):
     """A bulleted glossary: [(latex, meaning, origin), ...]; the origin is 'as in …', 'adapted from …' or 'self-defined'."""
-    return ('<ul class="defs2">' + "".join(f'<li>{tex(a, 12)} {b} <span class="src">({c})</span></li>' for a, b, c in items) + '</ul>')
+    return ('<ul class="defs2">' + "".join(f'<li>{tex(a, 12)} {b}' + (f' <span class="src">({c})</span>' if c else '') + '</li>' for a, b, c in items) + '</ul>')
 
 SLIDES = []   # dicts: id, label, title, hl, crumb, callout(html), body(html), foot, chip(href,text), notes, kind
 
@@ -410,7 +410,7 @@ slide("s01", "Where the time and the money go", cover=True,
     <div class="toc-t">In this part</div>
     <ol class="toc">
     <li><span>02</span>One attempt of an agent, step by step: the loop and its variables</li>
-    <li><span>03–04</span>The problem, defined: time, the growing prompt, money, success and the goal</li>
+    <li><span>03–04</span>The problem, defined: one formula for time, one for money, the goal, and what is inside their terms</li>
     <li><span>05–10</span>Where the time goes, term by term</li>
     <li><span>11–12</span>Where the money goes, term by term, and per success</li>
     <li><span>13–14</span>How time and money are linked, and the levers</li>
@@ -449,55 +449,81 @@ slide("s02", "One attempt of an agent, step by step",
       foot="SOURCES · after each symbol, the work it comes from; which part comes from where (the source’s own symbol, adapted, or self-defined), with locations: Appendix A0 · 4/5",
       chip=("#a0-4", "Appendix A0"))
 
-slide("s03", "The problem, defined (1/2): the time of one attempt, and the growing prompt",
-      crumb="from the loop → here: time as a sum over steps and calls, and why the prompt grows → to: money, success and the goal",
+def mainf(name, parts):
+    """A main formula as a row of terms; each term carries the class label that pages 5–12 use for it."""
+    out = ['<div class="mf">' + (f'<span class="lk">{name}</span>' if name else '')]
+    for p in parts:
+        if p[0] == "op":
+            out.append(f'<span class="mfo">{tex(p[1], 14)}</span>')
+        else:
+            out.append(f'<span class="mft"><span class="mfx">{tex(p[1], 14)}</span><small>{p[2]}</small></span>')
+    return "".join(out) + '</div>'
+
+def eqrow_html(key, sub, formula_html, gloss, cite, pg):
+    """eqrow with any HTML in the formula column."""
+    return (f'<div class="eqk">{key}<span>{sub}</span><span class="eqpg">{pg}</span></div><div class="eqm col">{formula_html}</div>'
+            f'<div class="eqg"><div>{gloss}</div><div class="eqcite">{cite}</div></div>')
+
+EQ["ttft"] = r"$\mathrm{TTFT}_{ij}\;\approx\;t^{\mathrm{queue}}_{ij}+t^{\mathrm{net}}_{ij}+t^{\mathrm{prefill}}_{ij}+t^{\mathrm{first}}_{ij}$"
+EQ["nin"] = r"$n^{\mathrm{hit}}_{ij}+n^{\mathrm{w5m}}_{ij}+n^{\mathrm{w1h}}_{ij}+n^{\mathrm{unc}}_{ij}\;=\;|H_{a,i}|\quad(\mathrm{one\ call\ per\ step})$"
+
+slide("s03", "The problem, defined (1/2): one formula for time, one for money, and what counts as faster",
+      crumb="from the loop → here: the two formulas every later page works on, and the goal → to: what is inside their terms",
       body=f"""
-<div class="statusleg">each row says whether it is <b>verbatim</b> from its source, <b>adapted</b> (reason in Appendix A0) or <b>our distillation</b> (no source writes it as a formula) · calc. = our algebra</div>
-<div class="eqtab narroweq">
-{eqrow("time", "one attempt", ["time", "call", "saving"],
-       defs1([
-        (r"T_{\mathrm{attempt}}", "wall-clock time of one attempt: the real time that passes from handing over the task to getting the result, so work done at the same time counts once", "self-defined"),
-        (r"i=0", "a step-0 bucket for calls outside any step, e.g. a plan made before step 1", "self-defined"),
-        (r"\mathcal{M},\ \mathcal{E}", "the time intervals in the trace when a model call is running; when anything else is", "adapted from " + CITE['asyncfc'] + ": decoding and function intervals"),
-        (r"\mathcal{S}(\cdot),\ \mathcal{D}(\cdot)", "intervals’ lengths added up (overlap counted twice); length of their union (overlap counted once) — not the model time " + tex("D_i", 12) + ". A 2-s tool call run during a model call: " + tex(r"T_{\mathrm{saving}}", 12) + " = 2 s", "as in " + CITE['asyncfc']),
-        (r"\triangleq", "“defined as”", "standard notation"),
-        (r"D_i,\ E_i,\ \ell_{ij},\ \mathrm{TTFT},\ n^{\mathrm{out}},\ \mathrm{TPOT}", "as on page 2", "origins there"),
-       ]),
-       "sum: " + CITE['aospec'] + " · calls within a step: our distillation, evidence " + CITE['osh'] + " · call: " + CITE['aa'] + " (third-party) · saving: " + CITE['asyncfc'] + ", intervals widened", "adapted · our distillation", stack=True, fs=12.5)}
-{eqrow("prompt", "grows", ["ctx", "ctxsum"],
-       defs1([
-        (r"|H_{a,i+1}|", "each step appends its output and its result to the next prompt (one call per step, full history kept); symbols as on page 2", "adapted from " + CITE['yuan'] + ", lengths of its Eq. 3"),
-        (r"|H_{a,1}|", "the first prompt (system prompt and task); the left-hand sum is all prompt tokens read over the attempt", "self-defined"),
-        (r"g_i,\ \bar{g}", "tokens step " + tex("i", 12) + " adds, " + tex(r"g_i=|\Phi(z_{a,i})|+|o_{a,i}|", 12) + "; their mean, weighted by the " + tex("N-i", 12) + " later steps that re-read them", "self-defined (calc.)"),
-        (r"N^{*}=2|H_{a,1}|/\bar{g}+1", "the step count beyond which the " + tex("N^2", 12) + " term outweighs " + tex(r"N|H_{a,1}|", 12), "self-defined (calc.)"),
-       ]),
-       "recurrence: " + CITE['yuan'] + " (lengths of its Eq. 3) · sum: our distillation (calc.) · re-sent history, measured: " + CITE['osh'], "adapted · our distillation (calc.)", stack=True, fs=12.5)}
+<div class="statusleg">each row says whether it is <b>verbatim</b> from its source, <b>adapted</b> (reason in Appendix A0) or <b>our distillation</b> (no source writes it as a formula) · the labels under the terms are the classes of pages 5–12</div>
+<div class="eqtab narroweq2">
+{eqrow_html("time", "one attempt", mainf("", [
+    ("op", r"T_{\mathrm{attempt}}="), ("term", r"\sum_{i=0}^{N}", "I · steps"), ("op", r"["),
+    ("term", r"\sum_{j=1}^{J_i}", "II · calls"), ("term", r"\ell_{ij}", "III · one call"), ("op", "+"),
+    ("term", r"E_i", "IV · non-model time"), ("op", r"]\ -"), ("term", r"T_{\mathrm{saving}}", "V · overlap")]),
+   defs1([
+    (r"T_{\mathrm{attempt}}", "wall-clock time of one attempt: real time from handing over the task to the result; work done at the same time counts once", "self-defined"),
+    (r"i=0", "a step-0 bucket for calls outside any step, e.g. a plan made before step 1", "self-defined"),
+    (r"\mathrm{III},\ \mathrm{V}", "written out on page 4; the other symbols are page 2’s", ""),
+   ]),
+   "sum: " + CITE['aospec'] + " · calls within a step: our distillation, evidence " + CITE['osh'] + " · saving: " + CITE['asyncfc'], "adapted · our distillation")}
+{eqrow_html("money", "one attempt", mainf("", [
+    ("op", r"c_m(p)="), ("term", r"\sum_{i}\sum_{j}", "3 · calls"), ("term", r"\sum_{\kappa}n^{\kappa}_{ij}", "1, 2 · tokens by class"),
+    ("term", r"c_{\kappa}(\mu_{ij})", "5 · price per class"), ("op", "+"), ("term", r"x_{\mathrm{env}}\,c_{\mathrm{env}}", "6 · environment")]),
+   defs1([
+    (r"c_m(p)", "dollars of one attempt of design " + tex("m", 12) + " (model and harness) on task " + tex("p", 12), CITE['cop']),
+    (r"c_{\mathrm{env}}", "price per unit of billed environment usage", CITE['cop']),
+    (r"\kappa", "billing class, written out on page 4", ""),
+   ]),
+   "base: " + CITE['cop'] + ", Eq. 13, extended as its App. D.1 allows · classes: " + CITE['anth-b'] + " · three-class precedent: " + CITE['tokenpilot'], "adapted")}
+{eqrow_html("goal", "per success", eq_svg("succ", fontsize=12.5, cls="eqn") + eq_svg("goal", fontsize=12.5, cls="eqn") + '<div class="mfnote">dividing by ' + tex("R_m(p)", 12) + ' is class 4 · failures, retries</div>',
+   defs1([
+    (r"C_m(p),\ \mathbb{E}", "expected " + tex("c_m(p)", 12) + " over attempts, failures included; expectation", CITE['cop']),
+    (r"v(m,p)", "dollars per success; the second term is seconds per success; attempts independent, retried until a verified success", CITE['cop']),
+    (r"R_0,\ \mathrm{Pareto}", "success floor; keep the designs that no other beats on both time and money per success", "self-defined, after " + CITE['kapoor25']),
+   ]),
+   "money: " + CITE['cop'] + ", Eq. 2 (verbatim) · time: the same, in seconds (adapted) · goal: " + CITE['kapoor25'] + "; " + CITE['cop'] + ", App. C.8 (our distillation)", "verbatim · adapted · distillation")}
 </div>""",
-      foot="SOURCES · as cited in each row · simplified: one call per step in the prompt row; times are per attempt, not distributions — Appendix A0",
+      foot="SOURCES · as cited in each row · Part 2 puts the time and money formulas at the top of every page, with III written out as on page 4, and marks the term each family of work changes — Appendix A0",
       chip=("#a0-1", "Appendix A0"))
 
-slide("s04", "The problem, defined (2/2): the money of one attempt, per success, and the goal",
-      crumb="from time and the prompt → here: money, cost and time per success, and what counts as acceleration → to: where the time goes",
-      body=f"""
-<div class="statusleg">verbatim · adapted · our distillation, as on page 3 · calc. = our algebra</div>
-<div class="eqtab">
-{eqrow("money", "one attempt", ["money", "classes"],
-       tex("c_m(p)", 11) + ": dollars of one attempt of design " + tex("m", 11) + " (model and harness) on task " + tex("p", 11) + ". " + tex(r"n^{\kappa}_{ij}", 11) + ": tokens of class " + tex(r"\kappa", 11) + " in call " + tex("j", 11) + " of step " + tex("i", 11) + " — cache hit, 5-min or 1-h cache write, uncached input, output. " + tex(r"c_{\mathrm{env}}", 11) + ": price per unit of billed environment usage.",
-       "base: " + CITE['cop'] + ", Eq. 13, extended as its App. D.1 allows · classes: " + CITE['anth-b'] + " · three-class precedent: " + CITE['tokenpilot'], "adapted", stack=True, fs=12.5)}
-{eqrow("success", "per success", ["succ"],
-       tex("v(m,p)", 11) + ": expected dollars per success; the second term: expected seconds per success. " + tex("C_m(p)", 11) + ": expected " + tex("c_m(p)", 11) + " over all attempts, failures included; " + tex(r"\mathbb{E}", 11) + ": expectation. Independent attempts, retried one after another until a verified success (" + tex("1/R_m(p)", 11) + " on average); the verifier’s time and cost count in every attempt.",
-       "money: " + CITE['cop'] + ", Eq. 2 (verbatim) · time: same derivation in seconds, as its App. D.1 allows (adapted)", "verbatim · adapted", stack=True, fs=12.5)}
-{eqrow("goal", "acceleration", ["goal"],
-       "Among designs that succeed at least " + tex("R_0", 11) + " of the time, keep those no other design beats on both time and money per success; the reference is a person doing the task today. Per task " + tex("p", 11) + "; over a task mix, " + tex(r"\sum_p C_m(p)/\sum_p R_m(p)", 11) + ".",
-       "distilled from " + CITE['kapoor25'] + " (“jointly optimizing the two metrics”, arXiv v1) and " + CITE['cop'] + " (App. C.8: leave unreliable systems off the frontier)", "our distillation", fs=12.5)}
-</div>
-{card("WHAT THE FORMULAS DO NOT SHOW: THE VARIABLES ARE COUPLED", "",
-      ["The prompt length drives both sides: prefill time and the input bill " + ci('osh'),
-       "The harness and provider, not the model, set the cache split " + ci('tracelab'),
-       "Time can cost money: a cache entry expires after 5 min or 1 h, so a slow step can turn cache reads into cache writes (our reading of " + CITE['anth-b'] + ")",
-       "Thinking lengthens " + tex("D_i", 11) + " and the output bill; calls and thinking change " + tex("R_m(p)", 11) + " (page 13)"])}""",
-      foot="SOURCES · as cited in each row · assumptions: independent attempts, retry until verified success, prices constant in context length (checked for Anthropic) — Appendix A0",
-      chip=("#a0-3", "Appendix A0"))
+slide("s04", "The problem, defined (2/2): what is inside the terms",
+      crumb="from the two formulas → here: four expansions, each of one term named in its first column → to: where the time goes",
+      body=table(["expands", "formula", "its symbols", "status · source", "pages"], [
+   ["<b>III · one call</b> " + tex(r"\ell_{ij}", 12) + " of the time formula", eq_svg("call", fontsize=11.5, cls="eqn") + eq_svg("ttft", fontsize=11.5, cls="eqn"),
+    defs1([(r"t^{\mathrm{queue}},\ t^{\mathrm{net}}", "waiting in the server’s queue; network time", "self-defined"),
+           (r"t^{\mathrm{prefill}},\ t^{\mathrm{first}}", "reading the uncached input; the first decoding step", "self-defined")]),
+    "call: adapted · " + CITE['aa'] + "<br>TTFT split: our distillation", "5–7; Part 2: 5–7"],
+   ["<b>V · overlap</b> " + tex(r"T_{\mathrm{saving}}", 12) + " of the time formula", eq_svg("saving", fontsize=11.5, cls="eqn"),
+    defs1([(r"\mathcal{M},\ \mathcal{E}", "the intervals when a model call runs; when anything else runs", CITE['asyncfc']),
+           (r"\mathcal{S},\ \mathcal{D},\ \triangleq", "lengths added up (overlap twice); length of their union (overlap once); defined as. A 2-s tool call during a model call gives 2 s", CITE['asyncfc'])]),
+    "adapted · " + CITE['asyncfc'] + ", intervals widened", "9; Part 2: 9–10"],
+   ["<b>The input each call reads</b> — inside III (its prefill) and 1, 2 (its tokens)", eq_svg("ctx", fontsize=11.5, cls="eqn") + eq_svg("ctxsum", fontsize=11.5, cls="eqn"),
+    defs1([(r"|H_{a,1}|,\ g_i", "the first prompt; tokens step " + tex("i", 12) + " adds, " + tex(r"|\Phi(z_{a,i})|+|o_{a,i}|", 12), "self-defined"),
+           (r"\bar{g},\ N^{*}=2|H_{a,1}|/\bar{g}+1", "mean of " + tex("g_i", 12) + ", weighted by the later steps that re-read it; the step count beyond which the " + tex("N^2", 12) + " term dominates", "self-defined (calc.)")]),
+    "recurrence: adapted · " + CITE['yuan'] + "<br>sum: our distillation (calc.)", "8; Part 2: 6, 11"],
+   ["<b>1, 2 · tokens by class</b> " + tex(r"n^{\kappa}_{ij}", 12) + " of the money formula", eq_svg("classes", fontsize=11.5, cls="eqn") + eq_svg("nin", fontsize=11.5, cls="eqn"),
+    defs1([(r"\mathrm{hit,\ w5m,\ w1h,\ unc,\ out}", "cache read; cache write kept 5 min or 1 h; uncached input; output", CITE['anth-b'])]),
+    "adapted · " + CITE['anth-b'] + " (billed input = read + written + uncached)", "11–12; Part 2: 12"],
+  ], ["17%", "31%", "32%", "13%", "7%"], cls="tbl p2 expand") + """
+<div class="figcap">What no formula shows: the terms are coupled — the prompt length drives both reading time and the input bill, and a slow step can turn cache reads into cache writes (page 13).</div>""",
+      foot="SOURCES · as cited in each row · the full derivations, each source’s own formula and every symbol with its origin: Appendix A0",
+      chip=("#a0-1", "Appendix A0"))
 
 # --- 05 time, term by term ---------------------------------------------------
 slide("s05", "Where the time goes: five classes, one per term",
@@ -564,7 +590,7 @@ slide("s07", "III · Inside one call: first token, then decoding",
 
 # --- 08 the prompt grows ---------------------------------------------------------
 slide("s08", "The prompt grows: every step re-reads the whole history",
-      crumb="from one call → here: the prompt row of page 3, measured → to: the time outside the model",
+      crumb="from one call → here: the input each call reads (page 4), measured → to: the time outside the model",
       callout=f"""<p><b>Each step appends its output and its result, so the tokens read over an attempt grow with {tex("N^2", 15)}; caching makes re-reading cheaper and faster, not free.</b> The square matters once {tex("N", 15)} passes a few dozen steps.</p>""",
       body=f"""
 <div class="cards4">
@@ -798,8 +824,8 @@ th_slow = ["id", "cause", "mechanism", "evidence, with the conditions of the mea
 w_slow = ["4%", "11%", "15%", "47%", "13%", "10%"]
 
 A("a0-1", "A0 · 1/5", "A0 · The time of one attempt: each source’s own formula, and why ours differs",
-  crumb="the derivation behind page 3 · verbatim / adapted / our distillation · calc. = our algebra",
-  body=table(["formula (pages 2–3)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
+  crumb="the derivation behind pages 3–4 · verbatim / adapted / our distillation · calc. = our algebra",
+  body=table(["formula (pages 3–4)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"T_{\mathrm{attempt}}\triangleq t_{\mathrm{end}}-t_{\mathrm{start}}=\mathcal{D}(\mathcal{M}\cup\mathcal{E})=\sum_{i=0}^{N}(D_i+E_i)-T_{\mathrm{saving}}", 11), "adapted", tex(r"T_{\mathrm{saving}}", 11) + " is “defined as the difference between the serialized baseline and the observed end-to-end asynchronous latency” (App. B.2) " + ci('asyncfc') + ", combined with the sum below", "one attempt, not one task (a task may take several); exact because the non-model intervals cover every instant; " + tex(r"T_{\mathrm{saving}}\geq 0", 11) + " (calc.); exact with measured call times, approximate once " + tex(r"\ell\approx\mathrm{TTFT}+n\,\mathrm{TPOT}", 11)],
    [tex(r"\sum_{i=0}^{N}(D_i+E_i)", 11), "adapted", "“At step i, the actor takes " + tex("D_i", 11) + " time to generate action " + tex("a_i", 11) + ", and the runtime takes " + tex("T_i", 11) + " time to execute it … yielding serial latency " + tex(r"\sum_i(D_i+T_i)", 11) + "” (§3) " + ci('aospec'), tex("T_i", 11) + " → " + tex("E_i", 11) + " (T is kept for totals); " + tex("D_i", 11) + " covers all calls of a step, " + tex("E_i", 11) + " every non-model interval, both as summed lengths; " + tex("i=0", 11) + " holds calls outside any step; AOSpec’s " + tex("a_i", 11) + " is an action, not our agent index; preferred to " + ci('llmc') + ", whose N counts the function calls of one plan"],
    [tex(r"D_i=\sum_j \ell_{ij}", 11), "our distillation", "No source sums the calls of a step. GTA1 makes “4 parallel calls” per planning step and “between 4 and 12 planning calls” per judging call " + ci('osh'), "parallel calls add here; their overlap is credited to " + tex(r"T_{\mathrm{saving}}", 11) + "; the letter ℓ as in " + ci('swm')],
@@ -808,16 +834,16 @@ A("a0-1", "A0 · 1/5", "A0 · The time of one attempt: each source’s own formu
   ], ["26%", "9%", "34%", "31%"]))
 
 A("a0-2", "A0 · 2/5", "A0 · Time hidden by concurrency, and the growing prompt",
-  crumb="the derivation behind page 3 · verbatim / adapted / our distillation · calc. = our algebra",
-  body=table(["formula (page 3)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
+  crumb="the derivation behind page 4 · verbatim / adapted / our distillation · calc. = our algebra",
+  body=table(["formula (page 4)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"T_{\mathrm{saving}}\triangleq\mathcal{S}(\mathcal{M})+\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})", 11), "adapted", "the same formula, continued " + tex(r"=\Delta_{F\parallel F}+\Delta_{D\parallel E}", 11) + ", with " + tex(r"\mathcal{M},\ \mathcal{E}", 11) + " “the sequence of time intervals for model decoding and function execution” (App. B.2) " + ci('asyncfc'), "intervals widened to whole calls and all non-model time, so values are not comparable with AsyncFC’s; the split becomes (calc.) " + tex(r"[\mathcal{S}(\mathcal{M})-\mathcal{D}(\mathcal{M})]+[\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{E})]+[\mathcal{D}(\mathcal{M})+\mathcal{D}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})]", 11) + ", each ≥ 0; it can include extra work that concurrency causes, so it is not the saving against a separate serial run (speed-ups use " + tex(r"T_{\mathrm{seq}}/T_{\mathrm{attempt}}", 11) + ", Part 2)"],
    [tex(r"|H_{a,i+1}|=|H_{a,i}|+|\Phi(z_{a,i})|+|o_{a,i}|", 11), "adapted", tex(r"H_{a,i+1}=H_{a,i}\,\Vert\,\Phi(\theta_{a,i},m_{a,i},u_{a,i})\,\Vert\,o_{a,i}", 11) + ", " + tex(r"C_{a,i}=|H_{a,i}|", 11) + " (Eqs. 1–3, v2 §II-C) " + ci('yuan'), "lengths of the concatenation; " + tex(r"\Phi(z_{a,i})", 11) + " written with Yuan’s own " + tex(r"z=(\theta,m,u)", 11) + " of its Eq. 2 (thinking, message, tool-call tokens), because its m would clash with the design m and its " + tex(r"C_{a,i}", 11) + " with the cost " + tex("C_m(p)", 11) + "; exact with one call per step and full history; in general add " + tex(r"h^{+}_i-h^{-}_i", 11) + " (other calls’ output; compaction)"],
    [tex(r"\sum_{i=1}^{N}|H_{a,i}|=N|H_{a,1}|+\frac{N(N-1)}{2}\bar{g}", 11), "our distillation (calc.)", "no source writes the sum; “at each step, the prompt sent to the LLM includes the history of all previous steps” " + ci('osh'), tex(r"g_i=|\Phi(z_{a,i})|+|o_{a,i}|", 11) + ", " + tex(r"\bar{g}=\sum_i(N-i)g_i\,/\,\frac{N(N-1)}{2}", 11) + " makes it exact; over a random step count " + tex(r"\mathbb{E}[\sum|H|]\approx\mathbb{E}[N]|H_{a,1}|+\frac{\bar{g}}{2}(\mathbb{E}[N]^2+\mathrm{Var}[N]-\mathbb{E}[N])", 11) + "; crossover " + tex(r"N^{*}=2|H_{a,1}|/\bar{g}+1", 11)],
   ], ["22%", "9%", "33%", "36%"]))
 
 A("a0-3", "A0 · 3/5", "A0 · Money, per success, and the goal",
-  crumb="the derivation behind page 4 · verbatim / adapted / our distillation · calc. = our algebra",
-  body=table(["formula (page 4)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
+  crumb="the derivation behind page 3 · verbatim / adapted / our distillation · calc. = our algebra",
+  body=table(["formula (page 3)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"c_m(p)=\sum_{i,j}\sum_{\kappa}n^{\kappa}_{ij}c_{\kappa}(\mu_{ij})+x_{\mathrm{env}}c_{\mathrm{env}}", 11), "adapted", tex(r"c_m(p)=n_{\mathrm{in}}(m,p)\,c_{\mathrm{in}}(m)+n_{\mathrm{out}}(m,p)\,c_{\mathrm{out}}(m)", 11) + " (Eq. 13): input and output tokens times their prices; other components go into " + tex(r"C_m(p)=w^{\top}x_m(p)", 11) + ", w the unit prices and " + tex("x_m(p)", 11) + " the quantities per attempt (App. D.1) " + ci('cop'), "input split into the billed classes (cache hit, 5-min and 1-h cache write, uncached); prices inside the sum because one step can mix models; environment usage added as App. D.1 allows; the class index is κ because x is Cost-of-Pass’s quantity. Closest written three-class form: " + ci('tokenpilot')],
    [tex(r"v(m,p)=C_m(p)/R_m(p)", 11), "verbatim", "“the expected number of attempts to obtain the first correct solution is " + tex("1/R_m(p)", 11) + "”, assuming independent trials (§2.2, Eq. 2) " + ci('cop'), "none; assumes unlimited independent retries and the verifier’s time and cost in every attempt; with at most K retries the ratio is still C/R (calc.); with cache-warm retries " + tex(r"C^{(1)}_m(p)+(1/R_m(p)-1)\,C^{(2+)}_m(p)", 11) + " (calc.)"],
    [tex(r"\mathbb{E}[T_{\mathrm{attempt}}]/R_m(p)", 11), "adapted", "“alternative units per attempt (FLOPs, time, latency, energy) may matter more than dollar cost” (App. D.1) " + ci('cop'), "the same derivation in seconds; serial retries only (parallel votes cost “roughly the latency of a single vote”); correlated failures break independence"],
@@ -1295,7 +1321,7 @@ slide("t02", "The map: each family of work targets one term or a pair, and most 
   [tex(r"c_{\kappa}(\mu_{ij})", 12), "a cheaper model or tier for most calls", "routing, small models, tiers", "13"],
   [tex("R_m(p)", 12) + ", set-up", "higher success; a one-time set-up spread over the tasks", "cost per success", "14"],
  ], ["20%", "47%", "25%", "8%"], cls="tbl p2 map")}""",
-      foot="SOURCES · Part 1’s formulas (pages 2–4, Appendix A0); the time row as on Part 1 page 13: TTFT shown as t^queue + t^prefill (network and first-token time left out), i = 0 holds calls outside any step · held-back works: Appendix B9",
+      foot="SOURCES · the time and money formulas of Part 1 page 3, with III (one call) written out as on page 4: TTFT shown as t^queue + t^prefill (network and first-token time left out) · held-back works: Appendix B9",
       chip=("#b9-1", "Appendix B9"))
 
 # --- Part 2 · 03 compile or replay ----------------------------------------------------------
@@ -1936,6 +1962,13 @@ svg.tex{display:inline-block;height:auto}
 .defs svg.tex{vertical-align:middle}.defs>div{min-width:0}
 .defs2{columns:3;column-gap:22px;margin:0;padding:6px 0 0 16px;border-top:1px solid var(--rule);font-size:11.5px;line-height:1.33;color:var(--ink2);flex:none}
 .defs2 li{break-inside:avoid;margin:0 0 3px 0}
+.eqtab.narroweq2{grid-template-columns:76px 620px 1fr}
+.mf{display:flex;align-items:flex-end;flex-wrap:wrap;gap:5px;padding:4px 0}
+.mft{display:inline-flex;flex-direction:column;align-items:center;border:1px solid var(--rule);border-radius:6px;padding:1px 5px 2px}
+.mft small{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.4px;color:var(--accent);letter-spacing:.03em;white-space:nowrap;margin-top:1px}
+.mfo{align-self:center}.mf svg.tex{vertical-align:middle}
+.mfnote{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;color:var(--mute);margin-top:2px}
+.tbl.p2.expand td{vertical-align:top}.tbl.p2.expand td .defs2.one{padding-left:14px;font-size:11.5px}
 .eqtab.narroweq{grid-template-columns:76px 420px 1fr}
 .defs2.one{columns:1;border-top:none;padding:0 0 0 16px;margin:0 0 3px 0;font-size:12px}.defs2 svg.tex{vertical-align:middle}
 .defs2 .src{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.6px;color:var(--mute)}
