@@ -1341,6 +1341,13 @@ def fx(*rows, legend=True):
         out.append('<div class="fxleg"><span class="fp good">targeted</span> <span class="fp bad">in exchange</span> <span class="fp keep">unchanged</span></div>')
     return "".join(out) + "</div>"
 
+NR = '<span class="nr">not reported</span>'
+
+def ptab2(rows):
+    """Part 2 table with the same columns on every row: what was measured, on the Part 1 axes (time, money or tokens, success)."""
+    return table(["work", "method", "time", "money or tokens", "success", "setting", "side effects"], rows,
+                 ["12%", "20%", "14%", "14%", "9%", "16%", "15%"], cls="tbl p2 p2u")
+
 def ptab(rows, widths=("17%", "24%", "37%", "22%"), headers=("work", "what it changes", "measured effect, and its conditions", "what grows, or is left out")):
     return table(list(headers), rows, list(widths), cls="tbl p2")
 
@@ -1454,17 +1461,17 @@ slide("t06", "Showing the model less of the page cuts prefill; a reader call can
       chip=("#b4-1", "Appendix B4"))
 
 # --- Part 2 · 07 decoding -----------------------------------------------------------------
-slide("t07", "Less thinking and faster decoding shorten the writing; neither touches the environment", part=2,
+slide("t07", "Less thinking and faster decoding shorten only the writing", part=2,
       crumb="terms: n^out ↓ (thinking included) · TPOT ↓ at a higher price per token",
       callout=f"""<p><b>Choosing the reasoning effort per step cut reasoning tokens by 45% at equal success; fast tiers are stated by their vendors to be up to 2.5× faster for twice the price.</b> Both shorten {tex("D_i", 15)} only.</p>""",
       body=f"""
 {fx(("time", {"nout": DN, "tpot": DN, "J": UP}), ("money", {"c": UP}))}
-{ptab([
-  [wk("ARES", "ares"), "A 1.7B router picks the reasoning effort for each step", "Reasoning tokens per task 21,424 → 11,723 (−45%), success 45.0 → 46.5%; low effort throughout −7.6 points (calc.) — WebArena, ~129 tasks (calc.; count not printed, B9), gpt-oss-20b", "A router call per step, cost not reported; no wall-clock"],
-  [wk("Overthinking", "overthinking"), "Two low-effort runs; keep the one that overthinks least", "$1,400 → $800 for the whole run, solved 29.1 → 27.3% — SWE-bench Verified (count not printed, B9), o1", "Two attempts per task"],
-  [wk("GUI-G1", "guig1"), "RL-trained grounding without a thinking section", "Output tokens 107–114 → 37–39 per example, ScreenSpot 87.5 → 90.3% — InfiGUI-R1-3B (accuracy from its own paper) vs GUI-G1-3B, two differently trained models", "Grounding only; no timing"],
-  [wk("Agent-X", "agentx"), "Draft tokens looked up from the prompt’s tool-use examples, verified by the model", "Decoding 1.73× faster; task time 1.43× faster from this alone (1.61× with its prompt cache) — 1,022 TinyAgent tool-calling examples, 7B model on a Mac mini", "On-device only"],
-  [wk("Fast tiers (vendor)", "anth-b", "openai"), "The same model, served faster", "Anthropic: up to 2.5× output tokens per second; the gain is in output speed, not first-token time. OpenAI: up to 2.5× faster, ‘speed’ undefined", "Price 2×; switching speed invalidates Anthropic’s message cache"],
+{ptab2([
+  [wk("ARES", "ares"), "Before each step, a small model (Qwen3, 1.7 billion parameters) sets how much the main model reasons: low, medium or high", NR, "Reasoning tokens per task 21,424 → 11,723 (−45%)", "45.0 → 46.5%", "WebArena, about 129 tasks (inferred), gpt-oss-20b", "One extra small-model call per step; its cost not reported"],
+  [wk("Overthinking", "overthinking"), "Run the task twice at low reasoning effort; a model picks the run that overthinks less", NR, "$1,400 → $800 for the whole benchmark (−43%, calc.)", "29.1 → 27.3%", "SWE-bench Verified, o1", "Two attempts and a judge call per task"],
+  [wk("GUI-G1", "guig1"), "A 3-billion-parameter grounding model trained with reinforcement learning to answer without a thinking section", NR, "Output tokens per example 107–114 → 37–39 (−65%, calc.)", "87.5 → 90.3% accuracy", "ScreenSpot; two different 3B models (InfiGUI-R1-3B vs GUI-G1-3B)", "Grounding calls only, not whole tasks"],
+  [wk("Agent-X", "agentx"), "Speculative decoding: guess the next tokens by copying from the tool-use examples in the prompt; the model checks the guesses", "Task time 1.43× faster (−30%, calc.); 1.61× with its prompt cache", NR + " (local model)", NR, "1,022 TinyAgent tool-calling tasks, 7B model on a Mac mini", "On-device only"],
+  [wk("Fast tiers (vendor)", "anth-b", "openai"), "The same model, served faster at a higher price", "Up to 2.5× more output tokens per second; first token no sooner (Anthropic)", "Price 2×", "Same model", "Vendor statements, no benchmark", "Switching speed resets Anthropic’s prompt cache"],
  ])}""",
       foot="NOT YET MEASURED · independent task-level timing of fast tiers · the net effect of per-step effort changes, which invalidate Anthropic’s message cache · more rows in Appendix B4 (2/2)",
       chip=("#b4-2", "Appendix B4"))
@@ -2031,6 +2038,8 @@ svg.tex{display:inline-block;height:auto}
 .eqtab>div.eqhr{grid-column:1/-1;border-bottom:1px solid var(--accent);padding:0;height:0}
 .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
 .plainlist{margin:0;padding-left:18px;font-size:12.5px;line-height:1.4;color:var(--ink2)}
+.nr{color:var(--mute);font-style:italic}
+.tbl.p2u td{font-size:11.3px;line-height:1.3}
 .p3refs{margin-top:-4px;border-top:1px solid var(--rule);padding-top:3px}
 .pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
 .pgrefs li{font-size:9.5px;line-height:1.22;color:var(--ink2);margin:0 0 3px 0;break-inside:avoid}
