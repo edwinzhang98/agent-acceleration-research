@@ -320,7 +320,7 @@ def defs3(items, head=False):
             run = 1
             while k + run < n and items[k + run][2] == so:
                 run += 1
-            row += f'<td class="so" rowspan="{run}">{so}</td>'
+            row += f'<td class="so{" span" if run > 1 else ""}" rowspan="{run}">{so}</td>'
         out.append(row + '</tr>')
     return "".join(out) + "</tbody></table>"
 
@@ -514,11 +514,10 @@ slide("s03", "The problem, defined (1/3): time, money and the goal",
     (r"v", "Expected dollars per success.", CITE['cop']),
     (r"C_m(p)", "Expected dollars of one attempt, " + tex(r"\mathbb{E}[c_m(p)]", 11) + ".", CITE['cop']),
     (r"R_m(p)", "Chance one attempt succeeds; dividing by it is money VI.", CITE['cop']),
-    (r"\min_m(\cdot,\cdot)^{\top}", "Pareto set: designs no other design matches or beats on both while beating on one.", CITE['boyd04']),
     (r"R_0", "Minimum acceptable success rate.", "self-defined"),
    ]), "", "")}
 </div>
-<div class="p3refs"><div class="p3rh">References</div>@@REFSSM:isp,asyncfc,llmc,cop,anth-b,boyd04@@</div>""",
+<div class="p3refs"><div class="p3rh">References</div>@@REFSSM:isp,asyncfc,llmc,cop,anth-b@@</div>""",
       chip=("#a0-1", "Appendix A0"))
 
 def deftable(groups):
@@ -536,7 +535,7 @@ def deftable(groups):
                 run = 1
                 while k + run < n and syms[k + run][2] == so:
                     run += 1
-                row += f'<td class="so" rowspan="{run}">{so}</td>'
+                row += f'<td class="so{" span" if run > 1 else ""}" rowspan="{run}">{so}</td>'
             out.append(row + '</tr>')
     return "".join(out) + "</tbody></table>"
 
@@ -822,10 +821,10 @@ REFS_P1 = [
  "Hua, W., Wan, M., Vadrevu, S., Nadel, R., Zhang, Y., &amp; Wang, C. (2025). Interactive speculative planning: Enhance agent efficiency through co-design of system and user interface (ISP). <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2410.00079. Rutgers University; Microsoft; Google DeepMind.",
  "Huang, Z., Wang, X., Wang, A., Jurayj, W., Jiménez Gutiérrez, B., Khashabi, D., &amp; Andrews, N. (2026). Better, faster, stronger: Programmatic skill learning best reduces agent cost (SpeedRunner). arXiv:2608.11338v1. Johns Hopkins University.",
  "Kang, H., Li, Z., Xu, W., Yang, X., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306, 55630–55657, spotlight. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI; independent researcher.",
- "Kapoor, S., Stroebl, B., Kirgis, P., Nadgir, N., Siegel, Z. S., Wei, B., … Narayanan, A. (2026). Holistic Agent Leaderboard: The missing infrastructure for AI agent evaluation. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2510.11977. Princeton University et al.",
+ "Kapoor, S., Stroebl, B., Kirgis, P., Nadgir, N., Siegel, Z., Wei, B., Xue, T., Chen, Z., Chen, F., Utpala, S., Ndzomga, F., Oruganty, D., Luskin, S., Liu, K., Yu, B., Arora, A., Hahm, D., Trivedi, H., Sun, H., . . . Narayanan, A. (2026). Holistic Agent Leaderboard: The missing infrastructure for AI agent evaluation. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>, 98778–98849. arXiv:2510.11977. Princeton University et al.",
  "Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., &amp; Narayanan, A. (2025). AI agents that matter. <i>Transactions on Machine Learning Research</i>. arXiv:2407.01502. Princeton University.",
  "Kim, S., Moon, S., Tabrizi, R., Lee, N., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2024). An LLM compiler for parallel function calling. <i>Proceedings of the 41st International Conference on Machine Learning (ICML 2024)</i>, PMLR 235, 24370–24391. arXiv:2312.04511. University of California, Berkeley; International Computer Science Institute; Lawrence Berkeley National Laboratory.",
- "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., … Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i> (Expert Certification). https://openreview.net/forum?id=5298fKGmv3. arXiv:2412.05467v4. ServiceNow Research; Mila; Polytechnique Montréal; Carnegie Mellon University; McGill University; Tel Aviv University; Université de Montréal; iMean AI.",
+ "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., Thakkar, M., Marty, T., Assouel, R., Omidi Shayegan, S., Jang, L. K., Lù, X. H., Yoran, O., Kong, D., Xu, F. F., Reddy, S., Neubig, G., Cappart, Q., Salakhutdinov, R., &amp; Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i> (Expert Certification). https://openreview.net/forum?id=5298fKGmv3. arXiv:2412.05467v4. ServiceNow Research; Mila; Polytechnique Montréal; Carnegie Mellon University; McGill University; Tel Aviv University; Université de Montréal; iMean AI.",
  "Lee, N., Erdogan, L. E., John, C. J., Krishnapillai, S., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2026). Agentic test-time scaling for WebAgents. <i>COLM 2026 Workshop on Efficient Reasoning</i> (non-archival). arXiv:2602.12276v2. University of California, Berkeley; International Computer Science Institute; Lawrence Berkeley National Laboratory.",
  "Li, Y., Ye, Q., Choubey, P. K., Zhang, J., &amp; Wu, C.-S. (2026). Speculate with memory: Lossless acceleration for LLM agents. arXiv:2607.12236v1. Salesforce Research.",
  "Liu, B., Qiu, H., Goiri, Í., Fonseca, R., Bianchini, R., &amp; Choukse, E. (2026). Agentic coding in the wild: Characterizing GitHub Copilot traces at production scale. arXiv:2608.00101. University of Illinois Urbana-Champaign; Microsoft Azure Research.",
@@ -842,7 +841,7 @@ REFS_P1 = [
  "Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., &amp; Cao, Y. (2023). ReAct: Synergizing reasoning and acting in language models. <i>The Eleventh International Conference on Learning Representations (ICLR 2023)</i>. arXiv:2210.03629. Princeton University; Google Research.",
  "Ye, N., Ahuja, A., Liargkovas, G., Lu, Y., Kaffes, K., &amp; Peng, T. (2026). Speculative actions: A lossless framework for faster AI agents. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>, oral. arXiv:2510.04371. Columbia University.",
  "Yuan, Y., Nayak, A., Kundu, S., &amp; Talati, N. (2026). Agentic AI workload characterization. <i>Proceedings of the 2026 IEEE International Symposium on Workload Characterization (IISWC 2026)</i>, Boulder, CO. arXiv:2605.26297v2 (21 September 2026; arXiv title “Agentic AI workload characteristics”). University of Illinois Urbana-Champaign; Gimlet Labs; Intel.",
- "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., … Zhang, D. (2026). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft; ZJU-UIUC Institute; Nanjing University; Peking University.",
+ "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., Wang, L., Yang, F., Zhao, P., Qiao, B., Du, C., Li, L., Kang, Y., Jiang, P., Zheng, S., Wang, R., Qian, J., Ma, M., Lou, J.-G., . . . Zhang, D. (2026). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft; ZJU-UIUC Institute; Nanjing University; Peking University.",
  "Zheng, L., Yin, L., Xie, Z., Sun, C., Huang, J., Yu, C. H., Cao, S., Kozyrakis, C., Stoica, I., Gonzalez, J. E., Barrett, C., &amp; Sheng, Y. (2024). SGLang: Efficient execution of structured language model programs. <i>Advances in Neural Information Processing Systems 37 (NeurIPS 2024)</i>, 62557–62583. https://doi.org/10.52202/079017-2000. arXiv:2312.07104. Stanford University; University of California, Berkeley; Shanghai Jiao Tong University; Texas A&amp;M University; independent researcher.",
  "Zhong, Y., Liu, S., Chen, J., Hu, J., Zhu, Y., Liu, X., Jin, X., &amp; Zhang, H. (2024). DistServe: Disaggregating prefill and decoding for goodput-optimized large language model serving. <i>18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)</i>, 193–210. https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin. arXiv:2401.09670. Peking University; StepFun; University of California, San Diego.",
  "Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., &amp; Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560v2. University of Washington; Wuhan University of Technology; Shanghai Jiao Tong University.",
@@ -1178,7 +1177,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("masking", "Lindenbauer et al., 2025",
   "Lindenbauer, T., Slinko, I., Felder, L., Bogomolov, E., &amp; Zharov, Y. (2025). The complexity trap: Simple observation masking is as efficient as LLM summarization for agent context management. Paper presented at the 4th Deep Learning for Code Workshop (DL4C): Deep Learning for Code in the Agentic Era, NeurIPS 2025. https://openreview.net/forum?id=OHVzruJl5k. arXiv:2508.21433v3. JetBrains Research; Technical University of Munich."),
  ("bats", "Liu et al., 2026a",
-  "Liu, T., Wang, Z., Miao, J., Hsu, I.-H., Yan, J., Chen, J., … Lee, C.-Y. (2026a). Budget-aware tool use enables effective agent scaling (Budget Tracker, BATS). <i>Third Conference on Language Modeling (COLM 2026)</i>. arXiv:2511.17006. University of California, Santa Barbara; Google Cloud AI Research; Google DeepMind; New York University."),
+  "Liu, T., Wang, Z., Miao, J., Hsu, I.-H., Yan, J., Chen, J., Han, R., Xu, F., Chen, Y., Jiang, K., Daruki, S., Liang, Y., Wang, W. Y., Pfister, T., &amp; Lee, C.-Y. (2026a). Budget-aware tool use enables effective agent scaling (Budget Tracker, BATS). <i>Third Conference on Language Modeling (COLM 2026)</i>. arXiv:2511.17006. University of California, Santa Barbara; Google Cloud AI Research; Google DeepMind; New York University."),
  ("droidspeak", "Liu et al., 2026b",
   "Liu, Y., Huang, Y., Yao, J., Feng, S., Gu, Z., Du, K., Li, H., Cheng, Y., Jiang, J., Lu, S., Musuvathi, M., &amp; Choukse, E. (2026b). DroidSpeak: KV cache sharing across fine-tuned model variants. <i>23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI 26)</i>, 319–338. arXiv:2411.02820 (under another title). University of Chicago; Microsoft."),
  ("smc", "Liu et al., 2026c",
@@ -1232,7 +1231,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("helium", "Wadlom et al., 2026",
   "Wadlom, N., Shen, J., &amp; Lu, Y. (2026). Efficient LLM serving for agentic workflows: A data systems perspective (Helium). <i>Proceedings of the ACM on Management of Data, 4</i>(3), Article 169 (SIGMOD 2026). https://doi.org/10.1145/3802046. arXiv:2603.16104v1 (extended version). National University of Singapore."),
  ("effagents", "Wang et al., 2025a",
-  "Wang, N., Hu, X., Liu, P., Zhu, H., Hou, Y., Huang, H., … Zhou, W. (2025a). Efficient agents: Building effective agents while reducing cost. arXiv:2508.02694v1. OPPO (OPPO AI Agent Team)."),
+  "Wang, N., Hu, X., Liu, P., Zhu, H., Hou, Y., Huang, H., Zhang, S., Yang, J., Liu, J., Zhang, G., Zhang, C., Wang, J., Jiang, Y. E., &amp; Zhou, W. (2025a). Efficient agents: Building effective agents while reducing cost. arXiv:2508.02694v1. OPPO (OPPO AI Agent Team)."),
  ("asi", "Wang et al., 2025b",
   "Wang, Z. Z., Gandhi, A., Neubig, G., &amp; Fried, D. (2025b). Inducing programmatic skills for agentic tasks (ASI). <i>Second Conference on Language Modeling (COLM 2025)</i>. arXiv:2504.06821. Carnegie Mellon University."),
  ("awm", "Wang et al., 2025c",
@@ -1280,7 +1279,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("toolcaching", "Zhai et al., 2026",
   "Zhai, Y., Shen, D., Luo, J., &amp; Yang, B. (2026). ToolCaching: Towards efficient caching for LLM tool-calling. arXiv:2601.15335v1. Southeast University."),
  ("ufo2", "Zhang et al., 2026a",
-  "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., … Zhang, D. (2026a). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft; ZJU-UIUC Institute; Nanjing University; Peking University."),
+  "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., Wang, L., Yang, F., Zhao, P., Qiao, B., Du, C., Li, L., Kang, Y., Jiang, P., Zheng, S., Wang, R., Qian, J., Ma, M., Lou, J.-G., . . . Zhang, D. (2026a). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft; ZJU-UIUC Institute; Nanjing University; Peking University."),
  ("bopo", "Zhang et al., 2026b",
   "Zhang, C., Xia, M., Zhang, X., Madrigal, D., Mallick, A., Kessler, S., Rühle, V., &amp; Rajmohan, S. (2026b). Budget-aware agentic routing via boundary-guided training (BoPO). arXiv:2602.21227v1. University of Cambridge; Microsoft (M365 Research)."),
  ("prune4web", "Zhang et al., 2026c",
@@ -1608,7 +1607,7 @@ B("b0-2", "B0 · 2/3", "B0 · Source formulas for speculation, cache retention a
    [wk("Speculative Actions, Prop. 1 and Thm 4 (App. C)", "specactions"), tex(r"\dfrac{\mathbb{E}[T_s]}{\mathbb{E}[T_{\mathrm{seq}}]}\rightarrow 1-\dfrac{p(k)}{1+p(k)}\cdot\dfrac{\alpha}{\alpha+\beta}", 11) + "<br>" + tex(r"\dfrac{\mathbb{E}[M_{\mathrm{spec}}-M_{\mathrm{seq}}]}{\mathbb{E}[M_{\mathrm{seq}}]}\rightarrow\tilde{k}-(\tilde{k}+\dfrac{\alpha}{\alpha+\beta})\,\dfrac{p(k)}{1+p(k)}", 11), tex(r"p(k)=1-(1-p)^k", 10) + ", k guesses of accuracy p; speculator and API latencies exponential with rates α, β; " + tex(r"T_s,\ T_{\mathrm{seq}}", 10) + " time with and without speculation; → the limit as the number of steps grows; " + tex(r"\tilde{k}", 10) + " distinct guessed actions; M money", "time saved and money added from the same guess accuracy; in the limit the time ratio stays above 1/2, so at most 50% is saved (Prop. 1’s stated bound) — under its exponential-latency model"],
    [wk("Speculate with memory, §2.1 and §4.3", "swm"), "saving per hit " + tex(r"=\min(\ell_{\mathrm{env}},\ \ell_{\mathrm{LLM}}-\ell_{\mathrm{spec}})", 11) + " (guess the action) or " + tex(r"\min(\ell_{\mathrm{LLM}},\ \ell_{\mathrm{env}}-\ell_{\mathrm{spec}})", 11) + " (guess the observation); extra cost " + tex(r"=k\,C_S+(1-\mathrm{acc})\,C_{\mathrm{act}}", 11), tex(r"\ell", 10) + " latencies of the environment, the model and the speculator; k speculators of cost " + tex("C_S", 10) + "; acc hit rate; " + tex(r"C_{\mathrm{act}}", 10) + " cost of the pre-launched actor call a miss wastes (the extra-cost form holds for observation and chained guesses)", "a hit can hide at most the idle window of the other side; its App. A uses slightly different per-type forms"],
    [wk("Continuum, Eqs. 1–2", "continuum"), tex(r"\tau^{*}=\arg\max_{\tau}\ \mathcal{P}(\tau,f)\,\mathrm{Benefit}(r)-\mathrm{Cost}(\tau,r)", 11), tex(r"\mathcal{P}(\tau,f)", 10) + " empirical probability that tool f returns within τ; Benefit: reload and reordering cost avoided; Cost: memory held for τ", "how long to keep a run’s cache through a tool wait: " + tex(r"t^{\mathrm{queue}}", 10) + " and re-prefill against GPU memory"],
-   [wk("InferCept, Eqs. 1–5", "infercept"), tex(r"\mathrm{Waste}_{\mathrm{preserve}}=T_{\mathrm{INT}}\,C_i^j\,M", 11) + "; also discard, swap and chunked discard; " + tex(r"\mathrm{Waste}=\min(\mathrm{Waste}_{\mathrm{preserve}},\mathrm{Waste}_{\mathrm{chunkD}})", 11) + " (Eq. 5)", tex(r"T_{\mathrm{INT}}", 10) + " duration of the tool call; " + tex("C", 10) + " context tokens; " + tex("M", 10) + " memory per token; i request, j interception (not Part 1’s step and call)", "the same trade inside the server: keep the cache during " + tex("E_i", 10) + ", or pay " + tex(r"t^{\mathrm{prefill}}", 10) + " again"],
+   [wk("InferCept, Eqs. 1–5", "infercept"), tex(r"\mathrm{Waste}^{j}_{\mathrm{preserve},i}=T^{j}_{\mathrm{INT}}\,C_i^j\,M", 11) + "; also discard, swap and chunked discard; " + tex(r"\mathrm{Waste}_i^j=\min(\mathrm{Waste}^{j}_{\mathrm{preserve},i},\,\mathrm{Waste}^{j}_{\mathrm{chunkD},i})", 11) + " (Eq. 5)", tex(r"T^{j}_{\mathrm{INT}}", 10) + " duration of interception j (a tool call, or a wait for a human or the environment); " + tex("C", 10) + " context tokens; " + tex("M", 10) + " memory per token; i request, j interception (not Part 1’s step and call)", "the same trade inside the server: keep the cache during " + tex("E_i", 10) + ", or pay " + tex(r"t^{\mathrm{prefill}}", 10) + " again"],
    [wk("FocusAgent, App. H.1", "focusagent"), tex(r"C_S|o_i|+C_L|o_r|\leq C_L|o_i|\ \Leftrightarrow\ \alpha\leq\dfrac{C_L-C_S}{C_L}", 11), tex("C_S, C_L", 10) + " prices of the small reader and the large actor; " + tex(r"|o_i|,|o_r|", 10) + " observation before and after reduction; " + tex(r"\alpha=|o_r|/|o_i|", 10), "when a reader call pays in money; the paper notes it ignores API latency — the time can still grow (page 6)"],
   ], w_f))
 
@@ -1714,7 +1713,7 @@ B("b4-2", "B4 · 2/2", "B4 · Decoding: more rows, with full conditions",
    [wk("GUI-KV", "guikv"), "Keeps 40% of the KV cache per layer (UI-TARS-1.5-7B)", "Decoding MFLOPs per token −38.9% and offline step accuracy 17.5 → 21.6% (AgentNetBench, 5 screenshots in context); OSWorld-Verified success 26.0 → 25.1%", "No wall-clock"],
    [wk("ToolSpec", "toolspec"), "Schema-aware drafts of tool-call tokens, verified losslessly", "Tool-call generation 3.5–4.2× faster — API-Bank, ToolAlpaca, BFCLv2; batch 1; 3–14B open models on GPUs", "Decoding speed, not task time"],
    [wk("Effort guidance (vendor)", "anth-a"), "Medium instead of high reasoning effort (Claude 4.6 family)", "“Roughly half the output tokens of high” with close to the best success, the same once retries are allowed; for Opus 4.7 the post recommends high (≈ half the tokens of max) — internal UI-automation suite, no counts", "Vendor statement"],
-   [wk("Ultrafast (vendor)", "openai", "cerebras"), "GPT-5.6 Sol on Cerebras hardware (preview, no price)", "Up to 14× faster than Standard, up to 750 output tokens per second (vendor)", "OpenAI (14×) and Cerebras (750 tokens/s) vendor statements; Cerebras’ own 6-task GDPval chart (5.6×) is marketing and not used"],
+   [wk("Ultrafast (vendor)", "openai", "cerebras"), "GPT-5.6 Sol on Cerebras hardware (preview, no price); since 29 Sep also GPT-6 Astra", "GPT-5.6 Sol: up to 14× faster than Standard, up to 750 output tokens per second (vendor). GPT-6 Astra: 6× its Standard price ($60 / $300 per M, calc.), no speed figure", "OpenAI (14×) and Cerebras (750 tokens/s) vendor statements; Cerebras’ own 6-task GDPval chart (5.6×) is marketing and not used"],
   ], w_d))
 
 B("b5-1", "B5 · 1/2", "B5 · Environment and parallel calls: more rows, with full conditions",
@@ -1918,7 +1917,7 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 /* cards */
 .cards3,.cards4,.rows5,.rows6,.figs3{display:grid;gap:12px}
 .cards3{grid-template-columns:repeat(3,1fr)}.cards4{grid-template-columns:repeat(4,1fr)}
-.rows6 .card{padding:6px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13px}.rows5.big .cv{font-size:15px}.rows5.big .card{padding:10px 13px}.rows6{grid-template-columns:repeat(3,1fr);gap:9px}
+.rows6 .card{padding:6px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:12.5px}.rows5.big .cv{font-size:15px}.rows5.big .card{padding:10px 13px}.rows6{grid-template-columns:repeat(3,1fr);gap:9px}
 .figs3{grid-template-columns:repeat(3,1fr);gap:20px;flex:none}
 .figs1{display:flex;flex:none}.figs1 .fig{width:600px;max-width:100%}
 .card{border:1px solid var(--rule);border-radius:4px;padding:11px 13px;background:#fff;display:flex;flex-direction:column;gap:5px;min-height:0}
@@ -2024,6 +2023,7 @@ svg.tex{display:inline-block;height:auto}
 .deft td{padding:1.5px 8px 1.5px 0;vertical-align:top;color:var(--ink2);border:none}
 .deft td.sy{white-space:nowrap}
 .deft td.so{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
+.deft td.so.span,.tbl.p4def td.so.span{vertical-align:middle;border-left:2px solid var(--rule);padding-left:6px}
 .deft th{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;font-weight:500;padding:0 8px 0 0}
 .eqtab>div.eqh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:0 0 5px 0;border-bottom:none;align-items:flex-end}
 .eqtab>div.eqhr{grid-column:1/-1;border-bottom:1px solid var(--accent);padding:0;height:0}
