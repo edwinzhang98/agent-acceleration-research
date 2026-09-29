@@ -1383,18 +1383,18 @@ slide("t02", "The map: each family of work targets one term or a pair, and most 
       body=f"""
 {fx(("time", {}), ("money", {}), legend=False)}
 {table(["#", "term (Part 1)", "what the work does to it", "family of work", "page"], [
-  ["1", tex("J_i", 12), "→ 0 on steps run as code or replayed from a recording", "compile or replay the loop", "03"],
-  ["2", tex("N", 12), "fewer steps: more work per call, reusable skills", "bigger actions, skills", "04"],
-  ["3", tex(r"t^{\mathrm{queue}},\ t^{\mathrm{prefill}}", 12), "shorter on self-hosted serving: whole programs scheduled, cache kept across tool waits", "agent-aware serving", "05"],
-  ["4", tex(r"|o_{a,i}|\rightarrow t^{\mathrm{prefill}}", 12), "less of each page shown to the model", "observation reduction", "06"],
-  ["5", tex(r"n^{\mathrm{out}},\ \mathrm{TPOT}", 12), "less thinking; faster decoding by guessing tokens", "decoding", "07"],
-  ["6", tex("E_i", 12), "fewer or cheaper environment actions", "environment", "08"],
-  ["7", tex(r"T_{\mathrm{saving}}", 12), "added: independent calls and tools run at once", "parallel calls", "09"],
-  ["8", tex(r"T_{\mathrm{saving}}", 12), "added: the next step guessed and run early", "speculation", "10"],
-  ["9", tex(r"\bar{g},\ N^2", 12), "a flatter slope; or the square removed", "context management", "11"],
-  ["10", tex(r"n^{\kappa}", 12), "input moved from uncached to cache hit", "caching", "12"],
-  ["11", tex(r"c_{\kappa}(\mu_{ij})", 12), "a cheaper model or tier for most calls", "routing, small models, tiers", "13"],
-  ["12", tex("R_m(p)", 12) + ", set-up", "higher success; a one-time set-up spread over the tasks", "cost per success", "14"],
+  ["1", tex("J_i", 12), "→ 0 on steps run as code or replayed from a recording", "compile or replay the loop", '<a class="pgbtn" href="#t03">03</a>'],
+  ["2", tex("N", 12), "fewer steps: more work per call, reusable skills", "bigger actions, skills", '<a class="pgbtn" href="#t04">04</a>'],
+  ["3", tex(r"t^{\mathrm{queue}},\ t^{\mathrm{prefill}}", 12), "shorter on self-hosted serving: whole programs scheduled, cache kept across tool waits", "agent-aware serving", '<a class="pgbtn" href="#t05">05</a>'],
+  ["4", tex(r"|o_{a,i}|\rightarrow t^{\mathrm{prefill}}", 12), "less of each page shown to the model", "observation reduction", '<a class="pgbtn" href="#t06">06</a>'],
+  ["5", tex(r"n^{\mathrm{out}},\ \mathrm{TPOT}", 12), "less thinking; faster decoding by guessing tokens", "decoding", '<a class="pgbtn" href="#t07">07</a>'],
+  ["6", tex("E_i", 12), "fewer or cheaper environment actions", "environment", '<a class="pgbtn" href="#t08">08</a>'],
+  ["7", tex(r"T_{\mathrm{saving}}", 12), "added: independent calls and tools run at once", "parallel calls", '<a class="pgbtn" href="#t09">09</a>'],
+  ["8", tex(r"T_{\mathrm{saving}}", 12), "added: the next step guessed and run early", "speculation", '<a class="pgbtn" href="#t10">10</a>'],
+  ["9", tex(r"\bar{g},\ N^2", 12), "a flatter slope; or the square removed", "context management", '<a class="pgbtn" href="#t11">11</a>'],
+  ["10", tex(r"n^{\kappa}", 12), "input moved from uncached to cache hit", "caching", '<a class="pgbtn" href="#t12">12</a>'],
+  ["11", tex(r"c_{\kappa}(\mu_{ij})", 12), "a cheaper model or tier for most calls", "routing, small models, tiers", '<a class="pgbtn" href="#t13">13</a>'],
+  ["12", tex("R_m(p)", 12) + ", set-up", "higher success; a one-time set-up spread over the tasks", "cost per success", '<a class="pgbtn" href="#t14">14</a>'],
  ], ["5%", "18%", "45%", "24%", "8%"], cls="tbl p2 map")}""",
       foot="the time and money formulas of Part 1 page 3, with III (one call) written out as on page 4: TTFT shown as t^queue + t^prefill (network and first-token time left out) · held-back works: Appendix B9",
       chip=("#b9-1", "Appendix B9"))
@@ -1924,6 +1924,9 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 .foot{position:absolute;left:41px;bottom:26px;right:230px;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;color:var(--mute);line-height:1.4}
 .chip{position:absolute;right:41px;bottom:26px;font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;color:var(--ink2);border:1px solid var(--rule);border-radius:14px;padding:5px 12px;text-decoration:none;background:#fff}
 .chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.left{right:auto;left:41px}
+.pgbtn{display:inline-block;font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;color:var(--accent);border:1px solid var(--rule);border-radius:10px;padding:0 9px;text-decoration:none;background:#fff}
+.pgbtn:hover{border-color:var(--accent)}
 /* cards */
 .cards3,.cards4,.rows5,.rows6,.figs3{display:grid;gap:12px}
 .cards3{grid-template-columns:repeat(3,1fr)}.cards4{grid-template-columns:repeat(4,1fr)}
@@ -2256,6 +2259,8 @@ def render(font_dir=None):
                 parts.append(f'<div class="foot">{s["foot"]}</div>')
             if s["chip"]:
                 parts.append(f'<a class="chip" href="{s["chip"][0]}">{esc(s["chip"][1])}{" ↗" if s["chip"][0] != "#back" else ""}</a>')
+            if s["part"] == 2 and s["kind"] == "main" and s["id"] not in ("t01", "t02"):
+                parts.append('<a class="chip left" href="#t02">← map</a>')
         if s["notes"]:
             parts.append(f'<aside class="notes" hidden>{esc(s["notes"])}</aside>')
         parts.append('</section>')
