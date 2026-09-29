@@ -474,40 +474,37 @@ EQ["ttft"] = r"$\mathrm{TTFT}_{ij}\;\approx\;t^{\mathrm{queue}}_{ij}+t^{\mathrm{
 EQ["nin"] = r"$n^{\mathrm{hit}}_{ij}+n^{\mathrm{w5m}}_{ij}+n^{\mathrm{w1h}}_{ij}+n^{\mathrm{unc}}_{ij}\;=\;|H_{a,i}|\quad(\mathrm{one\ call\ per\ step})$"
 
 slide("s03", "The problem, defined (1/2): one formula for time, one for money, and what counts as faster",
-      crumb="from the loop → here: the two formulas every later page works on, and the goal → to: what is inside their terms",
       body=f"""
-<div class="statusleg">each row is <b>verbatim</b> from its source, <b>adapted</b> (reason in Appendix A0) or <b>our distillation</b> · numerals run left to right: time I–V as on page 5, money I–VI as on page 11</div>
+<div class="statusleg">numerals run left to right: time I–V as on page 5, money I–VI as on page 11</div>
 <div class="eqtab narroweq2">
 {eqrow_html("time", "one attempt", mainf("", [
     ("op", r"T_{\mathrm{attempt}}="), ("term", r"\sum_{i=0}^{N}", "I · steps"), ("op", r"["),
     ("term", r"\sum_{j=1}^{J_i}", "II · calls"), ("term", r"\ell_{ij}", "III · one call"), ("op", "+"),
     ("term", r"E_i", "IV · non-model time"), ("op", r"]\ -"), ("term", r"T_{\mathrm{saving}}", "V · overlap")]),
    defs1([
-    (r"T_{\mathrm{attempt}}", "wall-clock of one attempt, task to result; overlap counts once", "self-defined"),
-    (r"i=0", "step-0 bucket for calls outside any step, e.g. an up-front plan", "self-defined"),
-    (r"\mathrm{III},\ \mathrm{V}", "written out on page 4; the other symbols are page 2’s", ""),
+    (r"T_{\mathrm{attempt}}", "wall-clock time of one attempt", "self-defined"),
+    (r"i=0", "calls outside any step, e.g. an up-front plan", "self-defined"),
    ]),
-   "sum: " + CITE['isp'] + ", §3 · calls within a step: our distillation, evidence " + CITE['osh'] + " · saving: " + CITE['asyncfc'] + "; precedent " + CITE['llmc'] + ", App. E.1", "adapted · our distillation")}
+   CITE['isp'] + "; " + CITE['asyncfc'] + "; " + CITE['llmc'], "")}
 {eqrow_html("money", "one attempt", mainf("", [
     ("op", r"c_m(p)="), ("term", r"\sum_{i}\sum_{j}", "I · calls"), ("term", r"\sum_{\kappa}n^{\kappa}_{ij}", "II, III · tokens read, written"),
     ("term", r"c_{\kappa}(\mu_{ij})", "IV · price per class"), ("op", "+"), ("term", r"x_{\mathrm{env}}\,c_{\mathrm{env}}", "V · environment")]),
    defs1([
     (r"c_m(p)", "dollars of one attempt of design " + tex("m", 12) + " on task " + tex("p", 12), CITE['cop']),
     (r"c_{\mathrm{env}}", "price per unit of billed environment usage", CITE['cop']),
-    (r"\kappa", "billing class, written out on page 4", ""),
+    (r"\kappa", "billing class", CITE['anth-b']),
    ]),
-   "base: " + CITE['cop'] + ", Eq. 13, extended as its App. D.1 allows · classes: " + CITE['anth-b'] + " · three-class precedent: " + CITE['tokenpilot'], "adapted")}
+   "", "")}
 {eqrow_html("goal", "per success", eq_svg("psucc", fontsize=12.5, cls="eqn") + eq_svg("goal2", fontsize=12.5, cls="eqn"),
    defs1([
     (r"T_{\mathrm{success}}", "expected seconds per success", "self-defined"),
     (r"v,\ C_m(p)", "expected dollars per success; per attempt", CITE['cop']),
-    (r"R_m(p)", "chance that one attempt succeeds; a success takes " + tex("1/R_m(p)", 12) + " attempts, so dividing by it adds the failed ones (money VI)", CITE['cop']),
+    (r"R_m(p)", "probability that one attempt succeeds; dividing by it is money VI", CITE['cop']),
     (r"\min_m(\cdot,\cdot)^{\top}", "the Pareto set: designs that no other design matches on both and beats on one", CITE['boyd04']),
-    (r"R_0", "success floor", "self-defined"),
+    (r"R_0", "minimum acceptable success rate", "self-defined"),
    ]),
-   tex("v", 10) + ": " + CITE['cop'] + ", Eq. 2 (verbatim) · " + tex(r"T_{\mathrm{success}}", 10) + ": the same in seconds, its App. D.1 (adapted) · goal: its Eq. 3 with two objectives (our distillation); min of a vector: " + CITE['boyd04'] + ", §4.7", "verbatim · adapted · our distillation")}
+   "", "")}
 </div>""",
-      foot="SOURCES · as cited in each row · Part 2 puts the time and money formulas at the top of every page, with III written out as on page 4, and marks the term each family of work changes — Appendix A0",
       chip=("#a0-1", "Appendix A0"))
 
 slide("s04", "The problem, defined (2/2): what is inside the terms",
@@ -837,7 +834,7 @@ th_slow = ["id", "cause", "mechanism", "evidence, with the conditions of the mea
 w_slow = ["4%", "11%", "15%", "47%", "13%", "10%"]
 
 A("a0-1", "A0 · 1/5", "A0 · The time of one attempt: each source’s own formula, and why ours differs",
-  crumb="the derivation behind pages 3–4 · verbatim / adapted / our distillation · calc. = our algebra",
+  crumb="the derivation behind pages 3–4 · status: verbatim = as the source writes it; adapted = changed, reason in the last column; our distillation = no source writes it as a formula · calc. = our algebra",
   body=table(["formula (pages 3–4)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"T_{\mathrm{attempt}}\triangleq t_{\mathrm{end}}-t_{\mathrm{start}}=\mathcal{D}(\mathcal{M}\cup\mathcal{E})=\sum_{i=0}^{N}(D_i+E_i)-T_{\mathrm{saving}}", 11), "adapted", tex(r"T_{\mathrm{saving}}", 11) + " is “defined as the difference between the serialized baseline and the observed end-to-end asynchronous latency” (App. B.2) " + ci('asyncfc') + ", combined with the sum below", "one attempt, not one task (a task may take several); exact because the non-model intervals cover every instant; " + tex(r"T_{\mathrm{saving}}\geq 0", 11) + " (calc.); exact with measured call times, approximate once " + tex(r"\ell\approx\mathrm{TTFT}+n\,\mathrm{TPOT}", 11)],
    [tex(r"\sum_{i=0}^{N}(D_i+E_i)", 11), "adapted", "“When we do not utilize speculative planning, the time taken to generate and execute the whole plan is " + tex(r"\Sigma_{i\leq n}(\mathrm{time}(T,s_i)+e(s_i))", 11) + "” (§3) " + ci('isp') + "; the same form with the letters " + tex("D_i", 11) + ", " + tex("T_i", 11) + ", " + tex(r"\sum_i(D_i+T_i)", 11) + " (§3) " + ci('aospec'), tex(r"\mathrm{time}(T,s_i)", 11) + " → " + tex("D_i", 11) + " (AOSpec’s letter), widened to all model calls of the step; " + tex("e(s_i)", 11) + " → " + tex("E_i", 11) + ", widened to every non-model interval, both as summed lengths; n → N; " + tex("i=0", 11) + " holds calls outside any step; preferred to " + ci('llmc') + ", whose N counts the function calls of one plan"],
