@@ -742,7 +742,7 @@ slide("s12", "Published costs count different parts of the money formula, and no
   <thead><tr><th>choice</th><th>term</th><th>one way → the other</th><th>example</th><th>factor</th></tr></thead>
   <tbody>
   <tr><td class="rk">tokens</td><td>II</td><td>output only → all tokens</td><td>GTA1, 39 OSWorld tasks, o3, no cache: $2.43 → $7.87 {ci('osh')}</td><td>3.2×</td></tr>
-  <tr><td class="rk">unit</td><td>VI</td><td>per attempt → per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: $72.4 at 20.6% success → ≈ $351 (calc.) {ci('osw2', 'cop')}</td><td>4.9×</td></tr>
+  <tr><td class="rk">unit</td><td>VI</td><td>per attempt → per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: $72.4 at 20.6% success → ≈ $351 (calc.) {ci('osw2', 'cop')} <a class="pgbtn" href="#b8-0">Part 2 works per success: B8 ↗</a></td><td>4.9×</td></tr>
   <tr><td class="rk">cache</td><td>II, IV</td><td>cached → uncached input</td><td>DeepSeek-V4.1-Flash: $0.006 → $0.30 per million tokens {ci('deepseek')}</td><td>4–50×, by vendor (calc.)</td></tr>
   <tr><td class="rk">tier</td><td>IV</td><td>standard → fast mode</td><td>Claude Opus 5.5: $4 / $20 → $8 / $40 per million input / output tokens; OpenAI 2× {ci('anth-b', 'openai')}</td><td>2×</td></tr>
   </tbody></table>
