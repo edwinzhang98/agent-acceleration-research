@@ -492,7 +492,7 @@ slide("s03", "The problem, defined (1/3): time, money and the goal",
       body=f"""
 <div class="statusleg">numerals run left to right: time I–V as on page 5, money I–VI as on page 11</div>
 <div class="eqtab narroweq2">
-<div class="eqh"></div><div class="eqh">formula</div><div class="eqh">{defs3([], head=True)}</div>
+<div class="eqh"></div><div class="eqh">formula</div><div class="eqh">{defs3([], head=True)}</div><div class="eqhr"></div>
 {eqrow_html("time", "one attempt", mainf("", [
     ("op", r"T_{\mathrm{attempt}}="), ("term", r"\sum_{i=0}^{N}", "I · steps"), ("op", r"["),
     ("term", r"\sum_{j=1}^{J_i}", "II · calls"), ("term", r"\ell_{ij}", "III · one call"), ("op", "+"),
@@ -2021,8 +2021,9 @@ svg.tex{display:inline-block;height:auto}
 .deft td{padding:1.5px 8px 1.5px 0;vertical-align:top;color:var(--ink2);border:none}
 .deft td.sy{white-space:nowrap}
 .deft td.so{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
-.deft th{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;font-weight:500;padding:0 8px 4px 0}
-.eqtab>div.eqh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:4px 0 0 0;border-bottom:none}
+.deft th{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;font-weight:500;padding:0 8px 0 0}
+.eqtab>div.eqh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:0 0 5px 0;border-bottom:none;align-items:flex-end}
+.eqtab>div.eqhr{grid-column:1/-1;border-bottom:1px solid var(--accent);padding:0;height:0}
 .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
 .p3refs{margin-top:-4px;border-top:1px solid var(--rule);padding-top:3px}
 .pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
@@ -2064,7 +2065,7 @@ svg.tex{display:inline-block;height:auto}
 .defs svg.tex{vertical-align:middle}.defs>div{min-width:0}
 .defs2{columns:3;column-gap:22px;margin:0;padding:6px 0 0 16px;border-top:1px solid var(--rule);font-size:11.5px;line-height:1.33;color:var(--ink2);flex:none}
 .defs2 li{break-inside:avoid;margin:0 0 3px 0}
-.eqtab.narroweq2{grid-template-columns:76px 620px 1fr}
+.eqtab.narroweq2{grid-template-columns:76px 620px 1fr;border-top:none}
 .mf{display:flex;align-items:flex-end;flex-wrap:wrap;gap:5px;padding:4px 0}
 .mft{display:inline-flex;flex-direction:column;align-items:center;border:1px solid var(--rule);border-radius:6px;padding:1px 5px 2px}
 .mft small{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.4px;color:var(--accent);letter-spacing:.03em;white-space:nowrap;margin-top:1px}
