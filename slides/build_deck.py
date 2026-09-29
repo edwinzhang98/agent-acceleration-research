@@ -340,14 +340,14 @@ def slide(id_, title, body, *, label=None, hl=(), crumb="", callout="", foot="",
 
 CITE = {   # short in-text forms, all in the reference list
     "osh": "Abhyankar, Qi &amp; Zhang, 2026",
-    "osw2": "XLANG Lab, 2026",
+    "osw2": "M. Yuan et al., 2026",
     "skim": "Wong et al., 2026",
     "atts": "Lee et al., 2026",
     "copilot": "Liu et al., 2026",
     "bian": "Bian et al., 2025",
     "asb": "Chang et al., 2026",
     "thunder": "Kang et al., 2026",
-    "yuan": "Yuan et al., 2026",
+    "yuan": "Y. Yuan et al., 2026",
     "ufo2": "Zhang et al., 2026",
     "hal": "Kapoor et al., 2026",
     "tracelab": "Zhu et al., 2026",
@@ -385,8 +385,7 @@ CITE = {   # short in-text forms, all in the reference list
 # arXiv preprints carry "arXiv · <first author's institution>", code carries "code". Peer-reviewed works and
 # company sources (the company is the author) carry nothing extra; their venue is in the reference list.
 ARXIV = {
- "aospec": "Imperial", "asyncfc": "UC Berkeley", "speedrunner": "JHU", "swm": "Salesforce Research", "skim": "Princeton",
- "asb": "HKUST", "tracelab": "U. Washington", "copilot": "UIUC", "osw2": "HKU", "code": None,
+ "aospec": "Imperial", "asyncfc": "UC Berkeley", "speedrunner": "JHU", "swm": "Salesforce Research", "asb": "HKUST", "tracelab": "U. Washington", "copilot": "UIUC", "osw2": "HKU", "code": None,
  "asymcache": "Peking U.", "enomoto": "NEC", "nichols": "LLNL", "toolcaching": "Southeast U.", "ares": "UC Santa Barbara",
  "bopo": "Cambridge", "deltabox": "SJTU", "overthinking": "UC Berkeley", "spork": "Tsinghua", "thinktwice": "Zhejiang U.",
  "tsds": "Northeastern U. London", "weboperator": "BUET", "asynclm": "Yale", "cuaverse": "SJTU", "fara": "Microsoft Research",
@@ -695,7 +694,7 @@ slide("s10", "Which term dominates depends on the harness, not on the kind of ag
 <td><b>Writing, or tool tails.</b> Writing is 91–98.6% of model time {ci('yuan')}; in Claude Code / Codex requests tools take 59.8%, the model 41.0% {ci('tracelab')}</td></tr>
 <tr><td class="rk">flips when</td>
 <td>The harness makes one call per step: over 70% of GUIAgent’s time is then the sandbox (cause not given) {ci('asb')}; OSWorld’s runners pause 0–10 s after each action {ci('code')}, 3 s in OSWorld 2.0 {ci('osw2')}</td>
-<td>The observation grows: 4.8× the per-step input moved the model’s share of total task latency from 46.9% to 61.6% (five WebArena tasks) {ci('asb')}. On a fast benchmark sandbox (five web apps) model calls are 73% of Browser-Use’s latency, three models averaged {ci('jit')}</td>
+<td>The observation grows: 4.8× the per-step input raised the model’s share of task latency from 46.9% to 61.6% (five WebArena tasks) {ci('asb')}. On a fast sandbox (five web apps) model calls are 73% of Browser-Use’s latency {ci('jit')}</td>
 <td>Load evicts the cache: latency up to 7.14× {ci('thunder')}</td></tr>
 <tr><td class="rk">in one line</td>
 <td>Slow in reading: every step re-reads the growing screenshot history</td>
@@ -703,8 +702,8 @@ slide("s10", "Which term dominates depends on the harness, not on the kind of ag
 <td>Reading is cached away; slow in writing and in the tools</td></tr>
 </tbody></table>
 <div class="concl">
-  <div><b>1 · The harness sets the dominant term</b> — calls per step, observation size, fixed sleeps, cache on or off; “slow because inference is slow” holds only for multi-call screenshot agents.</div>
-  <div><b>2 · {tex("N", 14)} multiplies every term</b> — one step fewer saves a whole step of time and money in all three kinds.</div>
+  <div><b>1 · The harness sets the dominant term</b>: calls per step, observation size, sleeps, cache.</div>
+  <div><b>2 · {tex("N", 14)} multiplies every term</b>: one step fewer saves time and money everywhere.</div>
 </div>""",
       chip=("#a2-1", "Appendix A2"))
 
@@ -731,7 +730,7 @@ slide("s11", "Where the money goes: six classes, one per term",
       chip=("#a3-1", "Appendix A3"))
 
 # --- 12 per success, conventions, environment ----------------------------------------
-slide("s12", "Published costs count different parts of the money formula, and none counts the machine (V)",
+slide("s12", "Cost figures count different terms, never the machine (V)",
       hl=("n-price", "n-succ", "n-machine"),
       callout="""<p><b>One run can be reported about 30× apart, and no figure includes the machine the agent runs on.</b></p>""",
       body=f"""
@@ -741,16 +740,16 @@ slide("s12", "Published costs count different parts of the money formula, and no
   <colgroup><col style="width:11%"><col style="width:9%"><col style="width:23%"><col style="width:44%"><col style="width:13%"></colgroup>
   <thead><tr><th>choice</th><th>term</th><th>one way → the other</th><th>example</th><th>factor</th></tr></thead>
   <tbody>
-  <tr><td class="rk">tokens</td><td>II</td><td>output only → all tokens</td><td>GTA1, 39 OSWorld tasks, o3, no cache: $2.43 (paper, output only) → $7.87 (calc., all tokens in its Table 3) {ci('osh')}</td><td>3.2× (calc.)</td></tr>
+  <tr><td class="rk">tokens</td><td>II</td><td>output only → all tokens</td><td>GTA1, 39 OSWorld tasks, o3, no cache: $2.43 (output only) → $7.87 (all tokens, calc.) {ci('osh')}</td><td>3.2× (calc.)</td></tr>
   <tr><td class="rk">unit</td><td>VI</td><td>per attempt → per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: ~$72.4 at 20.6% success → ≈ $351 (calc.) {ci('osw2', 'cop')} <a class="pgbtn" href="#b8-0">Part 2 works per success: B8 ↗</a></td><td>4.9×</td></tr>
   <tr><td class="rk">cache</td><td>II, IV</td><td>cached → uncached input</td><td>DeepSeek-V4.1-Flash: $0.006 → $0.30 per million tokens {ci('deepseek')}</td><td>4–50×, by vendor (calc.)</td></tr>
-  <tr><td class="rk">tier</td><td>IV</td><td>standard → fast mode</td><td>Claude Opus 5.5: $4 / $20 → $8 / $40 per million input / output tokens; OpenAI 2× {ci('anth-b', 'openai')}</td><td>2×</td></tr>
+  <tr><td class="rk">tier</td><td>IV</td><td>standard → fast mode</td><td>Claude Opus 5.5: $4 / $20 → $8 / $40 per M input / output; OpenAI 2× {ci('anth-b', 'openai')}</td><td>2×</td></tr>
   </tbody></table>
-  <div class="figcap">Tokens, unit and tier multiply: 3.2 × 4.9 × 2 ≈ 31× (calc.). Cache is left out because screenshot-agent papers do not report their cache state.</div>
+  <div class="figcap">Tokens × unit × tier: 3.2 × 4.9 × 2 ≈ 31× (calc.); cache is left out, as screenshot-agent papers do not report it.</div>
   </div>
   <div class="stack">
-    {hbars("Money V: renting the machine the agent operates for one hour, as a share of one task’s $7.87 model bill (calc.)", [("small VM (AWS t3.medium)",0.5,"0.5%"),("desktop VM of OSWorld 2.0 (AWS t3.2xlarge)",4.2,"4.2%"),("code sandbox (OpenAI container, 4 GB)",4.6,"4.6%"),("GPU sandbox (Daytona, H100)",50.2,"50%")], "one task uses one machine · $7.87 = GTA1 with o3 on OSWorld, all tokens, per task · list prices, read 27 September 2026: " + CITE['aws'] + "; " + CITE['openai'] + "; Daytona · more in Appendix A3", width=450, height_row=22)}
-    <ul class="plainlist"><li>The machine is billed while the agent waits: in a 24-hour production trace of a coding agent (35,037 sessions), the median session spends only 20% of its lifetime on model or tool work {ci('asb')}.</li></ul>
+    {hbars("Money V: renting the machine the agent operates for one hour, as a share of one task’s $7.87 model bill (calc.)", [("small VM (AWS t3.medium)",0.5,"0.5%"),("desktop VM of OSWorld 2.0 (AWS t3.2xlarge)",4.2,"4.2%"),("code sandbox (OpenAI container, 4 GB)",4.6,"4.6%"),("GPU sandbox (Daytona, H100)",50.2,"50%")], "one task uses one machine · $7.87 = GTA1, o3, OSWorld, all tokens, per task · list prices, 27 Sep 2026: " + CITE['aws'] + "; " + CITE['openai'] + "; Daytona · more in Appendix A3", width=450, height_row=22)}
+    <ul class="plainlist"><li>Billed while the agent waits: in a 24-h production trace of a coding agent (35,037 sessions), the median session is busy only 20% of its lifetime {ci('asb')}.</li></ul>
   </div>
 </div>""",
       chip=("#a3-3", "Appendix A3"))
@@ -806,10 +805,10 @@ slide("s14", "Still unmeasured: four gaps in the evidence",
 
 # --- references (part 1) ---------------------------------------------------
 REFS_P1 = [
- "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of Machine Learning and Systems 8 (MLSys 2026)</i>. arXiv:2506.16042v2. University of California, San Diego.",
+ "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of Machine Learning and Systems 8 (MLSys 2026)</i>, 482–494. arXiv:2506.16042v2. University of California, San Diego.",
  "Amazon Web Services. (2026). <i>Amazon EC2 T3 instances</i>, on-demand prices, Linux, US East (N. Virginia) (read 27 and 29 September 2026). https://aws.amazon.com/ec2/instance-types/t3/",
  "Anthropic. (2026a, May 13). <i>Best practices for computer and browser use with Claude</i>. https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude",
- "Anthropic. (2026b). <i>Claude API pricing</i>; <i>Prompt caching</i>; <i>Fast mode</i>; <i>Vision</i> (developer documentation, read 28 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/prompt-caching; https://platform.claude.com/docs/en/build-with-claude/fast-mode; https://platform.claude.com/docs/en/build-with-claude/vision",
+ "Anthropic. (2026b). <i>Pricing</i>; <i>Prompt caching</i>; <i>Fast mode (research preview)</i>; <i>Vision</i>; <i>Steering thinking</i>; <i>Migrating to Claude Opus 5.5</i> (developer documentation, read 28–29 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/prompt-caching; https://platform.claude.com/docs/en/build-with-claude/fast-mode; https://platform.claude.com/docs/en/build-with-claude/vision; https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost; https://platform.claude.com/docs/en/models/opus-5-5/migration-guide",
  "Artificial Analysis. (2026). <i>Methodology</i>; <i>Performance benchmarking methodology</i> (read 28 September 2026). https://artificialanalysis.ai/methodology; https://artificialanalysis.ai/methodology/performance-benchmarking — third-party measurement definitions.",
  "Bian, S., Yan, M., Jayarajan, A., Pekhimenko, G., &amp; Venkataraman, S. (2025). What limits agentic systems efficiency? <i>NeurIPS 2025 Workshop on Scaling Environments for Agents</i> (poster). arXiv:2510.16276v1. University of Wisconsin–Madison; University of Toronto; NVIDIA.",
  "Boyd, S., &amp; Vandenberghe, L. (2004). <i>Convex optimization</i>. Cambridge University Press. §4.7 Vector optimization (pp. 174–187). https://web.stanford.edu/~boyd/cvxbook/",
@@ -822,31 +821,31 @@ REFS_P1 = [
  "Google. (2026). <i>Gemini Developer API pricing</i> (read 28 September 2026). https://ai.google.dev/gemini-api/docs/pricing",
  "Hua, W., Wan, M., Vadrevu, S., Nadel, R., Zhang, Y., &amp; Wang, C. (2025). Interactive speculative planning: Enhance agent efficiency through co-design of system and user interface (ISP). <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2410.00079. Rutgers University; Microsoft; Google DeepMind.",
  "Huang, Z., Wang, X., Wang, A., Jurayj, W., Jiménez Gutiérrez, B., Khashabi, D., &amp; Andrews, N. (2026). Better, faster, stronger: Programmatic skill learning best reduces agent cost (SpeedRunner). arXiv:2608.11338v1. Johns Hopkins University.",
- "Kang, H., Li, Z., Yang, X., Xu, W., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, poster. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI.",
+ "Kang, H., Li, Z., Xu, W., Yang, X., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306, 55630–55657, spotlight. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI; independent researcher.",
  "Kapoor, S., Stroebl, B., Kirgis, P., Nadgir, N., Siegel, Z. S., Wei, B., … Narayanan, A. (2026). Holistic Agent Leaderboard: The missing infrastructure for AI agent evaluation. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2510.11977. Princeton University et al.",
  "Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., &amp; Narayanan, A. (2025). AI agents that matter. <i>Transactions on Machine Learning Research</i>. arXiv:2407.01502. Princeton University.",
  "Kim, S., Moon, S., Tabrizi, R., Lee, N., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2024). An LLM compiler for parallel function calling. <i>Proceedings of the 41st International Conference on Machine Learning (ICML 2024)</i>, PMLR 235, 24370–24391. arXiv:2312.04511. University of California, Berkeley; International Computer Science Institute; Lawrence Berkeley National Laboratory.",
  "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., … Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i> (Expert Certification). https://openreview.net/forum?id=5298fKGmv3. arXiv:2412.05467v4. ServiceNow Research; Mila; Polytechnique Montréal; Carnegie Mellon University; McGill University; Tel Aviv University; Université de Montréal; iMean AI.",
- "Lee, N., Erdogan, L. E., John, C. J., Krishnapillai, S., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2026). Agentic test-time scaling for WebAgents. <i>COLM 2026 Workshop on Efficient Reasoning</i> (non-archival). arXiv:2602.12276v2. University of California, Berkeley.",
- "Li, Y., Ye, Q., Choubey, P. K., Zhang, J., &amp; Wu, C.-S. (2026). Speculate with memory. arXiv:2607.12236. Salesforce Research.",
+ "Lee, N., Erdogan, L. E., John, C. J., Krishnapillai, S., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2026). Agentic test-time scaling for WebAgents. <i>COLM 2026 Workshop on Efficient Reasoning</i> (non-archival). arXiv:2602.12276v2. University of California, Berkeley; International Computer Science Institute; Lawrence Berkeley National Laboratory.",
+ "Li, Y., Ye, Q., Choubey, P. K., Zhang, J., &amp; Wu, C.-S. (2026). Speculate with memory: Lossless acceleration for LLM agents. arXiv:2607.12236v1. Salesforce Research.",
  "Liu, B., Qiu, H., Goiri, Í., Fonseca, R., Bianchini, R., &amp; Choukse, E. (2026). Agentic coding in the wild: Characterizing GitHub Copilot traces at production scale. arXiv:2608.00101. University of Illinois Urbana-Champaign; Microsoft Azure Research.",
- "Lu, J., Zhang, Z., Yang, F., Zhang, J., Wang, L., Du, C., Lin, Q., Rajmohan, S., Zhang, D., &amp; Zhang, Q. (2025). AXIS: Efficient human-agent-computer interaction with API-first LLM-based agents. <i>Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</i>, 7711–7743. https://doi.org/10.18653/v1/2025.acl-long.381. Microsoft.",
+ "Lu, J., Zhang, Z., Yang, F., Zhang, J., Wang, L., Du, C., Lin, Q., Rajmohan, S., Zhang, D., &amp; Zhang, Q. (2025). AXIS: Efficient human-agent-computer interaction with API-first LLM-based agents. <i>Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</i>, 7711–7743. https://doi.org/10.18653/v1/2025.acl-long.381. Peking University; Nanjing University; Microsoft.",
  "Luo, M., Shi, X., Cai, C., Zhang, T., Wong, J., Wang, Y., Wang, C., Huang, Y., Chen, Z., Gonzalez, J. E., &amp; Stoica, I. (2026). Agentix: An efficient serving engine for LLM agents as general programs. <i>23rd USENIX Symposium on Networked Systems Design and Implementation (NSDI 26)</i>, 2443–2459. https://www.usenix.org/conference/nsdi26/presentation/luo. arXiv:2502.13965 (as Autellix). University of California, Berkeley; Google DeepMind; Shanghai Jiao Tong University.",
- "OpenAI. (2026). <i>API pricing</i>; <i>API changelog</i> (fast mode, 30 July 2026; Ultrafast, 13 August 2026) (read 28 September 2026). https://developers.openai.com/api/docs/pricing; https://developers.openai.com/api/docs/changelog",
+ "OpenAI. (2026). <i>API pricing</i>; <i>API changelog</i> (fast mode, 30 July 2026; Ultrafast, 13 August 2026; GPT-6.1 Sol, 29 September 2026) (read 28–29 September 2026). https://developers.openai.com/api/docs/pricing; https://developers.openai.com/api/docs/changelog",
  "Vendor price pages used on page 12 and in Appendix A3 (all read 27 September 2026): Browser Use, <i>Pricing</i> and <i>API v4: create browser session</i>; Browserbase, <i>Pricing</i> and <i>Billing plans</i>; Daytona, <i>Pricing</i> and <i>Billing</i>; E2B, <i>Pricing</i>; Modal, <i>Pricing</i> and <i>Sandbox resources</i>.",
- "Winston, C., Wang, R. Y., Mirhoseini, A., &amp; Kozyrakis, C. (2026). Agent JIT compilation for latency-optimizing web agent planning and scheduling. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306. arXiv:2605.21470. Stanford University.",
- "Wong, M., Hsieh, K., Nath, S., &amp; Netravali, R. (2026). Skim: Speculative execution for fast and efficient web agents. arXiv:2605.16565. Princeton University; Microsoft Research.",
- "xAI. (2026). <i>Grok 4.7</i> model page, SpaceXAI Docs (read 28 September 2026). https://docs.x.ai/developers/models/grok-4.7",
- "XLANG Lab. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537. The University of Hong Kong (authored as “XLANG Lab and Collaborators”; the full author list is in the paper’s Appendix A).",
- "xlang-ai. (2026). <i>OSWorld</i> [Source code], desktop_env/desktop_env.py and run.py at commit b138d348. https://github.com/xlang-ai/OSWorld",
- "Xu, B., Xue, Z., Chen, D., Fu, C., Wu, C., Huang, C., … Zhang, N. (2026). TokenPilot: Cache-efficient context management for LLM agents. <i>Findings of the Association for Computational Linguistics: EMNLP 2026</i> (to appear). arXiv:2606.17016v2. Zhejiang University; University of Electronic Science and Technology of China; Xidian University; HomologyAI.",
+ "Winston, C., Wang, R. Y., Mirhoseini, A., &amp; Kozyrakis, C. (2026). Agent JIT compilation for latency-optimizing web agent planning and scheduling. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306, 135161–135186. https://proceedings.mlr.press/v306/winston26b.html. arXiv:2605.21470. Stanford University.",
+ "Wong, M., Hsieh, K., Nath, S., &amp; Netravali, R. (2026). Skim: Speculative execution for fast and efficient web agents. <i>Proceedings of the European Conference on Computer Systems (EuroSys 2027)</i> (to appear; accepted per the first author’s page, read 29 September 2026). arXiv:2605.16565v2. Princeton University; Microsoft Research.",
+ "xAI. (2026). <i>Grok 4.7</i> model page; <i>Pricing</i>, SpaceXAI Docs (pricing updated 28 September 2026; read 29 September 2026). https://docs.x.ai/developers/models/grok-4.7; https://docs.x.ai/developers/pricing",
+ "Yuan, M., Zhou, Z., Xiong, X., Wu, W., Sun, J., Song, J., Cui, K., Wang, B., Wu, H., Li, Y., Lu, D., Lu, H., Zhen, Q., Wang, X., Deng, J., Yang, Y., Chen, C., Zheng, B., Su, A., . . . Yu, T. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537v2. XLANG Lab, The University of Hong Kong (byline “XLANG Lab and Collaborators”).",
+ "xlang-ai. (2026). <i>OSWorld</i> [Source code], desktop_env/desktop_env.py, run.py, lib_run_single.py and scripts/python/run_multienv_*.py at commit b138d348. https://github.com/xlang-ai/OSWorld",
+ "Xu, B., Xue, Z., Chen, D., Fu, C., Wu, C., Huang, C., Jiang, C., Fang, J., Deng, X., Chen, Y., Yao, Y., Wang, X., Shang, J., Yu, G., &amp; Zhang, N. (2026). TokenPilot: Cache-efficient context management for LLM agents. <i>Findings of the Association for Computational Linguistics: EMNLP 2026</i> (to appear). arXiv:2606.17016v2. Zhejiang University; University of Electronic Science and Technology of China; Xidian University; HomologyAI.",
  "Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., &amp; Cao, Y. (2023). ReAct: Synergizing reasoning and acting in language models. <i>The Eleventh International Conference on Learning Representations (ICLR 2023)</i>. arXiv:2210.03629. Princeton University; Google Research.",
  "Ye, N., Ahuja, A., Liargkovas, G., Lu, Y., Kaffes, K., &amp; Peng, T. (2026). Speculative actions: A lossless framework for faster AI agents. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>, oral. arXiv:2510.04371. Columbia University.",
  "Yuan, Y., Nayak, A., Kundu, S., &amp; Talati, N. (2026). Agentic AI workload characterization. <i>Proceedings of the 2026 IEEE International Symposium on Workload Characterization (IISWC 2026)</i>, Boulder, CO. arXiv:2605.26297v2 (21 September 2026; arXiv title “Agentic AI workload characteristics”). University of Illinois Urbana-Champaign; Gimlet Labs; Intel.",
  "Zhang, C., Huang, H., Ni, C., Mu, J., Qin, S., He, S., … Zhang, D. (2026). UFO2: The desktop AgentOS. <i>Transactions on Machine Learning Research</i>. arXiv:2504.14603. Microsoft; ZJU-UIUC Institute; Nanjing University; Peking University.",
  "Zheng, L., Yin, L., Xie, Z., Sun, C., Huang, J., Yu, C. H., Cao, S., Kozyrakis, C., Stoica, I., Gonzalez, J. E., Barrett, C., &amp; Sheng, Y. (2024). SGLang: Efficient execution of structured language model programs. <i>Advances in Neural Information Processing Systems 37 (NeurIPS 2024)</i>, 62557–62583. https://doi.org/10.52202/079017-2000. arXiv:2312.07104. Stanford University; University of California, Berkeley; Shanghai Jiao Tong University; Texas A&amp;M University; independent researcher.",
  "Zhong, Y., Liu, S., Chen, J., Hu, J., Zhu, Y., Liu, X., Jin, X., &amp; Zhang, H. (2024). DistServe: Disaggregating prefill and decoding for goodput-optimized large language model serving. <i>18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)</i>, 193–210. https://www.usenix.org/conference/osdi24/presentation/zhong-yinmin. arXiv:2401.09670. Peking University; StepFun; University of California, San Diego.",
- "Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., &amp; Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560. University of Washington.",
+ "Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., &amp; Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560v2. University of Washington; Wuhan University of Technology; Shanghai Jiao Tong University.",
 ]
 
 def refs_for(*keys):
@@ -855,6 +854,9 @@ def refs_for(*keys):
     for k in keys:
         c = html.unescape(re.sub(r"<[^>]+>", "", CITE[k]))
         au = re.split(r" et al\.|,| &", c)[0].strip()
+        ini = re.match(r"([A-Z])\. (.+)", au)
+        if ini:
+            au = ini.group(2) + ", " + ini.group(1)   # "M. Yuan" → "Yuan, M"
         yr = re.search(r"\d{4}[a-z]?", c).group(0)
         m = [r for r in REFS_P1 if re.match(re.escape(au) + r"[,.]", html.unescape(r)) and f"({yr}" in r]
         assert len(m) == 1, (k, m)
@@ -1072,21 +1074,21 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("infercept", "Abhyankar et al., 2024",
   "Abhyankar, R., He, Z., Srivatsa, V., Zhang, H., &amp; Zhang, Y. (2024). InferCept: Efficient intercept support for augmented large language model inference. <i>Proceedings of the 41st International Conference on Machine Learning (ICML 2024)</i>, PMLR 235, 81–95. arXiv:2402.01869. University of California, San Diego."),
  ("osh", "Abhyankar, Qi &amp; Zhang, 2026",
-  "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of Machine Learning and Systems 8 (MLSys 2026)</i>. arXiv:2506.16042v2. University of California, San Diego."),
+  "Abhyankar, R., Qi, Q., &amp; Zhang, Y. (2026). OSWorld-Human: Benchmarking the efficiency of computer-use agents. <i>Proceedings of Machine Learning and Systems 8 (MLSys 2026)</i>, 482–494. arXiv:2506.16042v2. University of California, San Diego."),
  ("aws", "Amazon Web Services, 2026",
   "Amazon Web Services. (2026). <i>Amazon Bedrock AgentCore pricing</i>, Browser Tool (read 29 September 2026). https://aws.amazon.com/bedrock/agentcore/pricing/ — vendor pricing."),
  ("anth-a", "Anthropic, 2026a",
   "Anthropic. (2026a, May 13). <i>Best practices for computer and browser use with Claude</i>. https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude"),
  ("anth-b", "Anthropic, 2026b",
-  "Anthropic. (2026b). <i>Claude API pricing</i>; <i>Prompt caching</i>; <i>Fast mode</i>; <i>Vision</i> (developer documentation, read 28 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/prompt-caching; https://platform.claude.com/docs/en/build-with-claude/fast-mode; https://platform.claude.com/docs/en/build-with-claude/vision"),
- ("aa-recorder", "Automation Anywhere, 2026",
-  "Automation Anywhere. (2026). <i>Automator AI</i> [Product page, undated, read 28 September 2026]; <i>Generative Recorder and resilient automation | April 2024</i> [Community Product Club recap, 13 May 2024]. https://www.automationanywhere.com/products/automator-ai; https://community.automationanywhere.com/generative-recorder-85080/generative-recorder-and-resilient-automation-april-2024-88211 — vendor marketing (the product page’s 60% claims); the recap’s “nearly 50%” is vendor-stated, undefined."),
+  "Anthropic. (2026b). <i>Pricing</i>; <i>Prompt caching</i>; <i>Fast mode (research preview)</i>; <i>Vision</i>; <i>Steering thinking</i>; <i>Migrating to Claude Opus 5.5</i> (developer documentation, read 28–29 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/prompt-caching; https://platform.claude.com/docs/en/build-with-claude/fast-mode; https://platform.claude.com/docs/en/build-with-claude/vision; https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost; https://platform.claude.com/docs/en/models/opus-5-5/migration-guide"),
+ ("aa-recorder", "Automation Anywhere, 2024",
+  "Automation Anywhere. (2024, May 13). <i>Generative Recorder and resilient automation | April 2024</i> [Community Product Club recap]; <i>Automator AI</i> [Product page, undated, read 28 September 2026]. https://community.automationanywhere.com/generative-recorder-85080/generative-recorder-and-resilient-automation-april-2024-88211; https://www.automationanywhere.com/products/automator-ai — vendor marketing (the product page’s 60% claims); the recap’s “nearly 50%” is vendor-stated, undefined."),
  ("fara", "Awadallah et al., 2025",
   "Awadallah, A., Lara, Y., Magazine, R., Mozannar, H., Nambi, A., Pandya, Y., Rajeswaran, A., Rosset, C., Taymanov, A., Vineet, V., Whitehead, S., &amp; Zhao, A. (2025). Fara-7B: An efficient agentic model for computer use. arXiv:2511.19663v1. Microsoft (Microsoft Research AI Frontiers; no affiliation line printed)."),
  ("spork", "Bai et al., 2026",
   "Bai, H., Lv, W., Zheng, H., Lu, Y., &amp; Shu, J. (2026). SPORK: Self-speculative forking to accelerate agentic LLM inference. arXiv:2607.03333v1. Tsinghua University; Meituan."),
  ("stagehand", "Browserbase, 2026a",
-  "Browserbase. (2026a). <i>How caching works in Stagehand (and where it breaks)</i> [Blog post, by S. Arif, 24 February 2026]; <i>Caching actions</i>, Stagehand v3 and v4 documentation (undated) (read 28 September 2026). https://www.browserbase.com/blog/stagehand-caching; https://docs.stagehand.dev/v3/best-practices/caching; https://docs.stagehand.dev/v4/best-practices/caching — the docs describe the mechanism; the blog’s speed-up figures are vendor marketing."),
+  "Browserbase. (2026a). <i>We built caching into Stagehand. Here’s how it works</i> [Blog post, by S. Arif, 24 February 2026; page title “How caching works in Stagehand (and where it breaks)”]; <i>Caching actions</i>, Stagehand v3 and v4 documentation (undated) (read 28 September 2026). https://www.browserbase.com/blog/stagehand-caching; https://docs.stagehand.dev/v3/best-practices/caching; https://docs.stagehand.dev/v4/best-practices/caching — the docs describe the mechanism; the blog’s speed-up figures are vendor marketing."),
  ("browserbase", "Browserbase, 2026b",
   "Browserbase. (2026b). <i>Pricing</i> (read 28 September 2026). https://www.browserbase.com/pricing — vendor pricing."),
  ("latm", "Cai et al., 2024",
@@ -1104,7 +1106,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("agentx", "Chung et al., 2026",
   "Chung, J., Shin, B., Kim, J., &amp; Rhu, M. (2026). Agent-X: Full pipeline acceleration of on-device AI agents. <i>Proceedings of the 24th Annual International Conference on Mobile Systems, Applications and Services (MobiSys 2026)</i>. https://doi.org/10.1145/3745756.3809195. arXiv:2605.10380. KAIST."),
  ("overthinking", "Cuadron et al., 2025",
-  "Cuadron, A., Li, D., Ma, W., Wang, X., Wang, Y., Zhuang, S., … Gonzalez, J. E. (2025). The danger of overthinking: Examining the reasoning-action dilemma in agentic tasks. arXiv:2502.08235v1. University of California, Berkeley; ETH Zurich; University of Illinois Urbana-Champaign; Carnegie Mellon University."),
+  "Cuadron, A., Li, D., Ma, W., Wang, X., Wang, Y., Zhuang, S., Liu, S., Schroeder, L. G., Xia, T., Mao, H., Thumiger, N., Desai, A., Stoica, I., Klimovic, A., Neubig, G., &amp; Gonzalez, J. E. (2025). The danger of overthinking: Examining the reasoning-action dilemma in agentic tasks. arXiv:2502.08235v1. University of California, Berkeley; ETH Zurich; University of Illinois Urbana-Champaign; Carnegie Mellon University."),
  ("deepseek", "DeepSeek, 2026",
   "DeepSeek. (2026). <i>Models &amp; pricing</i> (API documentation, read 28 September 2026); <i>DeepSeek-V4.1-Flash release</i> (10 September 2026). https://api-docs.deepseek.com/quick_start/pricing; https://api-docs.deepseek.com/news/news260910"),
  ("weboperator", "Dihan et al., 2025",
@@ -1120,7 +1122,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("asyncfc", "Feng et al., 2026",
   "Feng, G., Mao, H., Dutta, P., &amp; Gonzalez, J. E. (2026). Concurrency without model changes: Future-based asynchronous function calling for LLMs (AsyncFC). arXiv:2605.15077v1. University of California, Berkeley."),
  ("asynclm", "Gim et al., 2024",
-  "Gim, I., Lee, S., &amp; Zhong, L. (2024). Asynchronous LLM function calling (AsyncLM). arXiv:2412.07017v1. Yale University."),
+  "Gim, I., Lee, S.-s., &amp; Zhong, L. (2024). Asynchronous LLM function calling (AsyncLM). arXiv:2412.07017v1. Yale University."),
  ("google", "Google, 2026",
   "Google. (2026). <i>Gemini Developer API pricing</i>; <i>Priority inference</i> (Gemini API documentation, updated 24 and 23 September 2026; read 28 September 2026). https://ai.google.dev/gemini-api/docs/pricing; https://ai.google.dev/gemini-api/docs/priority-inference"),
  ("dsp", "Guan et al., 2026",
@@ -1144,7 +1146,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("appagentx", "Jiang et al., 2025",
   "Jiang, W., Zhuang, Y., Song, C., Yang, X., Zhou, J. T., &amp; Zhang, C. (2025). AppAgentX: Evolving GUI agents as proficient smartphone users. arXiv:2503.02268v3. Westlake University; Henan University; Southeast University; A*STAR (IHPC; CFAR)."),
  ("thunder", "Kang et al., 2026",
-  "Kang, H., Li, Z., Yang, X., Xu, W., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, poster. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI; independent researcher."),
+  "Kang, H., Li, Z., Xu, W., Yang, X., Chen, Y., Wang, J., Chen, B., Krishna, T., Xu, C., &amp; Arora, S. (2026). ThunderAgent: A fast, simple, and program-aware agentic inference system. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306, 55630–55657, spotlight. arXiv:2602.13692. Georgia Institute of Technology; University of Illinois Urbana-Champaign; Carnegie Mellon University; Together AI; independent researcher."),
  ("kapoor25", "Kapoor et al., 2025",
   "Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., &amp; Narayanan, A. (2025). AI agents that matter. <i>Transactions on Machine Learning Research</i>. arXiv:2407.01502. Princeton University."),
  ("focusagent", "Kerboua et al., 2026",
@@ -1157,22 +1159,20 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
   "Kim, S., Moon, S., Tabrizi, R., Lee, N., Mahoney, M. W., Keutzer, K., &amp; Gholami, A. (2024). An LLM compiler for parallel function calling. <i>Proceedings of the 41st International Conference on Machine Learning (ICML 2024)</i>, PMLR 235, 24370–24391. arXiv:2312.04511. University of California, Berkeley; International Computer Science Institute; Lawrence Berkeley National Laboratory."),
  ("computerrl", "Lai et al., 2026",
   "Lai, H., Liu, X., Zhao, Y., Xu, H., Zhang, H., Jing, B., Ren, Y., Yao, S., Dong, Y., &amp; Tang, J. (2026). ComputerRL: Scaling end-to-end online reinforcement learning for computer use agents. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2508.14040. Tsinghua University; Z.AI; University of Chinese Academy of Sciences."),
- ("bgym", "Le Sellier de Chezelles et al., 2025",
-  "Le Sellier de Chezelles, T., Gasse, M., Lacoste, A., Caccia, M., Drouin, A., Boisvert, L., … Chapados, N. (2025). The BrowserGym ecosystem for web agent research. <i>Transactions on Machine Learning Research</i> (Expert Certification). https://openreview.net/forum?id=5298fKGmv3. arXiv:2412.05467v4. ServiceNow Research; Mila; Polytechnique Montréal; Carnegie Mellon University; McGill University; Tel Aviv University; Université de Montréal; iMean AI."),
- ("mobilegpt", "Lee et al., 2024",
+  ("mobilegpt", "Lee et al., 2024",
   "Lee, S., Choi, J., Lee, J., Wasi, M. H., Choi, H., Ko, S., Oh, S., &amp; Shin, I. (2024). MobileGPT: Augmenting LLM with human-like app memory for mobile task automation. <i>Proceedings of the 30th Annual International Conference on Mobile Computing and Networking (MobiCom ’24)</i>, 1119–1133. https://doi.org/10.1145/3636534.3690682. arXiv:2312.03003v3. KAIST; Simon Fraser University; Korea University."),
  ("agentreuse", "Li et al., 2024",
   "Li, G., Wu, R., Tan, H., &amp; Chen, G. (2024). A plan reuse mechanism for LLM-driven agent. <i>Journal of Computer Research and Development, 61</i>(11), 2706–2720. https://doi.org/10.7544/issn1000-1239.202440380. English version: Li, G., Wu, R., &amp; Tan, H. (2025), arXiv:2512.21309v2. University of Science and Technology of China."),
  ("continuum", "Li et al., 2026a",
   "Li, H., He, R., Mang, Q., Zhang, Q., Mao, H., Chen, X., Zhou, H., Zhang, H., Cheung, A., Gonzalez, J., &amp; Stoica, I. (2026a). Continuum: Efficient and robust multi-turn LLM agent scheduling with KV cache time-to-live. arXiv:2511.02230v7. University of California, Berkeley; Stanford University; Tsinghua University."),
  ("screenseeker", "Li et al., 2025",
-  "Li, K., Meng, Z., Lin, H., Luo, Z., Tian, Y., Ma, J., Huang, Z., &amp; Chua, T.-S. (2025). ScreenSpot-Pro: GUI grounding for professional high-resolution computer use. <i>Proceedings of the 33rd ACM International Conference on Multimedia (MM 2025)</i>, 8778–8786. https://doi.org/10.1145/3746027.3755688. arXiv:2504.07981. National University of Singapore; East China Normal University; Hong Kong Baptist University."),
+  "Li, K., Meng, Z., Lin, H., Luo, Z., Tian, Y., Ma, J., Huang, Z., &amp; Chua, T.-S. (2025). ScreenSpot-Pro: GUI grounding for professional high-resolution computer use. <i>Proceedings of the 33rd ACM International Conference on Multimedia (MM 2025)</i>, 8778–8786. https://doi.org/10.1145/3746027.3755688. arXiv:2504.07981. National University of Singapore; East China Normal University; Hong Kong Baptist University; Salesforce Research."),
  ("webrouter", "Li et al., 2026b",
   "Li, T., Hu, J., Wang, Y., Liu, J., &amp; Liu, X. (2026b). WebRouter: Query-specific router via variational information bottleneck for cost-sensitive web agent. <i>ICASSP 2026 – IEEE International Conference on Acoustics, Speech and Signal Processing</i>, 4086–4090. https://doi.org/10.1109/ICASSP55912.2026.11464950. arXiv:2510.11221. Nanjing University of Aeronautics and Astronautics; Hong Kong Baptist University; Beihang University; Pengcheng Laboratory."),
  ("swm", "Li et al., 2026c",
   "Li, Y., Ye, Q., Choubey, P. K., Zhang, J., &amp; Wu, C.-S. (2026c). Speculate with memory: Lossless acceleration for LLM agents. arXiv:2607.12236v1. Salesforce Research."),
  ("parrot", "Lin et al., 2024",
-  "Lin, C., Han, Z., Zhang, C., Yang, Y., Yang, F., Chen, C., &amp; Qiu, L. (2024). Parrot: Efficient serving of LLM-based applications with semantic variable. <i>18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)</i>. Shanghai Jiao Tong University; Microsoft Research."),
+  "Lin, C., Han, Z., Zhang, C., Yang, Y., Yang, F., Chen, C., &amp; Qiu, L. (2024). Parrot: Efficient serving of LLM-based applications with semantic variable. <i>18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)</i>, 929–945. https://www.usenix.org/conference/osdi24/presentation/lin-chaofan. arXiv:2405.19888. Shanghai Jiao Tong University; Microsoft Research."),
  ("wd", "Lin et al., 2026",
   "Lin, X., Liew, J. H., Savarese, S., &amp; Li, J. (2026). W&amp;D: Scaling parallel tool calling for efficient deep research agents. <i>ICLR 2026 Workshop on Agents in the Wild: Safety, Security, and Beyond</i> (non-archival). https://openreview.net/forum?id=JYM4xKpRgN. arXiv:2602.07359v1. Salesforce AI Research."),
  ("masking", "Lindenbauer et al., 2025",
@@ -1204,11 +1204,11 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("routellm", "Ong et al., 2025",
   "Ong, I., Almahairi, A., Wu, V., Chiang, W.-L., Wu, T., Gonzalez, J. E., Kadous, M. W., &amp; Stoica, I. (2025). RouteLLM: Learning to route LLMs from preference data. <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2406.18665. University of California, Berkeley; Anyscale; Canva."),
  ("openai", "OpenAI, 2026",
-  "OpenAI. (2026). <i>API pricing</i>; <i>API changelog</i> (Priority processing, 27 June 2025; Fast mode, 30 July and 5 August 2026; Ultrafast, 13 August 2026); <i>Fast mode</i>, <i>Flex processing</i>, <i>Batch API</i> and <i>Prompt caching</i> guides (developer documentation, read 28 September 2026); <i>Prompt Caching 201</i> (OpenAI Cookbook, 18 February 2026). https://developers.openai.com/api/docs/pricing; https://developers.openai.com/api/docs/changelog; https://developers.openai.com/api/docs/guides/fast-mode; https://developers.openai.com/api/docs/guides/flex-processing; https://developers.openai.com/api/docs/guides/batch; https://developers.openai.com/api/docs/guides/prompt-caching; https://developers.openai.com/cookbook/examples/prompt_caching_201"),
+  "OpenAI. (2026). <i>API pricing</i>; <i>API changelog</i> (Priority processing, 27 June 2025; Fast mode, 30 July and 5 August 2026; Ultrafast, 13 August 2026; GPT-6.1 Sol, 29 September 2026); <i>Fast mode</i>, <i>Flex processing</i>, <i>Batch API</i> and <i>Prompt caching</i> guides (developer documentation, read 28 September 2026); <i>Prompt Caching 201</i> (OpenAI Cookbook, 18 February 2026). https://developers.openai.com/api/docs/pricing; https://developers.openai.com/api/docs/changelog; https://developers.openai.com/api/docs/guides/fast-mode; https://developers.openai.com/api/docs/guides/flex-processing; https://developers.openai.com/api/docs/guides/batch; https://developers.openai.com/api/docs/guides/prompt-caching; https://developers.openai.com/cookbook/examples/prompt_caching_201"),
  ("kvflow", "Pan et al., 2025",
   "Pan, Z., Patel, A., Shen, Y., Hu, Z., Guan, Y., Li, W.-L., Qin, L., Wang, Y., &amp; Ding, Y. (2025). KVFlow: Efficient prefix caching for accelerating LLM-based multi-agent workflows. <i>Advances in Neural Information Processing Systems 38 (NeurIPS 2025)</i>, 139912–139931. https://doi.org/10.52202/085713-4208. arXiv:2507.07400. University of California, San Diego; Amazon Web Services."),
  ("walt", "Prabhu et al., 2026",
-  "Prabhu, V., Dai, Y., Fernandez, M., Ramakrishnan, K., Gu, J., Luo, Y., Savarese, S., Xiong, C., Li, J., Chen, Z., &amp; Xu, R. (2026). WALT: Web agents that learn tools. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2510.01524. Salesforce AI Research."),
+  "Prabhu, V., Dai, Y., Fernandez, M., Ramakrishnan, K., Gu, J., Luo, Y., Savarese, S., Xiong, C., Li, J., Chen, Z., &amp; Xu, R. (2026). WALT: Web agents that learn tools. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2510.01524. Salesforce Research."),
  ("eam", "Qin et al., 2026",
   "Qin, Z., Yue, S., Hua, X., Fu, Y., &amp; Ren, J. (2026). Executable agentic memory for GUI agent. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>. arXiv:2605.12294. Tsinghua University; Sun Yat-sen University."),
  ("tti", "Shen et al., 2025",
@@ -1218,19 +1218,19 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("cuaverse", "Shi et al., 2026b",
   "Shi, H., Wang, W., Fang, W., Liang, Y., Jin, T., Zhao, P., Liu, G., Chen, S., &amp; Wang, Y. (2026b). CUA-Universe: A scalable and dynamic environment for hybrid GUI+CLI agents. arXiv:2609.05374v1. Shanghai Jiao Tong University; Zhejiang University."),
  ("skyvern", "Skyvern, 2026",
-  "Skyvern. (2026). <i>Code caching</i>; <i>Cost control</i> (developer documentation, undated, read 28 September 2026). https://www.skyvern.com/docs/developers/features/code-caching; https://skyvern.mintlify.app/developers/optimization/cost-control — vendor documentation."),
+  "Skyvern. (2026). <i>Code caching</i>; <i>Cost control</i> (developer documentation, undated, read 28 September 2026). https://www.skyvern.com/docs/developers/features/code-caching; https://www.skyvern.com/docs/developers/optimization/cost-control — vendor documentation."),
  ("coact1", "Song et al., 2026",
   "Song, L., Dai, Y., Prabhu, V., Zhang, J., Shi, T., Li, L., Li, J., Savarese, S., Chen, Z., Zhao, J., Xu, R., &amp; Xiong, C. (2026). CoAct-1: Computer-using multi-agent system with coding actions. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>. arXiv:2508.03923. University of Southern California; Salesforce; University of Washington."),
  ("beyondbrowsing", "Song et al., 2025",
   "Song, Y., Xu, F. F., Zhou, S., &amp; Neubig, G. (2025). Beyond browsing: API-based web agents. <i>Findings of the Association for Computational Linguistics: ACL 2025</i>, 11066–11085. https://doi.org/10.18653/v1/2025.findings-acl.577. arXiv:2410.16464. Carnegie Mellon University."),
  ("preble", "Srivatsa et al., 2025",
-  "Srivatsa, V., He, Z., Abhyankar, R., Li, D., &amp; Zhang, Y. (2025). Preble: Efficient distributed prompt scheduling for LLM serving. <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2407.00023. University of California, San Diego."),
+  "Srivatsa, V., He, Z., Abhyankar, R., Li, D., &amp; Zhang, Y. (2025). Preble: Efficient distributed prompt scheduling for LLM serving. <i>The Thirteenth International Conference on Learning Representations (ICLR 2025)</i>. arXiv:2407.00023. University of California, San Diego; GenseeAI."),
  ("thinktwice", "Tang et al., 2025",
   "Tang, F., Shen, Y., Zhang, H., Chen, S., Hou, G., Zhang, W., Zhang, W., Song, K., Lu, W., &amp; Zhuang, Y. (2025). Think twice, click once: Enhancing GUI grounding via fast and slow systems (FOCUS). arXiv:2503.06470v1. Zhejiang University; Microsoft Research Asia."),
  ("uipath", "UiPath, 2026",
   "UiPath. (2026). <i>Healing Agent user guide</i>: <i>What is Healing Agent?</i>; <i>Recovery strategies</i>; <i>Licensing</i>; <i>Frequently asked questions</i> (Automation Cloud documentation, undated, read 28 September 2026). https://docs.uipath.com/agents/automation-cloud/latest/user-guide-ha/what-is-healing-agent; https://docs.uipath.com/agents/automation-cloud/latest/user-guide-ha/deterministic-recovery-strategies; https://docs.uipath.com/agents/automation-cloud/latest/user-guide-ha/licensing; https://docs.uipath.com/agents/automation-cloud/latest/user-guide-ha/frequently-asked-questions — vendor documentation."),
  ("helium", "Wadlom et al., 2026",
-  "Wadlom, N., Shen, J., &amp; Lu, Y. (2026). Efficient LLM serving for agentic workflows: A data systems perspective (Helium). <i>Proceedings of the ACM on Management of Data, 4</i>(3), 1–29 (SIGMOD 2026). https://doi.org/10.1145/3802046. arXiv:2603.16104v1 (extended version). National University of Singapore."),
+  "Wadlom, N., Shen, J., &amp; Lu, Y. (2026). Efficient LLM serving for agentic workflows: A data systems perspective (Helium). <i>Proceedings of the ACM on Management of Data, 4</i>(3), Article 169 (SIGMOD 2026). https://doi.org/10.1145/3802046. arXiv:2603.16104v1 (extended version). National University of Singapore."),
  ("effagents", "Wang et al., 2025a",
   "Wang, N., Hu, X., Liu, P., Zhu, H., Hou, Y., Huang, H., … Zhou, W. (2025a). Efficient agents: Building effective agents while reducing cost. arXiv:2508.02694v1. OPPO (OPPO AI Agent Team)."),
  ("asi", "Wang et al., 2025b",
@@ -1242,19 +1242,19 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("autodroid2", "Wen et al., 2025",
   "Wen, H., Tian, S., Pavlov, B., Du, W., Li, Y., Chang, G., Zhao, S., Liu, J., Liu, Y., Zhang, Y.-Q., &amp; Li, Y. (2025). AutoDroid-V2: Boosting SLM-based GUI agents via code generation. <i>Proceedings of the 23rd Annual International Conference on Mobile Systems, Applications and Services (MobiSys 2025)</i>, 223–235. https://doi.org/10.1145/3711875.3729134. arXiv:2412.18116. Tsinghua University (AIR); Shanghai AI Laboratory; Beijing Academy of Artificial Intelligence."),
  ("jit", "Winston et al., 2026",
-  "Winston, C., Wang, R. Y., Mirhoseini, A., &amp; Kozyrakis, C. (2026). Agent JIT compilation for latency-optimizing web agent planning and scheduling. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306. arXiv:2605.21470. Stanford University."),
+  "Winston, C., Wang, R. Y., Mirhoseini, A., &amp; Kozyrakis, C. (2026). Agent JIT compilation for latency-optimizing web agent planning and scheduling. <i>Proceedings of the 43rd International Conference on Machine Learning (ICML 2026)</i>, PMLR 306, 135161–135186. https://proceedings.mlr.press/v306/winston26b.html. arXiv:2605.21470. Stanford University."),
  ("skim", "Wong et al., 2026",
-  "Wong, M., Hsieh, K., Nath, S., &amp; Netravali, R. (2026). Skim: Speculative execution for fast and efficient web agents. arXiv:2605.16565v2. Princeton University; Microsoft Research."),
+  "Wong, M., Hsieh, K., Nath, S., &amp; Netravali, R. (2026). Skim: Speculative execution for fast and efficient web agents. <i>Proceedings of the European Conference on Computer Systems (EuroSys 2027)</i> (to appear; accepted per the first author’s page, read 29 September 2026). arXiv:2605.16565v2. Princeton University; Microsoft Research."),
  ("saferesume", "Wu et al., 2026",
   "Wu, G., Li, D., Jiang, K., Niu, J., Wang, C., &amp; Zhang, Y. (2026). Safe to resume? Breaking execution continuity of agent execution via rollback. arXiv:2608.29381v1. Southern University of Science and Technology; City University of Hong Kong."),
  ("xai", "xAI, 2026",
-  "xAI. (2026). <i>Grok 4.7</i> model page, SpaceXAI Docs (read 28 September 2026). https://docs.x.ai/developers/models/grok-4.7"),
+  "xAI. (2026). <i>Grok 4.7</i> model page; <i>Pricing</i>, SpaceXAI Docs (pricing updated 28 September 2026; read 29 September 2026). https://docs.x.ai/developers/models/grok-4.7; https://docs.x.ai/developers/pricing"),
  ("toolspec", "Xia et al., 2026",
-  "Xia, H., Li, Y., Du, C., Song, M., &amp; Li, W. (2026). ToolSpec: Accelerating tool calling via schema-aware and retrieval-augmented speculative decoding. arXiv:2604.13519v2. The Hong Kong Polytechnic University; Peking University."),
+  "Xia, H., Li, Y., Du, C., Song, M., &amp; Li, W. (2026). ToolSpec: Accelerating tool calling via schema-aware and retrieval-augmented speculative decoding. <i>Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP 2026)</i> (to appear). arXiv:2604.13519v2. The Hong Kong Polytechnic University; Peking University."),
  ("agentdiet", "Xiao et al., 2026",
   "Xiao, Y.-A., Gao, P., Peng, C., &amp; Xiong, Y. (2026). Reducing cost of LLM agents with trajectory reduction (AgentDiet). <i>Proceedings of the ACM on Software Engineering, 3</i>(FSE), Article FSE056. https://doi.org/10.1145/3797084. arXiv:2509.23586. Peking University; ByteDance."),
- ("osw2", "XLANG Lab, 2026",
-  "XLANG Lab. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537v2. The University of Hong Kong (authored as “XLANG Lab and Collaborators”; the full author list is in the paper’s Appendix A)."),
+ ("osw2", "M. Yuan et al., 2026",
+  "Yuan, M., Zhou, Z., Xiong, X., Wu, W., Sun, J., Song, J., Cui, K., Wang, B., Wu, H., Li, Y., Lu, D., Lu, H., Zhen, Q., Wang, X., Deng, J., Yang, Y., Chen, C., Zheng, B., Su, A., . . . Yu, T. (2026). OSWorld 2.0: Benchmarking computer use agents on long-horizon real-world tasks. arXiv:2606.29537v2. XLANG Lab, The University of Hong Kong (byline “XLANG Lab and Collaborators”)."),
  ("tokenpilot", "Xu et al., 2026a",
   "Xu, B., Xue, Z., Chen, D., Fu, C., Wu, C., Huang, C., Jiang, C., Fang, J., Deng, X., Chen, Y., Yao, Y., Wang, X., Shang, J., Yu, G., &amp; Zhang, N. (2026a). TokenPilot: Cache-efficient context management for LLM agents. <i>Findings of the Association for Computational Linguistics: EMNLP 2026</i>. arXiv:2606.17016v2. Zhejiang University; University of Electronic Science and Technology of China; Xidian University; HomologyAI."),
  ("tpsbench", "Xu et al., 2026b",
@@ -1272,7 +1272,7 @@ REFS_P2 = [   # (key, in-text form, reference), alphabetical; compiled 2026-09-2
  ("cacheblend", "Yao et al., 2025",
   "Yao, J., Li, H., Liu, Y., Ray, S., Cheng, Y., Zhang, Q., Du, K., Lu, S., &amp; Jiang, J. (2025). CacheBlend: Fast large language model serving for RAG with cached knowledge fusion. <i>Proceedings of the Twentieth European Conference on Computer Systems (EuroSys 2025)</i>, 94–109. https://doi.org/10.1145/3689031.3696098. arXiv:2405.16444. University of Chicago; The Chinese University of Hong Kong, Shenzhen; Stanford University; Microsoft Research."),
  ("kvcomm", "Ye et al., 2025",
-  "Ye, H., Gao, Z., Ma, M., Wang, Q., Fu, Y., Chung, M.-Y., Lin, Y., Liu, Z., Zhang, J., Zhuo, D., &amp; Chen, Y. (2025). KVCOMM: Online cross-context KV-cache communication for efficient LLM-based multi-agent systems. <i>Advances in Neural Information Processing Systems 38 (NeurIPS 2025)</i>. https://doi.org/10.52202/085713-0605. arXiv:2510.12872. Duke University; Massachusetts Institute of Technology; NVIDIA."),
+  "Ye, H., Gao, Z., Ma, M., Wang, Q., Fu, Y., Chung, M.-Y., Lin, Y., Liu, Z., Zhang, J., Zhuo, D., &amp; Chen, Y. (2025). KVCOMM: Online cross-context KV-cache communication for efficient LLM-based multi-agent systems. <i>Advances in Neural Information Processing Systems 38 (NeurIPS 2025)</i>, 20359–20405. https://doi.org/10.52202/085713-0605. arXiv:2510.12872. Duke University; Massachusetts Institute of Technology; NVIDIA."),
  ("specactions", "Ye et al., 2026",
   "Ye, N., Ahuja, A., Liargkovas, G., Lu, Y., Kaffes, K., &amp; Peng, T. (2026). Speculative actions: A lossless framework for faster AI agents. <i>The Fourteenth International Conference on Learning Representations (ICLR 2026)</i>, oral. arXiv:2510.04371. Columbia University."),
  ("paragui", "Yu et al., 2026",
@@ -1804,12 +1804,12 @@ B("b8-1", "B8 · 2/2", "B8 · Cost per success: the inputs, the formula and the 
 B("b9-1", "B9 · 1/4", "B9 · Works held back or dropped, and why",
   crumb="the source-credibility rule of slides/references.md · (iii) = numbers from a public benchmark with the task count and model stated",
   body=table(["status", "works", "reason"], [
-   ["Held back: condition (iii) not met as written, pending Edwin’s decision", "SpecHop (arXiv:2605.21965), PASTE (2603.18897), AOSpec (2608.00881), TAB, CacheScout (2608.14624), DualPath, PBKV, AgentKVShift, SpecBox (2607.23933), LLM-Tool Compiler, Cordon (2606.17573), GoClick, BAVT, AgentServe (2603.10342); DualSpec (XBench-DeepSearch and Seal-0 rows have no task count; its GAIA-Text-103 row is not used either); Continuum’s real-run 8.18×", "No task count, internal traces, or an unnamed model; their numbers stay off the pages"],
+   ["Held back: condition (iii) not met as written, pending Edwin’s decision", "SpecHop (arXiv:2605.21965), PASTE (2603.18897), AOSpec (2608.00881), TAB, CacheScout (2608.14624), DualPath, PBKV, AgentKVShift, SpecBox (2607.23933), LLM-Tool Compiler, Cordon (2606.17573), GoClick, BAVT, AgentServe (2603.10342), PEEK (2605.19932); DualSpec (XBench-DeepSearch and Seal-0 rows have no task count; its GAIA-Text-103 row is not used either); Continuum’s real-run 8.18×", "No task count, internal traces, or an unnamed model; their numbers stay off the pages"],
    ["Shown with a flag, pending the same decision", "Skim (“300+” tasks, page 8); ARES (~129 WebArena tasks, calc.), Overthinking (SWE-bench Verified), StepWise (OSWorld), Fara-7B (WebVoyager): task counts not printed; the author-built test suites of Atomix (leak test), Safe to Resume? (96 workflows) and Ghost Tool Calls (30 tasks)", "Counts derived by us, implied by the benchmark, or from suites the authors built; labelled on the pages"],
    ["Dropped: fail the rule", "Octopus v2, GPA, SkillDroid (qualitative only), Stateful Inference (Norgren), Cost-Aware Speculative Execution (Fareed), Dynamic ReAct, AdaGUI-R1, a speculative-tools GitHub repository", "In-house sets without counts or not from a public benchmark (GPA: an author-built 16-task pilot; SkillDroid: 15 author-defined task types), single authors without measurements, no institution, or unreadable"],
    ["Could not be read or found", "OS-Catalyst; ToolSEE; the Self-Guide “+22%”, VITA-VLA “−76%” and “2,000–8,000 schema tokens” figures", "The figures are not in the sources"],
    ["Off-topic", "SEAR, DREAM-Chunk (robotics); VITA-VLA, m2mKD (not LLM agents); SRMT (not an LLM); MemRefine (offline storage); DARE (math reasoning); Self-Guide (no efficiency measure)", "No Part 1 term"],
-   ["Qualitative only", "ECLAIR, AgentRR, Signal-Driven Observation, the small-models position paper, the LATM / DiLogics / ALLOY / Voyager / WebAgent lineage, RAC, Revisable by Design, AAPT, Qwen-UI-Agent, Log2Plan, ConServe, TOPAS, SmoothAgent, AAFLOW+ (modelled), PEEK, PANDO (flagged), vendor cache marketing", "No usable measured number, or internal inconsistencies"],
+   ["Qualitative only", "ECLAIR, AgentRR, Signal-Driven Observation, the small-models position paper, the LATM / DiLogics / ALLOY / Voyager / WebAgent lineage, RAC, Revisable by Design, AAPT, Qwen-UI-Agent, Log2Plan, ConServe, TOPAS, SmoothAgent, AAFLOW+ (modelled), PANDO (flagged), vendor cache marketing", "No usable measured number, or internal inconsistencies"],
    ["Numbers replaced by corrections", "SkillDroid 2.4×; Hajimiri v1; AgentServe 2.8× (against llama.cpp); RouteLLM 3.66× “vs GPT-4”; UFO2 “51.5% lower inference cost”; WALT “1.3–1.4× on average”", "Superseded by the source checks"],
   ], ["22%", "54%", "24%"]))
 
@@ -1829,9 +1829,9 @@ B9_REFS = [   # (status in B9, full reference) for every work B9 names that is n
  ("qualitative only", "Feng, E., Zhou, W., Liu, Z., Chen, L., Dong, Y., Zhang, C., Zhao, Y., Du, D., Hua, Z., Xia, Y., &amp; Chen, H. (2025). Get experience from practice: LLM agents with record &amp; replay (AgentRR). arXiv:2505.17716v1. Shanghai Jiao Tong University (IPADS)."),
  ("qualitative only", "Gaur, S., &amp; Lane, I. (2026). Signal-driven observation for long-horizon web agents. <i>ICML 2026 Workshop on Failure Modes in Agentic AI (FAGEN)</i> [Non-archival workshop paper]. https://icml.cc/virtual/2026/workshop/54094. arXiv:2606.06708v2. University of California, Santa Cruz."),
  ("dropped: credibility rule", "Gaurav, N., Akarsh, A., Ranjan, A., &amp; Bajaj, M. (2025). Dynamic ReAct: Scalable tool selection for large-scale MCP environments. arXiv:2509.20386v1. No institution printed (agentr.dev)."),
- ("qualitative only", "Gu, Z., Zhang, Q., Khattab, O., &amp; Madden, S. (2026). PEEK: Context map as an orientation cache for long-context LLM agents. arXiv:2605.19932v1. MIT CSAIL; Stanford University."),
+ ("held back: condition (iii)", "Gu, Z., Zhang, Q., Khattab, O., &amp; Madden, S. (2026). PEEK: Context map as an orientation cache for long-context LLM agents. arXiv:2605.19932v1. MIT CSAIL; Stanford University."),
  ("qualitative only", "Gur, I., Furuta, H., Huang, A., Safdari, M., Matsuo, Y., Eck, D., &amp; Faust, A. (2024). A real-world WebAgent with planning, long context understanding, and program synthesis. <i>The Twelfth International Conference on Learning Representations (ICLR 2024)</i>, oral. https://iclr.cc/virtual/2024/poster/19300. arXiv:2307.12856v4. Google DeepMind; The University of Tokyo."),
- ("held back: condition (iii)", "Jali, N., Nayak, A., &amp; Joshi, G. (2026). Not all turns are equally hard: Adaptive thinking budgets for efficient multi-turn reasoning in agents (TAB). arXiv:2604.05164v3. Carnegie Mellon University."),
+ ("held back: condition (iii)", "Jali, N., Nayak, A., &amp; Joshi, G. (2026). Not all turns are equally hard: Adaptive thinking budgets for efficient multi-turn reasoning in agents (TAB). <i>COLM 2026 Workshop on Efficient Reasoning</i> (non-archival). https://openreview.net/forum?id=jh4lGLg8AD. arXiv:2604.05164v3. Carnegie Mellon University."),
  ("dropped: credibility rule", "joelvarun. (2026). <i>speculative-tools</i> [Source code]. GitHub. https://github.com/joelvarun/speculative-tools"),
  ("off-topic", "Kim, M., Baek, J., Jeong, S., &amp; Hwang, S. J. (2026). MemRefine: LLM-guided compression for long-term agent memory. arXiv:2606.13177v1. Korea University; KAIST; DeepAuto.ai."),
  ("qualitative only", "Lee, S., Yoon, S., Lee, S., Kim, H., &amp; Sim, J. Y. (2025). Log2Plan: An adaptive GUI automation framework integrated with task mining approach. In <i>Proceedings of the 38th Annual ACM Symposium on User Interface Software and Technology (UIST ’25)</i>, 1–13. https://doi.org/10.1145/3746059.3747663. arXiv:2509.22137v1. Sookmyung Women’s University."),
@@ -1849,9 +1849,9 @@ B9_REFS = [   # (status in B9, full reference) for every work B9 names that is n
  ("qualitative only", "Pu, K., Yang, J., Yuan, A., Ma, M., Dong, R., Wang, X., Chen, Y., &amp; Grossman, T. (2023). DiLogics: Creating web automation programs with diverse logics. In <i>Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology (UIST ’23)</i>, 1–15. https://doi.org/10.1145/3586183.3606822. University of Toronto; University of Michigan; Virginia Tech."),
  ("held back: condition (iii)", "Saberi, M., Rezaei, K., &amp; Feizi, S. (2026). SpecHop: Continuous speculation for accelerating multi-hop retrieval agents. arXiv:2605.21965v1. University of Maryland, College Park."),
  ("off-topic", "Sagirova, A., Kuratov, Y., &amp; Burtsev, M. (2026). SRMT: Shared memory for multi-agent lifelong pathfinding. arXiv:2501.13200v2. AIRI; Moscow Institute of Physics and Technology; London Institute for Mathematical Sciences."),
- ("qualitative only", "Sarker, A. K., Halpern, A. J., Staylor, M., Alsaadi, A., von Laszewski, G., Cheng, Y., Jha, S., &amp; Fox, G. (2026). [AAFLOW+] Stateful operator abstraction with zero-copy distributed KV cache orchestration for multi-agent workflows. arXiv:2607.10987v1. University of Virginia; Rutgers University; Princeton Plasma Physics Laboratory."),
+ ("qualitative only", "Sarker, A. K., Halpern, A. J., Staylor, M., von Laszewski, G., Fox, G., Cheng, Y., Alsaadi, A., &amp; Jha, S. (2026). [AAFLOW+] Stateful operator abstraction with zero-copy distributed KV cache orchestration for multi-agent workflows. arXiv:2607.10987v1. University of Virginia; Rutgers University; Princeton Plasma Physics Laboratory."),
  ("held back: condition (iii)", "Singh, S., Karatzas, A., Fore, M., Anagnostopoulos, I., &amp; Stamoulis, D. (2024). An LLM-tool compiler for fused parallel function calling. arXiv:2405.17438v1. Microsoft; Southern Illinois University."),
- ("held back: condition (iii)", "Sui, Y., Zhao, H., Ma, R., He, Z., Wang, H., Li, J., Xu, K., Chen, K., &amp; Yang, Y. (2026). Parallelizing tool execution and LLM generation for low-latency agent serving (PASTE). arXiv:2603.18897v3. Shanghai Jiao Tong University; Microsoft Research; Stevens Institute of Technology; Hong Kong University of Science and Technology; Google."),
+ ("held back: condition (iii)", "Sui, Y., Zhao, H., Ma, R., He, Z., Wang, H., Xu, K., Chen, K., Li, J., &amp; Yang, Y. (2026). Parallelizing tool execution and LLM generation for low-latency agent serving (PASTE). arXiv:2603.18897v3. Shanghai Jiao Tong University; Microsoft Research; Stevens Institute of Technology; Google; Hong Kong University of Science and Technology."),
  ("could not be read, or the figure is not in it", "Vadlapati, P. (2025). ToolSEE: Agent tool search engine for efficient and scalable tool discovery using retrieval [Preprint]. Preprints.org. https://doi.org/10.20944/preprints202512.1744.v1"),
  ("qualitative only", "Wang, G., Xie, Y., Jiang, Y., Mandlekar, A., Xiao, C., Zhu, Y., Fan, L., &amp; Anandkumar, A. (2024). Voyager: An open-ended embodied agent with large language models. <i>Transactions on Machine Learning Research</i>. https://openreview.net/forum?id=ehfRiF0R3a. arXiv:2305.16291v2. NVIDIA; California Institute of Technology; The University of Texas at Austin; Stanford University; University of Wisconsin–Madison."),
  ("off-topic", "Wang, X., Wu, H., Song, J., Zhang, S., Zhang, J., Kong, F., Kwok, T. S. T., Chang, X.-W., Luo, Y., Wu, C., &amp; Liu, B. (2026). Co-evolution of policy and internal reward for language agents (Self-Guide). arXiv:2604.03098v1. McGill University; McMaster University; The University of Hong Kong; HKUST (Guangzhou); Peking University; University of California, Los Angeles; DeepWisdom; Université de Montréal; Mila."),
@@ -1861,7 +1861,7 @@ B9_REFS = [   # (status in B9, full reference) for every work B9 names that is n
  ("qualitative only", "Zhai, Z., Li, M., &amp; Wang, X. (2026). Revisable by design: A theory of streaming LLM agent execution. arXiv:2604.23283v1. Fudan University; Guangming Lab."),
  ("held back: condition (iii)", "Zhang, R., Kim, C., Feng, S., Du, K., Liu, Y., Zhong, Y., Ching, C.-W., Jiang, J., &amp; Hu, L. (2026). Learning agent execution for KV-cache management in agentic serving (CacheScout). arXiv:2608.14624v1. University of California, Santa Cruz; University of Washington; University of Chicago."),
  ("held back: condition (iii)", "Zhang, Y., Wo, T., Wang, J., Sun, X., Zhang, M., Yuan, C., Li, L., Hu, C., Zomaya, A. Y., &amp; Yang, R. (2026). SpecBox: Speculative sandbox scheduling for efficient LLM agent serving. arXiv:2607.23933v2. Beihang University; University of Leeds; The University of Sydney."),
- ("dropped: credibility rule", "Zhang, Y., Yan, Y., Yang, N., &amp; Yuan, D. (2026). AgentServe: Algorithm-system co-design for efficient agentic AI serving on a consumer-grade GPU. arXiv:2603.10342v1. The University of Sydney."),
+ ("held back: condition (iii)", "Zhang, Y., Yan, Y., Yang, N., &amp; Yuan, D. (2026). AgentServe: Algorithm-system co-design for efficient agentic AI serving on a consumer-grade GPU. arXiv:2603.10342v1. The University of Sydney."),
  ("dropped: credibility rule", "Zhao, Z., Liew, J. H., Yang, Y., Yang, W., Luo, Z., Sahoo, D., Savarese, S., &amp; Li, J. (2026). GPA: Learning GUI process automation from demonstrations. arXiv:2604.01676v2. Salesforce AI Research."),
  ("held back: condition (iii)", "Zheng, H., Fu, F., Wu, J., Yuan, B., Zhang, Y., Wang, H., Zhu, Y., Yan, X., &amp; Jiang, J. (2026). Efficient serving for dynamic agent workflows with prediction-based KV-cache management (PBKV). arXiv:2605.06472v1. Wuhan University; Shanghai Jiao Tong University; Macquarie University; Hong Kong University of Science and Technology; Dameng Database."),
  ("held back: condition (iii)", "Zhong, S., Lu, B., Chen, Q., Liu, C., Yang, F., &amp; Li, M. (2026). DualSpec: Accelerating deep research agents via dual-process action speculation. arXiv:2603.07416v1. Peking University; Microsoft Research; Microsoft."),
@@ -2031,11 +2031,11 @@ svg.tex{display:inline-block;height:auto}
 .plainlist{margin:0;padding-left:18px;font-size:12.5px;line-height:1.4;color:var(--ink2)}
 .nr{color:var(--mute);font-style:italic}
 .tbl.p2u td{font-size:11px;line-height:1.25}
-.p3refs{margin-top:-4px;border-top:1px solid var(--rule);padding-top:3px}
+.p3refs{margin-top:-6px;border-top:1px solid var(--rule);padding-top:2px}
 .pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
-.pgrefs li{font-size:9.5px;line-height:1.22;color:var(--ink2);margin:0 0 3px 0;break-inside:avoid}
+.pgrefs li{font-size:9.2px;line-height:1.2;color:var(--ink2);margin:0 0 2px 0;break-inside:avoid}
 .pgrefs i{font-style:italic}
-.pgrefs.sm li{font-size:8.8px;line-height:1.16;margin-bottom:2px}
+.pgrefs.sm li{font-size:8.5px;line-height:1.15;margin-bottom:1px}
 .p3rh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
 .reflist{margin:0;padding-left:20px;font-size:11.6px;line-height:1.38;color:var(--ink2);columns:2;column-gap:28px}
 .reflist li{margin:0 0 7px 0;break-inside:avoid}

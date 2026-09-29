@@ -304,6 +304,18 @@ Columns: ID · page · work · what the deck says → what the source says (loca
 - **E23** — replace the claim "**Each successive step can take up to 3× longer than early steps**" with "**Later steps take up to 3× longer than early ones in Agent S2 (GPT-4.1); ≈1.3–1.5× in GTA1 (o3), read off Figs. 3–4**", and the mechanism cell with "Each prompt re-sends the history; screenshot history is capped, so prompts grow mostly by text (GTA1 ≈3k → ≈17k tokens over 100 steps); 'dominated by the prefill stage' is the authors' inference from prompt size, not a timed split" (D307).
 - **Dossier §5, row 5** ("Each later step can take up to 3× longer … because every prompt re-sends the screenshot history (prefill-bound)") — replace with "Later steps can take up to 3× longer (Agent S2; GTA1 ≈1.5×) as the re-sent history grows; the prefill-bound reading is the authors' inference, not measured" (D307).
 
+## 3a. Applied to the deck (29 Sep, on Edwin's go-ahead: "1 改 2改 3更新 4…其实没引用到")
+
+All confirmed and corrected items of §1.1–1.3 were applied in slides/build_deck.py (commits f9fafd0, 4a7b161, e5c52ff, 698d1b9 and the reference commit that follows), with these decisions and deviations:
+- OSWorld 2.0 is cited as **M. Yuan et al., 2026** and the IISWC workload paper as **Y. Yuan et al., 2026** (APA 7 §8.20, same surname, different first authors); the reference entry lists the first 19 authors, an ellipsis and Tao Yu (D310 resolved). The page-reference helper now matches initials.
+- OpenAI's latest model is **GPT-6.1 Sol** (released 29 Sep 2026; cached read 0.05×, cache write $2.50 = 1.25×) on Part 1 A3, Part 2 page 12 and B6.
+- **BrowserGym** removed from the Part 2 reference list (no Part 2 page cites it; it stays in Part 1, cited on A1-3). Part 2's reference pages drop from seven to six; the deck has 73 pages.
+- Venue updates applied: ThunderAgent PMLR 306 (author order Xu before Yang, pp. 55630–55657, spotlight), ToolSpec EMNLP 2026 (to appear; arXiv marker removed), TAB COLM 2026 Workshop on Efficient Reasoning, **Skim EuroSys 2027 (to appear) — accepted per the first author's page only; re-check at the ACM DL**, Helium Article 169 (from DBLP metadata; confirm on the ACM page).
+- WALT's row now uses the tools-only ablation the checker cited (steps 8.9 → 6.5, success 57.5 → 61.5%) and the camera-ready's tool-building cost; re-check these two values in the ICLR PDF when editing next.
+- For fit, several cells were shortened and a few titles changed (Part 1 page 12: "Cost figures count different terms, never the machine (V)"; page 10's two summary boxes one line each); no correction was dropped.
+- Not applied (low severity): InferCept's formula rewritten in tex (b0-2); the APA 7 full-author rule for the other six-then-ellipsis entries (Efficient agents, UFO2, BATS, HAL, BrowserGym) — needs their author lists; the optional GPT-6 Astra line in B4.
+- Also found: TraceLab's §1 3.8× is not reproduced by Table 12 (calc. 4.28×) — added to D305's scope.
+
 ## 4. Still open
 
 1. Apply the confirmed fixes to the deck (all of §1.1–1.3) — awaiting Edwin's go-ahead; high-severity first.
