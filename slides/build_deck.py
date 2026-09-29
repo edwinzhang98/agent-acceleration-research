@@ -731,30 +731,28 @@ slide("s11", "Where the money goes: six classes, one per term",
       chip=("#a3-1", "Appendix A3"))
 
 # --- 12 per success, conventions, environment ----------------------------------------
-slide("s12", "Four accounting conventions for one task, and the cost of the environment machine",
+slide("s12", "What a cost figure counts, and what the environment machine adds",
       hl=("n-price", "n-succ", "n-machine"),
-      callout="""<p><b>The same run’s cost differs by up to 30× across the four conventions in use, and none includes the environment machine.</b></p>""",
+      callout="""<p><b>One run’s cost can be reported about 30× apart, depending on four accounting choices; none of them adds the environment machine (money V).</b></p>""",
       body=f"""
 <div class="two">
   <div>
   <table class="tbl conv">
-  <colgroup><col style="width:30%"><col style="width:55%"><col style="width:15%"></colgroup>
-  <thead><tr><th>convention</th><th>the same run, counted both ways</th><th>gap</th></tr></thead>
+  <colgroup><col style="width:13%"><col style="width:26%"><col style="width:46%"><col style="width:15%"></colgroup>
+  <thead><tr><th>choice</th><th>one way → the other</th><th>example</th><th>factor</th></tr></thead>
   <tbody>
-  <tr><td class="rk">output only vs all tokens</td><td>GTA1 on 39 OSWorld tasks, o3 list price, no cache: $2.43 counting output only; $7.87 counting all tokens {ci('osh')}</td><td>3.2×</td></tr>
-  <tr><td class="rk">per attempt vs per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: $72.4 per attempt at 20.6% completion → ≈ $351 (calc.; a benchmark average) {ci('osw2')}; per success = per attempt ÷ success rate {ci('cop')}</td><td>4.9×</td></tr>
-  <tr><td class="rk">uncached vs cached</td><td>A cached read costs a fraction of a normal read (DeepSeek-V4.1-Flash: $0.006 vs $0.30 per million tokens; other vendors in A3) {ci('deepseek')}</td><td>4–50× on the read price only, by vendor (calc.)</td></tr>
-  <tr><td class="rk">standard vs fast mode</td><td>Claude Opus 5.5 $4 / $20 → $8 / $40; OpenAI 2× on every listed model; up to 2.5× faster writing (vendor-stated), reading unchanged {ci('anth-b','openai')}</td><td>2×</td></tr>
+  <tr><td class="rk">tokens</td><td>output only → all tokens</td><td>GTA1, 39 OSWorld tasks, o3, no cache: $2.43 → $7.87 {ci('osh')}</td><td>3.2×</td></tr>
+  <tr><td class="rk">unit</td><td>per attempt → per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: $72.4 at 20.6% success → ≈ $351 (calc.) {ci('osw2', 'cop')}</td><td>4.9×</td></tr>
+  <tr><td class="rk">cache</td><td>cached → uncached input</td><td>DeepSeek-V4.1-Flash: $0.006 → $0.30 per million tokens {ci('deepseek')}</td><td>4–50×, by vendor (calc.)</td></tr>
+  <tr><td class="rk">tier</td><td>standard → fast mode</td><td>Claude Opus 5.5: $4 / $20 → $8 / $40 per million input / output tokens; OpenAI 2× {ci('anth-b', 'openai')}</td><td>2×</td></tr>
   </tbody></table>
-  <div class="figcap">The three that apply to a whole bill compound to about 31× (3.2 × 4.9 × 2, calc.). Screenshot-agent measurements do not report their cache state.</div>
+  <div class="figcap">Tokens, unit and tier multiply: 3.2 × 4.9 × 2 ≈ 31× (calc.). Cache is left out because screenshot-agent papers do not report their cache state.</div>
   </div>
   <div class="stack">
-    {card("V · THE ENVIRONMENT MACHINE, FROM LIST PRICES", "For CPU environments the machine is a small addition; idle time, proxy traffic and GPUs change that",
-          ["An H100 sandbox at $3.95 per hour is already half of a $7.87 bill, and hourly billing runs while the agent waits — the median AgentSysBench session is active only 20% of its lifetime"], "vendor price pages, read 2026-09-27; " + CITE['asb'])}
-    {hbars("A one-hour CPU environment as a share of a $7.87 API bill (calc.)", [("AWS t3.medium",0.5,"0.5%"),("AWS t3.2xlarge (OSWorld 2.0)",4.2,"4.2%"),("OpenAI hosted container 4 GB",4.6,"4.6%")], "AWS and OpenAI price pages · smaller vendors (Browser Use, Browserbase, E2B, Daytona, Modal) in Appendix A3", width=520, height_row=20)}
+    {hbars("One hour of the environment machine, as a share of the $7.87 GTA1 bill (calc.)", [("AWS t3.medium, CPU",0.5,"0.5%"),("AWS t3.2xlarge, CPU (OSWorld 2.0)",4.2,"4.2%"),("OpenAI container 4 GB, CPU",4.6,"4.6%"),("Daytona H100, GPU",50.2,"50%")], "list prices, read 27 September 2026: " + CITE['aws'] + "; " + CITE['openai'] + "; Daytona · more vendors in Appendix A3", width=560, height_row=22)}
+    <ul class="plainlist"><li>The machine is billed by the hour while the agent waits: the median AgentSysBench session is active 20% of its lifetime {ci('asb')}.</li></ul>
   </div>
 </div>""",
-      foot=f"SOURCES · {CITE['osh']} · {CITE['osw2']} · {CITE['cop']} · {CITE['asb']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['deepseek']} · {CITE['aws']} · the H100 price: Daytona, Pricing, on-demand GPU (read 27 Sep 2026)",
       chip=("#a3-3", "Appendix A3"))
 
 # --- 13 how time and money are linked -------------------------------------------------
@@ -1924,7 +1922,7 @@ h1{font-size:29px;line-height:1.15;font-weight:700;letter-spacing:-.01em;margin:
 /* cards */
 .cards3,.cards4,.rows5,.rows6,.figs3{display:grid;gap:12px}
 .cards3{grid-template-columns:repeat(3,1fr)}.cards4{grid-template-columns:repeat(4,1fr)}
-.rows6 .card{padding:6px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13.5px}.rows5.big .cv{font-size:16px}.rows5.big .card{padding:14px 14px}.rows6{grid-template-columns:repeat(3,1fr);gap:9px}
+.rows6 .card{padding:6px 13px}.rows6 .cv{font-size:14px}.rows6 .cd{font-size:12.5px;line-height:1.4}.rows5{grid-template-columns:repeat(5,1fr)}.rows5.big .cd{font-size:13px}.rows5.big .cv{font-size:15px}.rows5.big .card{padding:10px 13px}.rows6{grid-template-columns:repeat(3,1fr);gap:9px}
 .figs3{grid-template-columns:repeat(3,1fr);gap:20px;flex:none}
 .figs1{display:flex;flex:none}.figs1 .fig{width:600px;max-width:100%}
 .card{border:1px solid var(--rule);border-radius:4px;padding:11px 13px;background:#fff;display:flex;flex-direction:column;gap:5px;min-height:0}
@@ -2025,6 +2023,7 @@ svg.tex{display:inline-block;height:auto}
 .eqtab>div.eqh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:0 0 5px 0;border-bottom:none;align-items:flex-end}
 .eqtab>div.eqhr{grid-column:1/-1;border-bottom:1px solid var(--accent);padding:0;height:0}
 .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
+.plainlist{margin:0;padding-left:18px;font-size:12.5px;line-height:1.4;color:var(--ink2)}
 .p3refs{margin-top:-4px;border-top:1px solid var(--rule);padding-top:3px}
 .pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
 .pgrefs li{font-size:9.5px;line-height:1.22;color:var(--ink2);margin:0 0 3px 0;break-inside:avoid}
@@ -2176,8 +2175,8 @@ _FORMS1 = {k: _base(v) for k, v in CITE.items()}
 _FORMS2 = {k: html.unescape(c) for k, c, _ in REFS_P2}
 _REF2 = {k: r for k, _, r in REFS_P2}
 
-REFS_SMALL = {"s10", "s12", "t06"}   # pages with a little less room: smaller type
-REFS_NONE = {"s02", "s05", "s11", "s13", "s14", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
+REFS_SMALL = {"s05", "s10", "s12", "t06"}   # pages with a little less room: smaller type
+REFS_NONE = {"s02", "s11", "s13", "s14", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
 
 def page_refs_html(refs, small=False):
     return '<div class="p3refs"><div class="p3rh">References</div><ul class="pgrefs' + (' sm' if small else '') + '">' + "".join(f"<li>{r}</li>" for r in refs) + "</ul></div>"
@@ -2196,6 +2195,7 @@ for _s in SLIDES:
                     print("  no single reference for", _s["id"], _k)
         else:
             _refs = [_REF2[_k] for _k in _cited(_text, _FORMS2)]
+        _refs += [r for r in REFS_P1 if r.startswith("Vendor price pages")] if _s["id"] == "s12" else []
         _refs = sorted(set(_refs), key=lambda r: html.unescape(r).lower())
         if _refs:
             _s["body"] += page_refs_html(_refs, _s["id"] in REFS_SMALL)

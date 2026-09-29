@@ -14,7 +14,9 @@ Report (JSON, one entry per page id):
   content  scrollHeight/clientHeight of the page's content box; the first number must be <= the
            second, otherwise the page overflows.
   bad      elements whose bottom comes within 24 px of the slide's bottom edge or whose right
-           edge passes the slide's right edge, as class:bottom/right in px; must be empty.
+           edge passes the slide's right edge, as class:bottom/right in px; and "spill" entries for
+           a block of the page body whose contents run past its own bottom into the next block
+           (an overlap that does not grow the page); must be empty.
   s00 (deck title) and s01 (Part 1 title) are full-bleed covers: no content box (content is null),
   and their `cover` boxes are listed under bad — ignore them.
 A summary line follows the report. Exit code: 0 when every page other than s01 fits, 1 when any
@@ -40,6 +42,9 @@ COVER = ("s00", "s01", "t01")   # title pages, exempt from the check
 # and the content box's scrollHeight/clientHeight
 OVERFLOW_JS = """(sid)=>{const s=document.getElementById(sid);const r=s.getBoundingClientRect();const bad=[];
   s.querySelectorAll('.content, .content *, .cover, .cover *').forEach(el=>{const b=el.getBoundingClientRect(); if(b.height>0 && (b.bottom>r.bottom-24 || b.right>r.right+1)) bad.push(el.className+':'+Math.round(b.bottom-r.top)+'/'+Math.round(b.right-r.left));});
+  s.querySelectorAll('.body > *').forEach(ch=>{const cb=ch.getBoundingClientRect(); let spill=0;
+    ch.querySelectorAll('*').forEach(d=>{const db=d.getBoundingClientRect(); if(db.height>0) spill=Math.max(spill, db.bottom-cb.bottom);});
+    if(spill>2) bad.push('spill:'+(ch.className||ch.tagName)+':+'+Math.round(spill));});
   const c=s.querySelector('.content'); let inner=null; if(c){inner=c.scrollHeight+'/'+c.clientHeight;}
   return {bad:bad.slice(0,6), content:inner};}"""
 
@@ -90,7 +95,7 @@ async def main(ids=None, pdf=None, out=DEFAULT_OUT):
         await b.close()
     failed = [sid for sid, entry in report.items() if sid not in COVER and overflows(entry)]
     if failed:
-        print(f"FAIL: {len(failed)} of {len(report)} pages overflow: " + ", ".join(f"{sid} ({report[sid]['content']})" for sid in failed))
+        print(f"FAIL: {len(failed)} of {len(report)} pages overflow: " + ", ".join(f"{sid} ({report[sid]['content']}{'; ' + report[sid]['bad'][0] if report[sid]['bad'] else ''})" for sid in failed))
         return 1
     print(f"OK: all {len(report)} pages fit" + (" (the title pages s00, s01 and t01 are exempt)" if set(COVER) & set(report) else "")
           + f"; screenshots in {out}")
