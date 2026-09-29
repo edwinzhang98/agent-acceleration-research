@@ -516,8 +516,13 @@ def deftable(groups):
             row = '<tr class="g0">' if k == 0 else '<tr>'
             if k == 0:
                 row += f'<td class="ex" rowspan="{n}">{ex}</td><td class="fm" rowspan="{n}">{fm}<div class="fsrc">{fsrc}</div></td>'
-            row += f'<td class="sy">{tex(sy, 11.5)}</td><td class="df">{df}</td><td class="so">{so}</td></tr>'
-            out.append(row)
+            row += f'<td class="sy">{tex(sy, 11.5)}</td><td class="df">{df}</td>'
+            if k == 0 or syms[k - 1][2] != so:
+                run = 1
+                while k + run < n and syms[k + run][2] == so:
+                    run += 1
+                row += f'<td class="so" rowspan="{run}">{so}</td>'
+            out.append(row + '</tr>')
     return "".join(out) + "</tbody></table>"
 
 slide("s04", "The problem, defined (2/3): inside time III and time V",
@@ -537,8 +542,7 @@ slide("s04", "The problem, defined (2/3): inside time III and time V",
      (r"\mathcal{M}", "Set of time intervals during which a model call is running.", CITE['asyncfc']),
      (r"\mathcal{E}", "Set of time intervals during which anything else runs: actions, tools, harness code.", CITE['asyncfc']),
      (r"\mathcal{S}(\cdot)", "Sum of the lengths of the intervals in a set; time covered by two intervals counts twice.", CITE['asyncfc']),
-     (r"\mathcal{D}(\cdot)", "Length of the union of the intervals in a set; time covered by two intervals counts once.", CITE['asyncfc']),
-     (r"\triangleq", "Is defined as.", "—")]),
+     (r"\mathcal{D}(\cdot)", "Length of the union of the intervals in a set; time covered by two intervals counts once.", CITE['asyncfc'])]),
   ]) + '<div class="p3refs"><div class="p3rh">References</div>@@REFS:distserve,aa,swm,cop,asyncfc,llmc@@</div>',
       chip=("#a0-1", "Appendix A0"))
 
@@ -849,7 +853,7 @@ def refs_for(*keys):
     return sorted(out, key=lambda r: html.unescape(r).lower())
 
 for _s in SLIDES:
-    _s["body"] = re.sub(r"@@REFS:([\w,-]+)@@", lambda mm: "".join(f"<div>{r}</div>" for r in refs_for(*mm.group(1).split(","))), _s["body"])
+    _s["body"] = re.sub(r"@@REFS:([\w,-]+)@@", lambda mm: '<ul class="pgrefs">' + "".join(f"<li>{r}</li>" for r in refs_for(*mm.group(1).split(","))) + "</ul>", _s["body"])
 
 def refs_html(items, start=1):
     return f'<ol class="reflist" start="{start}">' + "".join(f"<li>{r}</li>" for r in items) + "</ol>"
@@ -2000,10 +2004,11 @@ svg.tex{display:inline-block;height:auto}
 .tbl.p4def td.sy{white-space:nowrap}
 .tbl.p4def td.so{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
 .tbl.p4def .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
-.p3refs{margin-top:2px;border-top:1px solid var(--rule);padding-top:3px;columns:2;column-gap:28px}
-.p3refs .p3rh{column-span:all}
+.p3refs{margin-top:2px;border-top:1px solid var(--rule);padding-top:3px}
+.pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
+.pgrefs li{font-size:9.5px;line-height:1.22;color:var(--ink2);margin:0 0 3px 0;break-inside:avoid}
+.pgrefs i{font-style:italic}
 .p3rh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
-.p3refs>div:not(.p3rh){font-size:9.5px;line-height:1.22;color:var(--ink2);padding-left:16px;text-indent:-16px;margin-bottom:3px;break-inside:avoid}
 .reflist{margin:0;padding-left:20px;font-size:11.6px;line-height:1.38;color:var(--ink2);columns:2;column-gap:28px}
 .reflist li{margin:0 0 7px 0;break-inside:avoid}
 .reflist i{font-style:italic}
