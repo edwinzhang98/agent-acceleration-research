@@ -301,7 +301,7 @@ def link_fig():
          pill(r"c_{\kappa}(\mu_{ij})", "buy"), op(r"+"), pill(r"x_{\mathrm{env}}", "time"), pill(r"c_{\mathrm{env}}", "buy")]
     return ('<div class="linkfig"><div class="lrow"><span class="lk">time</span>' + " ".join(t) + '</div>'
             '<div class="lrow"><span class="lk">money</span>' + " ".join(m) + '</div>'
-            '<div class="lleg"><span class="lp same">in both — same source</span><span class="lp time">time only, or money only through billed environment usage</span><span class="lp buy">the price — money for speed or accuracy</span></div></div>')
+            '<div class="lleg"><span class="lp same">in both equations — same source</span><span class="lp time">time only, or money only through billed environment usage</span><span class="lp buy">the price — money for speed or accuracy</span></div></div>')
 
 def defs(items, cols=3):
     """A grid of symbol definitions: [(latex, text), ...] — every symbol at its first appearance."""
@@ -756,20 +756,19 @@ slide("s12", "Published costs count different parts of the money formula, and no
       chip=("#a3-3", "Appendix A3"))
 
 # --- 13 how time and money are linked -------------------------------------------------
-slide("s13", "How slow and expensive are linked: three kinds of relationship",
+slide("s13", "Time and money: three links in the formulas, one outside",
       hl=("n-rtok", "n-wtok", "n-queue", "n-wait", "n-machine"),
-      callout="""<p><b>Time and money share the token counts; queueing and environment time reach money only through billed environment usage — and through the cache, which expires while the agent waits.</b></p>""",
+      callout="""<p><b>Most of what makes an agent slow also makes it expensive, because both come from the token counts; waiting costs time but little money, except when it lets the cache expire.</b></p>""",
       body=f"""
 {link_fig()}
-{defs([(r"t^{\mathrm{queue}}_{ij},\ t^{\mathrm{prefill}}_{ij}", "the queueing and prefill parts of " + tex(r"\mathrm{TTFT}_{ij}", 12) + " (our split; network and first-token time left out; Appendix A0)"), (r"\mathrm{time},\ \mathrm{money}", "one attempt each; divide by " + tex("R_m(p)", 12) + " for per success")], cols=2)}
 <div class="cards4 rel">
-  {card("SAME SOURCE — in both equations", "fix it, and time and money fall together",
+  {card("SAME SOURCE — in both equations", "reduce it, and time and money fall together",
         ["Steps " + tex("N", 13) + ", calls per step " + tex("J_i", 13) + ", reading, writing, cache hits, failures — every one of them lives in the token counts"], ci('osh','anth-b'))}
-  {card("SLOW BUT NOT EXPENSIVE — no tokens, only machine hours", "fix it, and only time falls",
+  {card("SLOW BUT NOT EXPENSIVE — no tokens, only machine hours", "reduce it, and only time falls",
         ["Queueing, page loads, fixed sleeps, tool tails — none produces a token; the machine behind them is billed by the hour, usually under 5% of the API bill"])}
-  {card("MONEY FOR TIME OR FOR ACCURACY — opposite signs", "paying for speed shortens only the writing segment; paying for accuracy costs more tokens per point as accuracy rises",
-        ["Fast mode: up to 2.5× faster writing (vendor-stated) at 2× the price, reading unchanged"], "(" + CITE['anth-b'] + "; " + CITE['openai'] + "; accuracy: Appendix A4)")}
-  {card("TIME THAT COSTS MONEY — the cache expires", "a slow step or a long pause can turn cheap cache reads into cache writes",
+  {card("THE PRICE — money buys time or accuracy", "paying for speed shortens only the writing of output tokens; each extra point of accuracy costs more tokens than the last",
+        ["Fast mode: output written up to 2.5× faster (vendor-stated) at 2× the price; reading the input is no faster"], "(" + CITE['anth-b'] + "; " + CITE['openai'] + "; accuracy: Appendix A4)")}
+  {card("NOT IN THE FORMULAS — the cache expires", "a slow step or a long pause can turn cheap cache reads into cache writes",
         ["A cache entry lives 5 minutes or 1 hour from the start of the last request that read or wrote it; at most 12.8% of cost could be saved if the cache survived human pauses"], ci('anth-b','tracelab'))}
 </div>""",
       foot=f"SOURCES · {CITE['osh']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['tracelab']} — the cause-by-cause table, with the convexity evidence, is Appendix A4",
@@ -2175,8 +2174,8 @@ _FORMS1 = {k: _base(v) for k, v in CITE.items()}
 _FORMS2 = {k: html.unescape(c) for k, c, _ in REFS_P2}
 _REF2 = {k: r for k, _, r in REFS_P2}
 
-REFS_SMALL = {"s05", "s10", "s12", "t06"}   # pages with a little less room: smaller type
-REFS_NONE = {"s02", "s11", "s13", "s14", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
+REFS_SMALL = {"s05", "s10", "s12", "s13", "t06"}   # pages with a little less room: smaller type
+REFS_NONE = {"s02", "s11", "s14", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
 
 def page_refs_html(refs, small=False):
     return '<div class="p3refs"><div class="p3rh">References</div><ul class="pgrefs' + (' sm' if small else '') + '">' + "".join(f"<li>{r}</li>" for r in refs) + "</ul></div>"
