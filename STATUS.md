@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-09-29, by Claude (Code session: audit fixes applied to the deck) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-09-29, by Codex (Part 3 research proposal drafted; Parts 1–2 deck unchanged) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -16,6 +16,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Done
 
+- [x] Part 3 Chinese research-direction document drafted for discussion: `notes/2026-09-29-part3-research-proposal-zh.md` and `.docx`; targeted primary-source support in `research/2026-09-29-part3-evidence.md` (proposed E304–E308, D311). Scope: automated trajectory diagnosis and improvement plus environment learning; connects to the current Parts 1–2. Method choice and budget remain for discussion.
 - [x] 15 deep-research outputs (5 prompts × 3 providers) + Claude's own P1 report merged into dossier **v1** (2026-09-26).
 - [x] Project's P3 survey (doc 15) merged by delta into dossier **v2**; D41–D55 logged; 5 primary sources re-verified (marked [V] in the dossier).
 - [x] Repo created and pushed; local clone on Edwin's Mac at `~/projects/agent-acceleration-research`.
@@ -37,6 +38,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-09-29 — Codex — Drafted the Part 3 discussion document on trajectory-driven automatic improvement and environment learning, with a concrete example, current slide-term mapping, six close primary-source neighbors, candidate hypotheses, baselines, autonomy metrics and evaluation protocols. ADIAS and SpeedRunner already cover much of the improvement loop; ActionEngine v2 adds environment-memory and amortization evidence with warm-up/disabled-Patcher conditions (E304–E308, D311). Source: `notes/2026-09-29-part3-research-proposal-zh.md` / `.docx`; merge notes: `research/2026-09-29-part3-evidence.md`. Parts 1–2 and the canonical dossier remain unchanged; next discuss the research focus and experiment scope before pricing a budget.
 - 2026-09-29 — Code session — The three audit leftovers applied (Edwin: “把这三处补上”): InferCept’s formulas with their indices (B0), full APA 7 author lists for HAL (ICLR BibTeX, pages 98778–98849), BrowserGym and UFO2 (TMLR BibTeX; UFO2’s TMLR version has 22 authors), BATS and Efficient agents, and GPT-6 Astra’s Ultrafast tier in B4 ($60 / $300 per M, 6× Standard, calc.; changelog and pricing page, 29 Sep). Part 1 page 3: the Pareto-set row and its textbook citation removed (Edwin: a question is not a request to show it); shared source cells are now centred with a bar over the rows they cover, so v, C_m(p) and R_m(p) visibly share Cost-of-Pass. 73 pages fit; PDF re-exported.
 - 2026-09-29 — Code session — Audit fixes applied on Edwin’s go-ahead (“1 改 2改 3更新 4…其实没引用到”): all confirmed and corrected items of `research/2026-09-29-deck-audit.md` §1.1–1.3 are in the deck (Part 1 main, Part 2 main, both appendices, references), with §3a listing the decisions: OSWorld 2.0 cited as M. Yuan et al., 2026 and the IISWC paper as Y. Yuan et al., 2026; GPT-6.1 Sol (released today) as OpenAI’s latest model; BrowserGym removed from the Part 2 reference list (73 pages now); venue updates for ThunderAgent, ToolSpec, TAB, Skim (EuroSys 2027 per the author’s page — to re-check), Helium. Not applied: InferCept’s formula in tex, the full-author rule for five older entries. All 73 pages fit; PDF re-exported.
 - 2026-09-29 — Code session — Full deck audit on Edwin’s request (every citation, venue, number and reading, at the primary sources): 444 cited passages grouped into 127 works (+ the 53 works B9 names), a 56-agent workflow with an independent checker per batch. Result in `research/2026-09-29-deck-audit.md`: 146 claim errors confirmed or corrected (8 high, 74 medium, 64 low), 33 reference-entry errors, 55 auditor reports refuted, 7 unverifiable, 3 more from spot checks; D305–D310 (TraceLab 3.8×/5.3× locations, Copilot 1.15 definition, OSWorld-Human 3× is Agent S2’s, the 80–92% idle range, KVFlow 1.83× in the camera-ready, OSWorld 2.0 authorship) with E19, E20, E23 patches. Deck not changed yet: fixes await Edwin’s go-ahead.
