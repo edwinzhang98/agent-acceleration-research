@@ -277,11 +277,11 @@ def eq_strip():
 
 def cost_strip():
     """Money per success with the six classes of cost mapped onto its terms (page 11)."""
-    terms = [(tex(r"\mathbb{E}[\ \sum_{i}\sum_{j \leq J_i}", 15), "3 · number of calls"),
-             (tex(r"\sum_{\kappa}\,n^{\kappa}_{ij}", 15), "1, 2 · tokens by class"),
-             (tex(r"c_{\kappa}(\mu_{ij})", 15), "5 · price per class"),
-             (tex(r"+\ x_{\mathrm{env}}\,c_{\mathrm{env}}\ ]", 15), "6 · environment"),
-             (tex(r"\div\ R_m(p)", 15), "4 · failures, retries")]
+    terms = [(tex(r"\mathbb{E}[\ \sum_{i}\sum_{j \leq J_i}", 15), "I · number of calls"),
+             (tex(r"\sum_{\kappa}\,n^{\kappa}_{ij}", 15), "II, III · tokens by class"),
+             (tex(r"c_{\kappa}(\mu_{ij})", 15), "IV · price per class"),
+             (tex(r"+\ x_{\mathrm{env}}\,c_{\mathrm{env}}\ ]", 15), "V · environment"),
+             (tex(r"\div\ R_m(p)", 15), "VI · failures, retries")]
     out = ['<div class="eqstrip"><div class="eqt">' + tex(r"v(m,p) =", 15) + '</div>']
     for t, c in terms:
         out.append(f'<div class="eqterm"><div class="eqx">{t}</div><div class="eqc">{html.escape(c)}</div></div>')
@@ -475,7 +475,7 @@ EQ["nin"] = r"$n^{\mathrm{hit}}_{ij}+n^{\mathrm{w5m}}_{ij}+n^{\mathrm{w1h}}_{ij}
 slide("s03", "The problem, defined (1/2): one formula for time, one for money, and what counts as faster",
       crumb="from the loop → here: the two formulas every later page works on, and the goal → to: what is inside their terms",
       body=f"""
-<div class="statusleg">each row says whether it is <b>verbatim</b> from its source, <b>adapted</b> (reason in Appendix A0) or <b>our distillation</b> (no source writes it as a formula) · the labels under the terms are the classes of pages 5–12</div>
+<div class="statusleg">each row is <b>verbatim</b> from its source, <b>adapted</b> (reason in Appendix A0) or <b>our distillation</b> · numerals run left to right: time I–V as on page 5, money I–VI as on page 11</div>
 <div class="eqtab narroweq2">
 {eqrow_html("time", "one attempt", mainf("", [
     ("op", r"T_{\mathrm{attempt}}="), ("term", r"\sum_{i=0}^{N}", "I · steps"), ("op", r"["),
@@ -488,15 +488,15 @@ slide("s03", "The problem, defined (1/2): one formula for time, one for money, a
    ]),
    "sum: " + CITE['isp'] + ", §3 · calls within a step: our distillation, evidence " + CITE['osh'] + " · saving: " + CITE['asyncfc'] + "; precedent " + CITE['llmc'] + ", App. E.1", "adapted · our distillation")}
 {eqrow_html("money", "one attempt", mainf("", [
-    ("op", r"c_m(p)="), ("term", r"\sum_{i}\sum_{j}", "3 · calls"), ("term", r"\sum_{\kappa}n^{\kappa}_{ij}", "1, 2 · tokens by class"),
-    ("term", r"c_{\kappa}(\mu_{ij})", "5 · price per class"), ("op", "+"), ("term", r"x_{\mathrm{env}}\,c_{\mathrm{env}}", "6 · environment")]),
+    ("op", r"c_m(p)="), ("term", r"\sum_{i}\sum_{j}", "I · calls"), ("term", r"\sum_{\kappa}n^{\kappa}_{ij}", "II, III · tokens read, written"),
+    ("term", r"c_{\kappa}(\mu_{ij})", "IV · price per class"), ("op", "+"), ("term", r"x_{\mathrm{env}}\,c_{\mathrm{env}}", "V · environment")]),
    defs1([
     (r"c_m(p)", "dollars of one attempt of design " + tex("m", 12) + " (model and harness) on task " + tex("p", 12), CITE['cop']),
     (r"c_{\mathrm{env}}", "price per unit of billed environment usage", CITE['cop']),
     (r"\kappa", "billing class, written out on page 4", ""),
    ]),
    "base: " + CITE['cop'] + ", Eq. 13, extended as its App. D.1 allows · classes: " + CITE['anth-b'] + " · three-class precedent: " + CITE['tokenpilot'], "adapted")}
-{eqrow_html("goal", "per success", eq_svg("succ", fontsize=12.5, cls="eqn") + eq_svg("goal", fontsize=12.5, cls="eqn") + '<div class="mfnote">dividing by ' + tex("R_m(p)", 12) + ' is class 4 · failures, retries</div>',
+{eqrow_html("goal", "per success", eq_svg("succ", fontsize=12.5, cls="eqn") + eq_svg("goal", fontsize=12.5, cls="eqn") + '<div class="mfnote">dividing by ' + tex("R_m(p)", 12) + ' is money VI · failures, retries</div>',
    defs1([
     (r"C_m(p),\ \mathbb{E}", "expected " + tex("c_m(p)", 12) + " over attempts, failures included; expectation", CITE['cop']),
     (r"v(m,p)", "dollars per success; the second term is seconds per success; attempts independent, retried until a verified success", CITE['cop']),
@@ -508,21 +508,21 @@ slide("s03", "The problem, defined (1/2): one formula for time, one for money, a
       chip=("#a0-1", "Appendix A0"))
 
 slide("s04", "The problem, defined (2/2): what is inside the terms",
-      crumb="from the two formulas → here: four expansions, each of one term named in its first column → to: where the time goes",
+      crumb="from the two formulas → here: four expansions, each of the term named in its first column (numerals as on page 3) → to: where the time goes",
       body=table(["expands", "formula", "its symbols", "status · source", "pages"], [
-   ["<b>III · one call</b> " + tex(r"\ell_{ij}", 12) + " of the time formula", eq_svg("call", fontsize=11.5, cls="eqn") + eq_svg("ttft", fontsize=11.5, cls="eqn"),
+   ["<b>Time III · one call</b> " + tex(r"\ell_{ij}", 12), eq_svg("call", fontsize=11.5, cls="eqn") + eq_svg("ttft", fontsize=11.5, cls="eqn"),
     defs1([(r"t^{\mathrm{queue}},\ t^{\mathrm{net}}", "waiting in the server’s queue; network time", "t^queue: " + CITE['distserve'] + "; t^net self-defined"),
            (r"t^{\mathrm{prefill}},\ t^{\mathrm{first}}", "reading the uncached input (this also computes the first token); emitting the first token", "t^prefill: " + CITE['distserve'] + "; t^first self-defined")]),
     "call: adapted · " + CITE['distserve'] + ", fn. 1<br>TTFT split: adapted · " + CITE['distserve'] + ", Eq. 1 (prefill + queueing); network time: " + CITE['aa'], "5–7; Part 2: 5–7"],
-   ["<b>V · overlap</b> " + tex(r"T_{\mathrm{saving}}", 12) + " of the time formula", eq_svg("saving", fontsize=11.5, cls="eqn"),
+   ["<b>Time V · overlap</b> " + tex(r"T_{\mathrm{saving}}", 12), eq_svg("saving", fontsize=11.5, cls="eqn"),
     defs1([(r"\mathcal{M},\ \mathcal{E}", "the intervals when a model call runs; when anything else runs", CITE['asyncfc']),
            (r"\mathcal{S},\ \mathcal{D},\ \triangleq", "lengths added up (overlap twice); length of their union (overlap once); defined as. A 2-s tool call during a model call gives 2 s", CITE['asyncfc'])]),
     "adapted · " + CITE['asyncfc'] + ", intervals widened; precedent " + CITE['llmc'] + ", App. E.1", "9; Part 2: 9–10"],
-   ["<b>The input each call reads</b> — inside III (its prefill) and 1, 2 (its tokens)", eq_svg("ctx", fontsize=11.5, cls="eqn") + eq_svg("ctxsum", fontsize=11.5, cls="eqn"),
+   ["<b>The input each call reads</b> — inside time III (its prefill) and money II (its tokens)", eq_svg("ctx", fontsize=11.5, cls="eqn") + eq_svg("ctxsum", fontsize=11.5, cls="eqn"),
     defs1([(r"|H_{a,1}|,\ g_i", "the first prompt; tokens step " + tex("i", 12) + " adds, " + tex(r"|\Phi(z_{a,i})|+|o_{a,i}|", 12), "self-defined"),
            (r"\bar{g},\ N^{*}=2|H_{a,1}|/\bar{g}+1", "mean of " + tex("g_i", 12) + ", weighted by the later steps that re-read it; the step count beyond which the " + tex("N^2", 12) + " term dominates", "self-defined (calc.)")]),
     "recurrence: adapted · " + CITE['yuan'] + "; full history: " + CITE['react'] + "<br>sum: our distillation (calc.)", "8; Part 2: 6, 11"],
-   ["<b>1, 2 · tokens by class</b> " + tex(r"n^{\kappa}_{ij}", 12) + " of the money formula", eq_svg("classes", fontsize=11.5, cls="eqn") + eq_svg("nin", fontsize=11.5, cls="eqn"),
+   ["<b>Money II, III · tokens by class</b> " + tex(r"n^{\kappa}_{ij}", 12), eq_svg("classes", fontsize=11.5, cls="eqn") + eq_svg("nin", fontsize=11.5, cls="eqn"),
     defs1([(r"\mathrm{hit,\ w5m,\ w1h,\ unc,\ out}", "cache read; cache write kept 5 min or 1 h; uncached input; output", CITE['anth-b'])]),
     "adapted · " + CITE['anth-b'] + " (billed input = read + written + uncached); cache hits: " + CITE['sglang'], "11–12; Part 2: 12"],
   ], ["17%", "31%", "32%", "13%", "7%"], cls="tbl p2 expand") + """
@@ -672,18 +672,18 @@ slide("s11", "Where the money goes: six classes, one per term",
       body=f"""
 {cost_strip()}
 <div class="rows6">
-  {card("1 · TOKENS READ", "Reading is the larger bill and grows with the square of the steps",
-        ["Even at a 95.7% cache hit rate, prefix tokens are still 59.5% of the bill — 4,265 Claude Code / Codex sessions"], ci('tracelab'))}
-  {card("2 · TOKENS WRITTEN", "Writing is the dearer token, thinking included, but the smaller bill",
-        ["31% of an uncached screenshot agent’s bill: $2.43 counting output only vs $7.87 counting all tokens — GTA1, 39 OSWorld tasks (calc.)"], ci('osh'))}
-  {card("3 · NUMBER OF CALLS", "The calls that make the agent slow also make it expensive",
+  {card("I · NUMBER OF CALLS", "The calls that make the agent slow also make it expensive",
         ["5–13× the calls of a single-call harness per step — GTA1: planners, retries and a judge (calc.)"], ci('osh'))}
-  {card("4 · FAILURES AND RETRIES", "Failed attempts are billed in full",
-        [f"$72.4 per attempt ÷ 20.6% completion ≈ $351 per success — OSWorld 2.0, Claude Opus 4.8, 108 tasks (calc.) {ci('osw2')}; cost per success = cost per attempt ÷ success rate {ci('cop')}"], "")}
-  {card("5 · UNIT PRICE", "The price list sets the constant; fast tiers double it",
+  {card("II · TOKENS READ", "Reading is the larger bill and grows with the square of the steps",
+        ["Even at a 95.7% cache hit rate, prefix tokens are still 59.5% of the bill — 4,265 Claude Code / Codex sessions"], ci('tracelab'))}
+  {card("III · TOKENS WRITTEN", "Writing is the dearer token, thinking included, but the smaller bill",
+        ["31% of an uncached screenshot agent’s bill: $2.43 counting output only vs $7.87 counting all tokens — GTA1, 39 OSWorld tasks (calc.)"], ci('osh'))}
+  {card("IV · UNIT PRICE", "The price list sets the constant; fast tiers double it",
         ["Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written — a 40× spread (calc.)"], ci('anth-b','openai'))}
-  {card("6 · THE ENVIRONMENT MACHINE", "Published costs are API bills only; a CPU environment adds little",
+  {card("V · THE ENVIRONMENT MACHINE", "Published costs are API bills only; a CPU environment adds little",
         ["$0.04–0.36 for a one-hour CPU environment: 0.5–4.6% of a $7.87 bill (calc.; an AWS t3.medium VM to an OpenAI 4 GB container; next page)"], ci('aws','openai'))}
+  {card("VI · FAILURES AND RETRIES", "Failed attempts are billed in full",
+        [f"$72.4 per attempt ÷ 20.6% completion ≈ $351 per success — OSWorld 2.0, Claude Opus 4.8, 108 tasks (calc.) {ci('osw2')}; cost per success = cost per attempt ÷ success rate {ci('cop')}"], "")}
 </div>""",
       foot="SOURCES · one representative number per class; the complete tables with conditions are in Appendix A3",
       chip=("#a3-1", "Appendix A3"))
@@ -708,7 +708,7 @@ slide("s12", "Four accounting conventions for one task, and the cost of the envi
   <div class="figcap">The three that apply to a whole bill compound to about 31× (3.2 × 4.9 × 2, calc.). Screenshot-agent measurements do not report their cache state.</div>
   </div>
   <div class="stack">
-    {card("6 · THE ENVIRONMENT MACHINE, FROM LIST PRICES", "For CPU environments the machine is a small addition; idle time, proxy traffic and GPUs change that",
+    {card("V · THE ENVIRONMENT MACHINE, FROM LIST PRICES", "For CPU environments the machine is a small addition; idle time, proxy traffic and GPUs change that",
           ["An H100 sandbox at $3.95 per hour is already half of a $7.87 bill, and hourly billing runs while the agent waits — the median AgentSysBench session is active only 20% of its lifetime"], "vendor price pages, read 2026-09-27; " + CITE['asb'])}
     {hbars("A one-hour CPU environment as a share of a $7.87 API bill (calc.)", [("AWS t3.medium",0.5,"0.5%"),("AWS t3.2xlarge (OSWorld 2.0)",4.2,"4.2%"),("OpenAI hosted container 4 GB",4.6,"4.6%")], "AWS and OpenAI price pages · smaller vendors (Browser Use, Browserbase, E2B, Daytona, Modal) in Appendix A3", width=520, height_row=20)}
   </div>
@@ -935,40 +935,40 @@ A("a2-1", "A2", "A2 · Where the arrows land, with every measurement condition",
 
 th_cost = ["id", "cause", "mechanism", "evidence, with the conditions of the measurement", "source"]
 w_cost = ["5%", "13%", "20%", "47%", "15%"]
-A("a3-1", "A3 · 1/3", "A3 · Cost, every cause — 1. tokens read and 2. tokens written",
+A("a3-1", "A3 · 1/3", "A3 · Cost, every cause — II. tokens read and III. tokens written",
   hl=("n-rtok", "n-wtok"),
   crumb="the complete table behind pages 8 and 11 · prices are list prices from the vendors’ own pages, September 2026",
   body=table(th_cost, [
-   ["1-1", "History re-sent", "Step " + tex("i", 12) + " reads everything from the " + tex("i-1", 12) + " earlier steps; total reading " + tex(r"\approx N^2", 12), "“Cost grows quadratically with the number of steps” — OSWorld-Human, real runs", ci('osh')],
-   ["1-2", "Large screenshots", "1,000–1,800 tokens per image; 100 images fill a 200K context", "Anthropic’s engineering guidance for computer and browser use", ci('anth-a')],
-   ["1-3", "Rich observation formats", "Accessibility tree + HTML + screenshot together: 4.8× the input", "AgentSysBench, WebArena agent, Kimi-K2.6", ci('asb')],
-   ["1-4", "Sampling", "Several candidates per step, mostly read tokens", "gpt-oss-120b + ReAct on 165 WebArena-Lite tasks: 1 → 10 candidates per step, 96K → 920K tokens per task", ci('atts')],
-   ["1-5", "The cache is not a cure", "However high the hit rate, a long history keeps reading dominant; a miss re-reads everything", "TraceLab, 4,265 Claude Code / Codex sessions: prefix-cache hit rate 95.7%, prefix tokens still 59.5% of list-price cost; on a miss the re-read is 3.8× the genuinely new content", ci('tracelab')],
-   ["2-1", "Thinking modes", "Thinking tokens are billed as output; when they cannot be switched off they are a fixed overhead", "OSWorld 2.0, same tasks: Claude Opus 4.8 224K output tokens per task, GPT-5.5 37K; Claude Opus 5.5: “thinking cannot be disabled and is billed as output”", ci('osw2','anth-b')],
-   ["2-2", "But writing is not always the larger bill", "In an uncached screenshot agent, output was 31% of the total", "OSWorld-Human, GTA1: the paper’s $2.43 counts output only; Table 3’s input and output give $7.87", ci('osh')],
+   ["II-1", "History re-sent", "Step " + tex("i", 12) + " reads everything from the " + tex("i-1", 12) + " earlier steps; total reading " + tex(r"\approx N^2", 12), "“Cost grows quadratically with the number of steps” — OSWorld-Human, real runs", ci('osh')],
+   ["II-2", "Large screenshots", "1,000–1,800 tokens per image; 100 images fill a 200K context", "Anthropic’s engineering guidance for computer and browser use", ci('anth-a')],
+   ["II-3", "Rich observation formats", "Accessibility tree + HTML + screenshot together: 4.8× the input", "AgentSysBench, WebArena agent, Kimi-K2.6", ci('asb')],
+   ["II-4", "Sampling", "Several candidates per step, mostly read tokens", "gpt-oss-120b + ReAct on 165 WebArena-Lite tasks: 1 → 10 candidates per step, 96K → 920K tokens per task", ci('atts')],
+   ["II-5", "The cache is not a cure", "However high the hit rate, a long history keeps reading dominant; a miss re-reads everything", "TraceLab, 4,265 Claude Code / Codex sessions: prefix-cache hit rate 95.7%, prefix tokens still 59.5% of list-price cost; on a miss the re-read is 3.8× the genuinely new content", ci('tracelab')],
+   ["III-1", "Thinking modes", "Thinking tokens are billed as output; when they cannot be switched off they are a fixed overhead", "OSWorld 2.0, same tasks: Claude Opus 4.8 224K output tokens per task, GPT-5.5 37K; Claude Opus 5.5: “thinking cannot be disabled and is billed as output”", ci('osw2','anth-b')],
+   ["III-2", "But writing is not always the larger bill", "In an uncached screenshot agent, output was 31% of the total", "OSWorld-Human, GTA1: the paper’s $2.43 counts output only; Table 3’s input and output give $7.87", ci('osh')],
   ], w_cost))
 
-A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — 3. calls, 4. failures, 5. unit price",
+A("a3-2", "A3 · 2/3", "A3 · Cost, every cause — I. calls, IV. unit price, VI. failures",
   hl=("n-calls", "n-succ", "n-price"),
-  crumb="the complete table behind page 11 (calls, failures, unit price)",
+  crumb="the complete table behind page 11 (I calls, IV unit price, VI failures)",
   body=table(th_cost, [
-   ["3", "Number of calls", tex(r"N \cdot J_i", 12) + " scales both token bills", "GTA1: 4 parallel planners per step, up to 3 retry rounds, one judging call → 4–12 planning calls per judging call, i.e. 5–13× the calls of a single-call harness (calc.). Agentic test-time scaling: 5–20 candidates per step multiply the calls by the candidate count. The same extra calls cost time and money at once", ci('osh','atts')],
-   ["4-1", "Failed attempts are billed", "Cost per success = cost per attempt ÷ success rate", "OSWorld 2.0: the best agent (Claude Opus 4.8) costs about $72.4 per attempt at 20.6% completion → about $351 per success (calc.). An accounting conversion, not the real price of retrying one task until it succeeds", ci('osw2')],
-   ["4-2", "Idle steps are billed in full", "Every step of a dead loop is a full read and write", "OSWorld-Human, GTA1 on 39 OSWorld tasks: one element-locating loop repeated the same step 18 times — 27 minutes, $8.47 at list price without caching; in failed tasks over 50 steps, 66% of steps were such repeats", ci('osh')],
-   ["4-3", "Evaluation itself is too expensive to repeat", "Single runs, no repeats", "Holistic Agent Leaderboard: 9 benchmarks, 21,730 runs, one run per configuration, about $40,000 in total; Claude Opus 4.1 not run on Online-Mind2Web because the estimate was $20,000", ci('hal')],
-   ["5-1", "Model tier", "Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written", "Vendor price pages, 27 September 2026", ci('anth-b','openai')],
-   ["5-2", "Fast mode", "2× on both vendors; switching speed tiers invalidates the cache", "Anthropic: Claude Opus 5.5 $8 / $40, up to 2.5× output speed (vendor-stated), first-token wait unchanged. OpenAI: 2× on all listed models; “up to 2.5×” stated only for GPT-5.6 Sol", ci('anth-b','openai')],
-   ["5-3", "Cache write and read", "Latest model of each vendor, per million tokens, normal read → cached read (ratios calc.):"
+   ["I", "Number of calls", tex(r"N \cdot J_i", 12) + " scales both token bills", "GTA1: 4 parallel planners per step, up to 3 retry rounds, one judging call → 4–12 planning calls per judging call, i.e. 5–13× the calls of a single-call harness (calc.). Agentic test-time scaling: 5–20 candidates per step multiply the calls by the candidate count. The same extra calls cost time and money at once", ci('osh','atts')],
+   ["IV-1", "Model tier", "Claude Opus 5.5 $4 / $20 vs GPT-6 Luna $0.10 / $0.50 per million tokens read / written", "Vendor price pages, 27 September 2026", ci('anth-b','openai')],
+   ["IV-2", "Fast mode", "2× on both vendors; switching speed tiers invalidates the cache", "Anthropic: Claude Opus 5.5 $8 / $40, up to 2.5× output speed (vendor-stated), first-token wait unchanged. OpenAI: 2× on all listed models; “up to 2.5×” stated only for GPT-5.6 Sol", ci('anth-b','openai')],
+   ["IV-3", "Cache write and read", "Latest model of each vendor, per million tokens, normal read → cached read (ratios calc.):"
           "<br>DeepSeek-V4.1-Flash $0.30 → $0.006 (0.02×; peak rate, both halve off-peak)"
           "<br>Claude Opus 5.5 $4 → $0.20 (0.05×; other Claude models 0.1×, Fable 5.1 0.025×; cache writes 1.25× for 5 min, 2× for 1 hour)"
           "<br>GPT-6 Sol $2 → $0.20 and GPT-6 Luna $0.10 → $0.01 (0.1×; cache writes 1.25×)"
           "<br>Gemini 3.8 Flash $0.75 → $0.075 (0.1×; plus $0.50 per million tokens per hour of storage; introductory to 31 Dec 2026)"
           "<br>Grok 4.7 $2 → $0.50 (0.25×)",
     "Vendor price pages, read 28 September 2026", ci('deepseek','anth-b','openai','google','xai')],
-   ["5-4", "Long-context surcharge", "OpenAI: 2× the read price above 272K tokens", "Vendor price page", ci('openai')],
+   ["IV-4", "Long-context surcharge", "OpenAI: 2× the read price above 272K tokens", "Vendor price page", ci('openai')],
+   ["VI-1", "Failed attempts are billed", "Cost per success = cost per attempt ÷ success rate", "OSWorld 2.0: the best agent (Claude Opus 4.8) costs about $72.4 per attempt at 20.6% completion → about $351 per success (calc.). An accounting conversion, not the real price of retrying one task until it succeeds", ci('osw2')],
+   ["VI-2", "Idle steps are billed in full", "Every step of a dead loop is a full read and write", "OSWorld-Human, GTA1 on 39 OSWorld tasks: one element-locating loop repeated the same step 18 times — 27 minutes, $8.47 at list price without caching; in failed tasks over 50 steps, 66% of steps were such repeats", ci('osh')],
+   ["VI-3", "Evaluation itself is too expensive to repeat", "Single runs, no repeats", "Holistic Agent Leaderboard: 9 benchmarks, 21,730 runs, one run per configuration, about $40,000 in total; Claude Opus 4.1 not run on Online-Mind2Web because the estimate was $20,000", ci('hal')],
   ], w_cost))
 
-A("a3-3", "A3 · 3/3", "A3 · Cost — 6. the environment machine, and the four conventions",
+A("a3-3", "A3 · 3/3", "A3 · Cost — V. the environment machine, and the four conventions",
   hl=("n-machine", "n-price", "n-succ"),
   crumb="the complete tables behind page 12 · AWS rows: Amazon Web Services, 2026 (read 27 and 29 Sep 2026) · OpenAI container: OpenAI, 2026 · other vendors: vendor price pages, read 27 Sep 2026 · shares are our arithmetic (calc.)",
   body=table(["environment", "price (vendor page)", "1-hour task", "15-min task", "share of a $7.87 API bill", "share of $72.4"], [
