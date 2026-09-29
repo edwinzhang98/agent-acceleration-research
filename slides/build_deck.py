@@ -287,7 +287,7 @@ def cost_strip():
         out.append(f'<div class="eqterm"><div class="eqx">{t}</div><div class="eqc">{html.escape(c)}</div></div>')
     return "".join(out) + "</div>"
 
-def link_fig():
+def link_fig(legend=True):
     """Time and money of one attempt with terms coloured by their relationship (page 13)."""
     def pill(src, kind):
         col = "#ffffff" if kind == "same" else ("#b3600c" if kind == "buy" else "#3d4b58")
@@ -301,7 +301,7 @@ def link_fig():
          pill(r"c_{\kappa}(\mu_{ij})", "buy"), op(r"+"), pill(r"x_{\mathrm{env}}", "time"), pill(r"c_{\mathrm{env}}", "buy")]
     return ('<div class="linkfig"><div class="lrow"><span class="lk">time</span>' + " ".join(t) + '</div>'
             '<div class="lrow"><span class="lk">money</span>' + " ".join(m) + '</div>'
-            '<div class="lleg"><span class="lp same">in both equations — same source</span><span class="lp time">time only, or money only through billed environment usage</span><span class="lp buy">the price — money for speed or accuracy</span></div></div>')
+            + ('<div class="lleg"><span class="lp same">in both equations — same source</span><span class="lp time">time only, or money only through billed environment usage</span><span class="lp buy">the price — money for speed or accuracy</span></div>' if legend else '') + '</div>')
 
 def defs(items, cols=3):
     """A grid of symbol definitions: [(latex, text), ...] — every symbol at its first appearance."""
@@ -436,8 +436,8 @@ slide("s01", "Where the time and the money go", cover=True,
     <li><span>03–04b</span>The problem, defined: one formula for time, one for money, the goal, and what is inside their terms</li>
     <li><span>05–10</span>Where the time goes, term by term</li>
     <li><span>11–12</span>Where the money goes, term by term, and per success</li>
-    <li><span>13–14</span>How time and money are linked, and the levers</li>
-    <li><span>15–17</span>References · Appendix A0–A5</li>
+    <li><span>13–14</span>The levers, grouped by how time and money are linked, and what is still unmeasured</li>
+    <li><span>15–17</span>References · Appendix A0–A5 at the end of the deck</li>
     </ol>
   </div>
 </div>""")
@@ -756,53 +756,52 @@ slide("s12", "Published costs count different parts of the money formula, and no
       chip=("#a3-3", "Appendix A3"))
 
 # --- 13 how time and money are linked -------------------------------------------------
-slide("s13", "Time and money: three links in the formulas, one outside",
-      hl=("n-rtok", "n-wtok", "n-queue", "n-wait", "n-machine"),
-      callout="""<p><b>Most of what makes an agent slow also makes it expensive, because both come from the token counts; waiting costs time but little money, except when it lets the cache expire.</b></p>""",
+def levtable(groups):
+    """Page 13: levers grouped by the link between time and money; the link cell spans its group."""
+    out = ['<table class="tbl lev2"><colgroup><col style="width:17%"><col style="width:36%"><col style="width:9%"><col style="width:13%"><col style="width:25%"></colgroup>'
+           '<thead><tr><th>link</th><th>lever</th><th>time</th><th>money</th><th>the catch</th></tr></thead><tbody>']
+    for cls, name, note, rows in groups:
+        for k, r in enumerate(rows):
+            tr = '<tr class="g0">' if k == 0 else '<tr>'
+            if k == 0:
+                tr += f'<td class="lk2" rowspan="{len(rows)}"><span class="lp {cls}">{name}</span><div class="lnote">{note}</div></td>'
+            out.append(tr + "".join(f"<td>{c}</td>" for c in r) + "</tr>")
+    return "".join(out) + "</tbody></table>"
+
+slide("s13", "Levers, grouped by how time and money are linked",
+      hl=("n-steps", "n-calls", "n-read", "n-write", "n-wait", "n-price", "n-overlap", "n-queue", "n-machine"),
+      callout="""<p><b>Most levers save time and money together; the others save only time, buy time with money, or lose money when the agent is slow.</b></p>""",
       body=f"""
-{link_fig()}
-<div class="cards4 rel">
-  {card("SAME SOURCE — in both equations", "reduce it, and time and money fall together",
-        ["Steps " + tex("N", 13) + ", calls per step " + tex("J_i", 13) + ", reading, writing, cache hits, failures — every one of them lives in the token counts"], ci('osh','anth-b'))}
-  {card("SLOW BUT NOT EXPENSIVE — no tokens, only machine hours", "reduce it, and only time falls",
-        ["Queueing, page loads, fixed sleeps, tool tails — none produces a token; the machine behind them is billed by the hour, usually under 5% of the API bill"])}
-  {card("THE PRICE — money buys time or accuracy", "paying for speed shortens only the writing of output tokens; each extra point of accuracy costs more tokens than the last",
-        ["Fast mode: output written up to 2.5× faster (vendor-stated) at 2× the price; reading the input is no faster"], "(" + CITE['anth-b'] + "; " + CITE['openai'] + "; accuracy: Appendix A4)")}
-  {card("NOT IN THE FORMULAS — the cache expires", "a slow step or a long pause can turn cheap cache reads into cache writes",
-        ["A cache entry lives 5 minutes or 1 hour from the start of the last request that read or wrote it; at most 12.8% of cost could be saved if the cache survived human pauses"], ci('anth-b','tracelab'))}
-</div>""",
-      foot=f"SOURCES · {CITE['osh']} · {CITE['anth-b']} · {CITE['openai']} · {CITE['tracelab']} — the cause-by-cause table, with the convexity evidence, is Appendix A4",
+{link_fig(legend=False)}
+{levtable([
+   ("same", "in both equations — same source", "shrink it, and time and money fall together", [
+     ["<b>Fewer steps</b> " + tex("N", 12) + " — several actions per call, skip navigation-only steps", "yes", "yes, the quadratic term", "which steps need no thinking?"],
+     ["<b>Fewer calls per step</b> " + tex("J_i", 12) + " — drop judging and reflection", "yes", "yes", "fewer errors caught"],
+     ["<b>Read less</b> " + tex(r"|H_{a,i}|,\ n^{\mathrm{unc}}", 12) + " — trim history, smaller screenshots, cache the prefix", "yes", "yes", "forgets; trimming invalidates the cache"],
+     ["<b>Write less</b> " + tex(r"n^{\mathrm{out}}", 12) + " — less thinking, smaller model", "yes", "yes", "accuracy may fall"],
+     ["<b>Stop retrying failures</b> " + tex("R_m(p)", 12) + " — early stop, detect dead loops", "yes", "yes", "ends some attempts that would succeed"]]),
+   ("time", "time only — no tokens", "only machine hours, under 5% of the API bill", [
+     ["<b>Overlap the waiting</b> " + tex(r"T_{\mathrm{saving}}", 12) + " — pre-load, parallel tools", "yes", "no", "only where the environment dominates"],
+     ["<b>Queue less</b> " + tex(r"t^{\mathrm{queue}}", 12) + " — serve the agent as one program", "yes, under load", "no", "self-hosted serving only"]]),
+   ("buy", "the price — money buys time", "pay more per token, write faster", [
+     ["<b>Buy a fast or priority tier</b> " + tex(r"\mathrm{TPOT},\ c_{\kappa}", 12), "writing only", "no — 2× more", "reading unchanged; cache dropped " + ci('anth-b', 'openai')]]),
+   ("out", "outside the formulas — the cache expires", "a slow step turns cheap cache reads into cache writes", [
+     ["<b>Keep the cache alive</b> — pauses shorter than its 5-minute or 1-hour life", "no", "≤ 12.8% " + ci('tracelab'), "a 1-hour cache costs 2× the input price to write, 5-minute 1.25× " + ci('anth-b')]]),
+])}""",
       chip=("#a4-1", "Appendix A4"))
 
-# --- 14 levers + gaps ------------------------------------------------------------------
-slide("s14", "The levers, and what is still unmeasured",
-      hl=("n-steps", "n-calls", "n-read", "n-write", "n-wait", "n-price", "n-overlap"),
-      callout="""<p><b>Seven levers follow from the formulas; each moves one term and carries a known risk.</b> Part 2 asks how far the literature has pushed each. Right: gaps in the evidence, not claims of a research gap.</p>""",
+slide("s14", "Still unmeasured: four gaps in the evidence",
+      callout="""<p><b>Gaps in the evidence behind Part 1, not claims of a research gap.</b></p>""",
       body=f"""
-<div class="levgrid">
-  <table class="tbl lev">
-  <colgroup><col style="width:40%"><col style="width:12%"><col style="width:18%"><col style="width:30%"></colgroup>
-  <thead><tr><th>lever</th><th>time</th><th>money</th><th>the catch</th></tr></thead>
-  <tbody>
-  <tr><td><b>Fewer steps</b> {tex("N", 12)} — several actions per call, skip navigation-only steps</td><td>yes</td><td>yes, the quadratic term</td><td>which steps need no thinking?</td></tr>
-  <tr><td><b>Read less</b> {tex(r"|H_{a,i}|,\ n^{\mathrm{unc}}", 12)} — trim history, shrink screenshots, cache the prefix</td><td>yes</td><td>yes</td><td>forgets; trimming invalidates the cache</td></tr>
-  <tr><td><b>Write less</b> {tex(r"n^{\mathrm{out}}", 12)} — less thinking, smaller model</td><td>yes</td><td>yes</td><td>accuracy may fall</td></tr>
-  <tr><td><b>Fewer calls per step</b> {tex("J_i", 12)} — drop judging and reflection</td><td>yes</td><td>yes</td><td>fewer errors caught</td></tr>
-  <tr><td><b>Overlap the waiting</b> {tex(r"T_{\mathrm{saving}}", 12)} — pre-load, parallel tools, page-ready events</td><td>yes</td><td>no</td><td>only where the environment dominates</td></tr>
-  <tr><td><b>Buy a fast or priority tier</b> {tex(r"\mathrm{TPOT},\ c_{\kappa}", 12)}</td><td>writing only</td><td>no — 2× more</td><td>reading unchanged; cache dropped</td></tr>
-  <tr><td><b>Stop retrying failures</b> {tex("R_m(p)", 12)} — early stop, detect dead loops</td><td>yes</td><td>yes</td><td>stops some attempts that would have succeeded</td></tr>
-  </tbody></table>
-  <div class="gapcol">
-    <div class="ck">NOT YET MEASURED</div>
-    <ul>
-      <li><b>Read / write time split and cache hit rate for a frontier API model</b> — the only split is on local 27–31B models {ci('yuan')}; screenshot-agent measurements do not report cache state.</li>
-      <li><b>How much slower than a person</b> — no benchmark times agent and human on the same tasks; the closest, AXIS’s small user study, has a UI agent 1.69× slower than manual work on easy tasks {ci('axis')}.</li>
-      <li><b>Whether the benchmark’s fixed sleep sits inside “action” time</b> in OSWorld-Human — if so, “environment under 3.5%” understates the waiting.</li>
-      <li><b>How much slowness costs accuracy</b> — OSWorld 2.0 records the stale-screen failure mode without its share {ci('osw2')}.</li>
-    </ul>
-  </div>
-</div>""",
-      foot=f"SOURCES · levers derived from the formulas on pages 3–4 · gaps: {CITE['yuan']} · {CITE['axis']} · {CITE['osw2']} · Appendix A4 and A5",
+<table class="tbl lev gaps2">
+<colgroup><col style="width:36%"><col style="width:64%"></colgroup>
+<thead><tr><th>not yet measured</th><th>the closest evidence</th></tr></thead>
+<tbody>
+<tr><td><b>Read / write time split and cache hit rate for a frontier API model</b></td><td>The only split is on local 27–31B models {ci('yuan')}; screenshot-agent measurements do not report cache state.</td></tr>
+<tr><td><b>How much slower than a person</b></td><td>No benchmark times agent and human on the same tasks; the closest, AXIS’s small user study, has a UI agent 1.69× slower than manual work on easy tasks {ci('axis')}.</td></tr>
+<tr><td><b>Whether the benchmark’s fixed sleep sits inside “action” time</b></td><td>In OSWorld-Human; if it does, “environment under 3.5%” understates the waiting {ci('osh')}.</td></tr>
+<tr><td><b>How much slowness costs accuracy</b></td><td>OSWorld 2.0 records the stale-screen failure mode without its share {ci('osw2')}.</td></tr>
+</tbody></table>""",
       chip=("#a5-1", "Appendix A5"))
 
 # --- references (part 1) ---------------------------------------------------
@@ -1366,7 +1365,7 @@ slide("t01", "Acceleration, term by term", cover=True, part=2,
     <li><span>09–10</span>Overlap: parallel calls, and speculation with its safety</li>
     <li><span>11–13</span>The growing prompt, the bill by class, a cheaper model per call</li>
     <li><span>14</span>Success and cost per success, set-up included</li>
-    <li><span>{P2_REF_SPAN}</span>References · Appendix B0–B10</li>
+    <li><span>{P2_REF_SPAN}</span>References · Appendix B0–B10 at the end of the deck</li>
     </ol>
   </div>
 </div>""")
@@ -1970,6 +1969,7 @@ svg.tex{display:inline-block;height:auto}
 .quadgrid{display:grid;grid-template-columns:520px 1fr;gap:22px;align-items:start;flex:none}
 .quadgrid .chart{width:100%}
 /* page 10 layout */
+.tbl.gaps2 td{font-size:13px;line-height:1.45;padding:9px 8px 9px 6px}
 .levgrid{display:grid;grid-template-columns:1fr 430px;gap:24px;align-items:start}
 .gapcol ul{margin:6px 0 0 0;padding-left:16px;font-size:12.5px;line-height:1.4;color:var(--ink2)}
 .gapcol li{margin-bottom:7px}
@@ -1987,6 +1987,14 @@ svg.tex{display:inline-block;height:auto}
 .lp.same{background:var(--accent);border-color:var(--accent);color:#fff}
 .lp.time{background:#eef1f3;border-color:#c4ced6;color:var(--ink2)}
 .lp.buy{background:#fbeede;border-color:#e2b98b;color:var(--warn)}
+.lp.out{background:#fff;border-color:var(--mute);border-style:dashed;color:var(--ink2)}
+.tbl.lev2{font-size:11.5px;line-height:1.32}
+.tbl.lev2 td{padding:1.5px 8px 1.5px 5px;border-bottom:none}
+.tbl.lev2 tr.g0 td{border-top:1px solid var(--rule)}
+.tbl.lev2 tbody tr.g0:first-child td{border-top:none}
+.tbl.lev2 td:first-child{font-family:inherit;font-size:11.5px;color:var(--ink2)}
+.tbl.lev2 td.lk2 .lp{font-size:10.5px;white-space:normal;line-height:1.3}
+.tbl.lev2 .lnote{font-size:10.5px;color:var(--mute);margin-top:4px;line-height:1.3}
 .lleg{display:flex;gap:10px;flex-wrap:wrap;font-size:11px}
 .lleg .lp{font-size:11px}
 /* tables */
@@ -2175,7 +2183,7 @@ _FORMS2 = {k: html.unescape(c) for k, c, _ in REFS_P2}
 _REF2 = {k: r for k, _, r in REFS_P2}
 
 REFS_SMALL = {"s05", "s10", "s12", "s13", "t06"}   # pages with a little less room: smaller type
-REFS_NONE = {"s02", "s11", "s14", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
+REFS_NONE = {"s02", "s11", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
 
 def page_refs_html(refs, small=False):
     return '<div class="p3refs"><div class="p3rh">References</div><ul class="pgrefs' + (' sm' if small else '') + '">' + "".join(f"<li>{r}</li>" for r in refs) + "</ul></div>"
@@ -2207,7 +2215,8 @@ def render(font_dir=None):
              '<style>', font_css(font_dir), CSS, '</style></head><body>',
              '<div id="stage">']
     main_n = {}
-    for s in SLIDES:
+    # every appendix after all the main pages of both parts; the pages link to them by id
+    for s in [x for x in SLIDES if x["kind"] != "appendix"] + [x for x in SLIDES if x["kind"] == "appendix"]:
         cls = "slide " + s["kind"]
         if s["kind"] in ("main", "refs") and s["label"]:
             label = f"AGENT ACCELERATION · PART {s['part']} · {main_n[s['part']]:02d}{s['label']}"
