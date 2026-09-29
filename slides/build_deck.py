@@ -1527,13 +1527,13 @@ slide("t10", "8 · Overlap: guess the next step and start it early", part=2,
 # --- Part 2 · 11 the growing prompt -------------------------------------------------------------
 slide("t11", "9 · The growing prompt: stop old context piling up", part=2,
       crumb="terms: ḡ ↓ (mask, trim, evict) or the N² structure removed (a plan instead of the history) · edits to old context turn some cache hits into misses or cache writes",
-      callout=f"""<p><b>Old observations are replaced by placeholders, trimmed by a cheaper model or evicted, which flattens the slope of the {tex("N^2", 15)} term; a plan written up front replaces the history and removes the square.</b></p>""",
+      callout=f"""<p><b>Old observations are masked, trimmed or evicted, which flattens the {tex("N^2", 15)} slope; a plan written up front removes the square.</b></p>""",
       body=f"""
 {fx(("prompt", {"g": DN, "N2": ("good", "removed by a plan")}), ("money", {"n": ("bad", "hit → miss, write")}))}
 {ptab2([
-  [wk("Observation masking", "masking", "sweagent"), "Observations older than 10 turns become a placeholder; actions and reasoning stay (SWE-agent's method, there 5 turns)", NR + ' (no wall-clock)', 'Cost per task $1.29 → $0.61 (−52.7%, paper), priced as tokens × list price', 'Solved 53.4 → 54.8% (+1.4 points, calc.; not significant)', 'SWE-bench Verified, 500 tasks; SWE-agent, Qwen3-Coder-480B self-hosted; vs no context management', 'Some later cache hits become misses; Gemini 2.5 Flash with thinking fell 40.4 → 36.4% (significant)'],
-  [wk("AgentDiet", "agentdiet"), 'A cheaper model (GPT-5 mini) cuts useless, redundant or expired content from each step two steps later', NR + ' (API latency unstable, say the authors)', 'Input tokens −39.9 to −59.7%; cost −21.1 to −35.9% including the reducer', 'Pass rate −1.0 to +2.0 points (one run)', '200 SWE-bench Verified + 300 Multi-SWE-bench Flash tasks; Trae Agent; Claude 4 Sonnet, Gemini 2.5 Pro', 'A reducer call per step over 500 tokens (5.5–11.8% of original cost, adds latency); invalidates the cache after the edit'],
-  [wk("TokenPilot eviction", "tokenpilot"), 'Every 3 turns a side model (Qwen3.5-35B-A3B) labels old segments; evictable ones leave the prompt', NR + ' (tokens and dollars only)', 'Cost $4.22 → $2.79 (−34%, calc.); cache-hit tokens 26.7M → 8.6M', 'Score 81.3 with eviction (vanilla agent 79.2); a partial-credit score, not pass rate', 'PinchBench continuous sessions, 123 tasks; GPT-5.4-mini; vs TokenPilot without eviction', 'A side-model call every 3 turns (under $0.03 for the whole stream); evictions break the cached prefix'],
+  [wk("Observation masking", "masking", "sweagent"), "Observations older than 10 turns become a placeholder; actions and reasoning stay (SWE-agent's method, there 5 turns)", NR + ' (no wall-clock)', 'Cost per task $1.29 → $0.61 (−52.7%), tokens × list price', '53.4 → 54.8% solved (not significant)', 'SWE-bench Verified, 500 tasks; SWE-agent, Qwen3-Coder-480B self-hosted; vs no context management', 'Some later cache hits become misses; Gemini 2.5 Flash with thinking fell 40.4 → 36.4% (significant)'],
+  [wk("AgentDiet", "agentdiet"), 'A cheaper model (GPT-5 mini) cuts useless, redundant or expired content from each step two steps later', NR + ' (API latency unstable, say the authors)', 'Input tokens −39.9 to −59.7%; cost −21.1 to −35.9% including the reducer', 'Pass rate −1.0 to +2.0 points (one run)', '200 SWE-bench Verified + 300 Multi-SWE-bench Flash; Claude 4 Sonnet, Gemini 2.5 Pro', 'A reducer call per step over 500 tokens (5.5–11.8% of original cost, adds latency); invalidates the cache after the edit'],
+  [wk("TokenPilot eviction", "tokenpilot"), 'Every 3 turns a side model (Qwen3.5-35B-A3B) labels old segments; evictable ones leave the prompt', NR + ' (tokens and dollars only)', 'Cost $4.22 → $2.79 (−34%, calc.); cache-hit tokens 26.7M → 8.6M', '81.3 with eviction, 79.2 vanilla (partial-credit score)', 'PinchBench continuous sessions, 123 tasks; GPT-5.4-mini; vs TokenPilot without eviction', 'A side-model call every 3 turns (under $0.03 for the whole stream); evictions break the cached prefix'],
   [wk("A plan, not the history", "llmc"), 'One planner call writes the whole plan; the prompt holds the plan, not every observation', 'Task time 20.47 → 5.47 s (3.74×, paper; −73%, calc.), parallel calls included', 'Input tokens per question 20,000 → 2,800 (−86%, calc.); cost 6.73× lower (paper)', 'Accuracy 72.47 → 77.13% (mean of 3 runs)', 'Movie Recommendation, 500 questions; gpt-3.5-turbo; vs ReAct', 'Only for steps that can be planned up front; WebShop got slower, 5.98 → 10.48 s'],
  ])}""",
       foot="NOT YET MEASURED · the N² token volume and the cache hit rate together, in a GUI agent · more rows in Appendix B4",
@@ -1542,21 +1542,15 @@ slide("t11", "9 · The growing prompt: stop old context piling up", part=2,
 # --- Part 2 · 12 the bill by class ------------------------------------------------------------
 slide("t12", "10 · Tokens by billing class: read input from the cache", part=2,
       crumb="term: n^unc → n^hit (input read from the cache) · cache writes n^w grow · the price c_κ(μ) unchanged",
-      callout="""<p><b>The stable part of the prompt is kept identical across calls and changing content is kept out of it, so the provider serves it as cache hits at 2–25% of the normal input price; a change of speed, tools or old context turns hits back into writes and misses.</b></p>""",
+      callout="""<p><b>The stable part of the prompt is kept identical across calls, so the provider serves it from its cache; changing the speed, the tools or old context turns hits back into writes.</b></p>""",
       body=f"""
 {fx(("money", {"n": ("good", "unc → hit"), "c": KEEP}))}
 {ptab2([
-  [wk("Don’t Break the Cache", "dbtc"), 'Measurement study: cache the stable system prompt and keep tool results out of the cache', 'Time to first token −6 to −31%; task time not reported', 'API cost −41 to −80% vs no cache (best mode per model)', NR + ' (no task-quality metric)', 'DeepResearch Bench web-search agent, 4 models, 40 sessions per condition, 10K-token system prompt; vs forced no-cache', 'Caching the whole context instead made GPT-4o’s first token 8.8% slower'],
-  [wk("TokenPilot", "tokenpilot"), 'Stable placeholders for changing fields, trimmed tool outputs, and a side model evicting finished segments', NR + ' (tokens and dollars only)', 'PinchBench $8.31 → $3.22 (−61%), hit rate 38.7 → 79.2%; Claw-Eval continuous $81.52 → $10.58 (−87%)', 'Score 80.5 → 81.0 and 63.4 → 60.8 (partial credit); −2.6 to +2.1 points over 4 settings', 'PinchBench (123 tasks, one per session), Claw-Eval (161 tasks, continuous); GPT-5.4-mini; vs OpenClaw with its own compaction', 'A side-model call every 3 turns, left out of the totals (under $0.03 over the continuous PinchBench stream)'],
-  [wk("TraceLab counterfactual", "tracelab"), 'Counterfactual: keep the prompt cache alive through the user’s think time between steps', NR + ' (a cost counterfactual)', 'Upper bound: $40,431 → $35,242 (−12.8%); −15.8% on the dashboard’s larger, later dataset', NR + ' (a cost counterfactual)', 'Recorded Claude Code and Codex traces, 33,960 user-initiated steps; list prices', 'Holds cache storage through idle time; no gain without human pauses (≈ 0 in autonomous runs)'],
+  [wk("Don’t Break the Cache", "dbtc"), 'Measurement study: cache the stable system prompt and keep tool results out of the cache', 'Time to first token −6 to −31%; task time not reported', 'API cost −41 to −80% vs no cache (best mode per model)', NR + ' (no task-quality metric)', 'DeepResearch Bench web-search agent, 4 models, 40 sessions per condition; vs forced no-cache', 'Caching the whole context instead made GPT-4o’s first token 8.8% slower'],
+  [wk("TokenPilot", "tokenpilot"), 'Stable placeholders for changing fields, trimmed tool outputs, and a side model evicting finished segments', NR + ' (tokens and dollars only)', 'PinchBench $8.31 → $3.22 (−61%); Claw-Eval continuous $81.52 → $10.58 (−87%)', '80.5 → 81.0 and 63.4 → 60.8 (partial-credit score)', 'PinchBench (123 tasks), Claw-Eval (161); GPT-5.4-mini; vs OpenClaw', 'A side-model call every 3 turns, left out of the totals (under $0.03 per stream)'],
+  [wk("TraceLab counterfactual", "tracelab"), 'Counterfactual: keep the prompt cache alive through the user’s think time between steps', NR + ' (a cost counterfactual)', 'Upper bound: $40,431 → $35,242 (−12.8%)', NR + ' (a cost counterfactual)', 'Recorded Claude Code and Codex traces, 33,960 user-initiated steps; list prices', 'Holds cache storage through idle time; no gain without human pauses (≈ 0 in autonomous runs)'],
  ])}
-{table(["latest model (vendor price pages, read 28 Sep 2026)", "cache hit ÷ uncached input", "cache write"], [
-  ["DeepSeek-V4.1-Flash", "0.02×", "not listed"],
-  ["Claude Opus 5.5", "0.05×", "1.25× (5 min), 2× (1 h)"],
-  ["GPT-6 Sol, GPT-6 Luna", "0.1×", "1.25×"],
-  ["Gemini 3.8 Flash", "0.1×", "storage $0.50 per million tokens per hour"],
-  ["Grok 4.7", "0.25×", "not listed"],
- ], ["44%", "22%", "34%"], cls="tbl p2 price")}""",
+<div class="figcap">Cache hit ÷ uncached input price, latest models (vendor price pages, read 28 Sep 2026): DeepSeek-V4.1-Flash 0.02×, Claude Opus 5.5 0.05× (writes 1.25× for 5 min, 2× for 1 h), GPT-6 0.1× (writes 1.25×), Gemini 3.8 Flash 0.1× (storage $0.50 per million tokens per hour), Grok 4.7 0.25× {c2('deepseek', 'anth-b', 'openai', 'google', 'xai')}.</div>""",
       foot=f"NOT YET MEASURED · a GUI or browser agent’s tokens split by billing class, cache writes included (Don’t Break the Cache covers a web-search agent) · prices {c2('deepseek', 'anth-b', 'openai', 'google', 'xai')}; Appendix B6",
       chip=("#b6-1", "Appendix B6"))
 
@@ -1571,8 +1565,7 @@ slide("t13", "11 · Price per token: a cheaper model for most calls", part=2,
   [wk("WebRouter", "webrouter"), 'A small router model picks GPT-4o, GPT-4.1 mini or Gemini 2.5 Flash for each step', 'Running time ~14% longer', '$0.98 → $0.12 per task (−87.8%)', 'Accuracy 86.1 → 82.3%', 'browser-use on 5 WebVoyager sites, ≥ 46 tasks each; vs GPT-4o alone', 'Steps 7.63 → 8.38 (+9.8%, calc.); a router call per step, its cost not separated'],
   [wk("Fara-7B", "fara"), 'A 7B model trained on synthetic trajectories acts from screenshots alone, replacing a frontier computer-use model', NR + ' (actions per task 38.0 → 16.5, −57% calc., the paper’s latency proxy)', '$0.913 → $0.025 per task (−97.3%, calc.); 7B at $0.20 per M tokens, no caching', '70.9 → 73.5% (WebVoyager, mean of 3 runs)', 'WebVoyager (task count not printed), 3 runs; vs OpenAI computer-use-preview', 'Online-Mind2Web success falls 42.9 → 34.1%'],
   [wk("Agentic plan caching", "apc"), 'Reuses cached plan templates; a small model adapts them instead of calling the large planner', '1,959.24 → 1,424.82 s (−27.28%) on one run: 100 FinanceBench queries, 46% hit rate', '−50.31% on average over 5 workloads; FinanceBench $4.03 → $1.86 (−54%, calc.)', '96.61% of the best accuracy on average; FinanceBench 91.0 → 85.5%', '5 workloads incl. FinanceBench, QASPER, GAIA; small model LLaMA-3.1-8B (GPT-4o-mini on GAIA); vs GPT-4o planner, no cache', 'A GPT-4o-mini keyword call per query; 3.99 s to build each cache entry'],
- ])}
-<div class="figcap">Tier prices (vendor, read 28 Sep 2026): OpenAI Flex and Batch 0.5×, Fast 2×; Google Priority 1.8× (Preview); Microsoft Foundry priority 1.75–2.5× (calc.) {c2('openai', 'google', 'microsoft')}.</div>""",
+ ])}""",
       foot="NOT YET MEASURED · the router’s own cost (excluded or not separated) · small-model losses on enterprise forms · routing with cached prices · Appendix B7",
       chip=("#b7-1", "Appendix B7"))
 
@@ -2189,8 +2182,8 @@ _FORMS1 = {k: _base(v) for k, v in CITE.items()}
 _FORMS2 = {k: html.unescape(c) for k, c, _ in REFS_P2}
 _REF2 = {k: r for k, _, r in REFS_P2}
 
-REFS_SMALL = {"s05", "s10", "s12", "s13", "t03", "t05", "t06", "t07", "t08", "t09"}   # pages with a little less room: smaller type
-REFS_NONE = {"s02", "s11", "t04", "t08", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
+REFS_SMALL = {"s05", "s10", "s12", "s13", "t03", "t05", "t06", "t07", "t08", "t09", "t12"}   # pages with a little less room: smaller type
+REFS_NONE = {"s02", "s11", "t04", "t08", "t10", "t11", "t14"}   # no blank space yet: the Part's reference pages hold these works
 
 def page_refs_html(refs, small=False):
     return '<div class="p3refs"><div class="p3rh">References</div><ul class="pgrefs' + (' sm' if small else '') + '">' + "".join(f"<li>{r}</li>" for r in refs) + "</ul></div>"
