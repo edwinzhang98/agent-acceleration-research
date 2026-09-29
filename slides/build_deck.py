@@ -269,7 +269,7 @@ def eq_strip():
     terms = [(tex(r"\sum_{i}\ [", 15), "I · steps"), (tex(r"\sum_{j \leq J_i}", 15), "II · calls per step"),
              (tex(r"(\mathrm{TTFT}_{ij} + n^{\mathrm{out}}_{ij}\,\mathrm{TPOT}_{ij})", 15), "III · each call"),
              (tex(r"+\ E_i\ ]", 15), "IV · non-model time"),
-             (tex(r"-\ T_{\mathrm{saving}}", 15), "V · little runs concurrently")]
+             (tex(r"-\ T_{\mathrm{saving}}", 15), "V · overlap")]
     s = ['<div class="eqstrip"><div class="eqt">' + tex(r"T_{\mathrm{attempt}} \approx", 15) + '</div>']
     for t, c in terms:
         s.append(f'<div class="eqterm"><div class="eqx">{t}</div><div class="eqc">{html.escape(c)}</div></div>')
@@ -306,6 +306,23 @@ def link_fig():
 def defs(items, cols=3):
     """A grid of symbol definitions: [(latex, text), ...] — every symbol at its first appearance."""
     return (f'<div class="defs c{cols}">' + "".join(f'<div>{tex(a, 12)} <span>{b}</span></div>' for a, b in items) + '</div>')
+
+def defs3(items, head=False):
+    """Page 3's notes as a table: symbol | definition | source; consecutive rows with the same source share one cell."""
+    out = ['<table class="deft"><colgroup><col style="width:17%"><col style="width:61%"><col style="width:22%"></colgroup>']
+    if head:
+        out.append('<thead><tr><th>symbol</th><th>definition</th><th>source</th></tr></thead>')
+    out.append('<tbody>')
+    n = len(items)
+    for k, (sy, df, so) in enumerate(items):
+        row = f'<tr><td class="sy">{tex(sy, 11.5)}</td><td class="df">{df}</td>'
+        if k == 0 or items[k - 1][2] != so:
+            run = 1
+            while k + run < n and items[k + run][2] == so:
+                run += 1
+            row += f'<td class="so" rowspan="{run}">{so}</td>'
+        out.append(row + '</tr>')
+    return "".join(out) + "</tbody></table>"
 
 def defs1(items):
     """defs2 in one column, for the gloss cell of an equation row."""
@@ -475,33 +492,32 @@ slide("s03", "The problem, defined (1/3): time, money and the goal",
       body=f"""
 <div class="statusleg">numerals run left to right: time I–V as on page 5, money I–VI as on page 11</div>
 <div class="eqtab narroweq2">
+<div class="eqh"></div><div class="eqh">formula</div><div class="eqh">{defs3([], head=True)}</div>
 {eqrow_html("time", "one attempt", mainf("", [
     ("op", r"T_{\mathrm{attempt}}="), ("term", r"\sum_{i=0}^{N}", "I · steps"), ("op", r"["),
     ("term", r"\sum_{j=1}^{J_i}", "II · calls"), ("term", r"\ell_{ij}", "III · one call"), ("op", "+"),
-    ("term", r"E_i", "IV · non-model time"), ("op", r"]\ -"), ("term", r"T_{\mathrm{saving}}", "V · overlap")]),
-   defs1([
-    (r"T_{\mathrm{attempt}}", "wall-clock time of one attempt", "self-defined"),
-    (r"i=0", "calls outside any step, e.g. an up-front plan", "self-defined"),
-   ]),
-   CITE['isp'] + "; " + CITE['asyncfc'] + "; " + CITE['llmc'], "")}
+    ("term", r"E_i", "IV · non-model time"), ("op", r"]\ -"), ("term", r"T_{\mathrm{saving}}", "V · overlap")]) + '<div class="fsrc">' + CITE['isp'] + "; " + CITE['asyncfc'] + "; " + CITE['llmc'] + '</div>',
+   defs3([
+    (r"T_{\mathrm{attempt}}", "Wall-clock time of one attempt, from handing over the task to the result.", "self-defined"),
+    (r"i=0", "Index for calls made outside any step, e.g. an up-front plan.", "self-defined"),
+   ]), "", "")}
 {eqrow_html("money", "one attempt", mainf("", [
     ("op", r"c_m(p)="), ("term", r"\sum_{i}\sum_{j}", "I · calls"), ("term", r"\sum_{\kappa}n^{\kappa}_{ij}", "II, III · tokens read, written"),
     ("term", r"c_{\kappa}(\mu_{ij})", "IV · price per class"), ("op", "+"), ("term", r"x_{\mathrm{env}}\,c_{\mathrm{env}}", "V · environment")]),
-   defs1([
-    (r"c_m(p)", "dollars of one attempt of design " + tex("m", 12) + " on task " + tex("p", 12), CITE['cop']),
-    (r"c_{\mathrm{env}}", "price per unit of billed environment usage", CITE['cop']),
-    (r"\kappa", "billing class", CITE['anth-b']),
-   ]),
-   "", "")}
+   defs3([
+    (r"c_m(p)", "Dollars spent on one attempt of design " + tex("m", 11) + " on task " + tex("p", 11) + ".", CITE['cop']),
+    (r"c_{\mathrm{env}}", "Price per unit of billed environment usage.", CITE['cop']),
+    (r"\kappa", "Billing class of a token.", CITE['anth-b']),
+   ]), "", "")}
 {eqrow_html("goal", "per success", eq_svg("psucc", fontsize=12.5, cls="eqn") + eq_svg("goal2", fontsize=12.5, cls="eqn"),
-   defs1([
-    (r"T_{\mathrm{success}}", "expected seconds per success", "self-defined"),
-    (r"v,\ C_m(p)", "expected dollars per success; per attempt", CITE['cop']),
-    (r"R_m(p)", "probability one attempt succeeds; dividing by it is money VI", CITE['cop']),
-    (r"\min_m(\cdot,\cdot)^{\top}", "the Pareto set: designs that no other design matches on both and beats on one", CITE['boyd04']),
-    (r"R_0", "minimum acceptable success rate", "self-defined"),
-   ]),
-   "", "")}
+   defs3([
+    (r"T_{\mathrm{success}}", "Expected seconds per success.", "self-defined"),
+    (r"v", "Expected dollars per success.", CITE['cop']),
+    (r"C_m(p)", "Expected dollars of one attempt, " + tex(r"\mathbb{E}[c_m(p)]", 11) + ".", CITE['cop']),
+    (r"R_m(p)", "Probability that one attempt succeeds; dividing by it is money VI.", CITE['cop']),
+    (r"\min_m(\cdot,\cdot)^{\top}", "Pareto set: the designs that no other design matches on both quantities and beats on one.", CITE['boyd04']),
+    (r"R_0", "Minimum acceptable success rate.", "self-defined"),
+   ]), "", "")}
 </div>
 <div class="p3refs"><div class="p3rh">References</div>@@REFS:isp,asyncfc,llmc,cop,anth-b,boyd04@@</div>""",
       chip=("#a0-1", "Appendix A0"))
@@ -572,19 +588,19 @@ slide("s04b", "The problem, defined (3/3): input tokens and their bill", label="
 # --- 05 time, term by term ---------------------------------------------------
 slide("s05", "Where the time goes: five classes, one per term",
       hl=("n-steps", "n-calls", "n-queue", "n-read", "n-write", "n-observe", "n-act", "n-wait", "n-overlap"),
-      callout=f"""<p><b>Four of the five are terms of the time equation; the fifth is how they combine: the concurrency term {tex(r"T_{\mathrm{saving}}", 15)} is small in the one production trace that reports it, so the terms nearly add.</b> Which class dominates depends on the harness, not on the kind of agent (page 10). Cause-by-cause tables with measurement conditions: Appendix A1.</p>""",
+      callout=f"""<p><b>Time is close to the plain sum of terms I–IV: little runs at the same time (V).</b></p>""",
       body=f"""
 {eq_strip()}
 <div class="rows5 big">
   {card("I · TOO MANY STEPS " + tex("(N)", 11), "Hour-scale tasks take hundreds of steps, and every step is a full round trip",
-        ["318 tool calls per task on OSWorld 2.0 — 108 desktop tasks, Claude Opus 4.7, one action per step"], ci('osw2'))}
+        ["318 steps per task on OSWorld 2.0 — 108 desktop tasks, Claude Opus 4.7, one action per step"], ci('osw2'))}
   {card("II · TOO MANY CALLS PER STEP " + tex("(J_i)", 11), "A harness that plans, judges and reflects multiplies every step",
         ["4–12 planning calls per judging call — GTA1 harness: four parallel planners, up to three retries, one judge"], ci('osh'))}
   {card("III · EACH CALL IS SLOW " + tex(r"(\ell_{ij})", 11), "Inside a call, waiting, reading and writing are three separate delays",
         ["Writing, one token at a time, is 91–98.6% of model time — local 27–31B models with a warm cache", "About 10 s per model call, the largest phase of a step — UFO2 desktop agent, GPT-4o and o1"], ci('yuan', 'ufo2'))}
   {card("IV · NON-MODEL TIME " + tex("(E_i)", 11), "The environment costs time whether or not the model is running",
         ["6.6 s per browser action vs 4.7 s per model call, median — 151 WebVoyager live-site tasks, GPT-4o"], ci('skim'))}
-  {card("V · LITTLE RUNS CONCURRENTLY " + tex(r"(T_{\mathrm{saving}})", 11), "Almost nothing overlaps, so task time is close to a sum: fixing one term saves only its own share",
+  {card("V · OVERLAP IS SMALL " + tex(r"(T_{\mathrm{saving}})", 11), "Almost nothing overlaps, so task time is close to a sum: fixing one term saves only its own share",
         ["Concurrency within a turn: 1.15 — GitHub Copilot production telemetry"], ci('copilot'))}
 </div>""",
       chip=("#a1-1", "Appendix A1"))
@@ -603,9 +619,6 @@ slide("s06", "I–II · Too many steps, too many calls per step",
         ["One element-locating loop repeated a step 18 times: 27 minutes and $8.47 at list price without caching — GTA1 harness, OSWorld"], ci('osh'))}
   {card("II · PLANNING, JUDGING, SAMPLING", "Extra calls per step buy accuracy at a rising token cost per point",
         ["10 candidates per step instead of 1: 38.8% → 43.2% success for 96K → 920K tokens per task — gpt-oss-120b, 165 WebArena-Lite tasks"], ci('atts'))}
-</div>
-<div class="figs1">
-  {hbars("Steps per task on OSWorld 2.0, 108 tasks", [("Opus 4.7 · one action per step",318,"318"),("Opus 4.7 · batched actions",160.7,"160.7"),("Opus 4.8 · batched",103,"103"),("GPT-5.5 · batched",95.2,"95.2")], "XLANG Lab, 2026 · mean over tasks", width=600)}
 </div>""",
       foot=f"SOURCES · {CITE['osw2']} · {CITE['skim']} · {CITE['osh']} · {CITE['atts']} — full rows with conditions in Appendix A1",
       chip=("#a1-1", "Appendix A1"))
@@ -2004,6 +2017,13 @@ svg.tex{display:inline-block;height:auto}
 .tbl.p4def td.sy{white-space:nowrap}
 .tbl.p4def td.so{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
 .tbl.p4def .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
+.deft{width:100%;border-collapse:collapse;table-layout:fixed;font-size:11.5px;line-height:1.3}
+.deft td{padding:1.5px 8px 1.5px 0;vertical-align:top;color:var(--ink2);border:none}
+.deft td.sy{white-space:nowrap}
+.deft td.so{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
+.deft th{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;font-weight:500;padding:0 8px 4px 0}
+.eqtab>div.eqh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:4px 0 0 0;border-bottom:none}
+.fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
 .p3refs{margin-top:2px;border-top:1px solid var(--rule);padding-top:3px}
 .pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
 .pgrefs li{font-size:9.5px;line-height:1.22;color:var(--ink2);margin:0 0 3px 0;break-inside:avoid}
