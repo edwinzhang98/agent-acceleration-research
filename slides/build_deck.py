@@ -140,9 +140,8 @@ EQ = {
  "ctxsum":  r"$\sum_{i=1}^{N}|H_{a,i}| \;=\; N\,|H_{a,1}| + \dfrac{N(N-1)}{2}\,\bar{g}$",
  "money":   r"$c_m(p) \;=\; \sum_{i=0}^{N}\,\sum_{j=1}^{J_i}\,\sum_{\kappa\in K}\, n^{\kappa}_{ij}\,c_{\kappa}(\mu_{ij}) \;+\; x_{\mathrm{env}}\,c_{\mathrm{env}}$",
  "classes": r"$K \;=\; \{\mathrm{hit},\ \mathrm{w5m},\ \mathrm{w1h},\ \mathrm{unc},\ \mathrm{out}\}$",
- "tsucc":   r"$T_{\mathrm{success}}(m,p) \;=\; \dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}$",
- "vsucc":   r"$v(m,p) \;=\; \dfrac{C_m(p)}{R_m(p)}$",
- "goal2":   r"$\min_{m\,:\,R_m(p)\,\geq\,R_0}\ \left(T_{\mathrm{success}}(m,p),\ v(m,p)\right)\quad \mathrm{in\ the\ Pareto\ sense}$",
+ "psucc":   r"$T_{\mathrm{success}}(m,p) \;=\; \dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)},\qquad v(m,p) \;=\; \dfrac{C_m(p)}{R_m(p)}$",
+ "goal2":   r"$\min_{m}\ \left(T_{\mathrm{success}}(m,p),\ v(m,p)\right)^{\top}\quad \mathrm{s.t.}\quad R_m(p)\,\geq\,R_0$",
 }
 _TEX_CACHE = {}
 _TEX_N = [0]
@@ -351,6 +350,7 @@ CITE = {   # short in-text forms, all in the reference list
     "aospec": "Chen et al., 2026",
     "swm": "Li et al., 2026",
     "kapoor25": "Kapoor et al., 2025",
+    "boyd04": "Boyd &amp; Vandenberghe, 2004",
     "cop": "Erol et al., 2026",
     "asyncfc": "Feng et al., 2026",
     "frugal": "Chen, Zaharia &amp; Zou, 2024",
@@ -497,19 +497,15 @@ slide("s03", "The problem, defined (1/2): one formula for time, one for money, a
     (r"\kappa", "billing class, written out on page 4", ""),
    ]),
    "base: " + CITE['cop'] + ", Eq. 13, extended as its App. D.1 allows · classes: " + CITE['anth-b'] + " · three-class precedent: " + CITE['tokenpilot'], "adapted")}
-{eqrow_html("per success", "time and money", '<div class="mfpair"><div>' + eq_svg("tsucc", fontsize=12.5, cls="eqn") + '<div class="mfnote">time per success</div></div><div>' + eq_svg("vsucc", fontsize=12.5, cls="eqn") + '<div class="mfnote">money per success</div></div></div><div class="mfnote">dividing by ' + tex("R_m(p)", 12) + ' is money VI · failures, retries</div>',
+{eqrow_html("goal", "per success", eq_svg("psucc", fontsize=12.5, cls="eqn") + eq_svg("goal2", fontsize=12.5, cls="eqn"),
    defs1([
-    (r"R_m(p)", "probability that one attempt succeeds", CITE['cop']),
-    (r"C_m(p),\ \mathbb{E}", "expected " + tex("c_m(p)", 12) + ", failures included", CITE['cop']),
-    (r"\div R_m(p)", "independent attempts until a verified success: " + tex("1/R_m(p)", 12) + " of them on average", CITE['cop']),
+    (r"T_{\mathrm{success}}", "expected seconds per success", "self-defined"),
+    (r"v,\ C_m(p)", "expected dollars per success; per attempt", CITE['cop']),
+    (r"R_m(p)", "chance that one attempt succeeds; a success takes " + tex("1/R_m(p)", 12) + " attempts, so dividing by it adds the failed ones (money VI)", CITE['cop']),
+    (r"\min_m(\cdot,\cdot)^{\top}", "the Pareto set: designs that no other design matches on both and beats on one", CITE['boyd04']),
+    (r"R_0", "success floor", "self-defined"),
    ]),
-   CITE['cop'] + ": money Eq. 2 (verbatim); time the same in seconds, App. D.1 (adapted; the name " + tex(r"T_{\mathrm{success}}", 10) + " is ours)", "verbatim · adapted")}
-{eqrow_html("goal", "what counts as faster", eq_svg("goal2", fontsize=12.5, cls="eqn") + '<div class="mfsay">Faster: one per-success quantity falls, the other does not rise, success stays ' + tex(r"\geq R_0", 12) + '. One falls, one rises: a trade-off. Part 2’s last column is this check.</div>',
-   defs1([
-    (r"R_0", "success floor: designs below it are not compared", "self-defined"),
-    (r"\mathrm{Pareto}", "no other design is as low on both and lower on one", CITE['kapoor25']),
-   ]),
-   CITE['kapoor25'] + " · floor: " + CITE['cop'] + ", App. C.8", "our distillation")}
+   tex("v", 10) + ": " + CITE['cop'] + ", Eq. 2 (verbatim) · " + tex(r"T_{\mathrm{success}}", 10) + ": the same in seconds, its App. D.1 (adapted) · goal: its Eq. 3 with two objectives (our distillation); min of a vector: " + CITE['boyd04'] + ", §4.7", "verbatim · adapted · our distillation")}
 </div>""",
       foot="SOURCES · as cited in each row · Part 2 puts the time and money formulas at the top of every page, with III written out as on page 4, and marks the term each family of work changes — Appendix A0",
       chip=("#a0-1", "Appendix A0"))
@@ -784,6 +780,7 @@ REFS_P1 = [
  "Anthropic. (2026b). <i>Claude API pricing</i>; <i>Prompt caching</i>; <i>Fast mode</i>; <i>Vision</i> (developer documentation, read 28 September 2026). https://platform.claude.com/docs/en/about-claude/pricing; https://platform.claude.com/docs/en/build-with-claude/prompt-caching; https://platform.claude.com/docs/en/build-with-claude/fast-mode; https://platform.claude.com/docs/en/build-with-claude/vision",
  "Artificial Analysis. (2026). <i>Methodology</i>; <i>Performance benchmarking methodology</i> (read 28 September 2026). https://artificialanalysis.ai/methodology; https://artificialanalysis.ai/methodology/performance-benchmarking — third-party measurement definitions.",
  "Bian, S., Yan, M., Jayarajan, A., Pekhimenko, G., &amp; Venkataraman, S. (2025). What limits agentic systems efficiency? <i>NeurIPS 2025 Workshop on Scaling Environments for Agents</i> (poster). arXiv:2510.16276v1. University of Wisconsin–Madison; University of Toronto; NVIDIA.",
+ "Boyd, S., &amp; Vandenberghe, L. (2004). <i>Convex optimization</i>. Cambridge University Press. §4.7 Vector optimization (pp. 174–187). https://web.stanford.edu/~boyd/cvxbook/",
  "Chang, C., Zhou, Y., Fu, K., An, D., Feng, T., Lu, H., Yao, S., Guo, P., Yu, Y., Shan, Y., Li, B., Yuan, B., &amp; Wang, W. (2026). From LLM inference to agentic workloads: Characterization and implications for serving systems (AgentSysBench). arXiv:2608.15127. Hong Kong University of Science and Technology; Alibaba Group; ByteDance.",
  "Chen, H. M., Guo, J., Luk, W., &amp; Fan, H. (2026). AOSpec: Action and observation co-speculation for low-latency agent serving. arXiv:2608.00881. Imperial College London.",
  "Chen, L., Zaharia, M., &amp; Zou, J. (2024). FrugalGPT: How to use large language models while reducing cost and improving performance. <i>Transactions on Machine Learning Research</i> (December 2024; Featured Certification). https://openreview.net/forum?id=cSimKw5p6R. arXiv:2305.05176. Stanford University.",
@@ -861,9 +858,9 @@ A("a0-3", "A0 · 3/5", "A0 · Money, per success, and the goal",
   crumb="the derivation behind page 3 · verbatim / adapted / our distillation · calc. = our algebra",
   body=table(["formula (page 3)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"c_m(p)=\sum_{i,j}\sum_{\kappa}n^{\kappa}_{ij}c_{\kappa}(\mu_{ij})+x_{\mathrm{env}}c_{\mathrm{env}}", 11), "adapted", tex(r"c_m(p)=n_{\mathrm{in}}(m,p)\,c_{\mathrm{in}}(m)+n_{\mathrm{out}}(m,p)\,c_{\mathrm{out}}(m)", 11) + " (Eq. 13): input and output tokens times their prices; other components go into " + tex(r"C_m(p)=w^{\top}x_m(p)", 11) + ", w the unit prices and " + tex("x_m(p)", 11) + " the quantities per attempt (App. D.1) " + ci('cop'), "input split into the billed classes (cache hit, 5-min and 1-h cache write, uncached); prices inside the sum because one step can mix models; environment usage added as App. D.1 allows; the class index is κ because x is Cost-of-Pass’s quantity. Closest written three-class form: " + ci('tokenpilot')],
-   [tex(r"v(m,p)=C_m(p)/R_m(p)", 11), "verbatim", "“the expected number of attempts to obtain the first correct solution is " + tex("1/R_m(p)", 11) + "”, assuming independent trials (§2.2, Eq. 2) " + ci('cop'), "none; assumes unlimited independent retries and the verifier’s time and cost in every attempt; with at most K retries the ratio is still C/R (calc.); with cache-warm retries " + tex(r"C^{(1)}_m(p)+(1/R_m(p)-1)\,C^{(2+)}_m(p)", 11) + " (calc.)"],
+   [tex(r"v(m,p)=C_m(p)/R_m(p)", 11), "verbatim", "“the expected number of attempts to obtain the first correct solution is " + tex("1/R_m(p)", 11) + "”, assuming independent trials (§2.2, Eq. 2) " + ci('cop'), "none; assumes unlimited independent retries and the verifier’s time and cost in every attempt; " + tex(r"C/R=\mathbb{E}[c\,|\,\mathrm{success}]+\frac{1-R}{R}\,\mathbb{E}[c\,|\,\mathrm{fail}]", 11) + " (calc.), the second term is money VI; with at most K retries the ratio is still C/R (calc.); with cache-warm retries " + tex(r"C^{(1)}_m(p)+(1/R_m(p)-1)\,C^{(2+)}_m(p)", 11) + " (calc.)"],
    [tex(r"T_{\mathrm{success}}(m,p)=\mathbb{E}[T_{\mathrm{attempt}}]/R_m(p)", 11), "adapted", "“alternative units per attempt (FLOPs, time, latency, energy) may matter more than dollar cost” (App. D.1) " + ci('cop'), "the same derivation in seconds, named " + tex(r"T_{\mathrm{success}}", 11) + " by us; serial retries only (parallel votes cost “roughly the latency of a single vote”); correlated failures break independence"],
-   [tex(r"\min_{m:\,R_m(p)\geq R_0}(T_{\mathrm{success}}(m,p),\,v(m,p))\ \mathrm{(Pareto)}", 11), "our distillation", tex(r"V_p(\mathcal{M})=\min_{m\in\mathcal{M}}v(m,p)", 11) + " (Eq. 3), with a human expert as fallback, " + tex(r"\min(V_p(\mathcal{M}),\,v(\mathrm{expert},p))", 11) + " (Eqs. 4–5) " + ci('cop') + "; “the new goal of jointly optimizing the two metrics” (arXiv v1) " + ci('kapoor25') + "; budgeted dual: maximise quality with expected cost within a budget " + ci('frugal'), "min → Pareto set, because seconds and dollars are not one scalar; the human is the reference point; the floor " + tex("R_0", 11) + " follows App. C.8’s remedy of leaving unreliable systems off the frontier; over a task mix " + tex(r"\sum_p C_m(p)/\sum_p R_m(p)", 11) + ", unlike Eq. 8’s mean of " + tex("V_p", 11)],
+   [tex(r"\min_{m}(T_{\mathrm{success}}(m,p),\,v(m,p))^{\top}\ \mathrm{s.t.}\ R_m(p)\geq R_0", 11), "our distillation", tex(r"V_p(\mathcal{M})=\min_{m\in\mathcal{M}}v(m,p)", 11) + " (Eq. 3), with a human expert as fallback, " + tex(r"\min(V_p(\mathcal{M}),\,v(\mathrm{expert},p))", 11) + " (Eqs. 4–5) " + ci('cop') + "; “the new goal of jointly optimizing the two metrics” (arXiv v1) " + ci('kapoor25') + "; budgeted dual: maximise quality with expected cost within a budget " + ci('frugal'), "scalar min → min of a vector, read as the Pareto set: “minimize (with respect to K)” (4.56), Pareto optimal (§4.7.3–4.7.5) " + ci('boyd04') + ", because seconds and dollars are not one scalar; Cost-of-Pass never says Pareto; the human is the reference point; the floor " + tex("R_0", 11) + " is our choice, after App. C.8’s remedy (i), which leaves impractical baselines off the frontier set; over a task mix " + tex(r"\sum_p C_m(p)/\sum_p R_m(p)", 11) + ", unlike Eq. 8’s mean of " + tex("V_p", 11)],
   ], ["22%", "9%", "37%", "32%"]))
 
 A("a0-4", "A0 · 4/5", "A0 · Every symbol, its unit, and where it comes from",
