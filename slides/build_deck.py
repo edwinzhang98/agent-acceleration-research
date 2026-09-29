@@ -2024,10 +2024,11 @@ svg.tex{display:inline-block;height:auto}
 .deft th{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;font-weight:500;padding:0 8px 4px 0}
 .eqtab>div.eqh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:4px 0 0 0;border-bottom:none}
 .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
-.p3refs{margin-top:2px;border-top:1px solid var(--rule);padding-top:3px}
+.p3refs{margin-top:-4px;border-top:1px solid var(--rule);padding-top:3px}
 .pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
 .pgrefs li{font-size:9.5px;line-height:1.22;color:var(--ink2);margin:0 0 3px 0;break-inside:avoid}
 .pgrefs i{font-style:italic}
+.pgrefs.sm li{font-size:8.8px;line-height:1.16;margin-bottom:2px}
 .p3rh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
 .reflist{margin:0;padding-left:20px;font-size:11.6px;line-height:1.38;color:var(--ink2);columns:2;column-gap:28px}
 .reflist li{margin:0 0 7px 0;break-inside:avoid}
@@ -2160,6 +2161,45 @@ JS = r"""
   fit();fromHash();setTimeout(()=>document.getElementById('help').classList.add('gone'),6000);
 })();
 """
+
+# --- every main page ends with the full references of the works it cites; the SOURCES foot lines go ------------
+def _cited(text, forms):
+    """Keys whose in-text form appears in text (a form is not matched inside a longer one, e.g. 2026a in 2026ab)."""
+    return [k for k, f in forms.items() if re.search(re.escape(f) + r"(?![0-9a-z])", text)]
+
+def _base(c):
+    c = html.unescape(re.sub(r"<[^>]+>", "", c)).split(", arXiv · ")[0]
+    return c[:-len(", code")] if c.endswith(", code") else c
+
+_FORMS1 = {k: _base(v) for k, v in CITE.items()}
+_FORMS2 = {k: html.unescape(c) for k, c, _ in REFS_P2}
+_REF2 = {k: r for k, _, r in REFS_P2}
+
+REFS_SMALL = {"s10", "s12", "t06"}   # pages with a little less room: smaller type
+REFS_NONE = {"s02", "s05", "s11", "s13", "s14", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
+
+def page_refs_html(refs, small=False):
+    return '<div class="p3refs"><div class="p3rh">References</div><ul class="pgrefs' + (' sm' if small else '') + '">' + "".join(f"<li>{r}</li>" for r in refs) + "</ul></div>"
+
+for _s in SLIDES:
+    if _s["kind"] != "main":
+        continue
+    _text = html.unescape(re.sub(r"<[^>]+>", " ", " ".join([_s["title"], _s["callout"], _s["body"], _s["foot"] or ""])))
+    if 'class="p3refs"' not in _s["body"] and _s["id"] not in REFS_NONE:
+        if _s["part"] == 1:
+            _refs = []
+            for _k in _cited(_text, _FORMS1):
+                try:
+                    _refs += refs_for(_k)
+                except AssertionError:
+                    print("  no single reference for", _s["id"], _k)
+        else:
+            _refs = [_REF2[_k] for _k in _cited(_text, _FORMS2)]
+        _refs = sorted(set(_refs), key=lambda r: html.unescape(r).lower())
+        if _refs:
+            _s["body"] += page_refs_html(_refs, _s["id"] in REFS_SMALL)
+    if (_s["foot"] or "").startswith("SOURCES"):
+        _s["foot"] = ""
 
 def render(font_dir=None):
     parts = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
