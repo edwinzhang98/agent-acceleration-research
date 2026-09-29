@@ -19,6 +19,7 @@ Evidence base for a research investigation into why LLM computer-use / web agent
 - Every new number carries: figure, exact measurement definition, source URL, date, primary/secondary label.
 - Conflicts with the dossier become new D-entries and new evidence new E-entries, continuing the numbering (current ranges in `STATUS.md`).
 - Distinguish model calls / tool calls / steps / turns; inference time / wall-clock; cost per attempt / per success; author estimate / stopwatch; arXiv version.
+- Source eligibility (Edwin, 2026-09-29): prioritize top journals/conferences, then official technical material from leading AI companies (OpenAI, Anthropic, Google/DeepMind, Groq and peers); allow preprints from strong universities or established research laboratories. Exclude ordinary-company blogs and other sources outside these categories. Verify venue/track or institutional affiliation, and append complete references with actual reading versions. Details in `CLAUDE.md`; [Part 3 source audit](research/2026-09-29-part3-source-filter.md) covers its 51 candidates, with 48 retained. Historical deck references have not all been re-audited against this updated rule.
 
 ## Roadmap
 

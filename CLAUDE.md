@@ -20,6 +20,7 @@ This repository is the evidence base for a research investigation into why LLM c
 - A conflict with the dossier becomes a new D-entry, never a silent overwrite; new evidence and new discrepancies continue the numbering.
 - Always distinguish: model calls ≠ tool calls ≠ steps ≠ turns; inference time ≠ wall-clock; cost per attempt ≠ cost per success; author estimate ≠ stopwatch measurement; arXiv version numbers matter (several headline numbers changed between versions — see D5, D13–D15, D44, D48).
 - Prefer primary sources (paper, leaderboard, vendor docs, official survey). If only a secondary source exists, say so. If a source is paywalled or unreachable, report that instead of guessing.
+- **Source eligibility, updated by Edwin on 2026-09-29:** prioritize formally published top journals/conferences; next allow official technical material from leading AI companies at the level of OpenAI, Anthropic, Google/DeepMind or Groq. Preprints from strong universities or established research laboratories may supplement these. Ordinary-company blogs and sources outside these categories are not reference material. Verify the venue/track or paper's institutional affiliations; a submission page or author-reported acceptance alone is not confirmed publication. End research documents with complete references and distinguish the formal citation from the version actually read. This supersedes the earlier broad company-research-group rule; the completed audit currently covers the 51 Part 3 candidates only (`research/2026-09-29-part3-source-filter.md`, D313), not all historical deck references.
 - Vendor-marketing numbers are labeled as such. Numbers computed by you are labeled "calc.".
 
 ## Output format for research and verification tasks
@@ -30,6 +31,8 @@ Four sections, in this order, written so they can be merged into the dossier wit
 2. D-ledger additions (next free D-IDs).
 3. E-ledger patches: the exact replacement text for each dossier line changed, with its E-ID.
 4. Still-open list.
+
+For reader-facing research documents, append a complete References section after these four sections. A source-screening audit can instead link to the accompanying document's References and retain excluded items only as an audit trail.
 
 No prose rewrite of the dossier.
 
