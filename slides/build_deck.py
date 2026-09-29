@@ -1346,7 +1346,7 @@ NR = '<span class="nr">not reported</span>'
 def ptab2(rows):
     """Part 2 table with the same columns on every row: what was measured, on the Part 1 axes (time, money or tokens, success)."""
     return table(["work", "method", "time", "money or tokens", "success", "setting", "side effects"], rows,
-                 ["12%", "20%", "14%", "14%", "9%", "16%", "15%"], cls="tbl p2 p2u")
+                 ["14%", "20%", "13%", "14%", "9%", "15%", "15%"], cls="tbl p2 p2u")
 
 def ptab(rows, widths=("17%", "24%", "37%", "22%"), headers=("work", "what it changes", "measured effect, and its conditions", "what grows, or is left out")):
     return table(list(headers), rows, list(widths), cls="tbl p2")
@@ -1382,24 +1382,25 @@ slide("t02", "The map: each family of work targets one term or a pair, and most 
       callout=f"""<p><b>Each work sits on the term it changes: it shrinks a term, removes a structure, or adds overlap {tex(r"T_{\mathrm{saving}}", 15)}; most also grow another term.</b> Speed-up = baseline time ÷ new time on the same tasks; each row says what was timed.</p>""",
       body=f"""
 {fx(("time", {}), ("money", {}), legend=False)}
-{table(["term (Part 1)", "what the work does to it", "family of work", "page"], [
-  [tex("J_i", 12), "→ 0 on steps run as code or replayed from a recording", "compile or replay the loop", "03"],
-  [tex("N", 12), "fewer steps: more work per call, reusable skills", "bigger actions, skills", "04"],
-  [tex(r"t^{\mathrm{queue}},\ t^{\mathrm{prefill}}", 12), "shorter on self-hosted serving: whole programs scheduled, cache kept across tool waits", "agent-aware serving", "05"],
-  [tex(r"|o_{a,i}|\rightarrow t^{\mathrm{prefill}}", 12), "less of each page shown to the model", "observation reduction", "06"],
-  [tex(r"n^{\mathrm{out}},\ \mathrm{TPOT}", 12), "less thinking; faster decoding, at a price", "decoding", "07"],
-  [tex("E_i", 12), "fewer or cheaper environment actions", "environment", "08"],
-  [tex(r"T_{\mathrm{saving}}", 12), "added: independent calls run at once, or the next step guessed and run early", "parallel calls; speculation", "09–10"],
-  [tex(r"\bar{g},\ N^2", 12), "a flatter slope; or the square removed", "context management", "11"],
-  [tex(r"n^{\kappa}", 12), "input moved from uncached to cache hit", "caching", "12"],
-  [tex(r"c_{\kappa}(\mu_{ij})", 12), "a cheaper model or tier for most calls", "routing, small models, tiers", "13"],
-  [tex("R_m(p)", 12) + ", set-up", "higher success; a one-time set-up spread over the tasks", "cost per success", "14"],
- ], ["20%", "47%", "25%", "8%"], cls="tbl p2 map")}""",
+{table(["#", "term (Part 1)", "what the work does to it", "family of work", "page"], [
+  ["1", tex("J_i", 12), "→ 0 on steps run as code or replayed from a recording", "compile or replay the loop", "03"],
+  ["2", tex("N", 12), "fewer steps: more work per call, reusable skills", "bigger actions, skills", "04"],
+  ["3", tex(r"t^{\mathrm{queue}},\ t^{\mathrm{prefill}}", 12), "shorter on self-hosted serving: whole programs scheduled, cache kept across tool waits", "agent-aware serving", "05"],
+  ["4", tex(r"|o_{a,i}|\rightarrow t^{\mathrm{prefill}}", 12), "less of each page shown to the model", "observation reduction", "06"],
+  ["5", tex(r"n^{\mathrm{out}},\ \mathrm{TPOT}", 12), "less thinking; faster decoding by guessing tokens", "decoding", "07"],
+  ["6", tex("E_i", 12), "fewer or cheaper environment actions", "environment", "08"],
+  ["7", tex(r"T_{\mathrm{saving}}", 12), "added: independent calls and tools run at once", "parallel calls", "09"],
+  ["8", tex(r"T_{\mathrm{saving}}", 12), "added: the next step guessed and run early", "speculation", "10"],
+  ["9", tex(r"\bar{g},\ N^2", 12), "a flatter slope; or the square removed", "context management", "11"],
+  ["10", tex(r"n^{\kappa}", 12), "input moved from uncached to cache hit", "caching", "12"],
+  ["11", tex(r"c_{\kappa}(\mu_{ij})", 12), "a cheaper model or tier for most calls", "routing, small models, tiers", "13"],
+  ["12", tex("R_m(p)", 12) + ", set-up", "higher success; a one-time set-up spread over the tasks", "cost per success", "14"],
+ ], ["5%", "18%", "45%", "24%", "8%"], cls="tbl p2 map")}""",
       foot="the time and money formulas of Part 1 page 3, with III (one call) written out as on page 4: TTFT shown as t^queue + t^prefill (network and first-token time left out) · held-back works: Appendix B9",
       chip=("#b9-1", "Appendix B9"))
 
 # --- Part 2 · 03 compile or replay ----------------------------------------------------------
-slide("t03", "Compiling or replaying the loop removes most model calls; where the actions still run, time falls less", part=2,
+slide("t03", "1 · Compiling or replaying the loop removes most model calls", part=2,
       crumb="term: J_i → 0 on steps run as code or replayed · E_i unchanged on replay; JIT-Planner’s cached site tools also shorten it · a set-up cost sits outside the formula (page 14)",
       callout=f"""<p><b>Code or a recorded trajectory takes the model out of most steps, so {tex("D_i", 15)} → 0 there; the actions in {tex("E_i", 15)} still run unless the code replaces them too.</b> Against Synapse, a planning agent, replay cut median tokens by 96.5% but median time by 59.6% (calc., EchoPath).</p>""",
       body=f"""
@@ -1415,7 +1416,7 @@ slide("t03", "Compiling or replaying the loop removes most model calls; where th
       chip=("#b1-1", "Appendix B1"))
 
 # --- Part 2 · 04 fewer steps -------------------------------------------------------------
-slide("t04", "Fewer steps: more work per call cut steps by 38⁠–⁠46%; skills cut fewer and cost prompt tokens", part=2,
+slide("t04", "2 · Fewer steps: more work per call cut steps by 38⁠–⁠46%; skills cut fewer and cost prompt tokens", part=2,
       crumb="term: N ↓ · actions per step grow with batching, fall with API calls (page 8) · skills add module calls (J_i ↑) and lengthen the prompt |H_{a,i}|",
       callout=f"""<p><b>One call that issues an API call or a batch of actions cut {tex("N", 15)} by 38–46% (calc.); the actions still run, and only AXIS timed the task.</b> Skills cut 11–21% of steps (calc.) and raise success; a plain agent given 15 steps instead of 10 used 31% fewer tokens (calc.) and did better.</p>""",
       body=f"""
@@ -1432,7 +1433,7 @@ slide("t04", "Fewer steps: more work per call cut steps by 38⁠–⁠46%; skill
       chip=("#b2-1", "Appendix B2"))
 
 # --- Part 2 · 05 serving --------------------------------------------------------------
-slide("t05", "Serving the agent as one program cuts queueing and re-reading, on self-hosted models only", part=2,
+slide("t05", "3 · Serving the agent as one program cuts queueing and re-reading, on self-hosted models only", part=2,
       crumb="terms: t^queue and t^prefill ↓ under load · self-hosted serving only; an API user cannot apply these",
       callout=f"""<p><b>Schedulers that treat a whole agent run as the unit, and keep its cache through tool waits, give 1.2–15× more throughput or load than vLLM-based baselines.</b> All are measured under load on self-hosted models; none reports task success.</p>""",
       body=f"""
@@ -1446,7 +1447,7 @@ slide("t05", "Serving the agent as one program cuts queueing and re-reading, on 
       chip=("#b3-1", "Appendix B3"))
 
 # --- Part 2 · 06 prefill: observation reduction -----------------------------------------------
-slide("t06", "Showing the model less of the page cuts prefill; a reader call can cost more time than it saves", part=2,
+slide("t06", "4 · Showing the model less of the page cuts prefill; a reader call can cost more time than it saves", part=2,
       crumb="term: |o_{a,i}| ↓ → the actor’s t^prefill and n^unc ↓ · J_i + 1 when a model does the reducing; that reader reads the full page · success can fall",
       callout=f"""<p><b>Pruning the page before the model reads it shortens the actor’s prompt at that step, and later prompts only where old pages stay in the history; a separate reader call adds a model call per step.</b> A pruning program without a model halved step time and kept 84% of the successes.</p>""",
       body=f"""
@@ -1461,23 +1462,22 @@ slide("t06", "Showing the model less of the page cuts prefill; a reader call can
       chip=("#b4-1", "Appendix B4"))
 
 # --- Part 2 · 07 decoding -----------------------------------------------------------------
-slide("t07", "Less thinking and faster decoding shorten only the writing", part=2,
-      crumb="terms: n^out ↓ (thinking included) · TPOT ↓ at a higher price per token",
-      callout=f"""<p><b>Choosing the reasoning effort per step cut reasoning tokens by 45% at equal success; fast tiers are stated by their vendors to be up to 2.5× faster for twice the price.</b> Both shorten {tex("D_i", 15)} only.</p>""",
+slide("t07", "5 · Less thinking and faster decoding shorten only the writing", part=2,
+      crumb="terms: n^out ↓ (thinking included) · TPOT ↓ by speculative decoding",
+      callout="""<p><b>Choosing the reasoning effort per step cut reasoning tokens by 45% at equal success; speculative decoding made tasks 1.43× faster.</b></p>""",
       body=f"""
-{fx(("time", {"nout": DN, "tpot": DN, "J": UP}), ("money", {"c": UP}))}
+{fx(("time", {"nout": DN, "tpot": DN, "J": UP}), ("money", {"J": UP}))}
 {ptab2([
-  [wk("ARES", "ares"), "Before each step, a small model (Qwen3, 1.7 billion parameters) sets how much the main model reasons: low, medium or high", NR, "Reasoning tokens per task 21,424 → 11,723 (−45%)", "45.0 → 46.5%", "WebArena, about 129 tasks (inferred), gpt-oss-20b", "One extra small-model call per step; its cost not reported"],
+  [wk("ARES", "ares"), "A small router model (1.7B) picks the reasoning effort for each step: low, medium or high", NR, "Reasoning tokens per task 21,424 → 11,723 (−45%)", "45.0 → 46.5%", "WebArena, ~129 tasks, gpt-oss-20b", "One extra small-model call per step; its cost not reported"],
   [wk("Overthinking", "overthinking"), "Run the task twice at low reasoning effort; a model picks the run that overthinks less", NR, "$1,400 → $800 for the whole benchmark (−43%, calc.)", "29.1 → 27.3%", "SWE-bench Verified, o1", "Two attempts and a judge call per task"],
-  [wk("GUI-G1", "guig1"), "A 3-billion-parameter grounding model trained with reinforcement learning to answer without a thinking section", NR, "Output tokens per example 107–114 → 37–39 (−65%, calc.)", "87.5 → 90.3% accuracy", "ScreenSpot; two different 3B models (InfiGUI-R1-3B vs GUI-G1-3B)", "Grounding calls only, not whole tasks"],
-  [wk("Agent-X", "agentx"), "Speculative decoding: guess the next tokens by copying from the tool-use examples in the prompt; the model checks the guesses", "Task time 1.43× faster (−30%, calc.); 1.61× with its prompt cache", NR + " (local model)", NR, "1,022 TinyAgent tool-calling tasks, 7B model on a Mac mini", "On-device only"],
-  [wk("Fast tiers (vendor)", "anth-b", "openai"), "The same model, served faster at a higher price", "Up to 2.5× more output tokens per second; first token no sooner (Anthropic)", "Price 2×", "Same model", "Vendor statements, no benchmark", "Switching speed resets Anthropic’s prompt cache"],
+  [wk("GUI-G1", "guig1"), "A 3B grounding model trained with RL to answer without a thinking section", NR, "Output tokens per example 107–114 → 37–39 (−65%, calc.)", "87.5 → 90.3% accuracy", "ScreenSpot; InfiGUI-R1-3B vs GUI-G1-3B", "Grounding calls only, not whole tasks"],
+  [wk("Agent-X", "agentx"), "Speculative decoding: guesses the next tokens from the tool-use examples in the prompt; the model checks them", "Task time 1.43× faster (−30%, calc.); 1.61× with its prompt cache", NR + " (local model)", NR, "1,022 TinyAgent tool-calling tasks, 7B model on a Mac mini", "On-device only"],
  ])}""",
       foot="NOT YET MEASURED · independent task-level timing of fast tiers · the net effect of per-step effort changes, which invalidate Anthropic’s message cache · more rows in Appendix B4 (2/2)",
       chip=("#b4-2", "Appendix B4"))
 
 # --- Part 2 · 08 environment -----------------------------------------------------------------
-slide("t08", "Time outside the model: on self-hosted WebArena it exceeded model time, and few works shrink it", part=2,
+slide("t08", "6 · Time outside the model: on self-hosted WebArena it exceeded model time, and few works shrink it", part=2,
       crumb="term: E_i ↓ — fewer environment actions, cached tool results · x_env priced by the hour",
       callout=f"""<p><b>With one agent on self-hosted WebArena, the mean step took 12.2 s, 7.6 s of it outside the model (Claude 3.5 Sonnet, 5,493 steps, on 8-CPU VMs the authors say limited speed; WorkArena L2: 4.9 of 10.7 s) {c2('bgym')}; Browser-Use on five web apps spent 73% of its time in model calls {c2('jit')}.</b> The works that shrink {tex("E_i", 15)} skip the browser or cache tool results; batching actions moves the other way.</p>""",
       body=f"""
@@ -1493,7 +1493,7 @@ slide("t08", "Time outside the model: on self-hosted WebArena it exceeded model 
       chip=("#b5-1", "Appendix B5"))
 
 # --- Part 2 · 09 overlap: parallel and asynchronous ---------------------------------------------
-slide("t09", "Overlap (1): running independent calls and tools together saved 17⁠–⁠73% of task time; one workload got slower", part=2,
+slide("t09", "7 · Overlap by parallel calls and tools saved 17⁠–⁠73% of task time", part=2,
       crumb="term: T_saving raised where it is small today · calls, turns and tokens fall when independent calls share a turn (LLMCompiler, W&D, TPS-Bench)",
       callout=f"""<p><b>Running independent calls or tools together creates {tex(r"T_{\mathrm{saving}}", 15)}; the longest dependent chain sets the limit.</b> Speed-up ≤ {tex(r"(T_{\mathrm{LLM}}+T_{\mathrm{tool}})/\max(T_{\mathrm{LLM}},T_{\mathrm{cp}})", 15)}: decoding, tool and critical-path tool time {c2('asyncfc')}; for parallel calls the slowest one sets the time {c2('llmc')}; at most 2× when every tool call waits for the one before ({tex(r"T_{\mathrm{cp}}=T_{\mathrm{tool}}", 15)}; calc.).</p>""",
       body=f"""
@@ -1508,7 +1508,7 @@ slide("t09", "Overlap (1): running independent calls and tools together saved 17
       chip=("#b0-1", "Appendix B0"))
 
 # --- Part 2 · 10 overlap: speculation, and safety ----------------------------------------------
-slide("t10", "Overlap (2): guessing the next step saved 5⁠–⁠45% of task time, always paid in extra calls", part=2,
+slide("t10", "8 · Overlap by guessing the next step saved 5⁠–⁠45% of task time, always paid in extra calls", part=2,
       crumb="term: T_saving added by guessing · calls, tokens and GPU hours grow · safe only for effects that can wait for a commit",
       callout="""<p><b>A guesser (a cheaper model or setting, or the model itself) runs the predicted next action early: a right guess hides a wait, a wrong one is discarded but paid for.</b> Steps with side effects need the rule on the right.</p>""",
       body=f"""
@@ -1530,7 +1530,7 @@ slide("t10", "Overlap (2): guessing the next step saved 5⁠–⁠45% of task ti
       chip=("#b5-2", "Appendix B5"))
 
 # --- Part 2 · 11 the growing prompt -------------------------------------------------------------
-slide("t11", "The growing prompt: masking old observations halved the bill; only compiled plans are shown to remove the square", part=2,
+slide("t11", "9 · The growing prompt: masking old observations halved the bill; only compiled plans are shown to remove the square", part=2,
       crumb="terms: ḡ ↓ (mask, trim, evict) or the N² structure removed (a plan instead of the history) · edits to old context turn some cache hits into misses or cache writes",
       callout=f"""<p><b>Placeholders remove each old observation once it is 10 turns old: a smaller effective {tex(r"\bar{g}", 15)}, a flatter slope of the {tex("N^2", 15)} term but the same shape.</b> A compiled plan removes the square: the prompt holds the plan, not the history.</p>""",
       body=f"""
@@ -1545,7 +1545,7 @@ slide("t11", "The growing prompt: masking old observations halved the bill; only
       chip=("#b4-1", "Appendix B4"))
 
 # --- Part 2 · 12 the bill by class ------------------------------------------------------------
-slide("t12", "The bill by class: a cached stable prefix cut bills 41⁠–⁠80% vs no cache; with trimming and eviction, up to 87%", part=2,
+slide("t12", "10 · The bill by class: a cached stable prefix cut bills 41⁠–⁠80% vs no cache; with trimming and eviction, up to 87%", part=2,
       crumb="term: n^unc → n^hit (input read from the cache) · cache writes n^w grow · the price c_κ(μ) unchanged",
       callout=f"""<p><b>A cache hit costs 2–25% of an uncached input token (by vendor), so moving input into the hit class cuts that input’s price by 75–98% (calc.) without changing the model.</b> A change of speed, of tools or of old context turns hits back into writes and misses.</p>""",
       body=f"""
@@ -1566,7 +1566,7 @@ slide("t12", "The bill by class: a cached stable prefix cut bills 41⁠–⁠80%
       chip=("#b6-1", "Appendix B6"))
 
 # --- Part 2 · 13 a cheaper model per call -----------------------------------------------------------
-slide("t13", "A cheaper model for most calls cut dollars per task by 50⁠–⁠97%, usually for a few points of success", part=2,
+slide("t13", "11 · A cheaper model for most calls cut dollars per task by 50⁠–⁠97%, usually for a few points of success", part=2,
       crumb="term: c_κ(μ_ij) ↓ — a smaller model or cheaper tier for most calls · N and J_i can grow · R_m(p) often falls",
       callout=f"""<p><b>Sending most steps to a small model, and only hard ones to a large one, cut dollars per task by 50–97% (calc.), usually for 1–4 points of success and sometimes with more steps.</b> Tiers trade the price per token against queueing and speed.</p>""",
       body=f"""
@@ -1583,7 +1583,7 @@ slide("t13", "A cheaper model for most calls cut dollars per task by 50⁠–⁠
 
 # --- Part 2 · 14 success and cost per success ----------------------------------------------------------
 EQ["amort"] = r"$v_n(m,p)\;=\;\dfrac{C_{\mathrm{setup}}}{n}\;+\;\dfrac{C_m(p)}{R_m(p)}$"
-slide("t14", "Cost per success moves with the success rate, and a set-up cost must be spread over the tasks", part=2,
+slide("t14", "12 · Cost per success moves with the success rate, and a set-up cost must be spread over the tasks", part=2,
       crumb="terms: R_m(p) in v(m,p) = C_m(p) / R_m(p) · plus a one-time set-up cost that Part 1’s per-attempt formula leaves out",
       callout="""<p><b>A dearer attempt can give a cheaper success: Beyond Browsing’s hybrid agent costs $1.4 per attempt against $1.2 for API calls alone, but $3.60 against $4.11 per success (calc.).</b> Few papers report the ratio, so the figures here are our calculations. Set-up costs are left out of most headlines; SpeedRunner spreads them over its runs (B8).</p>""",
       body=f"""
@@ -2039,7 +2039,7 @@ svg.tex{display:inline-block;height:auto}
 .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
 .plainlist{margin:0;padding-left:18px;font-size:12.5px;line-height:1.4;color:var(--ink2)}
 .nr{color:var(--mute);font-style:italic}
-.tbl.p2u td{font-size:11.3px;line-height:1.3}
+.tbl.p2u td{font-size:11px;line-height:1.28}
 .p3refs{margin-top:-4px;border-top:1px solid var(--rule);padding-top:3px}
 .pgrefs{columns:2;column-gap:28px;margin:0;padding-left:14px;list-style:disc}
 .pgrefs li{font-size:9.5px;line-height:1.22;color:var(--ink2);margin:0 0 3px 0;break-inside:avoid}
@@ -2191,8 +2191,8 @@ _FORMS1 = {k: _base(v) for k, v in CITE.items()}
 _FORMS2 = {k: html.unescape(c) for k, c, _ in REFS_P2}
 _REF2 = {k: r for k, _, r in REFS_P2}
 
-REFS_SMALL = {"s05", "s10", "s12", "s13", "t06"}   # pages with a little less room: smaller type
-REFS_NONE = {"s02", "s11", "t03", "t04", "t07", "t08", "t09", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
+REFS_SMALL = {"s05", "s10", "s12", "s13", "t03", "t06", "t07", "t09"}   # pages with a little less room: smaller type
+REFS_NONE = {"s02", "s11", "t04", "t08", "t10", "t11", "t12", "t13", "t14"}   # no blank space yet: the Part's reference pages hold these works
 
 def page_refs_html(refs, small=False):
     return '<div class="p3refs"><div class="p3rh">References</div><ul class="pgrefs' + (' sm' if small else '') + '">' + "".join(f"<li>{r}</li>" for r in refs) + "</ul></div>"
@@ -2215,7 +2215,7 @@ for _s in SLIDES:
         _refs = sorted(set(_refs), key=lambda r: html.unescape(r).lower())
         if _refs:
             _s["body"] += page_refs_html(_refs, _s["id"] in REFS_SMALL)
-    if (_s["foot"] or "").startswith("SOURCES"):
+    if (_s["foot"] or "").startswith("SOURCES") or _s["part"] == 2:
         _s["foot"] = ""
 
 def render(font_dir=None):

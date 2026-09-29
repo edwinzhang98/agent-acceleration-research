@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-09-29, by Claude (Code session: Part 2 page 7 rebuilt as a uniform-column sample) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-09-29, by Claude (Code session: Part 2 families numbered; Part 2 foots removed; page 7 fast-tier row dropped) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -37,6 +37,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-09-29 — Code session — Part 2 on Edwin’s review: page 7’s ARES method back to “A small router model (1.7B) picks the reasoning effort for each step”; the vendor fast-tier row removed (not a method; still on Part 1 pages 12–13 and in B4), with the callout, strip and map row 5 updated; every Part 2 foot (“NOT YET MEASURED …”) removed; page references added where they fit (Part 2 pages 3, 5, 6, 7, 9; still none on 4, 8, 10–14, listed in REFS_NONE); the map numbers its twelve families (parallel calls and speculation now two rows, 7 and 8) and every Part 2 page title starts with its family number; titles of pages 3 and 9 shortened to one line. 74 pages fit; PDF re-exported.
 - 2026-09-29 — Code session — Page 12’s chart relabelled after Edwin asked whether one task uses all four machines: bars now named by use (small VM, OSWorld 2.0’s desktop VM, code sandbox, GPU sandbox) with the product in brackets; title says it is renting the machine the agent operates for one hour as a share of one task’s $7.87 model bill; caption says one task uses one machine and what $7.87 is (GTA1 with o3 on OSWorld, all tokens, per task). 74 pages fit; PDF re-exported.
 - 2026-09-29 — Code session — Part 1 page 8 labelled like its neighbours (Edwin: does the prompt-growth page belong to none of I–V?): title “III · The prompt grows: …”, callout opens “The reading inside III, and money II”. 74 pages fit; PDF re-exported.
 - 2026-09-29 — Code session — Part 2 page 7 rebuilt as a sample of a uniform table on Edwin’s review (“1.7B router…不要写得这么缩写”; “应该有个统一的metrics”; “grows / left out 两个东西能放在一起吗”): columns work | method (plain words, e.g. ARES’s router is “a small model (Qwen3, 1.7 billion parameters)”) | time | money or tokens | success | setting | side effects; a quantity a paper did not measure reads “not reported”; percent changes added as calc. (Overthinking −43%, GUI-G1 −65%, Agent-X −30%); title shortened to one line. Pending Edwin: apply the same columns to the other Part 2 pages (3–6, 8–14). 74 pages fit; PDF re-exported.
