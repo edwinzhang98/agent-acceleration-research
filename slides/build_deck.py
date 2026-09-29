@@ -1352,7 +1352,7 @@ def ptab(rows, widths=("17%", "24%", "37%", "22%"), headers=("work", "what it ch
     return table(list(headers), rows, list(widths), cls="tbl p2")
 
 # --- Part 2 · 01 title --------------------------------------------------------------
-P2_REF_SPAN = "15" if P2_REF_PAGES == 1 else f"15–{14 + P2_REF_PAGES}"
+P2_REF_SPAN = "14" if P2_REF_PAGES == 1 else f"14–{13 + P2_REF_PAGES}"
 slide("t01", "Acceleration, term by term", cover=True, part=2,
       body=f"""
 <div class="cover">
@@ -1371,7 +1371,6 @@ slide("t01", "Acceleration, term by term", cover=True, part=2,
     <li><span>08</span>Less time outside the model</li>
     <li><span>09–10</span>Overlap: parallel calls, and speculation with its safety</li>
     <li><span>11–13</span>The growing prompt, the bill by class, a cheaper model per call</li>
-    <li><span>14</span>Success and cost per success, set-up included</li>
     <li><span>{P2_REF_SPAN}</span>References and Appendix B0–B10, at the end of the deck</li>
     </ol>
   </div>
@@ -1394,7 +1393,6 @@ slide("t02", "The map: each family of work targets one term or a pair, and most 
   ["9", tex(r"\bar{g},\ N^2", 12), "a flatter slope; or the square removed", "context management", '<a class="pgbtn" href="#t11">11</a>'],
   ["10", tex(r"n^{\kappa}", 12), "input moved from uncached to cache hit", "caching", '<a class="pgbtn" href="#t12">12</a>'],
   ["11", tex(r"c_{\kappa}(\mu_{ij})", 12), "a cheaper model or tier for most calls", "routing, small models, tiers", '<a class="pgbtn" href="#t13">13</a>'],
-  ["12", tex("R_m(p)", 12) + ", set-up", "higher success; a one-time set-up spread over the tasks", "cost per success", '<a class="pgbtn" href="#t14">14</a>'],
  ], ["5%", "18%", "45%", "24%", "8%"], cls="tbl p2 map")}""",
       foot="the time and money formulas of Part 1 page 3, with III (one call) written out as on page 4: TTFT shown as t^queue + t^prefill (network and first-token time left out) · held-back works: Appendix B9",
       chip=("#b9-1", "Appendix B9"))
@@ -1578,33 +1576,6 @@ def _cps(c, r):
     v = c / r
     return f"${v:,.0f}" if v >= 100 else f"${v:,.2f}"
 
-slide("t14", "12 · Success rate and set-up: the cost of one success", part=2,
-      crumb="terms: R_m(p) in v(m,p) = C_m(p) / R_m(p) · plus a one-time set-up cost that Part 1’s per-attempt formula leaves out",
-      callout="""<p><b>Few papers report the cost of one success, so this page computes it for works on the earlier pages: cost per attempt ÷ success rate, plus any one-time set-up spread over the tasks it serves.</b></p>""",
-      body=f"""
-<div class="eqtab">
-{eqrow("per task", "set-up spread", ["amort"],
-       tex(r"C_{\mathrm{setup}}", 11) + ": one-time cost of building the code, tools or memories; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{setup}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
-       "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); one large tool-making call spread over n cheap calls, O(nc + C) with C, c the cost of one large- and one small-model call: " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
-</div>
-<div class="twocol">
-{table(["work (page)", "cost per attempt", "success", "cost per success (calc.)"], [
-  [wk("AXIS (4)", "axis"), "$0.4 → $0.2", "52 → 84%", f"{_cps(0.4, .52)} → {_cps(0.2, .84)}"],
-  [wk("OSWorld 2.0, batched (4)", "osw2"), "~$76.1 → ~$72.4", "18.5 → 20.6%", f"{_cps(76.1, .185)} → {_cps(72.4, .206)}"],
-  [wk("W&amp;D (9)", "wd"), "$1.025 → $0.657", "66 → 68%", f"{_cps(1.025, .66)} → {_cps(0.657, .68)}"],
-  [wk("StepWise (13)", "stepwise"), "$0.881 → $0.224", "58.1 → 55.4%", f"{_cps(0.881, .581)} → {_cps(0.224, .554)}"],
-  [wk("WebRouter (13)", "webrouter"), "$0.98 → $0.12", "86.1 → 82.3%", f"{_cps(0.98, .861)} → {_cps(0.12, .823)}"],
-  [wk("Beyond Browsing, API only → hybrid", "beyondbrowsing"), "$1.2 → $1.4", "29.2 → 38.9%", f"{_cps(1.2, .292)} → {_cps(1.4, .389)}"],
-  [wk("BATS, vs ReAct@100", "bats"), "9.9¢ → $1.1", "12.6 → 24.6%", f"{_cps(0.099, .126)} → {_cps(1.1, .246)}"],
- ], ["34%", "22%", "18%", "26%"], cls="tbl p2")}
-{card("SET-UP COSTS LEFT OUT OF THE HEADLINES", "Each needs n tasks to pay off",
-      [f"JIT-Planner: 25–90 min of tool building plus 25–45 min of traces per app {c2('jit')}",
-       f"EET (Agentless, GPT-5-mini): $4.3 to build its experience base once, against a 500-task SWE-bench Verified run cut from $13.77 to $6.18 — repaid within that run; with Mini-SWE-Agent the $7.1 set-up exceeds one run’s $3.11 saving (calc.) {c2('eet')}",
-       f"AutoDroid-V2: $82.42 of GPT-4o calls per app (calc.) {c2('autodroid2')}"])}
-</div>""",
-      foot="NOT YET MEASURED · time, money and success, set-up included, on one web or GUI benchmark · the calculations with their inputs and rounding are in Appendix B8",
-      chip=("#b8-1", "Appendix B8"))
-
 # --- references (part 2) ---------------------------------------------------
 for _n in range(P2_REF_PAGES):
     _chunk = [r for _, _, r in REFS_P2][_n * P2_REFS_PER_PAGE:(_n + 1) * P2_REFS_PER_PAGE]
@@ -1643,12 +1614,12 @@ B("b0-2", "B0 · 2/3", "B0 · Source formulas for speculation, cache retention a
 
 EQ["nichols4"] = r"$T_{\mathrm{vanilla}}=2Ko+\phi\sum_{i=1}^{K}X_i+\delta\sum_i(R_i+t_i)+\sum_i T_i,\quad X_{i+1}=X_i+t_i+t_{o,i}$"
 B("b0-3", "B0 · 3/3", "B0 · Source formulas for money and set-up, and one closer source for Part 1",
-  crumb="verbatim from each source · behind pages 12 and 14 · the last row is a finding for Part 1’s Appendix A0",
+  crumb="verbatim from each source · behind page 12 and Appendix B8 · the last row is a finding for Part 1’s Appendix A0",
   body=table(h_f, [
    [wk("TokenPilot, App. A.2, Eq. 11", "tokenpilot"), tex(r"\mathrm{Cost}=|C'_{\mathrm{hit}}|\,p_{\mathrm{hit}}+|C'_{\mathrm{miss}}|\,p_{\mathrm{miss}}+H_{\mathrm{out}}\,p_{\mathrm{out}}", 11), tex(r"|C'_{\mathrm{hit}}|,|C'_{\mathrm{miss}}|", 10) + " cached and uncached input tokens; " + tex(r"H_{\mathrm{out}}", 10) + " generated tokens; p prices", "Part 1’s money sum over three classes; no cache-write term"],
    [wk("SpeedRunner, App. A.3", "speedrunner"), tex(r"\mathrm{cost}=p_{\mathrm{in}}N^{\mathrm{uncached}}_{\mathrm{in}}+p_{\mathrm{cache}}N^{\mathrm{cached}}_{\mathrm{in}}+p_{\mathrm{out}}N_{\mathrm{out}}", 11), "N summed over all calls of an episode, the skill-inducer calls amortised over its rollouts", "the same three classes; set-up calls spread over the runs they serve"],
    [wk("LATM, Table 2", "latm"), tex(r"O(nc+C)", 11) + " against " + tex(r"O(nC)", 11), "n samples; C one call to the large tool-making model; c one call to the small tool-using model", "one expensive set-up amortised over n cheap runs — the form of page 14’s " + tex(r"C_{\mathrm{setup}}/n", 10)],
-   [wk("AI Agents That Matter, §3", "kapoor25"), "in words: total cost = a fixed cost (one-time optimisation) + a variable cost (per run, from input and output tokens)", "—", "page 14’s " + tex(r"v_n(m,p)", 10) + " adds this fixed cost to Cost-of-Pass’s per-success cost (adapted)"],
+   [wk("AI Agents That Matter, §3", "kapoor25"), "in words: total cost = a fixed cost (one-time optimisation) + a variable cost (per run, from input and output tokens)", "—", "Appendix B8’s " + tex(r"v_n(m,p)", 10) + " adds this fixed cost to Cost-of-Pass’s per-success cost (adapted)"],
    [wk("Speculative tool calls, Eq. 4", "nichols"), eq_svg("nichols4", fontsize=10, cls="eqn"), "K turns; o per-call overhead; ϕ prefill and δ decode seconds per token; " + tex("X_i", 10) + " prompt tokens of turn i; " + tex("R_i, t_i", 10) + " reasoning and tool-call tokens; " + tex(r"t_{o,i}", 10) + " tool output; " + tex("T_i", 10) + " tool time", "a published form of Part 1’s time sum with its growing prompt, found in these checks: per-call overhead, prefill of a prompt that grows each turn, decoding, tool wait. Part 1 does not cite it yet (open question)"],
   ], w_f))
 
@@ -1790,8 +1761,32 @@ B("b7-1", "B7", "B7 · A cheaper model per call: more rows, with full conditions
    [wk("FrugalGPT", "frugal"), "A cascade of models with a stopping scorer", "Up to 98% lower cost at equal accuracy on one single-query dataset (HEADLINES)", "Single-turn"],
   ], w_d))
 
-B("b8-1", "B8", "B8 · Cost per success: the inputs, the formula and the rounding",
-  crumb="behind page 14 · v = cost per attempt ÷ success rate (Cost-of-Pass, Eq. 2) · all results are calc. unless stated",
+B("b8-0", "B8 · 1/2", "B8 · Cost per success, set-up included, for the Part 2 works",
+  crumb="computed from each paper’s own numbers (calc.): cost per attempt ÷ success rate, plus a one-time set-up spread over n tasks · (n) = the work’s Part 2 page",
+  body=f"""
+<div class="eqtab">
+{eqrow("per task", "set-up spread", ["amort"],
+       tex(r"C_{\mathrm{setup}}", 11) + ": one-time cost of building the code, tools or memories; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{setup}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
+       "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); one large tool-making call spread over n cheap calls, O(nc + C) with C, c the cost of one large- and one small-model call: " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
+</div>
+<div class="twocol">
+{table(["work (page)", "cost per attempt", "success", "cost per success (calc.)"], [
+  [wk("AXIS (4)", "axis"), "$0.4 → $0.2", "52 → 84%", f"{_cps(0.4, .52)} → {_cps(0.2, .84)}"],
+  [wk("OSWorld 2.0, batched (4)", "osw2"), "~$76.1 → ~$72.4", "18.5 → 20.6%", f"{_cps(76.1, .185)} → {_cps(72.4, .206)}"],
+  [wk("W&amp;D (9)", "wd"), "$1.025 → $0.657", "66 → 68%", f"{_cps(1.025, .66)} → {_cps(0.657, .68)}"],
+  [wk("StepWise (13)", "stepwise"), "$0.881 → $0.224", "58.1 → 55.4%", f"{_cps(0.881, .581)} → {_cps(0.224, .554)}"],
+  [wk("WebRouter (13)", "webrouter"), "$0.98 → $0.12", "86.1 → 82.3%", f"{_cps(0.98, .861)} → {_cps(0.12, .823)}"],
+  [wk("Beyond Browsing, API only → hybrid", "beyondbrowsing"), "$1.2 → $1.4", "29.2 → 38.9%", f"{_cps(1.2, .292)} → {_cps(1.4, .389)}"],
+  [wk("BATS, vs ReAct@100", "bats"), "9.9¢ → $1.1", "12.6 → 24.6%", f"{_cps(0.099, .126)} → {_cps(1.1, .246)}"],
+ ], ["34%", "22%", "18%", "26%"], cls="tbl p2")}
+{card("SET-UP COSTS LEFT OUT OF THE HEADLINES", "Each needs n tasks to pay off",
+      [f"JIT-Planner: 25–90 min of tool building plus 25–45 min of traces per app {c2('jit')}",
+       f"EET (Agentless, GPT-5-mini): $4.3 to build its experience base once, against a 500-task SWE-bench Verified run cut from $13.77 to $6.18 — repaid within that run; with Mini-SWE-Agent the $7.1 set-up exceeds one run’s $3.11 saving (calc.) {c2('eet')}",
+       f"AutoDroid-V2: $82.42 of GPT-4o calls per app (calc.) {c2('autodroid2')}"])}
+</div>""")
+
+B("b8-1", "B8 · 2/2", "B8 · Cost per success: the inputs, the formula and the rounding",
+  crumb="cost per success for works on the Part 2 pages, which few papers report · v = cost per attempt ÷ success rate (Cost-of-Pass, Eq. 2) · all results are calc. unless stated",
   body=table(["work", "cost per attempt (as printed)", "success rate", "cost per success (calc.)", "note"], [
    [wk("AXIS vs UFO", "axis"), "$0.4 → $0.2", "52.0 → 84.0%", f"{_cps(0.4, .52)} → {_cps(0.2, .84)}", "costs printed to one decimal"],
    [wk("W&amp;D", "wd"), "$1.025 → $0.657 ($102.5, $65.7 per 100)", "66 → 68%", f"{_cps(1.025, .66)} → {_cps(0.657, .68)}", "includes search and scraping fees"],
@@ -1804,7 +1799,7 @@ B("b8-1", "B8", "B8 · Cost per success: the inputs, the formula and the roundin
    [wk("Fara-7B vs computer-use-preview", "fara"), "$0.913 → $0.025", "70.9 → 73.5%", f"{_cps(0.913, .709)} → {_cps(0.025, .735)}", "WebVoyager"],
    [wk("AI Agents That Matter", "kapoor25"), "LATS $134.50 vs warming $2.45 (164-problem run totals)", "88.0 vs 93.2%", "stated totals, not per success", "HumanEval, GPT-4"],
   ], ["20%", "22%", "15%", "18%", "25%"]) + """
-<div class="apx-note">With a set-up cost (page 14): <b>v<sub>n</sub> = C<sub>setup</sub>/n + v</b>. Two retained works print both parts. EET’s experience base (Agentless, GPT-5-mini) cost $4.3 once, against a benchmark run of $13.77 → $6.18 (500 tasks), so it pays off within the first run: $10.48 with the set-up charged to it (calc.). SpeedRunner already spreads its skill-inducer calls over the runs they serve. The page-3 systems print their set-up in minutes, tokens or GPT-4o dollars, never next to a per-task dollar figure.</div>""")
+<div class="apx-note">With a set-up cost: <b>v<sub>n</sub> = C<sub>setup</sub>/n + v</b>. Two retained works print both parts. EET’s experience base (Agentless, GPT-5-mini) cost $4.3 once, against a benchmark run of $13.77 → $6.18 (500 tasks), so it pays off within the first run: $10.48 with the set-up charged to it (calc.). SpeedRunner already spreads its skill-inducer calls over the runs they serve. The page-3 systems print their set-up in minutes, tokens or GPT-4o dollars, never next to a per-task dollar figure.</div>""")
 
 B("b9-1", "B9 · 1/4", "B9 · Works held back or dropped, and why",
   crumb="the source-credibility rule of slides/references.md · (iii) = numbers from a public benchmark with the task count and model stated",
