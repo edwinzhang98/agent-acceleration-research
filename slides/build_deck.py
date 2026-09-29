@@ -416,7 +416,7 @@ slide("s01", "Where the time and the money go", cover=True,
     <div class="toc-t">In this part</div>
     <ol class="toc">
     <li><span>02</span>One attempt of an agent, step by step: the loop and its variables</li>
-    <li><span>03–04</span>The problem, defined: one formula for time, one for money, the goal, and what is inside their terms</li>
+    <li><span>03–04b</span>The problem, defined: one formula for time, one for money, the goal, and what is inside their terms</li>
     <li><span>05–10</span>Where the time goes, term by term</li>
     <li><span>11–12</span>Where the money goes, term by term, and per success</li>
     <li><span>13–14</span>How time and money are linked, and the levers</li>
@@ -471,7 +471,7 @@ def eqrow_html(key, sub, formula_html, gloss, cite, pg):
 EQ["ttft"] = r"$\mathrm{TTFT}_{ij}\;\approx\;t^{\mathrm{queue}}_{ij}+t^{\mathrm{net}}_{ij}+t^{\mathrm{prefill}}_{ij}+t^{\mathrm{first}}_{ij}$"
 EQ["nin"] = r"$n^{\mathrm{hit}}_{ij}+n^{\mathrm{w5m}}_{ij}+n^{\mathrm{w1h}}_{ij}+n^{\mathrm{unc}}_{ij}\;=\;|H_{a,i}|\quad(\mathrm{one\ call\ per\ step})$"
 
-slide("s03", "The problem, defined (1/2): one formula for time, one for money, and what counts as faster",
+slide("s03", "The problem, defined (1/3): time, money and the goal",
       body=f"""
 <div class="statusleg">numerals run left to right: time I–V as on page 5, money I–VI as on page 11</div>
 <div class="eqtab narroweq2">
@@ -497,40 +497,73 @@ slide("s03", "The problem, defined (1/2): one formula for time, one for money, a
    defs1([
     (r"T_{\mathrm{success}}", "expected seconds per success", "self-defined"),
     (r"v,\ C_m(p)", "expected dollars per success; per attempt", CITE['cop']),
-    (r"R_m(p)", "probability that one attempt succeeds; dividing by it is money VI", CITE['cop']),
+    (r"R_m(p)", "probability one attempt succeeds; dividing by it is money VI", CITE['cop']),
     (r"\min_m(\cdot,\cdot)^{\top}", "the Pareto set: designs that no other design matches on both and beats on one", CITE['boyd04']),
     (r"R_0", "minimum acceptable success rate", "self-defined"),
    ]),
    "", "")}
-</div>""",
+</div>
+<div class="p3refs"><div class="p3rh">References</div>@@REFS:isp,asyncfc,llmc,cop,anth-b,boyd04@@</div>""",
       chip=("#a0-1", "Appendix A0"))
 
-slide("s04", "The problem, defined (2/2): what is inside the terms",
-      body=table(["expands", "formula", "its symbols", "source", "pages"], [
-   ["<b>Time III · one call</b> " + tex(r"\ell_{ij}", 12), eq_svg("call", fontsize=11.5, cls="eqn") + eq_svg("ttft", fontsize=11.5, cls="eqn"),
-    defs1([(r"\ell_{ij}", "time of call " + tex("j", 12) + " in step " + tex("i", 12), CITE['swm']),
-           (r"\mathrm{TTFT},\ \mathrm{TPOT}", "time to first token; per later output token", CITE['distserve']),
-           (r"n^{\mathrm{out}}_{ij}", "output tokens of the call, thinking included", CITE['cop']),
-           (r"t^{\mathrm{queue}},\ t^{\mathrm{net}}", "server queue; network", CITE['distserve'] + "; self-defined"),
-           (r"t^{\mathrm{prefill}},\ t^{\mathrm{first}}", "reading the uncached input, which computes the first token; emitting it", CITE['distserve'] + "; self-defined")]),
-    CITE['distserve'] + "; " + CITE['aa'], "5–7; Part 2: 5–7"],
-   ["<b>Time V · overlap</b> " + tex(r"T_{\mathrm{saving}}", 12), eq_svg("saving", fontsize=11.5, cls="eqn"),
-    defs1([(r"\mathcal{M},\ \mathcal{E}", "intervals when a model call runs; when anything else runs", CITE['asyncfc']),
-           (r"\mathcal{S}(\cdot),\ \mathcal{D}(\cdot),\ \triangleq", "lengths added up (overlap counted twice); length of their union (overlap counted once); defined as", CITE['asyncfc'])]),
-    CITE['asyncfc'] + "; " + CITE['llmc'], "9; Part 2: 9–10"],
-   ["<b>Input tokens of a call</b> " + tex(r"|H_{a,i}|", 12) + " — read in time III (prefill), billed in money II", eq_svg("ctx", fontsize=11.5, cls="eqn") + eq_svg("ctxsum", fontsize=11.5, cls="eqn"),
-    defs1([(r"H_{a,i},\ |\cdot|", "prompt of agent " + tex("a", 12) + " at step " + tex("i", 12) + ", the history so far; its length in tokens", CITE['yuan']),
-           (r"z_{a,i},\ \Phi", "the model’s output at step " + tex("i", 12) + " (thinking, message, tool call); the chat template that writes it into the history", CITE['yuan']),
-           (r"o_{a,i}", "what the action returns (screenshot, tool result)", CITE['yuan']),
-           (r"N|H_{a,1}|", "the first prompt, read at each of the " + tex("N", 12) + " steps", "self-defined"),
-           (r"g_i,\ \bar{g}", "tokens step " + tex("i", 12) + " adds, " + tex(r"|\Phi(z_{a,i})|+|o_{a,i}|", 12) + "; their mean, each weighted by the " + tex(r"N-i", 12) + " later steps that re-read it", "self-defined")]),
-    "line 1: " + CITE['yuan'] + "; " + CITE['react'] + "<br>line 2: summed from line 1 (ours)", "8; Part 2: 6, 11"],
-   ["<b>Money II, III · tokens by class</b> " + tex(r"n^{\kappa}_{ij}", 12), eq_svg("classes", fontsize=11.5, cls="eqn") + eq_svg("nin", fontsize=11.5, cls="eqn"),
-    defs1([(r"n^{\kappa}_{ij}", "tokens of class " + tex(r"\kappa", 12) + " in call " + tex("j", 12) + " of step " + tex("i", 12), CITE['cop'] + "; " + CITE['anth-b']),
-           (r"\mathrm{hit,\ w5m,\ w1h,\ unc,\ out}", "cache read; cache write kept 5 min or 1 h; uncached input; output", CITE['anth-b'])]),
-    CITE['anth-b'] + "; " + CITE['sglang'], "11–12; Part 2: 12"],
-  ], ["13%", "25%", "44%", "11%", "7%"], cls="tbl p2 expand"),
+def deftable(groups):
+    """Page 4: one block per expansion; each symbol of its formula on its own row: symbol, definition, source."""
+    out = ['<table class="tbl p4def"><colgroup><col style="width:12%"><col style="width:24%"><col style="width:9%"><col style="width:39%"><col style="width:16%"></colgroup>'
+           '<thead><tr><th>expands</th><th>formula</th><th>symbol</th><th>definition</th><th>source</th></tr></thead><tbody>']
+    for ex, fm, fsrc, syms in groups:
+        n = len(syms)
+        for k, (sy, df, so) in enumerate(syms):
+            row = '<tr class="g0">' if k == 0 else '<tr>'
+            if k == 0:
+                row += f'<td class="ex" rowspan="{n}">{ex}</td><td class="fm" rowspan="{n}">{fm}<div class="fsrc">{fsrc}</div></td>'
+            row += f'<td class="sy">{tex(sy, 11.5)}</td><td class="df">{df}</td><td class="so">{so}</td></tr>'
+            out.append(row)
+    return "".join(out) + "</tbody></table>"
+
+slide("s04", "The problem, defined (2/3): inside time III and time V",
+      body=deftable([
+   ("<b>Time III · one call</b> " + tex(r"\ell_{ij}", 12), eq_svg("call", fontsize=11.5, cls="eqn") + eq_svg("ttft", fontsize=11.5, cls="eqn"),
+    CITE['distserve'] + "; " + CITE['aa'], [
+     (r"\ell_{ij}", "Latency of call " + tex("j", 11) + " in step " + tex("i", 11) + ": time from sending the request to receiving its last output token.", CITE['swm']),
+     (r"\mathrm{TTFT}_{ij}", "Time to first token: time from sending the request to receiving the first output token.", CITE['distserve'] + "; " + CITE['aa']),
+     (r"\mathrm{TPOT}_{ij}", "Time per output token: mean time between successive output tokens after the first.", CITE['distserve']),
+     (r"n^{\mathrm{out}}_{ij}", "Number of output tokens the call generates, thinking tokens included.", CITE['cop']),
+     (r"t^{\mathrm{queue}}_{ij}", "Time the request waits in the server’s queue before its prefill starts.", CITE['distserve']),
+     (r"t^{\mathrm{net}}_{ij}", "Network time between the client and the server.", "self-defined"),
+     (r"t^{\mathrm{prefill}}_{ij}", "Time to process the input tokens not read from the cache; this pass also computes the first output token.", CITE['distserve']),
+     (r"t^{\mathrm{first}}_{ij}", "Time to deliver the first output token once it is computed.", "self-defined")]),
+   ("<b>Time V · overlap</b> " + tex(r"T_{\mathrm{saving}}", 12), eq_svg("saving", fontsize=11.5, cls="eqn"),
+    CITE['asyncfc'] + "; " + CITE['llmc'], [
+     (r"\mathcal{M}", "Set of time intervals during which a model call is running.", CITE['asyncfc']),
+     (r"\mathcal{E}", "Set of time intervals during which anything else runs: actions, tools, harness code.", CITE['asyncfc']),
+     (r"\mathcal{S}(\cdot)", "Sum of the lengths of the intervals in a set; time covered by two intervals counts twice.", CITE['asyncfc']),
+     (r"\mathcal{D}(\cdot)", "Length of the union of the intervals in a set; time covered by two intervals counts once.", CITE['asyncfc']),
+     (r"\triangleq", "Is defined as.", "—")]),
+  ]) + '<div class="p3refs"><div class="p3rh">References</div>@@REFS:distserve,aa,swm,cop,asyncfc,llmc@@</div>',
       chip=("#a0-1", "Appendix A0"))
+
+slide("s04b", "The problem, defined (3/3): input tokens and their bill", label="b",
+      body=deftable([
+   ("<b>Input tokens of a call</b> " + tex(r"|H_{a,i}|", 12) + " — read in time III (prefill), billed in money II", eq_svg("ctx", fontsize=11.5, cls="eqn") + eq_svg("ctxsum", fontsize=11.5, cls="eqn"),
+    "line 1: " + CITE['yuan'] + "; " + CITE['react'] + "<br>line 2: summed from line 1 (ours)", [
+     (r"H_{a,i}", "Prompt agent " + tex("a", 11) + " sends to the model at step " + tex("i", 11) + ": the attempt’s history so far.", CITE['yuan']),
+     (r"|\cdot|", "Length in tokens.", CITE['yuan']),
+     (r"z_{a,i}", "Output of the model at step " + tex("i", 11) + ": its thinking, message and tool call.", CITE['yuan']),
+     (r"\Phi", "Chat template that writes the output " + tex(r"z_{a,i}", 11) + " into the history.", CITE['yuan']),
+     (r"o_{a,i}", "Observation returned by the action of step " + tex("i", 11) + ", e.g. a screenshot or a tool result.", CITE['yuan']),
+     (r"N", "Number of steps in the attempt.", CITE['isp']),
+     (r"g_i", "Tokens step " + tex("i", 11) + " adds to the history: " + tex(r"g_i=|\Phi(z_{a,i})|+|o_{a,i}|", 11) + ".", "self-defined"),
+     (r"\bar{g}", "Mean of the " + tex("g_i", 11) + ", each weighted by " + tex(r"N-i", 11) + ", the number of later steps that re-read it.", "self-defined")]),
+   ("<b>Money II, III · tokens by class</b> " + tex(r"n^{\kappa}_{ij}", 12), eq_svg("classes", fontsize=11.5, cls="eqn") + eq_svg("nin", fontsize=11.5, cls="eqn"),
+    CITE['anth-b'] + "; " + CITE['sglang'], [
+     (r"n^{\kappa}_{ij}", "Number of tokens of billing class " + tex(r"\kappa", 11) + " in call " + tex("j", 11) + " of step " + tex("i", 11) + ".", CITE['cop'] + "; " + CITE['anth-b']),
+     (r"K", "Set of billing classes.", "self-defined"),
+     (r"\mathrm{hit}", "Input tokens read from the prompt cache.", CITE['anth-b'] + "; " + CITE['tokenpilot']),
+     (r"\mathrm{w5m},\ \mathrm{w1h}", "Input tokens written to the cache, kept for 5 minutes or 1 hour.", CITE['anth-b']),
+     (r"\mathrm{unc}", "Input tokens neither read from nor written to the cache.", CITE['anth-b'] + "; " + CITE['speedrunner']),
+     (r"\mathrm{out}", "Output tokens.", CITE['anth-b'])]),
+  ]) + '<div class="p3refs"><div class="p3rh">References</div>@@REFS:yuan,react,isp,anth-b,sglang,tokenpilot,speedrunner,cop@@</div>',
+      chip=("#a0-2", "Appendix A0"))
 
 # --- 05 time, term by term ---------------------------------------------------
 slide("s05", "Where the time goes: five classes, one per term",
@@ -803,6 +836,21 @@ REFS_P1 = [
  "Zhu, K., Jacob, M., Ma, C., Pan, Y., Wang, S., Krishnamurthy, A., &amp; Kasikci, B. (2026). TraceLab: Characterizing coding agent workloads for LLM serving. arXiv:2606.30560. University of Washington.",
 ]
 
+def refs_for(*keys):
+    """The full REFS_P1 entries of the given CITE keys, in reference-list order."""
+    out = []
+    for k in keys:
+        c = html.unescape(re.sub(r"<[^>]+>", "", CITE[k]))
+        au = re.split(r" et al\.|,| &", c)[0].strip()
+        yr = re.search(r"\d{4}[a-z]?", c).group(0)
+        m = [r for r in REFS_P1 if re.match(re.escape(au) + r"[,.]", html.unescape(r)) and f"({yr}" in r]
+        assert len(m) == 1, (k, m)
+        out.append(m[0])
+    return sorted(out, key=lambda r: html.unescape(r).lower())
+
+for _s in SLIDES:
+    _s["body"] = re.sub(r"@@REFS:([\w,-]+)@@", lambda mm: "".join(f"<div>{r}</div>" for r in refs_for(*mm.group(1).split(","))), _s["body"])
+
 def refs_html(items, start=1):
     return f'<ol class="reflist" start="{start}">' + "".join(f"<li>{r}</li>" for r in items) + "</ol>"
 
@@ -833,8 +881,8 @@ A("a0-1", "A0 · 1/5", "A0 · The time of one attempt: each source’s own formu
   ], ["26%", "9%", "34%", "31%"]))
 
 A("a0-2", "A0 · 2/5", "A0 · Time hidden by concurrency, and the growing prompt",
-  crumb="the derivation behind page 4 · verbatim / adapted / our distillation · calc. = our algebra",
-  body=table(["formula (page 4)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
+  crumb="the derivation behind pages 4 and 4b · verbatim / adapted / our distillation · calc. = our algebra",
+  body=table(["formula (pages 4, 4b)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"T_{\mathrm{saving}}\triangleq\mathcal{S}(\mathcal{M})+\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})", 11), "adapted", "the same formula, continued " + tex(r"=\Delta_{F\parallel F}+\Delta_{D\parallel E}", 11) + ", with " + tex(r"\mathcal{M},\ \mathcal{E}", 11) + " “the sequence of time intervals for model decoding and function execution” (App. B.2) " + ci('asyncfc') + "; precedent for the effect: parallel tasks’ latency “is determined by the slowest task”, " + tex(r"T^C=\sum_i T_P^C(P_i)+\max_k T_E(E_k)", 11) + " against the serial " + tex(r"\sum_i(T_P^R(P_i)+T_E(E_i))", 11) + " (App. E.1, Eqs. 1–2) " + ci('llmc'), "intervals widened to whole calls and all non-model time, so values are not comparable with AsyncFC’s; the split becomes (calc.) " + tex(r"[\mathcal{S}(\mathcal{M})-\mathcal{D}(\mathcal{M})]+[\mathcal{S}(\mathcal{E})-\mathcal{D}(\mathcal{E})]+[\mathcal{D}(\mathcal{M})+\mathcal{D}(\mathcal{E})-\mathcal{D}(\mathcal{M}\cup\mathcal{E})]", 11) + ", each ≥ 0 (e.g. a 2-s tool call during a model call gives 2 s, calc.); it can include extra work that concurrency causes, so it is not the saving against a separate serial run (speed-ups use " + tex(r"T_{\mathrm{seq}}/T_{\mathrm{attempt}}", 11) + ", Part 2)"],
    [tex(r"|H_{a,i+1}|=|H_{a,i}|+|\Phi(z_{a,i})|+|o_{a,i}|", 11), "adapted", tex(r"H_{a,i+1}=H_{a,i}\,\Vert\,\Phi(\theta_{a,i},m_{a,i},u_{a,i})\,\Vert\,o_{a,i}", 11) + ", " + tex(r"C_{a,i}=|H_{a,i}|", 11) + " (Eqs. 1–3, v2 §II-C) " + ci('yuan') + "; the full history as context: " + tex(r"c_t=(o_1,a_1,\ldots,o_{t-1},a_{t-1},o_t)", 11) + " (§2) " + ci('react'), "lengths of the concatenation; " + tex(r"\Phi(z_{a,i})", 11) + " written with Yuan’s own " + tex(r"z=(\theta,m,u)", 11) + " of its Eq. 2 (thinking, message, tool-call tokens), because its m would clash with the design m and its " + tex(r"C_{a,i}", 11) + " with the cost " + tex("C_m(p)", 11) + "; exact with one call per step and full history; in general add " + tex(r"h^{+}_i-h^{-}_i", 11) + " (other calls’ output; compaction)"],
    [tex(r"\sum_{i=1}^{N}|H_{a,i}|=N|H_{a,1}|+\frac{N(N-1)}{2}\bar{g}", 11), "our distillation (calc.)", "no source writes the sum; “at each step, the prompt sent to the LLM includes the history of all previous steps” " + ci('osh'), tex(r"g_i=|\Phi(z_{a,i})|+|o_{a,i}|", 11) + ", " + tex(r"\bar{g}=\sum_i(N-i)g_i\,/\,\frac{N(N-1)}{2}", 11) + " makes it exact; over a random step count " + tex(r"\mathbb{E}[\sum|H|]\approx\mathbb{E}[N]|H_{a,1}|+\frac{\bar{g}}{2}(\mathbb{E}[N]^2+\mathrm{Var}[N]-\mathbb{E}[N])", 11) + "; crossover " + tex(r"N^{*}=2|H_{a,1}|/\bar{g}+1", 11)],
@@ -1943,6 +1991,19 @@ svg.tex{display:inline-block;height:auto}
 .appendix .tbl.dense{font-size:10px;line-height:1.28}.appendix .tbl.dense td{padding:3px 6px 3px 4px}
 .apx-note{margin-top:8px;font-size:11.5px;line-height:1.4;color:var(--ink2);background:var(--callout);border-radius:4px;padding:8px 12px}
 /* references */
+.tbl.p4def{font-size:11px;line-height:1.28}
+.tbl.p4def td{border-bottom:none;padding:1px 7px 1px 5px;color:var(--ink2)}
+.tbl.p4def td:first-child{font-family:inherit;font-size:11px;color:var(--ink2)}
+.tbl.p4def tr.g0 td{border-top:1px solid var(--rule);padding-top:4px}
+.tbl.p4def tbody tr.g0:first-child td{border-top:none}
+.tbl.p4def td.ex{font-size:11.5px;color:var(--ink2)}
+.tbl.p4def td.sy{white-space:nowrap}
+.tbl.p4def td.so{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
+.tbl.p4def .fsrc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);margin-top:4px}
+.p3refs{margin-top:2px;border-top:1px solid var(--rule);padding-top:3px;columns:2;column-gap:28px}
+.p3refs .p3rh{column-span:all}
+.p3rh{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+.p3refs>div:not(.p3rh){font-size:9.5px;line-height:1.22;color:var(--ink2);padding-left:16px;text-indent:-16px;margin-bottom:3px;break-inside:avoid}
 .reflist{margin:0;padding-left:20px;font-size:11.6px;line-height:1.38;color:var(--ink2);columns:2;column-gap:28px}
 .reflist li{margin:0 0 7px 0;break-inside:avoid}
 .reflist i{font-style:italic}
@@ -2083,7 +2144,9 @@ def render(font_dir=None):
     main_n = {}
     for s in SLIDES:
         cls = "slide " + s["kind"]
-        if s["kind"] in ("main", "refs"):
+        if s["kind"] in ("main", "refs") and s["label"]:
+            label = f"AGENT ACCELERATION · PART {s['part']} · {main_n[s['part']]:02d}{s['label']}"
+        elif s["kind"] in ("main", "refs"):
             main_n[s["part"]] = main_n.get(s["part"], 0) + 1
             label = f"AGENT ACCELERATION · PART {s['part']} · {main_n[s['part']]:02d}"
         elif s["kind"] == "title":
