@@ -749,7 +749,7 @@ slide("s12", "Published costs count different parts of the money formula, and no
   <div class="figcap">Tokens, unit and tier multiply: 3.2 × 4.9 × 2 ≈ 31× (calc.). Cache is left out because screenshot-agent papers do not report their cache state.</div>
   </div>
   <div class="stack">
-    {hbars("Money V, the machine: one hour as a share of the $7.87 GTA1 bill (calc.)", [("AWS t3.medium, CPU",0.5,"0.5%"),("AWS t3.2xlarge, CPU",4.2,"4.2%"),("OpenAI container 4 GB",4.6,"4.6%"),("Daytona H100, GPU",50.2,"50%")], "list prices, read 27 September 2026: " + CITE['aws'] + "; " + CITE['openai'] + "; Daytona · more vendors in Appendix A3", width=450, height_row=22)}
+    {hbars("Money V: renting the machine the agent operates for one hour, as a share of one task’s $7.87 model bill (calc.)", [("small VM (AWS t3.medium)",0.5,"0.5%"),("desktop VM of OSWorld 2.0 (AWS t3.2xlarge)",4.2,"4.2%"),("code sandbox (OpenAI container, 4 GB)",4.6,"4.6%"),("GPU sandbox (Daytona, H100)",50.2,"50%")], "one task uses one machine · $7.87 = GTA1 with o3 on OSWorld, all tokens, per task · list prices, read 27 September 2026: " + CITE['aws'] + "; " + CITE['openai'] + "; Daytona · more in Appendix A3", width=450, height_row=22)}
     <ul class="plainlist"><li>The machine is billed by the hour while the agent waits: the median AgentSysBench session is active 20% of its lifetime {ci('asb')}.</li></ul>
   </div>
 </div>""",
