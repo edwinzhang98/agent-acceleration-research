@@ -140,8 +140,9 @@ EQ = {
  "ctxsum":  r"$\sum_{i=1}^{N}|H_{a,i}| \;=\; N\,|H_{a,1}| + \dfrac{N(N-1)}{2}\,\bar{g}$",
  "money":   r"$c_m(p) \;=\; \sum_{i=0}^{N}\,\sum_{j=1}^{J_i}\,\sum_{\kappa\in K}\, n^{\kappa}_{ij}\,c_{\kappa}(\mu_{ij}) \;+\; x_{\mathrm{env}}\,c_{\mathrm{env}}$",
  "classes": r"$K \;=\; \{\mathrm{hit},\ \mathrm{w5m},\ \mathrm{w1h},\ \mathrm{unc},\ \mathrm{out}\}$",
- "succ":    r"$v(m,p) \;=\; \dfrac{C_m(p)}{R_m(p)}, \qquad \dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}$",
- "goal":    r"$\mathrm{Pareto}_m\left(\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)},\ v(m,p)\right)\quad \mathrm{s.t.}\quad R_m(p) \,\geq\, R_0$",
+ "tsucc":   r"$T_{\mathrm{success}}(m,p) \;=\; \dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}$",
+ "vsucc":   r"$v(m,p) \;=\; \dfrac{C_m(p)}{R_m(p)}$",
+ "goal2":   r"$\min_{m\,:\,R_m(p)\,\geq\,R_0}\ \left(T_{\mathrm{success}}(m,p),\ v(m,p)\right)\quad \mathrm{in\ the\ Pareto\ sense}$",
 }
 _TEX_CACHE = {}
 _TEX_N = [0]
@@ -482,8 +483,8 @@ slide("s03", "The problem, defined (1/2): one formula for time, one for money, a
     ("term", r"\sum_{j=1}^{J_i}", "II · calls"), ("term", r"\ell_{ij}", "III · one call"), ("op", "+"),
     ("term", r"E_i", "IV · non-model time"), ("op", r"]\ -"), ("term", r"T_{\mathrm{saving}}", "V · overlap")]),
    defs1([
-    (r"T_{\mathrm{attempt}}", "wall-clock time of one attempt: real time from handing over the task to the result; work done at the same time counts once", "self-defined"),
-    (r"i=0", "a step-0 bucket for calls outside any step, e.g. a plan made before step 1", "self-defined"),
+    (r"T_{\mathrm{attempt}}", "wall-clock of one attempt, task to result; overlap counts once", "self-defined"),
+    (r"i=0", "step-0 bucket for calls outside any step, e.g. an up-front plan", "self-defined"),
     (r"\mathrm{III},\ \mathrm{V}", "written out on page 4; the other symbols are page 2’s", ""),
    ]),
    "sum: " + CITE['isp'] + ", §3 · calls within a step: our distillation, evidence " + CITE['osh'] + " · saving: " + CITE['asyncfc'] + "; precedent " + CITE['llmc'] + ", App. E.1", "adapted · our distillation")}
@@ -491,18 +492,24 @@ slide("s03", "The problem, defined (1/2): one formula for time, one for money, a
     ("op", r"c_m(p)="), ("term", r"\sum_{i}\sum_{j}", "I · calls"), ("term", r"\sum_{\kappa}n^{\kappa}_{ij}", "II, III · tokens read, written"),
     ("term", r"c_{\kappa}(\mu_{ij})", "IV · price per class"), ("op", "+"), ("term", r"x_{\mathrm{env}}\,c_{\mathrm{env}}", "V · environment")]),
    defs1([
-    (r"c_m(p)", "dollars of one attempt of design " + tex("m", 12) + " (model and harness) on task " + tex("p", 12), CITE['cop']),
+    (r"c_m(p)", "dollars of one attempt of design " + tex("m", 12) + " on task " + tex("p", 12), CITE['cop']),
     (r"c_{\mathrm{env}}", "price per unit of billed environment usage", CITE['cop']),
     (r"\kappa", "billing class, written out on page 4", ""),
    ]),
    "base: " + CITE['cop'] + ", Eq. 13, extended as its App. D.1 allows · classes: " + CITE['anth-b'] + " · three-class precedent: " + CITE['tokenpilot'], "adapted")}
-{eqrow_html("goal", "per success", eq_svg("succ", fontsize=12.5, cls="eqn") + eq_svg("goal", fontsize=12.5, cls="eqn") + '<div class="mfnote">dividing by ' + tex("R_m(p)", 12) + ' is money VI · failures, retries</div>',
+{eqrow_html("per success", "time and money", '<div class="mfpair"><div>' + eq_svg("tsucc", fontsize=12.5, cls="eqn") + '<div class="mfnote">time per success</div></div><div>' + eq_svg("vsucc", fontsize=12.5, cls="eqn") + '<div class="mfnote">money per success</div></div></div><div class="mfnote">dividing by ' + tex("R_m(p)", 12) + ' is money VI · failures, retries</div>',
    defs1([
-    (r"C_m(p),\ \mathbb{E}", "expected " + tex("c_m(p)", 12) + " over attempts, failures included; expectation", CITE['cop']),
-    (r"v(m,p)", "dollars per success; the second term is seconds per success; attempts independent, retried until a verified success", CITE['cop']),
-    (r"R_0,\ \mathrm{Pareto}", "success floor; keep the designs that no other beats on both time and money per success", "self-defined, after " + CITE['kapoor25']),
+    (r"R_m(p)", "probability that one attempt succeeds", CITE['cop']),
+    (r"C_m(p),\ \mathbb{E}", "expected " + tex("c_m(p)", 12) + ", failures included", CITE['cop']),
+    (r"\div R_m(p)", "independent attempts until a verified success: " + tex("1/R_m(p)", 12) + " of them on average", CITE['cop']),
    ]),
-   "money: " + CITE['cop'] + ", Eq. 2 (verbatim) · time: the same, in seconds (adapted) · goal: " + CITE['kapoor25'] + "; " + CITE['cop'] + ", App. C.8 (our distillation)", "verbatim · adapted · distillation")}
+   CITE['cop'] + ": money Eq. 2 (verbatim); time the same in seconds, App. D.1 (adapted; the name " + tex(r"T_{\mathrm{success}}", 10) + " is ours)", "verbatim · adapted")}
+{eqrow_html("goal", "what counts as faster", eq_svg("goal2", fontsize=12.5, cls="eqn") + '<div class="mfsay">Faster: one per-success quantity falls, the other does not rise, success stays ' + tex(r"\geq R_0", 12) + '. One falls, one rises: a trade-off. Part 2’s last column is this check.</div>',
+   defs1([
+    (r"R_0", "success floor: designs below it are not compared", "self-defined"),
+    (r"\mathrm{Pareto}", "no other design is as low on both and lower on one", CITE['kapoor25']),
+   ]),
+   CITE['kapoor25'] + " · floor: " + CITE['cop'] + ", App. C.8", "our distillation")}
 </div>""",
       foot="SOURCES · as cited in each row · Part 2 puts the time and money formulas at the top of every page, with III written out as on page 4, and marks the term each family of work changes — Appendix A0",
       chip=("#a0-1", "Appendix A0"))
@@ -855,15 +862,15 @@ A("a0-3", "A0 · 3/5", "A0 · Money, per success, and the goal",
   body=table(["formula (page 3)", "status", "the source’s own formula or words, in its notation", "what changed, and why"], [
    [tex(r"c_m(p)=\sum_{i,j}\sum_{\kappa}n^{\kappa}_{ij}c_{\kappa}(\mu_{ij})+x_{\mathrm{env}}c_{\mathrm{env}}", 11), "adapted", tex(r"c_m(p)=n_{\mathrm{in}}(m,p)\,c_{\mathrm{in}}(m)+n_{\mathrm{out}}(m,p)\,c_{\mathrm{out}}(m)", 11) + " (Eq. 13): input and output tokens times their prices; other components go into " + tex(r"C_m(p)=w^{\top}x_m(p)", 11) + ", w the unit prices and " + tex("x_m(p)", 11) + " the quantities per attempt (App. D.1) " + ci('cop'), "input split into the billed classes (cache hit, 5-min and 1-h cache write, uncached); prices inside the sum because one step can mix models; environment usage added as App. D.1 allows; the class index is κ because x is Cost-of-Pass’s quantity. Closest written three-class form: " + ci('tokenpilot')],
    [tex(r"v(m,p)=C_m(p)/R_m(p)", 11), "verbatim", "“the expected number of attempts to obtain the first correct solution is " + tex("1/R_m(p)", 11) + "”, assuming independent trials (§2.2, Eq. 2) " + ci('cop'), "none; assumes unlimited independent retries and the verifier’s time and cost in every attempt; with at most K retries the ratio is still C/R (calc.); with cache-warm retries " + tex(r"C^{(1)}_m(p)+(1/R_m(p)-1)\,C^{(2+)}_m(p)", 11) + " (calc.)"],
-   [tex(r"\mathbb{E}[T_{\mathrm{attempt}}]/R_m(p)", 11), "adapted", "“alternative units per attempt (FLOPs, time, latency, energy) may matter more than dollar cost” (App. D.1) " + ci('cop'), "the same derivation in seconds; serial retries only (parallel votes cost “roughly the latency of a single vote”); correlated failures break independence"],
-   [tex(r"\mathrm{Pareto}_m(\cdot,\cdot)\ \mathrm{s.t.}\ R_m(p)\geq R_0", 11), "our distillation", tex(r"V_p(\mathcal{M})=\min_{m\in\mathcal{M}}v(m,p)", 11) + " (Eq. 3), with a human expert as fallback, " + tex(r"\min(V_p(\mathcal{M}),\,v(\mathrm{expert},p))", 11) + " (Eqs. 4–5) " + ci('cop') + "; “the new goal of jointly optimizing the two metrics” (arXiv v1) " + ci('kapoor25') + "; budgeted dual: maximise quality with expected cost within a budget " + ci('frugal'), "min → Pareto set, because seconds and dollars are not one scalar; the human is the reference point; the floor " + tex("R_0", 11) + " follows App. C.8’s remedy of leaving unreliable systems off the frontier; over a task mix " + tex(r"\sum_p C_m(p)/\sum_p R_m(p)", 11) + ", unlike Eq. 8’s mean of " + tex("V_p", 11)],
+   [tex(r"T_{\mathrm{success}}(m,p)=\mathbb{E}[T_{\mathrm{attempt}}]/R_m(p)", 11), "adapted", "“alternative units per attempt (FLOPs, time, latency, energy) may matter more than dollar cost” (App. D.1) " + ci('cop'), "the same derivation in seconds, named " + tex(r"T_{\mathrm{success}}", 11) + " by us; serial retries only (parallel votes cost “roughly the latency of a single vote”); correlated failures break independence"],
+   [tex(r"\min_{m:\,R_m(p)\geq R_0}(T_{\mathrm{success}}(m,p),\,v(m,p))\ \mathrm{(Pareto)}", 11), "our distillation", tex(r"V_p(\mathcal{M})=\min_{m\in\mathcal{M}}v(m,p)", 11) + " (Eq. 3), with a human expert as fallback, " + tex(r"\min(V_p(\mathcal{M}),\,v(\mathrm{expert},p))", 11) + " (Eqs. 4–5) " + ci('cop') + "; “the new goal of jointly optimizing the two metrics” (arXiv v1) " + ci('kapoor25') + "; budgeted dual: maximise quality with expected cost within a budget " + ci('frugal'), "min → Pareto set, because seconds and dollars are not one scalar; the human is the reference point; the floor " + tex("R_0", 11) + " follows App. C.8’s remedy of leaving unreliable systems off the frontier; over a task mix " + tex(r"\sum_p C_m(p)/\sum_p R_m(p)", 11) + ", unlike Eq. 8’s mean of " + tex("V_p", 11)],
   ], ["22%", "9%", "37%", "32%"]))
 
 A("a0-4", "A0 · 4/5", "A0 · Every symbol, its unit, and where it comes from",
   crumb="origin of each symbol: “as in” a source (its own symbol and meaning), “adapted from” a source (renamed or widened), or self-defined",
   body=table(["symbol", "meaning", "unit", "origin"], [
    [tex(r"i,\ N,\ j,\ J_i,\ a", 11), "step (i = 0: calls outside any step); steps; model call; calls in step i; agent", "—; steps; —; calls; —", "i as in " + CITE['isp'] + " §3 (their " + tex("s_i", 10) + ", n steps) · a as in " + CITE['yuan'] + " §II-C (whose i counts LLM invocations) · N adapted from Hua et al.’s n · j, J_i self-defined (calls ≠ steps)"],
-   [tex(r"D_i,\ E_i,\ T_{\mathrm{attempt}},\ T_{\mathrm{saving}},\ T_{\mathrm{seq}}", 11), "model time; non-model time of step i; wall-clock of one attempt; time hidden by concurrency; a separate serial run", "s", "D: the quantity of " + CITE['isp'] + " time(T, s_i) and the letter of " + CITE['aospec'] + ", widened to all calls of a step · E adapted from Hua et al.’s e(s_i) (AOSpec’s T_i) · T_attempt self-defined · T_saving adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened; precedent for the effect, not the symbol: " + CITE['llmc'] + " App. E.1, Eqs. 1–2) · T_seq as in " + CITE['specactions'] + " §3.1.2"],
+   [tex(r"D_i,\ E_i,\ T_{\mathrm{attempt}},\ T_{\mathrm{success}},\ T_{\mathrm{saving}},\ T_{\mathrm{seq}}", 11), "model time; non-model time of step i; wall-clock of one attempt; expected seconds per success; time hidden by concurrency; a separate serial run", "s", "D: the quantity of " + CITE['isp'] + " time(T, s_i) and the letter of " + CITE['aospec'] + ", widened to all calls of a step · E adapted from Hua et al.’s e(s_i) (AOSpec’s T_i) · T_attempt self-defined · T_success self-defined, the time analogue of Cost-of-Pass’s v · T_saving adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened; precedent for the effect, not the symbol: " + CITE['llmc'] + " App. E.1, Eqs. 1–2) · T_seq as in " + CITE['specactions'] + " §3.1.2"],
    [tex(r"\mathcal{S},\ \mathcal{D},\ \mathcal{M},\ \mathcal{E},\ \triangleq", 11), "summed length; length of a union; model-call and non-model intervals; defined as", "s", "adapted from " + CITE['asyncfc'] + " App. B.2 (intervals widened)"],
    [tex(r"\ell_{ij},\ \mathrm{TTFT}_{ij},\ \mathrm{TPOT}_{ij}", 11), "call latency; time to first token; time per output token", "s; s; s/token", "ℓ as in " + CITE['swm'] + " §2.1 (ℓ_LLM) · TPOT as in " + CITE['distserve'] + " §1 · TTFT adapted from " + CITE['distserve'] + " §1 (“the duration of the prefill phase”) and §3.1 Eq. 1 (plus queuing delay), widened by network time as in " + CITE['aa'] + " · indices self-defined"],
    [tex(r"t^{\mathrm{queue}},\ t^{\mathrm{net}},\ t^{\mathrm{prefill}},\ t^{\mathrm{first}}", 11), "parts of TTFT: queueing, network, prefill of uncached input, emitting the first token", "s", "t^queue, t^prefill adapted from " + CITE['distserve'] + " §3.1 Eq. 1 (queuing delay; prefill execution time) · t^net, t^first self-defined (A0 · 1/5)"],
@@ -1993,6 +2000,8 @@ svg.tex{display:inline-block;height:auto}
 .mft{display:inline-flex;flex-direction:column;align-items:center;border:1px solid var(--rule);border-radius:6px;padding:1px 5px 2px}
 .mft small{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.4px;color:var(--accent);letter-spacing:.03em;white-space:nowrap;margin-top:1px}
 .mfo{align-self:center}.mf svg.tex{vertical-align:middle}
+.mfpair{display:flex;gap:44px;align-items:flex-end}
+.mfsay{font-size:12px;line-height:1.35;color:var(--ink);margin-top:3px}
 .mfnote{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;color:var(--mute);margin-top:2px}
 .tbl.p2.expand td{vertical-align:top}.tbl.p2.expand td .defs2.one{padding-left:14px;font-size:11.5px}
 .eqtab.narroweq{grid-template-columns:76px 420px 1fr}
