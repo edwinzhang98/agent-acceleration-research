@@ -642,8 +642,8 @@ slide("s07", "III · Inside one call: first token, then decoding",
       chip=("#a1-2", "Appendix A1"))
 
 # --- 08 the prompt grows ---------------------------------------------------------
-slide("s08", "The prompt grows: every step re-reads the whole history",
-      callout=f"""<p><b>Each step appends its output and its result, so the tokens read over an attempt grow with {tex("N^2", 15)}; caching makes re-reading cheaper and faster, not free.</b> The square matters once {tex("N", 15)} passes a few dozen steps.</p>""",
+slide("s08", "III · The prompt grows: every step re-reads the whole history",
+      callout=f"""<p><b>The reading inside III, and money II: each step appends its output and its result, so the tokens read over an attempt grow with {tex("N^2", 15)}; caching makes re-reading cheaper and faster, not free.</b> The square matters once {tex("N", 15)} passes a few dozen steps.</p>""",
       body=f"""
 <div class="cards4">
   {card("HISTORY RE-SENT", "Most computer-use agents send the whole history at every step",
