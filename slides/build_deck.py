@@ -731,25 +731,25 @@ slide("s11", "Where the money goes: six classes, one per term",
       chip=("#a3-1", "Appendix A3"))
 
 # --- 12 per success, conventions, environment ----------------------------------------
-slide("s12", "What a cost figure counts, and what the environment machine adds",
+slide("s12", "Published costs count different parts of the money formula, and none counts the machine (V)",
       hl=("n-price", "n-succ", "n-machine"),
-      callout="""<p><b>One run’s cost can be reported about 30× apart, depending on four accounting choices; none of them adds the environment machine (money V).</b></p>""",
+      callout="""<p><b>One run can be reported about 30× apart, and no figure includes the machine the agent runs on.</b></p>""",
       body=f"""
-<div class="two">
+<div class="two" style="grid-template-columns:3fr 2fr">
   <div>
   <table class="tbl conv">
-  <colgroup><col style="width:13%"><col style="width:26%"><col style="width:46%"><col style="width:15%"></colgroup>
-  <thead><tr><th>choice</th><th>one way → the other</th><th>example</th><th>factor</th></tr></thead>
+  <colgroup><col style="width:11%"><col style="width:9%"><col style="width:23%"><col style="width:44%"><col style="width:13%"></colgroup>
+  <thead><tr><th>choice</th><th>term</th><th>one way → the other</th><th>example</th><th>factor</th></tr></thead>
   <tbody>
-  <tr><td class="rk">tokens</td><td>output only → all tokens</td><td>GTA1, 39 OSWorld tasks, o3, no cache: $2.43 → $7.87 {ci('osh')}</td><td>3.2×</td></tr>
-  <tr><td class="rk">unit</td><td>per attempt → per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: $72.4 at 20.6% success → ≈ $351 (calc.) {ci('osw2', 'cop')}</td><td>4.9×</td></tr>
-  <tr><td class="rk">cache</td><td>cached → uncached input</td><td>DeepSeek-V4.1-Flash: $0.006 → $0.30 per million tokens {ci('deepseek')}</td><td>4–50×, by vendor (calc.)</td></tr>
-  <tr><td class="rk">tier</td><td>standard → fast mode</td><td>Claude Opus 5.5: $4 / $20 → $8 / $40 per million input / output tokens; OpenAI 2× {ci('anth-b', 'openai')}</td><td>2×</td></tr>
+  <tr><td class="rk">tokens</td><td>II</td><td>output only → all tokens</td><td>GTA1, 39 OSWorld tasks, o3, no cache: $2.43 → $7.87 {ci('osh')}</td><td>3.2×</td></tr>
+  <tr><td class="rk">unit</td><td>VI</td><td>per attempt → per success</td><td>OSWorld 2.0, Claude Opus 4.8, 108 tasks: $72.4 at 20.6% success → ≈ $351 (calc.) {ci('osw2', 'cop')}</td><td>4.9×</td></tr>
+  <tr><td class="rk">cache</td><td>II, IV</td><td>cached → uncached input</td><td>DeepSeek-V4.1-Flash: $0.006 → $0.30 per million tokens {ci('deepseek')}</td><td>4–50×, by vendor (calc.)</td></tr>
+  <tr><td class="rk">tier</td><td>IV</td><td>standard → fast mode</td><td>Claude Opus 5.5: $4 / $20 → $8 / $40 per million input / output tokens; OpenAI 2× {ci('anth-b', 'openai')}</td><td>2×</td></tr>
   </tbody></table>
   <div class="figcap">Tokens, unit and tier multiply: 3.2 × 4.9 × 2 ≈ 31× (calc.). Cache is left out because screenshot-agent papers do not report their cache state.</div>
   </div>
   <div class="stack">
-    {hbars("One hour of the environment machine, as a share of the $7.87 GTA1 bill (calc.)", [("AWS t3.medium, CPU",0.5,"0.5%"),("AWS t3.2xlarge, CPU (OSWorld 2.0)",4.2,"4.2%"),("OpenAI container 4 GB, CPU",4.6,"4.6%"),("Daytona H100, GPU",50.2,"50%")], "list prices, read 27 September 2026: " + CITE['aws'] + "; " + CITE['openai'] + "; Daytona · more vendors in Appendix A3", width=560, height_row=22)}
+    {hbars("Money V, the machine: one hour as a share of the $7.87 GTA1 bill (calc.)", [("AWS t3.medium, CPU",0.5,"0.5%"),("AWS t3.2xlarge, CPU",4.2,"4.2%"),("OpenAI container 4 GB",4.6,"4.6%"),("Daytona H100, GPU",50.2,"50%")], "list prices, read 27 September 2026: " + CITE['aws'] + "; " + CITE['openai'] + "; Daytona · more vendors in Appendix A3", width=450, height_row=22)}
     <ul class="plainlist"><li>The machine is billed by the hour while the agent waits: the median AgentSysBench session is active 20% of its lifetime {ci('asb')}.</li></ul>
   </div>
 </div>""",
