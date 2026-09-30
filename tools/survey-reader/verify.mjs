@@ -9,7 +9,7 @@ const modules = process.env.SURVEY_READER_NODE_MODULES || '/Users/edwin/.cache/c
 const require = createRequire(import.meta.url);
 const { chromium } = require(path.join(modules, 'playwright'));
 const { marked } = await import(path.join(modules, 'marked/lib/marked.esm.js'));
-const file = path.join(root, 'notes/2026-09-30-self-improvement-agent-acceleration-review-zh.html');
+const file = path.join(root, 'notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.html');
 const md = fs.readFileSync(file.replace(/html$/, 'md'), 'utf8');
 const shots = process.env.SURVEY_READER_SHOTS || '/private/tmp/survey-reader-qa';
 fs.mkdirSync(shots, { recursive: true });

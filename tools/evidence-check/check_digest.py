@@ -18,7 +18,7 @@ import re
 import sys
 import unicodedata
 
-REF = re.compile(r"\[((?:[nwg]\d{3}#\d+)(?:\s*[,;]\s*[nwg]\d{3}#\d+)*)\]")
+REF = re.compile(r"\[((?:[a-z]\d{3}#\d+)(?:\s*[,;]\s*[a-z]\d{3}#\d+)*)\]")
 NUM = re.compile(r"(?<![A-Za-z#\[])\d[\d,]*\.?\d*")
 TR = {0x2010: "-", 0x2011: "-", 0x2012: "-", 0x2013: "-", 0x2014: "-", 0x2212: "-", 0x00A0: " ", 0x2009: " ", 0x202F: " ", 0x00D7: "x"}
 
@@ -29,7 +29,7 @@ def norm(s):
 
 def numbers(s):
     s = REF.sub(" ", s)
-    s = re.sub(r"\b[nwg]\d{3}\b", " ", s)
+    s = re.sub(r"\b[a-z]\d{3}\b", " ", s)
     out = []
     for t in NUM.findall(s):
         t = t.rstrip(".,")

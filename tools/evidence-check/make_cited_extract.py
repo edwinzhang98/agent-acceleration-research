@@ -14,7 +14,7 @@ import os
 import re
 import sys
 
-REF = re.compile(r"[nwghx]\d{3}#\d+")
+REF = re.compile(r"[a-z]\d{3}#\d+")
 TAG = re.compile(r"@@([A-Za-z0-9_-]+)@@")
 
 

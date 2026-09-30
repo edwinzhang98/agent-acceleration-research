@@ -4,6 +4,7 @@
 usage: build_part3_files.py <scratch_dir> <out_dir> --e-start N --d-start N --date YYYY-MM-DD --tags tags.json
                             --doc <name>=<draft.md> [--doc ...] [--part <doc>:<KEY>=<file> ...]
                             [--refs-a <codex report.md>] [--per-ref <review result.json>] [--dx <draft.md> <audit.json>]
+                            [--batches <prefixes>] [--rule 2026-09-29|2026-09-30]
 
 Documents cite evidence as [w003#9] (record id, item index) or through tags @@NAME@@ that tags.json maps to lists of
 such references. Every cited item must be in check/consolidated-*.json: it passed the mechanical anchor check and the
@@ -22,10 +23,22 @@ import os
 import re
 import sys
 
-REF = re.compile(r"[nwghx]\d{3}#\d+")
-REFGROUP = re.compile(r"\[((?:[nwghx]\d{3}#\d+)(?:\s*[,;]\s*[nwghx]\d{3}#\d+)*)\]")
+REF = re.compile(r"[a-z]\d{3}#\d+")
+REFGROUP = re.compile(r"\[((?:[a-z]\d{3}#\d+)(?:\s*[,;]\s*[a-z]\d{3}#\d+)*)\]")
 TAG = re.compile(r"@@([A-Za-z0-9_-]+)@@")
 RESERVED = ("TABLE_PER_REF", "E_TABLE", "REFERENCES", "D_ENTRIES", "E_PATCHES", "STILL_OPEN", "E_RANGE")
+RULE_ZH = {
+    "2026-09-29": "每条给出正式引用和实际核读的版本。来源等级按 Edwin 2026-09-29 的来源规则（D313）判定：顶刊顶会优先；其次是头部 AI 公司的官方技术材料；知名高校和成熟研究机构的预印本作为补充。作者自述的录用不算已确认发表。方括号里是核对库的记录号。",
+    "2026-09-30": "每条给出正式引用和实际核读的版本。来源等级按 Edwin 2026-09-30 重述的引用优先级判定：顶刊顶会优先；其次是顶级高校或成熟研究机构的高质量预印本；再次是 OpenAI/Anthropic/Google-DeepMind 一级公司的官方技术材料。Findings 和 workshop 论文按作者机构计入。作者自述的录用不算已确认发表。方括号里是核对库的记录号。",
+}
+RULE_EN = {
+    "2026-09-29": "Every work cited by an E-entry above, by record id. Each entry gives the formal citation and the version actually read. Source classes follow the rule of 2026-09-29 (D313).",
+    "2026-09-30": "Every work cited by an E-entry above, by record id. Each entry gives the formal citation and the version actually read. Source classes follow the citation priority Edwin restated on 2026-09-30 (top venues; then high-quality preprints from top universities or established laboratories; then official technical material of OpenAI/Anthropic/Google-DeepMind-level companies; Findings and workshop papers by institution).",
+}
+SEC3_NOTE = {
+    "2026-09-29": "Replacement wording for existing ledger lines is given in the Resolution column of the [A] entries of section 2 and in section 3 of `research/2026-09-29-part3-codex-report-review.md`. The canonical dossier is not changed.",
+    "2026-09-30": "No existing ledger line is replaced by this batch: section 2 records only conflicts inside sources ([B]) and version or venue notes ([C]). The canonical dossier is not changed.",
+}
 CLASS_ZH = {"top-venue": "顶刊顶会", "leading-company-official": "头部公司官方材料", "institutional-supplement": "合格机构补充",
             "hold": "暂缓", "exclude": "排除"}
 CLASS_EN = {"top-venue": "top venue", "leading-company-official": "leading-company official material",
@@ -34,7 +47,8 @@ BATCH = collections.OrderedDict([
     ("w", "first sweep (11 lanes)"), ("n", "second sweep (6 lanes from Edwin's clarifications)"),
     ("g", "gap sweep (ten gaps named by the critics, and promoted works)"),
     ("h", "close works named by the Codex survey and the deck that the store lacked"),
-    ("x", "supplementary items for the 23 works cited by the Codex plan report")])
+    ("x", "supplementary items for the 23 works cited by the Codex plan report"),
+    ("s", "works selected from the self-improvement survey (arXiv 2607.13104) and its project page, 2026-09-30")])
 
 
 def cell(s, n=None):
@@ -73,6 +87,13 @@ def main():
             if w.get("used"):
                 works[w["short"]] = w
     elig_raw = json.load(open(os.path.join(scratch, "check", "eligibility-by-record.json"), encoding="utf-8"))
+    # --batches <prefixes>: restrict the records files and sections 1a-1d to these batches (works from other
+    # batches that a document cites still get E-entries and references).
+    sel_batches = a[a.index("--batches") + 1] if "--batches" in a else "".join(BATCH.keys())
+    # --rule <date>: which statement of the source rule the reference lists cite (2026-09-29 default, or 2026-09-30).
+    rule = a[a.index("--rule") + 1] if "--rule" in a else "2026-09-29"
+    assert rule in RULE_ZH, rule
+    listrecs = [w for w in allrecs if w["short"][0] in sel_batches]
 
     def elig(sid):
         return elig_raw.get(alias.get(sid, sid)) or elig_raw.get(sid) or {}
@@ -232,9 +253,9 @@ def main():
         in_a = set(tags.get("IN_A", [])) if (dk == "review" and rep_refs) else set()
         if dk == "review" and rep_refs:
             R += ["### A. Codex 报告引用的 23 篇（沿用报告的编号 [1]–[23]）", "",
-                  "以下条目照录自 `notes/2026-09-29-part3-research-plan-report-zh.md` 的参考文献。本次审阅逐条核对了作者、题目、发表信息和所读版本：正式发表的条目在会议官方页面上确认，预印本条目确认 arXiv 记录中没有发表信息。", ""]
+                  "以下条目照录自 `notes/part3/2026-09-29-part3-research-plan-report-zh.md` 的参考文献。本次审阅逐条核对了作者、题目、发表信息和所读版本：正式发表的条目在会议官方页面上确认，预印本条目确认 arXiv 记录中没有发表信息。", ""]
             R += rep_refs + ["", "### B. 本审阅补充引用的文献（按核对库记录号）", ""]
-        R += ["每条给出正式引用和实际核读的版本。来源等级按 Edwin 2026-09-29 的来源规则（D313）判定：顶刊顶会优先；其次是头部 AI 公司的官方技术材料；知名高校和成熟研究机构的预印本作为补充。作者自述的录用不算已确认发表。方括号里是核对库的记录号。", ""]
+        R += [RULE_ZH[rule], ""]
         for c in canon_list(per_doc[dk]):
             if c in in_a:
                 continue
@@ -245,12 +266,14 @@ def main():
     # 5. records files, one per batch, eligible and used works only
     n_items = 0
     for b, name in BATCH.items():
+        if b not in sel_batches:
+            continue
         ws = [w for w in allrecs if w["short"].startswith(b) and w.get("used") and ok(w["short"])]
         if not ws:
             continue
         L = ["# Part 3 source records: " + name, "",
              "**Date:** " + date + " · generated by `tools/evidence-check/build_part3_files.py` from the verified store; not edited by hand.", "",
-             "Each work was saved as full text and read by one agent, which locked every item to a line of the saved text with a short verbatim anchor. A script checked that each anchor occurs in the saved text and that the numbers of the item stand within three lines of it. A second agent, which did not write the record, then tried to refute each item against the text. Items shown here passed both checks. Where the auditor corrected an item, the corrected wording is shown and the Audit column says so. The verbatim anchors and the saved texts are kept outside the repository; this file gives the location of every item instead. Only works that are eligible under the source rule of 2026-09-29 (D313) are listed; the others are in the evidence ledger, section 1b.", "",
+             "Each work was saved as full text and read by one agent, which locked every item to a line of the saved text with a short verbatim anchor. A script checked that each anchor occurs in the saved text and that the numbers of the item stand within three lines of it. A second agent, which did not write the record, then tried to refute each item against the text. Items shown here passed both checks. Where the auditor corrected an item, the corrected wording is shown and the Audit column says so. The verbatim anchors and the saved texts are kept outside the repository; this file gives the location of every item instead. Only works that are eligible under the source rule (2026-09-29, D313; citation priority restated on 2026-09-30) are listed; the others are in the evidence ledger, section 1b.", "",
              "Columns: # = item index (the reference is <record id>#<index>); Field = what the item is about; Line = line in the saved text of the version read. Full references: evidence ledger, References.", ""]
         for w in ws:
             el = elig(w["short"])
@@ -272,7 +295,7 @@ def main():
     # 6. ledger file
     L = ["## 1 Verification table", "", "### 1a Works used (eligible under the source rule, full text read, items audited)", "",
          "| Record | Work | Source (version read) | v1 date | Source class | Formal venue confirmed at the official source | Items kept | Audit |", "|---|---|---|---|---|---|---|---|"]
-    used = [w for w in allrecs if w.get("used") and ok(w["short"])]
+    used = [w for w in listrecs if w.get("used") and ok(w["short"])]
     for w in used:
         el = elig(w["short"])
         n_fix = sum(1 for e in w.get("evidence") or [] if e.get("audit") != "supported")
@@ -282,7 +305,7 @@ def main():
     L += ["", "### 1b Works verified but not used", "",
           "A work is listed here when the source rule holds or excludes it, when its full text could not be saved, or when its record was not audited or failed the audit. Nothing in these works is used as evidence.", "",
           "| Record | Work | Source | Why not used |", "|---|---|---|---|"]
-    for w in allrecs:
+    for w in listrecs:
         if w.get("used") and ok(w["short"]):
             continue
         el = elig(w["short"])
@@ -299,10 +322,12 @@ def main():
           "These works have more than one record: an independent second reading, a record of a second version of the same work (arXiv and camera-ready), or a record of supplementary items. Each counts as one work.", "",
           "| Work key | Records |", "|---|---|"]
     for k, v in dup.items():
+        if "--batches" in a and not any(r.split("-")[0][0] in sel_batches for r in v):
+            continue
         L.append("| %s | %s |" % (cell(k), ", ".join(v)))
     # parked
     parked, seen = [], set()
-    for p in sorted(glob.glob(os.path.join(scratch, "check", "wf*-result.json"))):
+    for p in (sorted(glob.glob(os.path.join(scratch, "check", "wf*-result.json"))) if "--batches" not in a else []):
         r = json.load(open(p, encoding="utf-8"))
         for k, why in (("parked", "relevance below 4 in its sweep"), ("parkedBudget", "prices only (budget deferred)")):
             for x in r.get(k, []) or []:
@@ -322,7 +347,7 @@ def main():
     if "--dx" in a:
         dx_draft = open(a[a.index("--dx") + 1], encoding="utf-8").read().split("\n")
         audit = {x["draft_id"]: x for x in json.load(open(a[a.index("--dx") + 2], encoding="utf-8"))["entries"]}
-        D += ["The entries below were drafted from the first two batches of records and then audited one by one against both places they compare (the ledger line or the first place in the source, and the second place in the source). [A] = conflict between the ledger and a source; [B] = conflict inside a source; [C] = version or venue note. Where the auditor corrected the resolution, the corrected text is shown. Replacement wording for ledger lines is in the Resolution column.", "",
+        D += ["The entries below were drafted from the records of this batch and then audited one by one against both places they compare (the ledger line or the first place in the source, and the second place in the source). [A] = conflict between the ledger and a source; [B] = conflict inside a source; [C] = version or venue note. Where the auditor corrected the resolution, the corrected text is shown. Replacement wording for ledger lines is in the Resolution column.", "",
               "| ID | Work | The ledger or the source says (place A) | The source says (place B; location, version) | Resolution | Source (read %s) | Items | Audit | Source class |" % date, "|---|---|---|---|---|---|---|---|---|"]
         for l in dx_draft:
             m = re.match(r"\| (DX\d+) \|", l)
@@ -334,7 +359,7 @@ def main():
                 continue
             if au["verdict"] == "confirmed-with-correction" and au.get("corrected_resolution"):
                 cells[4] = cell(au["corrected_resolution"])
-            sid = (re.search(r"\(([nwg]\d{3})", cells[1]) or re.search(r"([nwg]\d{3})", cells[1]))
+            sid = (re.search(r"\(([a-z]\d{3})", cells[1]) or re.search(r"([a-z]\d{3})", cells[1]))
             sid = sid.group(1) if sid else ""
             did = "D%d" % d_next
             d_next += 1
@@ -352,13 +377,13 @@ def main():
     sec2 = "\n".join(D)
 
     sec3 = "\n".join(["## 3 E-ledger patches", "", "### 3a Replacement text for existing lines", "",
-                      "Replacement wording for existing ledger lines is given in the Resolution column of the [A] entries of section 2 and in section 3 of `research/2026-09-29-part3-codex-report-review.md`. The canonical dossier is not changed.", "",
+                      SEC3_NOTE[rule], "",
                       "### 3b New E-entries", "",
                       "Entries %s. Each is one audited item of the verified store; the P3 record column gives the item, whose full record is in the records file of its batch." % e_range, "",
                       "| ID | Figure | Measurement definition and conditions | Source (URL, version, location) | Date | Label | Found by | Notes |", "|---|---|---|---|---|---|---|---|"] + ledger_rows)
 
     refs = ["## References", "",
-            "Every work cited by an E-entry above, by record id. Each entry gives the formal citation and the version actually read. Source classes follow the rule of 2026-09-29 (D313).", ""]
+            RULE_EN[rule], ""]
     for c in canon_list(order):
         refs += ref_entry(c, "en")
     json.dump({"sec1": sec1, "sec2": sec2, "sec3": sec3, "refs": "\n".join(refs)}, open(os.path.join(out, "ledger-parts.json"), "w", encoding="utf-8"), ensure_ascii=False)

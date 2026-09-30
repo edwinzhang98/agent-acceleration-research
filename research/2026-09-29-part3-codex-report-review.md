@@ -1,8 +1,8 @@
 # 第三部分研究计划报告（Codex 稿）的独立审阅
 
-2026-09-29，Claude Code 会话。审阅对象：`notes/2026-09-29-part3-research-plan-report-zh.md`（333 行，提交 83aaaa0，sha256 前 16 位 ce2edbbc7f3fbdc8）及其支持记录 `research/2026-09-29-part3-report-support.md`。审阅回答 Edwin 提出的四个问题：两个研究方向是否表达准确；相关工作的描述是否准确、候选贡献是否与已有研究重叠；第七章与 Time、Money 公式的衔接是否成立；哪些建议保留、修改或需要讨论。
+2026-09-29，Claude Code 会话。审阅对象：`notes/part3/2026-09-29-part3-research-plan-report-zh.md`（333 行，提交 83aaaa0，sha256 前 16 位 ce2edbbc7f3fbdc8）及其支持记录 `research/2026-09-29-part3-report-support.md`。审阅回答 Edwin 提出的四个问题：两个研究方向是否表达准确；相关工作的描述是否准确、候选贡献是否与已有研究重叠；第七章与 Time、Money 公式的衔接是否成立；哪些建议保留、修改或需要讨论。
 
-**结论先行。** (1) 两个方向和总目标表达准确。要改的是几处归属：规则手册出题是 Edwin 的设想；“以质量为前提”“可重置的起点环境”“第一阶段只用既有日志”是方案建议，不是 Edwin 的要求（1.1）。(2) 对文献的描述大体可靠：23 篇文献的 147 处陈述里，3 处写错或只部分成立，另有 5 处是段末引用的位置问题，其中 4 处容易让方案自己的规则被读成文献结论；报告低估了与已有研究的重叠：问题一的大部分对照已有人做过，这些对照缺的是“相同且报告出来的改进资源”，而修改去向包含新 action 和环境条件、按实际耗时排序的诊断，在已核对的文献里没有找到（1.2 的 C1、1.3、D335）。(3) 第七章与 Time、Money 公式的衔接成立；要补的是账本边界和防重复计数的规则（1.4）。(4) 保留、修改、讨论各项见 1.5。所有“修改”都写进我方下一稿方案（`notes/2026-09-29-part3-plan-claude-zh.md`），不改 Codex 报告。
+**结论先行。** (1) 两个方向和总目标表达准确。要改的是几处归属：规则手册出题是 Edwin 的设想；“以质量为前提”“可重置的起点环境”“第一阶段只用既有日志”是方案建议，不是 Edwin 的要求（1.1）。(2) 对文献的描述大体可靠：23 篇文献的 147 处陈述里，3 处写错或只部分成立，另有 5 处是段末引用的位置问题，其中 4 处容易让方案自己的规则被读成文献结论；报告低估了与已有研究的重叠：问题一的大部分对照已有人做过，这些对照缺的是“相同且报告出来的改进资源”，而修改去向包含新 action 和环境条件、按实际耗时排序的诊断，在已核对的文献里没有找到（1.2 的 C1、1.3、D335）。(3) 第七章与 Time、Money 公式的衔接成立；要补的是账本边界和防重复计数的规则（1.4）。(4) 保留、修改、讨论各项见 1.5。所有“修改”都写进我方下一稿方案（`notes/part3/2026-09-29-part3-plan-claude-zh.md`），不改 Codex 报告。
 
 **做了什么。** (1) 报告引用的 23 篇文献逐篇保存全文并重读，报告中关于文献的 147 处陈述逐条对照原文；(2) 第七章由两名互不知情的读者对照 `slides/build_deck.py` 和 `research/2026-09-28-problem-definition.md` 检查；(3) 三个研究问题分别对照本会话的核对库（读过全文的工作 314 项，其中 247 项符合来源规则并通过审计，共 2,923 条证据）查重叠。本文引用的每条文献细节都锁定到所读版本的具体行，先由脚本核对行内文字和数字，再由另一名读者独立尝试推翻；只有两步都通过的条目才进入第 1.6 节的证据表并获得 E 编号。本文写成后又经两轮独立审阅（对照条目、对照仓库、对照 Edwin 的原话），按其意见修改。
 
@@ -455,13 +455,13 @@
 - 第 3a 节的补丁（E230、E271、E272、E321、E323，survey 第 75 行，report-support 第 10、23、34 行，problem-definition 第 34 行）在 v3.1 合并时应用。本次没有改动这些文件。
 - PPT 中两处过时的页码指向（`slides/build_deck.py:1401`、`:1620`）没有修改，留给负责 slides 的会话。
 - 核对库（所存全文、逐条锚点、审计记录）保存在仓库之外：`~/.claude/projects/-Users-edwin-projects-agent-acceleration-research/part3-verification/`。核对脚本随本文一并提交到 `tools/evidence-check/`。
-- 我方方案稿见 `notes/2026-09-29-part3-plan-claude-zh.md`；预算按 Edwin 的要求暂不计算。
+- 我方方案稿见 `notes/part3/2026-09-29-part3-plan-claude-zh.md`；预算按 Edwin 的要求暂不计算。
 
 ## References
 
 ### A. Codex 报告引用的 23 篇（沿用报告的编号 [1]–[23]）
 
-以下条目照录自 `notes/2026-09-29-part3-research-plan-report-zh.md` 的参考文献。本次审阅逐条核对了作者、题目、发表信息和所读版本：正式发表的条目在会议官方页面上确认，预印本条目确认 arXiv 记录中没有发表信息。
+以下条目照录自 `notes/part3/2026-09-29-part3-research-plan-report-zh.md` 的参考文献。本次审阅逐条核对了作者、题目、发表信息和所读版本：正式发表的条目在会议官方页面上确认，预印本条目确认 arXiv 记录中没有发表信息。
 
 [1] Shaokun Zhang; Jieyu Zhang; Jiale Liu; Linxin Song; Chi Wang; Ranjay Krishna; Qingyun Wu (2024). *Offline Training of Language Model Agents with Functions as Learnable Weights*. ICML 2024, main conference; Proceedings of Machine Learning Research 235:60315–60335。[论文](https://proceedings.mlr.press/v235/zhang24cd.html)。
 

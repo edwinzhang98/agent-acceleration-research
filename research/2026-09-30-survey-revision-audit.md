@@ -1,6 +1,6 @@
 # 固定权重 Agent 加速报告的需求对照与修订核验
 
-日期：2026-09-30。输入是用户提供的 Claude Code 工作计划，作为需求检查清单，不是已完成的研究或证据。修订对象为 `notes/2026-09-30-self-improvement-agent-acceleration-review-zh.md` 及同名 Word，并扩展原筛查索引。前一版依据为 E644–E668、D436–D445。
+日期：2026-09-30。输入是用户提供的 Claude Code 工作计划，作为需求检查清单，不是已完成的研究或证据。修订对象为 `notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md` 及同名 Word，并扩展原筛查索引。前一版依据为 E644–E668、D436–D445。
 
 并行研究计划拟从 E669/D446 编号，本轮采用 SR2 局部标识，待统一入账时映射，不抢占全局编号，也不重写 canonical dossier。下列结论的来源均为原论文，核验日期统一为2026-09-30；数量来自网页快照解析的条目标为 calc.。本轮没有复现实验。
 
@@ -56,4 +56,4 @@
 
 ## References
 
-完整作者、正式发表与实际阅读版本见主报告末尾[1]–[53]；本文中的同名方法对应同一版本。[主报告](../notes/2026-09-30-self-improvement-agent-acceleration-review-zh.md)。原文局部定位及评测完整参考文献另见[形式化与评测核验](2026-09-30-survey-revision-evaluation.md)、[轨迹与环境核验](2026-09-30-survey-revision-memory-environment.md)。本文件只做修订审计，不引入另一套独立论文计数。
+完整作者、正式发表与实际阅读版本见主报告末尾[1]–[53]；本文中的同名方法对应同一版本。[主报告](../notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md)。原文局部定位及评测完整参考文献另见[形式化与评测核验](2026-09-30-survey-revision-evaluation.md)、[轨迹与环境核验](2026-09-30-survey-revision-memory-environment.md)。本文件只做修订审计，不引入另一套独立论文计数。

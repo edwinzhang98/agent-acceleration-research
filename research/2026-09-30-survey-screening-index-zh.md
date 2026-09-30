@@ -324,7 +324,7 @@
 
 完整学术引用集中在主报告的参考文献部分；本索引中的排除项、待核项与重复项仅保留目录审计入口。
 
-- [主报告及参考文献](/Users/edwin/projects/agent-acceleration-research/notes/2026-09-30-self-improvement-agent-acceleration-review-zh.md:272)
+- [主报告及参考文献](/Users/edwin/projects/agent-acceleration-research/notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md:272)
 - [提示优化与环境模型证据](/Users/edwin/projects/agent-acceleration-research/research/2026-09-30-survey-prompt-world-evidence.md)
 - [记忆分支证据](/Users/edwin/projects/agent-acceleration-research/research/2026-09-30-survey-memory-evidence.md)
 - [工具与技能分支证据](/Users/edwin/projects/agent-acceleration-research/research/2026-09-30-survey-tools-evidence.md)

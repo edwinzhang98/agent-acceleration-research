@@ -1,6 +1,6 @@
 # Part 3 evidence ledger (Claude Code session)
 
-**Date:** 2026-09-29 · **Session:** Claude Code (Part 3 research, in parallel with the Codex session) · **Scope:** the evidence behind `notes/2026-09-29-part3-plan-claude-zh.md` (the plan draft) and `research/2026-09-29-part3-codex-report-review.md` (the review of the Codex plan report). New IDs continue the repository maxima E323 and D320: E324–E643 here; D321–D335 are in the review file; D336–D435 here.
+**Date:** 2026-09-29 · **Session:** Claude Code (Part 3 research, in parallel with the Codex session) · **Scope:** the evidence behind `notes/part3/2026-09-29-part3-plan-claude-zh.md` (the plan draft) and `research/2026-09-29-part3-codex-report-review.md` (the review of the Codex plan report). New IDs continue the repository maxima E323 and D320: E324–E643 here; D321–D335 are in the review file; D336–D435 here.
 
 ## How the evidence was produced
 

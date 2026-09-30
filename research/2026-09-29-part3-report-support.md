@@ -1,6 +1,6 @@
 # 第三部分研究计划报告支持记录
 
-2026-09-29。对应读者报告：`notes/2026-09-29-part3-research-plan-report-zh.md` / `.docx`。本轮把已有调查综合成可讨论的研究计划，补读三篇最近邻，并按用户新增要求，在计划形成后回看当前 PPT 的公式与文献位置。Word 经 bundled LibreOffice 渲染为 17 页并逐页检查，中文字体、两条可编辑公式、五张表和引用链接已核对；文献引用共 23 条且与正文编号一致。未运行方法复现，未批准方案或预算，未修改前两部分 slides 或 canonical dossier。
+2026-09-29。对应读者报告：`notes/part3/2026-09-29-part3-research-plan-report-zh.md` / `.docx`。本轮把已有调查综合成可讨论的研究计划，补读三篇最近邻，并按用户新增要求，在计划形成后回看当前 PPT 的公式与文献位置。Word 经 bundled LibreOffice 渲染为 17 页并逐页检查，中文字体、两条可编辑公式、五张表和引用链接已核对；文献引用共 23 条且与正文编号一致。未运行方法复现，未批准方案或预算，未修改前两部分 slides 或 canonical dossier。
 
 ## 1 Verification table
 

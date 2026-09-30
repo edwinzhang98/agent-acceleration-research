@@ -1,6 +1,6 @@
 # Part 3 research proposal evidence and merge notes
 
-Date: 2026-09-29. Scope: targeted primary-source research supporting the Chinese discussion document `notes/2026-09-29-part3-research-proposal-zh.md`, not an exhaustive novelty survey. The current deck was read at commit `0da03a4`: 73 pages, Part 2 main methods on pages 03–13, cost per success in B8. Slides and canonical v3 are unchanged.
+Date: 2026-09-29. Scope: targeted primary-source research supporting the Chinese discussion document `notes/part3/2026-09-29-part3-research-proposal-zh.md`, not an exhaustive novelty survey. The current deck was read at commit `0da03a4`: 73 pages, Part 2 main methods on pages 03–13, cost per success in B8. Slides and canonical v3 are unchanged.
 
 New IDs continue the observed repository maxima E303 and D310. New records: E304–E308; version clarification: D311. These are proposed merge records, not changes to v3. No new performance numbers are used in the proposal; its design choices and experiments are proposals rather than paper findings. All papers below are primary sources; retrieved 2026-09-29.
 

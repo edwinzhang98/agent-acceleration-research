@@ -1,6 +1,6 @@
 # Self Improvement 与 Agent 加速的筛查及证据审计
 
-核查日期统一为2026-09-30。主报告为 [固定模型权重下的 Agent 加速与自我改进](../notes/2026-09-30-self-improvement-agent-acceleration-review-zh.md)。以下均为原作者一级来源（primary）的结果核查，未复现实验；本报告的研究建议属于推论。E644–E668、D436–D445为新增审计记录，不覆盖已有dossier条目。
+核查日期统一为2026-09-30。主报告为 [固定模型权重下的 Agent 加速与自我改进](../notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md)。以下均为原作者一级来源（primary）的结果核查，未复现实验；本报告的研究建议属于推论。E644–E668、D436–D445为新增审计记录，不覆盖已有dossier条目。
 
 ## 1 证据表与筛查覆盖
 
@@ -66,4 +66,4 @@
 - 建议的适用条件与定向探测是候选假设，需先与Metis、SpeedRunner、WALT、ActionEngine、HarnessFix、StarHarness做同预算比较；本报告没有认定新颖性。
 - 字幕用于解释作者分类与关切；实验效应仍以论文核查为准，未把自动转写用作原文引文。
 
-完整参考文献见[主报告末尾](../notes/2026-09-30-self-improvement-agent-acceleration-review-zh.md#参考文献)。筛查中的排除条目仅作为审计轨迹，不在主报告中用于支持性能结论。
+完整参考文献见[主报告末尾](../notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md#参考文献)。筛查中的排除条目仅作为审计轨迹，不在主报告中用于支持性能结论。

@@ -1,6 +1,6 @@
 # Survey report HTML reader
 
-把 `notes/2026-09-30-self-improvement-agent-acceleration-review-zh.md` 编译为同名 `.html`。这是既有报告的阅读版本，不新增研究证据或修改 Markdown / Word 内容。
+把 `notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md` 编译为同名 `.html`。这是既有报告的阅读版本，不新增研究证据或修改 Markdown / Word 内容。
 
 阅读版包含六张导读、全文与三张对照表、十二张重点方法卡、公式索引和五十三条完整参考文献。公式索引可直接跳回正文位置；引用编号打开完整来源。支持移动端目录、筛选、字号调整和打印全文。直接双击 HTML 即可离线阅读，外部原文链接除外。
 

@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const nodeModules = process.env.SURVEY_READER_NODE_MODULES || '/Users/edwin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules';
 const { marked } = await import(path.join(nodeModules, 'marked/lib/marked.esm.js'));
 const katex = require('./vendor/katex/katex.min.js');
-const sourcePath = path.join(root, 'notes/2026-09-30-self-improvement-agent-acceleration-review-zh.md');
+const sourcePath = path.join(root, 'notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md');
 const outputPath = sourcePath.replace(/\.md$/, '.html');
 const read = name => fs.readFileSync(path.join(here, name), 'utf8');
 const source = fs.readFileSync(sourcePath, 'utf8');
