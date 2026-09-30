@@ -1,10 +1,10 @@
 # Self-Improvement Survey 文献筛查索引
 
-本索引由最终筛查数据自动生成，供查阅与审计；不新增研究结论。
+本索引汇总方法筛查数据与评测补核，供查阅与审计；不新增研究结论。
 
-**253 条是综述目录记录数，不是 253 篇独立论文，也不代表每篇都已全文阅读。** 目录存在跨分类重复、题名与链接不一致等情况。阅读深度按实际记录区分目录初筛、摘要／元数据、方法核验与深读；“深读”表示读取了研究所需的方法、实验及相关附录，不表示逐页逐句审核所有内容。仅作去重的条目不继承另一条目的阅读深度。
+**本索引覆盖253条方法记录与59条评测记录，共312条目录行；不等于312篇独立论文，也不代表每篇都已全文阅读。** 方法253行的原分类保留如下；本次新增的评测59行位于文末。 目录存在跨分类重复、题名与链接不一致等情况。阅读深度按实际记录区分目录初筛、摘要／元数据、方法核验与深读；“深读”表示读取了研究所需的方法、实验及相关附录，不表示逐页逐句审核所有内容。仅作去重的条目不继承另一条目的阅读深度。
 
-本轮主报告实质讨论 **40 篇论文，并参考用户提供的演讲字幕**；这是有范围限定的研究整理，不是完整系统综述。排除项和待核项仅为审计记录，不构成对论文全部内容、质量或效果的背书；排除也不等于原论文没有价值。
+修订后的主报告引用 **40篇原有论文及12篇新增评测论文，并参考用户提供的演讲字幕**；这是有范围限定的研究整理，不是完整系统综述。排除项和待核项仅为审计记录，不构成对论文全部内容、质量或效果的背书；排除也不等于原论文没有价值。
 
 | 处理 | 目录记录数 | 含义 |
 |---|---:|---|
@@ -330,3 +330,73 @@
 - [工具与技能分支证据](/Users/edwin/projects/agent-acceleration-research/research/2026-09-30-survey-tools-evidence.md)
 - [整体 Agent 框架分支证据](/Users/edwin/projects/agent-acceleration-research/research/2026-09-30-survey-scaffold-evidence.md)
 - [本索引的数据源：逐条筛查 JSON](/Users/edwin/projects/agent-acceleration-research/research/2026-09-30-survey-screening.json)
+
+## 3 评测目录补筛
+
+59条目录记录按主链接去重为45个不同链接，14条为额外重复；其中包含judge、平台和错链，不是45个有效且互异的benchmark。12篇选读原文的任务、方法、评价与相关附录；33条仅目录/综述初筛；14条重复仅指向原行，不增加阅读数量。所有计数均为2026-09-30快照解析（calc.）。
+
+EV14原ClawBench链接2601.08613实际指向磁性纳米线论文。更正为[ClawBench 2604.08523v2](https://arxiv.org/pdf/2604.08523v2)，由[作者官方仓库](https://github.com/TIGER-AI-Lab/ClawBench)交叉定位；下表保留原错链用于审计。目录初筛不等于来源资格认证，待核项不用于主文的实质结论。
+
+| 行 | 项目与原目录链接 | 判定 | 阅读深度 | 范围理由与下一步 |
+|---|---|---|---|---|
+| EV01 | [Mind2Web: Towards a Generalist Agent for the Web](https://arxiv.org/abs/2306.06070) | 机制 | 原文任务与协议核验 | 静态参考轨迹/动作定位；Task SR非在线终局成功。 |
+| EV02 | [ManiSkill2: A Unified Benchmark for Generalizable Manipulation Skills](https://openreview.net/forum?id=b_CQDy9vrD1) | 范围外 | 目录与综述初筛 | 机器人操作；暂不纳入企业web主验证，非判定基准需训练。 |
+| EV03 | [CORE-Bench: Fostering the Credibility of Published Research Through a Computational Reproducibility Agent Benchmark](https://openreview.net/forum?id=BsMMc4MEGS) | 背景 | 目录与综述初筛 | 计算科研复现；可执行评价值得后续借鉴，领域不优先。 |
+| EV04 | [SWE-Bench+: Enhanced Coding Benchmark for LLMs](https://arxiv.org/abs/2410.06992) | 背景 | 目录与综述初筛 | 编码评测质量/污染相关；此轮不扩展软件修复主域。 |
+| EV05 | [WebLINX: Real-World Website Navigation with Multi-Turn Dialogue](https://openreview.net/forum?id=mUSPhG4uDW) | 机制 | 原文任务与协议核验 | 多轮静态示范；替代路径不可评，检索组件加速不可冒充部署收益。 |
+| EV06 | [GAIA: A Benchmark for General AI Assistants](https://openreview.net/forum?id=fibxvahvs3) | 背景 | 目录与综述初筛 | 通用助手任务；不是专为重复工作流/环境规则设计。 |
+| EV07 | [MINT: Evaluating LLMs in Multi-Turn Interaction with Tools and Language Feedback](https://openreview.net/forum?id=jp3gWrMuIZ) | 机制 | 原文任务与协议核验 | 反馈使用能力与每轮预算；原协议每个k从头开始，非持续学习曲线。 |
+| EV08 | [WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?](https://openreview.net/forum?id=BRfqYrikdo) | 核心 | 原文任务与协议核验 | ServiceNow参数化企业操作；云状态清理和反馈边界需固定。 |
+| EV09 | [AgentGym: Evolving Large Language Model-Based Agents across Diverse Environments](https://arxiv.org/abs/2406.04151) | 机制 | 目录与综述初筛 | 可作多环境接口资源；AgentEvol训练法与环境可用性须分开核。 |
+| EV10 | [GitTaskBench: A Benchmark for Code Agents Solving Real-World Tasks Through Code Repository Leveraging](https://arxiv.org/abs/2508.18993) | 背景 | 目录与综述初筛 | 仓库复用代码任务；暂不用于企业web速度推断，资格需另核。 |
+| EV11 | [SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Agents](https://arxiv.org/abs/2412.13178) | 范围外 | 目录与综述初筛 | 具身安全任务；安全维度可参考，动作成本不直接可比。 |
+| EV12 | [DrunkAgent: Stealthy Memory Corruption in LLM-Powered Recommender Agents](https://arxiv.org/abs/2503.23804) | 机制 | 目录与综述初筛 | 记忆污染/攻击可启发回归测试；未读原文，不引用攻击数字。 |
+| EV13 | [ST-WebAgentBench: A Benchmark for Evaluating Safety and Trustworthiness in Web Agents](https://openreview.net/forum?id=MuCDzH0ctf) | 核心 | 原文任务与协议核验 | 终局成功+轨迹规则合规；附加压力测试，不单独判加速。 |
+| EV14 | [ClawBench: A Benchmark for Evaluating AI Agents on Real-World Online Tasks](https://arxiv.org/abs/2601.08613) | 核心（后期） | 原文任务与协议核验 | 原目录错链；更正2604.08523v2后读原文。真实网站、客户端重置非服务器恢复。 |
+| EV15 | [Agent-as-a-Judge: Evaluate Agents with Agents](https://arxiv.org/abs/2410.10934) | 机制 | 目录与综述初筛 | 复杂工件/轨迹的agent judge；需另核可靠性与评价成本。 |
+| EV16 | [Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models](https://aclanthology.org/2025.acl-long.374/) | 范围外 | 目录与综述初筛 | 视觉生成模型评价，不是企业操作执行加速。 |
+| EV17 | [EvalAgent: Discovering Implicit Evaluation Criteria from the Web](https://openreview.net/forum?id=erGpkHCybv) | 机制 | 目录与综述初筛 | 隐式评价标准发现；有助rubric设计，尚未原文核可靠性。 |
+| EV18 | [Learning to Align Multi-Faceted Evaluation: A Unified and Robust Framework (ARJudge)](https://aclanthology.org/2025.findings-acl.494/) | 机制 | 目录与综述初筛 | 多维judge；如需额外训练judge则不属于全系统免训练主方案。 |
+| EV19 | [VerifiAgent: A Unified Verification Agent in Language Model Reasoning](https://aclanthology.org/2025.findings-emnlp.891/) | 机制 | 目录与综述初筛 | 推理验证；可参考验证接口，不据此证明业务状态判定可靠。 |
+| EV20 | [SWE-Bench+: Enhanced Coding Benchmark for LLMs](https://arxiv.org/abs/2410.06992) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV04；不增加独立来源数。 |
+| EV21 | [Identifying the Risks of LM Agents with an LM-Emulated Sandbox](https://openreview.net/forum?id=GEcwtMk1uA) | 机制 | 目录与综述初筛 | 模拟工具与风险评价；模拟器正确性/成本需原文另核后采用。 |
+| EV22 | [GitTaskBench: A Benchmark for Code Agents Solving Real-World Tasks Through Code Repository Leveraging](https://arxiv.org/abs/2508.18993) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV10；不增加独立来源数。 |
+| EV23 | [MINT: Evaluating LLMs in Multi-Turn Interaction with Tools and Language Feedback](https://openreview.net/forum?id=jp3gWrMuIZ) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV07；不增加独立来源数。 |
+| EV24 | [TaskBench: Benchmarking Large Language Models for Task Automation](https://arxiv.org/abs/2311.18760) | 机制 | 目录与综述初筛 | 任务分解/工具规划组件；不默认等于在线可重置工作流。 |
+| EV25 | [MetaTool Benchmark for Large Language Models: Deciding Whether to Use Tools and Which to Use](https://arxiv.org/abs/2310.03128) | 机制 | 目录与综述初筛 | 是否用工具/用哪个工具的决策；可做路由组件测试。 |
+| EV26 | [The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models](https://openreview.net/forum?id=2GmDdhBdDk) | 机制 | 目录与综述初筛 | 函数调用评测；版本跨度大，采用前需明确具体任务接口。 |
+| EV27 | [DrunkAgent: Stealthy Memory Corruption in LLM-Powered Recommender Agents](https://arxiv.org/abs/2503.23804) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV12；不增加独立来源数。 |
+| EV28 | [RSI-Bench: Multi-Axis Benchmark for Recursive Self-Improvement](https://github.com/sunghunkwag/rsi-bench) | 待核 | 目录与综述初筛 | 仅GitHub目录项，机构/正式出版资格未确认，隔离不用作结论。 |
+| EV29 | [SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://openreview.net/forum?id=VTF8yNQM66) | 背景 | 目录与综述初筛 | 软件issue修复；供scaffold相关研究背景，不作web加速主基准。 |
+| EV30 | [SWE-Bench+: Enhanced Coding Benchmark for LLMs](https://arxiv.org/abs/2410.06992) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV04；不增加独立来源数。 |
+| EV31 | [SWT-Bench: Testing and Validating Real-World Bug-Fixes with Code Agents](https://openreview.net/forum?id=9Y8zUO11EQ) | 机制 | 目录与综述初筛 | 测试/验证补丁可启发工件回归检查；本轮未读，不声称迁移已证实。 |
+| EV32 | [TDD-Bench Verified: Can LLMs Generate Tests for Issues Before They Get Resolved?](https://arxiv.org/abs/2412.02883) | 机制 | 目录与综述初筛 | 问题解决前生成测试；可借鉴验证独立性，IBM研究来源待专项核版。 |
+| EV33 | [LoCoBench-Agent: An Interactive Benchmark for LLM Agents in Long-Context Software Engineering](https://arxiv.org/abs/2511.13998) | 背景 | 目录与综述初筛 | 长上下文软件任务；任务形态与企业web不同。 |
+| EV34 | [DevAI: Automated AI Development Benchmark](https://arxiv.org/abs/2410.10934) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV15；DevAI是同篇论文的资源，不是第二篇独立论文。 |
+| EV35 | [Mind2Web: Towards a Generalist Agent for the Web](https://arxiv.org/abs/2306.06070) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV01；不增加独立来源数。 |
+| EV36 | [WebArena: A Realistic Web Environment for Building Autonomous Agents](https://openreview.net/forum?id=oKn9c6ytLx) | 核心 | 原文任务与协议核验 | 可恢复自托管站点、功能终局评价；部分题用LLM judge。 |
+| EV37 | [VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks](https://openreview.net/forum?id=RPKxrKTJbj) | 背景 | 目录与综述初筛 | 视觉web外部有效性候选；先避免把视觉grounding与经验机制混为一谈。 |
+| EV38 | [WebCanvas: Benchmarking Web Agents in Online Environments](https://arxiv.org/abs/2406.12373) | 待核 | 目录与综述初筛 | live web候选，但来源资格/真实重置和指标未核；不纳结论。 |
+| EV39 | [ST-WebAgentBench: A Benchmark for Evaluating Safety and Trustworthiness in Web Agents](https://openreview.net/forum?id=MuCDzH0ctf) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV13；不增加独立来源数。 |
+| EV40 | [clembench: Using Game Play to Evaluate Chat-Optimized Language Models as Conversational Agents](https://aclanthology.org/2023.emnlp-main.689/) | 范围外 | 目录与综述初筛 | 对话游戏协议；暂不纳企业web主验证。 |
+| EV41 | [clembench-2024: A Challenging, Dynamic, Complementary, Multilingual Benchmark and Underlying Flexible Framework for LLMs as Multi-Action Agents](https://arxiv.org/abs/2405.20859) | 范围外 | 目录与综述初筛 | 对话游戏框架更新；不能与2023版本结果混用。 |
+| EV42 | [GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents](https://arxiv.org/abs/2406.06613) | 范围外 | 目录与综述初筛 | 战略游戏；未核正式主会资格，不作核心论据。 |
+| EV43 | [LLM-Deliberation: Evaluating LLMs with Interactive Multi-Agent Negotiation Game](https://openreview.net/forum?id=eE1WHn6qlk) | 范围外 | 目录与综述初筛 | 多agent谈判；对手变化干扰与当前目标不同。 |
+| EV44 | [GTBench: Uncovering the Strategic Reasoning Capabilities of LLMs via Game-Theoretic Evaluations](https://arxiv.org/abs/2402.12348) | 范围外 | 目录与综述初筛 | 博弈策略能力；不直接验证企业流程加速。 |
+| EV45 | [CORE-Bench: Fostering the Credibility of Published Research Through a Computational Reproducibility Agent Benchmark](https://openreview.net/forum?id=BsMMc4MEGS) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV03；不增加独立来源数。 |
+| EV46 | [DiscoveryWorld: A Virtual Environment for Developing and Evaluating Automated Scientific Discovery Agents](https://openreview.net/forum?id=cDYqckEt6d) | 核心（机制） | 原文任务与协议核验 | 探索→假设→实验→规则；可区分任务完成和知识正确。 |
+| EV47 | [PaperBench: Evaluating AI's Ability to Replicate AI Research](https://arxiv.org/abs/2504.01848) | 背景 | 目录与综述初筛 | OpenAI科研复现评测；长流程计费/判分可后续借鉴，此轮未展开。 |
+| EV48 | [PhysGym: Benchmarking LLMs in Interactive Physics Discovery with Controlled Priors](https://openreview.net/forum?id=w8uII2qAmd) | 核心（机制） | 原文任务与协议核验 | 可控先验+主动选择实验；是函数规律发现，不能替代业务状态机。 |
+| EV49 | [AstaBench: Rigorous Benchmarking of AI Agents with a Scientific Research Suite](https://openreview.net/forum?id=M7TNf5J26u) | 机制 | 原文任务与协议核验 | 标准工具、分离工具访问与模型能力、统一费用；不是持续学习现成协议。 |
+| EV50 | [MLS-Bench: A Holistic and Rigorous Assessment of AI Systems on Building Better AI](https://arxiv.org/abs/2605.08678) | 背景 | 目录与综述初筛 | 构建AI系统的评测；任务可能含训练不等于执行agent必需训练，未展开。 |
+| EV51 | [ManiSkill2: A Unified Benchmark for Generalizable Manipulation Skills](https://openreview.net/forum?id=b_CQDy9vrD1) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV02；不增加独立来源数。 |
+| EV52 | [SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Agents](https://arxiv.org/abs/2412.13178) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV11；不增加独立来源数。 |
+| EV53 | [EmbodiedBench: Comprehensive Benchmarking Multi-Modal Large Language Models for Vision-Driven Embodied Agents](https://openreview.net/forum?id=DgGF2LEBPS) | 范围外 | 目录与综述初筛 | 视觉具身操作；暂不扩大到机器人主域。 |
+| EV54 | [OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments](https://arxiv.org/abs/2404.07972) | 核心（后期） | 原文任务与协议核验 | 真实OS任务与VM快照；UI/环境运行噪声和远端状态另控制。 |
+| EV55 | [AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents](https://aclanthology.org/2024.acl-long.850/) | 核心 | 原文任务与协议核验 | API跨应用任务，可复位DB+时间，终局含额外改动检查。 |
+| EV56 | [Identifying the Risks of LM Agents with an LM-Emulated Sandbox](https://openreview.net/forum?id=GEcwtMk1uA) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV21；不增加独立来源数。 |
+| EV57 | [MetaTool Benchmark for Large Language Models: Deciding Whether to Use Tools and Which to Use](https://arxiv.org/abs/2310.03128) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV25；不增加独立来源数。 |
+| EV58 | [Windows Agent Arena: Evaluating Multi-Modal OS Agents at Scale](https://openreview.net/forum?id=W9s817KqYf) | 背景 | 目录与综述初筛 | Windows外部有效性候选；先用OSWorld核机制，未读原文不承诺重置能力。 |
+| EV59 | [The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models](https://openreview.net/forum?id=2GmDdhBdDk) | 重复 | 重复，见原行；不增加阅读篇数 | 同EV26；不增加独立来源数。 |
+
+具体原文位置、版本、反馈/重置协议与完整参考文献见[评测补核](2026-09-30-survey-revision-evaluation.md)。主报告新增参考文献[42]–[53]与这12篇原文对应。

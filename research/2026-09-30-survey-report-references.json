@@ -198,5 +198,65 @@
     "number": 40,
     "entry": "Tobias Lindenbauer; Georg Groh; Hinrich Schütze. **From Knowledge to Noise: CTIM-Rover and the Pitfalls of Episodic Memory in Software Engineering Agents**. 预印本（2025）. 所读/核查版本：arXiv:2505.23422v1. [来源](https://arxiv.org/abs/2505.23422v1)。",
     "url": "https://arxiv.org/abs/2505.23422v1"
+  },
+  "SR2_R42": {
+    "number": 42,
+    "entry": "Harsh Trivedi, Tushar Khot, Mareike Hartmann, Ruskin Manku, Vinty Dong, Edward Li, Shashank Gupta, Ashish Sabharwal, and Niranjan Balasubramanian. **AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents.** Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pp.16022–16076, 2024. DOI:10.18653/v1/2024.acl-long.850. [正式页及实际读本](https://aclanthology.org/2024.acl-long.850/)。",
+    "url": "https://aclanthology.org/2024.acl-long.850/"
+  },
+  "SR2_R43": {
+    "number": 43,
+    "entry": "Alexandre Drouin, Maxime Gasse, Massimo Caccia, Issam H. Laradji, Manuel Del Verme, Tom Marty, David Vazquez, Nicolas Chapados, and Alexandre Lacoste. **WorkArena: How Capable are Web Agents at Solving Common Knowledge Work Tasks?** Proceedings of the 41st International Conference on Machine Learning, PMLR235:11642–11662, 2024. [正式页](https://proceedings.mlr.press/v235/drouin24a.html)，[实际阅读正式PDF](https://raw.githubusercontent.com/mlresearch/v235/main/assets/drouin24a/drouin24a.pdf)。2024原版，不混后续WorkArena++。",
+    "url": "https://proceedings.mlr.press/v235/drouin24a.html"
+  },
+  "SR2_R44": {
+    "number": 44,
+    "entry": "Shuyan Zhou, Frank F. Xu, Hao Zhu, Xuhui Zhou, Robert Lo, Abishek Sridhar, Xianyi Cheng, Tianyue Ou, Yonatan Bisk, Daniel Fried, Uri Alon, and Graham Neubig. **WebArena: A Realistic Web Environment for Building Autonomous Agents.** ICLR, 2024. [正式录](https://proceedings.iclr.cc/paper_files/paper/2024/hash/4410c0711e9154a7a2d26f9b3816d1ef-Abstract-Conference.html)。实际阅读[arXiv:2307.13854v4](https://arxiv.org/pdf/2307.13854v4)，2024-04-16。",
+    "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/4410c0711e9154a7a2d26f9b3816d1ef-Abstract-Conference.html"
+  },
+  "SR2_R45": {
+    "number": 45,
+    "entry": "Ido Levy, Ben Wiesel, Sami Marreed, Alon Oved, Avi Yaeli, and Segev Shlomov. **ST-WebAgentBench: A Benchmark for Evaluating Safety and Trustworthiness in Web Agents.** ICLR, 2026. [IBM正式出版记录](https://research.ibm.com/publications/st-webagentbench-a-benchmark-for-evaluating-safety-and-trustworthiness-in-web-agents--1)，[ICLR官方会议录目录](https://iclr.cc/virtual/2026/papers.html)。**实际读的后续版本署名为** Ido Levy, Ben Wiesel, Sami Marreed, Alon Oved, Avi Yaeli, Nir Mashkif, and Segev Shlomov，arXiv:2410.06703v7，2026-06-04，[PDF](https://arxiv.org/pdf/2410.06703v7)。本文375任务等数字来自后者；当前[官方代码](https://github.com/segev-shlomov/ST-WebAgentBench)补核反馈/重置模块。",
+    "url": "https://research.ibm.com/publications/st-webagentbench-a-benchmark-for-evaluating-safety-and-trustworthiness-in-web-agents--1"
+  },
+  "SR2_R46": {
+    "number": 46,
+    "entry": "Xiang Deng, Yu Gu, Boyuan Zheng, Shijie Chen, Sam Stevens, Boshi Wang, Huan Sun, and Yu Su. **Mind2Web: Towards a Generalist Agent for the Web.** Advances in Neural Information Processing Systems36, Datasets and Benchmarks Track, pp.28091–28114, 2023. [正式录](https://proceedings.neurips.cc/paper_files/paper/2023/hash/5950bf290a1570ea401bf98882128160-Abstract-Datasets_and_Benchmarks.html)。实际阅读[arXiv:2306.06070v3](https://arxiv.org/pdf/2306.06070v3)，2023-12-09；该PDF姓名写Samuel Stevens。",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/5950bf290a1570ea401bf98882128160-Abstract-Datasets_and_Benchmarks.html"
+  },
+  "SR2_R47": {
+    "number": 47,
+    "entry": "Xing Han Lu, Zdeněk Kasner, and Siva Reddy. **WebLINX: Real-World Website Navigation with Multi-Turn Dialogue.** Proceedings of the 41st International Conference on Machine Learning, PMLR235:33007–33056, 2024. [正式页](https://proceedings.mlr.press/v235/lu24e.html)，[实际阅读正式PDF](https://raw.githubusercontent.com/mlresearch/v235/main/assets/lu24e/lu24e.pdf)。作者个人常用拼写Xing Han Lù；引用按PMLR书目。",
+    "url": "https://proceedings.mlr.press/v235/lu24e.html"
+  },
+  "SR2_R48": {
+    "number": 48,
+    "entry": "Tianbao Xie, Danyang Zhang, Jixuan Chen, Xiaochuan Li, Siheng Zhao, Ruisheng Cao, Toh Jing Hua, Zhoujun Cheng, Dongchan Shin, Fangyu Lei, Yitao Liu, Yiheng Xu, Shuyan Zhou, Silvio Savarese, Caiming Xiong, Victor Zhong, and Tao Yu. **OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments.** Advances in Neural Information Processing Systems37, Datasets and Benchmarks Track, 2024. [正式会议PDF](https://proceedings.neurips.cc/paper_files/paper/2024/file/5d413e48f84dc61244b6be550f1cd8f5-Paper-Datasets_and_Benchmarks_Track.pdf)。实际协议读本是较早[arXiv:2404.07972v2](https://arxiv.org/pdf/2404.07972v2)，2024-05-30；不声称等同后续Verified版本。",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/5d413e48f84dc61244b6be550f1cd8f5-Paper-Datasets_and_Benchmarks_Track.pdf"
+  },
+  "SR2_R49": {
+    "number": 49,
+    "entry": "Yuxuan Zhang, Yubo Wang, Yipeng Zhu, Penghui Du, Junwen Miao, Xuan Lu, Zhuofeng Li, Xingwei Qu, Zhengkang Guo, Yuanzhe Shen, Dingjie Song, Han Zhou, Tuney Zheng, Xian Wu, Hao Yu, Songcheng Cai, Yi Lu, Yunzhuo Hao, Minyi Lei, Liang Chen, Kai Zou, Huifeng Yin, Wendong Xu, Dongfu Jiang, Ping Nie, Jiaheng Liu, Wenhu Chen, and Kelsey R. Allen. **ClawBench: Can AI Agents Complete Everyday Online Tasks?** arXiv:2604.08523v2, 2026-07-20. [实际阅读PDF](https://arxiv.org/pdf/2604.08523v2)，[作者官方代码](https://github.com/TIGER-AI-Lab/ClawBench)，[V1公开轨迹](https://huggingface.co/datasets/NAIL-Group/ClawBenchV1Trace)。强机构preprint；repo自报EMNLP2026 Findings，未在本次独立确认正式录。",
+    "url": "https://arxiv.org/pdf/2604.08523v2"
+  },
+  "SR2_R50": {
+    "number": 50,
+    "entry": "Peter Jansen, Marc-Alexandre Côté, Tushar Khot, Erin Bransom, Bhavana Dalvi Mishra, Bodhisattwa Prasad Majumder, Oyvind Tafjord, and Peter Clark. **DiscoveryWorld: A Virtual Environment for Developing and Evaluating Automated Scientific Discovery Agents.** Advances in Neural Information Processing Systems37, Datasets and Benchmarks Track, 2024. [正式录](https://proceedings.neurips.cc/paper_files/paper/2024/hash/13836f251823945316ae067350a5c366-Abstract-Datasets_and_Benchmarks_Track.html)。实际阅读[arXiv:2406.06769v2](https://arxiv.org/pdf/2406.06769v2)，2024-10-07，首页仍标preprint，不改变已经独立核实的后续正式venue。",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/13836f251823945316ae067350a5c366-Abstract-Datasets_and_Benchmarks_Track.html"
+  },
+  "SR2_R51": {
+    "number": 51,
+    "entry": "Yimeng Chen, Piotr Piękos, Mateusz Ostaszewski, Firas Laakom, and Jürgen Schmidhuber. **PhysGym: Benchmarking LLMs in Interactive Physics Discovery with Controlled Priors.** Advances in Neural Information Processing Systems38, Datasets and Benchmarks Track, 2025. [正式录](https://proceedings.nips.cc/paper_files/paper/2025/hash/42abcf9dffa48ca44fea1c497539a914-Abstract-Datasets_and_Benchmarks_Track.html)。实际阅读[arXiv:2507.15550v2](https://arxiv.org/pdf/2507.15550v2)，2025-10-26。",
+    "url": "https://proceedings.nips.cc/paper_files/paper/2025/hash/42abcf9dffa48ca44fea1c497539a914-Abstract-Datasets_and_Benchmarks_Track.html"
+  },
+  "SR2_R52": {
+    "number": 52,
+    "entry": "Xingyao Wang, Zihan Wang, Jiateng Liu, Yangyi Chen, Lifan Yuan, Hao Peng, and Heng Ji. **MINT: Evaluating LLMs in Multi-turn Interaction with Tools and Language Feedback.** ICLR, 2024. [正式录](https://proceedings.iclr.cc/paper_files/paper/2024/hash/8a0d3ae989a382ce6e50312bc35bf7e1-Abstract-Conference.html)。实际阅读[作者发布的会议PDF](https://zihanwang314.github.io/pdf/mint.pdf)，首页标ICLR2024及arXiv:2309.10691v3，2024-03-12。",
+    "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/8a0d3ae989a382ce6e50312bc35bf7e1-Abstract-Conference.html"
+  },
+  "SR2_R53": {
+    "number": 53,
+    "entry": "Jonathan Bragg, Mike D’Arcy, Nishant Balepur, Dan Bareket, Bhavana Dalvi, Sergey Feldman, Dany Haddad, Jena D. Hwang, Peter Jansen, Varsha Kishore, Bodhisattwa Prasad Majumder, Aakanksha Naik, Sigal Rahamimov, Kyle Richardson, Amanpreet Singh, Harshit Surana, Aryeh Tiktinsky, Rosni Vasu, Guy Wiener, Chloe Anastasiades, Stefan Candra, Jason Dunkelberger, Dan Emery, Rob Evans, Malachi Hamada, Regan Huff, Rodney Kinney, Matt Latzke, Jaron Lochner, Ruben Lozano-Aguilera, Cecile Nguyen, Smita Rao, Amber Tanaka, Brooke Vlahos, Peter Clark, Doug Downey, Yoav Goldberg, Ashish Sabharwal, and Daniel S. Weld. **AstaBench: Rigorous Benchmarking of AI Agents with a Scientific Research Suite.** ICLR, 2026. [OpenReview论文页](https://openreview.net/forum?id=M7TNf5J26u)，[ICLR官方录目录](https://iclr.cc/virtual/2026/papers.html)。实际阅读[arXiv:2510.21652v2](https://arxiv.org/pdf/2510.21652v2)，2026-04-21。",
+    "url": "https://openreview.net/forum?id=M7TNf5J26u"
   }
 }

@@ -72,7 +72,7 @@
 
 ### ST5. SpeedRunner：用 coding agent 分析历史轨迹、重构程序技能，直接优化成本
 
-**方法与冻结范围。** actor 和 skill inducer 都固定为 GPT-5.4-mini，actor reasoning=low、inducer=medium。wake 阶段跑一批 10 条轨迹；sleep 阶段 coding agent 读取原始轨迹、工具调用栈和版本化技能库，分析失败/冗余，新增、编辑或删除技能，并区分暴露给 actor 的 public 函数和内部 helper。关键点是**不依靠重新运行环境/replay 或额外验证**也能从日志改代码。它不是每条轨迹仅让 LLM 写一句反思，而是可使用代码搜索和统计的较强分析器。
+**方法与冻结范围。** actor 和 skill inducer 都固定为 GPT-5.4-mini，actor reasoning=low、inducer=medium。wake 阶段跑一批 10 条轨迹；sleep 阶段 coding agent 读取原始轨迹、工具调用栈和版本化技能库，分析失败/冗余，新增、编辑或删除技能，并区分暴露给 actor 的 public 函数和内部 helper。关键点是**不要求重新运行旧环境任务/replay 来验收技能**，仍可利用代码执行、日志统计和局部测试。此处已按后续补核收窄“无额外验证”的旧措辞，见 `2026-09-30-survey-revision-memory-environment.md` §4 与修订审计 SR2-D04。它不是每条轨迹仅让 LLM 写一句反思，而是可使用代码搜索和统计的较强分析器。
 
 **评测。** arXiv v1 §§3–5、Fig.3（PDF p6）、Appendix A/G：ScienceWorld 两个任务族、BabyAI 一个困难任务、Crafter；每环境 200 条训练 episode，每 50 条做 30 条 held-out evaluation，3 seeds。BabyAI 中作者报告约从 67% 接近 100%，单轨迹成本降到 ReAct 的约八分之一；这些是曲线/正文的近似描述，不应造出更精细的小数。Crafter 纵轴是成就进度，不是二元成功率。基线包括 ReAct、文字技能和程序技能法；ASI/Voyager 为适配到同 actor/primitive 的版本，ASI 主比较移除了 replay 验证，原样/变体分析另见附录。
 

@@ -1,0 +1,431 @@
+{
+  "snapshot_date": "2026-09-30",
+  "directory_rows": 59,
+  "unique_primary_urls": 45,
+  "extra_duplicate_rows": 14,
+  "depth_counts": {
+    "P": 12,
+    "S": 33,
+    "R": 14
+  },
+  "depth_definitions": {
+    "P": "原文任务与协议核验",
+    "S": "目录与综述初筛",
+    "R": "重复，见原行；不增加阅读篇数"
+  },
+  "rows": [
+    {
+      "id": "EV01",
+      "source_markdown": "[Mind2Web: Towards a Generalist Agent for the Web](https://arxiv.org/abs/2306.06070)",
+      "classification": "机制",
+      "depth_code": "P",
+      "reason": "静态参考轨迹/动作定位；Task SR非在线终局成功。"
+    },
+    {
+      "id": "EV02",
+      "source_markdown": "[ManiSkill2: A Unified Benchmark for Generalizable Manipulation Skills](https://openreview.net/forum?id=b_CQDy9vrD1)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "机器人操作；暂不纳入企业web主验证，非判定基准需训练。"
+    },
+    {
+      "id": "EV03",
+      "source_markdown": "[CORE-Bench: Fostering the Credibility of Published Research Through a Computational Reproducibility Agent Benchmark](https://openreview.net/forum?id=BsMMc4MEGS)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "计算科研复现；可执行评价值得后续借鉴，领域不优先。"
+    },
+    {
+      "id": "EV04",
+      "source_markdown": "[SWE-Bench+: Enhanced Coding Benchmark for LLMs](https://arxiv.org/abs/2410.06992)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "编码评测质量/污染相关；此轮不扩展软件修复主域。"
+    },
+    {
+      "id": "EV05",
+      "source_markdown": "[WebLINX: Real-World Website Navigation with Multi-Turn Dialogue](https://openreview.net/forum?id=mUSPhG4uDW)",
+      "classification": "机制",
+      "depth_code": "P",
+      "reason": "多轮静态示范；替代路径不可评，检索组件加速不可冒充部署收益。"
+    },
+    {
+      "id": "EV06",
+      "source_markdown": "[GAIA: A Benchmark for General AI Assistants](https://openreview.net/forum?id=fibxvahvs3)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "通用助手任务；不是专为重复工作流/环境规则设计。"
+    },
+    {
+      "id": "EV07",
+      "source_markdown": "[MINT: Evaluating LLMs in Multi-Turn Interaction with Tools and Language Feedback](https://openreview.net/forum?id=jp3gWrMuIZ)",
+      "classification": "机制",
+      "depth_code": "P",
+      "reason": "反馈使用能力与每轮预算；原协议每个k从头开始，非持续学习曲线。"
+    },
+    {
+      "id": "EV08",
+      "source_markdown": "[WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?](https://openreview.net/forum?id=BRfqYrikdo)",
+      "classification": "核心",
+      "depth_code": "P",
+      "reason": "ServiceNow参数化企业操作；云状态清理和反馈边界需固定。"
+    },
+    {
+      "id": "EV09",
+      "source_markdown": "[AgentGym: Evolving Large Language Model-Based Agents across Diverse Environments](https://arxiv.org/abs/2406.04151)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "可作多环境接口资源；AgentEvol训练法与环境可用性须分开核。"
+    },
+    {
+      "id": "EV10",
+      "source_markdown": "[GitTaskBench: A Benchmark for Code Agents Solving Real-World Tasks Through Code Repository Leveraging](https://arxiv.org/abs/2508.18993)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "仓库复用代码任务；暂不用于企业web速度推断，资格需另核。"
+    },
+    {
+      "id": "EV11",
+      "source_markdown": "[SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Agents](https://arxiv.org/abs/2412.13178)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "具身安全任务；安全维度可参考，动作成本不直接可比。"
+    },
+    {
+      "id": "EV12",
+      "source_markdown": "[DrunkAgent: Stealthy Memory Corruption in LLM-Powered Recommender Agents](https://arxiv.org/abs/2503.23804)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "记忆污染/攻击可启发回归测试；未读原文，不引用攻击数字。"
+    },
+    {
+      "id": "EV13",
+      "source_markdown": "[ST-WebAgentBench: A Benchmark for Evaluating Safety and Trustworthiness in Web Agents](https://openreview.net/forum?id=MuCDzH0ctf)",
+      "classification": "核心",
+      "depth_code": "P",
+      "reason": "终局成功+轨迹规则合规；附加压力测试，不单独判加速。"
+    },
+    {
+      "id": "EV14",
+      "source_markdown": "[ClawBench: A Benchmark for Evaluating AI Agents on Real-World Online Tasks](https://arxiv.org/abs/2601.08613)",
+      "classification": "核心（后期）",
+      "depth_code": "P",
+      "reason": "原目录错链；更正2604.08523v2后读原文。真实网站、客户端重置非服务器恢复。"
+    },
+    {
+      "id": "EV15",
+      "source_markdown": "[Agent-as-a-Judge: Evaluate Agents with Agents](https://arxiv.org/abs/2410.10934)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "复杂工件/轨迹的agent judge；需另核可靠性与评价成本。"
+    },
+    {
+      "id": "EV16",
+      "source_markdown": "[Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models](https://aclanthology.org/2025.acl-long.374/)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "视觉生成模型评价，不是企业操作执行加速。"
+    },
+    {
+      "id": "EV17",
+      "source_markdown": "[EvalAgent: Discovering Implicit Evaluation Criteria from the Web](https://openreview.net/forum?id=erGpkHCybv)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "隐式评价标准发现；有助rubric设计，尚未原文核可靠性。"
+    },
+    {
+      "id": "EV18",
+      "source_markdown": "[Learning to Align Multi-Faceted Evaluation: A Unified and Robust Framework (ARJudge)](https://aclanthology.org/2025.findings-acl.494/)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "多维judge；如需额外训练judge则不属于全系统免训练主方案。"
+    },
+    {
+      "id": "EV19",
+      "source_markdown": "[VerifiAgent: A Unified Verification Agent in Language Model Reasoning](https://aclanthology.org/2025.findings-emnlp.891/)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "推理验证；可参考验证接口，不据此证明业务状态判定可靠。"
+    },
+    {
+      "id": "EV20",
+      "source_markdown": "[SWE-Bench+: Enhanced Coding Benchmark for LLMs](https://arxiv.org/abs/2410.06992)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV04；不增加独立来源数。"
+    },
+    {
+      "id": "EV21",
+      "source_markdown": "[Identifying the Risks of LM Agents with an LM-Emulated Sandbox](https://openreview.net/forum?id=GEcwtMk1uA)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "模拟工具与风险评价；模拟器正确性/成本需原文另核后采用。"
+    },
+    {
+      "id": "EV22",
+      "source_markdown": "[GitTaskBench: A Benchmark for Code Agents Solving Real-World Tasks Through Code Repository Leveraging](https://arxiv.org/abs/2508.18993)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV10；不增加独立来源数。"
+    },
+    {
+      "id": "EV23",
+      "source_markdown": "[MINT: Evaluating LLMs in Multi-Turn Interaction with Tools and Language Feedback](https://openreview.net/forum?id=jp3gWrMuIZ)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV07；不增加独立来源数。"
+    },
+    {
+      "id": "EV24",
+      "source_markdown": "[TaskBench: Benchmarking Large Language Models for Task Automation](https://arxiv.org/abs/2311.18760)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "任务分解/工具规划组件；不默认等于在线可重置工作流。"
+    },
+    {
+      "id": "EV25",
+      "source_markdown": "[MetaTool Benchmark for Large Language Models: Deciding Whether to Use Tools and Which to Use](https://arxiv.org/abs/2310.03128)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "是否用工具/用哪个工具的决策；可做路由组件测试。"
+    },
+    {
+      "id": "EV26",
+      "source_markdown": "[The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models](https://openreview.net/forum?id=2GmDdhBdDk)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "函数调用评测；版本跨度大，采用前需明确具体任务接口。"
+    },
+    {
+      "id": "EV27",
+      "source_markdown": "[DrunkAgent: Stealthy Memory Corruption in LLM-Powered Recommender Agents](https://arxiv.org/abs/2503.23804)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV12；不增加独立来源数。"
+    },
+    {
+      "id": "EV28",
+      "source_markdown": "[RSI-Bench: Multi-Axis Benchmark for Recursive Self-Improvement](https://github.com/sunghunkwag/rsi-bench)",
+      "classification": "待核",
+      "depth_code": "S",
+      "reason": "仅GitHub目录项，机构/正式出版资格未确认，隔离不用作结论。"
+    },
+    {
+      "id": "EV29",
+      "source_markdown": "[SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://openreview.net/forum?id=VTF8yNQM66)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "软件issue修复；供scaffold相关研究背景，不作web加速主基准。"
+    },
+    {
+      "id": "EV30",
+      "source_markdown": "[SWE-Bench+: Enhanced Coding Benchmark for LLMs](https://arxiv.org/abs/2410.06992)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV04；不增加独立来源数。"
+    },
+    {
+      "id": "EV31",
+      "source_markdown": "[SWT-Bench: Testing and Validating Real-World Bug-Fixes with Code Agents](https://openreview.net/forum?id=9Y8zUO11EQ)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "测试/验证补丁可启发工件回归检查；本轮未读，不声称迁移已证实。"
+    },
+    {
+      "id": "EV32",
+      "source_markdown": "[TDD-Bench Verified: Can LLMs Generate Tests for Issues Before They Get Resolved?](https://arxiv.org/abs/2412.02883)",
+      "classification": "机制",
+      "depth_code": "S",
+      "reason": "问题解决前生成测试；可借鉴验证独立性，IBM研究来源待专项核版。"
+    },
+    {
+      "id": "EV33",
+      "source_markdown": "[LoCoBench-Agent: An Interactive Benchmark for LLM Agents in Long-Context Software Engineering](https://arxiv.org/abs/2511.13998)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "长上下文软件任务；任务形态与企业web不同。"
+    },
+    {
+      "id": "EV34",
+      "source_markdown": "[DevAI: Automated AI Development Benchmark](https://arxiv.org/abs/2410.10934)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV15；DevAI是同篇论文的资源，不是第二篇独立论文。"
+    },
+    {
+      "id": "EV35",
+      "source_markdown": "[Mind2Web: Towards a Generalist Agent for the Web](https://arxiv.org/abs/2306.06070)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV01；不增加独立来源数。"
+    },
+    {
+      "id": "EV36",
+      "source_markdown": "[WebArena: A Realistic Web Environment for Building Autonomous Agents](https://openreview.net/forum?id=oKn9c6ytLx)",
+      "classification": "核心",
+      "depth_code": "P",
+      "reason": "可恢复自托管站点、功能终局评价；部分题用LLM judge。"
+    },
+    {
+      "id": "EV37",
+      "source_markdown": "[VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks](https://openreview.net/forum?id=RPKxrKTJbj)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "视觉web外部有效性候选；先避免把视觉grounding与经验机制混为一谈。"
+    },
+    {
+      "id": "EV38",
+      "source_markdown": "[WebCanvas: Benchmarking Web Agents in Online Environments](https://arxiv.org/abs/2406.12373)",
+      "classification": "待核",
+      "depth_code": "S",
+      "reason": "live web候选，但来源资格/真实重置和指标未核；不纳结论。"
+    },
+    {
+      "id": "EV39",
+      "source_markdown": "[ST-WebAgentBench: A Benchmark for Evaluating Safety and Trustworthiness in Web Agents](https://openreview.net/forum?id=MuCDzH0ctf)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV13；不增加独立来源数。"
+    },
+    {
+      "id": "EV40",
+      "source_markdown": "[clembench: Using Game Play to Evaluate Chat-Optimized Language Models as Conversational Agents](https://aclanthology.org/2023.emnlp-main.689/)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "对话游戏协议；暂不纳企业web主验证。"
+    },
+    {
+      "id": "EV41",
+      "source_markdown": "[clembench-2024: A Challenging, Dynamic, Complementary, Multilingual Benchmark and Underlying Flexible Framework for LLMs as Multi-Action Agents](https://arxiv.org/abs/2405.20859)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "对话游戏框架更新；不能与2023版本结果混用。"
+    },
+    {
+      "id": "EV42",
+      "source_markdown": "[GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents](https://arxiv.org/abs/2406.06613)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "战略游戏；未核正式主会资格，不作核心论据。"
+    },
+    {
+      "id": "EV43",
+      "source_markdown": "[LLM-Deliberation: Evaluating LLMs with Interactive Multi-Agent Negotiation Game](https://openreview.net/forum?id=eE1WHn6qlk)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "多agent谈判；对手变化干扰与当前目标不同。"
+    },
+    {
+      "id": "EV44",
+      "source_markdown": "[GTBench: Uncovering the Strategic Reasoning Capabilities of LLMs via Game-Theoretic Evaluations](https://arxiv.org/abs/2402.12348)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "博弈策略能力；不直接验证企业流程加速。"
+    },
+    {
+      "id": "EV45",
+      "source_markdown": "[CORE-Bench: Fostering the Credibility of Published Research Through a Computational Reproducibility Agent Benchmark](https://openreview.net/forum?id=BsMMc4MEGS)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV03；不增加独立来源数。"
+    },
+    {
+      "id": "EV46",
+      "source_markdown": "[DiscoveryWorld: A Virtual Environment for Developing and Evaluating Automated Scientific Discovery Agents](https://openreview.net/forum?id=cDYqckEt6d)",
+      "classification": "核心（机制）",
+      "depth_code": "P",
+      "reason": "探索→假设→实验→规则；可区分任务完成和知识正确。"
+    },
+    {
+      "id": "EV47",
+      "source_markdown": "[PaperBench: Evaluating AI's Ability to Replicate AI Research](https://arxiv.org/abs/2504.01848)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "OpenAI科研复现评测；长流程计费/判分可后续借鉴，此轮未展开。"
+    },
+    {
+      "id": "EV48",
+      "source_markdown": "[PhysGym: Benchmarking LLMs in Interactive Physics Discovery with Controlled Priors](https://openreview.net/forum?id=w8uII2qAmd)",
+      "classification": "核心（机制）",
+      "depth_code": "P",
+      "reason": "可控先验+主动选择实验；是函数规律发现，不能替代业务状态机。"
+    },
+    {
+      "id": "EV49",
+      "source_markdown": "[AstaBench: Rigorous Benchmarking of AI Agents with a Scientific Research Suite](https://openreview.net/forum?id=M7TNf5J26u)",
+      "classification": "机制",
+      "depth_code": "P",
+      "reason": "标准工具、分离工具访问与模型能力、统一费用；不是持续学习现成协议。"
+    },
+    {
+      "id": "EV50",
+      "source_markdown": "[MLS-Bench: A Holistic and Rigorous Assessment of AI Systems on Building Better AI](https://arxiv.org/abs/2605.08678)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "构建AI系统的评测；任务可能含训练不等于执行agent必需训练，未展开。"
+    },
+    {
+      "id": "EV51",
+      "source_markdown": "[ManiSkill2: A Unified Benchmark for Generalizable Manipulation Skills](https://openreview.net/forum?id=b_CQDy9vrD1)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV02；不增加独立来源数。"
+    },
+    {
+      "id": "EV52",
+      "source_markdown": "[SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Agents](https://arxiv.org/abs/2412.13178)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV11；不增加独立来源数。"
+    },
+    {
+      "id": "EV53",
+      "source_markdown": "[EmbodiedBench: Comprehensive Benchmarking Multi-Modal Large Language Models for Vision-Driven Embodied Agents](https://openreview.net/forum?id=DgGF2LEBPS)",
+      "classification": "范围外",
+      "depth_code": "S",
+      "reason": "视觉具身操作；暂不扩大到机器人主域。"
+    },
+    {
+      "id": "EV54",
+      "source_markdown": "[OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments](https://arxiv.org/abs/2404.07972)",
+      "classification": "核心（后期）",
+      "depth_code": "P",
+      "reason": "真实OS任务与VM快照；UI/环境运行噪声和远端状态另控制。"
+    },
+    {
+      "id": "EV55",
+      "source_markdown": "[AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents](https://aclanthology.org/2024.acl-long.850/)",
+      "classification": "核心",
+      "depth_code": "P",
+      "reason": "API跨应用任务，可复位DB+时间，终局含额外改动检查。"
+    },
+    {
+      "id": "EV56",
+      "source_markdown": "[Identifying the Risks of LM Agents with an LM-Emulated Sandbox](https://openreview.net/forum?id=GEcwtMk1uA)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV21；不增加独立来源数。"
+    },
+    {
+      "id": "EV57",
+      "source_markdown": "[MetaTool Benchmark for Large Language Models: Deciding Whether to Use Tools and Which to Use](https://arxiv.org/abs/2310.03128)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV25；不增加独立来源数。"
+    },
+    {
+      "id": "EV58",
+      "source_markdown": "[Windows Agent Arena: Evaluating Multi-Modal OS Agents at Scale](https://openreview.net/forum?id=W9s817KqYf)",
+      "classification": "背景",
+      "depth_code": "S",
+      "reason": "Windows外部有效性候选；先用OSWorld核机制，未读原文不承诺重置能力。"
+    },
+    {
+      "id": "EV59",
+      "source_markdown": "[The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models](https://openreview.net/forum?id=2GmDdhBdDk)",
+      "classification": "重复",
+      "depth_code": "R",
+      "reason": "同EV26；不增加独立来源数。"
+    }
+  ]
+}
