@@ -1,0 +1,15 @@
+{
+  "sourceHash": "686f6ae5b277b37b12c4d8eb272db50a48e7d83fa01b345a60838e4b1c9cccd8",
+  "chapters": 10,
+  "evidence": 645,
+  "extraEvidence": 6,
+  "references": 88,
+  "mathOccurrences": 874,
+  "uniqueMath": 648,
+  "auditItems": 18,
+  "revisions": 54,
+  "tableCount": 12,
+  "mathFormattingEdits": 75,
+  "formattingSkipped": [],
+  "bytes": 7147151
+}

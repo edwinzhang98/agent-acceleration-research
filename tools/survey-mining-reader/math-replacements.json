@@ -1,0 +1,302 @@
+[
+  {
+    "old": "来自 InteractAndEvaluate(A_t, env)，",
+    "new": "来自 $\\operatorname{InteractAndEvaluate}(A_t,\\mathrm{env})$，"
+  },
+  {
+    "old": "N 是步数（i=0 放不属于任何一步的调用",
+    "new": "$N$ 是步数（$i=0$ 放不属于任何一步的调用"
+  },
+  {
+    "old": "只能用在 D_train 上",
+    "new": "只能用在 $D_{\\mathrm{train}}$ 上"
+  },
+  {
+    "old": "| Trace（OPTO） | OPTO 问题实例是三元组 (Θ, ω, T)：每轮优化器选一个参数 θ∈Θ，T 返回轨迹反馈 τ = (f, g)，优化器按 ω 用 τ 更新参数。不要求标量目标；附录 F 的公理 1 把\"解\"定义为验证预言机在给定 (θ, ω, f) 时接受的 θ | Θ：参数空间（θ 可以是异构的）；ω：问题上下文，每个实例固定，含解释 f 所需的不变信息和对参数期望性质等附加信息；T：Trace 预言机；g：执行轨迹，是以参数为根节点的 DAG；f：给 g 的唯一一个输出节点的反馈，可随 θ 和 g 变化；验证预言机：人、ML 模型或多项式时间算法 | [E729] |",
+    "new": "| Trace（OPTO） | OPTO 问题实例是三元组 $(\\Theta,\\omega,T)$：每轮优化器选一个参数 $\\theta\\in\\Theta$，T 返回轨迹反馈 $\\tau=(f,g)$，优化器按 $\\omega$ 用 $\\tau$ 更新参数。不要求标量目标；附录 F 的公理 1 把\"解\"定义为验证预言机在给定 $(\\theta,\\omega,f)$ 时接受的 $\\theta$ | $\\Theta$：参数空间（$\\theta$ 可以是异构的）；$\\omega$：问题上下文，每个实例固定，含解释 f 所需的不变信息和对参数期望性质等附加信息；T：Trace 预言机；g：执行轨迹，是以参数为根节点的 DAG；f：给 g 的唯一一个输出节点的反馈，可随 $\\theta$ 和 g 变化；验证预言机：人、ML 模型或多项式时间算法 | [E729] |"
+  },
+  {
+    "old": "图 G = (N, E, F, o)",
+    "new": "图 $G=(N,E,F,o)$"
+  },
+  {
+    "old": "E⊂N×N",
+    "new": "$E\\subset N\\times N$"
+  },
+  {
+    "old": "；F = {f_n}",
+    "new": "；$F=\\{f_n\\}$"
+  },
+  {
+    "old": "把分数改成 S_M = S_O − ratio × factor_value 后（S_O 是原进度分；factor_value 是用户在意的量，如步数或碰撞次数；ratio 是超参数）",
+    "new": "把分数改成 $S_M=S_O-\\mathrm{ratio}\\times\\mathrm{factor\\_value}$ 后（$S_O$ 是原进度分；$\\mathrm{factor\\_value}$ 是用户在意的量，如步数或碰撞次数；$\\mathrm{ratio}$ 是超参数）"
+  },
+  {
+    "old": "ProTeGi 的 m(p, D_te)，其中 m 是指标函数、实验里是 F1，D_te 是同域测试或开发数据",
+    "new": "ProTeGi 的 $m(p,D_{\\mathrm{te}})$，其中 $m$ 是指标函数、实验里是 F1，$D_{\\mathrm{te}}$ 是同域测试或开发数据"
+  },
+  {
+    "old": "| MemQ | 外生上下文 MDP（EC-MDP）⟨S, M, A, P_exo, P_endo, R, γ⟩；联合转移核分解为 P_exo(s_{t+1})·P_endo(M_{t+1} \\| s_t, M_t, A_t)（式 1），其中 P_endo(M_{t+1} \\| s_t, M_t, A_t) = Σ_τ π_LLM(τ \\| s_t, A_t)·1[M_{t+1} = M_t ∪ {Build(s_t, τ)}]。目标：对 π_ret 最大化 V^{π_ret}(M_0)，V^{π_ret}(M_t) = E[Σ_k γ^k r(τ_{t+k})]。集合动作值按\"各条记忆独立贡献\"近似为 Q(s, A; M) ≈ (1/\\|A\\|) Σ_{m_i∈A} Q(m_i)（式 3），Q(m) = E[r(τ) + γ Q(m_new) \\| m ∈ A]，m_new = Build(s, τ) | S：外生状态空间，即全部任务，下一任务按 ρ 抽取，与动作和记忆无关；M：内生状态，即记忆库；A(M)：至多 k 条记忆的检索子集；π_LLM：冻结的 LLM，产生轨迹 τ；Build：把任务和轨迹变成一条新记忆；R(s_t, A_t)：π_LLM 下 r(τ) 的期望；γ ∈ [0,1]：折扣；π_ret：检索策略，论文里被优化的策略；Q(m)：溯源值，即该记忆沿因果生成链对未来回报的边际贡献 | s001#0, s001#1 |",
+    "new": "| MemQ | 外生上下文 MDP（EC-MDP）$\\langle S,M,A,P_{\\mathrm{exo}},P_{\\mathrm{endo}},R,\\gamma\\rangle$；联合转移核分解为 $P_{\\mathrm{exo}}(s_{t+1})\\cdot P_{\\mathrm{endo}}(M_{t+1}\\mid s_t,M_t,A_t)$（式 1），其中 $P_{\\mathrm{endo}}(M_{t+1}\\mid s_t,M_t,A_t)=\\sum_{\\tau}\\pi_{\\mathrm{LLM}}(\\tau\\mid s_t,A_t)\\cdot\\mathbf{1}[M_{t+1}=M_t\\cup\\{\\operatorname{Build}(s_t,\\tau)\\}]$。目标：对 $\\pi _{\\mathrm{ret}}$ 最大化 $V^{\\pi_{\\mathrm{ret}}}(M_0)$，$V^{\\pi_{\\mathrm{ret}}}(M_t)=\\mathbb E[\\sum_k\\gamma^k r(\\tau_{t+k})]$。集合动作值按\"各条记忆独立贡献\"近似为 $Q(s,A;M)\\approx\\frac{1}{\\lvert A\\rvert}\\sum_{m_i\\in A}Q(m_i)$（式 3），$Q(m)=\\mathbb E[r(\\tau)+\\gamma Q(m_{\\mathrm{new}})\\mid m\\in A]$，$m_{\\mathrm{new}}=\\operatorname{Build}(s,\\tau)$ | S：外生状态空间，即全部任务，下一任务按 $\\rho$ 抽取，与动作和记忆无关；M：内生状态，即记忆库；$A(M)$：至多 k 条记忆的检索子集；$\\pi _{\\mathrm{LLM}}$：冻结的 LLM，产生轨迹 $\\tau$；Build：把任务和轨迹变成一条新记忆；$R(s_t,A_t)$：$\\pi _{\\mathrm{LLM}}$ 下 $r(\\tau)$ 的期望；$\\gamma\\in[0,1]$：折扣；$\\pi _{\\mathrm{ret}}$：检索策略，论文里被优化的策略；$Q(m)$：溯源值，即该记忆沿因果生成链对未来回报的边际贡献 | s001#0, s001#1 |"
+  },
+  {
+    "old": "| AEL | 回合流 {e_t}, t = 1..T，两个时间尺度：快窗口 W^fast_k（N 个回合）更新选择偏好，慢窗口 W^slow_j（M ≫ N 个回合）汇总证据做反思和记忆整合。每回合选执行框架配置 c_t = (p_t, z_t, m_t)，观察结果分 s_t ∈ [−1, 1]；默认 p_t、z_t 固定，由 Thompson Sampling 老虎机只选 m_t。第 3.1 节除逐回合结果分外没有写单独的目标式 | p_t：规划器；z_t：工具集；m_t：记忆检索策略；s_t：回合结果分（组合投资任务里从回报到 s_t 的映射论文未给） | s002#0 |",
+    "new": "| AEL | 回合流 $\\{e_t\\},\\ t=1,\\ldots,T$，两个时间尺度：快窗口 $W^{\\mathrm{fast}}_k$（N 个回合）更新选择偏好，慢窗口 $W^{\\mathrm{slow}}_j$（$M\\gg N$ 个回合）汇总证据做反思和记忆整合。每回合选执行框架配置 $c_t=(p_t,z_t,m_t)$，观察结果分 $s_t\\in[-1,1]$；默认 $p_t$、$z_t$ 固定，由 Thompson Sampling 老虎机只选 $m_t$。第 3.1 节除逐回合结果分外没有写单独的目标式 | $p_t$：规划器；$z_t$：工具集；$m_t$：记忆检索策略；$s_t$：回合结果分（组合投资任务里从回报到 $s_t$ 的映射论文未给） | s002#0 |"
+  },
+  {
+    "old": "| Mem²Evolve | 论文没有写标量目标或损失，定义的是两类存储和复用规则：资产记忆 M_A = B_agt ∪ B_tool（式 1）；agent 条目 m_agt = ⟨ρ, ε, σ, T_avail⟩（式 2）；工具条目 m_tool = ⟨n, d_func, c_impl, ω_doc⟩（式 3，MCP 格式）；招募函数 Γ(s_i)：sim(s_i, M_A) ≥ δ 时返回已存资产 m*，否则调用 Create(s_i \\| M_E, Web)（式 5） | B_agt：专家 agent 库；B_tool：可执行工具库；ρ：角色；ε：专长与领域知识；σ：行为策略建议；T_avail ⊆ B_tool：可用工具；n：工具名；d_func：功能描述；c_impl：实现代码；ω_doc：输入输出文档；s_i：规划器 π_θ 从任务 q_t 分解出的子任务；sim：子任务嵌入与资产键的余弦相似度；δ：置信阈值（取值论文未给）；M_E：经验记忆；Web：网页搜索 | s004#0, s004#1 |",
+    "new": "| Mem²Evolve | 论文没有写标量目标或损失，定义的是两类存储和复用规则：资产记忆 $M_A=B_{\\mathrm{agt}}\\cup B_{\\mathrm{tool}}$（式 1）；agent 条目 $m_{\\mathrm{agt}}=\\langle\\rho,\\varepsilon,\\sigma,T_{\\mathrm{avail}}\\rangle$（式 2）；工具条目 $m_{\\mathrm{tool}}=\\langle n,d_{\\mathrm{func}},c_{\\mathrm{impl}},\\omega_{\\mathrm{doc}}\\rangle$（式 3，MCP 格式）；招募函数 $\\Gamma(s_i)$：$\\operatorname{sim}(s_i,M_A)\\ge\\delta$ 时返回已存资产 $m^*$，否则调用 $\\operatorname{Create}(s_i\\mid M_E,\\mathrm{Web})$（式 5） | $B_{\\mathrm{agt}}$：专家 agent 库；$B_{\\mathrm{tool}}$：可执行工具库；$\\rho$：角色；$\\varepsilon$：专长与领域知识；$\\sigma$：行为策略建议；$T_{\\mathrm{avail}}\\subseteq B_{\\mathrm{tool}}$：可用工具；n：工具名；$d_{\\mathrm{func}}$：功能描述；$c_{\\mathrm{impl}}$：实现代码；$\\omega _{\\mathrm{doc}}$：输入输出文档；$s_i$：规划器 $\\pi _{\\theta}$ 从任务 $q_t$ 分解出的子任务；sim：子任务嵌入与资产键的余弦相似度；$\\delta$：置信阈值（取值论文未给）；$M_E$：经验记忆；Web：网页搜索 | s004#0, s004#1 |"
+  },
+  {
+    "old": "| Dynamic Cheatsheet | 查询序列 (x_1, …, x_n)，每个 x_i 取自未知测试分布 D_test（在线学习）；生成 ỹ_i = Gen(x_i, M_i)（式 1）；策展 M_{i+1} = Cur(M_i, x_i, ỹ_i)（式 2，即 DC-Cu 变体）。论文没有写目标函数，报告任务准确率 | Gen：解答生成器；M_i：第 i 步的记忆，含以往成功和失败的知识；ỹ_i：候选解；Cur：策展者 | s025#0, s025#1 |",
+    "new": "| Dynamic Cheatsheet | 查询序列 $(x_1,\\ldots,x_n)$，每个 $x_i$ 取自未知测试分布 $D_{\\mathrm{test}}$（在线学习）；生成 $\\widetilde y_i=\\operatorname{Gen}(x_i,M_i)$（式 1）；策展 $M_{i+1}=\\operatorname{Cur}(M_i,x_i,\\widetilde y_i)$（式 2，即 DC-Cu 变体）。论文没有写目标函数，报告任务准确率 | Gen：解答生成器；$M_i$：第 i 步的记忆，含以往成功和失败的知识；$\\widetilde y_i$：候选解；Cur：策展者 | s025#0, s025#1 |"
+  },
+  {
+    "old": "| SEDM | 按候选记忆 m 做配对 A/B：I_A = f(q)，I_B = f(q; m)（式 1）；o_A = F(I_A)，o_B = F(I_B)（式 2）；ΔR = R(o_B) − R(o_A)，ΔL = L(o_B) − L(o_A)，ΔT = T(o_B) − T(o_A)（式 3）；准入分 S = ΔR − λ_L·ΔL − λ_T·ΔT（式 4）。整个记忆库没有全局目标 | q：查询；f(·)：构造提示，I_B 把 m 连同工具反馈摘要注入 SCEC 的专用槽位；F：SCEC（自包含执行上下文）里的模型执行；R：任务奖励；L：延迟；T：token 开销；λ_L, λ_T ≥ 0：效用与成本的权衡系数（实验取值论文未给） | s028#1 |",
+    "new": "| SEDM | 按候选记忆 m 做配对 A/B：$I_A=f(q)$，$I_B=f(q;m)$（式 1）；$o_A=F(I_A)$，$o_B=F(I_B)$（式 2）；$\\Delta R=R(o_B)-R(o_A)$，$\\Delta L=L(o_B)-L(o_A)$，$\\Delta T=T(o_B)-T(o_A)$（式 3）；准入分 $S=\\Delta R-\\lambda_L\\cdot\\Delta L-\\lambda_T\\cdot\\Delta T$（式 4）。整个记忆库没有全局目标 | q：查询；f(·)：构造提示，$I_B$ 把 m 连同工具反馈摘要注入 SCEC 的专用槽位；F：SCEC（自包含执行上下文）里的模型执行；R：任务奖励；L：延迟；T：token 开销；$\\lambda_L,\\lambda_T\\ge0$：效用与成本的权衡系数（实验取值论文未给） | s028#1 |"
+  },
+  {
+    "old": "| FORGE | 目标是回合回报尽量接近 0：R = Σ_{t=1..30} r_t，每步奖励 r_step ≤ 0 同时惩罚持续失陷和防守动作的运营成本；每步从 Monitor、Analyse h、Remove h、Restore h、Decoy h 中选一个动作。协议状态：N 个实例并行，实例 i 的记忆 M_i = (M_i^P, M_i^A, M_i^C)；S 个阶段，每阶段 k_A 次尝试，毕业阈值 θ，失败触发 τ | r_step（= r_t）：第 t 步的非正标量奖励；R：回合回报；T = 30：回合步数；h：目标主机；P、A、C：Planner、Analyst、ActionChooser；记忆表示（Rules、Examples、Mixed）是实验变量；取值 N = 10，S = 6，k_A = 3，τ = −1.1（每步奖励），θ = −15（回合回报） | s008#1, s008#2 |",
+    "new": "| FORGE | 目标是回合回报尽量接近 0：$R=\\sum_{t=1}^{30}r_t$，每步奖励 $r_{\\mathrm{step}}\\le0$ 同时惩罚持续失陷和防守动作的运营成本；每步从 Monitor、Analyse h、Remove h、Restore h、Decoy h 中选一个动作。协议状态：N 个实例并行，实例 i 的记忆 $M_i=(M_i^P,M_i^A,M_i^C)$；S 个阶段，每阶段 $k_A$ 次尝试，毕业阈值 $\\theta$，失败触发 $\\tau$ | $r_{\\mathrm{step}}\\,(=r_t)$：第 t 步的非正标量奖励；R：回合回报；$T=30$：回合步数；h：目标主机；P、A、C：Planner、Analyst、ActionChooser；记忆表示（Rules、Examples、Mixed）是实验变量；取值 $N=10$，$S=6$，$k_A=3$，$\\tau=-1.1$（每步奖励），$\\theta=-15$（回合回报） | s008#1, s008#2 |"
+  },
+  {
+    "old": "| EXG | 论文没有写目标或损失，只定义轨迹、案例和图：T_τ = {(s_t, a_t, o_t)}, t = 1..T（式 1）；第 k 次尝试的案例 c_τ^(k) = (τ, x_τ, y_τ^(k), r_τ^(k), σ_τ^(k))（式 2）；经验图 G = (V, E)（式 3） | s_t：第 t 步的内部状态或提示上下文；a_t：动作；o_t：环境反馈（执行结果或对错信号）；T：有限步数；x_τ：任务输入；y_τ^(k)：该次尝试的最终输出；r_τ^(k) ∈ {0,1}：是否成功（1 为 golden，0 为 warning）；σ_τ^(k)：从轨迹抽出的执行信号（错误信息、失败类型、纠正反馈）；V：异构节点类型；E：带类型的关系 | s017#0 |",
+    "new": "| EXG | 论文没有写目标或损失，只定义轨迹、案例和图：$T_\\tau=\\{(s_t,a_t,o_t)\\},\\quad t=1,\\ldots,T$（式 1）；第 k 次尝试的案例 $c_\\tau^{(k)}=(\\tau,x_\\tau,y_\\tau^{(k)},r_\\tau^{(k)},\\sigma_\\tau^{(k)})$（式 2）；经验图 $G=(V,E)$（式 3） | $s_t$：第 t 步的内部状态或提示上下文；$a_t$：动作；$o_t$：环境反馈（执行结果或对错信号）；T：有限步数；$x_{\\tau}$：任务输入；$y_{\\tau}^{(k)}$：该次尝试的最终输出；$r_\\tau^{(k)}\\in\\{0,1\\}$：是否成功（1 为 golden，0 为 warning）；$\\sigma _{\\tau}^{(k)}$：从轨迹抽出的执行信号（错误信息、失败类型、纠正反馈）；V：异构节点类型；E：带类型的关系 | s017#0 |"
+  },
+  {
+    "old": "| G-Memory | 多 agent 系统为有向图 G = (V, E)，\\|V\\| = N；每个 agent C_i = (Base_i, Role_i, Mem_i, Plugin_i)（式 1）；T 个同步轮次，第 t 轮按拓扑序 π，C_i 输出 r_i^(t) = C_i(P_sys^(t), Q, {r_j^(t): C_j ∈ N^−(C_i)})，聚合算子 A 把各输出融合成中间解 a^(t)，最终答复 a^(T)。G-Memory 介入的位置是每个 agent 的 Mem_i 初始化（式 8） | E ⊆ V×V：通信通道；Base_i：底层 LLM；Role_i：角色；Mem_i：记忆状态；Plugin_i：辅助工具；Q：用户查询；P_sys^(t)：全局指令；N^−(C_i)：入邻居，其输出是 C_i 的上下文 | s012#0 |",
+    "new": "| G-Memory | 多 agent 系统为有向图 $G=(V,E)$，$\\lvert V\\rvert=N$；每个 agent $C_i=(\\mathrm{Base}_i,\\mathrm{Role}_i,\\mathrm{Mem}_i,\\mathrm{Plugin}_i)$（式 1）；T 个同步轮次，第 t 轮按拓扑序 $\\pi$，$C_i$ 输出 $r_i^{(t)}=C_i(P_{\\mathrm{sys}}^{(t)},Q,\\{r_j^{(t)}:C_j\\in N^-(C_i)\\})$，聚合算子 A 把各输出融合成中间解 $a^{(t)}$，最终答复 $a^{(T)}$。G-Memory 介入的位置是每个 agent 的 $\\mathrm{Mem}_i$ 初始化（式 8） | $E\\subseteq V\\times V$：通信通道；$\\mathrm{Base}_i$：底层 LLM；$\\mathrm{Role}_i$：角色；$\\mathrm{Mem}_i$：记忆状态；$\\mathrm{Plugin}_i$：辅助工具；Q：用户查询；$P_{\\mathrm{sys}}^{(t)}$：全局指令；$N^-(C_i)$：入邻居，其输出是 $C_i$ 的上下文 | s012#0 |"
+  },
+  {
+    "old": "| DecentMem | 任务集 X = {x_1..x_J}，agent 集 A = {a_1..a_M}，a_m = (Base_m, Role_m, M_m, Tool_m)；记忆片 z_i = (ξ_i, r*_i)；阶段 t 的局部上下文 c_m^(t) = (x, φ_m^(t), ρ_m^(t))，输出 v_m^(t) = π_m(c_m^(t))，聚合 s^(t) = Agg({v_m^(t)})。目标：对 {π_m} 最小化 Regret(X) = Σ_{x∈X} (R*_x − E[R_x(τ(x), ŷ(x))])。路由：r(α) = α r_E(α) + (1 − α) r_X(α)，R(T) = Σ_t (r(α*) − E[r(α_t)]) | Base_m：底层 LLM；Role_m：角色；M_m：记忆空间；Tool_m：可用工具；ξ_i：上下文原型；r*_i：动作原型；φ：邻居或前序 agent 的动作信息；ρ：从 M_m 检索的记忆；π_m：策略；τ(x)：所有活跃 agent 的联合轨迹；R_x：同时评价协作过程和最终输出的任务奖励；R*_x：可达最优奖励；ŷ(x)：论文未单独定义；r_E、r_X：E 池、X 池在路由概率 α 下的期望奖励。目标里没有 token、时间或费用项 | s016#0, s016#1 |",
+    "new": "| DecentMem | 任务集 $X=\\{x_1,\\ldots,x_J\\}$，agent 集 $A=\\{a_1,\\ldots,a_M\\}$，$a_m=(\\mathrm{Base}_m,\\mathrm{Role}_m,M_m,\\mathrm{Tool}_m)$；记忆片 $z_i=(\\xi_i,r_i^*)$；阶段 t 的局部上下文 $c_m^{(t)}=(x,\\phi_m^{(t)},\\rho_m^{(t)})$，输出 $v_m^{(t)}=\\pi_m(c_m^{(t)})$，聚合 $s^{(t)}=\\operatorname{Agg}(\\{v_m^{(t)}\\})$。目标：对 $\\{\\pi_m\\}$ 最小化 $\\operatorname{Regret}(X)=\\sum_{x\\in X}(R_x^*-\\mathbb E[R_x(\\tau(x),\\widehat y(x))])$。路由：$r(\\alpha)=\\alpha r_E(\\alpha)+(1-\\alpha)r_X(\\alpha)$，$R(T)=\\sum_t(r(\\alpha^*)-\\mathbb E[r(\\alpha_t)])$ | $\\mathrm{Base}_m$：底层 LLM；$\\mathrm{Role}_m$：角色；$M_m$：记忆空间；$\\mathrm{Tool}_m$：可用工具；$\\xi _i$：上下文原型；$r_i^*$：动作原型；$\\phi$：邻居或前序 agent 的动作信息；$\\rho$：从 $M_m$ 检索的记忆；$\\pi _m$：策略；$\\tau(x)$：所有活跃 agent 的联合轨迹；$R_x$：同时评价协作过程和最终输出的任务奖励；$R_x^*$：可达最优奖励；$\\widehat y(x)$：论文未单独定义；$r_E$、$r_X$：E 池、X 池在路由概率 $\\alpha$ 下的期望奖励。目标里没有 token、时间或费用项 | s016#0, s016#1 |"
+  },
+  {
+    "old": "| EvolveMem | θ* = argmax_{θ∈Θ} F(θ; K, Q)，F(θ; K, Q) = (1/\\|Q\\|) Σ_{(q, y*)∈Q} score(ŷ(q; θ, K), y*)（式 3） | Q：带真值答案 y* 的评测问题集（每轮都在同一个 Q 上打分）；K：LLM 抽取建成的记忆库；ŷ(q; θ, K)：检索配置 θ 下从 K 检索后的预测答案；Θ：检索配置空间；score：任务指标，实验中为 F1。目标只含答案质量 | s015#0 |",
+    "new": "| EvolveMem | $\\theta^*=\\operatorname*{argmax}_{\\theta\\in\\Theta}F(\\theta;K,Q)$，$F(\\theta;K,Q)=\\frac1{\\lvert Q\\rvert}\\sum_{(q,y^*)\\in Q}\\operatorname{score}(\\widehat y(q;\\theta,K),y^*)$（式 3） | Q：带真值答案 $y^*$ 的评测问题集（每轮都在同一个 Q 上打分）；K：LLM 抽取建成的记忆库；$\\widehat y(q;\\theta,K)$：检索配置 $\\theta$ 下从 K 检索后的预测答案；$\\Theta$：检索配置空间；score：任务指标，实验中为 F1。目标只含答案质量 | s015#0 |"
+  },
+  {
+    "old": "| SE-Agent | 环境 E = (T, S, A, P, R)；轨迹 τ = (s_0, a_0, …, s_n)，s_{i+1} = P(s_i, a_i)，质量取末状态奖励 R(τ, t) = R(s_n, t)；目标 π* = argmax_π E_{t~T}[R(τ^π(t), t)]。方法本身（式 11）对单个任务 t 返回最终候选池 Γ_K 中内部 Reward(τ, t)（式 8）最高的轨迹，而不是 §3 的 R 最高的轨迹 | T：需要多步推理的任务空间；S：状态空间，状态记录解题进度；A：动作空间（收集信息或直接执行）；P: S×A→S：转移；R: S×T→ℝ：按任务给状态打分；π: S×T→A：策略；Reward(τ, t)：TaskCompletion（规则 AutoEval + λ·LLM ExpertEval）、ReasoningQuality、Efficiency 的加权 | s062#0, s062#1 |",
+    "new": "| SE-Agent | 环境 $E=(T,S,A,P,R)$；轨迹 $\\tau=(s_0,a_0,\\ldots,s_n)$，$s_{i+1}=P(s_i,a_i)$，质量取末状态奖励 $R(\\tau,t)=R(s_n,t)$；目标 $\\pi^*=\\operatorname*{argmax}_\\pi\\mathbb E_{t\\sim T}[R(\\tau^\\pi(t),t)]$。方法本身（式 11）对单个任务 t 返回最终候选池 $\\Gamma _K$ 中内部 $\\operatorname{Reward}(\\tau,t)$（式 8）最高的轨迹，而不是 §3 的 R 最高的轨迹 | T：需要多步推理的任务空间；S：状态空间，状态记录解题进度；A：动作空间（收集信息或直接执行）；$P:S\\times A\\to S$：转移；$R:S\\times T\\to\\mathbb R$：按任务给状态打分；$\\pi:S\\times T\\to A$：策略；$\\operatorname{Reward}(\\tau,t)$：TaskCompletion（规则 $\\operatorname{AutoEval}+\\lambda\\cdot\\mathrm{LLM\\ ExpertEval}$）、ReasoningQuality、Efficiency 的加权 | s062#0, s062#1 |"
+  },
+  {
+    "old": "准入分 S = ΔR − λ_L·ΔL − λ_T·ΔT，用配对 A/B 重放比较",
+    "new": "准入分 $S=\\Delta R-\\lambda_L\\cdot\\Delta L-\\lambda_T\\cdot\\Delta T$，用配对 A/B 重放比较"
+  },
+  {
+    "old": "3. 把成本写进准入分：S = ΔR − λ_L·ΔL − λ_T·ΔT 的形式，把 ΔL、ΔT 换成",
+    "new": "3. 把成本写进准入分：$S=\\Delta R-\\lambda_L\\cdot\\Delta L-\\lambda_T\\cdot\\Delta T$ 的形式，把 $\\Delta L$、$\\Delta T$ 换成"
+  },
+  {
+    "old": "里，N=10 个实例并行",
+    "new": "里，$N=10$ 个实例并行"
+  },
+  {
+    "old": "| CRAFT | 论文没有写单一的优化目标；建工具集分生成、抽象、验证、去重四步。唯一的公式是生成步的问题采样规则：Q ← Q ∪ argTopK_min( max_{q_s∈Q} sim(q_r, q_s) \\| q_r ∈ R_i )。Q 为已采样的问题集，初始为源数据集里的 n 个随机样本；R_i 为第 i 轮后剩下的问题；q_r 为剩下的问题，q_s 为已采样的问题，q_r 与 Q 的相似度取它与 Q 中任一成员的最高相似度；argTopK_min 取最小的 k 个值的下标，k 为每轮加入的问题数（设为 100）；sim(·) 为 SimCSE 句向量的余弦相似度。每轮加入与 Q 最不相似的 k 个问题，让工具集更多样。 | 无单一目标 | [E1007] |",
+    "new": "| CRAFT | 论文没有写单一的优化目标；建工具集分生成、抽象、验证、去重四步。唯一的公式是生成步的问题采样规则：$Q\\leftarrow Q\\cup\\operatorname{argTopK}_{\\min}\\left(\\max_{q_s\\in Q}\\operatorname{sim}(q_r,q_s)\\mid q_r\\in R_i\\right)$。Q 为已采样的问题集，初始为源数据集里的 n 个随机样本；$R_i$ 为第 i 轮后剩下的问题；$q_r$ 为剩下的问题，$q_s$ 为已采样的问题，$q_r$ 与 Q 的相似度取它与 Q 中任一成员的最高相似度；$\\operatorname{argTopK}_{\\min}$ 取最小的 k 个值的下标，k 为每轮加入的问题数（设为 100）；$\\operatorname{sim}(\\cdot)$ 为 SimCSE 句向量的余弦相似度。每轮加入与 Q 最不相似的 k 个问题，让工具集更多样。 | 无单一目标 | [E1007] |"
+  },
+  {
+    "old": "| SkillOpt | 技能 s 是执行前插进 agent 上下文的自然语言策略。M 为冻结的目标模型，h 为 harness，x 为任务；运行 h(M, x, s) 得到轨迹 τ 和分数 r(s) ∈ [0,1]（式 1）。给定训练、选择、测试切分 D_tr、D_sel、D_test，从 D_tr 生成候选集 C(D_tr)，选 s\\*_sel = argmax_{s∈C(D_tr)} (1/\\|D_sel\\|) Σ r(s)，即在 \\|D_sel\\| 个选择任务上 r(s) 的平均最大（式 2）；报告 Test(s\\*_sel)，即 r(s\\*_sel) 在 \\|D_test\\| 个测试任务上的平均（式 3）。训练切分提供经验，选择切分决定是否更新，测试切分只用于最终报告。 | 平均分数 r（基准原生分数）；式 1–3 没有成本、token 或时间项 | [E1008] |",
+    "new": "| SkillOpt | 技能 s 是执行前插进 agent 上下文的自然语言策略。M 为冻结的目标模型，h 为 harness，x 为任务；运行 $h(M,x,s)$ 得到轨迹 $\\tau$ 和分数 $r(s)\\in[0,1]$（式 1）。给定训练、选择、测试切分 $D_{\\mathrm{tr}}$、$D_{\\mathrm{sel}}$、$D_{\\mathrm{test}}$，从 $D_{\\mathrm{tr}}$ 生成候选集 $C(D_{\\mathrm{tr}})$，选 $s^*_{\\mathrm{sel}}=\\operatorname*{argmax}_{s\\in C(D_{\\mathrm{tr}})}\\frac1{\\lvert D_{\\mathrm{sel}}\\rvert}\\sum r(s)$，即在 $\\lvert D_{\\mathrm{sel}}\\rvert$ 个选择任务上 $r(s)$ 的平均最大（式 2）；报告 $\\operatorname{Test}(s^*_{\\mathrm{sel}})$，即 $r(s^*_{\\mathrm{sel}})$ 在 $\\lvert D_{\\mathrm{test}}\\rvert$ 个测试任务上的平均（式 3）。训练切分提供经验，选择切分决定是否更新，测试切分只用于最终报告。 | 平均分数 r（基准原生分数）；式 1–3 没有成本、token 或时间项 | [E1008] |"
+  },
+  {
+    "old": "| CODESKILL | 学一个技能管理策略 M_θ：输入轨迹证据 τ 和相关的技能库上下文 C（技能库 B = {s_i}，i=1..N，的子集，每个 s_i 是可复用的过程性指令），输出操作 u = (a, z)；a 为操作类型（正文举例生成、演化、维护，Table 3 全表为 task-level generate、event-driven generate、skip、evolve、merge、add、drop），z 为操作内容（例如生成的技能或维护决定）；执行后 B' = Update(B, u)。目标为 max_θ E_{τ, x'}[R_task(π(x' \\| B'))]：π 为冻结的下游编码策略，x' 为未来任务，B' 作为先验知识，R_task 为下游任务表现。轨迹 τ = (o_1, a_1, …, o_T, a_T, y)，o_t 为观察，a_t 为动作（如 shell 命令或文件编辑），y 为任务结果；不更新 π。 | 下游任务表现 R_task | [E1009] |",
+    "new": "| CODESKILL | 学一个技能管理策略 $M_{\\theta}$：输入轨迹证据 $\\tau$ 和相关的技能库上下文 C（技能库 $B=\\{s_i\\}$，$i=1,\\ldots,N$，的子集，每个 $s_i$ 是可复用的过程性指令），输出操作 $u=(a,z)$；a 为操作类型（正文举例生成、演化、维护，Table 3 全表为 task-level generate、event-driven generate、skip、evolve、merge、add、drop），z 为操作内容（例如生成的技能或维护决定）；执行后 $B'=\\operatorname{Update}(B,u)$。目标为 $\\max_\\theta\\mathbb E_{\\tau,x'}[R_{\\mathrm{task}}(\\pi(x'\\mid B'))]$：$\\pi$ 为冻结的下游编码策略，x' 为未来任务，B' 作为先验知识，$R_{\\mathrm{task}}$ 为下游任务表现。轨迹 $\\tau=(o_1,a_1,\\ldots,o_T,a_T,y)$，$o_t$ 为观察，$a_t$ 为动作（如 shell 命令或文件编辑），y 为任务结果；不更新 $\\pi$。 | 下游任务表现 $R_{\\mathrm{task}}$ | [E1009] |"
+  },
+  {
+    "old": "| OpenSkill | n 个目标任务 {(I_i, E_i)}，i = 1..n，I_i 为自然语言指令，E_i 为执行环境；LLM agent π_θ（权重 θ）产生终态 x_i = π_θ(I_i, E_i)；每个任务有隐藏的真值测试集 T^GT_i，取值 {0,1}。技能集 S_i = {s_i,1, …, s_i,m} 条件化 agent：x_i = π_θ(I_i, S_i, E_i)，不改 θ。自演化定义为给每个任务构造 S_i，使 T^GT_i(π_θ(I_i, S_i, E_i)) = 1。构造 f 不得看到 T^GT_i，也不得为虚拟测试反推它：Ŝ_i = f(I_i, E_i)（式 1）；加入开放世界知识 K（公开文档、代码仓库、论文、教程）后 Ŝ_i = f(I_i, E_i, K)（式 2）。最终评估 PassRate = (1/n) Σ_i T^GT_i(π_θ'(I_i, S\\*_i, E_i))（式 6），π_θ' 为目标 agent（可以是另一个模型），S\\*_i 为最终技能集。 | 是否通过真值测试（逐任务定义） | [E1010] |",
+    "new": "| OpenSkill | n 个目标任务 $\\{(I_i,E_i)\\}$，$i=1,\\ldots,n$，$I_i$ 为自然语言指令，$E_i$ 为执行环境；LLM agent $\\pi _{\\theta}$（权重 $\\theta$）产生终态 $x_i=\\pi_\\theta(I_i,E_i)$；每个任务有隐藏的真值测试集 $T^{\\mathrm{GT}}_i$，取值 $\\{0,1\\}$。技能集 $S_i=\\{s_{i,1},\\ldots,s_{i,m}\\}$ 条件化 agent：$x_i=\\pi_\\theta(I_i,S_i,E_i)$，不改 $\\theta$。自演化定义为给每个任务构造 $S_i$，使 $T_i^{\\mathrm{GT}}(\\pi_\\theta(I_i,S_i,E_i))=1$。构造 f 不得看到 $T^{\\mathrm{GT}}_i$，也不得为虚拟测试反推它：$\\widehat S_i=f(I_i,E_i)$（式 1）；加入开放世界知识 K（公开文档、代码仓库、论文、教程）后 $\\widehat S_i=f(I_i,E_i,K)$（式 2）。最终评估 $\\mathrm{PassRate}=\\frac1n\\sum_iT_i^{\\mathrm{GT}}(\\pi'_\\theta(I_i,S_i^*,E_i))$（式 6），$\\pi _{\\theta}'$ 为目标 agent（可以是另一个模型），$S_i^*$ 为最终技能集。 | 是否通过真值测试（逐任务定义） | [E1010] |"
+  },
+  {
+    "old": "| CoEvoSkills | 任务环境为 POMDP M = ⟨X, A, T, O, Ω, R⟩：X 为状态空间（完整文件系统和进程），A 为动作（终端命令和文件编辑），T(x' \\| x, a) 为确定性转移，O 为观察空间（命令执行结果），Ω(o \\| x, a) 把动作后的状态映射为部分观察，y_H 为终态 x_H 里的输出产物，R(y_H) ∈ [0,1] 按隐藏的真值测试给产物打分。agent 只看到部分观察 o_t，按历史 h_t = (o_1, a_1, …, a_{t−1}, o_t) 行动；技能 S 条件化策略 a_t ~ π_θ(a_t \\| h_t, S)（式 1）。目标为期望终态奖励 J(S) = E_{τ~P(τ \\| π_θ, S, M)}[R(y_H)]（式 2），H 为终止步，τ = (o_1, a_1, …, a_{H−1}, o_H) 为执行轨迹；求 S\\* = argmax_S J(S)（式 3）。成功标准对 agent 隐藏。 | 期望终态奖励 R(y_H) | [E1011] |",
+    "new": "| CoEvoSkills | 任务环境为 POMDP $M=\\langle X,A,T,O,\\Omega,R\\rangle$：X 为状态空间（完整文件系统和进程），A 为动作（终端命令和文件编辑），$T(x'\\mid x,a)$ 为确定性转移，O 为观察空间（命令执行结果），$\\Omega(o\\mid x,a)$ 把动作后的状态映射为部分观察，$y_H$ 为终态 $x_H$ 里的输出产物，$R(y_H)\\in[0,1]$ 按隐藏的真值测试给产物打分。agent 只看到部分观察 $o_t$，按历史 $h_t=(o_1,a_1,\\ldots,a_{t-1},o_t)$ 行动；技能 S 条件化策略 $a_t\\sim\\pi_\\theta(a_t\\mid h_t,S)$（式 1）。目标为期望终态奖励 $J(S)=\\mathbb E_{\\tau\\sim P(\\tau\\mid\\pi_\\theta,S,M)}[R(y_H)]$（式 2），H 为终止步，$\\tau=(o_1,a_1,\\ldots,a_{H-1},o_H)$ 为执行轨迹；求 $S^*=\\operatorname*{argmax}_S J(S)$（式 3）。成功标准对 agent 隐藏。 | 期望终态奖励 $R(y_H)$ | [E1011] |"
+  },
+  {
+    "old": "| Alita-G | 给定目标任务 T = {(x_i, y_i)}，i=1..N，x_i 为任务说明，y_i 为期望结果，N 为任务数；自动合成专门 agent π_specialized = Alita-G(T, π_master)（式 1），π_master 为强的通用 agent 系统。式 2 要求 E_{(x,y)~D_target}[I{π_specialized(x) = y}] > E_{(x,y)~D_target}[I{π_base(x) = y}]：D_target 为目标任务分布，(x, y) 为任务及其期望结果，I{·} 为指示函数，π_base 为没有专门能力的基线 agent。 | 只有成功项；式 1–2 没有成本、token 或时间项 | [E1012, E1013] |",
+    "new": "| Alita-G | 给定目标任务 $T=\\{(x_i,y_i)\\}$，$i=1,\\ldots,N$，$x_i$ 为任务说明，$y_i$ 为期望结果，N 为任务数；自动合成专门 agent $\\pi_{\\mathrm{specialized}}=\\operatorname{Alita\\text{-}G}(T,\\pi_{\\mathrm{master}})$（式 1），$\\pi _{\\mathrm{master}}$ 为强的通用 agent 系统。式 2 要求 $\\mathbb E_{(x,y)\\sim D_{\\mathrm{target}}}[I\\{\\pi_{\\mathrm{specialized}}(x)=y\\}]>\\mathbb E_{(x,y)\\sim D_{\\mathrm{target}}}[I\\{\\pi_{\\mathrm{base}}(x)=y\\}]$：$D_{\\mathrm{target}}$ 为目标任务分布，(x, y) 为任务及其期望结果，$I\\{\\cdot\\}$ 为指示函数，$\\pi _{\\mathrm{base}}$ 为没有专门能力的基线 agent。 | 只有成功项；式 1–2 没有成本、token 或时间项 | [E1012, E1013] |"
+  },
+  {
+    "old": "| AgentDistill | 式 2：max_{B⊂L} E_{(x,y)~D}[I{π_S(x; B) = y}]，约束为式 1 的 ∇_θ π_S = 0（不对学生做梯度更新）。D = {(x_i, y_i)}，i=1..N，为（输入，真值答案）对；π_T 为教师 agent；π_S 为用小语言模型的学生 agent；θ 只作为式 1 的梯度下标出现，正文没有定义；L 为教师生成的全部 MCP 构成的空间；B 为从 L 蒸馏出的 MCP-Box；π_S(x; B) 为学生在 MCP-Box 指导下对输入 x 的行为；学生输出与真值一致时 I{·} 为 1。论文实际描述的流程没有按这个目标评估候选箱：箱子一次提示生成、整箱挂上。 | 学生对真值的期望准确率；没有成本、token 或时间项 | [E1014] |",
+    "new": "| AgentDistill | 式 2：$\\max_{B\\subset L}\\mathbb E_{(x,y)\\sim D}[I\\{\\pi_S(x;B)=y\\}]$，约束为式 1 的 $\\nabla_\\theta\\pi_S=0$（不对学生做梯度更新）。$D=\\{(x_i,y_i)\\}$，$i=1,\\ldots,N$，为（输入，真值答案）对；$\\pi _T$ 为教师 agent；$\\pi _S$ 为用小语言模型的学生 agent；$\\theta$ 只作为式 1 的梯度下标出现，正文没有定义；L 为教师生成的全部 MCP 构成的空间；B 为从 L 蒸馏出的 MCP-Box；$\\pi_S(x;B)$ 为学生在 MCP-Box 指导下对输入 x 的行为；学生输出与真值一致时 $I\\{\\cdot\\}$ 为 1。论文实际描述的流程没有按这个目标评估候选箱：箱子一次提示生成、整箱挂上。 | 学生对真值的期望准确率；没有成本、token 或时间项 | [E1014] |"
+  },
+  {
+    "old": "| Mem²Evolve | 资产记忆 M_A = B_agt ∪ B_tool（式 1），B_agt 为专家 agent 库，B_tool 为可执行工具库。agent 条目 m_agt = ⟨ρ, ε, σ, T_avail⟩（式 2）：ρ 为角色，ε 为专长和领域知识，σ 为指导行为策略的建议，T_avail ⊆ B_tool 为它可用的工具。工具条目 m_tool = ⟨n, d_func, c_impl, ω_doc⟩（式 3）：名称、功能描述、实现代码、输入输出文档，按 MCP 格式存。复用还是新建：规划器 π_θ 先把任务 q_t 分解为 S = {s_1, …, s_k}；对子任务 s_i，招募函数 Γ(s_i)（式 5）在 sim(s_i, M_A) ≥ δ 时返回已存资产 m\\*，否则调用 Create(s_i \\| M_E, Web)；sim 为子任务嵌入与资产键的余弦相似度，δ 为置信阈值，M_E 为经验记忆，Web 为网页搜索；δ 和 K（取前 K 个工具）的取值论文没有给。论文没有标量目标或损失。 | 无 | [E823, E858] |",
+    "new": "| Mem²Evolve | 资产记忆 $M_A=B_{\\mathrm{agt}}\\cup B_{\\mathrm{tool}}$（式 1），$B_{\\mathrm{agt}}$ 为专家 agent 库，$B_{\\mathrm{tool}}$ 为可执行工具库。agent 条目 $m_{\\mathrm{agt}}=\\langle\\rho,\\varepsilon,\\sigma,T_{\\mathrm{avail}}\\rangle$（式 2）：$\\rho$ 为角色，$\\varepsilon$ 为专长和领域知识，$\\sigma$ 为指导行为策略的建议，$T_{\\mathrm{avail}}\\subseteq B_{\\mathrm{tool}}$ 为它可用的工具。工具条目 $m_{\\mathrm{tool}}=\\langle n,d_{\\mathrm{func}},c_{\\mathrm{impl}},\\omega_{\\mathrm{doc}}\\rangle$（式 3）：名称、功能描述、实现代码、输入输出文档，按 MCP 格式存。复用还是新建：规划器 $\\pi _{\\theta}$ 先把任务 $q_t$ 分解为 $S=\\{s_1,\\ldots,s_k\\}$；对子任务 $s_i$，招募函数 $\\Gamma(s_i)$（式 5）在 $\\operatorname{sim}(s_i,M_A)\\ge\\delta$ 时返回已存资产 $m^*$，否则调用 $\\operatorname{Create}(s_i\\mid M_E,\\mathrm{Web})$；sim 为子任务嵌入与资产键的余弦相似度，$\\delta$ 为置信阈值，$M_E$ 为经验记忆，Web 为网页搜索；$\\delta$ 和 K（取前 K 个工具）的取值论文没有给。论文没有标量目标或损失。 | 无 | [E823, E858] |"
+  },
+  {
+    "old": "| AgentOrchestra | 定义 1：TEA = ⟨TCP, ECP, ACP, M, P_TEA⟩。T、E、A 为工具、环境、agent 的集合；TCP、ECP、ACP 为工具、环境、agent 上下文协议；M 为基本管理器集合（模型、提示、记忆、动态、版本管理器和 tracer）；P_TEA 为 T ∪ E ∪ A 上的一族类型化变换（A2T、E2T、T2E、T2A、A2E、E2A），须满足接口一致（暴露的输入输出签名保持类型正确）和闭包/可组合。附录 C.5 的定义 1–10 都没有给自演化写目标、损失或分数（审计记录对 §C.5 的读法）。 | 无 | [E1015] |",
+    "new": "| AgentOrchestra | 定义 1：$\\mathrm{TEA}=\\langle\\mathrm{TCP},\\mathrm{ECP},\\mathrm{ACP},M,P_{\\mathrm{TEA}}\\rangle$。T、E、A 为工具、环境、agent 的集合；TCP、ECP、ACP 为工具、环境、agent 上下文协议；M 为基本管理器集合（模型、提示、记忆、动态、版本管理器和 tracer）；$P_{\\mathrm{TEA}}$ 为 $T\\cup E\\cup A$ 上的一族类型化变换（A2T、E2T、T2E、T2A、A2E、E2A），须满足接口一致（暴露的输入输出签名保持类型正确）和闭包/可组合。附录 C.5 的定义 1–10 都没有给自演化写目标、损失或分数（审计记录对 §C.5 的读法）。 | 无 | [E1015] |"
+  },
+  {
+    "old": "| VASO | 给定原子命题 AP、系统命令 S（如 API）、全局规约 G 和任务提示 τ，构造技能 sk = (G, ψ_sk, C_sk)，要求 (a) 逻辑可行：存在执行轨迹 σ 使 L_sk(σ) ⊨ G ∧ ψ_sk；(b) 生成的计划在所有可能执行下满足规约：A_π ⊗ M ⊨ G ∧ ψ_sk。符号：AP = {a_1..a_n}；σ = σ_0, σ_1, … 为执行轨迹，σ_t 为 t 时刻的执行状态；G = {φ_1..φ_m} 为必须始终成立的全局 LTL 规约；ψ_sk 为技能的局部 LTL 规则（其预期行为或目标）；C_sk = (L_sk, C^p_sk) 为语义契约，L_sk: σ_t → 2^AP 为给出 t 时刻成立命题的标注函数，C^p_sk 为文本计划模板；sk = F_skill(τ, S, G)；计划 π = F_plan(C_sk, τ)；A_π 为由 π 编译成的迁移系统；M 在正文第 144 行是预定义的环境迁移系统，Table 3 和 §4.1 又定义为 2^AP 上的通用迁移系统，两处不一；§4.2 实际写出的计划级检查是 A_π ⊨ G ∧ ψ_sk，不含 M；⊨ 表示满足；⊗ 论文没有定义。优化目标 C\\*_sk = argmin_{C_sk} Loss(F_plan(C_sk, τ))，损失为违反的规约占全部规约的百分比；报告指标 Safety(π) = (1/N) Σ_i 1[π ⊨ φ_i]，即计划满足的规约占 N 条规约的比例。 | 违规比例 | [E1016] |",
+    "new": "| VASO | 给定原子命题 AP、系统命令 S（如 API）、全局规约 G 和任务提示 $\\tau$，构造技能 $\\mathrm{sk}=(G,\\psi_{\\mathrm{sk}},C_{\\mathrm{sk}})$，要求 (a) 逻辑可行：存在执行轨迹 $\\sigma$ 使 $L_{\\mathrm{sk}}(\\sigma)\\models G\\land\\psi_{\\mathrm{sk}}$；(b) 生成的计划在所有可能执行下满足规约：$A_\\pi\\otimes M\\models G\\land\\psi_{\\mathrm{sk}}$。符号：$\\mathrm{AP}=\\{a_1,\\ldots,a_n\\}$；$\\sigma=\\sigma_0,\\sigma_1,\\ldots$ 为执行轨迹，$\\sigma _t$ 为 t 时刻的执行状态；$G=\\{\\phi_1,\\ldots,\\phi_m\\}$ 为必须始终成立的全局 LTL 规约；$\\psi _{\\mathrm{sk}}$ 为技能的局部 LTL 规则（其预期行为或目标）；$C_{\\mathrm{sk}}=(L_{\\mathrm{sk}},C^p_{\\mathrm{sk}})$ 为语义契约，$L_{\\mathrm{sk}}:\\sigma_t\\to2^{\\mathrm{AP}}$ 为给出 t 时刻成立命题的标注函数，$C^p_{\\mathrm{sk}}$ 为文本计划模板；$\\mathrm{sk}=F_{\\mathrm{skill}}(\\tau,S,G)$；计划 $\\pi=F_{\\mathrm{plan}}(C_{\\mathrm{sk}},\\tau)$；$A_{\\pi}$ 为由 $\\pi$ 编译成的迁移系统；M 在正文第 144 行是预定义的环境迁移系统，Table 3 和 §4.1 又定义为 $2^{\\mathrm{AP}}$ 上的通用迁移系统，两处不一；§4.2 实际写出的计划级检查是 $A_\\pi\\models G\\land\\psi_{\\mathrm{sk}}$，不含 M；⊨ 表示满足；⊗ 论文没有定义。优化目标 $C^*_{\\mathrm{sk}}=\\operatorname*{argmin}_{C_{\\mathrm{sk}}}\\operatorname{Loss}(F_{\\mathrm{plan}}(C_{\\mathrm{sk}},\\tau))$，损失为违反的规约占全部规约的百分比；报告指标 $\\operatorname{Safety}(\\pi)=\\frac1N\\sum_i\\mathbf1[\\pi\\models\\phi_i]$，即计划满足的规约占 N 条规约的比例。 | 违规比例 | [E1016] |"
+  },
+  {
+    "old": "| Metis | 形式化为免训练的执行—反思—复用循环，不是优化目标。任务流 q^(1), q^(2), …；记忆 M 初始为空（M_0 = ∅）。对任务 q^(k)，从当前记忆 M_(k−1) 检索条目（通常用向量相似度检索加 LLM 过滤）放进交互上下文；冻结的 LLM 策略 π 按 a_t ~ π(· \\| c_t; M_(k−1)) 行动，c_t 为第 t 步的交互上下文（c_1 含查询和系统提示），a_t 为动作（代码块或工具调用），o_t 为环境观察，c_(t+1) = c_t ⊕ (a_t, o_t)。到第 T 步（终止动作或步数预算）停止，得轨迹 τ^(k) = (q, (a_1, o_1), …, (a_T, o_T))；反思模块写回 M_k = Reflect(M_(k−1), τ^(k))。Metis 的实例：S_i = Select(q_i, M_(i−1))，τ_i ~ π(· \\| q_i, S_i)，M_i = Reflect(M_(i−1), τ_i)。没有把准确率和成本合成一个目标，准确率、执行成本和建记忆成本分开报告。 | 无单一目标 | [E1019] |",
+    "new": "| Metis | 形式化为免训练的执行—反思—复用循环，不是优化目标。任务流 $q^{(1)},q^{(2)},\\ldots$；记忆 M 初始为空（$M_0=\\varnothing$）。对任务 $q^{(k)}$，从当前记忆 $M_{k-1}$ 检索条目（通常用向量相似度检索加 LLM 过滤）放进交互上下文；冻结的 LLM 策略 $\\pi$ 按 $a_t\\sim\\pi(\\cdot\\mid c_t;M_{k-1})$ 行动，$c_t$ 为第 t 步的交互上下文（$c_1$ 含查询和系统提示），$a_t$ 为动作（代码块或工具调用），$o_t$ 为环境观察，$c_{t+1}=c_t\\oplus(a_t,o_t)$。到第 T 步（终止动作或步数预算）停止，得轨迹 $\\tau^{(k)}=(q,(a_1,o_1),\\ldots,(a_T,o_T))$；反思模块写回 $M_k=\\operatorname{Reflect}(M_{k-1},\\tau^{(k)})$。Metis 的实例：$S_i=\\operatorname{Select}(q_i,M_{i-1})$，$\\tau_i\\sim\\pi(\\cdot\\mid q_i,S_i)$，$M_i=\\operatorname{Reflect}(M_{i-1},\\tau_i)$。没有把准确率和成本合成一个目标，准确率、执行成本和建记忆成本分开报告。 | 无单一目标 | [E1019] |"
+  },
+  {
+    "old": "| GenericAgent | 目标写成设计原则，不是优化公式：在有限的上下文预算里引入、保持和更新尽量多的决策相关信息；把上下文工程看作完整与简洁之间的受约束权衡，自然性为辅助约束，预算目标低于 30k token。唯一的公式是预算触发规则（式 1）：C_H = Σ_{m∈H} len(m)，H 为对话历史，len(m) 为消息 m 经 JSON 序列化后的字符数；B = α · W_tokens，W_tokens 为配置的 token 窗口，α ≈ 3 字符/token 为把 token 预算换成字符预算的经验比例；C_H > B 时触发压缩或淘汰。\"信息密度\"本身没有公式。 | 上下文预算（触发规则，不是目标） | [E1020] |",
+    "new": "| GenericAgent | 目标写成设计原则，不是优化公式：在有限的上下文预算里引入、保持和更新尽量多的决策相关信息；把上下文工程看作完整与简洁之间的受约束权衡，自然性为辅助约束，预算目标低于 30k token。唯一的公式是预算触发规则（式 1）：$C_H=\\sum_{m\\in H}\\operatorname{len}(m)$，H 为对话历史，$\\operatorname{len}(m)$ 为消息 m 经 JSON 序列化后的字符数；$B=\\alpha\\cdot W_{\\mathrm{tokens}}$，$W_{\\mathrm{tokens}}$ 为配置的 token 窗口，$\\alpha\\approx3$ 字符/token 为把 token 预算换成字符预算的经验比例；$C_H>B$ 时触发压缩或淘汰。\"信息密度\"本身没有公式。 | 上下文预算（触发规则，不是目标） | [E1020] |"
+  },
+  {
+    "old": "| DRAFT | 问题是弥合 LLM 与外部工具之间因人写的工具文档不足、不准造成的理解差距；没有写要最大化的损失或分数，Algorithm 1 按过程给出。输入：D 为原始工具文档集（每个工具一份 t，t_0 为数据集给的原始文档）；I 为最大迭代轮数（§3.1 设为 5）；φ 为探索查询与先前查询的最大余弦相似度必须低于的阈值（式 2）；τ 为终止阈值，作用于 Δ，Δ 为相邻两版文档的嵌入余弦相似度与 BLEU 的平均（式 5）。论文称 Δ 为\"变化程度\"，但它是相似度，Δ > τ（相邻两版已几乎相同）时停止。输出：D~ 为修订后的文档集，逐个工具生成。 | 无 | [E1021] |",
+    "new": "| DRAFT | 问题是弥合 LLM 与外部工具之间因人写的工具文档不足、不准造成的理解差距；没有写要最大化的损失或分数，Algorithm 1 按过程给出。输入：D 为原始工具文档集（每个工具一份 t，$t_0$ 为数据集给的原始文档）；I 为最大迭代轮数（§3.1 设为 5）；$\\phi$ 为探索查询与先前查询的最大余弦相似度必须低于的阈值（式 2）；$\\tau$ 为终止阈值，作用于 $\\Delta$，$\\Delta$ 为相邻两版文档的嵌入余弦相似度与 BLEU 的平均（式 5）。论文称 $\\Delta$ 为\"变化程度\"，但它是相似度，$\\Delta>\\tau$（相邻两版已几乎相同）时停止。输出：$\\widetilde D$ 为修订后的文档集，逐个工具生成。 | 无 | [E1021] |"
+  },
+  {
+    "old": "| Agent S | 形式化为检索加生成的流程，不是优化目标。Q = LLM(T_u, O_0)：T_u 为用户任务，O_0 为 ACI 给的初始观察（带标注的可访问性树加截图），Q 为\"How to do X\"形式的查询。K_web = Retrieve(Web, Q) 为网页搜索得到的外部知识；E_{n_u} = Retrieve(M_n, Q) 为按查询嵌入相似度从管理者叙事记忆 M_n 检索的相似整任务经验摘要；K_fused = LLM(M_n(Q), K_web) 为融合后的指南。子任务规划器据此产出拓扑排序的子任务队列 s_0..s_n，各带上下文 C_{s_i}；每个 worker w_i 检索子任务经验 E_{s_i} = Retrieve(M_e, ⟨T_u, s_i, C_{s_i}⟩)，M_e 为情景记忆。附录 C 写 a_j = MLLM(E_{s_i}, observation, Reflection) 生成一个落地动作；自评器 S 把一次执行变成文本奖励 r，写回 M_e 和 M_n。没有写损失或目标函数。 | 无 | [E1022] |",
+    "new": "| Agent S | 形式化为检索加生成的流程，不是优化目标。$Q=\\operatorname{LLM}(T_u,O_0)$：$T_u$ 为用户任务，$O_0$ 为 ACI 给的初始观察（带标注的可访问性树加截图），Q 为\"How to do X\"形式的查询。$K_{\\mathrm{web}}=\\operatorname{Retrieve}(\\mathrm{Web},Q)$ 为网页搜索得到的外部知识；$E_{n_u}=\\operatorname{Retrieve}(M_n,Q)$ 为按查询嵌入相似度从管理者叙事记忆 $M_n$ 检索的相似整任务经验摘要；$K_{\\mathrm{fused}}=\\operatorname{LLM}(M_n(Q),K_{\\mathrm{web}})$ 为融合后的指南。子任务规划器据此产出拓扑排序的子任务队列 $s_0,\\ldots,s_n$，各带上下文 $C_{s_i}$；每个 worker $w_i$ 检索子任务经验 $E_{s_i}=\\operatorname{Retrieve}(M_e,\\langle T_u,s_i,C_{s_i}\\rangle)$，$M_e$ 为情景记忆。附录 C 写 $a_j=\\operatorname{MLLM}(E_{s_i},\\mathrm{observation},\\mathrm{Reflection})$ 生成一个落地动作；自评器 S 把一次执行变成文本奖励 r，写回 $M_e$ 和 $M_n$。没有写损失或目标函数。 | 无 | [E1022] |"
+  },
+  {
+    "old": "| OpenAgent | 核心问题写成一个问题：LLM agent 能否为开放域任务自主搜索并适配新工具（来源为 GitHub 仓库），动机是现有 agent 受预定义工具集限制；没有写目标函数，评测指标为 Pass Rate 和 Completeness。层级求解过程形式化为 A_i^n = Agent_k^n(Q^n, A_j^n, O_j^n, …, A_1^n, O_1^n)：Agent_k^n 为第 n 层的第 k 个 agent；A_i^n 为它的第 i 个动作（用工具或指派下级 agent）；Q^n 为上级 agent 或人给它的查询；A_j^n、O_j^n 为此前的动作和观察。若 A_i^n 调用子 agent，则由 A_i^n 派生给 Agent_k^(n+1) 的查询 Q^(n+1)，子 agent 完成后把结果 A_q^(n+1) 报给 Agent_k^n。 | 无优化目标 | [E1023, E1024] |",
+    "new": "| OpenAgent | 核心问题写成一个问题：LLM agent 能否为开放域任务自主搜索并适配新工具（来源为 GitHub 仓库），动机是现有 agent 受预定义工具集限制；没有写目标函数，评测指标为 Pass Rate 和 Completeness。层级求解过程形式化为 $A_i^n=\\mathrm{Agent}_k^n(Q^n,A_j^n,O_j^n,\\ldots,A_1^n,O_1^n)$：$\\mathrm{Agent}_k^n$ 为第 n 层的第 k 个 agent；$A_i^n$ 为它的第 i 个动作（用工具或指派下级 agent）；$Q^n$ 为上级 agent 或人给它的查询；$A_j^n$、$O_j^n$ 为此前的动作和观察。若 $A_i^n$ 调用子 agent，则由 $A_i^n$ 派生给 $\\mathrm{Agent}_k^{(n+1)}$ 的查询 $Q^{(n+1)}$，子 agent 完成后把结果 $A_q^{(n+1)}$ 报给 $\\mathrm{Agent}_k^n$。 | 无优化目标 | [E1023, E1024] |"
+  },
+  {
+    "old": "| MetaAgent（预印本技术报告） | 模型参数 θ 固定时，推理轨迹 Y = (y1, t1, k1, y2, t2, k2, …, yn, A) = Θ(X \\| θ, Γ)（式 4）的质量取决于两点：输入序列 X 的内容和结构，以及中心 agent 与工具路由 agent Γ 之间的交互协议。X 为输入序列（用户查询、任务说明和其他上下文），y_i 为内部推理步，t_i 为自然语言求助请求，k_i 为该请求返回的外部知识，A 为最终答案，Θ 为以 θ 参数化的中心 agent，Γ 为独立的工具路由 agent。式 10 把整个系统写成 A ∈ Y = Θ(X \\| θ, Γ, E, C)，E 为积累的经验，C 为内部知识库。没有给自演化过程单独定义目标、损失或分数，改进只看第 3 节的评测分数。 | 无 | [E1026, E1027] |",
+    "new": "| MetaAgent（预印本技术报告） | 模型参数 $\\theta$ 固定时，推理轨迹 $Y=(y_1,t_1,k_1,y_2,t_2,k_2,\\ldots,y_n,A)=\\Theta(X\\mid\\theta,\\Gamma)$（式 4）的质量取决于两点：输入序列 X 的内容和结构，以及中心 agent 与工具路由 agent $\\Gamma$ 之间的交互协议。X 为输入序列（用户查询、任务说明和其他上下文），$y_i$ 为内部推理步，$t_i$ 为自然语言求助请求，$k_i$ 为该请求返回的外部知识，A 为最终答案，$\\Theta$ 为以 $\\theta$ 参数化的中心 agent，$\\Gamma$ 为独立的工具路由 agent。式 10 把整个系统写成 $A\\in Y=\\Theta(X\\mid\\theta,\\Gamma,E,C)$，E 为积累的经验，C 为内部知识库。没有给自演化过程单独定义目标、损失或分数，改进只看第 3 节的评测分数。 | 无 | [E1026, E1027] |"
+  },
+  {
+    "old": "| STOP（COLM 2024） | 改进器返回 s′ = I(u, s, L)，希望 u(s′) ≫ u(s)（式 1）；目标是下游任务分布上期望效用高的改进器 ū(I) = E_{(u,s)∼D}[u(I(u, s, L))]；训练时用元效用 û(I) = (1/\\|D\\|) Σ_{(u,s)∈D} u(I(u, s, L))（式 2），即改进器返回的解的下游效用平均 | L：随机的黑盒语言模型（只能调用，不知实现）；u = (u_func, u_str)：给解字符串打有界实数分的黑盒函数，加一段描述字符串（可以就是它的源码）；s：解字符串；τ = (u, s)：一个任务；I：改进器程序；D：下游任务分布，训练时是从中独立抽取的 n 个任务；给模型看的 û 描述是\"灰盒\"的，只说是下游任务平均、不含任务本身 | [E1052] |",
+    "new": "| STOP（COLM 2024） | 改进器返回 $s'=I(u,s,L)$，希望 $u(s')\\gg u(s)$（式 1）；目标是下游任务分布上期望效用高的改进器 $\\bar u(I)=\\mathbb E_{(u,s)\\sim D}[u(I(u,s,L))]$；训练时用元效用 $\\widehat u(I)=\\frac1{\\lvert D\\rvert}\\sum_{(u,s)\\in D}u(I(u,s,L))$（式 2），即改进器返回的解的下游效用平均 | L：随机的黑盒语言模型（只能调用，不知实现）；$u=(u_{\\mathrm{func}},u_{\\mathrm{str}})$：给解字符串打有界实数分的黑盒函数，加一段描述字符串（可以就是它的源码）；s：解字符串；$\\tau=(u,s)$：一个任务；I：改进器程序；D：下游任务分布，训练时是从中独立抽取的 n 个任务；给模型看的 $\\widehat u$ 描述是\"灰盒\"的，只说是下游任务平均、不含任务本身 | [E1052] |"
+  },
+  {
+    "old": "| Gödel Agent（ACL 2025） | π_{t+1}, I_{t+1} = I_t(π_t, I_t, r_t, g)，r_t = U(E, π_t)；学习算法 I_t 同时改写策略和它自己（对比元学习 π_{t+1} = I(π_t, r_t)，其中 I 固定） | E ∈ S：一个具体环境状态（例如带标准答案的数学题），S 为 agent 会遇到的所有环境；π ∈ Π：解题策略；U: S × Π → R：效用函数（环境反馈），把环境和策略映射为实数分；r_t：第 t 步的分；g ∈ G：高层优化目标（例如以最高准确率解题）；t：更新步；递归需要初始 (π_0, I_0)，例如 π_0 为思维链提示 | [E1053] |",
+    "new": "| Gödel Agent（ACL 2025） | $\\pi_{t+1},I_{t+1}=I_t(\\pi_t,I_t,r_t,g)$，$r_t=U(E,\\pi_t)$；学习算法 $I_t$ 同时改写策略和它自己（对比元学习 $\\pi_{t+1}=I(\\pi_t,r_t)$，其中 I 固定） | $E\\in S$：一个具体环境状态（例如带标准答案的数学题），S 为 agent 会遇到的所有环境；$\\pi\\in\\Pi$：解题策略；$U:S\\times\\Pi\\to R$：效用函数（环境反馈），把环境和策略映射为实数分；$r_t$：第 t 步的分；$g\\in G$：高层优化目标（例如以最高准确率解题）；t：更新步；递归需要初始 $(\\pi_0,I_0)$，例如 $\\pi _0$ 为思维链提示 | [E1053] |"
+  },
+  {
+    "old": "| DGM（ICLR 2026） | 条目库没有 DGM 的目标公式条目，只有文字定义：自改是修改自身代码仓库（提示、工作流、工具）的编程任务，开放式探索过程（档案维护、父代选择）固定不改；父代抽样权重 sigmoid(10·(α − 0.5)) × 1/(1 + n) | α：性能分（λ = 10，中点 α0 = 0.5）；n：具备改代码能力的子代数；满分的 agent 不参与抽样；每轮并行自改数 k：SWE-bench 为 2，Polyglot 为 4 | [E1044, E1054, E1055] |",
+    "new": "| DGM（ICLR 2026） | 条目库没有 DGM 的目标公式条目，只有文字定义：自改是修改自身代码仓库（提示、工作流、工具）的编程任务，开放式探索过程（档案维护、父代选择）固定不改；父代抽样权重 $\\operatorname{sigmoid}(10\\cdot(\\alpha-0.5))\\times\\frac1{1+n}$ | $\\alpha$：性能分（$\\lambda=10$，中点 $\\alpha_0=0.5$）；n：具备改代码能力的子代数；满分的 agent 不参与抽样；每轮并行自改数 k：SWE-bench 为 2，Polyglot 为 4 | [E1044, E1054, E1055] |"
+  },
+  {
+    "old": "| HGM（ICLR 2026 Oral） | 自改是对自改 agent 的迭代树搜索：T_0 = {a_0}；每轮策略 π 从 A_t = M_t ∪ V_t 取一个动作；目标 J(π) = E[U(a_final)]，a_final = argmax_{a∈T_B} Score_π(a)。团簇元生产力 CMP_π(T, a) = E_{T_B∼p_π(·\\|T,a)}[U(argmax_{a′∈C(T_B,a)} Score_π(a′))]，Score = U 时等于 E[max_{a′∈C(T_B,a)} U(a′)]。理论假设目标只取决于最终 agent，每次自改恰好耗一个预算单位，且只有自改本身计时间成本 | T_t：第 t 轮的 agent 树（档案）；m_a ∈ M_t：让 agent a 产生一次自改，作为 a 的子节点加入；v_a ∈ V_t：在多一个下游任务上评估 a；π：搜索算法（DGM、SICA、HGM 都是实例）；B：终止轮；Score：策略的一部分，用来挑最终 agent；E：对随机搜索取期望；U：返回的 agent 的效用，取所有下游任务二值成功指标的平均（没有时间、token 或费用项）；p_π：策略把搜索展开到结束时的轨迹分布；C(T_B, a)：T_B 中以 a 为根的子树（团簇） | [E1056, E1057, E1058] |",
+    "new": "| HGM（ICLR 2026 Oral） | 自改是对自改 agent 的迭代树搜索：$T_0=\\{a_0\\}$；每轮策略 $\\pi$ 从 $A_t=M_t\\cup V_t$ 取一个动作；目标 $J(\\pi)=\\mathbb E[U(a_{\\mathrm{final}})]$，$a_{\\mathrm{final}}=\\operatorname*{argmax}_{a\\in T_B}\\operatorname{Score}_\\pi(a)$。团簇元生产力 $\\operatorname{CMP}_\\pi(T,a)=\\mathbb E_{T_B\\sim p_\\pi(\\cdot\\mid T,a)}[U(\\operatorname*{argmax}_{a^\\prime\\in C(T_B,a)}\\operatorname{Score}_\\pi(a^\\prime))]$，$\\operatorname{Score}=U$ 时等于 $\\mathbb E[\\max_{a^\\prime\\in C(T_B,a)}U(a^\\prime)]$。理论假设目标只取决于最终 agent，每次自改恰好耗一个预算单位，且只有自改本身计时间成本 | $T_t$：第 t 轮的 agent 树（档案）；$m_a\\in M_t$：让 agent a 产生一次自改，作为 a 的子节点加入；$v_a\\in V_t$：在多一个下游任务上评估 a；$\\pi$：搜索算法（DGM、SICA、HGM 都是实例）；B：终止轮；Score：策略的一部分，用来挑最终 agent；E：对随机搜索取期望；U：返回的 agent 的效用，取所有下游任务二值成功指标的平均（没有时间、token 或费用项）；$p_{\\pi}$：策略把搜索展开到结束时的轨迹分布；$C(T_B,a)$：$T_B$ 中以 a 为根的子树（团簇） | [E1056, E1057, E1058] |"
+  },
+  {
+    "old": "| Group-Evolving Agents（GEA，预印本） | 以一组 agent 为演化单位：档案 A 存全部已发现的 agent；每轮按\"性能—新颖性\"标准从档案选 K 个父代，父代组通过共享经验共同产出同样大小 K 的子代组。论文未给目标公式，式 1–3 只定义父代选择 | A：档案；G = {a_1, …, a_K}：父代组；G′：子代组，\\|G′\\| = K；T：编码基准 | [E1059] |",
+    "new": "| Group-Evolving Agents（GEA，预印本） | 以一组 agent 为演化单位：档案 A 存全部已发现的 agent；每轮按\"性能—新颖性\"标准从档案选 K 个父代，父代组通过共享经验共同产出同样大小 K 的子代组。论文未给目标公式，式 1–3 只定义父代选择 | A：档案；$G=\\{a_1,\\ldots,a_K\\}$：父代组；$G^\\prime$：子代组，$\\lvert G^\\prime\\rvert=K$；T：编码基准 | [E1059] |"
+  },
+  {
+    "old": "| SICA（ICLR 2025 workshop，按机构计入） | U = w_score·p_score + w_cost·(1 − min(1, p_cost/$10)) + w_time·(1 − min(1, p_time/300 s))（式 1）；超时时 U_final = U(1 − τ)，否则 U_final = U（式 2） | p_score ∈ [0,1]：归一化的基准分；p_cost：美元费用；p_time：墙钟秒数；w_score、w_cost、w_time：权重，取 0.5、0.25、0.25；$10：每题最坏费用上限；300 s：超时取消时限；τ = 0.5：超时惩罚 | [E669] |",
+    "new": "| SICA（ICLR 2025 workshop，按机构计入） | $U=w_{\\mathrm{score}}p_{\\mathrm{score}}+w_{\\mathrm{cost}}\\left(1-\\min\\left(1,\\frac{p_{\\mathrm{cost}}}{\\$10}\\right)\\right)+w_{\\mathrm{time}}\\left(1-\\min\\left(1,\\frac{p_{\\mathrm{time}}}{300\\,\\mathrm{s}}\\right)\\right)$（式 1）；超时时 $U_{\\mathrm{final}}=U(1-\\tau)$，否则 $U_{\\mathrm{final}}=U$（式 2） | $p_{\\mathrm{score}}\\in[0,1]$：归一化的基准分；$p_{\\mathrm{cost}}$：美元费用；$p_{\\mathrm{time}}$：墙钟秒数；$w_{\\mathrm{score}}$、$w_{\\mathrm{cost}}$、$w_{\\mathrm{time}}$：权重，取 0.5、0.25、0.25；$\\$10$：每题最坏费用上限；300 s：超时取消时限；$\\tau=0.5$：超时惩罚 | [E669] |"
+  },
+  {
+    "old": "| Hyperagents（预印本） | 论文唯一写出的目标是 improvement@k：imp@k(M, A, G, T) = max_{A′∈A^(k)(M,A,G)} Evaluate(A′, T) − Evaluate(A, T)；DGM-H 循环本身没有写损失函数 | M：初始元 agent，固定；A：初始任务 agent；G：agent 生成算法（如 DGM 或 DGM-H 变体）；T：固定的评测任务集；k：M 最多可生成的新任务 agent 数（§5.2 取 50）；A^(k)：M 在 k 步修改内生成的任务 agent；Evaluate(·, T)：固定评测程序，越高越好；公式里没有费用、token 或时间项 | [E1060] |",
+    "new": "| Hyperagents（预印本） | 论文唯一写出的目标是 improvement@k：$\\operatorname{imp}@k(M,A,G,T)=\\max_{A^\\prime\\in A^{(k)}(M,A,G)}\\operatorname{Evaluate}(A^\\prime,T)-\\operatorname{Evaluate}(A,T)$；DGM-H 循环本身没有写损失函数 | M：初始元 agent，固定；A：初始任务 agent；G：agent 生成算法（如 DGM 或 DGM-H 变体）；T：固定的评测任务集；k：M 最多可生成的新任务 agent 数（§5.2 取 50）；$A^{(k)}$：M 在 k 步修改内生成的任务 agent；$\\operatorname{Evaluate}(\\cdot,T)$：固定评测程序，越高越好；公式里没有费用、token 或时间项 | [E1060] |"
+  },
+  {
+    "old": "| RQGM（预印本，作者自称初步） | 自改是对档案 T_t（T_0 = {a_0}）的树搜索：每步要么修改节点 a，要么在一个任务上评估一个节点并记下二值结果 o ∈ {0,1}；评估预算 B 用完时返回得分最高的节点。搜索效用 CMP(a) = n^C_success(a) / (n^C_success(a) + n^C_failure(a))；最终 agent 按 BB_ε(a) = I^{-1}_ε(1 + S_a, 1 + F_a) 挑；RQGM 的 agent 效用 U_j(a) = (1/\\|R\\|) Σ_{r∈R} p_{r,j}(a)，p_{r,j}(a) = (1/\\|D_r\\|) Σ_{d∈D_r} p_{r,d,j}(a) | S_a、F_a：节点 a 累计的成功、失败数；C(a)：以 a 为根的子树，n^C 汇总其中所有节点的成功和失败；节点用 Thompson 采样挑；ε ∈ (0,1)：置信水平；I^{-1}_ε：正则化不完全 Beta 函数的逆（Beta 后验的 ε 分位数）；R = {r_1..r_K}：K 个角色；D_r：角色 r 的任务池；j：纪元向量，每个依赖评估者的位置一个纪元号；p_{r,d,j}(a)：在 j 下 a 在任务 d 上的期望二值成功率；所有效用只在同一纪元内可比 | [E1061] |",
+    "new": "| RQGM（预印本，作者自称初步） | 自改是对档案 $T_t$（$T_0=\\{a_0\\}$）的树搜索：每步要么修改节点 a，要么在一个任务上评估一个节点并记下二值结果 $o\\in\\{0,1\\}$；评估预算 B 用完时返回得分最高的节点。搜索效用 $\\operatorname{CMP}(a)=\\frac{n^C_{\\mathrm{success}}(a)}{n^C_{\\mathrm{success}}(a)+n^C_{\\mathrm{failure}}(a)}$；最终 agent 按 $\\operatorname{BB}_\\varepsilon(a)=I_\\varepsilon^{-1}(1+S_a,1+F_a)$ 挑；RQGM 的 agent 效用 $U_j(a)=\\frac1{\\lvert R\\rvert}\\sum_{r\\in R}p_{r,j}(a)$，$p_{r,j}(a)=\\frac1{\\lvert D_r\\rvert}\\sum_{d\\in D_r}p_{r,d,j}(a)$ | $S_a$、$F_a$：节点 a 累计的成功、失败数；$C(a)$：以 a 为根的子树，$n^C$ 汇总其中所有节点的成功和失败；节点用 Thompson 采样挑；$\\varepsilon\\in(0,1)$：置信水平；$I^{-1}_{\\varepsilon}$：正则化不完全 Beta 函数的逆（Beta 后验的 $\\varepsilon$ 分位数）；$R=\\{r_1,\\ldots,r_K\\}$：K 个角色；$D_r$：角色 r 的任务池；j：纪元向量，每个依赖评估者的位置一个纪元号；$p_{r,d,j}(a)$：在 j 下 a 在任务 d 上的期望二值成功率；所有效用只在同一纪元内可比 | [E1061] |"
+  },
+  {
+    "old": "| RSEA（预印本） | 条目库没有问题定义条目，只有采纳规则：候选在留出验证集上 v ≥ Eval(当前) 即成为工作状态，v > v* 才更新冻结最佳；从未严格提升就返回空状态，等同 ReAct | v：候选的验证分；v*：冻结最佳的验证分，初值为空状态（ReAct）的验证分；被改的只有三层自然语言状态（策略前言、技能、步骤手册），权重和 ReAct 循环不变 | [E1062, E1063] |",
+    "new": "| RSEA（预印本） | 条目库没有问题定义条目，只有采纳规则：候选在留出验证集上 $v\\ge\\operatorname{Eval}(\\text{当前})$ 即成为工作状态，$v>v^*$ 才更新冻结最佳；从未严格提升就返回空状态，等同 ReAct | v：候选的验证分；$v^*$：冻结最佳的验证分，初值为空状态（ReAct）的验证分；被改的只有三层自然语言状态（策略前言、技能、步骤手册），权重和 ReAct 循环不变 | [E1062, E1063] |"
+  },
+  {
+    "old": "| Harness-R1（预印本） | 编辑模型的奖励（式 1）：Δ_B(P) = (1/n) Σ_i (R_i^P − R_i^0)，补丁无效或评估不完整时为 0；作者说前后用同一批任务，是同批、直推式的目标 | P：补丁（在四个生命周期点加可执行钩子）；B：一批 n 个任务，包括原本就成功的；R_i^0、R_i^P：冻结的目标 agent 在任务 i 上装补丁前、后的任务奖励（WebShop 为环境给的连续奖励，ALFWorld 和 DBBench 为二值成功）；奖励只含任务奖励 | [E1064, E1065, E1066] |",
+    "new": "| Harness-R1（预印本） | 编辑模型的奖励（式 1）：$\\Delta_B(P)=\\frac1n\\sum_i(R_i^P-R_i^0)$，补丁无效或评估不完整时为 0；作者说前后用同一批任务，是同批、直推式的目标 | P：补丁（在四个生命周期点加可执行钩子）；B：一批 n 个任务，包括原本就成功的；$R_i^0$、$R_i^P$：冻结的目标 agent 在任务 i 上装补丁前、后的任务奖励（WebShop 为环境给的连续奖励，ALFWorld 和 DBBench 为二值成功）；奖励只含任务奖励 | [E1064, E1065, E1066] |"
+  },
+  {
+    "old": "| AgentDevel（预印本） | 条目库没有问题定义条目，只有文字流程：一轮是 运行→打分→评审→诊断脚本→候选版本→采纳门（通过→失败 / 失败→通过）→发布，单一版本线，每轮一个候选；逐例信号 p_t(x) = Pass(g_t(x))（有程序化打分器时），否则取评审的判断（式 6），候选与当前版本按翻转比较（式 12–15） | p_t(x)：训练集例子 x 的通过或失败；程序化打分器：单元测试、格式检查等；评审看不到蓝图（条目没有单独解释 g_t） | [E1067, E1068] |",
+    "new": "| AgentDevel（预印本） | 条目库没有问题定义条目，只有文字流程：一轮是 运行→打分→评审→诊断脚本→候选版本→采纳门（通过→失败 / 失败→通过）→发布，单一版本线，每轮一个候选；逐例信号 $p_t(x)=\\operatorname{Pass}(g_t(x))$（有程序化打分器时），否则取评审的判断（式 6），候选与当前版本按翻转比较（式 12–15） | $p_t(x)$：训练集例子 x 的通过或失败；程序化打分器：单元测试、格式检查等；评审看不到蓝图（条目没有单独解释 $g_t$） | [E1067, E1068] |"
+  },
+  {
+    "old": "| JudgeFlow（预印本） | 工作流 W = ({(B_i, C_i)}_{i=1}^M, S)；逐块执行 a′_i = φ_exe^(i)(a′_{i−1}, q; B_i, C_i)，a′_0 = ∅（式 1）；目标 W* = argmax_W E_{(q,a)∼D}[φ_eval(a′_M, a)]（式 2），只含评估分，没有费用、时延或步数项 | O(D)：配置好的算子，O 为功能类别标签，D 为算子配置（LLM、提示模板等）；B_i：块类型（顺序、循环、条件）；C_i：块配置；M：块数；S：顶层块顺序；q：数据集 D 中的输入查询；a：q 的标准答案；φ_exe^(i)：第 i 块的执行函数；a′_i：第 i 块输出的状态；φ_eval：评估函数 | [E1069, E1070] |",
+    "new": "| JudgeFlow（预印本） | 工作流 $W=(\\{(B_i,C_i)\\}_{i=1}^M,S)$；逐块执行 $a_i^\\prime=\\phi_{\\mathrm{exe}}^{(i)}(a_{i-1}^\\prime,q;B_i,C_i)$，$a_0^\\prime=\\varnothing$（式 1）；目标 $W^*=\\operatorname*{argmax}_W\\mathbb E_{(q,a)\\sim D}[\\phi_{\\mathrm{eval}}(a_M^\\prime,a)]$（式 2），只含评估分，没有费用、时延或步数项 | $O(D)$：配置好的算子，O 为功能类别标签，D 为算子配置（LLM、提示模板等）；$B_i$：块类型（顺序、循环、条件）；$C_i$：块配置；M：块数；S：顶层块顺序；q：数据集 D 中的输入查询；a：q 的标准答案；$\\phi _{\\mathrm{exe}}^{(i)}$：第 i 块的执行函数；$a_i^\\prime$：第 i 块输出的状态；$\\phi _{\\mathrm{eval}}$：评估函数 | [E1069, E1070] |"
+  },
+  {
+    "old": "| Adaptive Auto-Harness（预印本） | 任务流 x_1, …, x_T，x_t ∼ P_t；harness C = φ(H_t)，\\|C\\| ≤ K；效用 V(C, x_t) = E_{a_t∼π(·\\|x_t,C)}[r(a_t, y(x_t))]（式 1）；V(H_t, x_t) = sup_{\\|C\\|≤K} V(C, x_t)；遗憾 Regret(φ, x_t) = V(H_t, x_t) − V(φ(H_t), x_t) ≥ 0（式 2）；命题 1：E[Regret(φ, x_t)] = L_evo(Φ) + L_adapt(φ)（式 4） | P_t：t 时刻的任务分布；y(x_t)：固定标准答案；H_t = {(x_i, r_i, τ_i)}：历史，r_i 为可选的实际奖励，τ_i 为解题轨迹；K：容量预算；φ：演化器；π：给定任务和 harness 时 LLM 的动作分布；C*_Φ(x_t)：类 Φ 中的演化器在解题时看到 x_t 能造出的最好 harness；L_evo：演化器类的能力差距；L_adapt：先定 harness 再见 x_t 的损失；式 1–6 只含期望任务奖励 | [E1071] |",
+    "new": "| Adaptive Auto-Harness（预印本） | 任务流 $x_1,\\ldots,x_T$，$x_t\\sim P_t$；harness $C=\\phi(H_t)$，$\\lvert C\\rvert\\le K$；效用 $V(C,x_t)=\\mathbb E_{a_t\\sim\\pi(\\cdot\\mid x_t,C)}[r(a_t,y(x_t))]$（式 1）；$V(H_t,x_t)=\\sup_{\\lvert C\\rvert\\le K}V(C,x_t)$；遗憾 $\\operatorname{Regret}(\\phi,x_t)=V(H_t,x_t)-V(\\phi(H_t),x_t)\\ge0$（式 2）；命题 1：$\\mathbb E[\\operatorname{Regret}(\\phi,x_t)]=L_{\\mathrm{evo}}(\\Phi)+L_{\\mathrm{adapt}}(\\phi)$（式 4） | $P_t$：t 时刻的任务分布；$y(x_t)$：固定标准答案；$H_t=\\{(x_i,r_i,\\tau_i)\\}$：历史，$r_i$ 为可选的实际奖励，$\\tau _i$ 为解题轨迹；K：容量预算；$\\phi$：演化器；$\\pi$：给定任务和 harness 时 LLM 的动作分布；$C_\\Phi^*(x_t)$：类 $\\Phi$ 中的演化器在解题时看到 $x_t$ 能造出的最好 harness；$L_{\\mathrm{evo}}$：演化器类的能力差距；$L_{\\mathrm{adapt}}$：先定 harness 再见 $x_t$ 的损失；式 1–6 只含期望任务奖励 | [E1071] |"
+  },
+  {
+    "old": "| Continual Harness（预印本） | 同一连续回合里两层循环：内层第 t 步，模型 M 在当前 harness H_t 下把观察 s_t = (o_t, m_t) 和已有轨迹映射为动作 a_t；外层在预热 W 步后每 F 步，Refiner 读最近窗口 τ_{t−F:t} 找失败特征，输出 Δ = (Δp, ΔG, ΔK, ΔM)，H_{t+1} = H_t ⊕ Δ，agent 不重置。目标是到达每个里程碑所需的累计按键数更少 | o_t：当前画面；m_t：可见格子和附近可走位置的 ASCII 地图；a_t 取自固定按键集合 A；p：系统提示（由 Δp 替换）；G：子 agent；K：技能；M（在 Δ 里）：记忆，后三者做增删改查；agent 与 Refiner 用同一个模型 M；F、W 的数值文中没有给；按键数按单个按键计，不是工具调用数；里程碑：Emerald 31 个、Red 18 个 | [E1072, E1073] |",
+    "new": "| Continual Harness（预印本） | 同一连续回合里两层循环：内层第 t 步，模型 M 在当前 harness $H_t$ 下把观察 $s_t=(o_t,m_t)$ 和已有轨迹映射为动作 $a_t$；外层在预热 W 步后每 F 步，Refiner 读最近窗口 $\\tau _{t-F:t}$ 找失败特征，输出 $\\Delta=(\\Delta p,\\Delta G,\\Delta K,\\Delta M)$，$H_{t+1}=H_t\\oplus\\Delta$，agent 不重置。目标是到达每个里程碑所需的累计按键数更少 | $o_t$：当前画面；$m_t$：可见格子和附近可走位置的 ASCII 地图；$a_t$ 取自固定按键集合 A；p：系统提示（由 $\\Delta p$ 替换）；G：子 agent；K：技能；M（在 $\\Delta$ 里）：记忆，后三者做增删改查；agent 与 Refiner 用同一个模型 M；F、W 的数值文中没有给；按键数按单个按键计，不是工具调用数；里程碑：Emerald 31 个、Red 18 个 | [E1072, E1073] |"
+  },
+  {
+    "old": "| RewardHarness（COLM 2026） | 给源图 I_s、编辑指令 p 和 K 张候选图 {I_1, …, I_K}，输出偏好分 s = (s_1, …, s_K) 及其诱导排序 π（式 1）；s, π = M(I_s, {I_k}, p, C) | M：冻结的 VLM，参数从不更新；C：推理时由编排器选入的技能文档和工具说明；分数是 1–5 分量表上的序数估计，只看相对顺序，分数相同算并列；演化循环的答案是 N = 100 条带人工分数 s* 和排序 π* 的校准集，分成 60 条 D_train、40 条 D_val | [E1074, E1075] |",
+    "new": "| RewardHarness（COLM 2026） | 给源图 $I_s$、编辑指令 p 和 K 张候选图 $\\{I_1,\\ldots,I_K\\}$，输出偏好分 $s=(s_1,\\ldots,s_K)$ 及其诱导排序 $\\pi$（式 1）；$s,\\pi=M(I_s,\\{I_k\\},p,C)$ | M：冻结的 VLM，参数从不更新；C：推理时由编排器选入的技能文档和工具说明；分数是 1–5 分量表上的序数估计，只看相对顺序，分数相同算并列；演化循环的答案是 $N=100$ 条带人工分数 $s^*$ 和排序 $\\pi^*$ 的校准集，分成 60 条 $D_{\\mathrm{train}}$、40 条 $D_{\\mathrm{val}}$ | [E1074, E1075] |"
+  },
+  {
+    "old": "U = 0.5·分数 + 0.25·(1−min(1, 费用/$10)) + 0.25·(1−min(1, 时间/300 s))",
+    "new": "$U=0.5\\cdot\\text{分数}+0.25\\left(1-\\min\\left(1,\\frac{\\text{费用}}{\\$10}\\right)\\right)+0.25\\left(1-\\min\\left(1,\\frac{\\text{时间}}{300\\,\\mathrm{s}}\\right)\\right)$"
+  },
+  {
+    "old": "必须低于 φ=0.9，否则重写",
+    "new": "必须低于 $\\phi=0.9$，否则重写"
+  },
+  {
+    "old": "时间项：I 步数 N，II 每步调用数 J_i，III 每次调用的时延（含越来越长的提示），IV 非模型时间 E_i，V 重叠 T_saving",
+    "new": "时间项：I 步数 $N$，II 每步调用数 $J_i$，III 每次调用的时延（含越来越长的提示），IV 非模型时间 $E_i$，V 重叠 $T_{\\mathrm{saving}}$"
+  },
+  {
+    "old": "时间 II（J_i 趋零）",
+    "new": "时间 II（$J_i$ 趋零）"
+  },
+  {
+    "old": "T_attempt 与 c_m(p) 下降",
+    "new": "$T_{\\mathrm{attempt}}$ 与 $c_m(p)$ 下降"
+  },
+  {
+    "old": "J_i 上升；t08",
+    "new": "$J_i$ 上升；t08"
+  },
+  {
+    "old": "T_attempt 升（均值差来自少数长任务）",
+    "new": "$T_{\\mathrm{attempt}}$ 升（均值差来自少数长任务）"
+  },
+  {
+    "old": "T_attempt 略降",
+    "new": "$T_{\\mathrm{attempt}}$ 略降"
+  },
+  {
+    "old": "自改进文献改的是 N 和 J_i",
+    "new": "自改进文献改的是 $N$ 和 $J_i$"
+  },
+  {
+    "old": "我们的 v = C/R 在这个范围内",
+    "new": "我们的 $v=C/R$ 在这个范围内"
+  },
+  {
+    "old": "（N = 84）",
+    "new": "（$N=84$）"
+  },
+  {
+    "old": "V→S：把这些变量",
+    "new": "$V\\to S$：把这些变量"
+  },
+  {
+    "old": "(x, x')：一条输入及其元数据",
+    "new": "$(x,x')$：一条输入及其元数据"
+  },
+  {
+    "old": "在有向无环计算图 (V, E, H, Θ) 上求",
+    "new": "在有向无环计算图 $(V,E,H,\\Theta)$ 上求"
+  },
+  {
+    "old": "由回答反馈 F(Q, A) 得到",
+    "new": "由回答反馈 $F(Q,A)$ 得到"
+  },
+  {
+    "old": "Θ⊆V：可优化参数",
+    "new": "$\\Theta\\subseteq V$：可优化参数"
+  },
+  {
+    "old": "A(Q, Θ)：输出节点",
+    "new": "$A(Q,\\Theta)$：输出节点"
+  },
+  {
+    "old": "F(Q, A)：额外的语义反馈",
+    "new": "$F(Q,A)$：额外的语义反馈"
+  },
+  {
+    "old": "把 (Predecessors(w), w, ",
+    "new": "把 ($\\operatorname{Predecessors}(w)$, $w$, "
+  },
+  {
+    "old": "(f∈T, i∈",
+    "new": "($f\\in T$, i∈"
+  },
+  {
+    "old": "多数把 Σ 当成一个整体",
+    "new": "多数把 $\\Sigma$ 当成一个整体"
+  }
+]
