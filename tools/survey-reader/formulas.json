@@ -1,0 +1,449 @@
+[
+  {
+    "source": "Agent_t = (θ_t, Σ_t)",
+    "latex": "\\mathrm{Agent}_t=(\\theta_t,\\Sigma_t)",
+    "display": false,
+    "label": "Agent系统配置",
+    "section": 1,
+    "provenance": "本文改写",
+    "explanation": "θ是模型参数，Σ是模型外系统；t是系统版本。",
+    "notes": "原综述用花体A表示Agent；此处保留主报告的重命名，不改回作者符号。"
+  },
+  {
+    "source": "Σ_t = (p_t, m_t, Tools_t, g_t)",
+    "latex": "\\Sigma_t=(p_t,m_t,\\mathrm{Tools}_t,g_t)",
+    "display": false,
+    "label": "外部系统构成",
+    "section": 1,
+    "provenance": "本文改写",
+    "explanation": "p是提示，m是记忆及其维护机制，Tools是工具接口，g是控制逻辑。"
+  },
+  {
+    "source": "S_t = ExecuteAndEvaluate(Agent_t, Context_t)",
+    "latex": "S_t=\\operatorname{ExecuteAndEvaluate}\\!\\left(\\mathrm{Agent}_t,\\mathrm{Context}_t\\right)",
+    "display": true,
+    "label": "执行与评估",
+    "section": 1,
+    "provenance": "本文改写",
+    "explanation": "S_t是轨迹、结果、检查或费用等反馈；Context_t是任务/部署上下文，不是成本。"
+  },
+  {
+    "source": "Σ_(t+1) = Update(Σ_1…Σ_t, S_t)",
+    "latex": "\\Sigma_{t+1}=\\operatorname{Update}(\\Sigma_1,\\ldots,\\Sigma_t,S_t)",
+    "display": true,
+    "label": "模型外系统更新",
+    "section": 1,
+    "provenance": "本文改写",
+    "explanation": "根据既有系统版本和本次反馈更新下一版外部系统。",
+    "notes": "省略号表示版本序列；仅补标准参数分隔符，不新增更新信息。"
+  },
+  {
+    "source": "θ_(t+1)=θ_t",
+    "latex": "\\theta_{t+1}=\\theta_t",
+    "display": false,
+    "label": "模型权重保持固定",
+    "section": 1,
+    "provenance": "本文改写",
+    "explanation": "更新外部系统期间，模型参数不变。"
+  },
+  {
+    "source": "q_t = E[Φ(x, τ)]",
+    "latex": "q_t=\\mathbb{E}\\!\\left[\\Phi(x,\\tau)\\right]",
+    "display": false,
+    "label": "第t版系统的期望表现",
+    "section": 1,
+    "provenance": "本文改写",
+    "explanation": "x是留出任务，τ是第t版Agent的轨迹，Φ为评价器；q_t是期望表现。",
+    "notes": "报告对综述式(26)重命名；不把费用项或成功率约束补入原式。"
+  },
+  {
+    "source": "g_y = Critique(y, L)",
+    "latex": "g_y=\\operatorname{Critique}(y,L)",
+    "display": false,
+    "label": "TextGrad下游文字反馈",
+    "section": 3,
+    "provenance": "本文改写",
+    "explanation": "y为输出，L为任务评价，g_y为针对输出的文字反馈。"
+  },
+  {
+    "source": "g_x = Backward(x, y, g_y)",
+    "latex": "g_x=\\operatorname{Backward}(x,y,g_y)",
+    "display": false,
+    "label": "TextGrad反馈传播",
+    "section": 3,
+    "provenance": "本文改写",
+    "explanation": "x为可编辑提示或代码；g_x是传播到x的文字建议，不是数值梯度。"
+  },
+  {
+    "source": "x_new = Edit(x, g_x)",
+    "latex": "x_{\\mathrm{new}}=\\operatorname{Edit}(x,g_x)",
+    "display": false,
+    "label": "TextGrad编辑更新",
+    "section": 3,
+    "provenance": "本文改写",
+    "explanation": "根据文字反馈g_x编辑x，产生新版本。"
+  },
+  {
+    "source": "(Θ, ω, T)",
+    "latex": "(\\Theta,\\omega,T)",
+    "display": false,
+    "label": "Trace的OPTO定义",
+    "section": 3,
+    "provenance": "原文定义",
+    "explanation": "Θ是可编辑变量空间，ω为固定问题描述，T为执行信息oracle。",
+    "notes": "本节θ可为代码或提示，不能复用第1节“模型权重”的解释。"
+  },
+  {
+    "source": "τ=(f,g)",
+    "latex": "\\tau=(f,g)",
+    "display": false,
+    "label": "Trace执行反馈",
+    "section": 3,
+    "provenance": "原文定义",
+    "explanation": "f是输出节点反馈，g是实际执行DAG；τ为此处的反馈二元组。",
+    "notes": "τ在本节不是通常的动作轨迹序列；按论文局部定义解释。"
+  },
+  {
+    "source": "Π* = argmax_Π E[μ(Φ(x; Π, Θ_fixed), m)]",
+    "latex": "\\Pi^{*}=\\operatorname*{arg\\,max}_{\\Pi}\\,\\mathbb{E}\\!\\left[\\mu\\!\\left(\\Phi(x;\\Pi,\\Theta_{\\mathrm{fixed}}),m\\right)\\right]",
+    "display": true,
+    "label": "GEPA提示优化目标",
+    "section": 3,
+    "provenance": "本文改写",
+    "explanation": "Π是模块提示，Θ_fixed是冻结权重，Φ是复合系统，μ依据评价资料m给任务x打分。",
+    "notes": "原文式(2)在固定权重条件下的主报告改写；预算B在正文说明，未偷偷加入成本惩罚。"
+  },
+  {
+    "source": "(τ, r_x(s)) = h(M,x,s)",
+    "latex": "(\\tau,r_x(s))=h(M,x,s)",
+    "display": true,
+    "label": "SkillOpt技能执行",
+    "section": 3,
+    "provenance": "本文改写",
+    "explanation": "固定模型M与harness h在任务x上读取技能s，产生轨迹τ与任务回报r_x(s)。",
+    "notes": "主报告依据原式(1)–(3)为r补了任务下标x，因此归为本文改写。"
+  },
+  {
+    "source": " s* = argmax_{s∈C} 平均_{x∈D_sel} r_x(s)",
+    "latex": "s^{*}=\\operatorname*{arg\\,max}_{s\\in C}\\;\\frac{1}{\\lvert D_{\\mathrm{sel}}\\rvert}\\sum_{x\\in D_{\\mathrm{sel}}}r_x(s)",
+    "display": true,
+    "label": "SkillOpt候选选择",
+    "section": 3,
+    "provenance": "本文改写",
+    "explanation": "从候选技能C中选择在选择集D_sel上平均回报最高者。",
+    "notes": "source保留原反引号内前导空格。把“平均”展开为有限集均值，未改变选择集合或数据用途。"
+  },
+  {
+    "source": "m_new = Dedup(Merge(m, Δ))",
+    "latex": "m_{\\mathrm{new}}=\\operatorname{Dedup}\\!\\left(\\operatorname{Merge}(m,\\Delta)\\right)",
+    "display": true,
+    "label": "ACE记忆增量维护",
+    "section": 3,
+    "provenance": "本文改写",
+    "explanation": "m是playbook，Δ是新增或修改的条目；Merge应用更新，Dedup处理冗余。"
+  },
+  {
+    "source": "W-AUC = Σ_k k·J(τ_k) / Σ_k k·J_max(g)",
+    "latex": "\\mathrm{W\\!\\text{-}\\!AUC}=\\frac{\\displaystyle\\sum_{k=1}^{K}k\\,J(\\tau_k)}{\\displaystyle\\sum_{k=1}^{K}k\\,J_{\\max}(g)}",
+    "display": true,
+    "label": "Meta-TTL加权学习曲线",
+    "section": 3,
+    "provenance": "原文定义",
+    "explanation": "g是任务，τ_k是第k次尝试，J为回报，J_max(g)为该任务最大回报，K为尝试次数。",
+    "notes": "报告正文明确k从1到K，转写据此补出求和上下限；不是按时间或费用加权。"
+  },
+  {
+    "source": "ρ_(k+1) ~ f_φ(· | ρ_k,H_k)",
+    "latex": "\\rho_{k+1}\\sim f_{\\phi}(\\,\\cdot\\mid\\rho_k,H_k)",
+    "display": false,
+    "label": "Meta-TTL提示内循环",
+    "section": 3,
+    "provenance": "原文定义",
+    "explanation": "ρ是actor prompt，H_k是尝试历史，φ是控制改进器的文字meta-prompt。"
+  },
+  {
+    "source": "I(E)→W",
+    "latex": "I(E)\\longrightarrow W",
+    "display": false,
+    "label": "AWM工作流诱导",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "E是执行经验集合，I将经验诱导成工作流W。"
+  },
+  {
+    "source": "M+W→M_w",
+    "latex": "M+W\\longrightarrow M_w",
+    "display": false,
+    "label": "AWM记忆增强",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "把工作流W加入原记忆M，得到增强记忆M_w。",
+    "notes": "加号是原文“加入上下文”记号，不是向量相加或数值参数更新。"
+  },
+  {
+    "source": "M_new = M_old ∪ Extract(task, trajectory, Judge结果)",
+    "latex": "\\begin{aligned}M_{\\mathrm{new}}={}&M_{\\mathrm{old}}\\\\&\\cup\\operatorname{Extract}\\!\\left(\\mathrm{task},\\mathrm{trajectory},\\text{Judge结果}\\right)\\end{aligned}",
+    "display": true,
+    "label": "ReasoningBank追加记忆",
+    "section": 4,
+    "provenance": "本文改写",
+    "explanation": "从任务、轨迹及judge判定抽取记忆条目，并追加到旧记忆。",
+    "notes": "默认consolidation是追加；不在渲染中改写为去重、证伪或删除。"
+  },
+  {
+    "source": "Q_new = Q_old + α(r − Q_old)",
+    "latex": "Q_{\\mathrm{new}}=Q_{\\mathrm{old}}+\\alpha\\left(r-Q_{\\mathrm{old}}\\right)",
+    "display": true,
+    "label": "MemRL效用更新",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "Q是记忆条目效用，r为本次回报，α为更新步长。"
+  },
+  {
+    "source": "score=(1−λ)·标准化相似度 + λ·标准化Q",
+    "latex": "\\mathrm{score}=(1-\\lambda)\\,\\widehat{\\mathrm{sim}}+\\lambda\\,\\widehat{Q}",
+    "display": true,
+    "label": "MemRL效用与相似度排序",
+    "section": 4,
+    "provenance": "本文改写",
+    "explanation": "sim与Q分别为相似度和效用，帽号表示z-score标准化，λ控制权重。",
+    "notes": "这是对原文式(7)的主报告简写；不把标准化解释为0到1缩放，也不补未展示的索引。"
+  },
+  {
+    "source": "M=(M_text,M_code)",
+    "latex": "M=(M_{\\mathrm{text}},M_{\\mathrm{code}})",
+    "display": false,
+    "label": "Metis双表示记忆",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "M_text是文字记忆，M_code是代码工具库。"
+  },
+  {
+    "source": "M_text=M_env ∪ M_pit ∪ M_plan",
+    "latex": "M_{\\mathrm{text}}=M_{\\mathrm{env}}\\cup M_{\\mathrm{pit}}\\cup M_{\\mathrm{plan}}",
+    "display": false,
+    "label": "Metis文字记忆分类",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "env为环境事实，pit为常见错误，plan为过程计划。"
+  },
+  {
+    "source": "M_k=Reflect(M_(k−1),τ_k)",
+    "latex": "M_k=\\operatorname{Reflect}(M_{k-1},\\tau_k)",
+    "display": true,
+    "label": "Metis轨迹反思更新",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "第k个任务轨迹τ_k用于反思并更新上一版记忆。"
+  },
+  {
+    "source": "|B(p)|≥θ",
+    "latex": "\\lvert B(p)\\rvert\\ge\\theta",
+    "display": false,
+    "label": "Metis程序化触发门槛",
+    "section": 4,
+    "provenance": "本文改写",
+    "explanation": "B(p)是选中过计划p的任务索引集合，θ是复用次数门槛。",
+    "notes": "按主报告对触发条件的简写；θ在这里是阈值，不是第1节的模型权重。被选中次数不等于成功次数。"
+  },
+  {
+    "source": "g: L×H→L",
+    "latex": "g:L\\times H\\longrightarrow L",
+    "display": false,
+    "label": "SpeedRunner技能归纳器",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "L是技能库，H是带版本信息的历史轨迹；g编辑技能库。"
+  },
+  {
+    "source": "L←g(L,H)",
+    "latex": "L\\leftarrow g(L,H)",
+    "display": false,
+    "label": "SpeedRunner库更新",
+    "section": 4,
+    "provenance": "原文定义",
+    "explanation": "归纳器读取当前库与历史，产生更新后的技能库。"
+  },
+  {
+    "source": "min [FailRate(u,I_test) + StepCount(u) + AgenticRatio(u)]",
+    "latex": "\\begin{aligned}\\min\\;\\bigl[&\\operatorname{FailRate}(u,I_{\\mathrm{test}})\\\\&+\\operatorname{StepCount}(u)\\\\&+\\operatorname{AgenticRatio}(u)\\bigr]\\end{aligned}",
+    "display": true,
+    "label": "WALT工具级优化目标",
+    "section": 5,
+    "provenance": "原文定义",
+    "explanation": "u为工具，I_test为测试输入；三项是失败比例、primitive操作数与需要LLM推理的步骤比例。",
+    "notes": "原文未给归一化权重；保持直接相加，不擅自补λ系数、美元单位或min下标。"
+  },
+  {
+    "source": "M=(S,O,T)",
+    "latex": "M=(S,O,T)",
+    "display": false,
+    "label": "ActionEngine状态机记忆",
+    "section": 5,
+    "provenance": "原文定义",
+    "explanation": "S是页面模板，O是操作，T是转移关系。"
+  },
+  {
+    "source": "v(τ)=max_t Σ_(j≤t) r_j",
+    "latex": "v(\\tau)=\\max_t\\sum_{j\\le t}r_j",
+    "display": true,
+    "label": "GLoW轨迹价值",
+    "section": 5,
+    "provenance": "原文定义",
+    "explanation": "τ为轨迹，r_j为第j步环境奖励；取最高前缀累计回报。",
+    "notes": "保持主报告的索引简写，不另引入未解释的轨迹长度T。"
+  },
+  {
+    "source": "A(s,a)=Q(s,a)−V(s)",
+    "latex": "A(s,a)=Q(s,a)-V(s)",
+    "display": false,
+    "label": "GLoW优势直觉",
+    "section": 5,
+    "provenance": "原文定义",
+    "explanation": "Q是状态动作价值，V是状态价值；式子说明相对优势的直觉。",
+    "notes": "此式是动机，GLoW实际输出文本动作优势；不要标成其实际数值RL更新。"
+  },
+  {
+    "source": "M_E←M_E∪{(o_t,a_t,o_(t+1))}",
+    "latex": "M_E\\leftarrow M_E\\cup\\left\\{(o_t,a_t,o_{t+1})\\right\\}",
+    "display": true,
+    "label": "WorldEvolver真实转移记忆",
+    "section": 5,
+    "provenance": "原文定义",
+    "explanation": "o_t是当前观察，a_t为执行动作，o_(t+1)为实际新观察。"
+  },
+  {
+    "source": "(rule,evidence)",
+    "latex": "(\\mathrm{rule},\\mathrm{evidence})",
+    "display": false,
+    "label": "WorldEvolver语义条目",
+    "section": 5,
+    "provenance": "本文改写",
+    "explanation": "每条语义记忆由文字规则和支持/矛盾证据分构成。",
+    "notes": "保持主报告的语义标签，不增添新更新公式。"
+  },
+  {
+    "source": "h* = argmax_{h∈H} J(h; D_holdout)",
+    "latex": "h^{*}=\\operatorname*{arg\\,max}_{h\\in H}J(h;D_{\\mathrm{holdout}})",
+    "display": true,
+    "label": "StarHarness目标",
+    "section": 6,
+    "provenance": "原文定义",
+    "explanation": "h是harness，H是候选空间，J为任务平均得分，D_holdout为最终留出集。",
+    "notes": "这是目标定义；搜索时留出结果不可见，勿将式子误标为用留出集逐轮选候选的实现。"
+  },
+  {
+    "source": "CMP_hat(a)=n_success(C(a)) / [n_success(C(a))+n_fail(C(a))]",
+    "latex": "\\widehat{\\mathrm{CMP}}(a)=\\frac{n_{\\mathrm{success}}\\!\\left(C(a)\\right)}{n_{\\mathrm{success}}\\!\\left(C(a)\\right)+n_{\\mathrm{fail}}\\!\\left(C(a)\\right)}",
+    "display": true,
+    "label": "HGM分支潜力估计",
+    "section": 6,
+    "provenance": "本文改写",
+    "explanation": "C(a)包含节点a及其后代；分子分母汇总整个分支的任务评测成功与失败。",
+    "notes": "主报告对§3.2–3.3实现中计数近似的符号化概括，不是理想clade metaproductivity的完整定义。"
+  },
+  {
+    "source": "P2F={x∈D_train: p_old(x)=1 且 p_new(x)=0}",
+    "latex": "\\mathrm{P2F}=\\left\\{x\\in D_{\\mathrm{train}}\\;:\\;p_{\\mathrm{old}}(x)=1\\land p_{\\mathrm{new}}(x)=0\\right\\}",
+    "display": true,
+    "label": "AgentDevel成功变失败",
+    "section": 7,
+    "provenance": "原文定义",
+    "explanation": "D_train为开发集；p_old与p_new表示修改前后是否通过用例。"
+  },
+  {
+    "source": "F2P={x∈D_train: p_old(x)=0 且 p_new(x)=1}",
+    "latex": "\\mathrm{F2P}=\\left\\{x\\in D_{\\mathrm{train}}\\;:\\;p_{\\mathrm{old}}(x)=0\\land p_{\\mathrm{new}}(x)=1\\right\\}",
+    "display": true,
+    "label": "AgentDevel失败变成功",
+    "section": 7,
+    "provenance": "原文定义",
+    "explanation": "F2P收集修改后从不通过变为通过的开发用例。"
+  },
+  {
+    "source": "是否存在轨迹σ，使 L(σ) 满足 G ∧ ψ",
+    "latex": "\\exists\\,\\sigma\\;:\\;L(\\sigma)\\models(G\\land\\psi)\\;?",
+    "display": true,
+    "label": "VASO逻辑可行性问题",
+    "section": 7,
+    "provenance": "本文改写",
+    "explanation": "σ是轨迹，L把观察映射成命题，G是全局规范，ψ是局部目标。",
+    "notes": "报告用中文重述原定义；问号保留“是否成立”的检查语气，不宣称一定存在。"
+  },
+  {
+    "source": "A_plan ⊗ M 是否满足 G ∧ ψ",
+    "latex": "A_{\\mathrm{plan}}\\otimes M\\;\\stackrel{?}{\\models}\\;(G\\land\\psi)",
+    "display": true,
+    "label": "VASO一般计划验证",
+    "section": 7,
+    "provenance": "本文改写",
+    "explanation": "A_plan是计划状态系统，M是预先给定环境模型，⊗为组合。",
+    "notes": "报告用中文重述一般模型检验；与作者更直接的具体实现区别保留在正文。"
+  },
+  {
+    "source": "S = f(I,E,K)",
+    "latex": "S=f(I,E,K)",
+    "display": false,
+    "label": "OpenSkill技能构造",
+    "section": 7,
+    "provenance": "原文定义",
+    "explanation": "I是任务指令，E为环境，K是外部知识，S为技能集合。"
+  },
+  {
+    "source": "T_proxy = g(I,E,K_verify)",
+    "latex": "T_{\\mathrm{proxy}}=g(I,E,K_{\\mathrm{verify}})",
+    "display": false,
+    "label": "OpenSkill代理测试构造",
+    "section": 7,
+    "provenance": "原文定义",
+    "explanation": "K_verify为外部验证依据，g生成代理测试T_proxy。"
+  },
+  {
+    "source": "最小化系统在任务流上的总费用 Cost_total(Σ)",
+    "latex": "\\min_{\\Sigma}\\;\\mathrm{Cost}_{\\mathrm{total}}(\\Sigma)",
+    "display": true,
+    "label": "本报告总费用目标",
+    "section": 9,
+    "provenance": "本文改写",
+    "explanation": "Σ为可修改的外部系统，总费用在相同任务流上统计。",
+    "notes": "这是本报告的核算/研究定义，不属于任何一篇论文的原目标。"
+  },
+  {
+    "source": "Quality(Σ) ≥ Quality(Σ_base) − ε",
+    "latex": "\\operatorname{Quality}(\\Sigma)\\ge\\operatorname{Quality}(\\Sigma_{\\mathrm{base}})-\\varepsilon",
+    "display": true,
+    "label": "本报告质量约束",
+    "section": 9,
+    "provenance": "本文改写",
+    "explanation": "Σ_base是基线系统，ε是事先规定的可接受质量差异。"
+  },
+  {
+    "source": "Latency_p95(Σ) ≤ L_limit",
+    "latex": "\\operatorname{Latency}_{p95}(\\Sigma)\\le L_{\\mathrm{limit}}",
+    "display": true,
+    "label": "本报告时延约束",
+    "section": 9,
+    "provenance": "本文改写",
+    "explanation": "Latency_p95是p95时延，L_limit是实验前确定的时延要求。"
+  },
+  {
+    "source": "累计净节省(N) = Σ[基线任务成本 − 改进系统任务成本] − 构造成本 − 选择成本 − 维护成本",
+    "latex": "\\begin{aligned}\\text{累计净节省}(N)={}&\\sum_{i=1}^{N}\\bigl[\\text{基线任务成本}_i-\\text{改进系统任务成本}_i\\bigr]\\\\&-\\text{构造成本}-\\text{选择成本}-\\text{维护成本}\\end{aligned}",
+    "display": true,
+    "label": "本报告累计净节省",
+    "section": 9,
+    "provenance": "本文改写",
+    "explanation": "N为任务数量，i表示同一任务流中的第i项；任务执行成本与额外构造、选择和维护分开计费。",
+    "notes": "源式的Σ在这里表示求和，不是外部系统变量Σ；据N展开求和范围，避免字体同形混淆。"
+  },
+  {
+    "source": "固定投入 ÷ 平均每任务净节省",
+    "latex": "\\frac{\\text{固定投入}}{\\text{平均每任务净节省}}",
+    "display": true,
+    "label": "本报告回本任务量近似",
+    "section": 9,
+    "provenance": "本文改写",
+    "explanation": "只有平均每任务净节省为正且近似稳定时，该比值才估计有限回本任务量。",
+    "notes": "保留正文条件；不加ceil或等号，以免把近似估计变成严格整数公式。"
+  }
+]

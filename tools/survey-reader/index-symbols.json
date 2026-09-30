@@ -1,0 +1,78 @@
+[
+  {
+    "source": "r_x(s)",
+    "latex": "r_x(s)"
+  },
+  {
+    "source": "M_text",
+    "latex": "M_{\\mathrm{text}}"
+  },
+  {
+    "source": "M_code",
+    "latex": "M_{\\mathrm{code}}"
+  },
+  {
+    "source": "o_(t+1)",
+    "latex": "o_{t+1}"
+  },
+  {
+    "source": "o_t",
+    "latex": "o_t"
+  },
+  {
+    "source": "a_t",
+    "latex": "a_t"
+  },
+  {
+    "source": "D_holdout",
+    "latex": "D_{\\mathrm{holdout}}"
+  },
+  {
+    "source": "p_old",
+    "latex": "p_{\\mathrm{old}}"
+  },
+  {
+    "source": "p_new",
+    "latex": "p_{\\mathrm{new}}"
+  },
+  {
+    "source": "T_proxy",
+    "latex": "T_{\\mathrm{proxy}}"
+  },
+  {
+    "source": "Latency_p95",
+    "latex": "\\operatorname{Latency}_{\\mathrm{p95}}"
+  },
+  {
+    "source": "F2P",
+    "latex": "\\mathrm{F2P}"
+  },
+  {
+    "source": "sim",
+    "latex": "\\mathrm{sim}"
+  },
+  {
+    "source": "A",
+    "latex": "\\mathcal{A}"
+  },
+  {
+    "source": "V",
+    "latex": "V"
+  },
+  {
+    "source": "σ",
+    "latex": "\\sigma"
+  },
+  {
+    "source": "N",
+    "latex": "N"
+  },
+  {
+    "source": "i",
+    "latex": "i"
+  },
+  {
+    "source": "t",
+    "latex": "t"
+  }
+]
