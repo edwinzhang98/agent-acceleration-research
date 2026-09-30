@@ -2,20 +2,20 @@
 
 Evidence base for a research investigation into why LLM computer-use / web agents are too slow and too expensive for real work, and into the 2023–2026 research landscape on accelerating them. Groundwork for (1) a paper on accelerating repetitive enterprise web workflows (SAP Concur expense reports) and (2) a slide deck for a senior ML audience.
 
-## 网页阅读
+## Read online
 
-**[打开研究阅读首页](https://edwinzhang98.github.io/agent-acceleration-research/)** — 目录、章节搜索、公式排版和手机阅读；也可下载 HTML 离线打开。
+**[Open the research reading site](https://edwinzhang98.github.io/agent-acceleration-research/)** — chapter navigation, search, rendered equations, and mobile layouts. The HTML files can also be downloaded for offline reading. The reports and reading-site interface are in Chinese; the slide deck is in English.
 
-| 阅读材料 | 用途 |
+| Reading material | Scope |
 |---|---|
-| [固定模型权重下的 Agent 加速与自我改进](https://edwinzhang98.github.io/agent-acceleration-research/reports/fixed-weight-agent-acceleration.html) | Codex 专题报告：机制、轨迹学习、环境探索与成本评测。 |
-| [自改进 Agent 的文献与 Agent 加速](https://edwinzhang98.github.io/agent-acceleration-research/reports/self-improvement-survey.html) | Claude 文献报告的 Codex 审核阅读版：方法、效果、条件、局限和证据查询。与上篇互补。 |
-| [文献自己怎样定义 Agent 加速](https://edwinzhang98.github.io/agent-acceleration-research/reports/how-literature-defines-acceleration.html) | 较新的问题定义研究；讨论稿，含两批独立记录审计，审计范围和待决事项见原文。 |
-| [文献里的公式：算速度和成本的](https://edwinzhang98.github.io/agent-acceleration-research/reports/formulas-for-speed-and-cost.html) | 公式与符号手册；2026-09-28 快照。 |
-| [Codex 研究计划](https://edwinzhang98.github.io/agent-acceleration-research/reports/trajectory-research-plan.html) · [Claude 第六稿计划](https://edwinzhang98.github.io/agent-acceleration-research/reports/claude-part3-plan.html) | 2026-09-29 讨论稿，方法、实验及预算尚未定案；尚未合并之后的全部审核。 |
-| [Agent Acceleration 演示稿](https://edwinzhang98.github.io/agent-acceleration-research/slides/agent-acceleration.html) | Part 1–2 的按页演示。 |
+| [Agent Acceleration and Self-Improvement with Fixed Model Weights](https://edwinzhang98.github.io/agent-acceleration-research/reports/fixed-weight-agent-acceleration.html) (Chinese) | Codex review of mechanisms, trajectory learning, environment exploration, and cost evaluation. |
+| [Self-Improving Agents: Literature and Acceleration](https://edwinzhang98.github.io/agent-acceleration-research/reports/self-improvement-survey.html) (Chinese) | Codex-reviewed edition of Claude's literature report: methods, results, conditions, limitations, and searchable evidence. Complements the report above. |
+| [How the Literature Defines Agent Acceleration](https://edwinzhang98.github.io/agent-acceleration-research/reports/how-literature-defines-acceleration.html) (Chinese) | Problem-framing discussion draft with two batches of independent record audits; the source explains their scope and open decisions. |
+| [Formulas for Speed and Cost](https://edwinzhang98.github.io/agent-acceleration-research/reports/formulas-for-speed-and-cost.html) (Chinese) | Equations and notation reference; snapshot dated 2026-09-28. |
+| [Codex Research Plan](https://edwinzhang98.github.io/agent-acceleration-research/reports/trajectory-research-plan.html) · [Claude Research Plan, Draft 6](https://edwinzhang98.github.io/agent-acceleration-research/reports/claude-part3-plan.html) (Chinese) | Discussion drafts dated 2026-09-29. Methods, experiments, and budgets are undecided; later review findings have not all been incorporated. |
+| [Agent Acceleration Slide Deck](https://edwinzhang98.github.io/agent-acceleration-research/slides/agent-acceleration.html) (English) | Slide-by-slide presentation of Parts 1–2. |
 
-Markdown 原稿在 `notes/`，审核和证据在 `research/`，演示源稿在 `slides/`；`docs/` 是统一网页入口和生成结果。新增四篇仅转换展示，不代表重新审核论文。构建与维护见 [阅读站说明](tools/reading-site/README.md)。
+Source reports are in `notes/`, reviews and evidence in `research/`, and presentation sources in `slides/`. The generated reading site is in `docs/`. The four additional report editions are presentation conversions, not new paper audits. See the [reading-site guide](tools/reading-site/README.md) for building and maintenance.
 
 ## Layout
 
@@ -32,6 +32,7 @@ Markdown 原稿在 `notes/`，审核和证据在 `research/`，演示源稿在 `
 
 ## Working rules
 
+- Keep repository README documentation in English. Label links to Chinese reports explicitly; provide a separate language edition if bilingual documentation is needed.
 - Cite by the dossier's IDs (E-, D-, §). Extend the dossier by patches; do not re-derive it.
 - Every new number carries: figure, exact measurement definition, source URL, date, primary/secondary label.
 - Conflicts with the dossier become new D-entries and new evidence new E-entries, continuing the numbering (current ranges in `STATUS.md`).

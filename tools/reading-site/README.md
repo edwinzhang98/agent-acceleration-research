@@ -1,27 +1,27 @@
-# 研究阅读站
+# Research reading site
 
-公开入口：<https://edwinzhang98.github.io/agent-acceleration-research/>
+Public site: <https://edwinzhang98.github.io/agent-acceleration-research/>
 
-`docs/index.html` 是统一首页。报告在 `docs/reports/`，真正的演示稿在 `docs/slides/`。`notes/` 保存读者向原稿，`research/` 保存证据、审计和修订记录；不把长篇报告归入 slides。
+`docs/index.html` is the shared reading index. Reports live in `docs/reports/`; slide presentations live in `docs/slides/`. The reader-facing source documents remain in `notes/`, while `research/` holds evidence, audits, and revision records. Long-form reports are kept separate from slides.
 
-## 本批内容与边界
+## Included material and scope
 
-| 内容 | 生成方式与状态 |
+| Material | Rendering method and status |
 |---|---|
-| Codex 固定权重专题报告 | 重用 `tools/survey-reader/` 的完整交互阅读版，加首页和原稿入口。 |
-| Claude 综述审核阅读版 | 重用 `tools/survey-mining-reader/`，保留原来的审核修订、证据查询和完整书目。不是对全部论文做了一次新审核。 |
-| 最新问题定义报告 | 全文转换；原文区分定位阅读、锚点检查与独立审计。综合判断仍为讨论稿。 |
-| 速度与成本公式手册 | 全文转换，LaTeX 围栏排版；价格是 9/28 快照。第 6 节 AQuaUI 表格行原文截断，不补写缺文。 |
-| Codex 计划、Claude 第六稿 | 全文转换，明确 9/29 讨论稿状态，尚未吸收 9/30 后续审核的全部结论。 |
-| Part 1–2 演示稿 | 原 HTML 加小型首页链接，保持演示内容。 |
+| Codex report on fixed-weight agent acceleration | Reuses the complete interactive reader from `tools/survey-reader/`, with links to the reading index and Markdown source. |
+| Reviewed edition of Claude's survey report | Reuses `tools/survey-mining-reader/`, preserving its review patches, evidence lookup, and complete bibliography. This is not a new audit of every cited paper. |
+| Latest report on how the literature defines the problem | Converts the full text. The source distinguishes targeted reading, anchor checks, and independent audits; its synthesis remains a discussion draft. |
+| Formula reference for speed and cost | Converts the full text and renders LaTeX blocks. Prices reflect the September 28 snapshot. The source's truncated AQuaUI table row in section 6 remains incomplete; no missing text is reconstructed. |
+| Codex research plan and Claude's sixth draft | Converts both documents in full and labels them as September 29 discussion drafts. They do not yet incorporate all conclusions from the September 30 follow-up review. |
+| Part 1–2 slide presentation | Adds a small link to the reading index while preserving the original HTML presentation. |
 
-首批选择问题定义、公式和两份计划，是因为它们直接补齐“研究什么、如何衡量、下一步怎么验证”的阅读路径。旧的 `research-proposal` 已被详细计划取代，不放同级首页。Part 1 慢/贵逻辑链、Part 2 加速文献是下一批候选；前者原快照缺一张循环图，两者都需要保留历史版本和来源规则。大证据台账和历史 dossier 继续通过仓库溯源，不逐一复制成文章。
+The first set adds the problem-definition report, formula reference, and two plans to connect three questions: what to study, how to measure it, and what to test next. The older `research-proposal` has been superseded by the detailed plans and is not listed alongside them. The Part 1 analysis of slowness and cost and the Part 2 acceleration literature review are candidates for a later addition. The former is missing a loop diagram in its source snapshot; both require their historical versions and source rules to remain clear. Large evidence ledgers and historical dossiers remain available through repository links rather than being duplicated as individual articles.
 
-本次没有改写研究结论或修改原 Markdown。`math-formatting.json` 只把明确的裸数学表达转成 LaTeX；附录原始证据中的文字式摘要保留。原稿链接的已知错层路径，只有在仓库中确认真实目标存在时才纠偏。原文中的 HTML 注释不作为正文显示，其他原生 HTML 转义处理。公式和字体内嵌，不依赖外部渲染 CDN。
+This publishing pass does not rewrite research conclusions or modify the source Markdown. `math-formatting.json` only converts unambiguous plain-text mathematical expressions to LaTeX; prose summaries in the original evidence appendices are preserved. Known relative-link errors are corrected only when the intended target can be confirmed in the repository. HTML comments in the source are omitted from the visible article, and other raw HTML is escaped. Equations and fonts are embedded, with no external rendering CDN.
 
-## 生成与检查
+## Build and check
 
-需要 Node.js 24；固定的 Markdown 依赖由 lockfile 安装。KaTeX 使用仓库已有的 `tools/survey-reader/vendor/katex/`，许可证随网页保留。
+Use Node.js 24. The lockfile pins the Markdown dependency. KaTeX is reused from `tools/survey-reader/vendor/katex/`, and its license is retained in the generated pages.
 
 ```sh
 npm ci --prefix tools/reading-site --ignore-scripts --no-audit --no-fund
@@ -29,20 +29,20 @@ node tools/reading-site/build.mjs --rebuild
 node tools/reading-site/check.mjs
 ```
 
-`--rebuild` 先重建两份定制报告，再生成整个站点。单独运行原来任一报告的生成器，也会同步它的 `docs/reports/` 副本；完整首页和哈希清单仍应运行总构建更新。可用 `SURVEY_READER_NODE_MODULES` 指定已安装的 Node 模块目录，用 `SURVEY_READER_QA_DIR` 指定中间校验输出目录。
+`--rebuild` rebuilds the two custom reports before generating the entire site. Running either original report generator also updates its copy in `docs/reports/`; run the full site build to refresh the reading index and hash manifest. Set `SURVEY_READER_NODE_MODULES` to use a specific directory of installed Node modules, or `SURVEY_READER_QA_DIR` to choose the directory for intermediate verification output.
 
-`catalog.json` 管理标题、来源、状态和输出路径。新增条目可以指向 Markdown，或通过 `htmlSource` 复用已存在的定制 HTML。`site-manifest.json` 记录原稿、原 HTML 与发布文件哈希，以及数学排版和结构统计。源内容有变时，旧的精确数学映射匹配不上会中止构建，避免悄悄丢失格式修订。
+`catalog.json` defines titles, sources, status labels, and output paths. New entries can point to Markdown or reuse an existing custom HTML report through `htmlSource`. `site-manifest.json` records hashes for the Markdown source, original HTML, and published output, together with math-formatting and document-structure statistics. If source changes cause an exact math-formatting replacement to stop matching, the build fails so the formatting change cannot silently disappear.
 
-可选浏览器检查（需已安装 Playwright 和 Chromium）：
+Optional browser checks require Playwright and Chromium to be installed:
 
 ```sh
 PLAYWRIGHT_NODE_MODULES=/path/to/node_modules node tools/reading-site/verify.mjs
 ```
 
-检查四种窗口宽度的布局、搜索、目录、字号、打印展开、脚本错误和外部资源请求，截图默认放 `/tmp/reading-site-qa/`。它是本地 QA，不是在线部署的依赖。
+The browser checks cover layout at four viewport widths, search, the table of contents, font sizing, print expansion, script errors, and external resource requests. Screenshots go to `/tmp/reading-site-qa/` by default. This is local QA and is not required by the deployment workflow.
 
-## 发布与更新
+## Publish and update
 
-仓库 Settings → Pages 使用 **GitHub Actions**。`.github/workflows/reading-site.yml` 在 main 的相关来源、模板、演示或 docs 改动时自动运行：安装固定依赖 → 重建 → 静态验证 → 上传 `docs/` → 部署。也可在 Actions 手动运行 **Publish research reading site**。
+Set the repository's **Settings → Pages** publishing source to **GitHub Actions**. `.github/workflows/reading-site.yml` runs when relevant sources, templates, slides, or docs change on main: install pinned dependencies → rebuild → run static validation → upload `docs/` → deploy. The **Publish research reading site** workflow can also be started manually from Actions.
 
-只发布 `docs/` 目录；研究原稿、证据及源工具通过 GitHub 链接访问。维护时修改来源或模板，然后重建并提交生成结果，避免直接编辑 `docs/` 后被下一次构建覆盖。是否发布成功以 Actions 的 deployment 结果和线上页面核查为准。
+Only `docs/` is published. Research sources, evidence, and source tools are accessible through GitHub links. To update the site, edit a source or template, rebuild, and commit the generated output. Direct edits to `docs/` will be overwritten by the next build. Confirm publication through the Actions deployment result and a check of the live pages.

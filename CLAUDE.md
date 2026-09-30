@@ -7,6 +7,8 @@ This repository is the evidence base for a research investigation into why LLM c
 1. **Start:** read `STATUS.md` (one screen: canonical version, done / next, parked questions, log). Open only the files it points to.
 2. **Finish:** update `STATUS.md` (add a log line; tick or add Done / Next items; change the "Canonical document" line if you produced a new dossier version; bump "Last updated"), then commit. Work that is not committed does not exist.
 
+Repository README documentation defaults to English (Edwin, 2026-09-30). Do not insert Chinese prose into an English README. If bilingual documentation is requested, keep English as the default and put Chinese in a separate language edition. Label links to Chinese research reports explicitly.
+
 ## What is canonical
 
 - The canonical document is the dossier named in `STATUS.md` (currently `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md`). Never overwrite it; a new version gets a new filename (`…-v3.1-<date>.md`, `…-v4-<date>.md`).
