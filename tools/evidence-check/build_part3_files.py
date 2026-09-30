@@ -48,7 +48,9 @@ BATCH = collections.OrderedDict([
     ("g", "gap sweep (ten gaps named by the critics, and promoted works)"),
     ("h", "close works named by the Codex survey and the deck that the store lacked"),
     ("x", "supplementary items for the 23 works cited by the Codex plan report"),
-    ("s", "works selected from the self-improvement survey (arXiv 2607.13104) and its project page, 2026-09-30")])
+    ("s", "works selected from the self-improvement survey (arXiv 2607.13104) and its project page, 2026-09-30"),
+    ("f", "framing records (how each paper states its problem, challenge, objective, solution and gain), one per work of the store and of the deck list, 2026-09-30"),
+    ("p", "works of the deck reference list (Parts 1 and 2) fetched on 2026-09-30 for the framing study; metadata only, their framing items are in batch f")])
 
 
 def cell(s, n=None):
@@ -253,7 +255,7 @@ def main():
         in_a = set(tags.get("IN_A", [])) if (dk == "review" and rep_refs) else set()
         if dk == "review" and rep_refs:
             R += ["### A. Codex 报告引用的 23 篇（沿用报告的编号 [1]–[23]）", "",
-                  "以下条目照录自 `notes/part3/2026-09-29-part3-research-plan-report-zh.md` 的参考文献。本次审阅逐条核对了作者、题目、发表信息和所读版本：正式发表的条目在会议官方页面上确认，预印本条目确认 arXiv 记录中没有发表信息。", ""]
+                  "以下条目照录自 `notes/2026-09-29-part3-research-plan-report-zh.md` 的参考文献。本次审阅逐条核对了作者、题目、发表信息和所读版本：正式发表的条目在会议官方页面上确认，预印本条目确认 arXiv 记录中没有发表信息。", ""]
             R += rep_refs + ["", "### B. 本审阅补充引用的文献（按核对库记录号）", ""]
         R += [RULE_ZH[rule], ""]
         for c in canon_list(per_doc[dk]):
