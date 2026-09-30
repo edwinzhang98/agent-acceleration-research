@@ -2,3 +2,5 @@
 *.bundle
 slides/shots/
 .venv/
+
+tools/reading-site/node_modules/

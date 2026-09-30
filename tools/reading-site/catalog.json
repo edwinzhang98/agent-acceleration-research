@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "reports/fixed-weight-agent-acceleration.html",
+    "title": "固定模型权重下的 Agent 加速与自我改进",
+    "description": "围绕轨迹学习与环境探索，区分执行收益、改进成本和长期净收益，并提出可检验的研究问题。",
+    "author": "Codex",
+    "category": "核心报告",
+    "status": "专题报告",
+    "source": "notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md",
+    "htmlSource": "notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.html",
+    "updated": "2026-09-30",
+    "kind": "report"
+  },
+  {
+    "slug": "reports/self-improvement-survey.html",
+    "title": "自改进 Agent 的文献与 Agent 加速",
+    "description": "Claude 的广覆盖文献整理与 Codex 审核阅读版：逐项机制、效果、适用条件、局限，以及可追溯的修订。",
+    "author": "Claude Code · Codex 审核",
+    "category": "核心报告",
+    "status": "讨论稿 · 含审核",
+    "source": "notes/part3/2026-09-30-self-improvement-survey-mining-zh.md",
+    "htmlSource": "notes/part3/2026-09-30-self-improvement-survey-mining-zh.html",
+    "updated": "2026-09-30",
+    "kind": "report"
+  },
+  {
+    "slug": "reports/how-literature-defines-acceleration.html",
+    "title": "文献自己怎样定义 Agent 加速",
+    "description": "从论文自己的问题定义、瓶颈和目标出发，串起十一类问题与解法，帮助判断下一步究竟研究什么。",
+    "author": "Claude Code",
+    "category": "问题定义",
+    "status": "讨论稿 · 部分记录待审计",
+    "notice": "这是原讨论稿的完整阅读版。本轮只转换排版，没有新增论文事实审核。原稿区分定位阅读与独立审计；尚未审计记录及待决事项保留在第 8–9 节。",
+    "source": "notes/part1/2026-09-30-how-the-literature-defines-agent-acceleration-zh.md",
+    "updated": "2026-09-30",
+    "kind": "report"
+  },
+  {
+    "slug": "reports/formulas-for-speed-and-cost.html",
+    "title": "文献里的公式：算速度和成本的",
+    "description": "集中查阅延迟、token 费用、效率指标和服务系统公式，连同符号解释、出处及实际阅读版本。",
+    "author": "Claude Code",
+    "category": "问题定义",
+    "status": "2026-09-28 快照",
+    "notice": "原文为 2026-09-28 导出快照，公式已排版。第 6 节末尾的 AQuaUI 表格行在原稿中不完整，本页原样保留，没有补写；未导出的嵌入内容仍保留占位说明。价格和平台信息以文中日期为准，本轮未重新核验论文或更新价格。",
+    "source": "notes/part1/2026-09-28-doc3-formulas-for-speed-and-cost-zh.md",
+    "updated": "2026-09-28",
+    "kind": "report"
+  },
+  {
+    "slug": "reports/trajectory-research-plan.html",
+    "title": "从执行轨迹学习的 Agent 加速研究计划",
+    "description": "Codex 的计划讨论稿：研究目标、最近邻工作、对照实验、成本分账和阶段性判断。",
+    "author": "Codex",
+    "category": "研究计划",
+    "status": "2026-09-29 讨论稿",
+    "notice": "这是 2026-09-29 的计划讨论稿，尚未自动吸收 9 月 30 日综述与审核的全部结论。方法、实验及预算尚未定案，阅读时请与两份较新的核心报告对照。",
+    "source": "notes/part3/2026-09-29-part3-research-plan-report-zh.md",
+    "updated": "2026-09-29",
+    "kind": "report"
+  },
+  {
+    "slug": "reports/claude-part3-plan.html",
+    "title": "第三部分方案：让 Agent 从自己的轨迹里自动改进",
+    "description": "Claude 第六稿：改进循环、环境知识、答案库、验收、三个账本和待决定事项，附证据索引。",
+    "author": "Claude Code",
+    "category": "研究计划",
+    "status": "第六稿 · 待讨论",
+    "notice": "这是 2026-09-29 的第六稿讨论方案，并非已批准的实验计划。文中待决定事项原样保留；9 月 30 日综述给出的修改建议尚未在本轮合并。",
+    "source": "notes/part3/2026-09-29-part3-plan-claude-zh.md",
+    "updated": "2026-09-29",
+    "kind": "report"
+  },
+  {
+    "slug": "slides/agent-acceleration.html",
+    "title": "Agent Acceleration · 演示稿",
+    "description": "按页浏览为什么慢、为什么贵，以及已有加速方法；保留原演示稿的导航、图表和参考文献。",
+    "author": "项目演示稿",
+    "category": "演示稿",
+    "status": "Part 1–2",
+    "source": "slides/README.md",
+    "htmlSource": "slides/agent-acceleration.html",
+    "updated": "2026-09-29",
+    "kind": "slide"
+  }
+]

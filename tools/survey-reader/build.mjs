@@ -1,3 +1,4 @@
+import { syncExistingReport } from '../reading-site/publish-report.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -137,3 +138,5 @@ const result = `<!doctype html>
 if (/ZZMATH\d+ZZ/.test(result)) throw new Error('Unexpanded formula slot');
 fs.writeFileSync(outputPath, result);
 console.log(JSON.stringify({ output: outputPath, bytes: Buffer.byteLength(result), chapters: chapters.length, formulas: formulas.length, symbolRules: inlineRules.length, references: referenceBlocks.length, methods: methods.length, slides: overview.length, sourceHash }, null, 2));
+
+syncExistingReport(root, sourcePath);

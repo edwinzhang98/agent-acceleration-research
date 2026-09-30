@@ -1,0 +1,12 @@
+{
+  "name": "agent-acceleration-reading-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs --rebuild",
+    "check": "node check.mjs"
+  },
+  "dependencies": {
+    "marked": "17.0.5"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "reports": [
+    {
+      "slug": "reports/fixed-weight-agent-acceleration.html",
+      "source": "notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.md",
+      "sourceHash": "7a741d9e255ba294b5601da211d425a258095ae6a079a11159c91bb79bd25048",
+      "htmlSource": "notes/part3/2026-09-30-self-improvement-agent-acceleration-review-zh.html",
+      "htmlSourceHash": "c7ebb62fce0b78308fe92a78f93551780a87652593ac92d62296baf1f9180859",
+      "outputHash": "699fd54b1089d115fa2d6a1bdc95c370b1c9ed60cf86eba9d3168fd639583dab",
+      "bytes": 1040319,
+      "formattingCount": 0,
+      "stats": {}
+    },
+    {
+      "slug": "reports/self-improvement-survey.html",
+      "source": "notes/part3/2026-09-30-self-improvement-survey-mining-zh.md",
+      "sourceHash": "686f6ae5b277b37b12c4d8eb272db50a48e7d83fa01b345a60838e4b1c9cccd8",
+      "htmlSource": "notes/part3/2026-09-30-self-improvement-survey-mining-zh.html",
+      "htmlSourceHash": "be438325fb2d74d0acc4f82f5448b11a80bbc311dbbceb5c1cf6d685dfeff12a",
+      "outputHash": "6c88adecc86e0ec595159258216f607809faab47fc55f278945ea342f9af6775",
+      "bytes": 7147991,
+      "formattingCount": 0,
+      "stats": {}
+    },
+    {
+      "slug": "reports/how-literature-defines-acceleration.html",
+      "source": "notes/part1/2026-09-30-how-the-literature-defines-agent-acceleration-zh.md",
+      "sourceHash": "5603f2095d8be420890f80e1755f40cb2cba13dcd9492046afb41d5438408a70",
+      "htmlSource": null,
+      "htmlSourceHash": null,
+      "outputHash": "ee7bf927204cb15607e0fd6a065cbbc07bbf4d084cbb542d27c7412576921c9c",
+      "bytes": 845931,
+      "formattingCount": 36,
+      "stats": {
+        "sourceHash": "5603f2095d8be420890f80e1755f40cb2cba13dcd9492046afb41d5438408a70",
+        "renderedMarkdownHash": "ca6bd39591f392398c33b81f08ad33a98d69b5bfcb1e5b0a64cce217c83001fb",
+        "sourceBytes": 272242,
+        "headings": 25,
+        "sections": 14,
+        "tables": 4,
+        "formulas": 60,
+        "displayFormulas": 0,
+        "mathWarnings": [],
+        "localPaths": [],
+        "rewrittenLinks": 0,
+        "imagesAsLinks": 0,
+        "sourceHtmlBlocks": 1,
+        "htmlBytes": 845931
+      }
+    },
+    {
+      "slug": "reports/formulas-for-speed-and-cost.html",
+      "source": "notes/part1/2026-09-28-doc3-formulas-for-speed-and-cost-zh.md",
+      "sourceHash": "c11469e1309377d346197b43f3218438e2d980d26d1b122b741f820888288727",
+      "htmlSource": null,
+      "htmlSourceHash": null,
+      "outputHash": "f6f4aff3c6de579a05a7a3493bf791e123080e3fcab2f4eb02f3d77afc464214",
+      "bytes": 1311938,
+      "formattingCount": 38,
+      "stats": {
+        "sourceHash": "c11469e1309377d346197b43f3218438e2d980d26d1b122b741f820888288727",
+        "renderedMarkdownHash": "8e6b77bd29496b838542cb9c09035d611e2cff3dbda65d78da5b1b258ad19fce",
+        "sourceBytes": 46587,
+        "headings": 14,
+        "sections": 8,
+        "tables": 2,
+        "formulas": 159,
+        "displayFormulas": 61,
+        "mathWarnings": [],
+        "localPaths": [],
+        "rewrittenLinks": 0,
+        "imagesAsLinks": 0,
+        "sourceHtmlBlocks": 1,
+        "htmlBytes": 1311938
+      }
+    },
+    {
+      "slug": "reports/trajectory-research-plan.html",
+      "source": "notes/part3/2026-09-29-part3-research-plan-report-zh.md",
+      "sourceHash": "ce2edbbc7f3fbdc854da6c5f0047a70ae91b19693f462e38c19f14e8fa0d9518",
+      "htmlSource": null,
+      "htmlSourceHash": null,
+      "outputHash": "9fc132d2c273ee7cc0da01383b46c88b91aa6fe67279550572930731e9415fe0",
+      "bytes": 488407,
+      "formattingCount": 7,
+      "stats": {
+        "sourceHash": "ce2edbbc7f3fbdc854da6c5f0047a70ae91b19693f462e38c19f14e8fa0d9518",
+        "renderedMarkdownHash": "da54573aef7119b010c04a1ae858537ed6cde41367449074416046bdddb9048c",
+        "sourceBytes": 43409,
+        "headings": 28,
+        "sections": 10,
+        "tables": 5,
+        "formulas": 17,
+        "displayFormulas": 2,
+        "mathWarnings": [],
+        "localPaths": [],
+        "rewrittenLinks": 1,
+        "imagesAsLinks": 0,
+        "sourceHtmlBlocks": 0,
+        "htmlBytes": 488407
+      }
+    },
+    {
+      "slug": "reports/claude-part3-plan.html",
+      "source": "notes/part3/2026-09-29-part3-plan-claude-zh.md",
+      "sourceHash": "68129bb35e89afa700bd8e16b175a095997f9a5c22ab1ecfc8db2459ece694da",
+      "htmlSource": null,
+      "htmlSourceHash": null,
+      "outputHash": "ccfee224696da37578ead7a569c5b29e11de58fb4cd8c7cc569e7dd7c9aa5f1f",
+      "bytes": 762856,
+      "formattingCount": 11,
+      "stats": {
+        "sourceHash": "68129bb35e89afa700bd8e16b175a095997f9a5c22ab1ecfc8db2459ece694da",
+        "renderedMarkdownHash": "8cd7a524a0d3f1123caa9119d27111ef6ccaf2d9634abe0221b51e31684b8d19",
+        "sourceBytes": 266930,
+        "headings": 43,
+        "sections": 20,
+        "tables": 17,
+        "formulas": 32,
+        "displayFormulas": 3,
+        "mathWarnings": [],
+        "localPaths": [],
+        "rewrittenLinks": 0,
+        "imagesAsLinks": 0,
+        "sourceHtmlBlocks": 1,
+        "htmlBytes": 762856
+      }
+    },
+    {
+      "slug": "slides/agent-acceleration.html",
+      "source": "slides/README.md",
+      "sourceHash": "04ccfa0b1289ab983dfef5aec466b1d5a84b67c56fd01a87809897fd316c1471",
+      "htmlSource": "slides/agent-acceleration.html",
+      "htmlSourceHash": "fedf45d1f55814eab651250dc72cef5f974c2654582ea16498b1435561ba02c9",
+      "outputHash": "9434f4827cc53a8a792b013e51a81f20e5b41537e4709bbc7983ccc16e0d3084",
+      "bytes": 3676227,
+      "formattingCount": 0,
+      "stats": {}
+    }
+  ]
+}

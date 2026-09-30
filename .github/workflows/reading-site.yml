@@ -1,0 +1,51 @@
+name: Publish research reading site
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'notes/**'
+      - 'research/**'
+      - 'tools/reading-site/**'
+      - 'tools/survey-reader/**'
+      - 'tools/survey-mining-reader/**'
+      - 'slides/agent-acceleration.html'
+      - 'slides/README.md'
+      - 'docs/**'
+      - '.github/workflows/reading-site.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: tools/reading-site/package-lock.json
+      - uses: actions/configure-pages@v5
+      - name: Install Markdown renderer
+        run: npm ci --prefix tools/reading-site --ignore-scripts --no-audit --no-fund
+      - name: Generate the complete reading site
+        run: node tools/reading-site/build.mjs --rebuild
+        env:
+          SURVEY_READER_NODE_MODULES: ${{ github.workspace }}/tools/reading-site/node_modules
+          SURVEY_READER_QA_DIR: ${{ runner.temp }}/survey-reader-qa
+      - name: Check published files and local links
+        run: node tools/reading-site/check.mjs
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

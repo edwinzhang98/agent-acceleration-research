@@ -1,3 +1,4 @@
+import { syncExistingReport } from '../reading-site/publish-report.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -134,3 +135,5 @@ fs.writeFileSync(path.join(qaDir,'content.json'),json({chapters:chapters.map(c=>
 fs.writeFileSync(path.join(here,'build-manifest.json'),JSON.stringify({sourceHash,chapters:10,evidence:645,extraEvidence:evidence.filter(e=>e.legacy).length,references:refs.length,mathOccurrences:renderedMathCount,uniqueMath:[...new Set(math.map(m=>m.latex))].length,auditItems:audit.length,revisions:revisions.length,tableCount:tableNo,mathFormattingEdits:mathEdits.length-formattingSkipped.length,formattingSkipped,bytes:Buffer.byteLength(final)},null,2)+'\n');
 fs.writeFileSync(path.join(here,'math-inventory.json'),JSON.stringify([...new Set(math.map(m=>m.latex))],null,2)+'\n');
 console.log(fs.readFileSync(path.join(here,'build-manifest.json'),'utf8'));
+
+syncExistingReport(root, sourcePath);

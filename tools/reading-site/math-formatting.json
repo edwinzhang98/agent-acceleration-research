@@ -1,0 +1,354 @@
+{
+  "notes/part1/2026-09-30-how-the-literature-defines-agent-acceleration-zh.md": [
+    {
+      "old": "成功减去 λ 乘费用",
+      "new": "成功减去 $\\lambda$ 乘费用"
+    },
+    {
+      "old": "τ* = argmax_τ P(τ,f)·Benefit(r) − Cost(τ,r)",
+      "new": "$\\tau^*=\\arg\\max_{\\tau}\\big[P(\\tau,f)\\cdot\\operatorname{Benefit}(r)-\\operatorname{Cost}(\\tau,r)\\big]$"
+    },
+    {
+      "old": "max E[r(a, â(s,q))] s.t. E[c(s,q)] ≤ b，q 查询、â 策略 s 的答案、c 费用、b 平均费用上限",
+      "new": "$\\max\\mathbb E[r(a,\\hat a(s,q))]\\quad\\text{s.t.}\\quad\\mathbb E[c(s,q)]\\le b$，$q$ 查询、$\\hat a$ 策略 $s$ 的答案、$c$ 费用、$b$ 平均费用上限"
+    },
+    {
+      "old": "J_soft(θ) = E[𝟙(success) − λ Σ c(a_t)]，λ 是拉格朗日乘子",
+      "new": "$J_{\\mathrm{soft}}(\\theta)=\\mathbb E[\\mathbf 1(\\mathrm{success})-\\lambda\\sum c(a_t)]$，$\\lambda$ 是拉格朗日乘子"
+    },
+    {
+      "old": "max E[V(τ,x) − λ Σ cost(e_t)]，e_t 是每步的推理档位",
+      "new": "$\\max\\mathbb E[V(\\tau,x)-\\lambda\\sum\\operatorname{cost}(e_t)]$，$e_t$ 是每步的推理档位"
+    },
+    {
+      "old": "min C_L(λ) s.t. R(λ) ≥ R^min，C_D(λ) ≤ C_D^max",
+      "new": "$\\min C_L(\\lambda)\\quad\\text{s.t.}\\quad R(\\lambda)\\ge R^{\\min},\\ C_D(\\lambda)\\le C_D^{\\max}$"
+    },
+    {
+      "old": "max Acc_b(π) s.t. 每种工具的调用数 ≤ b_i",
+      "new": "$\\max\\operatorname{Acc}_b(\\pi)\\quad\\text{s.t.}\\quad\\text{每种工具的调用数}\\le b_i$"
+    },
+    {
+      "old": "Ratio = T_base / (T*_base − α·t_overlap + T_oh)，上限 1/(1 − f_tool)，α 是投机被接受的比例、f_tool 是工具时间占比",
+      "new": "$\\mathrm{Ratio}=\\dfrac{T_{\\mathrm{base}}}{T^*_{\\mathrm{base}}-\\alpha\\cdot t_{\\mathrm{overlap}}+T_{\\mathrm{oh}}}$，上限 $\\dfrac{1}{1-f_{\\mathrm{tool}}}$，$\\alpha$ 是投机被接受的比例、$f_{\\mathrm{tool}}$ 是工具时间占比"
+    },
+    {
+      "old": "S = L_serial/L_parallel",
+      "new": "$S=L_{\\mathrm{serial}}/L_{\\mathrm{parallel}}$"
+    },
+    {
+      "old": "L = L_on + λ L_off",
+      "new": "$L=L_{\\mathrm{on}}+\\lambda L_{\\mathrm{off}}$"
+    },
+    {
+      "old": "(tool, params)",
+      "new": "$(\\mathrm{tool},\\mathrm{params})$"
+    },
+    {
+      "old": "Pruning(o_i) = 1 − |o_r|/|o_i|",
+      "new": "$\\operatorname{Pruning}(o_i)=1-\\lvert o_r\\rvert/\\lvert o_i\\rvert$"
+    },
+    {
+      "old": "max_M [Σ_{m∈C'} U(m|C')] / K(C')，C' 是管理后的上下文、U 是消息对后续动作的边际贡献、K 是它的开销",
+      "new": "$\\max_M\\dfrac{\\sum_{m\\in C'}U(m\\mid C')}{K(C')}$，$C^{\\prime}$ 是管理后的上下文、$U$ 是消息对后续动作的边际贡献、$K$ 是它的开销"
+    },
+    {
+      "old": "v_i = λ1·延迟 + λ2·费用/大小 − λ3·e^(−TTL/τ)",
+      "new": "$v_i=\\lambda_1\\cdot\\text{延迟}+\\lambda_2\\cdot\\text{费用}/\\text{大小}-\\lambda_3\\cdot e^{-\\mathrm{TTL}/\\tau}$"
+    },
+    {
+      "old": "O(1) 回滚",
+      "new": "$O(1)$ 回滚"
+    },
+    {
+      "old": "f_route < c_rediscovery = c_latency + c_compute + c_tokens + p_fail·c_retry",
+      "new": "$f_{\\mathrm{route}}<c_{\\mathrm{rediscovery}}=c_{\\mathrm{latency}}+c_{\\mathrm{compute}}+c_{\\mathrm{tokens}}+p_{\\mathrm{fail}}\\cdot c_{\\mathrm{retry}}$"
+    },
+    {
+      "old": "(y*,z*) = argmin C_maint + C_run s.t. J_perf ≤ J_perf^ref + ε",
+      "new": "$(y^*,z^*)=\\arg\\min(C_{\\mathrm{maint}}+C_{\\mathrm{run}})\\quad\\text{s.t.}\\quad J_{\\mathrm{perf}}\\le J_{\\mathrm{perf}}^{\\mathrm{ref}}+\\varepsilon$"
+    },
+    {
+      "old": "r_i = p_i(1 − q_i/B)",
+      "new": "$r_i=p_i(1-q_i/B)$"
+    },
+    {
+      "old": "计划生成 t_p 和执行 t_e",
+      "new": "计划生成 $t_p$ 和执行 $t_e$"
+    },
+    {
+      "old": "技能库 L 当作策略的参数、由归纳器 g: L×H→L 更新",
+      "new": "技能库 $L$ 当作策略的参数、由归纳器 $g:L\\times H\\to L$ 更新"
+    },
+    {
+      "old": "S = ΔR − λ_L·ΔL − λ_T·ΔT",
+      "new": "$S=\\Delta R-\\lambda_L\\cdot\\Delta L-\\lambda_T\\cdot\\Delta T$"
+    },
+    {
+      "old": "S ≥ η 才写入",
+      "new": "$S\\ge\\eta$ 才写入"
+    },
+    {
+      "old": "p* = argmax E[M(m_p(x), y)]",
+      "new": "$p^*=\\arg\\max\\mathbb E[M(m_p(x),y)]$"
+    },
+    {
+      "old": "max_S (PR(S), −Cost(S))",
+      "new": "$\\max_S(\\operatorname{PR}(S),-\\operatorname{Cost}(S))$"
+    },
+    {
+      "old": "argmax E[μ(Φ(x;⟨Π,Θ⟩), m)] s.t. #rollouts ≤ B，Π 是各模块的提示词、B 是 rollout 预算",
+      "new": "$\\arg\\max\\mathbb E[\\mu(\\Phi(x;\\langle\\Pi,\\Theta\\rangle),m)]\\quad\\text{s.t.}\\quad\\#\\mathrm{rollouts}\\le B$，$\\Pi$ 是各模块的提示词、$B$ 是 rollout 预算"
+    },
+    {
+      "old": "H* = argmax E[R(x,τ)] s.t. C(H_0 ⇝ H) ≤ B，C 是从初始 harness 演化到 H 的验证开销",
+      "new": "$H^*=\\arg\\max\\mathbb E[R(x,\\tau)]\\quad\\text{s.t.}\\quad C(H_0\\rightsquigarrow H)\\le B$，$C$ 是从初始 harness 演化到 $H$ 的验证开销"
+    },
+    {
+      "old": "v* = argmax E[R(x, f(x;v))]，v 是各组件的联合配置",
+      "new": "$v^*=\\arg\\max\\mathbb E[R(x,f(x;v))]$，$v$ 是各组件的联合配置"
+    },
+    {
+      "old": "W* = argmax E[φ_eval(a'_M, a)]，W 是逻辑块的组合",
+      "new": "$W^*=\\arg\\max\\mathbb E[\\varphi_{\\mathrm{eval}}(a'_M,a)]$，$W$ 是逻辑块的组合"
+    },
+    {
+      "old": "总成本 C_0 + n·C_j 与回本点 n",
+      "new": "总成本 $C_0+n\\cdot C_j$ 与回本点 $n$"
+    },
+    {
+      "old": "U = 0.5·p_score + 0.25·(1 − min(1, p_cost/$10)) + 0.25·(1 − min(1, p_time/300 s))",
+      "new": "$U=0.5\\,p_{\\mathrm{score}}+0.25\\bigl(1-\\min(1,p_{\\mathrm{cost}}/(10\\,\\mathrm{USD}))\\bigr)+0.25\\bigl(1-\\min(1,p_{\\mathrm{time}}/(300\\,\\mathrm{s}))\\bigr)$"
+    },
+    {
+      "old": "δ-正确的最佳臂 P(k̂ = k*) ≥ 1 − δ 下最小化 Cost(τ) = c_F·τ + c_Y·Σ A_t",
+      "new": "$\\delta$-正确的最佳臂 $P(\\hat k=k^*)\\ge1-\\delta$ 下最小化 $\\operatorname{Cost}(\\tau)=c_F\\cdot\\tau+c_Y\\cdot\\sum A_t$"
+    },
+    {
+      "old": "P_θ(v | x, ŷ, ê)",
+      "new": "$P_\\theta(v\\mid x,\\hat y,\\hat e)$"
+    },
+    {
+      "old": "WES⁺ = (1/n) Σ r_t · t_human/t_agent",
+      "new": "$\\mathrm{WES}^{+}=\\frac{1}{n}\\sum r_t\\cdot\\frac{t_{\\mathrm{human}}}{t_{\\mathrm{agent}}}$"
+    },
+    {
+      "old": "v(m,p) = C_m(p)/R_m(p)",
+      "new": "$v(m,p)=C_m(p)/R_m(p)$"
+    },
+    {
+      "old": "Δ_t(τ)",
+      "new": "$\\Delta_t(\\tau)$"
+    }
+  ],
+  "notes/part3/2026-09-29-part3-plan-claude-zh.md": [
+    {
+      "old": "- T_attempt 是一次尝试的墙钟时间。N 是步数。i = 0 放不属于任何一步的调用，例如开头的规划。",
+      "new": "- $T_{\\mathrm{attempt}}$ 是一次尝试的墙钟时间。$N$ 是步数。$i=0$ 放不属于任何一步的调用，例如开头的规划。"
+    },
+    {
+      "old": "- J_i 是第 i 步的模型调用数，ℓ_ij 是其中第 j 次调用的耗时。D_i 是第 i 步的模型时间。E_i 是这一步其余的全部时间：观察、操作、等待、执行框架的间隙、限流后的退避。D_i 和 E_i 都是时长相加。",
+      "new": "- $J_i$ 是第 $i$ 步的模型调用数，$\\ell_{ij}$ 是其中第 $j$ 次调用的耗时。$D_i$ 是第 $i$ 步的模型时间。$E_i$ 是这一步其余的全部时间：观察、操作、等待、执行框架的间隙、限流后的退避。$D_i$ 和 $E_i$ 都是时长相加。"
+    },
+    {
+      "old": "- T_saving 是因为同时进行而被遮住的时间；严格串行时为 0。",
+      "new": "- $T_{\\mathrm{saving}}$ 是因为同时进行而被遮住的时间；严格串行时为 $0$。"
+    },
+    {
+      "old": "- c_m(p) 是一次尝试的费用。每次调用的 token 分五类：缓存命中、两种时长的缓存写入、未缓存的输入、输出。n 是某一类的 token 数，c_κ(μ_ij) 是提供这次调用的模型在这一类上的单价。x_env c_env 是按用量计费的环境。",
+      "new": "- $c_m(p)$ 是一次尝试的费用。每次调用的 token 分五类：缓存命中、两种时长的缓存写入、未缓存的输入、输出。$n$ 是某一类的 token 数，$c_\\kappa(\\mu_{ij})$ 是提供这次调用的模型在这一类上的单价。$x_{\\mathrm{env}}c_{\\mathrm{env}}$ 是按用量计费的环境。"
+    },
+    {
+      "old": "- R_m(p) 是一次尝试成功的概率。C_m(p) 是一次尝试的期望费用，对全部尝试取，包括失败的。T_success 和 v 是每次成功的时间和费用。slides 的目标是在成功率不低于下限 R_0 的条件下，同时压低这两个量。",
+      "new": "- $R_m(p)$ 是一次尝试成功的概率。$C_m(p)$ 是一次尝试的期望费用，对全部尝试取，包括失败的。$T_{\\mathrm{success}}$ 和 $v$ 是每次成功的时间和费用。slides 的目标是在成功率不低于下限 $R_0$ 的条件下，同时压低这两个量。"
+    },
+    {
+      "old": "i = 0",
+      "new": "$i=0$"
+    }
+  ],
+  "notes/part1/2026-09-28-doc3-formulas-for-speed-and-cost-zh.md": [
+    {
+      "old": "结论：89 个来源里 39 篇论文写了明确的、算时间或成本的公式，3 个厂商或第三方页面有计费或测量定义式，另有 5 个原文是顺着引用找到的（Cost-of-Pass、AndroidArena、Orca、vLLM、Anthropic Vision 页）；其余只报测量数字。时间模型都是\"每步 = 模型生成 + 环境执行，串行相加\"，加速文献在上面加一项\"能重叠掉多少\"；成本模型都是\"各类 token × 单价\"；把成本和准确率合成一个数的只有 WES、Cost-of-Pass 和 APGR。扫描范围：Part 1 和 Part 2 参考文献表（slides/references.md）的全部来源——83 篇 arXiv 论文加 6 个非 arXiv 来源；被可信度规则排除的 4 篇不看；GPA (arXiv:2604.01676) 因 arXiv 限流没读到。公式照原文抄（LaTeX），变量含义和章节跟在后面；一篇文献引用别人的公式时，顺着引用打开原文，公式记在原文名下。",
+      "new": "结论：89 个来源里 39 篇论文写了明确的、算时间或成本的公式，3 个厂商或第三方页面有计费或测量定义式，另有 5 个原文是顺着引用找到的（Cost-of-Pass、AndroidArena、Orca、vLLM、Anthropic Vision 页）；其余只报测量数字。时间模型都是\"$\\text{每步}=\\text{模型生成}+\\text{环境执行}$，串行相加\"，加速文献在上面加一项\"能重叠掉多少\"；成本模型都是\"$\\text{各类 token}\\times\\text{单价}$\"；把成本和准确率合成一个数的只有 WES、Cost-of-Pass 和 APGR。扫描范围：Part 1 和 Part 2 参考文献表（slides/references.md）的全部来源——83 篇 arXiv 论文加 6 个非 arXiv 来源；被可信度规则排除的 4 篇不看；GPA (arXiv:2604.01676) 因 arXiv 限流没读到。公式照原文抄（LaTeX），变量含义和章节跟在后面；一篇文献引用别人的公式时，顺着引用打开原文，公式记在原文名下。"
+    },
+    {
+      "old": "写出时间模型的文献都用同一个骨架：每一步的时间 = 模型生成时间 + 工具或环境执行时间，各步串行相加。做加速的文献在这个骨架上加一项\"能重叠掉多少\"。下面按机制分组，每篇只抄它自己定义的式子。",
+      "new": "写出时间模型的文献都用同一个骨架：$\\text{每一步的时间}=\\text{模型生成时间}+\\text{工具或环境执行时间}$，各步串行相加。做加速的文献在这个骨架上加一项\"能重叠掉多少\"。下面按机制分组，每篇只抄它自己定义的式子。"
+    },
+    {
+      "old": "变量：N 个子任务；T\\_P^R(P\\_i)、T\\_P^C(P\\_i) 是 ReAct 或 LLMCompiler 的规划器生成第 i 个子任务的时间；T\\_E(E\\_i) 是执行第 i 个子任务的时间。γ\\_max = N 要求执行时间远大于规划时间且各任务执行时间相同；γ\\_min ≈ 1 是规划时间占主导的情形。",
+      "new": "变量：N 个子任务；$T_P^R(P_i)$、$T_P^C(P_i)$ 是 ReAct 或 LLMCompiler 的规划器生成第 i 个子任务的时间；$T_E(E_i)$ 是执行第 i 个子任务的时间。$\\gamma_{\\max}=N$ 要求执行时间远大于规划时间且各任务执行时间相同；$\\gamma_{\\min}\\approx1$ 是规划时间占主导的情形。"
+    },
+    {
+      "old": "变量：F 是互不依赖的函数调用集合；G(f) 是生成第 f 个调用所需 token 的时间；E(f) 是执行时间；Ē、Ḡ 是平均执行时间和平均生成时间（定理 6.2，假设 E 服从正态分布、|F| 很大）。定理 6.1：L\\_Async ≤ L\\_SyncParallel < L\\_Sync。",
+      "new": "变量：F 是互不依赖的函数调用集合；$G(f)$ 是生成第 f 个调用所需 token 的时间；$E(f)$ 是执行时间；$\\overline E$、$\\overline G$ 是平均执行时间和平均生成时间（定理 6.2，假设 E 服从正态分布、$\\lvert F\\rvert$ 很大）。定理 6.1：$L_{\\mathrm{Async}}\\le L_{\\mathrm{SyncParallel}}<L_{\\mathrm{Sync}}$。"
+    },
+    {
+      "old": "变量：T\\_LLM 总解码时间；T\\_tool 所有函数执行时间之和；T\\_cp 关键路径上的函数执行时间之和；α 是异步执行给解码带来的额外时间比例；S(·) 是若干时间区间的总时长，D(·) 是合并后覆盖的墙钟时长；Δ\\_{F∥F} 是函数之间并行省下的，Δ\\_{D∥E} 是解码和执行重叠省下的。",
+      "new": "变量：$T_{\\mathrm{LLM}}$ 总解码时间；$T_{\\mathrm{tool}}$ 所有函数执行时间之和；$T_{\\mathrm{cp}}$ 关键路径上的函数执行时间之和；$\\alpha$ 是异步执行给解码带来的额外时间比例；$S(\\cdot)$ 是若干时间区间的总时长，$D(\\cdot)$ 是合并后覆盖的墙钟时长；$\\Delta_{F\\parallel F}$ 是函数之间并行省下的，$\\Delta_{D\\parallel E}$ 是解码和执行重叠省下的。"
+    },
+    {
+      "old": "### 2. 投机执行：期望时间 = 基线 − 命中率 × 省下的时间 + 开销",
+      "new": "### 2. 投机执行：$\\text{期望时间}=\\text{基线}-\\text{命中率}\\times\\text{省下的时间}+\\text{开销}$"
+    },
+    {
+      "old": "变量：T\\_dec 主流解码时间；T\\_tool 工具执行时间；α 投机被接受的轮次比例；t\\_overlap 每次接受时藏在解码后面的工具时间；T\\_oh 每轮的探测和作废开销；T\\*\\_base 用了前缀恢复后的实际解码时间；f\\_tool = T\\_tool / T\\_base。论文自算：BrowseComp 上 f\\_tool = 0.366，上限 1.58×。",
+      "new": "变量：$T_{\\mathrm{dec}}$ 主流解码时间；$T_{\\mathrm{tool}}$ 工具执行时间；$\\alpha$ 投机被接受的轮次比例；$t_{\\mathrm{overlap}}$ 每次接受时藏在解码后面的工具时间；$T_{\\mathrm{oh}}$ 每轮的探测和作废开销；$T^*_{\\mathrm{base}}$ 用了前缀恢复后的实际解码时间；$f_{\\mathrm{tool}}=T_{\\mathrm{tool}}/T_{\\mathrm{base}}$。论文自算：BrowseComp 上 $f_{\\mathrm{tool}}=0.366$，上限 1.58×。"
+    },
+    {
+      "old": "**Ye, Ahuja, Liargkovas, Lu, Kaffes & Peng (2026), Speculative actions, Columbia, ICLR 2026 (oral), arXiv:2510.04371v2, §2、§5、附录 A 与 C。** 假设投机器延迟服从 Exp(α)，真实 API 调用延迟服从 Exp(β)，β < α；k 路并行投机至少一路正确的概率是 p(k)。",
+      "new": "**Ye, Ahuja, Liargkovas, Lu, Kaffes & Peng (2026), Speculative actions, Columbia, ICLR 2026 (oral), arXiv:2510.04371v2, §2、§5、附录 A 与 C。** 假设投机器延迟服从 $\\operatorname{Exp}(\\alpha)$，真实 API 调用延迟服从 $\\operatorname{Exp}(\\beta)$，$\\beta<\\alpha$；k 路并行投机至少一路正确的概率是 $p(k)$。"
+    },
+    {
+      "old": "**Guan, Lan, Sun, Ding, Acharya, Wang, Wang & Hua (2026), Dynamic speculative agent planning, ICLR 2026, arXiv:2509.01920v3, §4.3、§5.1。** 投机深度 k = max(1, k̂ + β)，k̂ 是预测值、β 是用户设的偏置；时间指标 ΔTime = (1/N) Σ\\_i (1 − T\\_i^SP / T\\_i^seq) × 100%。",
+      "new": "**Guan, Lan, Sun, Ding, Acharya, Wang, Wang & Hua (2026), Dynamic speculative agent planning, ICLR 2026, arXiv:2509.01920v3, §4.3、§5.1。** 投机深度 $k=\\max(1,\\hat k+\\beta)$，$\\hat k$ 是预测值、$\\beta$ 是用户设的偏置；时间指标 $\\Delta\\mathrm{Time}=\\frac{1}{N}\\sum_i\\left(1-\\frac{T_i^{\\mathrm{SP}}}{T_i^{\\mathrm{seq}}}\\right)\\times100\\%$。"
+    },
+    {
+      "old": "**Luo et al. (2026), Agentix, UC Berkeley 等, NSDI 2026, §3、§4.2。** 单线程程序的端到端延迟 = 排队等待 + 模型执行 + 被工具或人打断的等待（文字定义）。调度用\"已获得服务\"做优先级：",
+      "new": "**Luo et al. (2026), Agentix, UC Berkeley 等, NSDI 2026, §3、§4.2。** 单线程程序的$\\text{端到端延迟}=\\text{排队等待}+\\text{模型执行}+\\text{被工具或人打断的等待}$（文字定义）。调度用\"已获得服务\"做优先级："
+    },
+    {
+      "old": "**Artificial Analysis 方法页（第三方测量，读于 2026-09-28）。** TTFT = 发出请求到收到第一个 token；输出速度 = 第一个 token 之后每秒收到的 token 数；\"100 个输出 token 的总响应时间\"由二者合成，页面只说 synthetically based on TTFT and Output Speed，加法形式是我们按定义写出的：",
+      "new": "**Artificial Analysis 方法页（第三方测量，读于 2026-09-28）。** $\\mathrm{TTFT}=\\text{发出请求到收到第一个 token}$；$\\text{输出速度}=\\text{第一个 token 之后每秒收到的 token 数}$；\"100 个输出 token 的总响应时间\"由二者合成，页面只说 synthetically based on TTFT and Output Speed，加法形式是我们按定义写出的："
+    },
+    {
+      "old": "**Yu, Jeong, Kim, Kim & Chun (2022), Orca, OSDI 2022（经 InferCept 的引用找到的原文）。** serving 论文常用的归一化延迟 = 每个请求的端到端延迟 ÷ 它生成的 token 数，取中位数；vLLM（Kwon et al., SOSP 2023）用同一定义但取平均数。文字定义，无式子。",
+      "new": "**Yu, Jeong, Kim, Kim & Chun (2022), Orca, OSDI 2022（经 InferCept 的引用找到的原文）。** serving 论文常用的$\\text{归一化延迟}=\\text{每个请求的端到端延迟}\\,/\\,\\text{它生成的 token 数}$，取中位数；vLLM（Kwon et al., SOSP 2023）用同一定义但取平均数。文字定义，无式子。"
+    },
+    {
+      "old": "所有写出美元成本的文献都是同一个式子：各类 token 数 × 对应单价再相加。差别只在把 token 分成几类（输入/输出；缓存命中/未命中；投机 agent/目标 agent），以及有没有除以成功率。",
+      "new": "所有写出美元成本的文献都是同一个式子：$\\text{各类 token 数}\\times\\text{对应单价}$再相加。差别只在把 token 分成几类（输入/输出；缓存命中/未命中；投机 agent/目标 agent），以及有没有除以成功率。"
+    },
+    {
+      "old": "### 1. 成本 = token × 单价",
+      "new": "### 1. $\\text{成本}=\\text{token}\\times\\text{单价}$"
+    },
+    {
+      "old": "n\\_p、n\\_c 提示和补全 token 数，c 对应单价；P ∈ {0,1} 任务成功；S\\_cost 是 U(c) 在各模型间 min-max 归一化后的分。路由器的训练损失（式 (6)）在 VIB 损失上加一项 λ · E\\[Σ\\_t p\\_φ(y\\_t|z\\_i) · C(M\\_t)\\]，C(M\\_t) 是模型 t 的单位 token 成本。",
+      "new": "$n_p$、$n_c$ 提示和补全 token 数，c 对应单价；$P\\in\\{0,1\\}$ 任务成功；$S_{\\mathrm{cost}}$ 是 $U(c)$ 在各模型间 min-max 归一化后的分。路由器的训练损失（式 (6)）在 VIB 损失上加一项 $\\lambda\\cdot\\mathbb E[\\sum_t p_\\varphi(y_t\\mid z_i)\\cdot C(M_t)]$，$C(M_t)$ 是模型 t 的单位 token 成本。"
+    },
+    {
+      "old": "α ≪ 1 是缓存命中 token 的折扣；实验取 GPT-5.4-mini 官方价 p\\_hit = $0.075、p\\_miss = $0.75、p\\_out = $4.50 每百万 token。",
+      "new": "$\\alpha\\ll1$ 是缓存命中 token 的折扣；实验取 GPT-5.4-mini 官方价 $p_{\\mathrm{hit}}=0.075\\,\\mathrm{USD}$、$p_{\\mathrm{miss}}=0.75\\,\\mathrm{USD}$、$p_{\\mathrm{out}}=4.50\\,\\mathrm{USD}$ 每百万 token。"
+    },
+    {
+      "old": "**Li et al. (2026), Speculate with memory, §4.3。** 每次投机的净额外成本 k · C\\_S + (1 − acc) · C\\_act：k 个并行投机器各一次调用，猜错时多付一次主模型调用。",
+      "new": "**Li et al. (2026), Speculate with memory, §4.3。** 每次投机的净额外成本 $k\\cdot C_S+(1-\\mathrm{acc})\\cdot C_{\\mathrm{act}}$：k 个并行投机器各一次调用，猜错时多付一次主模型调用。"
+    },
+    {
+      "old": "**Winston et al. (2026), Agent JIT, §3.2。** 代码计划的静态成本估计：工具调用 cost += C\\_tool · γ^d，LLM 调用 cost += C\\_eval · γ^d，γ = 10 惩罚嵌套深度 d，取成本最小的有效计划。",
+      "new": "**Winston et al. (2026), Agent JIT, §3.2。** 代码计划的静态成本估计：工具调用 $\\mathrm{cost}\\mathrel{+}=C_{\\mathrm{tool}}\\cdot\\gamma^d$，LLM 调用 $\\mathrm{cost}\\mathrel{+}=C_{\\mathrm{eval}}\\cdot\\gamma^d$，$\\gamma=10$ 惩罚嵌套深度 d，取成本最小的有效计划。"
+    },
+    {
+      "old": "**Zhai, Li & Wang (2026), Revisable by design, 复旦等, arXiv:2604.23283v1, 式 (2)。** 中途修改任务的代价 AdaptCost = C\\_comp(ρ) + C\\_waste(τ\\_{k\\*+1:n})：补偿动作的成本加上被丢弃步骤的沉没成本（抽象单位）。",
+      "new": "**Zhai, Li & Wang (2026), Revisable by design, 复旦等, arXiv:2604.23283v1, 式 (2)。** 中途修改任务的代价 $\\operatorname{AdaptCost}=C_{\\mathrm{comp}}(\\rho)+C_{\\mathrm{waste}}(\\tau_{k^*+1:n})$：补偿动作的成本加上被丢弃步骤的沉没成本（抽象单位）。"
+    },
+    {
+      "old": "**Xing, Zhang, Xue, Chen, Yang & Xiao (2024), Understanding the weakness of LLM agents within a complex Android environment (AndroidArena), KDD 2024, arXiv:2402.06596（经 AutoDroid-V2 的引用找到）, §5.1。** RRR = L / L̂，标注动作序列长度 ÷ 实际执行长度，越高越高效。Wen et al. (2025), AutoDroid-V2, MobiSys 2025, §4.1 写作 n/k 采用。",
+      "new": "**Xing, Zhang, Xue, Chen, Yang & Xiao (2024), Understanding the weakness of LLM agents within a complex Android environment (AndroidArena), KDD 2024, arXiv:2402.06596（经 AutoDroid-V2 的引用找到）, §5.1。** $\\mathrm{RRR}=L/\\hat L$，标注动作序列长度 ÷ 实际执行长度，越高越高效。Wen et al. (2025), AutoDroid-V2, MobiSys 2025, §4.1 写作 $\\frac{n}{k}$ 采用。"
+    },
+    {
+      "old": "**Erol et al. (2025), Cost-of-Pass**：v(m,p) = C\\_m(p) / R\\_m(p)，每个正确答案的期望花费（式子在第二节）。",
+      "new": "**Erol et al. (2025), Cost-of-Pass**：$v(m,p)=C_m(p)/R_m(p)$，每个正确答案的期望花费（式子在第二节）。"
+    },
+    {
+      "old": "c 是路由到强模型的调用比例（成本的代理）；r 平均回答质量，M\\_s、M\\_w 强/弱模型；APGR 实际按 10 个比例点取平均；CPT(x%) 是达到 x% PGR 所需的最小强模型比例。附录 D 的混合单价：(95×10 + 264×30)/(95+264) ≈ $24.7 每百万 token（GPT-4 输入 95、输出 264 token 的均值）。",
+      "new": "c 是路由到强模型的调用比例（成本的代理）；r 平均回答质量，M\\_s、M\\_w 强/弱模型；APGR 实际按 10 个比例点取平均；CPT(x%) 是达到 x% PGR 所需的最小强模型比例。附录 D 的混合单价：$\\frac{95\\times10+264\\times30}{95+264}\\approx24.7\\,\\mathrm{USD}$ 每百万 token（GPT-4 输入 95、输出 264 token 的均值）。"
+    },
+    {
+      "old": "**Guan et al. (2026), Dynamic speculative agent planning, §5.1 式 (3)–(5)、(10)–(11)。** ΔTime、ΔP（提示 token）、ΔG（生成 token）、ΔCost 都是逐任务相对顺序基线的平均变化；平均峰值并发 MC̄ = (1/N) Σ MC\\_i，平均投机步 K̄ = (1/M) Σ k\\_i。",
+      "new": "**Guan et al. (2026), Dynamic speculative agent planning, §5.1 式 (3)–(5)、(10)–(11)。** $\\Delta\\mathrm{Time}$、$\\Delta P$（提示 token）、$\\Delta G$（生成 token）、$\\Delta\\mathrm{Cost}$ 都是逐任务相对顺序基线的平均变化；平均峰值并发 $\\overline{\\mathrm{MC}}=\\frac{1}{N}\\sum\\mathrm{MC}_i$，平均投机步 $\\overline K=\\frac{1}{M}\\sum k_i$。"
+    },
+    {
+      "old": "**压缩比类指标。** Kerboua et al. (2026), FocusAgent, §4.3：Pruning(o\\_i) = 1 − |o\\_r| / |o\\_i|（token）。Enomoto, Obara, Zhang & Oyamada (2026), NEC, arXiv:2605.29397v1, §2.1：",
+      "new": "**压缩比类指标。** Kerboua et al. (2026), FocusAgent, §4.3：$\\operatorname{Pruning}(o_i)=1-\\lvert o_r\\rvert/\\lvert o_i\\rvert$（token）。Enomoto, Obara, Zhang & Oyamada (2026), NEC, arXiv:2605.29397v1, §2.1："
+    },
+    {
+      "old": "按字符数计，H\\_s 是第 s 步的 HTML 观察，R 是裁剪方法。Xiao, Gao, Peng & Xiong (2026), AgentDiet, 北京大学、字节跳动, FSE 2026, §4.2.4：Keep% = Σ l\\_reduced / Σ l\\_orig × 100，只在 l\\_orig − l\\_reduced > θ 时才替换（θ ∈ {0, 250, 500, 1000, 2000}）。SGLang、CacheScout：缓存命中率 = 缓存的 prompt token / 全部 prompt token。",
+      "new": "按字符数计，H\\_s 是第 s 步的 HTML 观察，R 是裁剪方法。Xiao, Gao, Peng & Xiong (2026), AgentDiet, 北京大学、字节跳动, FSE 2026, §4.2.4：$\\mathrm{Keep}\\%=\\dfrac{\\sum l_{\\mathrm{reduced}}}{\\sum l_{\\mathrm{orig}}}\\times100$，只在 $l_{\\mathrm{orig}}-l_{\\mathrm{reduced}}>\\theta$ 时才替换（$\\theta\\in\\{0,250,500,1000,2000\\}$）。SGLang、CacheScout：$\\text{缓存命中率}=\\dfrac{\\text{缓存的 prompt token}}{\\text{全部 prompt token}}$。"
+    },
+    {
+      "old": "**Chen, Sun, Bellucci & Jacucci (2026), SkillDroid, 附录 D。** 0-LLM 率 = 零次 LLM 调用完成的轮次比例；每轮 LLM 调用数 C\\_LLM：纯回放 0，语义匹配加回放 1，全 LLM 执行 5–15；加速比 = L̄\\_L1 / L̄\\_L2。",
+      "new": "**Chen, Sun, Bellucci & Jacucci (2026), SkillDroid, 附录 D。** $\\text{0-LLM 率}=\\text{零次 LLM 调用完成的轮次比例}$；每轮 LLM 调用数 $C_{\\mathrm{LLM}}$：纯回放 0，语义匹配加回放 1，全 LLM 执行 5–15；$\\text{加速比}=\\overline L_{L1}/\\overline L_{L2}$。"
+    },
+    {
+      "old": "M\\_x(t) 过程 x 在 t 时刻的显存；c\\_p 程序 p 的上下文长度；τ 阶段（R 推理，A 执行工具）；f(t) = 2^{−t} 时间衰减；C\\_total 是 KV 池容量；重算成本随上下文长度平方增长，所以驱逐时选最短的（式 (8)(9) 只在 PDF 里读到，无 alt text）。",
+      "new": "M\\_x(t) 过程 x 在 t 时刻的显存；c\\_p 程序 p 的上下文长度；τ 阶段（R 推理，A 执行工具）；$f(t)=2^{-t}$ 时间衰减；C\\_total 是 KV 池容量；重算成本随上下文长度平方增长，所以驱逐时选最短的（式 (8)(9) 只在 PDF 里读到，无 alt text）。"
+    },
+    {
+      "old": "ℳ 活跃请求的平均显存；PrefillReload(r) 重算或从 CPU 回载的时间；𝒯 平均等待时间；η 是已服务轮数 k 与剩余轮数 N − k 的负相关（无记忆负载时 η = 0）。页面上系统名拼作 Continnum。",
+      "new": "ℳ 活跃请求的平均显存；PrefillReload(r) 重算或从 CPU 回载的时间；𝒯 平均等待时间；η 是已服务轮数 k 与剩余轮数 $N{-}k$ 的负相关（无记忆负载时 $\\eta=0$）。页面上系统名拼作 Continnum。"
+    },
+    {
+      "old": "**Zheng et al. (2024), SGLang, NeurIPS 2024, arXiv:2312.07104v2, §3 与附录 A.3。** 缓存命中率 = 缓存的 prompt token / 全部 prompt token。定理 3.1：按前缀树的深度优先顺序调度，命中率最优（缓存 ≥ 最长请求）；证明中的下界：",
+      "new": "**Zheng et al. (2024), SGLang, NeurIPS 2024, arXiv:2312.07104v2, §3 与附录 A.3。** $\\text{缓存命中率}=\\dfrac{\\text{缓存的 prompt token}}{\\text{全部 prompt token}}$。定理 3.1：按前缀树的深度优先顺序调度，命中率最优（$\\text{缓存}\\ge\\text{最长请求}$）；证明中的下界："
+    },
+    {
+      "old": "**Pan et al. (2025), KVFlow, NeurIPS 2025, arXiv:2507.07400v1, §3.1。** 下游 agent 的\"距执行步数\" = max(E1, E2) + 1（AND 依赖）或 min(E1, E2) + 1（OR 依赖），步数大的先驱逐。",
+      "new": "**Pan et al. (2025), KVFlow, NeurIPS 2025, arXiv:2507.07400v1, §3.1。** 下游 agent 的\"距执行步数\" $=\\max(E1,E2)+1$（AND 依赖）或 $\\min(E1,E2)+1$（OR 依赖），步数大的先驱逐。"
+    },
+    {
+      "old": "**Luo et al. (2026), Agentix, §4.3。** 负载均衡：调用 ≤ 2048 token 走最空闲引擎，否则钉在程序所在引擎保 KV 缓存局部性；阈值按命中率统计选定。调度优先级式子在第一节。",
+      "new": "**Luo et al. (2026), Agentix, §4.3。** 负载均衡：$\\text{调用}\\le2048\\,\\mathrm{token}$ 走最空闲引擎，否则钉在程序所在引擎保 KV 缓存局部性；阈值按命中率统计选定。调度优先级式子在第一节。"
+    },
+    {
+      "old": "- 总输入 token = cache\\_read\\_input\\_tokens + cache\\_creation\\_input\\_tokens + input\\_tokens，三类分开计费。缓存 5 分钟（默认）或 1 小时，从写或读它的那次请求开始计，每次命中免费续期；可缓存的最短前缀 512–4096 token 视模型而定。",
+      "new": "- $\\text{总输入 token}=\\mathrm{cache\\_read\\_input\\_tokens}+\\mathrm{cache\\_creation\\_input\\_tokens}+\\mathrm{input\\_tokens}$，三类分开计费。缓存 5 分钟（默认）或 1 小时，从写或读它的那次请求开始计，每次命中免费续期；可缓存的最短前缀 512–4096 token 视模型而定。"
+    },
+    {
+      "old": "- 图片 token（[Vision 页](https://platform.claude.com/docs/en/build-with-claude/vision)，经定价页的链接找到）：每 28×28 像素一个视觉 token，上限 1568（标准档）或 4784（Claude 4.7 及以后的高分辨率档），超过则等比缩小；1280×720 的截图 = 46 × 26 = 1,196 token（calc.）。声明 computer\\_toolset\\_20260801 每次请求约加 4,500 输入 token。",
+      "new": "- 图片 token（[Vision 页](https://platform.claude.com/docs/en/build-with-claude/vision)，经定价页的链接找到）：每 28×28 像素一个视觉 token，上限 1568（标准档）或 4784（Claude 4.7 及以后的高分辨率档），超过则等比缩小；1280×720 的截图 = $46\\times26=1{,}196\\,\\mathrm{token}$（calc.）。声明 computer\\_toolset\\_20260801 每次请求约加 4,500 输入 token。"
+    },
+    {
+      "old": "**Artificial Analysis 方法页：** 混合价 = (7 × 缓存命中价 + 2 × 输入价 + 1 × 输出价) / 10。",
+      "new": "**Artificial Analysis 方法页：** $\\text{混合价}=\\dfrac{7\\times\\text{缓存命中价}+2\\times\\text{输入价}+1\\times\\text{输出价}}{10}$。"
+    },
+    {
+      "old": "对我们 Part 1 的影响：第 7 页页首和第 8 页表里写的\"a cached read costs 0.1×\"是标准倍率，Opus 5.5 实际是 0.05×（$0.20 / $4），档案 E84 已记，页面上要补一句。",
+      "new": "对我们 Part 1 的影响：第 7 页页首和第 8 页表里写的\"a cached read costs 0.1×\"是标准倍率，Opus 5.5 实际是 0.05×（$0.20\\,\\mathrm{USD}/(4\\,\\mathrm{USD})$），档案 E84 已记，页面上要补一句。"
+    },
+    {
+      "old": "| 基准和测量 | OSWorld 2.0 (XLANG Lab 2026)；OSWorld-Human 除 WES 外；Bian et al. 2025；AgentSysBench (Chang et al. 2026)；HAL (Kapoor et al. 2025)；AI agents that matter (Kapoor et al. 2025)；BrowserGym；Agentic test-time scaling (Lee et al. 2026)；Measuring agents in production (Pan et al. 2026)；UFO2；TraceLab 的成本部分；MAP | 文字：\"cost per task = 输入输出 token × 列价\"；\"total token count per task = 所有调用的 prompt + completion token\"（Lee et al.）；\"固定成本 = 优化费用均值，可变成本 = 每任务推理费用均值\"（AI agents that matter 附录 B）；AgentSysBench 只有概念式 Y = Φ(W, S)；OSWorld 2.0 附录 A–H 未读到 |",
+      "new": "| 基准和测量 | OSWorld 2.0 (XLANG Lab 2026)；OSWorld-Human 除 WES 外；Bian et al. 2025；AgentSysBench (Chang et al. 2026)；HAL (Kapoor et al. 2025)；AI agents that matter (Kapoor et al. 2025)；BrowserGym；Agentic test-time scaling (Lee et al. 2026)；Measuring agents in production (Pan et al. 2026)；UFO2；TraceLab 的成本部分；MAP | 文字：\"$\\text{cost per task}=\\text{输入输出 token}\\times\\text{列价}$\"；\"$\\text{total token count per task}=\\text{所有调用的 prompt}+\\text{completion token}$\"（Lee et al.）；\"$\\text{固定成本}=\\text{优化费用均值}$，$\\text{可变成本}=\\text{每任务推理费用均值}$\"（AI agents that matter 附录 B）；AgentSysBench 只有概念式 $Y=\\Phi(W,S)$；OSWorld 2.0 附录 A–H 未读到 |"
+    },
+    {
+      "old": "| 模型与训练 | ComputerRL；StepWise；SPACE（只有块长上限和回合计数）；The danger of overthinking；Fara-7B（成本 = token × 价，文字）；Beyond browsing；AXIS (ACL 2025) | 成本按列价算，无式子；AXIS 的完成时间和成本只在表里 |",
+      "new": "| 模型与训练 | ComputerRL；StepWise；SPACE（只有块长上限和回合计数）；The danger of overthinking；Fara-7B（$\\text{成本}=\\text{token}\\times\\text{价}$，文字）；Beyond browsing；AXIS (ACL 2025) | 成本按列价算，无式子；AXIS 的完成时间和成本只在表里 |"
+    },
+    {
+      "old": "| 可靠性、回滚 | RAC；Safe to resume；Revisable by design 除 AdaptCost 外；WebOperator；SMC（只有 ℓ = K − j） | 时间和 token 是表里的数 |",
+      "new": "| 可靠性、回滚 | RAC；Safe to resume；Revisable by design 除 AdaptCost 外；WebOperator；SMC（只有 $\\ell=K-j$） | 时间和 token 是表里的数 |"
+    }
+  ],
+  "notes/part3/2026-09-29-part3-research-plan-report-zh.md": [
+    {
+      "old": "这里 N 是 observe–decide–act–wait 的轮数，Jᵢ 是该轮所有模型调用数，Dᵢ 是模型时间，Eᵢ 是观察、操作、等待和框架处理等非模型时间。费用由各类 token 用量及对应单价、再加被计费的环境用量构成。上述是前两部分从文献改编和补充的分析表达，并非声称某篇论文原样提出了整套公式；来源与改编边界保留在 PPT 附录 A0。具体符号与页面依据见仓库的[公式衔接核查](../research/2026-09-29-part3-report-support.md)。",
+      "new": "这里 $N$ 是 observe–decide–act–wait 的轮数，$J_i$ 是该轮所有模型调用数，$D_i$ 是模型时间，$E_i$ 是观察、操作、等待和框架处理等非模型时间。费用由各类 token 用量及对应单价、再加被计费的环境用量构成。上述是前两部分从文献改编和补充的分析表达，并非声称某篇论文原样提出了整套公式；来源与改编边界保留在 PPT 附录 A0。具体符号与页面依据见仓库的[公式衔接核查](../research/2026-09-29-part3-report-support.md)。"
+    },
+    {
+      "old": "| 修提示 代码或决策流程 | 少走错误路径 可减少无效 N 和轮内重试 Jᵢ 也可能提高成功率 Rₘ(p) | 更长提示 额外裁判调用 或过早停止 |",
+      "new": "| 修提示 代码或决策流程 | 少走错误路径 可减少无效 $N$ 和轮内重试 $J_i$ 也可能提高成功率 $R_m(p)$ | 更长提示 额外裁判调用 或过早停止 |"
+    },
+    {
+      "old": "| 把已知操作交给参数化 action | 少做重复模型决策 总调用数 ΣᵢJᵢ 及总输入输出 token 可能下降 | 底层操作仍需执行 条件检查与回退仍有费用 |",
+      "new": "| 把已知操作交给参数化 action | 少做重复模型决策 总调用数 $\\sum_iJ_i$ 及总输入输出 token 可能下降 | 底层操作仍需执行 条件检查与回退仍有费用 |"
+    },
+    {
+      "old": "| 用环境条件选入口和读取路径 | 减少试探和无效操作时 才可能减少总非模型时间 ΣᵢEᵢ | 检索 检测 动态参数处理和知识维护 |",
+      "new": "| 用环境条件选入口和读取路径 | 减少试探和无效操作时 才可能减少总非模型时间 $\\sum_iE_i$ | 检索 检测 动态参数处理和知识维护 |"
+    },
+    {
+      "old": "尤其要分清动作粒度。假设一次模型决策调用一个 action，action 内仍执行原来的多次点击。从外层轮数看，N 可能变小，每轮的环境工作却变多；若保留原来的细粒度检查点，也可以把内部纯代码步骤记成 Jᵢ = 0。这可能是同一批被省掉的模型调用的两种描述，不能当成两个独立收益相乘。底层点击数量是否减少，必须另行记录。若还避免了错误导航、重复截图或等待，才有额外的环境开销收益。",
+      "new": "尤其要分清动作粒度。假设一次模型决策调用一个 action，action 内仍执行原来的多次点击。从外层轮数看，$N$ 可能变小，每轮的环境工作却变多；若保留原来的细粒度检查点，也可以把内部纯代码步骤记成 $J_i=0$。这可能是同一批被省掉的模型调用的两种描述，不能当成两个独立收益相乘。底层点击数量是否减少，必须另行记录。若还避免了错误导航、重复截图或等待，才有额外的环境开销收益。"
+    },
+    {
+      "old": "成功率是另一条关联。修复可能主要提高 Rₘ(p)，并不降低单次尝试的时间或费用，却减少完成任务所需的失败尝试。PPT 的每成功口径可以解释这一点，但固定设计下的 Cₘ(p) / Rₘ(p) 及相应时间表达有重试假设。持续更新版本、任务不相同或失败相互关联时，应以实际任务流计账，不能把一个固定比值直接当成在线完成成本预测。",
+      "new": "成功率是另一条关联。修复可能主要提高 $R_m(p)$，并不降低单次尝试的时间或费用，却减少完成任务所需的失败尝试。PPT 的每成功口径可以解释这一点，但固定设计下的 $C_m(p)/R_m(p)$ 及相应时间表达有重试假设。持续更新版本、任务不相同或失败相互关联时，应以实际任务流计账，不能把一个固定比值直接当成在线完成成本预测。"
+    },
+    {
+      "old": "单次执行公式能解释“改好的版本为什么可能更快、更便宜”，但无法单独回答“花钱把它改好是否值得”。跨任务的轨迹分析、知识构建、代码生成、候选验证和探索属于额外投入，不能都塞进单次尝试的 i = 0。i = 0 在现有框架里容纳的是本次尝试内、未归某个行动轮的调用，例如开头的规划。",
+      "new": "单次执行公式能解释“改好的版本为什么可能更快、更便宜”，但无法单独回答“花钱把它改好是否值得”。跨任务的轨迹分析、知识构建、代码生成、候选验证和探索属于额外投入，不能都塞进单次尝试的 $i=0$。$i=0$ 在现有框架里容纳的是本次尝试内、未归某个行动轮的调用，例如开头的规划。"
+    }
+  ]
+}
