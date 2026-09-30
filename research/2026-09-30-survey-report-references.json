@@ -1,0 +1,202 @@
+{
+  "R01": {
+    "number": 1,
+    "entry": "Zhe Ren; Yimeng Chen; Dandan Guo; Guowei Rong; Tonghui Li; R.B. Xiong; Qingfeng Lan; Wenyi Wang; Li Nanbo; Yibo Yang; Mingchen Zhuge; Jürgen Schmidhuber. **Self-Improvements in Modern Agentic Systems: A Survey.** 2026. arXiv:2607.13104v1，2026-07-14. [原文](https://arxiv.org/pdf/2607.13104v1)。配套[文献集合](https://selfimproving-agent.github.io/#overview)，本次快照2026-09-30。",
+    "url": "https://arxiv.org/pdf/2607.13104v1"
+  },
+  "R02": {
+    "number": 2,
+    "entry": "Mert Yuksekgonul; Federico Bianchi; Joseph Boen; Sheng Liu; Pan Lu; Zhi Huang; Carlos Guestrin; James Zou. **Optimizing generative AI by backpropagating language model feedback.** Nature 639:609–616, 2025. DOI:10.1038/s41586-025-08661-4. [正式论文](https://www.nature.com/articles/s41586-025-08661-4)。方法亦核原始预印本 *TextGrad: Automatic “Differentiation” via Text*, arXiv:2406.07496v1，2024；正式题名与作者表有所更新。",
+    "url": "https://arxiv.org/pdf/2406.07496v1"
+  },
+  "R03": {
+    "number": 3,
+    "entry": "Ching-An Cheng, Allen Nie, Adith Swaminathan. Trace is the Next AutoDiff: Generative Optimization with Rich Feedback, Execution Traces, and LLMs. NeurIPS, 2024. arXiv:2406.16218v2. [原文](https://arxiv.org/abs/2406.16218v2)",
+    "url": "https://arxiv.org/pdf/2406.16218v2"
+  },
+  "R04": {
+    "number": 4,
+    "entry": "Lakshya A. Agrawal, Shangyin Tan, Dilara Soylu, Noah Ziems, Rishi Khare, Krista Opsahl-Ong, Arnav Singhvi, Herumb Shandilya, Michael J. Ryan, Meng Jiang, Christopher Potts, Koushik Sen, Alexandros G. Dimakis, Ion Stoica, Dan Klein, Matei Zaharia, Omar Khattab. GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning. ICLR, 2026. arXiv:2507.19457v2. [原文](https://arxiv.org/abs/2507.19457v2)",
+    "url": "https://arxiv.org/pdf/2507.19457v2"
+  },
+  "R05": {
+    "number": 5,
+    "entry": "Yifan Yang, Ziyang Gong, Weiquan Huang, Qihao Yang, Ziwei Zhou, Zisu Huang, Yan Li, Xuemei Gao, Qi Dai, Bei Liu, Kai Qiu, Yuqing Yang, Dongdong Chen, Xue Yang, Chong Luo. SkillOpt: Executive Strategy for Self-Evolving Agent Skills. 2026. arXiv:2605.23904v2. [原文](https://arxiv.org/abs/2605.23904v2)",
+    "url": "https://arxiv.org/pdf/2605.23904v2"
+  },
+  "R06": {
+    "number": 6,
+    "entry": "Qizheng Zhang, Changran Hu, Shubhangi Upasani, Boyuan Ma, Fenglu Hong, Vamsidhar Kamanuru, Jay Rainton, Chen Wu, Mengmeng Ji, Hanchen Li, Urmish Thakker, James Zou, Kunle Olukotun. Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models. ICLR, 2026. arXiv:2510.04618v3. [原文](https://arxiv.org/abs/2510.04618v3)",
+    "url": "https://arxiv.org/pdf/2510.04618v3"
+  },
+  "R07": {
+    "number": 7,
+    "entry": "Zhanzhi Lou, Hui Chen, Yibo Li, Qian Wang, Bryan Hooi. Meta-TTL: Meta-Learning Self-Improvement Policies for Language Agents. 2026. arXiv:2604.00830v4. [原文](https://arxiv.org/abs/2604.00830v4)",
+    "url": "https://arxiv.org/pdf/2604.00830v4"
+  },
+  "R08": {
+    "number": 8,
+    "entry": "Igor Bogdanov, Chung-Horng Lung, Thomas Kunz, Jie Gao, Adrian Taylor, Marzia Zaman. FORGE: Self-Evolving Agent Memory With No Weight Updates via Population Broadcast. ACM Conference on AI and Agentic Systems, 2026. DOI:10.1145/3786335.3813155. [原文](https://arxiv.org/abs/2605.16233v1)",
+    "url": "https://arxiv.org/pdf/2605.16233v1"
+  },
+  "R09": {
+    "number": 9,
+    "entry": "Yunhao Yang, Neel P. Bhatt, Kevin Wang, Samuel Tetteh, Zhangyang Wang, Ufuk Topcu. VASO: Formally Verifiable Self-Evolving Skills for Physical AI Agents. 2026. arXiv:2606.05395v1. [原文](https://arxiv.org/abs/2606.05395v1)",
+    "url": "https://arxiv.org/pdf/2606.05395v1"
+  },
+  "R10": {
+    "number": 10,
+    "entry": "Minsoo Kim, Seung-won Hwang. Dual-Scale World Models for LLM Agents Towards Hard-Exploration Problems. 2025. arXiv:2509.24116v2. [原文](https://arxiv.org/abs/2509.24116v2)",
+    "url": "https://arxiv.org/pdf/2509.24116v2"
+  },
+  "R11": {
+    "number": 11,
+    "entry": "Xuan Zhang, Wenxuan Zhang, See-Kiong Ng, Yang Deng. Self-Evolving World Models for LLM Agent Planning. 2026. arXiv:2606.30639v2. [原文](https://arxiv.org/abs/2606.30639v2)",
+    "url": "https://arxiv.org/pdf/2606.30639v2"
+  },
+  "R12": {
+    "number": 12,
+    "entry": "Wujiang Xu; Zujie Liang; Kai Mei; Hang Gao; Juntao Tan; Yongfeng Zhang. **A-Mem: Agentic Memory for LLM Agents.** Advances in Neural Information Processing Systems 38, 2025. DOI:10.52202/085713-0593. [正式论文](https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html)。本轮所读为该会议版。",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/19909c36f51abc4856b4560aff3d36d6-Abstract-Conference.html"
+  },
+  "R13": {
+    "number": 13,
+    "entry": "Zora Zhiruo Wang; Jiayuan Mao; Daniel Fried; Graham Neubig. **Agent Workflow Memory**. ICML 2025, Proceedings of Machine Learning Research 267:63897–63911. 所读/核查版本：正式PMLR版；另查arXiv:2409.07429v1. [来源](https://proceedings.mlr.press/v267/wang25bx.html)。",
+    "url": "https://proceedings.mlr.press/v267/wang25bx.html"
+  },
+  "R14": {
+    "number": 14,
+    "entry": "Siru Ouyang; Jun Yan; I-Hung Hsu; Yanfei Chen; Ke Jiang; Zifeng Wang; Rujun Han; Long T. Le; Samira Daruki; Xiangru Tang; Vishy Tirumalashetty; George Lee; Mahsan Rofouei; Hangfei Lin; Jiawei Han; Chen-Yu Lee; Tomas Pfister. **ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory**. 预印本（2025）. 所读/核查版本：arXiv:2509.25140v2. [来源](https://arxiv.org/abs/2509.25140)。",
+    "url": "https://arxiv.org/pdf/2509.25140v2"
+  },
+  "R15": {
+    "number": 15,
+    "entry": "Andrew Zhao; Daniel Huang; Quentin Xu; Matthieu Lin; Yong-Jin Liu; Gao Huang. **ExpeL: LLM Agents Are Experiential Learners**. Proceedings of the AAAI Conference on Artificial Intelligence 38(17):19632–19642, 2024. 所读/核查版本：arXiv:2308.10144v3. [来源](https://arxiv.org/abs/2308.10144)。[正式 DOI](https://doi.org/10.1609/aaai.v38i17.29936)",
+    "url": "https://arxiv.org/pdf/2308.10144v3"
+  },
+  "R16": {
+    "number": 16,
+    "entry": "Shengtao Zhang; Jiaqian Wang; Ruiwen Zhou; Junwei Liao; Yuchen Feng; Zhuo Li; Yujie Zheng; Weinan Zhang; Ying Wen; Zhiyu Li; Feiyu Xiong; Yutao Qi; Bo Tang; Muning Wen. **MemRL: Self-Evolving Agents via Runtime Reinforcement Learning on Episodic Memory**. 预印本（2026）. 所读/核查版本：arXiv:2601.03192v2. [来源](https://arxiv.org/abs/2601.03192)。",
+    "url": "https://arxiv.org/pdf/2601.03192v2"
+  },
+  "R17": {
+    "number": 17,
+    "entry": "Zijie Dai; Siuhin He; Hui Li; Qihui Zhou; Jiajun Li; Mingcong Song; Guoping Long; Hongjie Si; Xin Yao; Lin Zhang; James Cheng; Xiao Yan. **Metis: Bridging Text and Code Memory for Self-Evolving Agents**. 预印本（2026）. 所读/核查版本：arXiv:2606.24151v1. [来源](https://arxiv.org/abs/2606.24151)。",
+    "url": "https://arxiv.org/pdf/2606.24151v1"
+  },
+  "R18": {
+    "number": 18,
+    "entry": "Sunjae Lee; Junyoung Choi; Jungjae Lee; Munim Hasan Wasi; Hojun Choi; Steven Y. Ko; Sangeun Oh; Insik Shin. **MobileGPT: Augmenting LLM with Human-like App Memory for Mobile Task Automation**. ACM MobiCom 2024. 所读/核查版本：arXiv:2312.03003v3. [来源](https://arxiv.org/abs/2312.03003)。目录/abs仍保留早期标题 Explore, Select, Derive, and Recall；实际PDF正文为正式标题。",
+    "url": "https://arxiv.org/pdf/2312.03003v3"
+  },
+  "R19": {
+    "number": 19,
+    "entry": "Zora Zhiruo Wang, Apurva Gandhi, Graham Neubig, and Daniel Fried. 2025. *Inducing Programmatic Skills for Agentic Tasks*. **COLM 2025**. arXiv:2504.06821, **v2**. [PDF](https://arxiv.org/pdf/2504.06821v2); [OpenReview](https://openreview.net/forum?id=lsAY6fWsog).",
+    "url": "https://arxiv.org/pdf/2504.06821v2"
+  },
+  "R20": {
+    "number": 20,
+    "entry": "Boyuan Zheng, Michael Y. Fatemi, Xiaolong Jin, Zora Zhiruo Wang, Apurva Gandhi, Yueqi Song, Yu Gu, Jayanth Srinivasa, Gaowen Liu, Graham Neubig, and Yu Su. 2025. *SkillWeaver: Web Agents can Self-Improve by Discovering and Honing Skills*. arXiv:2504.07079, **v1**. 本文未独立核实最终发表 venue；OSU/UVA/Purdue/CMU/Cisco Research. [PDF](https://arxiv.org/pdf/2504.07079v1).",
+    "url": "https://arxiv.org/pdf/2504.07079v1"
+  },
+  "R21": {
+    "number": 21,
+    "entry": "Viraj Prabhu, Yutong Dai, Matthew Fernandez, Krithika Ramakrishnan, Jing Gu, Yanqi Luo, Silvio Savarese, Caiming Xiong, Junnan Li, Zeyuan Chen, and Ran Xu. 2026. *WALT: Web Agents that Learn Tools*. **ICLR 2026**. 实读会议 camera-ready PDF，非旧 arXiv:2510.01524v1；正式 proceedings 核实 venue。[正式论文页及 PDF 入口](https://proceedings.iclr.cc/paper_files/paper/2026/hash/5b175f9e93873e3a10a6ce43dbb82e05-Abstract-Conference.html).",
+    "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/5b175f9e93873e3a10a6ce43dbb82e05-Abstract-Conference.html"
+  },
+  "R22": {
+    "number": 22,
+    "entry": "Hongbin Zhong, Fazle Faisal, Luis França, Tanakorn Leesatapornwongsa, Adriana Szekeres, Kexin Rong, and Suman Nath. 2026. *ActionEngine: From Reactive to Programmatic Web Agents via State Machine Memory*. arXiv:2602.20502, **v2, September 28, 2026**. Georgia Tech/Microsoft；本文按预印本补充。[PDF](https://arxiv.org/pdf/2602.20502v2).",
+    "url": "https://arxiv.org/pdf/2602.20502v2"
+  },
+  "R23": {
+    "number": 23,
+    "entry": "Zixi Huang, Xiheng Wang, Andrew Wang, William Jurayj, Bernal Jiménez Gutiérrez, Daniel Khashabi, and Nicholas Andrews. 2026. *Better, Faster, Stronger: Programmatic Skill Learning Best Reduces Agent Cost*. arXiv:2608.11338, **v1**. Johns Hopkins University；预印本，方法名 SpeedRunner。[PDF](https://arxiv.org/pdf/2608.11338v1).",
+    "url": "https://arxiv.org/pdf/2608.11338v1"
+  },
+  "R24": {
+    "number": 24,
+    "entry": "Huawei Lin, Peng Li, Jie Song, Fuxin Jiang, and Tieying Zhang. 2026. *MUSE-Autoskill: Self-Evolving Agents via Skill Creation, Memory, Management, and Evaluation*. arXiv:2605.27366, **v2**（实读 PDF 首页日期 July 7, 2026；不要用原始 arXiv 编号月份代替本版本日期）。ByteDance/Rochester Institute of Technology；预印本补充。[PDF](https://arxiv.org/pdf/2605.27366v2).",
+    "url": "https://arxiv.org/pdf/2605.27366v2"
+  },
+  "R25": {
+    "number": 25,
+    "entry": "Zhiling Yan, Dingjie Song, Hanrong Zhang, Wei Liang, Yuxuan Zhang, Yutong Dai, Lifang He, Philip S. Yu, Ran Xu, Xiang Li, and Lichao Sun. 2026. *OpenSkill: Open-World Self-Evolution for LLM Agents*. arXiv:2606.06741, **v1**. Lehigh/UIC/UBC/Vector/Salesforce/Harvard 等；预印本补充。[PDF](https://arxiv.org/pdf/2606.06741v1).",
+    "url": "https://arxiv.org/pdf/2606.06741v1"
+  },
+  "R26": {
+    "number": 26,
+    "entry": "Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu, Linxi “Jim” Fan, and Anima Anandkumar. 2024. *Voyager: An Open-Ended Embodied Agent with Large Language Models*. **Transactions on Machine Learning Research (TMLR)**. 实读 arXiv:2305.16291, **v2 (2023)**；会议/期刊最终版与实读版本区分。[PDF](https://arxiv.org/pdf/2305.16291v2); [OpenReview](https://openreview.net/forum?id=ehfRiF0R3a).",
+    "url": "https://arxiv.org/pdf/2305.16291v2"
+  },
+  "R27": {
+    "number": 27,
+    "entry": "Changle Qu, Sunhao Dai, Xiaochi Wei, Hengyi Cai, Shuaiqiang Wang, Dawei Yin, Jun Xu, and Ji-Rong Wen. 2025. *From Exploration to Mastery: Enabling LLMs to Master Tools via Self-Driven Interactions*. **ICLR 2025**. arXiv:2410.08197, **v2**；方法 DRAFT。[PDF](https://arxiv.org/pdf/2410.08197v2); [会议 PDF](https://openreview.net/pdf?id=QKBu1BOAwd).",
+    "url": "https://arxiv.org/pdf/2410.08197v2"
+  },
+  "R28": {
+    "number": 28,
+    "entry": "Jiahao Qiu; Xuan Qi; Tongcheng Zhang; Xinzhe Juan; Jiacheng Guo; Yifu Lu; Yimin Wang; Zixin Yao; Qihan Ren; Xun Jiang; Xing Zhou; Dongrui Liu; Ling Yang; Yue Wu; Kaixuan Huang; Shilong Liu; Hongru Wang; Mengdi Wang. **Alita: Generalist Agent Enabling Scalable Agentic Reasoning with Minimal Predefinition and Maximal Self-Evolution.** 2025. arXiv:2505.20286v1，2025-05-26. [原文](https://arxiv.org/pdf/2505.20286v1)。按实际阅读的预印本版本引用。",
+    "url": "https://arxiv.org/pdf/2505.20286v1"
+  },
+  "R30": {
+    "number": 29,
+    "entry": "Mengzhuo Chen; Junjie Wang; Zhe Liu; Yawen Wang; Haiming Zheng; Qing Wang. **From Failed Trajectories to Reliable LLM Agents: Diagnosing and Repairing Harness Flaws.** ISCAS/UCAS/Tianjin University preprint,2026. 实读[arXiv2606.06324v2](https://arxiv.org/pdf/2606.06324v2)，2026-07-02，13页；方法名HarnessFix。",
+    "url": "https://arxiv.org/pdf/2606.06324v2"
+  },
+  "R31": {
+    "number": 30,
+    "entry": "Esakkivel Esakkiraja; Denis Akhiyarov; Vikas Yadav; Sai Rajeswar; Patrice Bechard; Sridhar Nemala; Sagar Davasam. **StarHarness: Evolving Harnesses with Stratified Search for Enterprise Environments.** ServiceNow/Mila/Université de Montréal preprint,2026. 实读[arXiv2608.24804v1](https://arxiv.org/pdf/2608.24804v1)，2026-08-25，10页。",
+    "url": "https://arxiv.org/pdf/2608.24804v1"
+  },
+  "R32": {
+    "number": 31,
+    "entry": "Zewen Liu; Zhan Shi; Yisi Sang; Bing He; Minhua Lin; Tianxin Wei; Dakuo Wang; Benoit Dumoulin; Wei Jin; Hanqing Lu. **Adaptive Auto-Harness: Sustained Self-Improvement for Agentic System Deployment on Open-Ended Task Streams.** Emory/Amazon/Penn State/UIUC/Northeastern preprint,2026. 实读[arXiv2606.01770v2](https://arxiv.org/pdf/2606.01770v2)，2026-06-03，23页。",
+    "url": "https://arxiv.org/pdf/2606.01770v2"
+  },
+  "R33": {
+    "number": 32,
+    "entry": "Seth Karten; Joel Zhang; Tersoo Upaa Jr; Ruirong Feng; Wenzhe Li; Chengshuai Shi; Chi Jin; Kiran Vodrahalli. **Continual Harness: Online Adaptation for Self-Improving Foundation Agents.** Princeton/ARISE Foundation/Google DeepMind preprint,2026. 实读[arXiv2605.09998v1](https://arxiv.org/pdf/2605.09998v1)，2026-05-11，28页。本文保留固定FM实验，排除其模型训练分支。",
+    "url": "https://arxiv.org/pdf/2605.09998v1"
+  },
+  "R34": {
+    "number": 33,
+    "entry": "Chunqiu Steven Xia; Zhe Wang; Yan Yang; Yuxiang Wei; Lingming Zhang. **Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?** UIUC preprint,2025. 实读[arXiv2511.13646v3](https://arxiv.org/pdf/2511.13646v3)，2025-11-24，20页。",
+    "url": "https://arxiv.org/pdf/2511.13646v3"
+  },
+  "R35": {
+    "number": 34,
+    "entry": "Wenyi Wang; Piotr Piękos; Li Nanbo; Firas Laakom; Yimeng Chen; Mateusz Ostaszewski; Mingchen Zhuge; Jürgen Schmidhuber. **Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine.** ICLR2026，[官方paper list](https://iclr.cc/virtual/2026/papers.html)。实读[arXiv2510.21614v3](https://arxiv.org/pdf/2510.21614v3)，2025-10-29，30页；未把会议版与该预印本假定逐字相同。",
+    "url": "https://arxiv.org/pdf/2510.21614v3"
+  },
+  "R36": {
+    "number": 35,
+    "entry": "Jenny Zhang; Shengran Hu; Cong Lu; Robert Lange; Jeff Clune. **Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents.** ICLR2026, main conference poster. [正式会议信息](https://iclr.cc/virtual/2026/poster/10007327)。实读[arXiv2505.22954v3](https://arxiv.org/pdf/2505.22954v3)，2026-03-12，72页。",
+    "url": "https://arxiv.org/pdf/2505.22954v3"
+  },
+  "R37": {
+    "number": 36,
+    "entry": "Di Zhang. **AgentDevel: Reframing Self-Evolving LLM Agents as Release Engineering.** Fudan University preprint,2026. 实读[arXiv2601.04620v1](https://arxiv.org/pdf/2601.04620v1)，2026-01-08，11页。",
+    "url": "https://arxiv.org/pdf/2601.04620v1"
+  },
+  "R38": {
+    "number": 37,
+    "entry": "Tianle Cai, Xuezhi Wang, Tengyu Ma, Xinyun Chen, and Denny Zhou. 2024. *Large Language Models as Tool Makers*. **ICLR 2024**. arXiv:2305.17126, **v2**；方法 LATM。[PDF](https://arxiv.org/pdf/2305.17126v2); [OpenReview](https://openreview.net/forum?id=qV83K9d5WB).",
+    "url": "https://arxiv.org/pdf/2305.17126v2"
+  },
+  "R39": {
+    "number": 38,
+    "entry": "Shuai Shao; Kangning Zhang; Qingyao Li; Shijian Wang; Hao Wang; Wenxiang Jiao; Yuan Lu; Yi Guo; Weiwen Liu; Weinan Zhang. **Harness-R1: Learning to Edit Executable Runtime Harnesses from Agent Failure Trajectories.** SJTU/Xiaohongshu/Southeast University preprint,2026. 实读[arXiv2608.02276v1](https://arxiv.org/pdf/2608.02276v1)，2026-08-03，22页，训练边界审核；排除出全流程免训练方法。",
+    "url": "https://arxiv.org/pdf/2608.02276v1"
+  },
+  "R40": {
+    "number": 39,
+    "entry": "Haoran Xu; Jiacong Hu; Ke Zhang; Lei Yu; Yuxin Tang; Xinyuan Song; Yiqun Duan; Lynn Ai; Bill Shi. **SEDM: Scalable Self-Evolving Distributed Memory for Agents**. 预印本（2025）. 所读/核查版本：arXiv:2509.09498v3. [来源](https://arxiv.org/abs/2509.09498v3)。",
+    "url": "https://arxiv.org/abs/2509.09498v3"
+  },
+  "R41": {
+    "number": 40,
+    "entry": "Tobias Lindenbauer; Georg Groh; Hinrich Schütze. **From Knowledge to Noise: CTIM-Rover and the Pitfalls of Episodic Memory in Software Engineering Agents**. 预印本（2025）. 所读/核查版本：arXiv:2505.23422v1. [来源](https://arxiv.org/abs/2505.23422v1)。",
+    "url": "https://arxiv.org/abs/2505.23422v1"
+  }
+}

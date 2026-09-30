@@ -1,0 +1,3699 @@
+[
+  {
+    "row_id": 1,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2023",
+    "title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+    "url": "https://arxiv.org/abs/2212.10560",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2212.10560",
+      "https://arxiv.org/abs/2212.10560",
+      "https://github.com/yizhongw/self-instruct"
+    ]
+  },
+  {
+    "row_id": 2,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2023",
+    "title": "Large Language Models Can Self-Improve",
+    "url": "https://arxiv.org/abs/2210.11610",
+    "hub_venue_unverified": "EMNLP",
+    "links": [
+      "https://arxiv.org/abs/2210.11610",
+      "https://arxiv.org/abs/2210.11610"
+    ]
+  },
+  {
+    "row_id": 3,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2023",
+    "title": "Orca: Progressive Learning from Complex Explanation Traces of GPT-4",
+    "url": "https://arxiv.org/abs/2306.02707",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2306.02707",
+      "https://arxiv.org/abs/2306.02707",
+      "https://aka.ms/orca-lm"
+    ]
+  },
+  {
+    "row_id": 4,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2024",
+    "title": "SELF: Self-Evolution with Language Feedback",
+    "url": "https://arxiv.org/abs/2310.00533",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2310.00533",
+      "https://arxiv.org/abs/2310.00533"
+    ]
+  },
+  {
+    "row_id": 5,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2024",
+    "title": "SELF-GUIDE: Better Task-Specific Instruction Following via Self-Synthetic Finetuning",
+    "url": "https://arxiv.org/abs/2407.12874",
+    "hub_venue_unverified": "COLM",
+    "links": [
+      "https://arxiv.org/abs/2407.12874",
+      "https://arxiv.org/abs/2407.12874",
+      "https://github.com/zhaochenyang20/Prompt2Model-Self-Guide"
+    ]
+  },
+  {
+    "row_id": 6,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Improving Model Alignment Through Collective Intelligence of Open-Source LLMS",
+    "url": "https://arxiv.org/abs/2505.03059",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2505.03059",
+      "https://arxiv.org/abs/2505.03059"
+    ]
+  },
+  {
+    "row_id": 7,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Superficial Self-Improved Reasoners Benefit from Model Merging",
+    "url": "https://arxiv.org/abs/2503.02103",
+    "hub_venue_unverified": "EMNLP",
+    "links": [
+      "https://arxiv.org/abs/2503.02103",
+      "https://arxiv.org/abs/2503.02103",
+      "https://github.com/xiangchi-yuan/merge_syn"
+    ]
+  },
+  {
+    "row_id": 8,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Will Pre-Training Ever End? A First Step Toward Next-Generation Foundation MLLMs via Self-Improving Systematic Cognition",
+    "url": "https://arxiv.org/abs/2503.12303",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2503.12303",
+      "https://arxiv.org/abs/2503.12303",
+      "https://github.com/thunlp/SICOG?tab=readme-ov-file"
+    ]
+  },
+  {
+    "row_id": 9,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "TaskCraft: Automated Generation of Agentic Tasks",
+    "url": "https://arxiv.org/abs/2506.10055",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.10055",
+      "https://arxiv.org/abs/2506.10055",
+      "https://github.com/OPPO-PersonalAI/TaskCraft"
+    ]
+  },
+  {
+    "row_id": 10,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Iterative Tool Usage Exploration for Multimodal Agents via Step-wise Preference Tuning",
+    "url": "https://arxiv.org/abs/2504.21561",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2504.21561",
+      "https://arxiv.org/abs/2504.21561",
+      "https://github.com/SPORT-Agents/SPORT-Agents"
+    ]
+  },
+  {
+    "row_id": 11,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Maximizing Confidence Alone Improves Reasoning",
+    "url": "https://arxiv.org/abs/2505.22660",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.22660",
+      "https://arxiv.org/abs/2505.22660",
+      "https://github.com/satrams/rent-rl"
+    ]
+  },
+  {
+    "row_id": 12,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "DIVE: Diversified Iterative Self-Improvement",
+    "url": "https://arxiv.org/abs/2501.00747",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2501.00747",
+      "https://arxiv.org/abs/2501.00747",
+      "https://github.com/qinyiwei/DIVE"
+    ]
+  },
+  {
+    "row_id": 13,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Self-Adapting Language Models",
+    "url": "https://arxiv.org/abs/2506.10943",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2506.10943",
+      "https://arxiv.org/abs/2506.10943",
+      "https://github.com/Continual-Intelligence/SEAL"
+    ]
+  },
+  {
+    "row_id": 14,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "First SFT, Second RL, Third UPT: Continual Improving Multi-Modal LLM Reasoning via Unsupervised Post-Training",
+    "url": "https://arxiv.org/pdf/2505.22453",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/pdf/2505.22453",
+      "https://arxiv.org/pdf/2505.22453",
+      "https://github.com/waltonfuture/MM-UPT"
+    ]
+  },
+  {
+    "row_id": 15,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "LADDER: Self-Improving LLMs Through Recursive Problem Decomposition",
+    "url": "https://arxiv.org/abs/2503.00735",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2503.00735",
+      "https://arxiv.org/abs/2503.00735"
+    ]
+  },
+  {
+    "row_id": 16,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Self-Consistency Preference Optimization",
+    "url": "https://arxiv.org/abs/2411.04109",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2411.04109",
+      "https://arxiv.org/abs/2411.04109"
+    ]
+  },
+  {
+    "row_id": 17,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Adapting While Learning: Grounding LLMs for Scientific Problems with Tool Usage Adaptation",
+    "url": "https://arxiv.org/abs/2411.00412",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2411.00412",
+      "https://arxiv.org/abs/2411.00412",
+      "https://github.com/Rose-STL-Lab/Adapting-While-Learning"
+    ]
+  },
+  {
+    "row_id": 18,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2026",
+    "title": "Reinforcing General Reasoning Without Verifiers",
+    "url": "https://arxiv.org/abs/2505.21493",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2505.21493",
+      "https://arxiv.org/abs/2505.21493",
+      "https://github.com/sail-sg/VeriFree"
+    ]
+  },
+  {
+    "row_id": 19,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2026",
+    "title": "SAGE: Multi-Agent Self-Evolution for LLM Reasoning",
+    "url": "https://arxiv.org/abs/2603.15255",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2603.15255",
+      "https://arxiv.org/abs/2603.15255"
+    ]
+  },
+  {
+    "row_id": 20,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2026",
+    "title": "ANDES: Agent Native Data Evolving Synthesis Tool for Autonomous Instruction Alignment",
+    "url": "https://arxiv.org/abs/2606.01279",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.01279",
+      "https://arxiv.org/abs/2606.01279",
+      "https://github.com/zzy1127/ANDES"
+    ]
+  },
+  {
+    "row_id": 21,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2026",
+    "title": "EvoGround: Self-Evolving Video Agents for Video Temporal Grounding",
+    "url": "https://arxiv.org/abs/2605.13803",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.13803",
+      "https://arxiv.org/abs/2605.13803",
+      "https://github.com/minjoong507/EvoGround"
+    ]
+  },
+  {
+    "row_id": 22,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2026",
+    "title": "From Self-Evolving Synthetic Data to Verifiable-Reward RL: Post-Training Multi-turn Interactive Tool-Using Agents",
+    "url": "https://arxiv.org/abs/2601.22607",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.22607",
+      "https://arxiv.org/abs/2601.22607"
+    ]
+  },
+  {
+    "row_id": 23,
+    "branch": "fm",
+    "category": "1.1 Intrinsic Generative Demonstrations",
+    "subgroup": "",
+    "year": "2026",
+    "title": "RAGShaper: Eliciting Sophisticated Agentic RAG Skills via Automated Data Synthesis",
+    "url": "https://arxiv.org/abs/2601.08699",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.08699",
+      "https://arxiv.org/abs/2601.08699"
+    ]
+  },
+  {
+    "row_id": 24,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "STRIVE: Structured Reasoning for Self-Improvement in Claim Verification",
+    "url": "https://arxiv.org/abs/2502.11959",
+    "hub_venue_unverified": "MIR",
+    "links": [
+      "https://arxiv.org/abs/2502.11959",
+      "https://arxiv.org/abs/2502.11959"
+    ]
+  },
+  {
+    "row_id": 25,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Beyond Accuracy: The Role of Calibration in Self-Improving Large Language Models",
+    "url": "https://arxiv.org/abs/2504.02902",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.02902",
+      "https://arxiv.org/abs/2504.02902"
+    ]
+  },
+  {
+    "row_id": 26,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2022",
+    "title": "Constitutional AI: Harmlessness from AI Feedback",
+    "url": "https://arxiv.org/abs/2212.08073",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2212.08073",
+      "https://arxiv.org/abs/2212.08073",
+      "https://github.com/anthropics/ConstitutionalHarmlessnessPaper?tab=readme-ov-file"
+    ]
+  },
+  {
+    "row_id": 27,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2023",
+    "title": "ReST meets ReAct: Self-Improvement for Multi-Step Reasoning LLM Agent",
+    "url": "https://arxiv.org/abs/2312.10003",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2312.10003",
+      "https://arxiv.org/abs/2312.10003"
+    ]
+  },
+  {
+    "row_id": 28,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Self-Evolved Reward Learning for LLMs",
+    "url": "https://arxiv.org/abs/2411.00418",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2411.00418",
+      "https://arxiv.org/abs/2411.00418",
+      "https://github.com/microsoft/DKI_LLM/tree/main/SER"
+    ]
+  },
+  {
+    "row_id": 29,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Sample, Predict, then Proceed: Self-Verification Sampling for Tool Use of LLMs",
+    "url": "https://arxiv.org/abs/2506.02918v1",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.02918v1",
+      "https://arxiv.org/abs/2506.02918v1"
+    ]
+  },
+  {
+    "row_id": 30,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "RLSR: Reinforcement Learning from Self Reward",
+    "url": "https://arxiv.org/abs/2505.08827",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.08827",
+      "https://arxiv.org/abs/2505.08827"
+    ]
+  },
+  {
+    "row_id": 31,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Right Question is Already Half the Answer: Fully Unsupervised LLM Reasoning Incentivization",
+    "url": "https://arxiv.org/abs/2504.05812",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2504.05812",
+      "https://arxiv.org/abs/2504.05812",
+      "https://github.com/QingyangZhang/EMPO"
+    ]
+  },
+  {
+    "row_id": 32,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "TTRL: Test-Time Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2504.16084",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2504.16084",
+      "https://arxiv.org/abs/2504.16084",
+      "https://github.com/PRIME-RL/TTRL"
+    ]
+  },
+  {
+    "row_id": 33,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Can Large Reasoning Models Self-Train?",
+    "url": "https://arxiv.org/abs/2505.21444",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.21444",
+      "https://arxiv.org/abs/2505.21444",
+      "https://github.com/tajwarfahim/srt"
+    ]
+  },
+  {
+    "row_id": 34,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Self Rewarding Self Improving",
+    "url": "https://arxiv.org/abs/2505.08827v1",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.08827v1",
+      "https://arxiv.org/abs/2505.08827v1"
+    ]
+  },
+  {
+    "row_id": 35,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Self-Evolving Curriculum for LLM Reasoning",
+    "url": "https://arxiv.org/abs/2505.14970",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.14970",
+      "https://arxiv.org/abs/2505.14970",
+      "https://github.com/ServiceNow/sec"
+    ]
+  },
+  {
+    "row_id": 36,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Reflect, Retry, Reward: Self-Improving LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2505.24726",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.24726",
+      "https://arxiv.org/abs/2505.24726"
+    ]
+  },
+  {
+    "row_id": 37,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2025",
+    "title": "Adaptive Self-improvement LLM Agentic System for ML Library Development",
+    "url": "https://arxiv.org/abs/2502.02534",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2502.02534",
+      "https://arxiv.org/abs/2502.02534",
+      "https://github.com/zhang677/PCL-lite"
+    ]
+  },
+  {
+    "row_id": 38,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2026",
+    "title": "Learning to Reason without External Rewards",
+    "url": "https://arxiv.org/abs/2505.19590",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2505.19590",
+      "https://arxiv.org/abs/2505.19590",
+      "https://github.com/sunblaze-ucb/Intuitor"
+    ]
+  },
+  {
+    "row_id": 39,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2026",
+    "title": "Structured Reasoning for Large Language Models",
+    "url": "https://arxiv.org/abs/2601.07180",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.07180",
+      "https://arxiv.org/abs/2601.07180"
+    ]
+  },
+  {
+    "row_id": 40,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2026",
+    "title": "iReasoner: Trajectory-Aware Intrinsic Reasoning Supervision for Self-Evolving Large Multimodal Models",
+    "url": "https://arxiv.org/abs/2601.07180",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.07180",
+      "https://arxiv.org/abs/2601.07180",
+      "https://github.com/meghanaasunil/iReasoner"
+    ]
+  },
+  {
+    "row_id": 41,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2026",
+    "title": "STRIVE: Structured Reasoning for Self-improvement in Claim Verification",
+    "url": "https://link.springer.com/article/10.1007/s11633-025-1598-5",
+    "hub_venue_unverified": "machine intelligence research",
+    "links": [
+      "https://link.springer.com/article/10.1007/s11633-025-1598-5",
+      "https://link.springer.com/article/10.1007/s11633-025-1598-5"
+    ]
+  },
+  {
+    "row_id": 42,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2026",
+    "title": "UniCorn: Towards Self-Improving Unified Multimodal Models through Self-Generated Supervision",
+    "url": "https://arxiv.org/abs/2601.03193",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.03193",
+      "https://arxiv.org/abs/2601.03193",
+      "https://github.com/Hungryyan1/UniCorn"
+    ]
+  },
+  {
+    "row_id": 43,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2026",
+    "title": "Retrospective Progress-Aware Self-Refinement for LLM Agent Training",
+    "url": "https://arxiv.org/abs/2606.14302",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.14302",
+      "https://arxiv.org/abs/2606.14302"
+    ]
+  },
+  {
+    "row_id": 44,
+    "branch": "fm",
+    "category": "1.2 Intrinsic Evaluative Feedback",
+    "subgroup": "",
+    "year": "2026",
+    "title": "EVE-Agent: Evidence-Verifiable Self-Evolving Agents",
+    "url": "https://arxiv.org/abs/2605.22905",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.22905",
+      "https://arxiv.org/abs/2605.22905"
+    ]
+  },
+  {
+    "row_id": 45,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2023",
+    "title": "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation",
+    "url": "https://arxiv.org/abs/2306.11706",
+    "hub_venue_unverified": "TMLR",
+    "links": [
+      "https://arxiv.org/abs/2306.11706",
+      "https://arxiv.org/abs/2306.11706",
+      "https://github.com/keirp/automatic_prompt_engineer"
+    ]
+  },
+  {
+    "row_id": 46,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "Tool-Star: Empowering LLM-Brained Multi-Tool Reasoner via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2505.16410",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.16410",
+      "https://arxiv.org/abs/2505.16410",
+      "https://github.com/RUC-NLPIR/Tool-Star"
+    ]
+  },
+  {
+    "row_id": 47,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "CodeARC: Benchmarking Reasoning Capabilities of LLM Agents for Inductive Program Synthesis",
+    "url": "https://arxiv.org/abs/2503.23145",
+    "hub_venue_unverified": "COLM",
+    "links": [
+      "https://arxiv.org/abs/2503.23145",
+      "https://arxiv.org/abs/2503.23145",
+      "https://github.com/Anjiang-Wei/CodeARC"
+    ]
+  },
+  {
+    "row_id": 48,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "LLMs are Greedy Agents: Effects of RL Fine-tuning on Decision-Making Abilities",
+    "url": "https://arxiv.org/abs/2504.16078",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.16078",
+      "https://arxiv.org/abs/2504.16078"
+    ]
+  },
+  {
+    "row_id": 49,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "Agent-RLVR: Training Software Engineering Agents via Guidance and Environment Rewards",
+    "url": "https://arxiv.org/abs/2506.11425",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.11425",
+      "https://arxiv.org/abs/2506.11425"
+    ]
+  },
+  {
+    "row_id": 50,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "WebRL: Training LLM Web Agents via Self-Evolving Online Curriculum Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2411.02337",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2411.02337",
+      "https://arxiv.org/abs/2411.02337",
+      "https://github.com/THUDM/WebRL"
+    ]
+  },
+  {
+    "row_id": 51,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "Self-Improving Language Models for Evolutionary Program Synthesis: A Case Study on ARC-AGI",
+    "url": "https://arxiv.org/abs/2507.14172",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2507.14172",
+      "https://arxiv.org/abs/2507.14172",
+      "https://github.com/flowersteam/SOAR"
+    ]
+  },
+  {
+    "row_id": 52,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "DeepResearcher: Scaling Deep Research via Reinforcement Learning in Real-world Environments",
+    "url": "https://arxiv.org/abs/2504.03160",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.03160",
+      "https://arxiv.org/abs/2504.03160",
+      "https://github.com/GAIR-NLP/DeepResearcher"
+    ]
+  },
+  {
+    "row_id": 53,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "Agentic Reasoning and Tool Integration for LLMs via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2505.01441v1",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.01441v1",
+      "https://arxiv.org/abs/2505.01441v1"
+    ]
+  },
+  {
+    "row_id": 54,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "UI-Genie: A Self-Improving Approach for Iteratively Boosting MLLM-based Mobile GUI Agents",
+    "url": "https://arxiv.org/abs/2505.21496",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2505.21496",
+      "https://arxiv.org/abs/2505.21496",
+      "https://github.com/Euphoria16/UI-Genie"
+    ]
+  },
+  {
+    "row_id": 55,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2504.20073",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.20073",
+      "https://arxiv.org/abs/2504.20073",
+      "https://github.com/mll-lab-nu/RAGEN"
+    ]
+  },
+  {
+    "row_id": 56,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2025",
+    "title": "SEAgent: Self-Evolving Computer Use Agent with Autonomous Learning from Experience",
+    "url": "https://arxiv.org/abs/2508.04700",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2508.04700",
+      "https://arxiv.org/abs/2508.04700",
+      "https://github.com/SunzeY/SEAgent"
+    ]
+  },
+  {
+    "row_id": 57,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2026",
+    "title": "WebGym: Scaling Training Environments for Visual Web Agents with Realistic Tasks",
+    "url": "https://arxiv.org/abs/2601.02439",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.02439",
+      "https://arxiv.org/abs/2601.02439",
+      "https://github.com/microsoft/webgym"
+    ]
+  },
+  {
+    "row_id": 58,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2026",
+    "title": "Kevin: Multi-Turn RL for Generating CUDA Kernels",
+    "url": "https://arxiv.org/abs/2507.11948",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2507.11948",
+      "https://arxiv.org/abs/2507.11948"
+    ]
+  },
+  {
+    "row_id": 59,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2026",
+    "title": "Tool-R0: Self-Evolving LLM Agents for Tool-Learning from Zero Data",
+    "url": "https://arxiv.org/abs/2602.21320",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2602.21320",
+      "https://arxiv.org/abs/2602.21320",
+      "https://github.com/emrecanacikgoz/Tool-R0"
+    ]
+  },
+  {
+    "row_id": 60,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2026",
+    "title": "Socratic-SWE: Self-Evolving Coding Agents via Trace-Derived Agent Skills",
+    "url": "https://arxiv.org/abs/2606.07412",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.07412",
+      "https://arxiv.org/abs/2606.07412"
+    ]
+  },
+  {
+    "row_id": 61,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2026",
+    "title": "Self-evolving LLM Agents with In-Distribution Optimization",
+    "url": "https://arxiv.org/abs/2606.07367",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2606.07367",
+      "https://arxiv.org/abs/2606.07367"
+    ]
+  },
+  {
+    "row_id": 62,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-env",
+    "year": "2026",
+    "title": "Skill Self-Play: Pushing the Frontier of LLM Capability with Co-Evolving Skills",
+    "url": "https://arxiv.org/abs/2607.22529",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2607.22529",
+      "https://arxiv.org/abs/2607.22529",
+      "https://github.com/Qwen-Applications/skill-self-play"
+    ]
+  },
+  {
+    "row_id": 63,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2023",
+    "title": "Language Models Meet World Models: Embodied Experiences Enhance Language Models",
+    "url": "https://arxiv.org/abs/2305.10626",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2305.10626",
+      "https://arxiv.org/abs/2305.10626",
+      "https://github.com/szxiangjn/world-model-for-language-model"
+    ]
+  },
+  {
+    "row_id": 64,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2024",
+    "title": "Agent Planning with World Knowledge Model",
+    "url": "https://arxiv.org/abs/2405.14205",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2405.14205",
+      "https://arxiv.org/abs/2405.14205",
+      "https://github.com/zjunlp/WKM"
+    ]
+  },
+  {
+    "row_id": 65,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "Web Agents with World Models: Learning and Leveraging Environment Dynamics in Web Navigation",
+    "url": "https://arxiv.org/abs/2410.13232",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2410.13232",
+      "https://arxiv.org/abs/2410.13232",
+      "https://github.com/kyle8581/WMA-Agents"
+    ]
+  },
+  {
+    "row_id": 66,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "Understanding World or Predicting Future? A Comprehensive Survey of World Models",
+    "url": "https://arxiv.org/abs/2411.14499",
+    "hub_venue_unverified": "ACM CSUR",
+    "links": [
+      "https://arxiv.org/abs/2411.14499",
+      "https://arxiv.org/abs/2411.14499",
+      "https://github.com/tsinghua-fib-lab/World-Model"
+    ]
+  },
+  {
+    "row_id": 67,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "General agents contain world models",
+    "url": "https://arxiv.org/abs/2506.01622",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2506.01622",
+      "https://arxiv.org/abs/2506.01622"
+    ]
+  },
+  {
+    "row_id": 68,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "WebEvolver: Enhancing Web Agent Self-Improvement with Coevolving World Model",
+    "url": "https://arxiv.org/abs/2504.21024",
+    "hub_venue_unverified": "EMNLP",
+    "links": [
+      "https://arxiv.org/abs/2504.21024",
+      "https://arxiv.org/abs/2504.21024",
+      "https://github.com/Tencent/SelfEvolvingAgent"
+    ]
+  },
+  {
+    "row_id": 69,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "WebSynthesis: World-Model-Guided MCTS for Efficient WebUI-Trajectory Synthesis",
+    "url": "https://arxiv.org/abs/2507.04370",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.04370",
+      "https://arxiv.org/abs/2507.04370",
+      "https://github.com/LucusFigoGao/WebSynthesis"
+    ]
+  },
+  {
+    "row_id": 70,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "GAWM: Global-Aware World Model for Multi-Agent Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2501.10116",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2501.10116",
+      "https://arxiv.org/abs/2501.10116"
+    ]
+  },
+  {
+    "row_id": 71,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "WMPO: World Model-based Policy Optimization for Vision-Language-Action Models",
+    "url": "https://arxiv.org/abs/2511.09515",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2511.09515",
+      "https://arxiv.org/abs/2511.09515",
+      "https://github.com/WM-PO/WMPO"
+    ]
+  },
+  {
+    "row_id": 72,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "Internalizing World Models via Self-Play Finetuning for Agentic RL",
+    "url": "https://arxiv.org/abs/2510.15047",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2510.15047",
+      "https://arxiv.org/abs/2510.15047"
+    ]
+  },
+  {
+    "row_id": 73,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2026",
+    "title": "AlignUSER: Human-Aligned LLM Agents via World Models for Recommender System Evaluation",
+    "url": "https://arxiv.org/abs/2601.00930",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.00930",
+      "https://arxiv.org/abs/2601.00930"
+    ]
+  },
+  {
+    "row_id": 74,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2026",
+    "title": "Self-Evolving World Models for LLM Agent Planning",
+    "url": "https://arxiv.org/abs/2606.30639",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.30639",
+      "https://arxiv.org/abs/2606.30639"
+    ]
+  },
+  {
+    "row_id": 75,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "NavMorph: A Self-Evolving World Model for Vision-and-Language Navigation in Continuous Environments",
+    "url": "https://arxiv.org/abs/2506.23468",
+    "hub_venue_unverified": "ICCV",
+    "links": [
+      "https://arxiv.org/abs/2506.23468",
+      "https://arxiv.org/abs/2506.23468",
+      "https://github.com/Feliciaxyao/NavMorph"
+    ]
+  },
+  {
+    "row_id": 76,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2025",
+    "title": "EvoWorld: Evolving Panoramic World Generation with Explicit 3D Memory",
+    "url": "https://arxiv.org/abs/2510.01183",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2510.01183",
+      "https://arxiv.org/abs/2510.01183",
+      "https://github.com/JiahaoPlus/EvoWorld"
+    ]
+  },
+  {
+    "row_id": 77,
+    "branch": "fm",
+    "category": "1.3 Extrinsic Exploratory Experience",
+    "subgroup": "experience-world",
+    "year": "2026",
+    "title": "RISE: Self-Improving Robot Policy with Compositional World Model",
+    "url": "https://arxiv.org/abs/2602.11075",
+    "hub_venue_unverified": "RSS",
+    "links": [
+      "https://arxiv.org/abs/2602.11075",
+      "https://arxiv.org/abs/2602.11075",
+      "https://github.com/OpenDriveLab/RISE"
+    ]
+  },
+  {
+    "row_id": 78,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2022",
+    "title": "Large Language Models Are Human-Level Prompt Engineers",
+    "url": "https://arxiv.org/abs/2211.01910",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2211.01910",
+      "https://arxiv.org/abs/2211.01910",
+      "https://github.com/keirp/automatic_prompt_engineer"
+    ]
+  },
+  {
+    "row_id": 79,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2024",
+    "title": "Large Language Models as Optimizers",
+    "url": "https://arxiv.org/abs/2309.03409",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2309.03409",
+      "https://arxiv.org/abs/2309.03409",
+      "https://github.com/google-deepmind/opro"
+    ]
+  },
+  {
+    "row_id": 80,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2024",
+    "title": "Prompt Refinement with Image Pivot for Text-to-Image Generation",
+    "url": "https://arxiv.org/abs/2407.00247",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2407.00247",
+      "https://arxiv.org/abs/2407.00247",
+      "https://github.com/jingtaozhan/PromptReformulate"
+    ]
+  },
+  {
+    "row_id": 81,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2024",
+    "title": "Learning from Contrastive Prompts: Automated Optimization and Adaptation",
+    "url": "https://arxiv.org/abs/2409.15199",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2409.15199",
+      "https://arxiv.org/abs/2409.15199"
+    ]
+  },
+  {
+    "row_id": 82,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2024",
+    "title": "PRompt Optimization in Multi-Step Tasks (PROMST): Integrating Human Feedback and Heuristic-based Sampling",
+    "url": "https://arxiv.org/abs/2402.08702",
+    "hub_venue_unverified": "EMNLP",
+    "links": [
+      "https://arxiv.org/abs/2402.08702",
+      "https://arxiv.org/abs/2402.08702",
+      "https://github.com/yongchao98/PROMST"
+    ]
+  },
+  {
+    "row_id": 83,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2025",
+    "title": "The Prompt Alchemist: Automated LLM-Tailored Prompt Optimization for Test Case Generation",
+    "url": "https://arxiv.org/abs/2501.01329",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2501.01329",
+      "https://arxiv.org/abs/2501.01329"
+    ]
+  },
+  {
+    "row_id": 84,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2025",
+    "title": "DRO-InstructZero: Distributionally Robust Prompt Optimization for Large Language Models",
+    "url": "https://arxiv.org/abs/2510.15260",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2510.15260",
+      "https://arxiv.org/abs/2510.15260"
+    ]
+  },
+  {
+    "row_id": 85,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2025",
+    "title": "CoolPrompt: Automatic Prompt Optimization Framework for Large Language Models",
+    "url": "https://ieeexplore.ieee.org/document/11239071",
+    "hub_venue_unverified": "FRUCT",
+    "links": [
+      "https://ieeexplore.ieee.org/document/11239071",
+      "https://ieeexplore.ieee.org/document/11239071"
+    ]
+  },
+  {
+    "row_id": 86,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2026",
+    "title": "SePO: Self-Evolving Prompt Agent for System Prompt Optimization",
+    "url": "https://arxiv.org/abs/2606.04465",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.04465",
+      "https://arxiv.org/abs/2606.04465",
+      "https://github.com/taowangcheng/SePO"
+    ]
+  },
+  {
+    "row_id": 87,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-scalar",
+    "year": "2026",
+    "title": "SAGE: Stochastic Prompt Optimization via Agent-Guided Exploration",
+    "url": "https://arxiv.org/abs/2606.18902",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.18902",
+      "https://arxiv.org/abs/2606.18902"
+    ]
+  },
+  {
+    "row_id": 88,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2023",
+    "title": "Self-Refine: Iterative Refinement with Self-Feedback",
+    "url": "https://arxiv.org/abs/2303.17651",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2303.17651",
+      "https://arxiv.org/abs/2303.17651",
+      "https://github.com/madaan/self-refine"
+    ]
+  },
+  {
+    "row_id": 89,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2023",
+    "title": "Chain of Hindsight Aligns Language Models with Feedback",
+    "url": "https://arxiv.org/abs/2302.02676",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2302.02676",
+      "https://arxiv.org/abs/2302.02676",
+      "https://github.com/haoliuhl/chain-of-hindsight"
+    ]
+  },
+  {
+    "row_id": 90,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2023",
+    "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2303.11366",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2303.11366",
+      "https://arxiv.org/abs/2303.11366",
+      "https://github.com/noahshinn/reflexion"
+    ]
+  },
+  {
+    "row_id": 91,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2023",
+    "title": "Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate",
+    "url": "https://arxiv.org/abs/2305.19118",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2305.19118",
+      "https://arxiv.org/abs/2305.19118",
+      "https://github.com/Skytliang/Multi-Agents-Debate"
+    ]
+  },
+  {
+    "row_id": 92,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2024",
+    "title": "Self-Improving Customer Review Response Generation Based on LLMs",
+    "url": "https://arxiv.org/abs/2405.03845",
+    "hub_venue_unverified": "COLING",
+    "links": [
+      "https://arxiv.org/abs/2405.03845",
+      "https://arxiv.org/abs/2405.03845"
+    ]
+  },
+  {
+    "row_id": 93,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2024",
+    "title": "Prompt Optimization with Human Feedback",
+    "url": "https://arxiv.org/abs/2405.17346",
+    "hub_venue_unverified": "ICML Workshop",
+    "links": [
+      "https://arxiv.org/abs/2405.17346",
+      "https://arxiv.org/abs/2405.17346",
+      "https://github.com/xqlin98/APOHF"
+    ]
+  },
+  {
+    "row_id": 94,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2024",
+    "title": "Optimizing Instructions and Demonstrations for Multi-Stage Language Model Programs",
+    "url": "https://arxiv.org/abs/2406.11695",
+    "hub_venue_unverified": "EMNLP",
+    "links": [
+      "https://arxiv.org/abs/2406.11695",
+      "https://arxiv.org/abs/2406.11695",
+      "https://dspy.ai/"
+    ]
+  },
+  {
+    "row_id": 95,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2025",
+    "title": "CriSPO: Multi-Aspect Critique-Suggestion-guided Automatic Prompt Optimization for Text Generation",
+    "url": "https://arxiv.org/abs/2410.02748",
+    "hub_venue_unverified": "AAAI",
+    "links": [
+      "https://arxiv.org/abs/2410.02748",
+      "https://arxiv.org/abs/2410.02748",
+      "https://github.com/amazon-science/CriSPO"
+    ]
+  },
+  {
+    "row_id": 96,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2025",
+    "title": "Boosting Private Domain Understanding of Efficient MLLMs: A Tuning-free, Adaptive, Universal Prompt Optimization Framework",
+    "url": "https://arxiv.org/abs/2412.19684",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2412.19684",
+      "https://arxiv.org/abs/2412.19684"
+    ]
+  },
+  {
+    "row_id": 97,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2026",
+    "title": "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2507.19457",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2507.19457",
+      "https://arxiv.org/abs/2507.19457",
+      "https://github.com/gepa-ai/gepa"
+    ]
+  },
+  {
+    "row_id": 98,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-qualitative",
+    "year": "2026",
+    "title": "FORGE: Self-Evolving Agent Memory With No Weight Updates via Population Broadcast",
+    "url": "https://arxiv.org/abs/2605.16233",
+    "hub_venue_unverified": "CAIS",
+    "links": [
+      "https://arxiv.org/abs/2605.16233",
+      "https://arxiv.org/abs/2605.16233"
+    ]
+  },
+  {
+    "row_id": 99,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-evolution",
+    "year": "2024",
+    "title": "EvoPrompt: Connecting LLMs with Evolutionary Algorithms Yields Powerful Prompt Optimizers",
+    "url": "https://arxiv.org/abs/2309.08532",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2309.08532",
+      "https://arxiv.org/abs/2309.08532",
+      "https://github.com/beeevita/EvoPrompt"
+    ]
+  },
+  {
+    "row_id": 100,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-evolution",
+    "year": "2024",
+    "title": "WizardLM: Empowering large pre-trained language models to follow complex instructions",
+    "url": "https://arxiv.org/abs/2304.12244",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2304.12244",
+      "https://arxiv.org/abs/2304.12244",
+      "https://github.com/nlpxucan/WizardLM"
+    ]
+  },
+  {
+    "row_id": 101,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-evolution",
+    "year": "2025",
+    "title": "Tournament of Prompts: Evolving LLM Instructions Through Structured Debates and Elo Ratings",
+    "url": "https://arxiv.org/abs/2506.00178v2",
+    "hub_venue_unverified": "KDD",
+    "links": [
+      "https://arxiv.org/abs/2506.00178v2",
+      "https://arxiv.org/abs/2506.00178v2"
+    ]
+  },
+  {
+    "row_id": 102,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-evolution",
+    "year": "2023",
+    "title": "Promptbreeder: Self-Referential Self-Improvement Via Prompt Evolution",
+    "url": "https://arxiv.org/abs/2309.16797",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2309.16797",
+      "https://arxiv.org/abs/2309.16797"
+    ]
+  },
+  {
+    "row_id": 103,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-evolution",
+    "year": "2025",
+    "title": "DelvePO: Direction-Guided Self-Evolving Framework for Flexible Prompt Optimization",
+    "url": "https://arxiv.org/abs/2510.18257",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2510.18257",
+      "https://arxiv.org/abs/2510.18257",
+      "https://github.com/PasaLab/DelvePO"
+    ]
+  },
+  {
+    "row_id": 104,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-evolution",
+    "year": "2025",
+    "title": "How to Auto-optimize Prompts for Domain Tasks? Adaptive Prompting and Reasoning through Evolutionary Domain Knowledge Adaptation",
+    "url": "https://arxiv.org/abs/2510.21148",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2510.21148",
+      "https://arxiv.org/abs/2510.21148",
+      "https://github.com/miemieyanga/EGO-Prompt"
+    ]
+  },
+  {
+    "row_id": 105,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2023",
+    "title": "Automatic Prompt Optimization with \"Gradient Descent\" and Beam Search",
+    "url": "https://arxiv.org/abs/2305.03495",
+    "hub_venue_unverified": "EMNLP",
+    "links": [
+      "https://arxiv.org/abs/2305.03495",
+      "https://arxiv.org/abs/2305.03495",
+      "https://github.com/microsoft/LMOps/tree/main/prompt_optimization"
+    ]
+  },
+  {
+    "row_id": 106,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2024",
+    "title": "How to Correctly do Semantic Backpropagation on Language-based Agentic Systems",
+    "url": "https://arxiv.org/abs/2412.03624",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2412.03624",
+      "https://arxiv.org/abs/2412.03624",
+      "https://github.com/HishamAlyahya/semantic_backprop"
+    ]
+  },
+  {
+    "row_id": 107,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2024",
+    "title": "Trace is the Next AutoDiff: Generative Optimization with Rich Feedback, Execution Traces, and LLMs",
+    "url": "https://arxiv.org/abs/2406.16218",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2406.16218",
+      "https://arxiv.org/abs/2406.16218",
+      "https://github.com/microsoft/trace"
+    ]
+  },
+  {
+    "row_id": 108,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2025",
+    "title": "TextGrad: Automatic \"Differentiation\" via Text",
+    "url": "https://arxiv.org/abs/2406.07496",
+    "hub_venue_unverified": "Nature",
+    "links": [
+      "https://arxiv.org/abs/2406.07496",
+      "https://arxiv.org/abs/2406.07496",
+      "https://github.com/zou-group/textgrad"
+    ]
+  },
+  {
+    "row_id": 109,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2025",
+    "title": "metaTextGrad: Automatically optimizing language model optimizers",
+    "url": "https://arxiv.org/abs/2505.18524",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2505.18524",
+      "https://arxiv.org/abs/2505.18524",
+      "https://github.com/zou-group/metatextgrad"
+    ]
+  },
+  {
+    "row_id": 110,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2025",
+    "title": "MAPGD: Multi-Agent Prompt Gradient Descent for Collaborative Prompt Optimization",
+    "url": "https://openreview.net/pdf?id=FywYwwH5z9",
+    "hub_venue_unverified": "NeurIPS Workshop",
+    "links": [
+      "https://openreview.net/pdf?id=FywYwwH5z9",
+      "https://openreview.net/pdf?id=FywYwwH5z9"
+    ]
+  },
+  {
+    "row_id": 111,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2025",
+    "title": "Scaling Textual Gradients via Sampling-Based Momentum",
+    "url": "https://arxiv.org/abs/2506.00400",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2506.00400",
+      "https://arxiv.org/abs/2506.00400"
+    ]
+  },
+  {
+    "row_id": 112,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2026",
+    "title": "Pick Your Textual Gradients",
+    "url": "https://openreview.net/pdf?id=ydTwv5D536",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://openreview.net/pdf?id=ydTwv5D536",
+      "https://openreview.net/pdf?id=ydTwv5D536"
+    ]
+  },
+  {
+    "row_id": 113,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2026",
+    "title": "SkillOpt: Executive Strategy for Self-Evolving Agent Skills",
+    "url": "https://arxiv.org/abs/2605.23904",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.23904",
+      "https://arxiv.org/abs/2605.23904",
+      "https://github.com/microsoft/SkillOpt"
+    ]
+  },
+  {
+    "row_id": 114,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2026",
+    "title": "VASO: Formally Verifiable Self-Evolving Skills for Physical AI Agents",
+    "url": "https://arxiv.org/abs/2606.05395",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.05395",
+      "https://arxiv.org/abs/2606.05395"
+    ]
+  },
+  {
+    "row_id": 115,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2026",
+    "title": "Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization",
+    "url": "https://arxiv.org/abs/2604.20714",
+    "hub_venue_unverified": "ACL Findings",
+    "links": [
+      "https://arxiv.org/abs/2604.20714",
+      "https://arxiv.org/abs/2604.20714"
+    ]
+  },
+  {
+    "row_id": 116,
+    "branch": "scaffolding",
+    "category": "2.1 Prompt Optimization",
+    "subgroup": "prompt-textgrad",
+    "year": "2026",
+    "title": "Learning to Learn-at-Test-Time: Language Agents with Learnable Adaptation Policies",
+    "url": "https://arxiv.org/abs/2604.00830",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2604.00830",
+      "https://arxiv.org/abs/2604.00830",
+      "https://github.com/zzzlou/meta-ttl"
+    ]
+  },
+  {
+    "row_id": 117,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2023",
+    "title": "Learning to Reason and Memorize with Self-Notes",
+    "url": "https://arxiv.org/abs/2305.00833",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2305.00833",
+      "https://arxiv.org/abs/2305.00833"
+    ]
+  },
+  {
+    "row_id": 118,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2024",
+    "title": "ExpeL: LLM Agents Are Experiential Learners",
+    "url": "https://arxiv.org/abs/2308.10144",
+    "hub_venue_unverified": "AAAI",
+    "links": [
+      "https://arxiv.org/abs/2308.10144",
+      "https://arxiv.org/abs/2308.10144",
+      "https://github.com/LeapLabTHU/ExpeL"
+    ]
+  },
+  {
+    "row_id": 119,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2024",
+    "title": "A Human-Inspired Reading Agent with Gist Memory of Very Long Contexts",
+    "url": "https://arxiv.org/abs/2402.09727",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2402.09727",
+      "https://arxiv.org/abs/2402.09727"
+    ]
+  },
+  {
+    "row_id": 120,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2024",
+    "title": "CodeAgent: Enhancing Code Generation with Tool-Integrated Agent Systems for Real-World Repo-level Coding Challenges",
+    "url": "https://arxiv.org/abs/2401.07339",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2401.07339",
+      "https://arxiv.org/abs/2401.07339"
+    ]
+  },
+  {
+    "row_id": 121,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2024",
+    "title": "MEMORYLLM: Towards Self-Updatable Large Language Models",
+    "url": "https://arxiv.org/abs/2402.04624",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2402.04624",
+      "https://arxiv.org/abs/2402.04624",
+      "https://github.com/wangyu-ustc/MemoryLLM"
+    ]
+  },
+  {
+    "row_id": 122,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "Agent Workflow Memory",
+    "url": "https://arxiv.org/abs/2409.07429",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2409.07429",
+      "https://arxiv.org/abs/2409.07429",
+      "https://github.com/zorazrw/agent-workflow-memory"
+    ]
+  },
+  {
+    "row_id": 123,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory",
+    "url": "https://arxiv.org/abs/2509.25140",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2509.25140",
+      "https://arxiv.org/abs/2509.25140"
+    ]
+  },
+  {
+    "row_id": 124,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "Seeing, Listening, Remembering, and Reasoning: A Multimodal Agent with Long-Term Memory",
+    "url": "https://arxiv.org/abs/2508.09736",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2508.09736",
+      "https://arxiv.org/abs/2508.09736",
+      "https://github.com/bytedance-seed/m3-agent"
+    ]
+  },
+  {
+    "row_id": 125,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory",
+    "url": "https://arxiv.org/abs/2305.00833",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2305.00833",
+      "https://arxiv.org/abs/2305.00833",
+      "https://github.com/suzgunmirac/dynamic-cheatsheet"
+    ]
+  },
+  {
+    "row_id": 126,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "PRIME: Planning and Retrieval-Integrated Memory for Enhanced Reasoning",
+    "url": "https://arxiv.org/abs/2509.22315",
+    "hub_venue_unverified": "AAAI",
+    "links": [
+      "https://arxiv.org/abs/2509.22315",
+      "https://arxiv.org/abs/2509.22315"
+    ]
+  },
+  {
+    "row_id": 127,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "Contextual Memory Reweaving in Large Language Models Using Layered Latent State Reconstruction",
+    "url": "",
+    "hub_venue_unverified": "arXiv",
+    "links": []
+  },
+  {
+    "row_id": 128,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "MemGen: Weaving Generative Latent Memory for Self-Evolving Agents",
+    "url": "https://arxiv.org/abs/2509.24704",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2509.24704",
+      "https://arxiv.org/abs/2509.24704",
+      "https://github.com/bingreeky/MemGen"
+    ]
+  },
+  {
+    "row_id": 129,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2025",
+    "title": "M+: Extending MemoryLLM with Scalable Long-Term Memory",
+    "url": "https://arxiv.org/abs/2502.00592",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2502.00592",
+      "https://arxiv.org/abs/2502.00592",
+      "https://github.com/wangyu-ustc/MemoryLLM"
+    ]
+  },
+  {
+    "row_id": 130,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2026",
+    "title": "Seeing, Listening, Remembering, and Reasoning: A Multimodal Agent with Long-Term Memory",
+    "url": "https://arxiv.org/abs/2508.09736",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2508.09736",
+      "https://arxiv.org/abs/2508.09736",
+      "https://github.com/bytedance-seed/m3-agent"
+    ]
+  },
+  {
+    "row_id": 131,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2026",
+    "title": "Thought-Retriever: Don't Just Retrieve Raw Data, Retrieve Thoughts for Memory-Augmented Agentic Systems",
+    "url": "https://arxiv.org/abs/2604.12231",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2604.12231",
+      "https://arxiv.org/abs/2604.12231"
+    ]
+  },
+  {
+    "row_id": 132,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2026",
+    "title": "Better with Experience: Self-Evolving LLM Agents for Evidence-Grounded Health Community Notes",
+    "url": "https://arxiv.org/abs/2606.02215",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.02215",
+      "https://arxiv.org/abs/2606.02215"
+    ]
+  },
+  {
+    "row_id": 133,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-object",
+    "year": "2026",
+    "title": "Agon: An Autonomous Large-Scale Omnidisciplinary Research System Built on Prompt Economy",
+    "url": "https://arxiv.org/abs/2606.24177",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.24177",
+      "https://arxiv.org/abs/2606.24177",
+      "https://github.com/AutoResearch-Factory/Agon"
+    ]
+  },
+  {
+    "row_id": 134,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2022",
+    "title": "XMem: Long-Term Video Object Segmentation with an Atkinson-Shiffrin Memory Model",
+    "url": "https://arxiv.org/abs/2207.07115",
+    "hub_venue_unverified": "ECCV",
+    "links": [
+      "https://arxiv.org/abs/2207.07115",
+      "https://arxiv.org/abs/2207.07115",
+      "https://github.com/hkchengrex/XMem"
+    ]
+  },
+  {
+    "row_id": 135,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2023",
+    "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+    "url": "https://dl.acm.org/doi/10.1145/3586183.3606763",
+    "hub_venue_unverified": "UIST'23",
+    "links": [
+      "https://dl.acm.org/doi/10.1145/3586183.3606763",
+      "https://dl.acm.org/doi/10.1145/3586183.3606763"
+    ]
+  },
+  {
+    "row_id": 136,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2024",
+    "title": "MemoryBank: Enhancing Large Language Models with Long-Term Memory",
+    "url": "https://arxiv.org/abs/2305.10250",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2305.10250",
+      "https://arxiv.org/abs/2305.10250",
+      "https://github.com/zhongwanjun/MemoryBank-SiliconFriend"
+    ]
+  },
+  {
+    "row_id": 137,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2024",
+    "title": "MovieChat: From Dense Token to Sparse Memory for Long Video Understanding",
+    "url": "https://arxiv.org/abs/2307.16449",
+    "hub_venue_unverified": "CVPR",
+    "links": [
+      "https://arxiv.org/abs/2307.16449",
+      "https://arxiv.org/abs/2307.16449",
+      "https://github.com/rese1f/MovieChat"
+    ]
+  },
+  {
+    "row_id": 138,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2024",
+    "title": "Explore, Select, Derive, and Recall: Augmenting LLM with Human-like Memory for Mobile Task Automation",
+    "url": "https://arxiv.org/abs/2312.03003",
+    "hub_venue_unverified": "ACM MobiCom",
+    "links": [
+      "https://arxiv.org/abs/2312.03003",
+      "https://arxiv.org/abs/2312.03003",
+      "https://github.com/mobilegptsys/MobileGPT"
+    ]
+  },
+  {
+    "row_id": 139,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2024",
+    "title": "Scene-Driven Multimodal Knowledge Graph Construction for Embodied AI",
+    "url": "https://arxiv.org/abs/2311.03783",
+    "hub_venue_unverified": "IEEE TKDE",
+    "links": [
+      "https://arxiv.org/abs/2311.03783",
+      "https://arxiv.org/abs/2311.03783"
+    ]
+  },
+  {
+    "row_id": 140,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "SCM: Enhancing Large Language Model with Self-Controlled Memory Framework",
+    "url": "https://arxiv.org/abs/2304.13343",
+    "hub_venue_unverified": "DASFAA",
+    "links": [
+      "https://arxiv.org/abs/2304.13343",
+      "https://arxiv.org/abs/2304.13343",
+      "https://github.com/wbbeyourself/SCM4LLMs"
+    ]
+  },
+  {
+    "row_id": 141,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "Hierarchical Memory for High-Efficiency Long-Term Reasoning in LLM Agents",
+    "url": "https://arxiv.org/abs/2507.22925",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.22925",
+      "https://arxiv.org/abs/2507.22925"
+    ]
+  },
+  {
+    "row_id": 142,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "SALM: A Multi-Agent Framework for Language Model-Driven Social Network Simulation",
+    "url": "https://arxiv.org/abs/2505.09081",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.09081",
+      "https://arxiv.org/abs/2505.09081"
+    ]
+  },
+  {
+    "row_id": 143,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory",
+    "url": "https://arxiv.org/abs/2504.19413",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.19413",
+      "https://arxiv.org/abs/2504.19413",
+      "https://mem0.ai/research"
+    ]
+  },
+  {
+    "row_id": 144,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "G-Memory: Tracing Hierarchical Memory for Multi-Agent Systems",
+    "url": "https://arxiv.org/abs/2506.07398",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2506.07398",
+      "https://arxiv.org/abs/2506.07398",
+      "https://github.com/bingreeky/GMemory"
+    ]
+  },
+  {
+    "row_id": 145,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "Zep: A Temporal Knowledge Graph Architecture for Agent Memory",
+    "url": "https://arxiv.org/abs/2501.13956",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2501.13956",
+      "https://arxiv.org/abs/2501.13956"
+    ]
+  },
+  {
+    "row_id": 146,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "SGMem: Sentence Graph Memory for Long-Term Conversational Agents",
+    "url": "https://arxiv.org/abs/2509.21212",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2509.21212",
+      "https://arxiv.org/abs/2509.21212"
+    ]
+  },
+  {
+    "row_id": 147,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "CausalRAG: Integrating Causal Graphs into Retrieval-Augmented Generation",
+    "url": "https://arxiv.org/abs/2503.19878",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2503.19878",
+      "https://arxiv.org/abs/2503.19878",
+      "https://github.com/Pwnb/CausalRAG"
+    ]
+  },
+  {
+    "row_id": 148,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "GraphVideoAgent: Enhancing Long-form Video Understanding with Entity Relation Graphs",
+    "url": "https://dl.acm.org/doi/abs/10.1145/3746027.3755537",
+    "hub_venue_unverified": "MM'25",
+    "links": [
+      "https://dl.acm.org/doi/abs/10.1145/3746027.3755537",
+      "https://dl.acm.org/doi/abs/10.1145/3746027.3755537"
+    ]
+  },
+  {
+    "row_id": 149,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "Decentralizing AI Memory: SHIMI, a Semantic Hierarchical Memory Index for Scalable Agent Reasoning",
+    "url": "https://arxiv.org/abs/2504.06135",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.06135",
+      "https://arxiv.org/abs/2504.06135"
+    ]
+  },
+  {
+    "row_id": 150,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "From Knowledge to Noise: CTIM-Rover and the Pitfalls of Episodic Memory in Software Engineering Agents",
+    "url": "https://arxiv.org/abs/2505.23422v1",
+    "hub_venue_unverified": "ACL Workshop",
+    "links": [
+      "https://arxiv.org/abs/2505.23422v1",
+      "https://arxiv.org/abs/2505.23422v1",
+      "https://github.com/Liqs-v2/ctim-rover"
+    ]
+  },
+  {
+    "row_id": 151,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "In Prospect and Retrospect: Reflective Memory Management for Long-term Personalized Dialogue Agents",
+    "url": "https://arxiv.org/abs/2503.08026",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2503.08026",
+      "https://arxiv.org/abs/2503.08026"
+    ]
+  },
+  {
+    "row_id": 152,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2025",
+    "title": "MrSteve: Instruction-Following Agents in Minecraft with What-Where-When Memory",
+    "url": "https://openreview.net/pdf?id=CjXaMI2kUH",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://openreview.net/pdf?id=CjXaMI2kUH",
+      "https://openreview.net/pdf?id=CjXaMI2kUH",
+      "https://github.com/frechele/MrSteve"
+    ]
+  },
+  {
+    "row_id": 153,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2026",
+    "title": "EvolveMem: Self-Evolving Memory Architecture via AutoResearch for LLM Agents",
+    "url": "https://arxiv.org/abs/2605.13941",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.13941",
+      "https://arxiv.org/abs/2605.13941",
+      "https://github.com/aiming-lab/SimpleMem"
+    ]
+  },
+  {
+    "row_id": 154,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2026",
+    "title": "SAGE: A Self-Evolving Agentic Graph-Memory Engine for Structure-Aware Associative Memory",
+    "url": "https://arxiv.org/abs/2605.12061",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.12061",
+      "https://arxiv.org/abs/2605.12061"
+    ]
+  },
+  {
+    "row_id": 155,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2026",
+    "title": "Prism: An Evolutionary Memory Substrate for Multi-Agent Open-Ended Discovery",
+    "url": "https://arxiv.org/abs/2604.19795",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2604.19795",
+      "https://arxiv.org/abs/2604.19795"
+    ]
+  },
+  {
+    "row_id": 156,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2026",
+    "title": "DecentMem: Self-Evolving Multi-Agent Systems via Decentralized Memory",
+    "url": "https://arxiv.org/abs/2605.22721",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.22721",
+      "https://arxiv.org/abs/2605.22721"
+    ]
+  },
+  {
+    "row_id": 157,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2026",
+    "title": "EXG: Self-Evolving Agents with Experience Graphs",
+    "url": "https://arxiv.org/abs/2605.17721",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.17721",
+      "https://arxiv.org/abs/2605.17721"
+    ]
+  },
+  {
+    "row_id": 158,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-structure",
+    "year": "2026",
+    "title": "CLAG: Adaptive Memory Organization via Agent-Driven Clustering for Small Language Model Agents",
+    "url": "https://arxiv.org/abs/2603.15421",
+    "hub_venue_unverified": "ACL Findings",
+    "links": [
+      "https://arxiv.org/abs/2603.15421",
+      "https://arxiv.org/abs/2603.15421",
+      "https://github.com/dmis-lab/CLAG"
+    ]
+  },
+  {
+    "row_id": 159,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2023",
+    "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+    "url": "https://arxiv.org/abs/2304.03442",
+    "hub_venue_unverified": "UIST",
+    "links": [
+      "https://arxiv.org/abs/2304.03442",
+      "https://arxiv.org/abs/2304.03442",
+      "https://github.com/joonspk-research/generative_agents"
+    ]
+  },
+  {
+    "row_id": 160,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2024",
+    "title": "WizardLM: Empowering large pre-trained language models to follow complex instructions",
+    "url": "https://arxiv.org/abs/2509.09498",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2509.09498",
+      "https://arxiv.org/abs/2509.09498"
+    ]
+  },
+  {
+    "row_id": 161,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "SEDM: Scalable Self-Evolving Distributed Memory for Agents",
+    "url": "https://arxiv.org/abs/2309.08532",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2309.08532",
+      "https://arxiv.org/abs/2309.08532",
+      "https://github.com/beeevita/EvoPrompt"
+    ]
+  },
+  {
+    "row_id": 162,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "MemInsight: Autonomous Memory Augmentation for LLM Agents",
+    "url": "https://arxiv.org/abs/2503.21760",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2503.21760",
+      "https://arxiv.org/abs/2503.21760"
+    ]
+  },
+  {
+    "row_id": 163,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "MemGen: Weaving Generative Latent Memory for Self-Evolving Agents",
+    "url": "https://arxiv.org/abs/2509.24704",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2509.24704",
+      "https://arxiv.org/abs/2509.24704",
+      "https://github.com/KANABOON1/MemGen"
+    ]
+  },
+  {
+    "row_id": 164,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "A-MEM: Agentic Memory for LLM Agents",
+    "url": "https://arxiv.org/abs/2502.12110",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2502.12110",
+      "https://arxiv.org/abs/2502.12110",
+      "https://github.com/WujiangXu/A-mem-sys"
+    ]
+  },
+  {
+    "row_id": 165,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "G-Memory: Tracing Hierarchical Memory for Multi-Agent Systems",
+    "url": "https://arxiv.org/abs/2506.07398",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.07398",
+      "https://arxiv.org/abs/2506.07398",
+      "https://github.com/bingreeky/GMemory"
+    ]
+  },
+  {
+    "row_id": 166,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory",
+    "url": "https://arxiv.org/abs/2504.19413",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.19413",
+      "https://arxiv.org/abs/2504.19413",
+      "https://mem0.ai/research"
+    ]
+  },
+  {
+    "row_id": 167,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG",
+    "url": "https://arxiv.org/abs/2501.09136",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2501.09136",
+      "https://arxiv.org/abs/2501.09136",
+      "https://github.com/asinghcsu/AgenticRAG-Survey"
+    ]
+  },
+  {
+    "row_id": 168,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "Memory OS of AI Agent",
+    "url": "https://arxiv.org/abs/2506.06326",
+    "hub_venue_unverified": "EMNLP",
+    "links": [
+      "https://arxiv.org/abs/2506.06326",
+      "https://arxiv.org/abs/2506.06326",
+      "https://github.com/BAI-LAB/MemoryOS"
+    ]
+  },
+  {
+    "row_id": 169,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "SCM: Enhancing Large Language Model with Self-Controlled Memory Framework",
+    "url": "https://arxiv.org/abs/2304.13343",
+    "hub_venue_unverified": "DASFAA",
+    "links": [
+      "https://arxiv.org/abs/2304.13343",
+      "https://arxiv.org/abs/2304.13343",
+      "https://github.com/wbbeyourself/SCM4LLMs"
+    ]
+  },
+  {
+    "row_id": 170,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "Dynamic Cheatsheet: Test-Time Learning with Adaptive Memory",
+    "url": "https://arxiv.org/abs/2504.07952",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.07952",
+      "https://arxiv.org/abs/2504.07952",
+      "https://github.com/suzgunmirac/dynamic-cheatsheet"
+    ]
+  },
+  {
+    "row_id": 171,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "MLC-Agent: Cognitive Model based on Memory-Learning Collaboration in LLM Empowered Agent Simulation Environment",
+    "url": "https://arxiv.org/abs/2507.20215",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.20215",
+      "https://arxiv.org/abs/2507.20215"
+    ]
+  },
+  {
+    "row_id": 172,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "MemInsight: Autonomous Memory Augmentation for LLM Agents",
+    "url": "https://arxiv.org/abs/2503.21760",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2503.21760",
+      "https://arxiv.org/abs/2503.21760"
+    ]
+  },
+  {
+    "row_id": 173,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2025",
+    "title": "PBFT-Backed Semantic Voting for Multi-Agent Memory Pruning",
+    "url": "https://arxiv.org/abs/2506.17338",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.17338",
+      "https://arxiv.org/abs/2506.17338",
+      "https://github.com/DngBack/co-forget-protocol"
+    ]
+  },
+  {
+    "row_id": 174,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving Language Models",
+    "url": "https://arxiv.org/abs/2510.04618",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2510.04618",
+      "https://arxiv.org/abs/2510.04618",
+      "https://github.com/ace-agent/ace"
+    ]
+  },
+  {
+    "row_id": 175,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "MemRL: Self-Evolving Agents via Runtime Reinforcement Learning on Episodic Memory",
+    "url": "https://arxiv.org/abs/2601.03192",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.03192",
+      "https://arxiv.org/abs/2601.03192",
+      "https://github.com/MemTensor/MemRL"
+    ]
+  },
+  {
+    "row_id": 176,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "TMEM: Scaling Self-Evolving Agents via Parametric Memory",
+    "url": "https://arxiv.org/abs/2606.04536",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.04536",
+      "https://arxiv.org/abs/2606.04536"
+    ]
+  },
+  {
+    "row_id": 177,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "MemQ: Integrating Q-Learning into Self-Evolving Memory Agents over Provenance DAGs",
+    "url": "https://arxiv.org/abs/2605.08374",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.08374",
+      "https://arxiv.org/abs/2605.08374",
+      "https://github.com/jwliao-ai/MemQ"
+    ]
+  },
+  {
+    "row_id": 178,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "Memory Beyond Recall: A Dual-Process Cognitive Memory System for Self-Evolving LLM Agents",
+    "url": "https://arxiv.org/abs/2606.09483",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.09483",
+      "https://arxiv.org/abs/2606.09483"
+    ]
+  },
+  {
+    "row_id": 179,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "AEL: Agent Evolving Learning for Open-Ended Environments",
+    "url": "https://arxiv.org/abs/2604.21725",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2604.21725",
+      "https://arxiv.org/abs/2604.21725",
+      "https://github.com/WujiangXu/AEL"
+    ]
+  },
+  {
+    "row_id": 180,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "Metis: Bridging Text and Code Memory for Self-Evolving Agents",
+    "url": "https://arxiv.org/abs/2606.24151",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.24151",
+      "https://arxiv.org/abs/2606.24151"
+    ]
+  },
+  {
+    "row_id": 181,
+    "branch": "scaffolding",
+    "category": "2.2 Memory",
+    "subgroup": "memory-processing",
+    "year": "2026",
+    "title": "Mem^2Evolve: Towards Self-Evolving Agents via Co-Evolutionary Capability Expansion and Experience Distillation",
+    "url": "https://arxiv.org/abs/2604.10923",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2604.10923",
+      "https://arxiv.org/abs/2604.10923",
+      "https://github.com/BUAA-IRIP-LLM/Mem2Evolve"
+    ]
+  },
+  {
+    "row_id": 182,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2023",
+    "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "url": "https://arxiv.org/abs/2305.16291",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2305.16291",
+      "https://arxiv.org/abs/2305.16291",
+      "https://github.com/MineDojo/Voyager"
+    ]
+  },
+  {
+    "row_id": 183,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2024",
+    "title": "ToolNet: Connecting Large Language Models with Massive Tools via Tool Graph",
+    "url": "https://arxiv.org/abs/2403.00839",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2403.00839",
+      "https://arxiv.org/abs/2403.00839"
+    ]
+  },
+  {
+    "row_id": 184,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "AgentOrchestra: Orchestrating Hierarchical Multi-Agent Intelligence with the Tool-Environment-Agent(TEA) Protocol",
+    "url": "https://arxiv.org/abs/2506.12508",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.12508",
+      "https://arxiv.org/abs/2506.12508"
+    ]
+  },
+  {
+    "row_id": 185,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "MetaAgent: Toward Self-Evolving Agent via Tool Meta-Learning",
+    "url": "https://arxiv.org/abs/2508.00271",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2508.00271",
+      "https://arxiv.org/abs/2508.00271",
+      "https://github.com/qhjqhj00/MetaAgent"
+    ]
+  },
+  {
+    "row_id": 186,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "OrchDAG: Complex Tool Orchestration in Multi-Turn Interactions with Plan DAGs",
+    "url": "https://arxiv.org/abs/2510.24663",
+    "hub_venue_unverified": "NeurIPS Workshop",
+    "links": [
+      "https://arxiv.org/abs/2510.24663",
+      "https://arxiv.org/abs/2510.24663"
+    ]
+  },
+  {
+    "row_id": 187,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "AutoTIR: Autonomous Tools Integrated Reasoning via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2507.21836",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.21836",
+      "https://arxiv.org/abs/2507.21836",
+      "https://github.com/weiyifan1023/AutoTIR"
+    ]
+  },
+  {
+    "row_id": 188,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "MCP-Flow: Facilitating LLM Agents to Master Real-World, Diverse and Scaling MCP Tools",
+    "url": "https://arxiv.org/abs/2510.24284",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2510.24284",
+      "https://arxiv.org/abs/2510.24284",
+      "https://github.com/wwh0411/MCP-Flow"
+    ]
+  },
+  {
+    "row_id": 189,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "In-the-Flow Agentic System Optimization for Effective Planning and Tool Use",
+    "url": "https://arxiv.org/abs/2510.05592",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2510.05592",
+      "https://arxiv.org/abs/2510.05592",
+      "https://github.com/lupantech/AgentFlow"
+    ]
+  },
+  {
+    "row_id": 190,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "MassTool: A Multi-Task Search-Based Tool Retrieval Framework for Large Language Models",
+    "url": "https://arxiv.org/abs/2507.00487",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.00487",
+      "https://arxiv.org/abs/2507.00487",
+      "https://github.com/wxydada/MassTool"
+    ]
+  },
+  {
+    "row_id": 191,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "AgentOrchestra: Orchestrating Multi-Agent Intelligence with the Tool-Environment-Agent(TEA) Protocol",
+    "url": "https://arxiv.org/abs/2506.12508",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.12508",
+      "https://arxiv.org/abs/2506.12508"
+    ]
+  },
+  {
+    "row_id": 192,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "Iterative Tool Usage Exploration for Multimodal Agents via Step-wise Preference Tuning",
+    "url": "https://arxiv.org/abs/2504.21561",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2504.21561",
+      "https://arxiv.org/abs/2504.21561",
+      "https://github.com/SPORT-Agents/SPORT-Agents"
+    ]
+  },
+  {
+    "row_id": 193,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "Tool-Star: Empowering LLM-Brained Multi-Tool Reasoner via Reinforcement Learning",
+    "url": "https://arxiv.org/abs/2505.16410",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.16410",
+      "https://arxiv.org/abs/2505.16410",
+      "https://github.com/RUC-NLPIR/Tool-Star"
+    ]
+  },
+  {
+    "row_id": 194,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "MCP-Zero: Active Tool Discovery for Autonomous LLM Agents",
+    "url": "https://arxiv.org/abs/2506.01056v4",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.01056v4",
+      "https://arxiv.org/abs/2506.01056v4",
+      "https://github.com/xfey/MCP-Zero"
+    ]
+  },
+  {
+    "row_id": 195,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "AskToAct: Enhancing LLMs Tool Use via Self-Correcting Clarification",
+    "url": "https://arxiv.org/abs/2503.01940",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2503.01940",
+      "https://arxiv.org/abs/2503.01940"
+    ]
+  },
+  {
+    "row_id": 196,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "MemTool: Optimizing Short-Term Memory Management for Dynamic Tool Calling in LLM Agent Multi-Turn Conversations",
+    "url": "https://arxiv.org/abs/2507.21428",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.21428",
+      "https://arxiv.org/abs/2507.21428"
+    ]
+  },
+  {
+    "row_id": 197,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "Tool-Planner: Task Planning with Clusters across Multiple Tools",
+    "url": "https://arxiv.org/abs/2406.03807",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2406.03807",
+      "https://arxiv.org/abs/2406.03807",
+      "https://github.com/OceannTwT/Tool-Planner"
+    ]
+  },
+  {
+    "row_id": 198,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "Tool-to-Agent Retrieval: Bridging Tools and Agents for Scalable LLM Multi-Agent Systems",
+    "url": "https://arxiv.org/abs/2511.01854",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2511.01854",
+      "https://arxiv.org/abs/2511.01854"
+    ]
+  },
+  {
+    "row_id": 199,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2025",
+    "title": "ToolGen: Unified Tool Retrieval and Calling via Generation",
+    "url": "https://arxiv.org/abs/2410.03439",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2410.03439",
+      "https://arxiv.org/abs/2410.03439",
+      "https://github.com/Reason-Wang/ToolGen"
+    ]
+  },
+  {
+    "row_id": 200,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2026",
+    "title": "ToolACE-R: Model-aware Iterative Training and Adaptive Refinement for Tool Learning",
+    "url": "https://arxiv.org/abs/2504.01400",
+    "hub_venue_unverified": "AAAI",
+    "links": [
+      "https://arxiv.org/abs/2504.01400",
+      "https://arxiv.org/abs/2504.01400"
+    ]
+  },
+  {
+    "row_id": 201,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2026",
+    "title": "DeepAgent: A General Reasoning Agent with Scalable Toolsets",
+    "url": "https://arxiv.org/abs/2510.21618",
+    "hub_venue_unverified": "WWW",
+    "links": [
+      "https://arxiv.org/abs/2510.21618",
+      "https://arxiv.org/abs/2510.21618",
+      "https://github.com/RUC-NLPIR/DeepAgent"
+    ]
+  },
+  {
+    "row_id": 202,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2026",
+    "title": "DeepEyesV2: Toward Agentic Multimodal Model",
+    "url": "https://arxiv.org/abs/2511.05271",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2511.05271",
+      "https://arxiv.org/abs/2511.05271",
+      "https://github.com/Visual-Agent/DeepEyesV2"
+    ]
+  },
+  {
+    "row_id": 203,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2026",
+    "title": "In-the-Flow Agentic System Optimization for Effective Planning and Tool Use",
+    "url": "https://arxiv.org/abs/2510.05592",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2510.05592",
+      "https://arxiv.org/abs/2510.05592",
+      "https://github.com/lupantech/AgentFlow"
+    ]
+  },
+  {
+    "row_id": 204,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2026",
+    "title": "GenericAgent: A Token-Efficient Self-Evolving LLM Agent via Contextual Information Density Maximization",
+    "url": "https://arxiv.org/abs/2604.17091",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2604.17091",
+      "https://arxiv.org/abs/2604.17091",
+      "https://github.com/lsdefine/GenericAgent"
+    ]
+  },
+  {
+    "row_id": 205,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-routing",
+    "year": "2026",
+    "title": "ANDES: Agent Native Data Evolving Synthesis Tool for Autonomous Instruction Alignment",
+    "url": "https://arxiv.org/abs/2606.01279",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.01279",
+      "https://arxiv.org/abs/2606.01279",
+      "https://github.com/zzy1127/ANDES"
+    ]
+  },
+  {
+    "row_id": 206,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2023",
+    "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "url": "https://arxiv.org/abs/2305.16291",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2305.16291",
+      "https://arxiv.org/abs/2305.16291",
+      "https://github.com/MineDojo/Voyager"
+    ]
+  },
+  {
+    "row_id": 207,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2025",
+    "title": "STELLA: Self-Evolving LLM Agent for Biomedical Research",
+    "url": "https://arxiv.org/abs/2507.02004",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.02004",
+      "https://arxiv.org/abs/2507.02004",
+      "https://github.com/zaixizhang/STELLA"
+    ]
+  },
+  {
+    "row_id": 208,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2025",
+    "title": "SkillWeaver: Web Agents can Self-Improve by Discovering and Honing Skills",
+    "url": "https://arxiv.org/abs/2504.07079",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2504.07079",
+      "https://arxiv.org/abs/2504.07079",
+      "https://github.com/OSU-NLP-Group/SkillWeaver"
+    ]
+  },
+  {
+    "row_id": 209,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2025",
+    "title": "PyVision: Agentic Vision with Dynamic Tooling",
+    "url": "https://arxiv.org/abs/2507.07998",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.07998",
+      "https://arxiv.org/abs/2507.07998",
+      "https://github.com/agents-x-project/PyVision"
+    ]
+  },
+  {
+    "row_id": 210,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2025",
+    "title": "From Exploration to Mastery: Enabling LLMs to Master Tools via Self-Driven Interactions",
+    "url": "https://arxiv.org/abs/2410.08197",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2410.08197",
+      "https://arxiv.org/abs/2410.08197",
+      "https://github.com/quchangle1/DRAFT"
+    ]
+  },
+  {
+    "row_id": 211,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2025",
+    "title": "LLMLOOP: Improving LLM-Generated Code and Tests Through Automated Iterative Feedback Loops",
+    "url": "https://ieeexplore.ieee.org/document/11185878",
+    "hub_venue_unverified": "ICSME",
+    "links": [
+      "https://ieeexplore.ieee.org/document/11185878",
+      "https://ieeexplore.ieee.org/document/11185878",
+      "https://github.com/ravinravi03/LLMLOOP"
+    ]
+  },
+  {
+    "row_id": 212,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2025",
+    "title": "Helping LLMs Improve Code Generation Using Feedback from Testing and Static Analysis",
+    "url": "https://arxiv.org/abs/2412.14841",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2412.14841",
+      "https://arxiv.org/abs/2412.14841"
+    ]
+  },
+  {
+    "row_id": 213,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2026",
+    "title": "RewardHarness: Self-Evolving Agentic Post-Training",
+    "url": "https://arxiv.org/abs/2605.08703",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.08703",
+      "https://arxiv.org/abs/2605.08703",
+      "https://github.com/TIGER-AI-Lab/RewardHarness"
+    ]
+  },
+  {
+    "row_id": 214,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2026",
+    "title": "MUSE-Autoskill: Self-Evolving Agents via Skill Creation, Memory, Management, and Evaluation",
+    "url": "https://arxiv.org/abs/2605.27366",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.27366",
+      "https://arxiv.org/abs/2605.27366"
+    ]
+  },
+  {
+    "row_id": 215,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2026",
+    "title": "CODESKILL: Learning Self-Evolving Skills for Coding Agents",
+    "url": "https://arxiv.org/abs/2605.25430",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.25430",
+      "https://arxiv.org/abs/2605.25430"
+    ]
+  },
+  {
+    "row_id": 216,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-refine",
+    "year": "2026",
+    "title": "PFAgent: A Tractable and Self-Evolving Power-Flow Agent for Interactive Grid Analysis",
+    "url": "https://arxiv.org/abs/2604.10846",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2604.10846",
+      "https://arxiv.org/abs/2604.10846"
+    ]
+  },
+  {
+    "row_id": 217,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2023",
+    "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "url": "https://arxiv.org/abs/2305.16291",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2305.16291",
+      "https://arxiv.org/abs/2305.16291",
+      "https://github.com/MineDojo/Voyager"
+    ]
+  },
+  {
+    "row_id": 218,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Alita: Generalist Agent Enabling Scalable Agentic Reasoning with Minimal Predefinition and Maximal Self-Evolution",
+    "url": "https://arxiv.org/abs/2505.20286",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.20286",
+      "https://arxiv.org/abs/2505.20286",
+      "https://github.com/CharlesQ9/Alita"
+    ]
+  },
+  {
+    "row_id": 219,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2024",
+    "title": "Large Language Models as Tool Makers",
+    "url": "https://arxiv.org/abs/2305.17126",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2305.17126",
+      "https://arxiv.org/abs/2305.17126",
+      "https://github.com/ctlllll/LLM-ToolMaker"
+    ]
+  },
+  {
+    "row_id": 220,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Alita-G: Self-Evolving Generative Agent for Agent Generation",
+    "url": "https://arxiv.org/abs/2510.23601",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2510.23601",
+      "https://arxiv.org/abs/2510.23601"
+    ]
+  },
+  {
+    "row_id": 221,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "LLM Agents Making Agent Tools",
+    "url": "https://arxiv.org/abs/2502.11705",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2502.11705",
+      "https://arxiv.org/abs/2502.11705",
+      "https://github.com/KatherLab/ToolMaker"
+    ]
+  },
+  {
+    "row_id": 222,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2024",
+    "title": "OS-Copilot: Towards Generalist Computer Agents with Self-Improvement",
+    "url": "https://arxiv.org/abs/2402.07456",
+    "hub_venue_unverified": "ICLR",
+    "links": [
+      "https://arxiv.org/abs/2402.07456",
+      "https://arxiv.org/abs/2402.07456",
+      "https://github.com/OS-Copilot/OS-Copilot"
+    ]
+  },
+  {
+    "row_id": 223,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Advanced Tool Learning and Selection System (ATLASS): A Closed-Loop Framework Using LLM",
+    "url": "https://arxiv.org/abs/2503.10071",
+    "hub_venue_unverified": "SOSE",
+    "links": [
+      "https://arxiv.org/abs/2503.10071",
+      "https://arxiv.org/abs/2503.10071"
+    ]
+  },
+  {
+    "row_id": 224,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Code2MCP: Transforming Code Repositories into MCP Services",
+    "url": "https://arxiv.org/abs/2509.05941",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2509.05941",
+      "https://arxiv.org/abs/2509.05941",
+      "https://github.com/DEFENSE-SEU/Code2MCP"
+    ]
+  },
+  {
+    "row_id": 225,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "STELLA: Self-Evolving LLM Agent for Biomedical Research",
+    "url": "https://arxiv.org/abs/2507.02004",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.02004",
+      "https://arxiv.org/abs/2507.02004",
+      "https://github.com/zaixizhang/STELLA"
+    ]
+  },
+  {
+    "row_id": 226,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "PyVision: Agentic Vision with Dynamic Tooling",
+    "url": "https://arxiv.org/abs/2507.07998",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2507.07998",
+      "https://arxiv.org/abs/2507.07998",
+      "https://github.com/agents-x-project/PyVision"
+    ]
+  },
+  {
+    "row_id": 227,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "AgentOrchestra: Orchestrating Multi-Agent Intelligence with the Tool-Environment-Agent(TEA) Protocol",
+    "url": "https://arxiv.org/abs/2506.12508",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.12508",
+      "https://arxiv.org/abs/2506.12508"
+    ]
+  },
+  {
+    "row_id": 228,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Enhancing Open-Domain Task-Solving Capability of LLMs via Autonomous Tool Integration from GitHub",
+    "url": "https://arxiv.org/abs/2312.17294",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2312.17294",
+      "https://arxiv.org/abs/2312.17294",
+      "https://github.com/OpenBMB/OpenAct"
+    ]
+  },
+  {
+    "row_id": 229,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "OpenSkill: Open-World Self-Evolution for LLM Agents",
+    "url": "https://arxiv.org/abs/2606.06741",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.06741",
+      "https://arxiv.org/abs/2606.06741",
+      "https://github.com/OpenLAIR/OpenSkill"
+    ]
+  },
+  {
+    "row_id": 230,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "EvoDS: Self-Evolving Autonomous Data Science Agent with Skill Learning and Context Management",
+    "url": "https://arxiv.org/abs/2606.03841",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.03841",
+      "https://arxiv.org/abs/2606.03841",
+      "https://github.com/usail-hkust/EvoDS"
+    ]
+  },
+  {
+    "row_id": 231,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "Autonomous Evolution of EDA Tools: Multi-Agent Self-Evolved ABC",
+    "url": "https://arxiv.org/abs/2604.15082",
+    "hub_venue_unverified": "DAC",
+    "links": [
+      "https://arxiv.org/abs/2604.15082",
+      "https://arxiv.org/abs/2604.15082"
+    ]
+  },
+  {
+    "row_id": 232,
+    "branch": "scaffolding",
+    "category": "2.3 Tool",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "CoEvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification",
+    "url": "https://arxiv.org/abs/2604.01687",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2604.01687",
+      "https://arxiv.org/abs/2604.01687",
+      "https://github.com/Zhang-Henry/CoEvoSkills"
+    ]
+  },
+  {
+    "row_id": 233,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2024",
+    "title": "Language Agents as Optimizable Graphs",
+    "url": "https://arxiv.org/abs/2402.16823",
+    "hub_venue_unverified": "ICML",
+    "links": [
+      "https://arxiv.org/abs/2402.16823",
+      "https://arxiv.org/abs/2402.16823",
+      "https://github.com/metauto-ai/gptswarm"
+    ]
+  },
+  {
+    "row_id": 234,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2024",
+    "title": "Self-Taught Optimizer (STOP): Recursively Self-Improving Code Generation",
+    "url": "https://arxiv.org/abs/2310.02304",
+    "hub_venue_unverified": "COLM",
+    "links": [
+      "https://arxiv.org/abs/2310.02304",
+      "https://arxiv.org/abs/2310.02304",
+      "https://github.com/microsoft/stop"
+    ]
+  },
+  {
+    "row_id": 235,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2024",
+    "title": "Automated Design of Agentic Systems",
+    "url": "https://arxiv.org/abs/2408.08435",
+    "hub_venue_unverified": "NeurIPS",
+    "links": [
+      "https://arxiv.org/abs/2408.08435",
+      "https://arxiv.org/abs/2408.08435",
+      "https://github.com/ShengranHu/ADAS"
+    ]
+  },
+  {
+    "row_id": 236,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2024",
+    "title": "Symbolic Learning Enables Self-Evolving Agents",
+    "url": "https://arxiv.org/abs/2406.18532",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2406.18532",
+      "https://arxiv.org/abs/2406.18532",
+      "https://github.com/aiwaves-cn/agents"
+    ]
+  },
+  {
+    "row_id": 237,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents",
+    "url": "https://arxiv.org/abs/2505.22954",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2505.22954",
+      "https://arxiv.org/abs/2505.22954",
+      "https://github.com/jennyzzt/dgm"
+    ]
+  },
+  {
+    "row_id": 238,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Huxley-Gödel Machine: Human-Level Coding Agent Development by an Approximation of the Optimal Self-Improving Machine",
+    "url": "https://arxiv.org/abs/2510.21614",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2510.21614",
+      "https://arxiv.org/abs/2510.21614",
+      "https://github.com/metauto-ai/HGM"
+    ]
+  },
+  {
+    "row_id": 239,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Gödel Agent: A Self-Referential Agent Framework for Recursive Self-Improvement",
+    "url": "https://arxiv.org/abs/2410.04444",
+    "hub_venue_unverified": "ACL",
+    "links": [
+      "https://arxiv.org/abs/2410.04444",
+      "https://arxiv.org/abs/2410.04444",
+      "https://github.com/Arvid-pku/Godel_Agent"
+    ]
+  },
+  {
+    "row_id": 240,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "AlphaEvolve: A coding agent for scientific and algorithmic discovery",
+    "url": "https://arxiv.org/abs/2506.13131",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2506.13131",
+      "https://arxiv.org/abs/2506.13131"
+    ]
+  },
+  {
+    "row_id": 241,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "ShinkaEvolve: Towards Open-Ended And Sample-Efficient Program Evolution",
+    "url": "https://arxiv.org/abs/2509.19349",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2509.19349",
+      "https://arxiv.org/abs/2509.19349",
+      "https://github.com/SakanaAI/ShinkaEvolve"
+    ]
+  },
+  {
+    "row_id": 242,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2025",
+    "title": "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?",
+    "url": "https://arxiv.org/abs/2511.13646",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2511.13646",
+      "https://arxiv.org/abs/2511.13646",
+      "https://github.com/OpenAutoCoder/live-swe-agent"
+    ]
+  },
+  {
+    "row_id": 243,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "AgentDevel: Reframing Self-Evolving LLM Agents as Release Engineering",
+    "url": "https://arxiv.org/abs/2601.04620",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.04620",
+      "https://arxiv.org/abs/2601.04620"
+    ]
+  },
+  {
+    "row_id": 244,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "JudgeFlow: Agentic Workflow Optimization via Block Judge",
+    "url": "https://arxiv.org/abs/2601.07477",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.07477",
+      "https://arxiv.org/abs/2601.07477"
+    ]
+  },
+  {
+    "row_id": 245,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "RoboPhD: Self-Improving Text-to-SQL Through Autonomous Agent Evolution",
+    "url": "https://arxiv.org/abs/2601.01126",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2601.01126",
+      "https://arxiv.org/abs/2601.01126",
+      "https://github.com/andborth/RoboPhD"
+    ]
+  },
+  {
+    "row_id": 246,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "Adaptive Auto-Harness: Sustained Self-Improvement for Agentic System Deployment on Open-Ended Task Streams",
+    "url": "https://arxiv.org/abs/2606.01770",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.01770",
+      "https://arxiv.org/abs/2606.01770",
+      "https://github.com/A-EVO-Lab/AdaptiveHarness"
+    ]
+  },
+  {
+    "row_id": 247,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "MOSS: Self-Evolution through Source-Level Rewriting in Autonomous Agent Systems",
+    "url": "https://arxiv.org/abs/2605.22794",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.22794",
+      "https://arxiv.org/abs/2605.22794",
+      "https://github.com/hkgai-official/Moss"
+    ]
+  },
+  {
+    "row_id": 248,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "Recursive Self-Evolving Agents via Held-Out Selection",
+    "url": "https://arxiv.org/abs/2606.28374",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.28374",
+      "https://arxiv.org/abs/2606.28374"
+    ]
+  },
+  {
+    "row_id": 249,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
+    "url": "https://arxiv.org/abs/2605.09998",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2605.09998",
+      "https://arxiv.org/abs/2605.09998",
+      "https://github.com/sethkarten/continual-harness"
+    ]
+  },
+  {
+    "row_id": 250,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators",
+    "url": "https://arxiv.org/abs/2606.26294",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2606.26294",
+      "https://arxiv.org/abs/2606.26294"
+    ]
+  },
+  {
+    "row_id": 251,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "Group-Evolving Agents: Open-Ended Self-Improvement via Experience Sharing",
+    "url": "https://arxiv.org/abs/2602.04837",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2602.04837",
+      "https://arxiv.org/abs/2602.04837"
+    ]
+  },
+  {
+    "row_id": 252,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "Hyperagents",
+    "url": "https://arxiv.org/abs/2603.19461",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2603.19461",
+      "https://arxiv.org/abs/2603.19461",
+      "https://github.com/facebookresearch/Hyperagents"
+    ]
+  },
+  {
+    "row_id": 253,
+    "branch": "scaffolding",
+    "category": "2.4 Full Scaffolding",
+    "subgroup": "tool-create",
+    "year": "2026",
+    "title": "Harness-R1: Learning to Edit Executable Runtime Harnesses from Agent Failure Trajectories",
+    "url": "https://arxiv.org/abs/2608.02276",
+    "hub_venue_unverified": "arXiv",
+    "links": [
+      "https://arxiv.org/abs/2608.02276",
+      "https://arxiv.org/abs/2608.02276",
+      "https://github.com/DeepExperience/Harness-R1"
+    ]
+  }
+]
