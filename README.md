@@ -10,7 +10,7 @@ Evidence base for a research investigation into why LLM computer-use / web agent
 |---|---|
 | [固定模型权重下的 Agent 加速与自我改进](https://edwinzhang98.github.io/agent-acceleration-research/reports/fixed-weight-agent-acceleration.html) | Codex 专题报告：机制、轨迹学习、环境探索与成本评测。 |
 | [自改进 Agent 的文献与 Agent 加速](https://edwinzhang98.github.io/agent-acceleration-research/reports/self-improvement-survey.html) | Claude 文献报告的 Codex 审核阅读版：方法、效果、条件、局限和证据查询。与上篇互补。 |
-| [文献自己怎样定义 Agent 加速](https://edwinzhang98.github.io/agent-acceleration-research/reports/how-literature-defines-acceleration.html) | 较新的问题定义研究；讨论稿，完整记录库尚未全部独立审计。 |
+| [文献自己怎样定义 Agent 加速](https://edwinzhang98.github.io/agent-acceleration-research/reports/how-literature-defines-acceleration.html) | 较新的问题定义研究；讨论稿，含两批独立记录审计，审计范围和待决事项见原文。 |
 | [文献里的公式：算速度和成本的](https://edwinzhang98.github.io/agent-acceleration-research/reports/formulas-for-speed-and-cost.html) | 公式与符号手册；2026-09-28 快照。 |
 | [Codex 研究计划](https://edwinzhang98.github.io/agent-acceleration-research/reports/trajectory-research-plan.html) · [Claude 第六稿计划](https://edwinzhang98.github.io/agent-acceleration-research/reports/claude-part3-plan.html) | 2026-09-29 讨论稿，方法、实验及预算尚未定案；尚未合并之后的全部审核。 |
 | [Agent Acceleration 演示稿](https://edwinzhang98.github.io/agent-acceleration-research/slides/agent-acceleration.html) | Part 1–2 的按页演示。 |

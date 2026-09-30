@@ -25,16 +25,16 @@
     {
       "slug": "reports/how-literature-defines-acceleration.html",
       "source": "notes/part1/2026-09-30-how-the-literature-defines-agent-acceleration-zh.md",
-      "sourceHash": "5603f2095d8be420890f80e1755f40cb2cba13dcd9492046afb41d5438408a70",
+      "sourceHash": "a32fd381a14bf12f3e3a067c74f852a66ab8696b4ab9e3f303df6829d654f6d1",
       "htmlSource": null,
       "htmlSourceHash": null,
-      "outputHash": "ee7bf927204cb15607e0fd6a065cbbc07bbf4d084cbb542d27c7412576921c9c",
-      "bytes": 845931,
+      "outputHash": "e15a6200a58deab3cb7f7525a458b94bc9d7d25e7b52acdcb1b04dea258fc886",
+      "bytes": 846387,
       "formattingCount": 36,
       "stats": {
-        "sourceHash": "5603f2095d8be420890f80e1755f40cb2cba13dcd9492046afb41d5438408a70",
-        "renderedMarkdownHash": "ca6bd39591f392398c33b81f08ad33a98d69b5bfcb1e5b0a64cce217c83001fb",
-        "sourceBytes": 272242,
+        "sourceHash": "a32fd381a14bf12f3e3a067c74f852a66ab8696b4ab9e3f303df6829d654f6d1",
+        "renderedMarkdownHash": "b1b4337d0e951e6dfbb2930d67e4ec262adfec1ac030b050cdd15897d9a38e53",
+        "sourceBytes": 272661,
         "headings": 25,
         "sections": 14,
         "tables": 4,
@@ -45,7 +45,7 @@
         "rewrittenLinks": 0,
         "imagesAsLinks": 0,
         "sourceHtmlBlocks": 1,
-        "htmlBytes": 845931
+        "htmlBytes": 846387
       }
     },
     {
