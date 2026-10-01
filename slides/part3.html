@@ -16686,10 +16686,10 @@ z
   </ul></div>
  <div><div class="lbl">What learning may change here (model weights fixed)</div>
   <ul class="symlist">
-   <li><b>Memory</b>: the note “Hotel → check-in and check-out dates required”</li>
-   <li><b>Prompt</b>: an instruction to fill the dates before submitting a hotel expense</li>
-   <li><b>Skill or tool</b>: a function that fills every field a hotel expense requires</li>
-   <li><b>Control code</b>: a check of the required fields before each submit</li>
+   <li><b>Prompt</b>: an instruction read on every call: fill the check-in and check-out dates before submitting a hotel expense</li>
+   <li><b>Memory</b>: a note read only when relevant: Hotel → check-in and check-out dates required</li>
+   <li><b>Skill or tool</b>: a procedure the model calls when it needs it: instructions plus a script that fills every field a hotel expense requires</li>
+   <li><b>Control code</b>: the harness’s own logic, run whatever the model decides: check the required fields before every submit</li>
   </ul></div>
 </div>
 <div class="path" style="margin-top:12px"><span class="pl" style="width:auto;margin-right:10px">SCOPE</span><span class="s">this example: expense reports on a website</span>→<span class="s">any workflow repeated in one software environment</span>→<span class="s">websites · desktop applications · mobile apps · tool APIs</span></div>
