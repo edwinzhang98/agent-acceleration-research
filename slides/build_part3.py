@@ -32,6 +32,9 @@ def _refs_from(path):
 
 REFDB = {**_refs_from(V1), **_refs_from(LIT)}
 REFDB["ref-p1-cop"] = ("Erol et al., 2026", bd.refs_for("cop")[0])   # Part 1's source for cost per success
+P1KEYS = ["isp", "swm", "distserve", "aa", "anth-b", "aospec", "asyncfc", "llmc", "react", "yuan", "tokenpilot", "sglang"]
+for _k in P1KEYS:   # the sources of the agent-loop symbols, in Part 1's checked reference list
+    REFDB["ref-p1-" + _k] = (html.unescape(re.sub(r"<[^>]+>", "", bd.CITE[_k])), bd.refs_for(_k)[0])
 EN = [("arXiv 预印本", "arXiv preprint"), ("预印本", "arXiv"), ("实际读的版本：", "Version read: "), ("版本日期：", ""),
       ("初版日期：", "first version "), ("主会", "main conference"), ("日程已列", "listed in the programme"),
       ("论文集待刊", "proceedings forthcoming"), ("正式题名", "formal title"), ("未记录", "not recorded"),
@@ -73,8 +76,8 @@ def fmt_ref(anchor, full=False):
     """A reference in author–year form: Surname, I., … (Year). Title. Venue. The full form adds the formal link and the version read."""
     name, raw = REFDB[anchor]
     m = re.match(r"(.+?)\s(\d{4}[a-z]?)\.\s(.+)$", raw)
-    if anchor == "ref-p1-cop" or not m:
-        return raw if anchor == "ref-p1-cop" else en(raw)
+    if anchor.startswith("ref-p1-") or not m:
+        return raw if anchor.startswith("ref-p1-") else en(raw)
     authors, year, rest = m.groups()
     title, _, after = rest.partition(". ")
     venue = re.split(r"\s*(?:\[正式引用链接\]|正式引用链接|实际读的版本|; OpenReview|; DOI)", after)[0].strip().rstrip(".")
@@ -105,6 +108,9 @@ def cite(*keys):
 FORM = {}
 _seen = {}
 for a, (n, _) in REFDB.items():
+    if a.startswith("ref-p1-") and a != "ref-p1-cop":
+        FORM[a] = n
+        continue
     f, first = short(n)
     FORM[a] = f
     _seen.setdefault(f, []).append(a)
@@ -125,7 +131,7 @@ def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind
     S.append(dict(id=id_, title=title, body=body, crumb=crumb, callout=callout, foot=foot, chip=chip, kind=kind,
                   cover=cover, label=label))
 
-TAG = "LEARNING ACROSS TASKS"
+TAG = "AGENT ACCELERATION · STABLE ENVIRONMENT"
 EXTRA_CSS = r"""
 .flow{display:flex;align-items:stretch;gap:5px}
 .stp{flex:1;border:1px solid var(--rule);border-radius:4px;padding:7px 9px;font-size:12.5px;line-height:1.32;background:#fff}
@@ -167,6 +173,14 @@ EXTRA_CSS = r"""
 .refs3{columns:2;column-gap:26px;font-size:9.6px;line-height:1.32;color:var(--ink2);padding-left:0;list-style:none;margin:0}
 .refs3 li{break-inside:avoid;margin:0 0 4px}
 .refs3 a{color:var(--accent);text-decoration:none}
+.cover-q{margin:22px 0 0;padding-left:22px;font-size:16px;line-height:1.5;color:var(--ink2);max-width:980px}
+.cover-q li{margin-bottom:6px}
+svg .node.xh rect{fill:#fbeede;stroke:#e2b98b}
+svg .node.nd rect{fill:#f3f7fa;stroke:var(--accent);stroke-dasharray:5 3}
+.mleg{display:flex;gap:16px;font-size:11px;color:var(--ink2);margin:4px 0 0 40px}
+.mleg a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px}
+.fig-loop2.sm svg.big-svg{width:960px}
+.mleg span.k{display:inline-block;width:22px;height:12px;border-radius:6px;vertical-align:-2px;margin-right:6px}
 .symgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px 20px;font-size:11.3px;line-height:1.36;color:var(--ink2)}
 #help{display:none!important}
 .p3refs{margin-top:auto;border-top:none;box-shadow:0 -1px 0 var(--rule)}
@@ -176,7 +190,7 @@ EXTRA_CSS = r"""
 
 def render(font_dir=None):
     parts = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
-             '<title>Learning across tasks</title>', '<style>', bd.font_css(font_dir), bd.CSS, EXTRA_CSS, '</style></head><body>',
+             '<title>Agent acceleration in a stable environment</title>', '<style>', bd.font_css(font_dir), bd.CSS, EXTRA_CSS, '</style></head><body>',
              '<div id="stage">']
     n = 0
     order = ([s for s in S if s["kind"] not in ("appendix", "refs")] + [s for s in S if s["kind"] == "refs"]
@@ -231,15 +245,34 @@ R = dict(ace=13, awm=14, axis=98, sica=67, wma=73, draft=44, mobilegpt=35, walt=
 def c(*names):
     return cite(*[R[n] for n in names])
 
+def p1(k):
+    """Short form of a Part 1 source, registered for this page's references."""
+    a = "ref-p1-" + k
+    cite(a)
+    return FORM[a]
+
+def mech_svg():
+    svg = bd.loop_svg(hl=("n-steps", "n-calls", "n-succ"), cls="big-svg", big=True)
+    for id_, cls in (("n-rtok", "xh"), ("n-read", "nd")):
+        svg = re.sub(r'(id="ah\d+-' + id_ + r'" class="node(?: pill)?)"', r'\1 ' + cls + '"', svg)
+    return svg
+
+
+
 # =====================================================================
 # Cover
 # =====================================================================
-slide("s00", "Learning across tasks", kind="title", cover=True, body="""
+slide("s00", "Agent acceleration in a stable environment", kind="title", cover=True, body="""
 <div class="cover cover-deck"><div class="cover-one">
-  <h1 class="cover-title">Learning to do repeated web tasks faster and more cheaply</h1>
-  <p class="cover-sub">An agent runs the same workflow again and again with new inputs. What it learns is kept outside the model, so that each later task takes less time and money without lowering the quality of the result.</p>
-  <p class="cover-sub2">I · The problem (pages 1–3) · II · How far existing work has got (pages 4–9) · III · Our plan follows after discussion.</p>
-  <p class="cover-date">October 2026</p>
+  <h1 class="cover-title">Agent Acceleration in a Stable Environment</h1>
+  <p class="cover-sub">Learning from repeated tasks to make later ones faster and cheaper</p>
+  <ol class="cover-q">
+   <li>Can what an agent learns on earlier tasks lower the time and money of later tasks, with the cost of learning counted?</li>
+   <li>After how many tasks does the learning pay for itself?</li>
+   <li>Which parts of the agent should learning change, and should it learn from its own runs or from exploring the environment?</li>
+   <li>Does what it learned still work on new tasks and after the environment changes, without lowering the success rate?</li>
+  </ol>
+  <p class="cover-date" style="margin-top:28px">October 2026</p>
 </div></div>""")
 
 # =====================================================================
@@ -280,6 +313,20 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
 <div class="figcap" style="margin-top:6px">Each source’s original formula, and what we changed and why: <a href="#a00">Appendix A0 ↗</a></div>""",
   chip=("#a00", "Appendix A0"))
 
+slide("s1m", "How an agent runs a task, and where learning changes it",
+  callout="<p><b>One attempt is a loop of steps: observe, call the model, act, wait, until the agent stops. Learning across tasks changes the harness around the model to cut steps, model calls and failures; the price is a longer prompt to read.</b></p>",
+  body=f"""
+<div class="fig-loop2 sm">{mech_svg()}</div>
+<div class="mleg"><span><span class="k" style="background:var(--accent)"></span>learning aims to lower it, or to raise success</span><span><span class="k" style="background:#fbeede;border:1px solid #e2b98b"></span>grows in exchange: learned material is read in the prompt</span><span><span class="k" style="background:#f3f7fa;border:1px dashed var(--accent)"></span>a possible direction: a stable prompt prefix is read from the cache</span><span><a href="#a00-2">every symbol: Appendix A0 ↗</a></span></div>
+<div class="path" style="margin:8px 0 6px 60px"><span class="pl" style="width:auto;margin-right:10px">ACROSS TASKS</span><span class="s">run record</span>→<span class="s">learning, at cost {tex(r"C_{\mathrm{learn}}", 10)}</span>→<span class="s">updated harness: prompt · memory · skills and tools · control code</span>→<span class="s">next task</span></div>
+{bd.defs2([
+  (r"N,\ i", "steps in one attempt; one step is one observe–decide–act–wait round", p1("isp")),
+  (r"J_i", "model calls in step " + tex("i", 12) + ": planner, judge, retries", "self-defined"),
+  (r"R_m(p)", "chance that one attempt of agent " + tex("m", 12) + " on task " + tex("p", 12) + " succeeds", cite("ref-p1-cop")[1:-1]),
+  (r"|H_{a,i}|", "length of the prompt read in step " + tex("i", 12) + "; learned notes make it longer", p1("yuan")),
+  (r"\mathrm{prefill}", "reading the prompt before writing; input already in the cache is read faster and billed at a lower price", p1("anth-b")),
+])}""")
+
 slide("s02", "Example: a web agent that files expense reports",
   crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
   callout="<p><b>Our running example: a web agent files expense reports; each task is a new report in the same system. Not knowing one rule of the form, that a hotel expense needs check-in and check-out dates, sends the agent into a rework loop.</b></p>",
@@ -309,21 +356,30 @@ slide("s02", "Example: a web agent that files expense reports",
 <div class="path" style="margin-top:12px"><span class="pl" style="width:auto;margin-right:10px">SCOPE</span><span class="s">this example: expense reports on a website</span>→<span class="s">any workflow repeated in one software environment</span>→<span class="s">websites · desktop applications · mobile apps · tool APIs</span></div>
 """)
 
-slide("s03", "Five difficulties, each tied to a term of the formula",
-  crumb="difficulties from our problem framing · each card names the term it sits in",
-  callout="<p><b>Five difficulties separate a faster agent from a proven one.</b></p>",
+slide("s03", "Five difficulties, grouped by the cost they affect",
+  callout="<p><b>Three difficulties affect the cost of each task after learning; two affect the cost of learning itself.</b></p>",
   body=f"""
-<div class="rows5 big" style="flex:1">
-  {card("1 · THE WHOLE RUN · " + C_EXEC, "Fewer actions can still mean a longer task, so judge by end-to-end time and money",
-        ["Actions 10.7 → 10.2 per task, yet 215 → 395 s per task — WebCoach, 643 live WebVoyager tasks, Skywork-38B with a Qwen3-8B coach; the time includes the coach’s inference " + c("webcoach")], "")}
-  {card("2 · NEEDED OR REMOVABLE · " + C_EXEC, "What can be skipped is known only after a run has succeeded once, and that run is paid for",
-        ["Replay cut the median task time 315.7 → 127.5 s, but only on the 159 tasks whose first pass had succeeded and been stored; building each took a median of about 572k tokens and 4.5 min — EchoPath, OSWorld-Verified " + c("echopath")], "")}
-  {card("3 · FROM FAILURE TO FIX · " + C_LEARN, "Seeing a failure does not say what to change; finding and checking a fix costs model calls",
-        ["Completion +6.3 to +18.4 points after automatic repairs, mean of three runs, GPT-5 mini on four benchmarks; the repairs on AppWorld used 37.2 million tokens offline — HarnessFix " + c("harnessfix")], "")}
-  {card("4 · TRANSFER AND READING · " + C_EXEC, "Learned material has to help on new tasks and be cheap to read",
+<div class="two" style="grid-template-columns:3fr 2fr;flex:1;min-height:0">
+ <div style="display:flex;flex-direction:column;min-height:0">
+  <div class="lbl">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
+  <div class="cards3" style="flex:1">
+  {card("1 · MEASURE TIME, NOT STEPS", "Fewer steps do not always save time",
+        ["Actions per task 10.7 → 10.2, but time per task 215 → 395 s — WebCoach, 643 live WebVoyager tasks, Skywork-38B with a Qwen3-8B coach; the time includes the coach’s calls " + c("webcoach")], "")}
+  {card("2 · WHAT CAN BE SKIPPED", "What can be skipped is known only after a run has succeeded",
+        ["Replaying stored runs cut the median time per task 315.7 → 127.5 s, but only for the 159 tasks already solved and stored; storing one took a median of about 572k tokens and 4.5 min — EchoPath, OSWorld-Verified " + c("echopath")], "")}
+  {card("3 · NEW TASKS, READING COST", "What was learned must help on new tasks and be cheap to read",
         ["With token budgets roughly matched, the plain agent without skills or memory did best: 44.78% success at 73.6K tokens per task — WebArena, four domains, Gemini 3 Flash, three runs " + c("hajimiri")], "")}
-  {card("5 · PROVING THE SAVING · " + C_LEARN, "Showing that a change saves money costs money itself",
-        ["$1.91 → $1.70 and 130.2 → 114.5 s per task on four benchmarks, for a whole run of about $7,000: n* ≈ 33,000 tasks at that saving per attempt (calc.) — SICA " + c("sica")], "")}
+  </div>
+ </div>
+ <div style="display:flex;flex-direction:column;min-height:0">
+  <div class="lbl">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
+  <div class="two" style="flex:1;gap:12px">
+  {card("4 · FROM FAILURE TO FIX", "A failure does not say how to fix it; finding a fix costs model calls",
+        ["Automatic repairs raised completion by 6.3–18.4 points, mean of three runs, GPT-5 mini on four benchmarks; the repairs on AppWorld alone used 37.2 million tokens — HarnessFix " + c("harnessfix")], "")}
+  {card("5 · PROVING THE SAVING", "Checking that a change saves money also costs money",
+        ["$1.91 → $1.70 and 130.2 → 114.5 s per task on four benchmarks, for a whole run of about $7,000: about 33,000 tasks to break even (calc.) — SICA " + c("sica")], "")}
+  </div>
+ </div>
 </div>""")
 
 # =====================================================================
@@ -483,7 +539,7 @@ def ours(f, tag):
 def orig(f, src):
     return f + f'<div class="wcite">{src}</div>'
 
-slide("a00", "A0 · Page 1’s formulas: the original, ours, and why we changed it", label="A0", kind="appendix", chip=("#back", "← back"),
+slide("a00", "A0 · Page 1’s formulas: the original, ours, and why we changed it", label="A0 · 1/2", kind="appendix", chip=("#back", "← back"),
   body=table(["our formula", "original formula", "original definitions", "what we changed, and why"], [
     [ours(tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)}", 12), "from the paper"),
      orig(tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)}", 12) + " (Eq. 2)", cite("ref-p1-cop")),
@@ -523,6 +579,24 @@ slide("a00", "A0 · Page 1’s formulas: the original, ours, and why we changed 
      ul(["written as a formula by setting " + tex(r"v_n(m^{\prime})=\bar{v}(m)", 10) + " — why: computable from measured costs",
          "assumes the saving per task stays the same"])],
   ], ["21%", "21%", "30%", "28%"], cls="tbl p3a p3t"))
+
+slide("a00-2", "A0 · Every symbol in the agent loop", label="A0 · 2/2", kind="appendix", chip=("#back", "← back"),
+  body=f"""<div class="fig-loop2" style="margin-bottom:8px">{mech_svg()}</div>
+{bd.defs2([
+  (r"i,\ N", "step (one observe–decide–act–wait round); steps in the attempt", p1("isp")),
+  (r"J_i,\ j", "model calls in step " + tex("i", 12) + " (planner, judge, retries …); call index", "self-defined"),
+  (r"\ell_{ij}", "latency of call " + tex("j", 12) + " of step " + tex("i", 12), p1("swm")),
+  (r"\mathrm{TTFT}_{ij}", "time to the first generated token: queueing, sending, prefill of the uncached input", p1("distserve") + "; " + p1("aa")),
+  (r"n^{\mathrm{out}}_{ij},\ \mathrm{TPOT}_{ij}", "output tokens of the call, thinking included; time per output token after the first", FORM["ref-p1-cop"] + " (adapted); " + p1("anth-b") + "; " + p1("distserve")),
+  (r"D_i,\ E_i", "model time of step " + tex("i", 12) + "; all its other time (observe, act, wait, harness gaps, back-off)", "adapted from " + p1("isp") + "; " + p1("aospec")),
+  (r"T_{\mathrm{saving}}", "time hidden because some of it ran at the same time; 0 if strictly serial", p1("asyncfc") + "; precedent " + p1("llmc")),
+  (r"o_{a,i},\ a", "tokens the result or screenshot of step " + tex("i", 12) + " adds to the prompt; agent index", p1("react") + "; " + p1("yuan")),
+  (r"|H_{a,i}|,\ \Phi,\ z_{a,i}", "length of the prompt step " + tex("i", 12) + "’s call reads (one call per step); chat template; the call’s output: thinking, message and tool-call tokens", p1("yuan")),
+  (r"n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{unc}}", "input tokens read from the cache, written to it, or uncached", p1("anth-b") + "; " + p1("tokenpilot") + "; " + p1("sglang")),
+  (r"c_{\kappa}(\mu),\ \kappa,\ \mu", "price per token of billing class " + tex(r"\kappa", 12) + " on serving model " + tex(r"\mu", 12), "adapted from " + FORM["ref-p1-cop"]),
+  (r"x_{\mathrm{env}}", "billed environment usage (e.g. sandbox hours)", FORM["ref-p1-cop"] + " (adapted)"),
+  (r"R_m(p)", "chance that one attempt of agent " + tex("m", 12) + " on task " + tex("p", 12) + " succeeds", cite("ref-p1-cop")[1:-1]),
+])}""")
 
 # =====================================================================
 # Appendix A1 — definitions and totals
