@@ -206,7 +206,7 @@ def render(font_dir=None):
     return "".join(parts)
 
 # ---------------------------------------------------------------- the formula that runs through the deck
-bd.FX["per task"] = [("op", r"v_n(m^{\prime},p)="), ("S", r"\dfrac{C_{\mathrm{setup}}}{n}"), ("op", "+"),
+bd.FX["per task"] = [("op", r"v_n(m^{\prime},p)="), ("S", r"\dfrac{C_{\mathrm{learn}}}{n}"), ("op", "+"),
                      ("C", r"\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}"), ("op", r"\quad\mathrm{s.t.}\ "), ("R", r"R_{m^{\prime}}(p)\geq R_0")]
 DN, UP, KEEP = bd.DN, bd.UP, bd.KEEP
 def citet(*keys):
@@ -220,7 +220,7 @@ def ul(items):
 def fx(marks, legend=True):
     return bd.fx(("per task", marks), legend=legend)
 
-C_EXEC, C_LEARN, QQ = tex(r"C_{m^{\prime}}(p)", 13), tex(r"C_{\mathrm{setup}}", 13), tex(r"R_{m^{\prime}}(p)\geq R_0", 13)
+C_EXEC, C_LEARN, QQ = tex(r"C_{m^{\prime}}(p)", 13), tex(r"C_{\mathrm{learn}}", 13), tex(r"R_{m^{\prime}}(p)\geq R_0", 13)
 
 # Row indices in slides/part3-data/rows.json (= the §6 table of the literature document, in order)
 R = dict(ace=13, awm=14, axis=98, sica=67, wma=73, draft=44, mobilegpt=35, walt=81, harnessfix=84, growing=88,
@@ -244,7 +244,7 @@ slide("s00", "Learning across tasks", kind="title", cover=True, body="""
 # I · The problem
 # =====================================================================
 slide("s01", "Problem: make repeated tasks faster and cheaper",
-  crumb="cost per success, with a one-time set-up spread over the n tasks it serves · time is reported beside money, never added to it",
+  crumb="cost per success, with the learning cost spread over the n tasks it serves · time is reported beside money, never added to it",
   callout="<p><b>An agent runs the same workflow many times with new inputs. What it learns on earlier tasks should lower the time and money of later tasks, with the cost of learning counted, without lowering the success rate.</b></p>",
   body=f"""
 {table(["formula", "meaning", "symbols", "source"], [
@@ -256,18 +256,18 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
          tex("R_m(p)", 11) + ": success rate (R), the chance that one attempt succeeds",
          tex(r"T_{\mathrm{attempt}}", 11) + ": time (T) of one attempt, in seconds"]),
      "Dollars: from " + citet("ref-p1-cop") + ". Seconds: ours, adapted from the same paper."],
-    [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{setup}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 13),
-     tex("v_n", 11) + ": expected cost per task after learning, set-up included",
+    [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{learn}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 13),
+     tex("v_n", 11) + ": expected cost per task after learning, learning cost included",
      ul([tex(r"m^{\prime}", 11) + ": the same agent after learning, model unchanged, harness changed",
-         tex(r"C_{\mathrm{setup}}", 11) + ": cost of learning, the set-up (exploring, proposing and checking changes, keeping them up to date), each counted once",
+         tex(r"C_{\mathrm{learn}}", 11) + ": cost of learning (exploring, proposing and checking changes, keeping them up to date), each counted once",
          tex("n", 11) + ": number of tasks the learned agent serves"]),
      "Ours, adapted from " + citet("ref-ai-agents-that-matter", 46) + "."],
     [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)", 12) + "<br>" + tex(r"\mathrm{s.t.}\quad R_{m^{\prime}}(p)\geq R_0", 12),
      "The goal: lower time and money per task, success held",
      ul([tex("R_0", 11) + ": lowest required success rate, fixed in advance, measured on tasks not used for learning",
-         tex(r"T_{\mathrm{setup}}", 11) + ": time spent learning offline, reported beside " + tex(r"T_{\mathrm{success}}", 11) + ", not spread over tasks"]),
+         tex(r"T_{\mathrm{learn}}", 11) + ": time spent learning offline, reported beside " + tex(r"T_{\mathrm{success}}", 11) + ", not spread over tasks"]),
      "Ours."],
-    [tex(r"n^{*}=\dfrac{C_{\mathrm{setup}}}{v(m,p)-v(m^{\prime},p)}", 13),
+    [tex(r"n^{*}=\dfrac{C_{\mathrm{learn}}}{v(m,p)-v(m^{\prime},p)}", 13),
      tex("n^{*}", 11) + ": break-even, the number of tasks after which " + tex(r"v_n(m^{\prime},p)", 11) + " falls below " + tex("v(m,p)", 11),
      "—",
      "Ours, from row 2; " + citet("ref-ai-agents-that-matter") + " report a break-even point."],
@@ -376,7 +376,7 @@ slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works i
   chip=("#a02", "Appendix A2–A5"))
 
 slide("s06", "How a run record becomes a change, and what the change costs",
-  crumb="direction 1 · C_m′(p) ↓ after the change · C_setup ↑ at three points: diagnosis, candidates, re-tests",
+  crumb="direction 1 · C_m′(p) ↓ after the change · C_learn ↑ at three points: diagnosis, candidates, re-tests",
   callout="<p><b>Every step after reading the run records costs model calls, and these costs are rarely reported next to the savings.</b></p>",
   body=f"""
 {fx({"C": DN, "S": UP, "R": KEEP})}
@@ -411,7 +411,7 @@ slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kin
   chip=("#a06", "Appendix A6–A9"))
 
 slide("s08", "Exploring a site, keeping a checked rule, and using it on the next task",
-  crumb="direction 2 · the exploring is C_setup · the rule removes rework from C_m′(p) · it must be re-checked when the site changes",
+  crumb="direction 2 · the exploring is C_learn · the rule removes rework from C_m′(p) · it must be re-checked when the site changes",
   callout="<p><b>The agent probes the form, writes down what it found together with where it applies and the evidence for it, and reads that note on the next task, so the error-and-retry loop of page 2 does not happen.</b></p>",
   body=f"""
 <div class="panel3">
@@ -430,7 +430,7 @@ slide("s08", "Exploring a site, keeping a checked rule, and using it on the next
   chip=("#a09", "Appendix A9"))
 
 slide("s09", "Across both directions, what learning costs is rarely counted",
-  crumb="C_setup rarely itemised · R_m′(p) ≥ R_0 hard to prove · fewer steps ≠ less time or money",
+  crumb="C_learn rarely itemised · R_m′(p) ≥ R_0 hard to prove · fewer steps ≠ less time or money",
   callout="<p><b>The learning bill is rarely itemised, proving that a change is correct is the weak link, and a saving measured as fewer steps, or in one setting, does not guarantee less time or money elsewhere.</b></p>",
   body=f"""
 <div class="cards4" style="flex:1">
@@ -488,7 +488,7 @@ slide("a00", "A0 · Page 1’s formulas: the original, ours, and why we changed 
      orig("no time formula", cite("ref-p1-cop")),
      ul(["units per attempt other than dollars, such as time or latency, may matter more (App. D.1)"]),
      ul(["the same form, in seconds", "why: time and money are reported side by side", "assumes attempts run one after another"])],
-    [ours(tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{setup}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 12), "ours, adapted"),
+    [ours(tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{learn}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 12), "ours, adapted"),
      orig("total cost = fixed cost + variable cost (in words)", cite("ref-ai-agents-that-matter")) + "<br>" + orig(tex(r"O(nc+C)", 11) + " against " + tex(r"O(nC)", 11) + " (Table 2)", cite(46)),
      ul(["fixed cost: paid once, to optimise the agent’s design (prompt, hyperparameters)",
          "variable cost: paid on every run, set by its input and output tokens",
@@ -501,9 +501,9 @@ slide("a00", "A0 · Page 1’s formulas: the original, ours, and why we changed 
      ul([tex(r"\mathcal{M}", 10) + ": the available models",
          tex(r"V_p(\mathcal{M})", 10) + ": the lowest cost per success on " + tex("p", 10) + " among them"]),
      ul(["one number becomes a pair, seconds and dollars, lowered together — why: no fixed exchange rate between them",
-         "set-up included",
+         "learning cost included",
          "success floor " + tex("R_0", 10) + ", fixed in advance — why: an agent must not look cheaper by succeeding less"])],
-    [ours(tex(r"n^{*}=\dfrac{C_{\mathrm{setup}}}{v(m,p)-v(m^{\prime},p)}", 12), "ours"),
+    [ours(tex(r"n^{*}=\dfrac{C_{\mathrm{learn}}}{v(m,p)-v(m^{\prime},p)}", 12), "ours"),
      orig("no formula (in words)", cite("ref-ai-agents-that-matter")),
      ul(["the jointly optimised agent is cheaper in total than the default one after about 1,350 HotPotQA tasks"]),
      ul(["written as a formula by setting " + tex(r"v_n(m^{\prime},p)=v(m,p)", 10) + " — why: computable from measured costs",

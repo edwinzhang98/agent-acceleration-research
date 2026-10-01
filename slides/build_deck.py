@@ -1570,7 +1570,7 @@ slide("t13", "11 · Price per token: a cheaper model for most calls", part=2,
       chip=("#b7-1", "Appendix B7"))
 
 # --- Part 2 · 14 success and cost per success ----------------------------------------------------------
-EQ["amort"] = r"$v_n(m,p)\;=\;\dfrac{C_{\mathrm{setup}}}{n}\;+\;\dfrac{C_m(p)}{R_m(p)}$"
+EQ["amort"] = r"$v_n(m,p)\;=\;\dfrac{C_{\mathrm{learn}}}{n}\;+\;\dfrac{C_m(p)}{R_m(p)}$"
 def _cps(c, r):
     v = c / r
     return f"${v:,.0f}" if v >= 100 else f"${v:,.2f}"
@@ -1617,7 +1617,7 @@ B("b0-3", "B0 · 3/3", "B0 · Source formulas for money and set-up, and one clos
   body=table(h_f, [
    [wk("TokenPilot, App. A.2, Eq. 11", "tokenpilot"), tex(r"\mathrm{Cost}=|C'_{\mathrm{hit}}|\,p_{\mathrm{hit}}+|C'_{\mathrm{miss}}|\,p_{\mathrm{miss}}+H_{\mathrm{out}}\,p_{\mathrm{out}}", 11), tex(r"|C'_{\mathrm{hit}}|,|C'_{\mathrm{miss}}|", 10) + " cached and uncached input tokens; " + tex(r"H_{\mathrm{out}}", 10) + " generated tokens; p prices", "Part 1’s money sum over three classes; no cache-write term"],
    [wk("SpeedRunner, App. A.3", "speedrunner"), tex(r"\mathrm{cost}=p_{\mathrm{in}}N^{\mathrm{uncached}}_{\mathrm{in}}+p_{\mathrm{cache}}N^{\mathrm{cached}}_{\mathrm{in}}+p_{\mathrm{out}}N_{\mathrm{out}}", 11), "N summed over all calls of an episode, the skill-inducer calls amortised over its rollouts", "the same three classes; set-up calls spread over the runs they serve"],
-   [wk("LATM, Table 2", "latm"), tex(r"O(nc+C)", 11) + " against " + tex(r"O(nC)", 11), "n samples; C one call to the large tool-making model; c one call to the small tool-using model", "one expensive set-up amortised over n cheap runs — the form of page 14’s " + tex(r"C_{\mathrm{setup}}/n", 10)],
+   [wk("LATM, Table 2", "latm"), tex(r"O(nc+C)", 11) + " against " + tex(r"O(nC)", 11), "n samples; C one call to the large tool-making model; c one call to the small tool-using model", "one expensive set-up amortised over n cheap runs — the form of page 14’s " + tex(r"C_{\mathrm{learn}}/n", 10)],
    [wk("AI Agents That Matter, §3", "kapoor25"), "in words: total cost = a fixed cost (one-time optimisation) + a variable cost (per run, from input and output tokens)", "—", "Appendix B8’s " + tex(r"v_n(m,p)", 10) + " adds this fixed cost to Cost-of-Pass’s per-success cost (adapted)"],
    [wk("Speculative tool calls, Eq. 4", "nichols"), eq_svg("nichols4", fontsize=10, cls="eqn"), "K turns; o API hand-off overhead (HTTP and reloading into the batch), paid twice per turn; ϕ prefill and δ decode seconds per token; " + tex("X_i", 10) + " prompt tokens of turn i; " + tex("R_i, t_i", 10) + " reasoning and tool-call tokens; " + tex(r"t_{o,i}", 10) + " tool output; " + tex("T_i", 10) + " tool time", "a published form of Part 1’s time sum with its growing prompt, found in these checks: per-call overhead, prefill of a prompt that grows each turn, decoding, tool wait. Part 1 does not cite it yet (open question)"],
   ], w_f))
@@ -1765,7 +1765,7 @@ B("b8-0", "B8 · 1/2", "B8 · Cost per success, set-up included, for the Part 2 
   body=f"""
 <div class="eqtab">
 {eqrow("per task", "set-up spread", ["amort"],
-       tex(r"C_{\mathrm{setup}}", 11) + ": cost of building the code, tools or memories once, and of keeping them up to date where a work reports it; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{setup}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
+       tex(r"C_{\mathrm{learn}}", 11) + ": learning cost — building the code, tools or memories once (the set-up), and keeping them up to date where a work reports it; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{learn}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
        "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); one tool-making stage (a few large-model calls to propose, verify and wrap a tool, once per task type) spread over n cheap calls, O(nc + C) with C, c the cost of one large- and one small-model call: " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
 </div>
 <div class="twocol">
