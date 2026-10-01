@@ -255,13 +255,13 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
          tex("C_m(p)", 11) + ": expected dollars of one attempt",
          tex("R_m(p)", 11) + ": chance that one attempt succeeds",
          tex(r"T_{\mathrm{attempt}}", 11) + ": seconds of one attempt; " + tex(r"\mathbb{E}", 11) + ": expected value"]),
-     "Dollars: from " + citet("ref-p1-cop") + ". Seconds: ours, same form."],
+     "Dollars: from " + citet("ref-p1-cop") + ". Seconds: ours, adapted from the same paper."],
     [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{setup}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 13),
      tex("v_n", 11) + ": expected dollars per task after learning, set-up included",
      ul([tex(r"m^{\prime}", 11) + ": the same model, its harness changed by learning",
          tex(r"C_{\mathrm{setup}}", 11) + ": dollars spent on learning (exploring, proposing and checking changes, keeping them up to date), each counted once",
          tex("n", 11) + ": tasks the learned design serves"]),
-     "Ours, built on " + citet("ref-ai-agents-that-matter", 46) + "."],
+     "Ours, adapted from " + citet("ref-ai-agents-that-matter", 46) + "."],
     [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)", 12) + "<br>" + tex(r"\mathrm{s.t.}\quad R_{m^{\prime}}(p)\geq R_0", 12),
      "The goal: lower time and money per task, success held",
      ul([tex("R_0", 11) + ": lowest acceptable success rate, fixed in advance, measured on tasks not used for learning",
@@ -270,10 +270,10 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
     [tex(r"n^{*}=\dfrac{C_{\mathrm{setup}}}{v(m,p)-v(m^{\prime},p)}", 13),
      tex("n^{*}", 11) + ": break-even, the number of tasks after which " + tex(r"v_n(m^{\prime},p)", 11) + " falls below " + tex("v(m,p)", 11),
      "—",
-     "Ours, from row 2; " + citet("ref-ai-agents-that-matter") + " report such a break-even."],
+     "Ours, from row 2; " + citet("ref-ai-agents-that-matter") + " report a break-even point."],
   ], ["29%", "21%", "33%", "17%"], cls="tbl p3t")}
-<div class="figcap" style="margin-top:6px">“From”: the formula appears in that paper. “Ours”: our formula; “built on” names the papers whose ideas it combines.</div>""",
-  chip=("#a01", "Appendix A1"))
+<div class="figcap" style="margin-top:6px">Each source’s original formula, and what we changed and why: <a href="#a00">Appendix A0 ↗</a></div>""",
+  chip=("#a00", "Appendix A0"))
 
 slide("s02", "Where one expense report loses time",
   crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
@@ -464,6 +464,28 @@ slide("s10", "The closest works save time or money on repeated tasks; none count
      "97.4K vs 112.6K tokens per AppWorld task", "memory manager not counted; apps never seen before not tested"],
   ], ["15%", "20%", "38%", "27%"], cls="tbl p2"),
   chip=("#a10", "Appendix A10"))
+
+# =====================================================================
+# Appendix A0 — each formula of page 1 against its source
+# =====================================================================
+slide("a00", "A0 · Page 1’s formulas: the original, ours, and why we changed it", label="A0", kind="appendix", chip=("#back", "← back"),
+  body=table(["our formula", "status", "the source’s own formula or words, in its notation", "what we changed, and why"], [
+    [tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)}", 12), "from the paper",
+     tex(r"v(m,p)=C_m(p)/R_m(p)", 11) + ", cost-of-pass (Eq. 2): expected cost of one attempt over its success rate; the expected number of attempts to the first correct answer is " + tex(r"1/R_m(p)", 11) + ", with independent attempts " + cite("ref-p1-cop"),
+     "The paper compares <b>models</b>; we read " + tex("m", 11) + " as a <b>design</b>, the model plus its harness, because learning changes the harness and not the model. The formula is unchanged."],
+    [tex(r"T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 12), "ours, adapted",
+     "The same paper notes that units per attempt other than dollars, such as time or latency, may matter more (App. D.1); it gives no time formula " + cite("ref-p1-cop"),
+     "The same derivation in seconds, so time and money can be reported side by side. It assumes attempts run one after another; failures that repeat for the same reason break the independence assumption."],
+    [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{setup}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 12), "ours, adapted",
+     "In words: total cost = a fixed cost, paid once to optimise the agent’s design, + a variable cost, paid on every run and set by its input and output tokens " + cite("ref-ai-agents-that-matter") + ". " + tex(r"O(nc+C)", 11) + " against " + tex(r"O(nC)", 11) + ": one expensive tool-making step " + tex("C", 11) + " amortised over " + tex("n", 11) + " cheap runs " + tex("c", 11) + " (Table 2) " + cite(46),
+     "(1) The fixed cost is divided by " + tex("n", 11) + " to give a cost per task. (2) The variable part is taken per success, so failed attempts are paid for. (3) The fixed cost is widened from one-time optimisation to all that learning costs: exploring, proposing and checking changes, and keeping them up to date, because our learning does all of these."],
+    [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)", 11) + "<br>" + tex(r"\mathrm{s.t.}\ R_{m^{\prime}}(p)\geq R_0", 11), "ours",
+     tex(r"V_p(\mathcal{M})=\min_{m\in\mathcal{M}}v(m,p)", 11) + " (Eq. 3): the lowest cost per success among the available models " + cite("ref-p1-cop") + "; accuracy and cost optimised jointly " + cite("ref-ai-agents-that-matter"),
+     "(1) One number becomes a pair, seconds and dollars, lowered together: there is no fixed exchange rate between them. (2) The set-up is included. (3) A success floor " + tex("R_0", 11) + ", fixed before the experiment, so that a design cannot look cheaper by succeeding less."],
+    [tex(r"n^{*}=\dfrac{C_{\mathrm{setup}}}{v(m,p)-v(m^{\prime},p)}", 12), "ours",
+     "In words: the jointly optimised agent becomes cheaper in total than the default one after about 1,350 HotPotQA tasks " + cite("ref-ai-agents-that-matter"),
+     "Written as a formula from row 3, by setting " + tex(r"v_n(m^{\prime},p)=v(m,p)", 11) + ", so the break-even point can be computed from measured costs. It assumes the saving per task stays the same over the " + tex("n", 11) + " tasks."],
+  ], ["22%", "9%", "35%", "34%"], cls="tbl p3a") + '<div class="figcap">Status: “from the paper” — the formula appears in the source unchanged; “ours, adapted” — a source’s formula or statement, changed as described; “ours” — our formula, with the closest source statements alongside.</div>')
 
 # =====================================================================
 # Appendix A1 — definitions and totals
