@@ -56,6 +56,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-10-01 — Claude Code — Part 3 mechanism page: added the two sums that link the loop to page 1 (T_attempt over the steps, adapted from Hua et al. 2025 with T_saving from Feng et al. 2026; the cost of one attempt c_m(p), adapted from Erol et al. 2026, whose expectation is page 1's C_m(p)); the agent index a in |H_{a,i}| explained (which agent, when several share a task — not the same as m, the whole system); c_env added to the appendix symbol list. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 page 4, version C, difficulty 5 retitled “Learning and testing can cost more than they save” to match its figure (learning, testing and repair against the savings). No E/D changes.
 - 2026-10-01 — Claude Code — Part 3: difficulty 5's takeaway now reads “Learning pays off only if enough reports share its cost”; card labels on the shared-problems page brought into page 1's notation (v̄(m′) for the per-task cost, R̄(m′) ≥ R_0 for the success floor). No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 page 4, version C: difficulty 4's possible causes now of different kinds (reasoning, rule, interaction, tool); difficulty 5's figure labels the two crossings as break-even n* and break-even with more testing, calls the steps repair after the site changes, and its takeaway reads “If fewer than n* reports come, learning costs more than it saves”. No E/D changes.

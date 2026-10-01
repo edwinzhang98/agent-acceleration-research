@@ -34,7 +34,7 @@ REFDB = {**_refs_from(V1), **_refs_from(LIT)}
 REFDB["ref-p1-cop"] = ("Erol et al., 2026", bd.refs_for("cop")[0])   # Part 1's source for cost per success
 P1KEYS = ["isp", "swm", "distserve", "aa", "anth-b", "aospec", "asyncfc", "llmc", "react", "yuan", "tokenpilot", "sglang"]
 for _k in P1KEYS:   # the sources of the agent-loop symbols, in Part 1's checked reference list
-    REFDB["ref-p1-" + _k] = (html.unescape(re.sub(r"<[^>]+>", "", bd.CITE[_k])), bd.refs_for(_k)[0])
+    REFDB["ref-p1-" + _k] = (re.sub(r", arXiv · .*$", "", html.unescape(re.sub(r"<[^>]+>", "", bd.CITE[_k]))), bd.refs_for(_k)[0])
 EN = [("arXiv 预印本", "arXiv preprint"), ("预印本", "arXiv"), ("实际读的版本：", "Version read: "), ("版本日期：", ""),
       ("初版日期：", "first version "), ("主会", "main conference"), ("日程已列", "listed in the programme"),
       ("论文集待刊", "proceedings forthcoming"), ("正式题名", "formal title"), ("未记录", "not recorded"),
@@ -77,7 +77,13 @@ def fmt_ref(anchor, full=False):
     name, raw = REFDB[anchor]
     m = re.match(r"(.+?)\s(\d{4}[a-z]?)\.\s(.+)$", raw)
     if anchor.startswith("ref-p1-") or not m:
-        return raw if anchor.startswith("ref-p1-") else en(raw)
+        if not anchor.startswith("ref-p1-"):
+            return en(raw)
+        if full:
+            return raw
+        short_raw = re.sub(r"\s*(?:Dashboard: )?https?://\S+", "", raw)
+        short_raw = re.sub(r"\s*\(read [^)]*\)", "", short_raw)
+        return re.sub(r"[;,]\s*\.", ".", re.sub(r"\s{2,}", " ", short_raw)).strip()
     authors, year, rest = m.groups()
     title, _, after = rest.partition(". ")
     venue = re.split(r"\s*(?:\[正式引用链接\]|正式引用链接|实际读的版本|; OpenReview|; DOI)", after)[0].strip().rstrip(".")
@@ -188,6 +194,7 @@ EXTRA_CSS = r"""
 svg .node.xh rect{fill:#fbeede;stroke:#e2b98b}
 svg .node.nd rect{fill:#f3f7fa;stroke:var(--accent);stroke-dasharray:5 3}
 .mleg{display:flex;gap:16px;font-size:11px;color:var(--ink2);margin:4px 0 0 40px}
+.bridge{font-size:12px;color:var(--ink2);margin:2px 0 0 40px;line-height:1.45}.bridge .src{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
 .mleg a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px}
 .fig-loop2.sm svg.big-svg{width:960px}
 .mleg span.k{display:inline-block;width:22px;height:12px;border-radius:6px;vertical-align:-2px;margin-right:6px}
@@ -325,16 +332,17 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
   chip=("#a00", "Appendix A0"))
 
 slide("s1m", "How an agent runs a task, and where learning changes it",
-  callout="<p><b>One attempt is a loop of steps: observe, call the model, act, wait, until the agent stops. Learning across tasks changes the harness around the model to cut steps, model calls and failures; the price is a longer prompt to read.</b></p>",
+  callout="<p><b>One attempt is a loop of steps. Learning changes the harness to cut steps, model calls and failures; the price is a longer prompt.</b></p>",
   body=f"""
 <div class="fig-loop2 sm">{mech_svg()}</div>
 <div class="mleg"><span><span class="k" style="background:var(--accent)"></span>learning aims to lower it, or to raise success</span><span><span class="k" style="background:#fbeede;border:1px solid #e2b98b"></span>grows in exchange: learned material is read in the prompt</span><span><span class="k" style="background:#f3f7fa;border:1px dashed var(--accent)"></span>a possible direction: a stable prompt prefix is read from the cache</span><span><a href="#a00-2">every symbol: Appendix A0 ↗</a></span></div>
-<div class="path" style="margin:8px 0 6px 60px"><span class="pl" style="width:auto;margin-right:10px">ACROSS TASKS</span><span class="s">run record</span>→<span class="s">learning, at cost {tex(r"C_{\mathrm{learn}}", 10)}</span>→<span class="s">updated harness: prompt · memory · skills and tools · control code</span>→<span class="s">next task</span></div>
+<div class="bridge">One attempt adds up to {tex(r"T_{\mathrm{attempt}}=\Sigma_{i}\,(D_i+E_i)-T_{\mathrm{saving}}", 11)} <span class="src">(adapted from {p1("isp")}; {p1("asyncfc")})</span> and {tex(r"c_m(p)=\Sigma_{i,j,\kappa}\,n^{\kappa}_{ij}\,c_{\kappa}(\mu_{ij})+x_{\mathrm{env}}\,c_{\mathrm{env}}", 11)} <span class="src">(adapted from {FORM["ref-p1-cop"]})</span>; page 1’s {tex("C_m(p)", 11)} is the expected {tex("c_m(p)", 11)}</div>
+<div class="path" style="margin:4px 0 2px 60px"><span class="pl" style="width:auto;margin-right:10px">ACROSS TASKS</span><span class="s">run record</span>→<span class="s">learning, at cost {tex(r"C_{\mathrm{learn}}", 10)}</span>→<span class="s">updated harness: prompt · memory · skills and tools · control code</span>→<span class="s">next task</span></div>
 {bd.defs2([
   (r"N,\ i", "steps in one attempt; one step is one observe–decide–act–wait round", p1("isp")),
   (r"J_i", "model calls in step " + tex("i", 12) + ": planner, judge, retries", "self-defined"),
   (r"R_m(p)", "chance that one attempt of agent " + tex("m", 12) + " on task " + tex("p", 12) + " succeeds", cite("ref-p1-cop")[1:-1]),
-  (r"|H_{a,i}|", "length of the prompt read in step " + tex("i", 12) + "; learned notes make it longer", p1("yuan")),
+  (r"|H_{a,i}|", "length of the prompt agent " + tex("a", 12) + " reads in step " + tex("i", 12) + " (" + tex("a", 12) + ": which agent, when several share a task); learned notes make it longer", p1("yuan")),
   (r"\mathrm{prefill}", "reading the prompt before writing; input already in the cache is read faster and billed at a lower price", p1("anth-b")),
 ])}""")
 
@@ -856,7 +864,7 @@ slide("a00-2", "A0 · Every symbol in the agent loop", label="A0 · 2/2", kind="
   (r"|H_{a,i}|,\ \Phi,\ z_{a,i}", "length of the prompt step " + tex("i", 12) + "’s call reads (one call per step); chat template; the call’s output: thinking, message and tool-call tokens", p1("yuan")),
   (r"n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{unc}}", "input tokens read from the cache, written to it, or uncached", p1("anth-b") + "; " + p1("tokenpilot") + "; " + p1("sglang")),
   (r"c_{\kappa}(\mu),\ \kappa,\ \mu", "price per token of billing class " + tex(r"\kappa", 12) + " on serving model " + tex(r"\mu", 12), "adapted from " + FORM["ref-p1-cop"]),
-  (r"x_{\mathrm{env}}", "billed environment usage (e.g. sandbox hours)", FORM["ref-p1-cop"] + " (adapted)"),
+  (r"x_{\mathrm{env}},\ c_{\mathrm{env}}", "billed environment usage (e.g. sandbox hours); its price per unit", FORM["ref-p1-cop"] + " (adapted)"),
   (r"R_m(p)", "chance that one attempt of agent " + tex("m", 12) + " on task " + tex("p", 12) + " succeeds", cite("ref-p1-cop")[1:-1]),
 ])}""")
 
