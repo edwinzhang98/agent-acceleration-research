@@ -158,6 +158,7 @@ EXTRA_CSS = r"""
 .tbl.p3t td{font-size:11.2px;line-height:1.28;padding:4px 7px 4px 5px}
 .tbl.p3t td.c{text-align:center;font-family:'IBM Plex Mono',Menlo,monospace;font-size:12px;color:var(--ink)}
 .tbl.p3t tr.tot td{font-weight:700;border-top:1px solid var(--accent)}
+.tbl.p3t ul.tb{margin:0;padding-left:13px}.tbl.p3t ul.tb li{margin:0 0 1px}
 .tbl.p3t a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px}
 .tbl.p3a{font-size:10px;line-height:1.3}.tbl.p3a td{padding:3px 6px 3px 4px}
 .tbl.p3a td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:10px;color:var(--ink)}
@@ -208,6 +209,14 @@ def render(font_dir=None):
 bd.FX["per task"] = [("op", r"v_n(m^{\prime},p)="), ("S", r"\dfrac{C_{\mathrm{setup}}}{n}"), ("op", "+"),
                      ("C", r"\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}"), ("op", r"\quad\mathrm{s.t.}\ "), ("R", r"R_{m^{\prime}}(p)\geq R_0")]
 DN, UP, KEEP = bd.DN, bd.UP, bd.KEEP
+def citet(*keys):
+    """Narrative citation: Surname et al. (Year) and Surname et al. (Year)."""
+    forms = [cite(k)[1:-1] for k in keys]
+    return " and ".join(re.sub(r", (\d{4}[a-z]?)$", r" (\1)", f) for f in forms)
+
+def ul(items):
+    return '<ul class="tb">' + "".join(f"<li>{x}</li>" for x in items) + "</ul>"
+
 def fx(marks, legend=True):
     return bd.fx(("per task", marks), legend=legend)
 
@@ -238,20 +247,32 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
   crumb="cost per success, with a one-time set-up spread over the n tasks it serves · time is reported beside money, never added to it",
   callout="<p><b>An agent runs the same workflow many times with new inputs. What it learns on earlier tasks should lower the time and money of later tasks, with the cost of learning counted, without lowering the success rate.</b></p>",
   body=f"""
-{table(["formula", "meaning and symbols", "source"], [
+{table(["formula", "meaning", "symbols", "source"], [
     [tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)}", 13) + "<br>" + tex(r"T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 13),
-     "<b>Dollars and seconds per success.</b> " + tex("m", 11) + ": a design, the model plus the program around it (the harness); " + tex("p", 11) + ": one task; " + tex("C_m(p)", 11) + ": expected dollars of one attempt; " + tex("R_m(p)", 11) + ": chance that one attempt succeeds; " + tex(r"T_{\mathrm{attempt}}", 11) + ": seconds of one attempt, " + tex(r"\mathbb{E}", 11) + " its expected value; " + tex("v", 11) + ", " + tex(r"T_{\mathrm{success}}", 11) + ": expected dollars and seconds per success, retrying until the task succeeds",
-     "dollars: " + cite("ref-p1-cop") + "; seconds: our definition, same form"],
+     tex("v", 11) + ", " + tex(r"T_{\mathrm{success}}", 11) + ": expected dollars and seconds per success, retrying until the task succeeds",
+     ul([tex("m", 11) + ": a design, the model plus the program around it (the harness)",
+         tex("p", 11) + ": one task",
+         tex("C_m(p)", 11) + ": expected dollars of one attempt",
+         tex("R_m(p)", 11) + ": chance that one attempt succeeds",
+         tex(r"T_{\mathrm{attempt}}", 11) + ": seconds of one attempt; " + tex(r"\mathbb{E}", 11) + ": expected value"]),
+     "Dollars: from " + citet("ref-p1-cop") + ". Seconds: ours, same form."],
     [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{setup}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 13),
-     "<b>Dollars per task after learning, set-up included.</b> " + tex(r"m^{\prime}", 11) + ": the same model with its harness changed by learning; " + tex(r"C_{\mathrm{setup}}", 11) + ": dollars spent on learning (exploring, proposing and checking changes, keeping them up to date), each counted once; " + tex("n", 11) + ": tasks the learned design serves; " + tex("v_n", 11) + ": expected dollars per task, set-up included",
-     "our definition, from fixed plus variable cost " + cite("ref-ai-agents-that-matter") + ", §3, and one set-up over n runs " + cite(46)],
-    [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)\quad\mathrm{s.t.}\quad R_{m^{\prime}}(p)\geq R_0", 12),
-     "<b>The goal: both lower, success held.</b> " + tex("R_0", 11) + ": lowest acceptable success rate, fixed in advance and measured on tasks not used for learning; time spent learning offline, " + tex(r"T_{\mathrm{setup}}", 11) + ", is reported beside " + tex(r"T_{\mathrm{success}}", 11) + " and not spread over tasks",
-     "our definition"],
+     tex("v_n", 11) + ": expected dollars per task after learning, set-up included",
+     ul([tex(r"m^{\prime}", 11) + ": the same model, its harness changed by learning",
+         tex(r"C_{\mathrm{setup}}", 11) + ": dollars spent on learning (exploring, proposing and checking changes, keeping them up to date), each counted once",
+         tex("n", 11) + ": tasks the learned design serves"]),
+     "Ours, built on " + citet("ref-ai-agents-that-matter", 46) + "."],
+    [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)", 12) + "<br>" + tex(r"\mathrm{s.t.}\quad R_{m^{\prime}}(p)\geq R_0", 12),
+     "The goal: lower time and money per task, success held",
+     ul([tex("R_0", 11) + ": lowest acceptable success rate, fixed in advance, measured on tasks not used for learning",
+         tex(r"T_{\mathrm{setup}}", 11) + ": offline learning time, reported beside " + tex(r"T_{\mathrm{success}}", 11) + ", not spread over tasks"]),
+     "Ours."],
     [tex(r"n^{*}=\dfrac{C_{\mathrm{setup}}}{v(m,p)-v(m^{\prime},p)}", 13),
-     "<b>Break-even.</b> " + tex("n^{*}", 11) + ": the number of tasks after which " + tex(r"v_n(m^{\prime},p)", 11) + " falls below " + tex("v(m,p)", 11),
-     "our definition, from row 2; the same comparison in " + cite("ref-ai-agents-that-matter") + ", §3.2"],
-  ], ["37%", "43%", "20%"], cls="tbl p3t")}""",
+     tex("n^{*}", 11) + ": break-even, the number of tasks after which " + tex(r"v_n(m^{\prime},p)", 11) + " falls below " + tex("v(m,p)", 11),
+     "—",
+     "Ours, from row 2; " + citet("ref-ai-agents-that-matter") + " report such a break-even."],
+  ], ["29%", "21%", "33%", "17%"], cls="tbl p3t")}
+<div class="figcap" style="margin-top:6px">“From”: the formula appears in that paper. “Ours”: our formula; “built on” names the papers whose ideas it combines.</div>""",
   chip=("#a01", "Appendix A1"))
 
 slide("s02", "Where one expense report loses time",
