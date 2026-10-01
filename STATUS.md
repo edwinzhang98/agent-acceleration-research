@@ -56,6 +56,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-10-01 — Claude Code — Part 3: difficulty 5's takeaway now reads “Learning pays off only if enough reports share its cost”; card labels on the shared-problems page brought into page 1's notation (v̄(m′) for the per-task cost, R̄(m′) ≥ R_0 for the success floor). No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 page 4, version C: difficulty 4's possible causes now of different kinds (reasoning, rule, interaction, tool); difficulty 5's figure labels the two crossings as break-even n* and break-even with more testing, calls the steps repair after the site changes, and its takeaway reads “If fewer than n* reports come, learning costs more than it saves”. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 page 4, version C, difficulty 3 retitled “A trade-off between generalization and cost per use” (the framing note's “effective across tasks”), y axis “generalizes”, ideal corner “cheap and general?”. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 page 4, version C, difficulty 3: title “Flexible is costly; cheap is fragile”, axes labelled with the same words (flexible ↑, cost per use →). No E/D changes.

@@ -246,7 +246,7 @@ def ul(items):
 def fx(marks, legend=True):
     return bd.fx(("per task", marks), legend=legend)
 
-C_EXEC, C_LEARN, QQ = tex(r"C_{m^{\prime}}(p)", 13), tex(r"C_{\mathrm{learn}}", 13), tex(r"R_{m^{\prime}}(p)\geq R_0", 13)
+C_EXEC, C_LEARN, QQ = tex(r"\bar{v}(m^{\prime})", 13), tex(r"C_{\mathrm{learn}}", 13), tex(r"\bar{R}(m^{\prime})\geq R_0", 13)
 
 # Row indices in slides/part3-data/rows.json (= the §6 table of the literature document, in order)
 R = dict(ace=13, awm=14, axis=98, sica=67, wma=73, draft=44, mobilegpt=35, walt=81, harnessfix=84, growing=88,
@@ -639,7 +639,7 @@ slide("s03c", "Five difficulties (version C: diagrams)",
 <div class="two" style="flex:none">
   {card("", "4 · Finding the cause behind an error message", cause_fig() + '<div class="cd" style="margin-top:2px">Each possible cause costs a check; the right one may come late, or never</div>',
      seen([("HarnessFix", "harnessfix", "finds the faulty step"), ("ESPO", "espo", "sorts errors first")]))}
-  {card("", "5 · Testing a change costs money, and can cost more than it saves", breakeven_fig() + '<div class="cd" style="margin-top:2px">If fewer than ' + tex("n^{*}", 11) + ' reports come, learning costs more than it saves</div>',
+  {card("", "5 · Testing a change costs money, and can cost more than it saves", breakeven_fig() + '<div class="cd" style="margin-top:2px">Learning pays off only if enough reports share its cost</div>',
      seen([("AI Agents That Matter", "ref-ai-agents-that-matter", "late break-even"), ("SICA", "sica", "large bill, small saving")]))}
 </div></div>""",
   chip=("#ad", "Appendix D"))
