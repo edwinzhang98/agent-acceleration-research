@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build slides/part3.html — the standalone deck on learning to do repeated web tasks faster and more cheaply.
 
-Sections I (the problem) and II (how far existing work has got), pages 1–10 of
+Sections I (the problem) and II (how far existing work has got), pages 1–9 of
 notes/part3/2026-10-01-part3-standalone-slides-outline-v3-zh.md; section III (our plan) waits for discussion.
 Page anatomy, CSS, helpers and navigation are build_deck.py's (imported, not changed). Numbers come from
 notes/part3/2026-10-01-two-directions-literature-zh.md (§5, §6 table; row data in slides/part3-data/rows.json),
@@ -236,7 +236,7 @@ slide("s00", "Learning across tasks", kind="title", cover=True, body="""
 <div class="cover cover-deck"><div class="cover-one">
   <h1 class="cover-title">Learning to do repeated web tasks faster and more cheaply</h1>
   <p class="cover-sub">An agent runs the same workflow again and again with new inputs. What it learns is kept outside the model, so that each later task takes less time and money without lowering the quality of the result.</p>
-  <p class="cover-sub2">I · The problem (pages 1–4) · II · How far existing work has got (pages 5–10) · III · Our plan follows after discussion.</p>
+  <p class="cover-sub2">I · The problem (pages 1–3) · II · How far existing work has got (pages 4–9) · III · Our plan follows after discussion.</p>
   <p class="cover-date">October 2026</p>
 </div></div>""")
 
@@ -316,27 +316,6 @@ slide("s03", "Five difficulties, each tied to a term of the formula",
   {card("5 · PROVING THE SAVING · " + C_LEARN, "Showing that a change saves money costs money itself",
         ["$1.91 → $1.70 and 130.2 → 114.5 s per task on four benchmarks, for a whole run of about $7,000: n* ≈ 33,000 tasks at that saving per attempt (calc.) — SICA " + c("sica")], "")}
 </div>""")
-
-slide("s04", "Acceleration and self-improvement overlap in 16 of 178 agent methods",
-  crumb="our coding of the calibrated corpus (383 works; 198 study agents, 178 of them propose a method) · calc.",
-  callout="<p><b>Of 178 agent methods, 16 both aim at running time and learn across tasks. 88 learn without aiming at time, and 30 aim at time without learning.</b></p>",
-  body=f"""
-<div class="two" style="grid-template-columns:1.25fr 1fr">
- <div>
-  <table class="q2"><thead><tr><th></th><th>learns or improves across tasks</th><th>does not</th></tr></thead><tbody>
-   <tr><td>running time is a main goal</td><td class="n hl">16</td><td class="n">30</td></tr>
-   <tr><td>running time is not a main goal</td><td class="n">88</td><td class="n">44</td></tr>
-  </tbody></table>
-  <div class="figcap">Learns or improves: reuses experience, explores the environment, or rewrites prompts, skills, memory or harness code; model training alone does not count.</div>
- </div>
- <div class="stack">
-  {card("NOT ONLY SUCCESS", "Self-improving agents do not all optimise success alone",
-        ["SICA and SpeedRunner also target cost or usage " + c("sica", "speedrunner")], "")}
-  {card("TWO CORPORA", "178 agent methods here; 102 works checked one by one on pages 5–10",
-        ["The two counts come from different corpora and are not compared"], "")}
- </div>
-</div>""",
-  chip=("#a01", "Appendix A1"))
 
 # =====================================================================
 # II · How far existing work has got
@@ -500,8 +479,7 @@ slide("a01", "A1 · How the three columns were judged, and the totals per class"
 <div class="apx-note"><b>Time or money of runs</b> — yes: measured seconds or dollars of executing tasks with what was learned; partly: tokens, steps, calls or an author’s estimate only.
 <b>Learning cost</b> — yes: a measured amount for learning, building or maintaining (tokens, dollars, time, compute or rollouts); partly: an estimate, iteration counts only, or a part knowingly left out.
 <b>Unseen tasks</b> — yes: tested on tasks that took no part in learning or selection; partly: an online stream that learns as it goes, the same workflow with new parameters, or an unstated split.
-These are our initial judgments from the cells of the per-work table (calc.), not re-read from the full texts; the representative works on pages 5 and 7 are to be checked one by one before the deck is final.
-Page 4 counts a different corpus: 178 agent methods in the calibrated set of 383 works.</div>""")
+These are our initial judgments from the cells of the per-work table (calc.), not re-read from the full texts; the representative works on pages 4 and 6 are to be checked one by one before the deck is final.</div>""")
 
 # =====================================================================
 # Appendix A2–A10 — per-work tables, paginated
