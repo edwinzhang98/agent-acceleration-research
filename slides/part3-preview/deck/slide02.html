@@ -1,0 +1,78 @@
+<section class="slide" id="s02" aria-labelledby="s02-title">
+  <header>
+    <p class="kicker">SETUP</p>
+    <h1 id="s02-title">Same website, new task inputs</h1>
+    <p class="scope">Each task creates a different ticket through the same workflow.</p>
+  </header>
+  <div class="s02-divider" aria-hidden="true"></div>
+
+  <section class="s02-tasks" aria-labelledby="s02-inputs-title">
+    <h2 id="s02-inputs-title">Different task inputs</h2>
+    <article class="s02-task s02-task-a" aria-labelledby="s02-task-a-title">
+      <div class="s02-task-heading">
+        <svg class="ico" aria-hidden="true"><use href="#document"></use></svg>
+        <h3 id="s02-task-a-title">Login failure</h3>
+        <span class="s02-type">Bug</span>
+      </div>
+      <p>Portal shows “Session expired” after sign-in.</p>
+      <p class="s02-reproduce"><span>Reproduce</span> Open Portal, enter credentials,<br>then select Sign in.</p>
+    </article>
+    <article class="s02-task s02-task-b" aria-labelledby="s02-task-b-title">
+      <div class="s02-task-heading">
+        <svg class="ico" aria-hidden="true"><use href="#document"></use></svg>
+        <h3 id="s02-task-b-title">Upload failure</h3>
+        <span class="s02-type">Bug</span>
+      </div>
+      <p>An attached PDF fails to upload.</p>
+      <p class="s02-reproduce"><span>Reproduce</span> Open Attachments, choose a PDF,<br>then select Upload.</p>
+    </article>
+  </section>
+
+  <div class="s02-join" aria-hidden="true">
+    <svg class="s02-join-lines" viewBox="0 0 144 268"><path d="M0 62H66V207H0M66 135H107"></path></svg>
+    <svg class="ico s02-join-arrow"><use href="#arrow"></use></svg>
+  </div>
+
+  <section class="s02-site" aria-labelledby="s02-site-title">
+    <h2 id="s02-site-title">One support ticket website</h2>
+    <div class="s02-browser" role="img" aria-label="The same ticket website accepts both task inputs. Its rules, permissions and layout stay fixed.">
+      <div class="s02-browser-bar">
+        <svg class="ico" aria-hidden="true"><use href="#web"></use></svg>
+        <span>support.example</span>
+        <small>Illustrative website</small>
+      </div>
+      <div class="s02-form">
+        <div class="s02-form-title"><span>Create ticket</span><span class="s02-form-type">Type <b>Bug</b><span aria-hidden="true">⌄</span></span></div>
+        <div class="s02-field"><span>Title</span><span>From the current task</span></div>
+        <div class="s02-field"><span>Description / steps</span><span>From the current task</span></div>
+      </div>
+      <div class="s02-constants">
+        <span><svg class="ico" aria-hidden="true"><use href="#check"></use></svg>Same rules</span>
+        <span><svg class="ico" aria-hidden="true"><use href="#check"></use></svg>Same permissions</span>
+        <span><svg class="ico" aria-hidden="true"><use href="#check"></use></svg>Same layout</span>
+      </div>
+    </div>
+    <div class="s02-workflow" aria-label="Shared workflow: create, fill, submit, then verify">
+      <span>Create</span><svg class="ico" aria-hidden="true"><use href="#arrow"></use></svg>
+      <span>Fill</span><svg class="ico" aria-hidden="true"><use href="#arrow"></use></svg>
+      <span>Submit</span><svg class="ico" aria-hidden="true"><use href="#arrow"></use></svg>
+      <span class="s02-verify"><svg class="ico" aria-hidden="true"><use href="#check"></use></svg>Verify</span>
+    </div>
+  </section>
+
+  <div class="s02-state-note">
+    <p><b>Before each run</b> Restore a comparable starting state.</p>
+    <p><b>During the run</b> Page state and saved records can change.</p>
+  </div>
+
+  <div class="s02-boundaries">
+    <div class="s02-first">
+      <p class="s02-label">FIRST EXPERIMENT</p>
+      <p>New inputs within the same workflow</p>
+    </div>
+    <div class="s02-later">
+      <p class="s02-label">LATER, SEPARATE EXPERIMENTS</p>
+      <p>New workflows <span aria-hidden="true">/</span> Site changes <span aria-hidden="true">/</span> Other websites</p>
+    </div>
+  </div>
+</section>

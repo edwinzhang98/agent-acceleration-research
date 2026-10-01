@@ -1,16 +1,19 @@
-# Part 3 mechanism preview
+# Web Agent learning experiments
 
-One standalone English HTML slide showing a proposed environment-exploration workflow. HTML Slides are the requested delivery format for this preview and the future Part 3 deck, with all titles, body text, diagrams, legends, and appendices in English. The ticket website and its validation rule are illustrative, not a selected benchmark or an experimental result.
+Four standalone English HTML slides introduce two independent experiments. The slides do not use Part 3 labels or depend on an earlier presentation. The ticket website and its validation rule are illustrative, not a selected benchmark or an experimental result.
 
-- [HTML slide — primary deliverable](output/environment-exploration-example.html)
-- [PNG preview](output/environment-exploration-example.png)
+- [Four-slide HTML deck — primary deliverable](output/web-agent-experiments.html)
+- [Four-slide overview](output/web-agent-experiments-overview.png)
+- [Environment-exploration page on its own](output/environment-exploration-example.html)
 - [Content outline (Chinese)](../../notes/part3/2026-10-01-part3-standalone-slides-outline-v2-zh.md)
 - [Experiment design (Chinese)](../../notes/part3/2026-10-01-part3-experiment-design-zh.md)
 
-Open the HTML file directly in a browser for offline viewing. Edit `environment-exploration.template.html`, then run `python3 slides/part3-preview/build_preview_html.py` from the repository root to regenerate the standalone file with embedded IBM Plex fonts. No PowerPoint generation is needed. Private drafts and validation records go in `.build/`; deliverables go in `output/`.
+Open the HTML file directly in a browser for offline viewing. Use the left/right arrows or the page buttons to navigate. Home/End jump to the first/last page; `#s01` through `#s04` link to individual slides. Page 4 has a separate **Walk through** button; W or Space steps through its diagram and Escape restores the full view.
 
-The visual page shows two schematic webpage states, a checked rule saved in a file, and task/page/guide inputs entering the unchanged agent. Two illustrative execution paths highlight possible rework; they are not measured results. Click **Walk through** or press the right arrow to highlight each stage, and use **Show all** or Escape to restore the whole diagram. The PNG is a browser rendering of the current HTML. The HTML scales to the viewport and has a 1280 × 720 print layout. The template also loads the repository fonts locally, so it can be previewed directly.
+The page order is: research goal and independent experiments, same-website/new-input setup, changes outside fixed model weights, and the environment-exploration mechanism. Edit `deck/slide01–03.html` and their CSS files for the opening pages. Edit `environment-exploration.template.html` for page 4, then run `python3 slides/part3-preview/build_deck_preview.py` from the repository root. `build_preview_html.py` updates the single-page preview. Both outputs embed IBM Plex fonts. No PowerPoint generation is needed. Private drafts, page screenshots and validation records go in `.build/`; deliverables go in `output/`.
+
+The mechanism page shows two schematic webpage states, a checked rule saved in a file, and task/page/guide inputs entering the unchanged agent. Two illustrative execution paths highlight possible rework; they are not measured results. The HTML scales to the viewport and prints one 1280 × 720 page per slide. The mechanism template also loads the repository fonts locally, so it can be previewed directly.
 
 The [earlier PowerPoint prototype](output/environment-exploration-example.pptx) and `build-preview.mjs` are retained as historical prototype material. They are superseded by the HTML delivery and do not need to be regenerated.
 
-The full deck has not been produced. The next content decision is whether this level of concrete detail makes the proposed mechanism clear enough for the audience.
+Only the requested first four slides are built. Literature, experiment protocols and the remaining outline pages are still to be produced.

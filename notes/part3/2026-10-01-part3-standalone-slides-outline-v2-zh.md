@@ -1,21 +1,23 @@
-# 第三部分独立演示大纲 第二版
+# Web Agent 独立实验演示大纲 第二版
 
 2026 年 10 月 1 日 · 供敲定内容后制作英文 HTML Slides
 
-这份演示讲清楚我们准备怎样研究 Agent 的环境探索与自我改进。面向有机器学习背景、未读过前两部分的听众，前两部分作为延展阅读。本稿保留两个完整方向：**主动探索环境，形成后续任务能用的知识与操作；从执行轨迹中学习，修改 Agent 自己的做法。** 两个方向分别实验，各自回答能否改善后续任务；组合不是必做内容。首轮研究同一网站、同一种流程的新输入，明确固定模型权重。
+这份演示讲清楚我们准备怎样研究 Agent 的环境探索与自我改进。面向有机器学习背景的听众，按独立演示组织；正式标题、页眉和页脚均不写“Part 3”，也不要求先读其他部分。本稿保留两个完整方向：**主动探索环境，形成后续任务能用的知识与操作；从执行轨迹中学习，修改 Agent 自己的做法。** 两个方向分别实验，各自回答能否改善后续任务；组合不是必做内容。首轮研究同一网站、同一种流程的新输入，明确固定模型权重。
 
 正文共 **12 页，第 1 页兼作封面**；完整参考文献和细节附录另列。**正式交付为英文 HTML Slides，包括标题、正文、图示文字、图例和附录，支持离线浏览。** 本稿的中文仅用于审阅内容，不能直接搬上正式页面。每页“上屏内容”是待译成英文的拟议正文，“图示与讲述”说明怎样把内容讲具体，“制作依据”保存来源和必要边界。
 
 首轮明确使用 Web Agent。浏览器工具是它操作网站的接口，不另开一条通用工具使用任务线。具体网站尚未选定；以下用创建支持工单作说明，报销仍可作为另一种应用选择。示例中的网页规则是虚构的，不代表已选定基准。
 
+前四页已制作成[连续英文 HTML Slides](../../slides/part3-preview/output/web-agent-experiments.html)，从研究目标到环境探索机制；后续页面仍为待制作大纲。
+
 ## 全篇结构
 
 | 页码 | 英文页面标题 | 听众应当理解什么 |
 |---|---|---|
-| 1 | Agent Acceleration through Environment Exploration and Self-Improvement | 研究对象、目标和两个方向 |
-| 2 | Same Website, Same Workflow, New Inputs | 为什么不同任务可能共享经验，困难在哪里 |
-| 3 | What Changes When Model Weights Stay Fixed? | 实际保存或修改什么文件，下一次怎样使用 |
-| 4 | Learning Environment Knowledge and Reusable Operations | 主动交互怎样形成可用的环境知识和操作 |
+| 1 | Web Agent learning experiments | 研究对象、目标和两个方向 |
+| 2 | Same website, new task inputs | 为什么不同任务可能共享经验，困难在哪里 |
+| 3 | What changes when model weights stay fixed? | 实际保存或修改什么文件，下一次怎样使用 |
+| 4 | Environment exploration | 主动交互怎样形成可用的环境知识和操作 |
 | 5 | Environment Exploration: What Is Learned? | 按学习产物分类，每类如何做，有什么共同困难 |
 | 6 | Evaluating Environment Exploration | 探索在什么条件下有用，怎样与已有方法比较 |
 | 7 | Improving the Agent from Execution Trajectories | 怎样从失败和低效执行中提出、验证并保留修改 |
@@ -27,7 +29,7 @@
 
 ## 第 1 页 我们要做什么
 
-**英文标题：** Agent Acceleration through Environment Exploration and Self-Improvement
+**英文标题：** Web Agent learning experiments
 
 **上屏内容：**
 

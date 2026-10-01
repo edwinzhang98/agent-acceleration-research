@@ -1,0 +1,25 @@
+<section class="slide" id="s01" aria-labelledby="s01-title">
+<header><p class="kicker">RESEARCH PROPOSAL</p><h1 id="s01-title">Web Agent learning experiments</h1><p class="scope">Use past knowledge and experience to make later tasks faster and less costly, while keeping outcomes correct.</p></header>
+<div class="divider"></div>
+<div class="experiment exp-a">
+  <div class="exp-intro"><p class="exp-label mono">EXPERIMENT A</p><h2>Environment exploration</h2><p>Actively try the website.<br>Learn its rules and operations.</p><p class="pilot-tag">First pilot: website knowledge</p></div>
+  <div class="exp-flow">
+    <div class="flow-node"><div class="mini-site"><div class="site-bar"><i></i><i></i><i></i></div><div class="site-content"><span>Type</span><b>Question <small>↔</small> Bug</b><div class="field-line"></div><div class="field-line extra"></div></div></div><p>Probe the environment</p></div>
+    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
+    <div class="flow-node"><div class="mini-file"><svg class="ico" aria-hidden="true"><use href="#document"/></svg><span class="mono">site-guide.md</span><p>Bug tickets require<br>reproduction steps.</p></div><p>Save checked knowledge</p></div>
+    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
+    <div class="flow-node"><div class="later-task"><svg class="ico" aria-hidden="true"><use href="#chip"/></svg><div><strong>Same Agent</strong><span>New task inputs</span></div></div><p>Reuse on later tasks</p></div>
+  </div>
+</div>
+<div class="experiment exp-b">
+  <div class="exp-intro"><p class="exp-label mono">EXPERIMENT B</p><h2>Learning from trajectories</h2><p>Inspect successes, failures<br>and unnecessary work.</p><p class="pilot-tag">First pilot: execution instructions</p></div>
+  <div class="exp-flow">
+    <div class="flow-node"><div class="trace-stack"><span><i class="trace-dot"></i>Observe the page</span><span><i class="trace-dot"></i>Fill fields</span><span class="retry"><svg class="ico" aria-hidden="true"><use href="#warning"/></svg>Error, then retry</span></div><p>Analyze execution records</p></div>
+    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
+    <div class="flow-node"><div class="mini-file"><svg class="ico" aria-hidden="true"><use href="#document"/></svg><span class="mono">policy-prompt.md</span><p>Select Type first.<br>Then inspect the fields.</p></div><p>Validate a specific change</p></div>
+    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
+    <div class="flow-node"><div class="later-task"><svg class="ico" aria-hidden="true"><use href="#chip"/></svg><div><strong>Same Agent</strong><span>New task inputs</span></div></div><p>Use the revised instructions</p></div>
+  </div>
+</div>
+<div class="goal-strip"><div><svg class="ico" aria-hidden="true"><use href="#check"/></svg><span>Correct outcomes</span></div><div><svg class="ico" aria-hidden="true"><use href="#clock"/></svg><span>Less elapsed time</span></div><div><svg class="ico" aria-hidden="true"><use href="#cost"/></svg><span>Lower total cost<small>including learning and validation</small></span></div></div>
+</section>
