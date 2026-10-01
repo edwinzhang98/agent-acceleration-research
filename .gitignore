@@ -4,3 +4,4 @@ slides/shots/
 .venv/
 
 tools/reading-site/node_modules/
+slides/part3-preview/.build/
