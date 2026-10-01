@@ -1,66 +1,49 @@
 <section class="slide" id="s03" aria-labelledby="s03-title">
   <header class="s03-heading">
-    <p class="kicker">IMPLEMENTATION</p>
-    <h1 id="s03-title">What changes when model weights stay fixed?</h1>
-    <p class="scope">Change the files that guide or run the Web Agent. Keep the model weights fixed.</p>
+    <p class="kicker">RESEARCH DESIGN</p>
+    <h1 id="s03-title">Two independent research questions</h1>
+    <p class="scope">Model weights stay fixed. The directions can change prompts, memory, skills or control code; each pilot isolates one component.</p>
   </header>
   <div class="s03-divider" aria-hidden="true"></div>
 
-  <div class="s03-file s03-guide" aria-label="Experiment A adds learned website knowledge as context">
-    <p class="s03-experiment">EXPERIMENT A <span>Environment exploration</span></p>
-    <h2><svg class="ico" aria-hidden="true"><use href="#document"></use></svg><code>site-guide.md</code></h2>
-    <p class="s03-file-content">Bug tickets require<br>reproduction steps.</p>
+  <div class="s03-branches">
+    <section class="s03-branch" aria-labelledby="s03-a-title">
+      <h2 id="s03-a-title"><span>A</span> Environment exploration</h2>
+      <div class="s03-rq">
+        <p class="s03-label">RESEARCH QUESTION</p>
+        <p class="s03-question">How should an agent select and verify website knowledge for later tasks under an exploration budget?</p>
+      </div>
+      <div class="s03-hypothesis">
+        <p class="s03-label">PROPOSED HYPOTHESIS</p>
+        <p>Checked knowledge can reduce repeated discovery and recovery enough to offset acquisition and reading costs.</p>
+      </div>
+      <div class="s03-pilot">
+        <p><span>Only change</span> <code>site-guide.md</code> → context</p>
+        <p><span>Compare</span> Empty guide vs. learned guide</p>
+        <p><span>Keep fixed</span> Model, policy, tools and control loop</p>
+      </div>
+    </section>
+
+    <section class="s03-branch" aria-labelledby="s03-b-title">
+      <h2 id="s03-b-title"><span>B</span> Learning from trajectories</h2>
+      <div class="s03-rq">
+        <p class="s03-label">RESEARCH QUESTION</p>
+        <p class="s03-question">How can trace analysis identify and validate changes that remove avoidable work while controlling regressions?</p>
+      </div>
+      <div class="s03-hypothesis">
+        <p class="s03-label">PROPOSED HYPOTHESIS</p>
+        <p>Instructions revised from trajectories can reduce avoidable work on new tasks while meeting the same quality requirement.</p>
+      </div>
+      <div class="s03-pilot">
+        <p><span>Only change</span> <code>policy-prompt.md</code> → instructions</p>
+        <p><span>Compare</span> Original vs. trace-revised policy</p>
+        <p><span>Keep fixed</span> Model, knowledge, tools and control loop</p>
+      </div>
+    </section>
   </div>
 
-  <p class="s03-independent">Independent pilots: change one object.</p>
-
-  <div class="s03-file s03-policy" aria-label="Experiment B loads an instruction revised from execution trajectories">
-    <p class="s03-experiment">EXPERIMENT B <span>Learning from trajectories</span></p>
-    <h2><svg class="ico" aria-hidden="true"><use href="#document"></use></svg><code>policy-prompt.md</code></h2>
-    <p class="s03-file-content">Select type, then inspect<br>required fields.</p>
-  </div>
-
-  <div class="s03-harness" aria-label="The execution harness is the program around the frozen model">
-    <h2>Execution harness</h2>
-    <p>Program around the model: run actions and return observations.</p>
-  </div>
-
-  <svg class="s03-links" viewBox="0 0 1280 720" aria-hidden="true">
-    <path d="M424 248H548V292H599"></path>
-    <path d="m592 286 7 6-7 6"></path>
-    <path d="M424 438H548V360H599"></path>
-    <path d="m592 354 7 6-7 6"></path>
-    <path d="M829 328H977"></path>
-    <path d="m970 322 7 6-7 6"></path>
-    <path d="M1093 421V463H712V421"></path>
-    <path d="m706 428 6-7 6 7"></path>
-  </svg>
-  <p class="s03-link-label s03-context-label">Add as<br>context</p>
-  <p class="s03-link-label s03-instruction-label">Load as<br>instruction</p>
-
-  <div class="s03-model">
-    <svg class="ico" aria-hidden="true"><use href="#chip"></use></svg>
-    <h2>Frozen model</h2>
-    <p><svg class="ico" aria-hidden="true"><use href="#lock"></use></svg>Same weights</p>
-  </div>
-
-  <p class="s03-action-label">Choose an action</p>
-  <div class="s03-browser">
-    <svg class="ico" aria-hidden="true"><use href="#web"></use></svg>
-    <h2>Browser</h2>
-    <p>Click · type · submit</p>
-  </div>
-  <p class="s03-return-label">Page + tool result</p>
-
-  <div class="s03-later" aria-label="Possible later changes outside the first pilots">
-    <div class="s03-later-heading"><h2>Possible later changes</h2><p>Outside the first pilots</p></div>
-    <div class="s03-later-object">
-      <svg class="ico" aria-hidden="true"><use href="#document"></use></svg>
-      <div><h3><code>create_ticket.py</code></h3><p>Register a reusable browser skill</p></div>
-    </div>
-    <div class="s03-later-object">
-      <svg class="ico" aria-hidden="true"><use href="#document"></use></svg>
-      <div><h3><code>runner.py</code></h3><p>Change observe / check / retry controls</p></div>
-    </div>
+  <div class="s03-common">
+    <p><strong>Assess:</strong> task quality, end-to-end time and cumulative cost, including learning and validation.</p>
+    <p>These pilots test feasibility. If effective, compare existing methods under matched learning budgets to isolate the contribution.</p>
   </div>
 </section>

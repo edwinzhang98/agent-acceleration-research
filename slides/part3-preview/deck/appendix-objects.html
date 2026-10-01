@@ -1,0 +1,15 @@
+<section class="slide report-page appendix" id="a02" aria-labelledby="a02-title">
+<header><p class="kicker">APPENDIX A2 / ENGINEERING OBJECTS</p><h1 id="a02-title">Learning changes a persistent artifact outside the model</h1><p class="scope">The directions differ in how evidence is obtained and used; their possible outputs overlap.</p></header><div class="divider"></div>
+<div class="report-body">
+<table class="objects-table"><colgroup><col style="width:18%"><col style="width:29%"><col style="width:32%"><col style="width:21%"></colgroup>
+<thead><tr><th>Update object</th><th>Illustrative content</th><th>How the next task uses it</th><th>First-study status</th></tr></thead>
+<tbody>
+<tr><th>Website knowledge<br><code>site-guide.md</code></th><td>“Bug tickets require reproduction steps.” Store the condition, scope and supporting checks.</td><td>Retrieve relevant knowledge and add it to the model context before choosing actions.</td><td>A: learned guide versus empty guide.</td></tr>
+<tr><th>Execution policy<br><code>policy-prompt.md</code></th><td>“Select the ticket type before inspecting and filling required fields.”</td><td>Load revised behavioral instructions; keep the browser interface and control program fixed.</td><td>B: revised versus original policy.</td></tr>
+<tr><th>Callable skill<br><code>create_ticket.py</code></th><td>A parameterized sequence that creates a ticket and checks the result.</td><td>Register a reusable operation. The Agent supplies the current task inputs when calling it.</td><td>Later study; expands the available operations.</td></tr>
+<tr><th>Control program<br><code>runner.py</code></th><td>Rules for when to observe, verify completion, retry or fall back.</td><td>Execute revised control logic around the same model and browser tools.</td><td>Later study; changes the execution loop.</td></tr>
+</tbody></table>
+<div class="appendix-notes"><div><h2>Validation before reuse</h2><ul><li>Test candidate updates on validation tasks; retain a version only if it meets the quality rule.</li><li>Record provenance, update size and loading costs. Preserve the original version for comparison.</li></ul></div><div><h2>What remains a research question</h2><ul><li>Which observations or traces justify a general rule?</li><li>When should an update be revised or rejected?</li><li>Do later savings exceed acquisition, checking and use costs?</li></ul></div></div>
+</div>
+<a class="appendix-return" href="#back">← Back to discussion · B</a>
+</section>

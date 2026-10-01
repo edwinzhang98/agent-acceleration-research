@@ -1,25 +1,19 @@
 <section class="slide" id="s01" aria-labelledby="s01-title">
-<header><p class="kicker">RESEARCH PROPOSAL</p><h1 id="s01-title">Web Agent learning experiments</h1><p class="scope">Use past knowledge and experience to make later tasks faster and less costly, while keeping outcomes correct.</p></header>
-<div class="divider"></div>
-<div class="experiment exp-a">
-  <div class="exp-intro"><p class="exp-label mono">EXPERIMENT A</p><h2>Environment exploration</h2><p>Actively try the website.<br>Learn its rules and operations.</p><p class="pilot-tag">First pilot: website knowledge</p></div>
-  <div class="exp-flow">
-    <div class="flow-node"><div class="mini-site"><div class="site-bar"><i></i><i></i><i></i></div><div class="site-content"><span>Type</span><b>Question <small>↔</small> Bug</b><div class="field-line"></div><div class="field-line extra"></div></div></div><p>Probe the environment</p></div>
-    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
-    <div class="flow-node"><div class="mini-file"><svg class="ico" aria-hidden="true"><use href="#document"/></svg><span class="mono">site-guide.md</span><p>Bug tickets require<br>reproduction steps.</p></div><p>Save checked knowledge</p></div>
-    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
-    <div class="flow-node"><div class="later-task"><svg class="ico" aria-hidden="true"><use href="#chip"/></svg><div><strong>Same Agent</strong><span>New task inputs</span></div></div><p>Reuse on later tasks</p></div>
-  </div>
+<header><p class="kicker">WEB AGENT LEARNING EXPERIMENTS</p><h1 id="s01-title">Research problem and objective</h1><p class="scope">Study scope: fixed model weights, interactive Web tasks and persistent learning across task instances.</p></header><div class="divider"></div>
+<div class="problem">
+  <h2>Research question</h2>
+  <p class="question-text">How can prior interactions reduce the time and cost of later Web tasks while maintaining task success?</p>
+  <h3>Why this needs an experiment</h3>
+  <ul><li>Repeated tasks may repeat discovery, reasoning or error recovery that earlier experience could help avoid.</li><li>Learning also costs time and money. Acquiring, checking and reading knowledge may outweigh what it saves.</li></ul>
+  <p class="unit-note"><b>Unit of evaluation</b><br>A sequence of new task instances, with the learning investment charged to that sequence.</p>
 </div>
-<div class="experiment exp-b">
-  <div class="exp-intro"><p class="exp-label mono">EXPERIMENT B</p><h2>Learning from trajectories</h2><p>Inspect successes, failures<br>and unnecessary work.</p><p class="pilot-tag">First pilot: execution instructions</p></div>
-  <div class="exp-flow">
-    <div class="flow-node"><div class="trace-stack"><span><i class="trace-dot"></i>Observe the page</span><span><i class="trace-dot"></i>Fill fields</span><span class="retry"><svg class="ico" aria-hidden="true"><use href="#warning"/></svg>Error, then retry</span></div><p>Analyze execution records</p></div>
-    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
-    <div class="flow-node"><div class="mini-file"><svg class="ico" aria-hidden="true"><use href="#document"/></svg><span class="mono">policy-prompt.md</span><p>Select Type first.<br>Then inspect the fields.</p></div><p>Validate a specific change</p></div>
-    <svg class="ico flow-arrow" aria-hidden="true"><use href="#arrow"/></svg>
-    <div class="flow-node"><div class="later-task"><svg class="ico" aria-hidden="true"><use href="#chip"/></svg><div><strong>Same Agent</strong><span>New task inputs</span></div></div><p>Use the revised instructions</p></div>
-  </div>
+<div class="objective">
+  <h2>Operational objective</h2>
+  <p class="objective-intro">Seek lower elapsed time and total cost, subject to a pre-specified quality requirement relative to the baseline.</p>
+  <div class="quality">Predefine the acceptable change in task success.</div>
+  <dl class="metrics"><dt>Success</dt><dd>Fraction of test tasks passing an external outcome check; compare paired success rates and report uncertainty.</dd><dt>Time</dt><dd>Elapsed time per task, including retries and failed runs. Report mean and tail latency.</dd><dt>Cost</dt><dd>Learning and validation investment, plus execution costs over the same task sequence.</dd></dl>
+  <div class="accounting">{{math:cost}}</div>
+  <p class="notation">N counts later tasks attempted. Learning includes validation; execution includes reading learned context.</p>
 </div>
-<div class="goal-strip"><div><svg class="ico" aria-hidden="true"><use href="#check"/></svg><span>Correct outcomes</span></div><div><svg class="ico" aria-hidden="true"><use href="#clock"/></svg><span>Less elapsed time</span></div><div><svg class="ico" aria-hidden="true"><use href="#cost"/></svg><span>Lower total cost<small>including learning and validation</small></span></div></div>
+<div class="comparison-rule"><strong>Decision rule</strong><span>Compare with the unchanged Agent on the same held-out inputs. Report time and cost separately, alongside success under the pre-specified quality rule.</span><a class="appendix-link" href="#a01">Measurement protocol ↗</a></div>
 </section>

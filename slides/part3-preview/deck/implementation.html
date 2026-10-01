@@ -1,0 +1,67 @@
+<section class="slide" id="s05" aria-labelledby="s05-title">
+  <header class="s05-heading">
+    <p class="kicker">IMPLEMENTATION</p>
+    <h1 id="s05-title">What changes when model weights stay fixed?</h1>
+    <p class="scope">Change the files that guide or run the Web Agent. Keep the model weights fixed.</p>
+  </header>
+  <div class="s05-divider" aria-hidden="true"></div>
+
+  <div class="s05-file s05-guide" aria-label="Experiment A adds learned website knowledge as context">
+    <p class="s05-experiment">EXPERIMENT A <span>Environment exploration</span></p>
+    <h2><svg class="ico" aria-hidden="true"><use href="#document"></use></svg><code>site-guide.md</code></h2>
+    <p class="s05-file-content">Bug tickets require<br>reproduction steps.</p>
+  </div>
+
+  <p class="s05-independent">Independent pilots: change one object.</p>
+
+  <div class="s05-file s05-policy" aria-label="Experiment B loads an instruction revised from execution trajectories">
+    <p class="s05-experiment">EXPERIMENT B <span>Learning from trajectories</span></p>
+    <h2><svg class="ico" aria-hidden="true"><use href="#document"></use></svg><code>policy-prompt.md</code></h2>
+    <p class="s05-file-content">Select type, then inspect<br>required fields.</p>
+  </div>
+
+  <div class="s05-harness" aria-label="The execution harness is the program around the frozen model">
+    <h2>Execution harness</h2>
+    <p>Program around the model: run actions and return observations.</p>
+  </div>
+
+  <svg class="s05-links" viewBox="0 0 1280 720" aria-hidden="true">
+    <path d="M424 248H548V292H599"></path>
+    <path d="m592 286 7 6-7 6"></path>
+    <path d="M424 438H548V360H599"></path>
+    <path d="m592 354 7 6-7 6"></path>
+    <path d="M829 328H977"></path>
+    <path d="m970 322 7 6-7 6"></path>
+    <path d="M1093 421V463H712V421"></path>
+    <path d="m706 428 6-7 6 7"></path>
+  </svg>
+  <p class="s05-link-label s05-context-label">Add as<br>context</p>
+  <p class="s05-link-label s05-instruction-label">Load as<br>instruction</p>
+
+  <div class="s05-model">
+    <svg class="ico" aria-hidden="true"><use href="#chip"></use></svg>
+    <h2>Frozen model</h2>
+    <p><svg class="ico" aria-hidden="true"><use href="#lock"></use></svg>Same weights</p>
+  </div>
+
+  <p class="s05-action-label">Choose an action</p>
+  <div class="s05-browser">
+    <svg class="ico" aria-hidden="true"><use href="#web"></use></svg>
+    <h2>Browser</h2>
+    <p>Click · type · submit</p>
+  </div>
+  <p class="s05-return-label">Page + tool result</p>
+
+  <div class="s05-later" aria-label="Possible later changes outside the first pilots">
+    <div class="s05-later-heading"><h2>Possible later changes</h2><p>Outside the first pilots</p></div>
+    <div class="s05-later-object">
+      <svg class="ico" aria-hidden="true"><use href="#document"></use></svg>
+      <div><h3><code>create_ticket.py</code></h3><p>Register a reusable browser skill</p></div>
+    </div>
+    <div class="s05-later-object">
+      <svg class="ico" aria-hidden="true"><use href="#document"></use></svg>
+      <div><h3><code>runner.py</code></h3><p>Change observe / check / retry controls</p></div>
+    </div>
+  </div>
+  <a class="appendix-link object-link" href="#a02">Update objects and validation ↗</a>
+</section>

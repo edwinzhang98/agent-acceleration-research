@@ -1,0 +1,16 @@
+<section class="slide report-page appendix" id="a01" aria-labelledby="a01-title">
+<header><p class="kicker">APPENDIX A1 / MEASUREMENT PROTOCOL</p><h1 id="a01-title">Success, elapsed time and cost need separate checks</h1><p class="scope">Proposed protocol. Specify thresholds and budgets before the held-out test; no experimental results are shown.</p></header><div class="divider"></div>
+<div class="report-body">
+<table class="protocol-table"><colgroup><col style="width:15%"><col style="width:46%"><col style="width:39%"></colgroup>
+<thead><tr><th>Quantity</th><th>Operational definition</th><th>Report / control</th></tr></thead>
+<tbody>
+<tr><th>Task success</th><td>External check of the final saved state: requested fields correct, no duplicate record or unrelated change.</td><td>Paired success rates with uncertainty; predefine an acceptable drop. Count correct-to-incorrect changes.</td></tr>
+<tr><th>Task latency</th><td>Elapsed time from task release to termination. Include model calls, browser/tool waits, checks and permitted retries.</td><td>Mean, median and tail latency over all test tasks. Failed runs and timeouts remain in the report.</td></tr>
+<tr><th>Learning investment</th><td>Explore or collect development traces; propose, test and select an update. Count the actual resources spent.</td><td>Report learning cost and elapsed time separately. Amortize the one-time cost across the stated reuse horizon.</td></tr>
+<tr><th>Execution cost</th><td>Model input/output charges, tool charges and billed environment use for all test executions, including failures.</td><td>Include retrieval and reading the update. State price assumptions; report tokens and calls as diagnostics, not dollars.</td></tr>
+<tr><th>Total cost &amp; reuse</th><td>Learning investment plus execution cost for the same number of subsequent tasks in both arms.</td><td>Plot cumulative cost against tasks attempted. Report any break-even point together with achieved success.</td></tr>
+</tbody></table>
+<div class="appendix-notes"><div><h2>Two different comparisons</h2><ul><li><b>Fixed test set:</b> same tasks and execution limits, to isolate the update's effect.</li><li><b>Fixed total budget:</b> let the baseline spend unused learning budget on execution; predeclare retry rules.</li></ul></div><div><h2>Keep evaluation independent</h2><ul><li>Freeze before testing. Hidden checker results cannot trigger Agent retries.</li><li>Count later maintenance as learning cost. Keep research-only scoring overhead separate.</li></ul></div></div>
+</div>
+<a class="appendix-return" href="#back">← Back to discussion · B</a>
+</section>

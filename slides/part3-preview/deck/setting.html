@@ -1,0 +1,18 @@
+<section class="slide report-page" id="s04" aria-labelledby="s04-title">
+<header><p class="kicker">INITIAL EXPERIMENTAL SETTING</p><h1 id="s04-title">What changes between tasks—and what stays fixed?</h1><p class="scope">Start with new inputs to one workflow on one website. Test broader transfer separately.</p></header><div class="divider"></div>
+<div class="report-body">
+  <div class="claim">A different task instance means a new request and new data, executed through the same workflow.</div>
+  <table class="study-table">
+    <colgroup><col style="width:19%"><col style="width:43%"><col style="width:38%"></colgroup>
+    <thead><tr><th>Study component</th><th>First-study choice</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><th>Task inputs</th><td>New ticket titles, descriptions and reproduction steps within the same creation workflow.</td><td>Test reuse on new requests.</td></tr>
+      <tr><th>Environment</th><td>Same website version, interface, rules and permissions. Restore the starting state before each run.</td><td>Separate the learned update from changes to the website or records.</td></tr>
+      <tr><th>Agent &amp; execution</th><td>Same model, browser tools and runtime settings. Change only the guide in A or the policy in B.</td><td>Attribute the change to one updated component.</td></tr>
+      <tr><th>Task split</th><td>Development produces candidates; validation selects one; held-out testing uses a frozen update.</td><td>Measure generalization to unseen inputs.</td></tr>
+      <tr><th>Comparison</th><td>Paired test inputs and starting states, matched execution limits and predeclared stopping rules.</td><td>Count unsuccessful runs and retries in both arms. Keep the outcome checker external.</td></tr>
+    </tbody>
+  </table>
+  <div class="study-bottom"><div><h2>A concrete pair</h2><p>“Login failure” → create a Bug ticket.<br>“Upload failure” → create another Bug ticket.</p></div><div><h2>What this first study can establish</h2><ul><li>Whether a persistent update helps within this workflow.</li><li>When later savings recover the learning cost.</li></ul></div></div>
+</div>
+</section>
