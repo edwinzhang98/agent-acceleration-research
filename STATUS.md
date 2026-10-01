@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-01, by Codex (Part 3 HTML preview with revised typography and fuller mechanism) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-01, by Codex (Part 3 HTML visual storyboard and walkthrough) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -52,6 +52,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-01 — Codex — Replaced the text-heavy Part 3 preview with a visual HTML storyboard: webpage state change, checked knowledge file, agent input diagram, and illustrative rework paths. Added optional three-stage highlighting with keyboard controls; template now loads the same local fonts as the standalone output. Browser layout, font loading, walkthrough, offline behavior, viewport fit and print dimensions checked; PNG updated. No experiment results, new source claims or E/D changes.
 
 - 2026-10-01 — Codex — Switched the Part 3 preview and planned deck to English HTML at Edwin’s request. Rebuilt the one-page mechanism with embedded IBM Plex fonts, lighter typography, a scope row, exploration trials, explicit knowledge-file contents, runtime loading and a pilot comparison. Browser rendering, layout, viewport scaling, offline requests and print dimensions checked. Updated outline and preview README; full deck remains pending content review. No E/D changes.
 

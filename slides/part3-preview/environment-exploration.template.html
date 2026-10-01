@@ -3,112 +3,86 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Environment exploration — Part 3</title>
+<title>Environment exploration — visual mechanism</title>
 <style>
-/* EMBEDDED_FONTS */
-:root{--ink:#1b2733;--muted:#596977;--blue:#0f5a7c;--pale:#e2edf4;--rule:#d9e1e7}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden}
-body{background:#20262c;color:var(--ink);font-family:Plex,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;background:white;transform:translate(-50%,-50%) scale(var(--scale,1));box-shadow:0 0 35px #0005;transform-origin:center;padding:30px 44px}
-.mono{font-family:'Plex Mono',monospace;font-weight:400}
-.kicker{margin:0;color:var(--muted);font-size:11.5px;letter-spacing:.13em}
-h1{margin:12px 0 7px;font-size:36px;line-height:1.15;font-weight:600;letter-spacing:-.025em}
-.subtitle{margin:0;font-size:19px;line-height:1.4;color:var(--muted)}
-.scope{margin-top:20px;padding:10px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;gap:30px;font-size:15px;line-height:1.4}
-.scope span+span{border-left:1px solid var(--rule);padding-left:30px}
-.scope b{font-weight:600}
-.flow{display:grid;grid-template-columns:1.05fr 1fr 1fr;column-gap:40px;margin-top:25px}
-.step{position:relative;min-width:0}
-.step:not(:last-child)::after{content:'→';position:absolute;right:-30px;top:0;color:var(--blue);font-size:22px}
-h2{font-weight:600;font-size:22px;line-height:1.3;margin:0 0 15px;color:var(--blue)}
-.question,.task{font-size:18px;line-height:1.4;margin:0 0 15px}
-table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.3;table-layout:fixed}
-th{font-weight:400;text-align:left;color:var(--muted);font-size:12px;padding:0 8px 8px 0;border-bottom:1px solid var(--blue)}
-td{padding:10px 8px 10px 0;border-bottom:1px solid var(--rule)}
-th:first-child{width:56%}
-.warning{color:#9d5616}
-.note{font-size:16px;line-height:1.4;color:var(--muted);margin:14px 0 0}
-.file{background:#f5f8fa;border-top:3px solid var(--blue);padding:13px 17px 15px}
-.filename{font-size:15px;color:var(--blue);margin:0 0 13px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
-dl{margin:0;display:grid;grid-template-columns:48px 1fr;gap:10px 12px;font-size:17px;line-height:1.4}
-dt{color:var(--muted);font-size:12px;line-height:24px}
-dd{margin:0}
-.runtime{font-size:16px;line-height:1.45;margin:14px 0 0}
-.runtime strong{font-weight:600}
-.inputs{font-size:15px;color:var(--muted);line-height:1.4;margin:0;padding-bottom:12px;border-bottom:1px solid var(--rule)}
-.agent{font-size:18px;font-weight:600;margin:11px 0 10px;color:var(--blue)}
-ol{margin:0;padding-left:23px;font-size:17px;line-height:1.4}
-li{padding-left:3px;margin-bottom:8px}li::marker{color:var(--muted)}
-.pilot{position:absolute;left:44px;right:44px;top:578px;display:grid;grid-template-columns:170px 1fr;gap:18px;background:var(--pale);padding:14px 18px}
-.pilot h2{margin:1px 0 0;font-size:17px;color:var(--blue)}
-.pilot p{margin:0;font-size:16px;line-height:1.45}.pilot p+p{margin-top:4px}
-footer{position:absolute;left:44px;right:44px;bottom:22px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:11.5px;line-height:1.35}
-@page{size:1280px 720px;margin:0}
-@media print{html,body{height:720px;background:white;overflow:visible}#stage{position:relative;left:0;top:0;transform:none;box-shadow:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+/* FONT_START */
+@font-face{font-family:Plex;font-weight:400;src:url('../fonts/ibm-plex-sans-latin-400-normal.woff2')}
+@font-face{font-family:Plex;font-weight:600;src:url('../fonts/ibm-plex-sans-latin-600-normal.woff2')}
+@font-face{font-family:'Plex Mono';font-weight:400;src:url('../fonts/ibm-plex-mono-latin-400-normal.woff2')}
+/* FONT_END */
+:root{--ink:#20303b;--muted:#687984;--blue:#125e7e;--pale:#edf4f7;--rule:#d5e0e6;--orange:#b76a2d;--green:#357563}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:#20262c;font-family:Plex,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform:translate(-50%,-50%) scale(var(--scale,1));transform-origin:center;background:#fff}
+header{position:absolute;left:44px;right:44px;top:29px}.kicker{font:11px 'Plex Mono',monospace;letter-spacing:.12em;color:var(--muted);margin:0}h1{font-size:34px;letter-spacing:-.025em;line-height:1.2;font-weight:600;margin:12px 0 9px}.scope{font-size:16px;color:var(--muted);margin:0}.scope b{font-weight:600;color:var(--ink)}
+.controls{position:absolute;right:44px;top:29px;display:flex;align-items:center;gap:12px;z-index:5}button{font:14px Plex,Arial,sans-serif;cursor:pointer;background:#fff;border:1px solid var(--rule);border-radius:4px;padding:6px 11px;color:var(--blue)}button:hover,button:focus-visible{border-color:var(--blue);outline:2px solid #125e7e22;outline-offset:2px}.counter{font:12px 'Plex Mono',monospace;color:var(--muted);min-width:30px}#show-all{border-color:transparent;color:var(--muted)}
+.divider{position:absolute;left:44px;right:44px;top:137px;border-top:1px solid var(--rule)}
+.region{position:absolute;top:160px;height:336px;transition:opacity .25s}.explore{left:44px;width:406px}.remember{left:513px;width:251px}.reuse{left:827px;width:409px}
+h2{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:600;line-height:1.3;margin:0;color:var(--blue)}.num{display:inline-grid;place-items:center;border:1px solid var(--blue);border-radius:50%;width:27px;height:27px;font-size:15px;font-weight:400;flex:none}.caption{font-size:15px;color:var(--muted);margin:9px 0 15px}.mono{font-family:'Plex Mono',monospace}.ico{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;width:24px;height:24px;vertical-align:middle}
+.probes{display:flex;justify-content:space-between;position:relative;padding-top:2px}.browser{width:176px;height:177px;border:1px solid #aebec8;border-radius:5px;overflow:hidden;background:#fff}.browser-bar{height:23px;display:flex;gap:4px;align-items:center;background:#f0f4f6;padding:0 9px;border-bottom:1px solid var(--rule)}.browser-bar i{width:4px;height:4px;background:#97a8b4;border-radius:50%}.browser-bar span{font-size:10px;color:var(--muted);margin-left:auto}.form{padding:10px 12px}.tiny-label{font-size:11px;line-height:15px;color:var(--muted)}.field{margin:4px 0 7px;border:1px solid var(--rule);height:27px;padding:4px 7px;font-size:13px;display:flex;justify-content:space-between;align-items:center}.field.type{border-color:#91b1c2;background:#f2f7fa}.field.bug{border-color:var(--blue);color:var(--blue)}.field.required{border-color:var(--orange);background:#fdf5ec;height:29px}.skeleton{height:4px;width:90%;background:#dce4e9;margin:6px 0}.skeleton.short{width:64%}.new-field{color:var(--orange)}.mini-feedback{font-size:11px;line-height:15px;color:var(--orange);margin:0}.switch{position:absolute;left:185px;top:54px;width:35px;height:15px;color:var(--blue)}.switch svg{width:35px;height:15px}.under-probes{display:flex;justify-content:space-between;margin-top:8px;font-size:13px;color:var(--muted)}.under-probes span{width:176px;text-align:center}.validation{display:flex;align-items:center;gap:9px;border-top:1px solid var(--rule);margin-top:17px;padding-top:10px;font-size:14px;line-height:1.35}.validation .ico{color:var(--green);width:25px;height:25px;flex:none}.validation small{font-size:12px;color:var(--muted)}
+.link{position:absolute;top:318px;width:40px;height:23px;color:var(--blue)}.link-a{left:459px}.link-b{left:775px}.link svg{width:40px;height:23px}
+.file{position:relative;margin:32px 8px 0 0;border:1.5px solid #8eafbf;border-radius:2px;padding:14px 18px 17px;background:#f5f9fb;height:194px}.file::after{content:'';position:absolute;right:-1.5px;top:-1.5px;width:22px;height:22px;background:linear-gradient(45deg,#d7e5ed 50%,white 50%);border-bottom:1px solid #8eafbf;border-left:1px solid #8eafbf}.filename{margin:0 0 18px;font:14px 'Plex Mono',monospace;color:var(--blue)}.rule-scope{font-size:12px;color:var(--muted);margin:0 0 8px}.condition{font-size:18px;font-weight:600;margin:0 0 9px}.condition span{font-size:12px;font-weight:400;color:var(--muted);margin-right:7px}.rule-body{font-size:19px;line-height:1.3;margin:0;border-left:3px solid var(--blue);padding-left:12px}.persist{font-size:14px;color:var(--muted);text-align:center;margin:14px 8px 0 0}.persist .ico{height:18px;width:18px;margin-right:4px}
+.inputs{display:flex;justify-content:space-between;width:350px;margin:23px auto 0}.input-item{width:94px;text-align:center;color:var(--muted);font-size:12px;line-height:1.35}.input-item>.ico{display:block;width:32px;height:34px;margin:0 auto 6px;color:var(--blue)}.input-item.guide{color:var(--blue)}.input-item strong{display:block;font-size:13px;font-weight:600;color:var(--ink)}.merge{display:block;width:300px;height:29px;margin:5px auto 0;color:#9ab3bf}.agent{width:294px;margin:0 auto;background:var(--pale);border:1px solid #a8c0cd;display:flex;align-items:center;gap:13px;padding:11px 15px}.agent>.ico{width:34px;height:34px;color:var(--blue);flex:none}.agent strong{display:block;font-size:19px;font-weight:600}.agent small{font-size:12px;color:var(--muted)}.agent small .ico{width:13px;height:13px;vertical-align:-2px}.output{margin:10px auto 0;display:flex;align-items:center;justify-content:center;gap:9px;width:340px;color:var(--green);font-size:14px}.output .ico{width:20px;height:20px}.down{display:block;width:18px;height:16px;margin:5px auto 0;color:#9ab3bf}
+.comparison{position:absolute;left:44px;right:44px;top:520px;border-top:1px solid var(--rule);padding-top:14px}.comparison-title{font-size:16px;line-height:1.3;margin:0 0 11px;font-weight:600}.comparison-title span{font-size:12px;font-weight:400;color:var(--muted);margin-left:14px}.lane{display:grid;grid-template-columns:142px 1fr;align-items:center;height:40px}.lane-label{font-size:14px;color:var(--muted)}.lane.after .lane-label{color:var(--green)}.route{display:flex;align-items:center;gap:10px}.event{display:flex;align-items:center;gap:6px;font-size:14px;white-space:nowrap}.event .ico{width:19px;height:19px;color:var(--blue)}.event.warn{color:var(--orange)}.event.warn .ico{color:var(--orange)}.event.good .ico{color:var(--green)}.route>.ico{width:35px;height:15px;color:#9bafb9;flex:none}.rework{display:flex;align-items:center;gap:10px;border:1px dashed #d8b28c;background:#fcf7f1;border-radius:4px;padding:5px 10px}.rework>.ico{width:26px;height:14px;color:#c39566}.after .route{gap:14px}.after .route>.ico{width:59px}.savings{font-size:13px;color:var(--green);margin-left:16px;display:flex;align-items:center;gap:5px}.savings .ico{width:18px;height:18px}
+footer{position:absolute;left:44px;right:44px;bottom:20px;border-top:1px solid var(--rule);padding-top:10px;display:flex;justify-content:space-between;color:var(--muted);font-size:11px;line-height:1.35;gap:25px}footer span:first-child{max-width:950px}
+#stage[data-focus="1"] [data-step]:not([data-step="1"]),#stage[data-focus="2"] [data-step]:not([data-step="2"]),#stage[data-focus="3"] [data-step]:not([data-step="3"]){opacity:.22}
+@media(prefers-reduced-motion:reduce){.region{transition:none}}
+@page{size:1280px 720px;margin:0}@media print{html,body{height:720px;background:#fff;overflow:visible}#stage{position:relative;left:0;top:0;transform:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}.controls{display:none}#stage [data-step]{opacity:1!important}}
 </style>
 </head>
 <body>
-<main id="stage" aria-labelledby="slide-title">
-  <header>
-    <p class="kicker mono">AGENT ACCELERATION / PART 3 / DIRECTION 1</p>
-    <h1 id="slide-title">Environment exploration</h1>
-    <p class="subtitle">How a Web Agent turns website interactions into knowledge for later tasks</p>
-    <div class="scope"><span><b>Fixed:</b> model weights, browser tools and control loop</span><span><b>Shared:</b> website and workflow</span><span><b>New:</b> task inputs</span></div>
-  </header>
-  <div class="flow">
-    <section class="step">
-      <h2>1. Explore and verify</h2>
-      <p class="question">Which fields become required when the ticket type changes?</p>
-      <table aria-label="Illustrative sandbox observations">
-        <thead><tr><th class="mono">TRIAL</th><th class="mono">WEBSITE FEEDBACK</th></tr></thead>
-        <tbody>
-          <tr><td>Bug, no steps</td><td class="warning">Required field</td></tr>
-          <tr><td>Bug, with steps</td><td>Ticket saved</td></tr>
-          <tr><td>Question, no steps</td><td>Ticket saved</td></tr>
-        </tbody>
-      </table>
-      <p class="note">Repeat with fresh development inputs. Check the rule’s scope before keeping it.</p>
-    </section>
-    <section class="step">
-      <h2>2. Save the checked rule</h2>
-      <div class="file">
-        <p class="filename mono">site-guide.md</p>
-        <dl>
-          <dt class="mono">SCOPE</dt><dd>Create-ticket form</dd>
-          <dt class="mono">WHEN</dt><dd>Ticket type is Bug</dd>
-          <dt class="mono">RULE</dt><dd>“Steps to reproduce” is required.</dd>
-          <dt class="mono">USE</dt><dd>Check these fields before submitting.</dd>
-        </dl>
-      </div>
-      <p class="runtime"><strong>Updated object:</strong> a persistent knowledge file. Relevant notes enter the task prompt.</p>
-    </section>
-    <section class="step">
-      <h2>3. Reuse on a new task</h2>
-      <p class="task">Create a Bug ticket about an upload failure, with new details.</p>
-      <p class="inputs">Task + current webpage + relevant guide</p>
-      <p class="agent">Same Web Agent</p>
-      <ol>
-        <li>Select the ticket type.</li>
-        <li>Fill the fields using the new task’s details.</li>
-        <li>Submit and check the saved ticket.</li>
-      </ol>
-      <p class="note">Expected benefit: fewer repeated errors. The new input and saved result still need checking.</p>
-    </section>
-  </div>
-  <aside class="pilot" aria-label="Proposed pilot comparison">
-    <h2>First comparison</h2>
-    <div>
-      <p>Empty guide vs. explored guide. Validate and freeze the guide, then test the same unseen inputs.</p>
-      <p>Measure success, elapsed time and total cost, including exploration, validation and reading the guide.</p>
-    </div>
-  </aside>
-  <footer><span>Illustrative pilot, not experimental results. Other exploration outputs include operation graphs and callable skills.</span><span class="mono">MECHANISM PREVIEW / 01</span></footer>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+<symbol id="arrow" viewBox="0 0 40 20"><path d="M2 10H36M29 4l7 6-7 6"/></symbol>
+<symbol id="document" viewBox="0 0 32 36"><path d="M7 2h12l7 7v25H7zM19 2v8h7M12 16h9M12 22h9M12 28h6"/></symbol>
+<symbol id="web" viewBox="0 0 36 32"><rect x="2" y="2" width="32" height="28" rx="2"/><path d="M2 9h32M6 6h1m3 0h1M8 15h20M8 20h12M8 25h17"/></symbol>
+<symbol id="chip" viewBox="0 0 36 36"><rect x="8" y="8" width="20" height="20" rx="3"/><rect x="13" y="13" width="10" height="10" rx="1"/><path d="M13 3v5m10-5v5M13 28v5m10-5v5M3 13h5m-5 10h5m20-10h5m-5 10h5"/></symbol>
+<symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m7.5 12 3 3 6-6"/></symbol>
+<symbol id="warning" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5m0 3v.5"/></symbol>
+<symbol id="edit" viewBox="0 0 24 24"><path d="m5 15 11-11 4 4L9 19l-5 1zM13 7l4 4"/></symbol>
+<symbol id="send" viewBox="0 0 24 24"><path d="m3 3 19 9-19 9 4-9zM7 12h15"/></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+</defs></svg>
+<main id="stage" data-focus="0" aria-labelledby="slide-title">
+<header><p class="kicker">AGENT ACCELERATION / PART 3 / DIRECTION 1</p><h1 id="slide-title">Environment exploration</h1><p class="scope"><b>Same website. New task inputs.</b> The model weights stay fixed.</p></header>
+<div class="controls" aria-label="Diagram walkthrough"><span class="counter" aria-live="polite"></span><button id="walk" type="button">Walk through →</button><button id="show-all" type="button" hidden>Show all</button></div>
+<div class="divider"></div>
+<section class="region explore" data-step="1" aria-label="Active exploration and validation">
+<h2><span class="num">1</span>Explore the website</h2><p class="caption">Active probe: change the ticket type</p>
+<div class="probes">
+<div class="browser" role="img" aria-label="Ticket type Question, with no reproduction field"><div class="browser-bar"><i></i><i></i><i></i><span>Create ticket</span></div><div class="form"><div class="tiny-label">Type</div><div class="field type">Question <span>⌄</span></div><div class="tiny-label">Details</div><div class="field" style="height:49px;display:block"><div class="skeleton"></div><div class="skeleton short"></div></div></div></div>
+<div class="switch" aria-hidden="true"><svg class="ico"><use href="#arrow"/></svg></div>
+<div class="browser" role="img" aria-label="Changing the type to Bug reveals required reproduction steps"><div class="browser-bar"><i></i><i></i><i></i><span>Create ticket</span></div><div class="form"><div class="tiny-label">Type</div><div class="field type bug">Bug <span>⌄</span></div><div class="tiny-label new-field">Steps to reproduce *</div><div class="field required"></div><p class="mini-feedback">This field is required</p></div></div>
+</div><div class="under-probes"><span>Before changing type</span><span>A new condition appears</span></div>
+<div class="validation"><svg class="ico" aria-hidden="true"><use href="#check"/></svg><div>Check new development inputs<br><small>Repeat Bug cases and test other types</small></div></div>
+</section>
+<div class="link link-a" data-step="2" aria-hidden="true"><svg class="ico"><use href="#arrow"/></svg></div>
+<section class="region remember" data-step="2" aria-label="Save a scoped website rule">
+<h2><span class="num">2</span>Keep a checked rule</h2>
+<div class="file"><p class="filename">site-guide.md</p><p class="rule-scope">Scope: create-ticket form</p><p class="condition"><span>IF</span> Type = Bug</p><p class="rule-body">Reproduction steps<br>are required.</p></div>
+<p class="persist"><svg class="ico" aria-hidden="true"><use href="#document"/></svg>Saved across tasks</p>
+</section>
+<div class="link link-b" data-step="3" aria-hidden="true"><svg class="ico"><use href="#arrow"/></svg></div>
+<section class="region reuse" data-step="3" aria-label="Load knowledge into the unchanged agent">
+<h2><span class="num">3</span>Use it on the next task</h2>
+<div class="inputs"><div class="input-item"><svg class="ico" aria-hidden="true"><use href="#document"/></svg><strong>New Bug ticket</strong>Upload failure</div><div class="input-item"><svg class="ico" aria-hidden="true"><use href="#web"/></svg><strong>Current page</strong>Live observation</div><div class="input-item guide"><svg class="ico" aria-hidden="true"><use href="#document"/></svg><strong>Saved guide</strong>Prompt context</div></div>
+<svg class="merge ico" viewBox="0 0 300 29" aria-hidden="true"><path d="M25 1v10h125m125-10v10H150m0-10v24m-4-5 4 5 4-5"/></svg>
+<div class="agent"><svg class="ico" aria-hidden="true"><use href="#chip"/></svg><div><strong>Same Web Agent</strong><small><svg class="ico" aria-hidden="true"><use href="#lock"/></svg> Model weights unchanged</small></div></div>
+<svg class="down ico" viewBox="0 0 18 16" aria-hidden="true"><path d="M9 1v12m-4-4 4 4 4-4"/></svg><div class="output"><svg class="ico" aria-hidden="true"><use href="#web"/></svg>Fill required fields, submit, verify</div>
+</section>
+<section class="comparison" data-step="3" aria-label="Illustrative task paths before and after learning">
+<p class="comparison-title">Where repeated work could disappear<span>Illustrative paths, not measured results</span></p>
+<div class="lane before"><div class="lane-label">Without the guide</div><div class="route"><div class="event"><svg class="ico"><use href="#send"/></svg>Submit</div><svg class="ico"><use href="#arrow"/></svg><div class="rework"><div class="event warn"><svg class="ico"><use href="#warning"/></svg>Missing field</div><svg class="ico"><use href="#arrow"/></svg><div class="event"><svg class="ico"><use href="#edit"/></svg>Fill steps</div><svg class="ico"><use href="#arrow"/></svg><div class="event"><svg class="ico"><use href="#send"/></svg>Submit again</div></div><svg class="ico"><use href="#arrow"/></svg><div class="event good"><svg class="ico"><use href="#check"/></svg>Verify saved ticket</div></div></div>
+<div class="lane after"><div class="lane-label">With the guide</div><div class="route"><div class="event"><svg class="ico"><use href="#edit"/></svg>Fill steps</div><svg class="ico"><use href="#arrow"/></svg><div class="event"><svg class="ico"><use href="#send"/></svg>Submit</div><svg class="ico"><use href="#arrow"/></svg><div class="event good"><svg class="ico"><use href="#check"/></svg>Verify saved ticket</div><span class="savings"><svg class="ico"><use href="#check"/></svg>May avoid this rework</span></div></div>
+</section>
+<footer><span>Proposed text-knowledge pilot. Measure success, time and total cost, including exploration, validation and reading the guide.</span><span class="mono">MECHANISM / 01</span></footer>
 </main>
 <script>
-const fit = () => document.documentElement.style.setProperty('--scale', Math.min(innerWidth / 1280, innerHeight / 720));
-addEventListener('resize', fit);
-fit();
+const stage=document.getElementById('stage'), walk=document.getElementById('walk'), all=document.getElementById('show-all'), counter=document.querySelector('.counter');
+let focus=0;
+function setFocus(value){focus=value;stage.dataset.focus=String(value);all.hidden=!value;walk.textContent=value===3?'Finish walkthrough →':value?'Next step →':'Walk through →';counter.textContent=value?`${value} / 3`:'';walk.setAttribute('aria-label',value===3?'Show the complete diagram':`Highlight step ${value+1}`)}
+function next(){setFocus(focus===3?0:focus+1)}
+walk.addEventListener('click',next);all.addEventListener('click',()=>setFocus(0));
+addEventListener('keydown',e=>{if(e.key===' '&&e.target.matches('button'))return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}if(e.key==='Escape'||e.key==='0')setFocus(0)});
+const fit=()=>document.documentElement.style.setProperty('--scale',Math.min(innerWidth/1280,innerHeight/720));addEventListener('resize',fit);fit();
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 """Build the standalone English HTML slide with embedded repository fonts."""
 from base64 import b64encode
+import re
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -12,5 +13,5 @@ for family, stem, weights in [('Plex', 'sans', (400, 600)), ('Plex Mono', 'mono'
 html = (HERE / 'environment-exploration.template.html').read_text()
 output = HERE / 'output' / 'environment-exploration-example.html'
 output.parent.mkdir(parents=True, exist_ok=True)
-output.write_text(html.replace('/* EMBEDDED_FONTS */', '\n'.join(faces)))
+output.write_text(re.sub(r'/\* FONT_START \*/.*?/\* FONT_END \*/', lambda _: '\n'.join(faces), html, flags=re.S))
 print(output)

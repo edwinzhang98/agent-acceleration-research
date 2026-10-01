@@ -9,7 +9,7 @@ One standalone English HTML slide showing a proposed environment-exploration wor
 
 Open the HTML file directly in a browser for offline viewing. Edit `environment-exploration.template.html`, then run `python3 slides/part3-preview/build_preview_html.py` from the repository root to regenerate the standalone file with embedded IBM Plex fonts. No PowerPoint generation is needed. Private drafts and validation records go in `.build/`; deliverables go in `output/`.
 
-The revised page uses regular-weight body text, a compact scope row, an exploration evidence table, the actual knowledge-file contents, runtime reuse, and a pilot comparison. The PNG is a browser rendering of the current HTML. The HTML scales to the viewport and has a 1280 × 720 print layout.
+The visual page shows two schematic webpage states, a checked rule saved in a file, and task/page/guide inputs entering the unchanged agent. Two illustrative execution paths highlight possible rework; they are not measured results. Click **Walk through** or press the right arrow to highlight each stage, and use **Show all** or Escape to restore the whole diagram. The PNG is a browser rendering of the current HTML. The HTML scales to the viewport and has a 1280 × 720 print layout. The template also loads the repository fonts locally, so it can be previewed directly.
 
 The [earlier PowerPoint prototype](output/environment-exploration-example.pptx) and `build-preview.mjs` are retained as historical prototype material. They are superseded by the HTML delivery and do not need to be regenerated.
 
