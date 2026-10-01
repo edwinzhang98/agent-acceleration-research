@@ -167,6 +167,9 @@ EXTRA_CSS = r"""
 .tbl.p3t td.c{text-align:center;font-family:'IBM Plex Mono',Menlo,monospace;font-size:12px;color:var(--ink)}
 .tbl.p3t tr.tot td{font-weight:700;border-top:1px solid var(--accent)}
 .tbl.p3t ul.tb{margin:0;padding-left:13px}.tbl.p3t ul.tb li{margin:0 0 1px}
+.tbl.p3d td{font-size:11.2px;line-height:1.28;padding:3px 8px 3px 5px}
+.tbl.p3d td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:var(--ink)}
+.tbl.p3d tr.grp td{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:#f3f7fa;text-align:center;padding:3px}
 .tbl.p3t a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px}
 .tbl.p3a{font-size:10px;line-height:1.3}.tbl.p3a td{padding:3px 6px 3px 4px}
 .tbl.p3a td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:10px;color:var(--ink)}
@@ -242,6 +245,7 @@ C_EXEC, C_LEARN, QQ = tex(r"C_{m^{\prime}}(p)", 13), tex(r"C_{\mathrm{learn}}", 
 R = dict(ace=13, awm=14, axis=98, sica=67, wma=73, draft=44, mobilegpt=35, walt=81, harnessfix=84, growing=88,
          echopath=90, webcoach=31, hajimiri=94, reasoningbank=32, clawtrace=95, agentdevel=69, skillweaver=36,
          actionengine=80, speedrunner=82, metis=19, gptswarm=9, openskill=50, unbrowse=91, appworld=76)
+R.update(genericagent=42, sedm=28, espo=96, gepa=12, adas=55, gea=65)
 def c(*names):
     return cite(*[R[n] for n in names])
 
@@ -356,31 +360,44 @@ slide("s02", "Example: a web agent that files expense reports",
 <div class="path" style="margin-top:12px"><span class="pl" style="width:auto;margin-right:10px">SCOPE</span><span class="s">this example: expense reports on a website</span>→<span class="s">any workflow repeated in one software environment</span>→<span class="s">websites · desktop applications · mobile apps · tool APIs</span></div>
 """)
 
+def ev(name, key, text):
+    return f'<b>{name}</b> <span class="wcite">{c(key)}</span><br>{text}'
+
+def grp(label):
+    return f'<tr class="grp"><td colspan="4">{label}</td></tr>'
+
+def drow(n, claim, cells):
+    return f'<tr><td><b>{n} · {claim}</b></td>' + "".join(f"<td>{x}</td>" for x in cells) + "</tr>"
+
 slide("s03", "Five difficulties, grouped by the cost they affect",
   callout="<p><b>Three difficulties affect the cost of each task after learning; two affect the cost of learning itself.</b></p>",
   body=f"""
-<div class="two" style="grid-template-columns:3fr 2fr;flex:1;min-height:0">
- <div style="display:flex;flex-direction:column;min-height:0">
-  <div class="lbl">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
-  <div class="cards3" style="flex:1">
-  {card("1 · MEASURE TIME, NOT STEPS", "Fewer steps do not always save time",
-        ["Actions per task 10.7 → 10.2, but time per task 215 → 395 s — WebCoach, 643 live WebVoyager tasks, Skywork-38B with a Qwen3-8B coach; the time includes the coach’s calls " + c("webcoach")], "")}
-  {card("2 · WHAT CAN BE SKIPPED", "What can be skipped is known only after a run has succeeded",
-        ["Replaying stored runs cut the median time per task 315.7 → 127.5 s, but only for the 159 tasks already solved and stored; storing one took a median of about 572k tokens and 4.5 min — EchoPath, OSWorld-Verified " + c("echopath")], "")}
-  {card("3 · NEW TASKS, READING COST", "What was learned must help on new tasks and be cheap to read",
-        ["With token budgets roughly matched, the plain agent without skills or memory did best: 44.78% success at 73.6K tokens per task — WebArena, four domains, Gemini 3 Flash, three runs " + c("hajimiri")], "")}
-  </div>
- </div>
- <div style="display:flex;flex-direction:column;min-height:0">
-  <div class="lbl">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
-  <div class="two" style="flex:1;gap:12px">
-  {card("4 · FROM FAILURE TO FIX", "A failure does not say how to fix it; finding a fix costs model calls",
-        ["Automatic repairs raised completion by 6.3–18.4 points, mean of three runs, GPT-5 mini on four benchmarks; the repairs on AppWorld alone used 37.2 million tokens — HarnessFix " + c("harnessfix")], "")}
-  {card("5 · PROVING THE SAVING", "Checking that a change saves money also costs money",
-        ["$1.91 → $1.70 and 130.2 → 114.5 s per task on four benchmarks, for a whole run of about $7,000: about 33,000 tasks to break even (calc.) — SICA " + c("sica")], "")}
-  </div>
- </div>
-</div>""")
+<table class="tbl p3t p3d"><colgroup><col style="width:22%"><col style="width:26%"><col style="width:26%"><col style="width:26%"></colgroup>
+<thead><tr><th>difficulty</th><th colspan="3">what three works found (conditions: <a href="#ad">Appendix D ↗</a>)</th></tr></thead><tbody>
+{grp("Cost per task after learning · " + tex(r"\bar{v}(m^{\prime})", 11))}
+{drow(1, "Fewer steps do not always save time", [
+   ev("WebCoach", "webcoach", "actions 10.7 → 10.2, but 215 → 395 s per task"),
+   ev("ReasoningBank", "reasoningbank", "steps 9.7 → 8.3, but total tokens 50,847 → 53,055 in another table"),
+   ev("GenericAgent", "genericagent", "fewest tokens on some tasks, yet slower than OpenClaw on five long tasks: 220.8 vs 183.1 s")])}
+{drow(2, "What can be skipped is known only after a run has succeeded", [
+   ev("EchoPath", "echopath", "315.7 → 127.5 s per task, only for 159 tasks already solved; storing one took ~572k tokens"),
+   ev("MobileGPT", "mobilegpt", "−62.5% latency, −68.8% cost on repeated tasks, after 10–15 min of exploring each app"),
+   ev("ActionEngine", "actionengine", "91.2% with a warmed-up site map, 73.1% without; exploring pays off after 39–101 tasks")])}
+{drow(3, "What was learned must help on new tasks and be cheap to read", [
+   ev("Skill and memory modules", "hajimiri", "with budgets roughly matched, the plain agent did best: 44.78% at 73.6K tokens per task"),
+   ev("ClawTrace", "clawtrace", "moved to SkillsBench, median cost per task $0.143 vs $0.144: no saving"),
+   ev("SEDM", "sedm", "its memory raised the prompt on FEVER to 2.47M tokens, from 1.65M without memory")])}
+{grp("Cost of learning · " + tex(r"C_{\mathrm{learn}}", 11))}
+{drow(4, "A failure does not say how to fix it; finding a fix costs model calls", [
+   ev("HarnessFix", "harnessfix", "completion +6.3 to +18.4 points, for 37.2M tokens of repairs on AppWorld"),
+   ev("ESPO", "espo", "about 3.4M tokens and 2 h 13 min to optimise one prompt (PUPA)"),
+   ev("GEPA", "gepa", "1,839–7,051 rollouts to optimise the prompts of one benchmark")])}
+{drow(5, "Checking that a change saves money also costs money", [
+   ev("SICA", "sica", "about $7,000 for one full run, to save $0.21 per task (calc.)"),
+   ev("ADAS", "adas", "about $500 for one search and its evaluation on ARC"),
+   ev("GEA", "gea", "about $13,000 for one full evolution (author estimate)")])}
+</tbody></table>""",
+  chip=("#ad", "Appendix D"))
 
 # =====================================================================
 # II · How far existing work has got
@@ -630,7 +647,7 @@ def arow(i):
 
 LEG = "Marks in the last column, in order: time or money of runs measured · learning cost measured · tested on unseen tasks; ● yes, ◐ partly, ○ no (initial judgment, calc.; Appendix A1)."
 BUDGET = 3500
-def apx_pages(aid, title, ids):
+def apx_pages(aid, title, ids, lab=None):
     pages, cur, size = [], [], 0
     for i in ids:
         t = TR.get(i, {})
@@ -642,7 +659,8 @@ def apx_pages(aid, title, ids):
         pages.append(cur)
     for k, p in enumerate(pages):
         sid = aid if k == 0 else f"{aid}-{k + 1}"
-        slide(sid, f"{aid.upper()} · {title}" + (f" ({k + 1}/{len(pages)})" if len(pages) > 1 else ""), label=f"{aid.upper()} · {k + 1}/{len(pages)}",
+        L = lab or aid.upper()
+        slide(sid, f"{L} · {title}" + (f" ({k + 1}/{len(pages)})" if len(pages) > 1 else ""), label=f"{L} · {k + 1}/{len(pages)}",
               kind="appendix", chip=("#back", "← back"),
               body=table(["work", "venue", "what it changes", "where it was tested", "effect, with conditions", "time, money, learning cost", "marks"],
                          [arow(i) for i in p], ["11%", "8%", "15%", "17%", "21%", "21%", "7%"], cls="tbl p3a") + f'<div class="figcap">{LEG}</div>')
@@ -651,6 +669,7 @@ for cat, title, aid in CLASS[:8]:
     apx_pages(aid, title, ids_of(cat) + (ids_of("2E判分环境") if aid == "a06" else []))
 CLOSEST = [80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 14, 32, 35, 36, 19, 42, 68, 28]
 apx_pages("a10", "The works closest to ours", [i for i in CLOSEST if i < len(J)])
+apx_pages("ad", "Evidence behind the five difficulties", [31, 32, 42, 90, 35, 80, 94, 95, 28, 84, 96, 12, 67, 55, 65], lab="D")
 
 # =====================================================================
 # References
