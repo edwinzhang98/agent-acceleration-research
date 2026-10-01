@@ -206,8 +206,8 @@ def render(font_dir=None):
     return "".join(parts)
 
 # ---------------------------------------------------------------- the formula that runs through the deck
-bd.FX["per task"] = [("op", r"v_n(m^{\prime},p)="), ("S", r"\dfrac{C_{\mathrm{learn}}}{n}"), ("op", "+"),
-                     ("C", r"\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}"), ("op", r"\quad\mathrm{s.t.}\ "), ("R", r"R_{m^{\prime}}(p)\geq R_0")]
+bd.FX["per task"] = [("op", r"v_n(m^{\prime})="), ("S", r"\dfrac{C_{\mathrm{learn}}}{n}"), ("op", "+"),
+                     ("C", r"\bar{v}(m^{\prime})"), ("op", r"\quad\mathrm{s.t.}\ "), ("R", r"\bar{R}(m^{\prime})\geq R_0")]
 DN, UP, KEEP = bd.DN, bd.UP, bd.KEEP
 def citet(*keys):
     """Narrative citation: Surname et al. (Year) and Surname et al. (Year)."""
@@ -249,27 +249,31 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
   body=f"""
 {table(["formula", "meaning", "symbols", "source"], [
     [tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)}", 13) + "<br>" + tex(r"T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 13),
-     tex("v", 11) + " (the source’s cost-of-pass): expected cost per success, retrying until the task succeeds<br><br>" + tex(r"T_{\mathrm{success}}", 11) + ": expected time per success",
+     tex("v", 11) + " (the source’s cost-of-pass): expected cost per success on one task, retrying until it succeeds<br><br>" + tex(r"T_{\mathrm{success}}", 11) + ": expected time per success on one task",
      ul([tex("m", 11) + ": the agent, a model plus the program around it (the harness); “m” for model, as in the source",
-         tex("p", 11) + ": one task; “p” for problem, as in the source",
+         tex("p", 11) + ": one task, e.g. one expense report; “p” for problem, as in the source",
          tex("C_m(p)", 11) + ": expected cost (C) of one attempt, in dollars",
          tex("R_m(p)", 11) + ": success rate (R), the chance that one attempt succeeds",
          tex(r"T_{\mathrm{attempt}}", 11) + ": time (T) of one attempt, in seconds"]),
-     "Dollars: from " + citet("ref-p1-cop") + ". Seconds: ours, adapted from the same paper."],
-    [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{learn}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 13),
+     tex("v", 11) + ": from " + citet("ref-p1-cop") + "<br><br>" + tex(r"T_{\mathrm{success}}", 11) + ": self-defined, the same form as " + tex("v", 11)],
+    [tex(r"\bar{v}(m)=\dfrac{1}{n}\sum_{k=1}^{n}v(m,p_k)", 13),
+     tex(r"\bar{v}", 11) + ": the average over " + tex("n", 11) + " tasks; " + tex(r"\bar{T}_{\mathrm{success}}", 11) + " and the average success rate " + tex(r"\bar{R}", 11) + " are taken the same way",
+     ul([tex("n", 11) + ": number of tasks, e.g. expense reports filed",
+         tex("p_k", 11) + ": the " + tex("k", 11) + "-th task, " + tex(r"k=1,\dots,n", 11)]),
+     "Self-defined, adapted from " + citet("ref-p1-cop") + "."],
+    [tex(r"v_n(m^{\prime})=\dfrac{C_{\mathrm{learn}}}{n}+\bar{v}(m^{\prime})", 13),
      tex("v_n", 11) + ": expected cost per task after learning, learning cost included",
      ul([tex(r"m^{\prime}", 11) + ": the same agent after learning, model unchanged, harness changed",
-         tex(r"C_{\mathrm{learn}}", 11) + ": cost of learning (exploring, proposing and checking changes, keeping them up to date), each counted once",
-         tex("n", 11) + ": number of tasks the learned agent serves"]),
-     "Ours, adapted from " + citet("ref-ai-agents-that-matter", 46) + "."],
-    [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)", 12) + "<br>" + tex(r"\mathrm{s.t.}\quad R_{m^{\prime}}(p)\geq R_0", 12),
+         tex(r"C_{\mathrm{learn}}", 11) + ": cost of learning (exploring, proposing and checking changes, keeping them up to date), each counted once"]),
+     "Self-defined, adapted from " + citet("ref-ai-agents-that-matter", 46) + "."],
+    [tex(r"\min\ \left(\bar{T}_{\mathrm{success}}(m^{\prime}),\ v_n(m^{\prime})\right)", 12) + "<br>" + tex(r"\mathrm{s.t.}\quad \bar{R}(m^{\prime})\geq R_0", 12),
      "The goal: lower time and money per task, success held",
      ul([tex("R_0", 11) + ": lowest required success rate, fixed in advance, measured on tasks not used for learning"]),
-     "Ours."],
-    [tex(r"n^{*}=\dfrac{C_{\mathrm{learn}}}{v(m,p)-v(m^{\prime},p)}", 13),
-     tex("n^{*}", 11) + ": break-even, the number of tasks after which " + tex(r"v_n(m^{\prime},p)", 11) + " falls below " + tex("v(m,p)", 11),
+     "Self-defined."],
+    [tex(r"n^{*}=\dfrac{C_{\mathrm{learn}}}{\bar{v}(m)-\bar{v}(m^{\prime})}", 13),
+     tex("n^{*}", 11) + ": break-even, the number of tasks after which " + tex(r"v_n(m^{\prime})", 11) + " falls below " + tex(r"\bar{v}(m)", 11),
      "—",
-     "Ours, from row 2; " + citet("ref-ai-agents-that-matter") + " report a break-even point."],
+     "Self-defined, from row 3; " + citet("ref-ai-agents-that-matter") + " report a break-even point."],
   ], ["29%", "21%", "33%", "17%"], cls="tbl p3t")}
 <div class="figcap" style="margin-top:6px">Each source’s original formula, and what we changed and why: <a href="#a00">Appendix A0 ↗</a></div>""",
   chip=("#a00", "Appendix A0"))
@@ -289,7 +293,8 @@ slide("s02", "Example: a web agent that files expense reports",
  <div class="stp rw"><span class="n">7</span>Submit again</div><div class="arr">→</div>
  <div class="stp key"><span class="n">8</span>Check the saved report</div>
 </div>
-<div class="path"><span class="pl">WITH A LEARNED RULE</span><span class="s">1</span>→<span class="s">2</span>→<span class="s">3</span>→<span class="s">fill the dates</span>→<span class="s">4</span>→<span class="s">8</span><span class="illus" style="margin:0 0 0 10px">orange: rework that a learned rule removes</span></div>
+<div class="illus" style="margin:4px 0 0 50.6%;width:36.4%;text-align:center;color:var(--warn)">rework that a learned rule removes</div>
+<div class="path" style="margin-top:10px"><span class="pl" style="width:auto;margin-right:10px">WITH THE RULE “HOTEL NEEDS CHECK-IN AND CHECK-OUT DATES”</span><span class="s">1</span>→<span class="s">2</span>→<span class="s">3</span>→<span class="s">fill the dates</span>→<span class="s">4</span>→<span class="s">8</span><span class="illus" style="margin:0 0 0 10px">the dates are filled before submitting: no error, no second submission</span></div>
 <div class="lbl" style="margin-top:22px">Definitions</div>
 <div class="defs4">
  <div><b>Task</b>A goal, its input data and a starting state, with a check of the result that the agent does not control.</div>
@@ -297,8 +302,7 @@ slide("s02", "Example: a web agent that files expense reports",
  <div><b>Run record</b>What one execution observed and did, the feedback it got, its outcome, its time and its cost.</div>
  <div><b>Learning</b>An update that outlives a task and changes something outside the model: a prompt, a memory, a skill or tool, or control code.</div>
 </div>
-<div class="lbl" style="margin-top:20px">Scope</div><div style="font-size:12.5px;line-height:1.45;color:var(--ink2)">The same problem arises for any agent that repeats a workflow in one software environment: a website, a desktop application, a mobile app or a set of tool APIs. Our first experiments use web agents.</div>
-<div class="illus" style="margin-top:12px">Illustrative example; the form rule is invented.</div>""")
+<div class="lbl" style="margin-top:20px">Scope</div><div style="font-size:12.5px;line-height:1.45;color:var(--ink2)">The same problem arises for any agent that repeats a workflow in one software environment: a website, a desktop application, a mobile app or a set of tool APIs. Our first experiments use web agents.</div>""")
 
 slide("s03", "Five difficulties, each tied to a term of the formula",
   crumb="difficulties from our problem framing · each card names the term it sits in",
@@ -483,29 +487,35 @@ slide("a00", "A0 · Page 1’s formulas: the original, ours, and why we changed 
          tex("R_m(p)", 10) + ": chance that one attempt is correct; " + tex(r"1/R_m(p)", 10) + " attempts are expected until the first correct one, attempts independent"]),
      ul([tex("m", 10) + " becomes the agent: the model plus its harness",
          "why: learning changes the harness, not the model"])],
-    [ours(tex(r"T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 12), "ours, adapted"),
+    [ours(tex(r"T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 12), "self-defined, adapted"),
      orig("no time formula", cite("ref-p1-cop")),
      ul(["units per attempt other than dollars, such as time or latency, may matter more (App. D.1)"]),
      ul(["the same form, in seconds", "why: time and money are reported side by side", "assumes attempts run one after another"])],
-    [ours(tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{learn}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 12), "ours, adapted"),
+    [ours(tex(r"\bar{v}(m)=\dfrac{1}{n}\sum_{k=1}^{n}v(m,p_k)", 12), "self-defined, adapted"),
+     orig(tex(r"V_{p\sim D}(\mathcal{M})\approx\mathbb{E}_{p\sim P}[V_p(\mathcal{M})]", 12) + " (Eq. 8)", cite("ref-p1-cop")),
+     ul([tex("D", 10) + ": a dataset of problems; " + tex("P", 10) + ": its empirical distribution, mass " + tex("1/n", 10) + " on each problem",
+         tex(r"V_p(\mathcal{M})", 10) + ": the lowest cost per success on " + tex("p", 10) + " among the available models"]),
+     ul(["the same average over " + tex("n", 10) + " tasks, applied to one agent’s " + tex("v", 10) + " instead of the cheapest model’s; " + tex(r"\bar{T}_{\mathrm{success}}", 10) + " and " + tex(r"\bar{R}", 10) + " the same way",
+         "why: we compare one agent before and after learning"])],
+    [ours(tex(r"v_n(m^{\prime})=\dfrac{C_{\mathrm{learn}}}{n}+\bar{v}(m^{\prime})", 12), "self-defined, adapted"),
      orig("total cost = fixed cost + variable cost (in words)", cite("ref-ai-agents-that-matter")) + "<br>" + orig(tex(r"O(nc+C)", 11) + " against " + tex(r"O(nC)", 11) + " (Table 2)", cite(46)),
      ul(["fixed cost: paid once, to optimise the agent’s design (prompt, hyperparameters)",
          "variable cost: paid on every run, set by its input and output tokens",
          tex("n", 10) + ": task instances; " + tex("C", 10) + ": one call of the large tool-making model; " + tex("c", 10) + ": one call of the small tool-using model"]),
      ul(["fixed cost ÷ " + tex("n", 10) + ": a cost per task",
-         "variable part per success (÷ " + tex("R", 10) + "), so failed attempts are paid for",
+         "variable part = the average cost per success " + tex(r"\bar{v}(m^{\prime})", 10) + ", so failed attempts are paid for",
          "fixed cost widened to exploring, proposing, checking and upkeep — why: our learning does all of these"])],
-    [ours(tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)", 11) + "<br>" + tex(r"\mathrm{s.t.}\ R_{m^{\prime}}(p)\geq R_0", 11), "ours"),
+    [ours(tex(r"\min\ \left(\bar{T}_{\mathrm{success}}(m^{\prime}),\ v_n(m^{\prime})\right)", 11) + "<br>" + tex(r"\mathrm{s.t.}\ \bar{R}(m^{\prime})\geq R_0", 11), "self-defined"),
      orig(tex(r"V_p(\mathcal{M})=\min_{m\in\mathcal{M}}v(m,p)", 12) + " (Eq. 3)", cite("ref-p1-cop")) + "<br>" + orig("accuracy and cost optimised jointly (in words)", cite("ref-ai-agents-that-matter")),
      ul([tex(r"\mathcal{M}", 10) + ": the available models",
          tex(r"V_p(\mathcal{M})", 10) + ": the lowest cost per success on " + tex("p", 10) + " among them"]),
      ul(["one number becomes a pair, seconds and dollars, lowered together — why: no fixed exchange rate between them",
          "learning cost included",
          "success floor " + tex("R_0", 10) + ", fixed in advance — why: an agent must not look cheaper by succeeding less"])],
-    [ours(tex(r"n^{*}=\dfrac{C_{\mathrm{learn}}}{v(m,p)-v(m^{\prime},p)}", 12), "ours"),
+    [ours(tex(r"n^{*}=\dfrac{C_{\mathrm{learn}}}{\bar{v}(m)-\bar{v}(m^{\prime})}", 12), "self-defined"),
      orig("no formula (in words)", cite("ref-ai-agents-that-matter")),
      ul(["the jointly optimised agent is cheaper in total than the default one after about 1,350 HotPotQA tasks"]),
-     ul(["written as a formula by setting " + tex(r"v_n(m^{\prime},p)=v(m,p)", 10) + " — why: computable from measured costs",
+     ul(["written as a formula by setting " + tex(r"v_n(m^{\prime})=\bar{v}(m)", 10) + " — why: computable from measured costs",
          "assumes the saving per task stays the same"])],
   ], ["21%", "21%", "30%", "28%"], cls="tbl p3a p3t"))
 

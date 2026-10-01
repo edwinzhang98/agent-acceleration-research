@@ -1570,7 +1570,7 @@ slide("t13", "11 · Price per token: a cheaper model for most calls", part=2,
       chip=("#b7-1", "Appendix B7"))
 
 # --- Part 2 · 14 success and cost per success ----------------------------------------------------------
-EQ["amort"] = r"$v_n(m,p)\;=\;\dfrac{C_{\mathrm{learn}}}{n}\;+\;\dfrac{C_m(p)}{R_m(p)}$"
+EQ["amort"] = r"$v_n(m^{\prime})\;=\;\dfrac{C_{\mathrm{learn}}}{n}\;+\;\bar{v}(m^{\prime}),\qquad \bar{v}(m^{\prime})\;=\;\dfrac{1}{n}\sum_{k=1}^{n}\dfrac{C_{m^{\prime}}(p_k)}{R_{m^{\prime}}(p_k)}$"
 def _cps(c, r):
     v = c / r
     return f"${v:,.0f}" if v >= 100 else f"${v:,.2f}"
@@ -1618,7 +1618,7 @@ B("b0-3", "B0 · 3/3", "B0 · Source formulas for money and set-up, and one clos
    [wk("TokenPilot, App. A.2, Eq. 11", "tokenpilot"), tex(r"\mathrm{Cost}=|C'_{\mathrm{hit}}|\,p_{\mathrm{hit}}+|C'_{\mathrm{miss}}|\,p_{\mathrm{miss}}+H_{\mathrm{out}}\,p_{\mathrm{out}}", 11), tex(r"|C'_{\mathrm{hit}}|,|C'_{\mathrm{miss}}|", 10) + " cached and uncached input tokens; " + tex(r"H_{\mathrm{out}}", 10) + " generated tokens; p prices", "Part 1’s money sum over three classes; no cache-write term"],
    [wk("SpeedRunner, App. A.3", "speedrunner"), tex(r"\mathrm{cost}=p_{\mathrm{in}}N^{\mathrm{uncached}}_{\mathrm{in}}+p_{\mathrm{cache}}N^{\mathrm{cached}}_{\mathrm{in}}+p_{\mathrm{out}}N_{\mathrm{out}}", 11), "N summed over all calls of an episode, the skill-inducer calls amortised over its rollouts", "the same three classes; set-up calls spread over the runs they serve"],
    [wk("LATM, Table 2", "latm"), tex(r"O(nc+C)", 11) + " against " + tex(r"O(nC)", 11), "n samples; C one call to the large tool-making model; c one call to the small tool-using model", "one expensive set-up amortised over n cheap runs — the form of page 14’s " + tex(r"C_{\mathrm{learn}}/n", 10)],
-   [wk("AI Agents That Matter, §3", "kapoor25"), "in words: total cost = a fixed cost (one-time optimisation) + a variable cost (per run, from input and output tokens)", "—", "Appendix B8’s " + tex(r"v_n(m,p)", 10) + " adds this fixed cost to Cost-of-Pass’s per-success cost (adapted)"],
+   [wk("AI Agents That Matter, §3", "kapoor25"), "in words: total cost = a fixed cost (one-time optimisation) + a variable cost (per run, from input and output tokens)", "—", "Appendix B8’s " + tex(r"v_n(m^{\prime})", 10) + " adds this fixed cost to Cost-of-Pass’s per-success cost (adapted)"],
    [wk("Speculative tool calls, Eq. 4", "nichols"), eq_svg("nichols4", fontsize=10, cls="eqn"), "K turns; o API hand-off overhead (HTTP and reloading into the batch), paid twice per turn; ϕ prefill and δ decode seconds per token; " + tex("X_i", 10) + " prompt tokens of turn i; " + tex("R_i, t_i", 10) + " reasoning and tool-call tokens; " + tex(r"t_{o,i}", 10) + " tool output; " + tex("T_i", 10) + " tool time", "a published form of Part 1’s time sum with its growing prompt, found in these checks: per-call overhead, prefill of a prompt that grows each turn, decoding, tool wait. Part 1 does not cite it yet (open question)"],
   ], w_f))
 
@@ -1765,7 +1765,7 @@ B("b8-0", "B8 · 1/2", "B8 · Cost per success, set-up included, for the Part 2 
   body=f"""
 <div class="eqtab">
 {eqrow("per task", "set-up spread", ["amort"],
-       tex(r"C_{\mathrm{learn}}", 11) + ": learning cost — building the code, tools or memories once (the set-up), and keeping them up to date where a work reports it; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{learn}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
+       tex(r"C_{\mathrm{learn}}", 11) + ": learning cost — building the code, tools or memories once (the set-up), and keeping them up to date where a work reports it; " + tex("n", 11) + ": tasks it serves, " + tex("p_k", 11) + " the k-th; " + tex(r"m^{\prime}", 11) + ": the agent with what it learned; " + tex(r"\bar{v}", 11) + ": Part 1’s " + tex("v", 11) + " averaged over the n tasks, each retried until it succeeds, so per task = per success. Against the agent " + tex("m", 11) + " without it, it pays off once " + tex(r"n>n^{*}=C_{\mathrm{learn}}/(\bar{v}(m)-\bar{v}(m^{\prime}))", 11) + ", which needs " + tex(r"\bar{v}(m^{\prime})<\bar{v}(m)", 11) + " (calc.). The table below approximates " + tex(r"\bar{v}", 11) + " by mean cost per attempt ÷ mean success rate, exact when the tasks are alike.",
        "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); one tool-making stage (a few large-model calls to propose, verify and wrap a tool, once per task type) spread over n cheap calls, O(nc + C) with C, c the cost of one large- and one small-model call: " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
 </div>
 <div class="twocol">
@@ -1798,7 +1798,7 @@ B("b8-1", "B8 · 2/2", "B8 · Cost per success: the inputs, the formula and the 
    [wk("Fara-7B vs computer-use-preview", "fara"), "$0.913 → $0.025", "70.9 → 73.5%", f"{_cps(0.913, .709)} → {_cps(0.025, .735)}", "WebVoyager"],
    [wk("AI Agents That Matter", "kapoor25"), "LATS $134.50 vs warming $2.45 (164-problem run totals)", "88.0 vs 93.2%", "stated totals, not per success", "HumanEval, GPT-4"],
   ], ["20%", "22%", "15%", "18%", "25%"]) + """
-<div class="apx-note">With a set-up cost: <b>v<sub>n</sub> = C<sub>setup</sub>/n + v</b>. Two retained works print both parts. EET’s experience base (Agentless, GPT-5-mini) cost $4.3 once, against a benchmark run of $13.77 → $6.18 (500 tasks), so it pays off within the first run: $10.48 with the set-up charged to it (calc.). SpeedRunner already spreads its skill-inducer calls over the runs they serve. The page-3 systems print their set-up in minutes, tokens or GPT-4o dollars, never next to a per-task dollar figure.</div>""")
+<div class="apx-note">With a learning cost: <b>v<sub>n</sub> = C<sub>learn</sub>/n + v̄</b>. Two retained works print both parts. EET’s experience base (Agentless, GPT-5-mini) cost $4.3 once, against a benchmark run of $13.77 → $6.18 (500 tasks), so it pays off within the first run: $10.48 with the set-up charged to it (calc.). SpeedRunner already spreads its skill-inducer calls over the runs they serve. The page-3 systems print their set-up in minutes, tokens or GPT-4o dollars, never next to a per-task dollar figure.</div>""")
 
 B("b9-1", "B9 · 1/4", "B9 · Works held back or dropped, and why",
   crumb="the source-credibility rule of slides/references.md · (iii) = numbers from a public benchmark with the task count and model stated",

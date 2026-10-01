@@ -18,10 +18,11 @@
 
 | 公式 | 含义 | 出处 |
 |---|---|---|
-| $v(m,p)=\dfrac{C_m(p)}{R_m(p)}$，$T_{\text{success}}(m,p)=\dfrac{\mathbb{E}[T_{\text{attempt}}]}{R_m(p)}$ | 设计 $m$（模型 + 外围程序）做任务 $p$，每次成功的美元和秒数 | 美元：Erol et al., 2026（Cost-of-Pass，ICLR 2026）；时间：our definition，写法相同 |
-| $v_n(m',p)=\dfrac{C_{\text{learn}}}{n}+\dfrac{C_{m'}(p)}{R_{m'}(p)}$ | $m'$ 是同一个模型、外围程序经学习改过的设计；学习花费 $C_{\text{learn}}$ 摊到它服务的 $n$ 个任务上 | our definition，组合了 Kapoor et al., 2025 §3 的“固定成本 + 可变成本”和 LATM（Cai et al., 2024）的“一次准备、$n$ 次运行” |
-| $\min\big(T_{\text{success}}(m',p),\,v_n(m',p)\big)$，约束 $R_{m'}(p)\ge R_0$ | 时间和费用作为一对一起降低，计入准备成本；成功率在没参与学习的任务上测 | our definition |
-| $n^*=\dfrac{C_{\text{learn}}}{v(m,p)-v(m',p)}$ | 回本点：做完多少个任务后，学习花费被省下的钱抵消 | our definition，由第二行推出；Kapoor et al., 2025 §3.2 做的是同一种比较（联合优化在约 1,350 个任务后总成本更低） |
+| $v(m,p)=\dfrac{C_m(p)}{R_m(p)}$，$T_{\text{success}}(m,p)=\dfrac{\mathbb{E}[T_{\text{attempt}}]}{R_m(p)}$ | 一个任务（一张报销单）：每次成功的期望成本和时间 | $v$：Erol et al., 2026（Cost-of-Pass，Eq. 2）；$T_{\text{success}}$：self-defined，形式同 $v$ |
+| $\bar v(m)=\dfrac{1}{n}\sum_{k=1}^{n}v(m,p_k)$（$\bar T_{\text{success}}$、$\bar R$ 同理） | $n$ 个任务的平均 | self-defined，改编自 Erol et al., 2026 Eq. 8（在数据集上每题权重 $1/n$ 取平均） |
+| $v_n(m')=\dfrac{C_{\text{learn}}}{n}+\bar v(m')$ | 学习后每个任务的期望成本，含学习费 | self-defined，改编自 Kapoor et al., 2025（固定成本 + 可变成本）与 LATM（Cai et al., 2024） |
+| $\min\big(\bar T_{\text{success}}(m'),\,v_n(m')\big)$，约束 $\bar R(m')\ge R_0$ | 目标：时间和费用一起降，成功率守住 | self-defined |
+| $n^*=\dfrac{C_{\text{learn}}}{\bar v(m)-\bar v(m')}$ | 回本点 | self-defined，由第三行推出；Kapoor et al., 2025 报告过回本点（约 1,350 个任务） |
 
 符号约定（同第一部分）：
 
