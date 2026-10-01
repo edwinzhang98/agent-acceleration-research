@@ -131,7 +131,7 @@ def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind
     PAGE.clear()
     if kind == "main" and refs:
         rh = bd.page_refs_html(sorted((fmt_ref(a) for a in refs), key=lambda r: re.sub("<[^>]+>", "", r).lower()), small=True)
-        body += rh.replace('class="pgrefs sm"', 'class="pgrefs sm c3"') if len(refs) > 10 else rh
+        body += rh.replace('class="pgrefs sm"', 'class="pgrefs sm c3"') if len(refs) > 8 else rh
     S.append(dict(id=id_, title=title, body=body, crumb=crumb, callout=callout, foot=foot, chip=chip, kind=kind,
                   cover=cover, label=label))
 
@@ -252,9 +252,9 @@ C_EXEC, C_LEARN, QQ = tex(r"C_{m^{\prime}}(p)", 13), tex(r"C_{\mathrm{learn}}", 
 R = dict(ace=13, awm=14, axis=98, sica=67, wma=73, draft=44, mobilegpt=35, walt=81, harnessfix=84, growing=88,
          echopath=90, webcoach=31, hajimiri=94, reasoningbank=32, clawtrace=95, agentdevel=69, skillweaver=36,
          actionengine=80, speedrunner=82, metis=19, gptswarm=9, openskill=50, unbrowse=91, appworld=76)
-R.update(genericagent=42, sedm=28, espo=96, gepa=12, adas=55, gea=65)
+R.update(genericagent=42, sedm=28, espo=96, gepa=12, adas=55, gea=65, grounding=93, skillnb=92)
 def c(*names):
-    return cite(*[R[n] for n in names])
+    return cite(*[n if n.startswith("ref-") else R[n] for n in names])
 
 def p1(k):
     """Short form of a Part 1 source, registered for this page's references."""
@@ -520,27 +520,126 @@ def reading_fig():
     sv += _lbl(76, 90, "prompt tokens over the FEVER run; +0.82M calc.", size=9.5)
     return sv + '</svg>'
 
-slide("s03c", "Five difficulties (version C: diagrams for 1–3)",
+G_, O_, A_ = "#c9d5df", "#f2c79a", "#0f5a85"
+
+def _box(x, y, w, h, lines, kind="g", size=10.5):
+    fill, stroke, col = {"g": ("#fff", "#c9d5df", "var(--ink)"), "o": ("#fbeede", "#e2b98b", "var(--warn)"),
+                         "a": ("#eef4f8", A_, "var(--ink)")}[kind]
+    t = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="3" style="fill:{fill};stroke:{stroke}"/>'
+    for k, l in enumerate(lines):
+        t += _lbl(x + 5, y + 13 + k * 12, l, mono=False, size=size, col=col)
+    return t
+
+def _arr(d, col="#7d8a96", mk="a2"):
+    return f'<path d="{d}" style="stroke:{col};fill:none" marker-end="url(#{mk})"/>'
+
+DEFS_ = ('<defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker>'
+         '<marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#b3600c"/></marker></defs>')
+
+def check_fig():
+    """Difficulty 2 (schematic, the framing note's own form example): check the form after choosing Hotel, or skip it."""
+    sv = f'<svg width="400" height="104" viewBox="0 0 400 104" style="width:100%;height:auto;display:block">{DEFS_}'
+    sv += _box(0, 38, 68, 30, ["Choose type:", "Hotel"])
+    sv += _arr("M68 46 C76 46 76 16 84 16") + _arr("M68 60 C76 60 76 82 84 82")
+    sv += _box(86, 4, 86, 24, ["check the form"], "a") + _arr("M172 16 H180") + _box(182, 4, 60, 24, ["fill dates"]) + _arr("M242 16 H250") + _box(252, 4, 48, 24, ["submit"])
+    sv += _lbl(306, 21, "✓", mono=False, size=13, col="var(--accent)", bold=True)
+    sv += _lbl(86, 42, "one step more, always right", size=9)
+    sv += _box(86, 70, 118, 24, ["skip: as last time"]) + _arr("M204 82 H212") + _box(214, 70, 48, 24, ["submit"])
+    sv += _lbl(270, 80, "✓ rule still holds", mono=False, size=10, col="var(--accent)") + _lbl(270, 95, "✗ it changed: rework", mono=False, size=10, col="var(--warn)")
+    sv += _lbl(398, 10, "schematic", anchor="end", size=9, col="var(--accent)")
+    return sv + '</svg>'
+
+def tradeoff_fig():
+    """Difficulty 3 (schematic): forms of learned material placed by cost to use and by how well they cope with change."""
+    sv = f'<svg width="400" height="116" viewBox="0 0 400 116" style="width:100%;height:auto;display:block">{DEFS_}'
+    x0, y0, x1, y1 = 34, 98, 394, 4
+    sv += _arr(f"M{x0} {y0} H{x1}") + _arr(f"M{x0} {y0} V{y1}")
+    sv += _lbl(x1, y0 + 13, "cost of using it, per report →", anchor="end", size=9.5, col="var(--ink2)")
+    sv += _lbl(x0, y0 + 13, "schematic", anchor="start", size=9, col="var(--accent)")
+    sv += f'<text transform="translate(22 {y0 - 4}) rotate(-90)" style="font:8.5px \'IBM Plex Mono\',monospace;fill:var(--ink2)">copes with change</text>'
+    sv += '<path d="M78 84 C150 72 230 50 330 24" style="stroke:#dbe3ea;stroke-width:7;fill:none;stroke-linecap:round"/>'
+    for (x, y, t, lx, ly, anc) in [(78, 84, "replayed script", 88, 92, "start"), (160, 68, "skill: steps + script", 170, 78, "start"),
+                                   (245, 47, "note in memory", 255, 56, "start"), (330, 24, "note in every prompt", 322, 15, "end")]:
+        sv += f'<circle cx="{x}" cy="{y}" r="5" style="fill:{A_}"/>' + _lbl(lx, ly, t, mono=False, size=10.5, col="var(--ink)", anchor=anc)
+    sv += f'<rect x="42" y="8" width="112" height="24" rx="12" style="fill:none;stroke:{A_};stroke-dasharray:4 3"/>' + _lbl(98, 24, "cheap and flexible?", anchor="middle", mono=False, size=10, col="var(--accent)")
+    return sv + '</svg>'
+
+def cause_fig():
+    """Difficulty 4 (schematic): one error message, several possible causes checked one by one; the cost of checking grows."""
+    sv = f'<svg width="600" height="96" viewBox="0 0 600 96" style="width:100%;height:auto;display:block">{DEFS_}'
+    sv += _box(0, 22, 112, 34, ["Error: over the", "meal limit"], "o", size=10.5)
+    sv += _lbl(132, 12, "possible causes, checked one by one", size=9.5, col="var(--ink2)")
+    causes = ["wrong type?", "typo in amount?", "limit changed?", "wrong currency?"]
+    W, GAP, X0 = 100, 8, 132
+    sv += _arr(f"M112 39 H{X0 - 3}")
+    for k, t in enumerate(causes):
+        x = X0 + k * (W + GAP)
+        sv += _box(x, 20, W, 24, [t], "g", size=10)
+        h = 8 * (k + 1)
+        sv += f'<rect x="{x}" y="{80 - h}" width="{W}" height="{h}" rx="2" style="fill:#f2c79a"/>'
+        if k < len(causes) - 1:
+            sv += _arr(f"M{x + W} 32 H{x + W + GAP - 1}")
+    xe = X0 + 4 * (W + GAP)
+    sv += _lbl(xe + 2, 37, "…?", mono=False, size=13, col="var(--mute)", bold=True)
+    sv += _lbl(X0, 92, "cost of checking so far →", size=9, col="var(--warn)")
+    sv += _lbl(0, 76, "the cause may be found", mono=False, size=10, col="var(--ink2)") + _lbl(0, 89, "late, or not at all", mono=False, size=10, col="var(--ink2)")
+    sv += '<text x="598" y="10" text-anchor="end" style="font:9px \'IBM Plex Mono\',monospace;fill:var(--accent)">schematic</text>'
+    return sv + '</svg>'
+
+def breakeven_fig():
+    """Difficulty 5 (schematic): total cost over reports, without learning, and with learning, testing and upkeep after changes."""
+    sv = f'<svg width="600" height="110" viewBox="0 0 600 110" style="width:100%;height:auto;display:block">{DEFS_}'
+    x0, y0, x1, y1 = 40, 92, 596, 4
+    sv += _arr(f"M{x0} {y0} H{x1}") + _arr(f"M{x0} {y0} V{y1}")
+    sv += _lbl(x1, y0 + 13, "number of reports filed →", anchor="end", size=9.5, col="var(--ink2)")
+    sv += f'<text transform="translate(28 {y0 - 2}) rotate(-90)" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--ink2)">total cost →</text>'
+    sv += _lbl(x0, y0 + 13, "schematic", size=9, col="var(--accent)")
+    nl = lambda x: y0 - 84 * (x - x0) / 460
+    steps = [(290, 7), (420, 7)]          # upkeep after the site changes
+    def learn(x, base):
+        return base - 20 * (x - x0) / 460 - sum(h for xs, h in steps if x >= xs)
+    def path(base):
+        d, xp = f"M{x0} {base:.1f}", x0
+        for xs, h in steps + [(500, 0)]:
+            d += f" L{xs} {learn(xs - 0.01, base):.1f}"
+            if h:
+                d += f" L{xs} {learn(xs, base):.1f}"
+        return d
+    def cross(base):
+        for k in range(4600):
+            x = x0 + k / 10
+            if learn(x, base) >= nl(x):
+                return x, nl(x)
+        return None
+    sv += f'<path d="M{x0} {y0} L500 {nl(500):.1f}" style="stroke:#7d8a96;stroke-width:2;fill:none"/>' + _lbl(506, 11, "no learning", mono=False, size=10.5, col="var(--ink)")
+    sv += f'<path d="{path(66)}" style="stroke:{A_};stroke-width:2;fill:none"/>' + _lbl(506, 38, "with learning", mono=False, size=10.5, col="var(--accent)")
+    sv += f'<path d="{path(50)}" style="stroke:{A_};stroke-width:1.5;stroke-dasharray:5 4;fill:none"/>' + _lbl(506, 24, "more testing", mono=False, size=10, col="var(--accent)")
+    sv += _lbl(296, learn(300, 66) + 14, "upkeep after a change", mono=False, size=9.5, col="var(--ink2)")
+    c1, c2 = cross(66), cross(50)
+    if c1:
+        sv += f'<circle cx="{c1[0]:.0f}" cy="{c1[1]:.0f}" r="4" style="fill:{A_}"/><path d="M{c1[0]:.0f} {c1[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c1[0], y0 + 13, "n*", anchor="middle", mono=False, size=11, col="var(--accent)", bold=True)
+    if c2:
+        sv += f'<circle cx="{c2[0]:.0f}" cy="{c2[1]:.0f}" r="3.5" style="fill:#fff;stroke:{A_}"/><path d="M{c2[0]:.0f} {c2[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c2[0], y0 + 13, "later", anchor="middle", mono=False, size=10, col="var(--accent)")
+    sv += _lbl(52, 12, "learning and testing are paid first", mono=False, size=10, col="var(--ink2)") + _arr("M60 16 L44 62")
+    return sv + '</svg>'
+
+slide("s03c", "Five difficulties (version C: diagrams)",
   body=f"""<div class="tightcards">
 <div class="lbl" style="text-align:center">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
 <div class="cards3" style="flex:none">
   {card("", "1 · Fewer steps do not always save time", steps_fig() + '<div class="cd" style="margin-top:4px">Each step got longer: judge a report by its seconds, not its steps</div>',
-     drawn("WebCoach", "webcoach", [("ReasoningBank", "reasoningbank", "fewer steps, more tokens"), ("GenericAgent", "genericagent", "fewer tokens, more time")]))}
-  {card("", "2 · What can be skipped is known only after a run has succeeded", blocks_fig() + '<div class="cd" style="margin-top:4px">Only a run that succeeded shows which steps were needed</div>',
-     seen([("EchoPath", "echopath", "replays only solved tasks"), ("MobileGPT", "mobilegpt", "saves after exploring"), ("ActionEngine", "actionengine", "needs a warm-up")]))}
-  {card("", "3 · What was learned must help on new tasks and be cheap to read", reading_fig() + '<div class="cd" style="margin-top:4px">Notes are re-read on every call; they must pay off on new reports</div>',
-     drawn("SEDM", "sedm", [("skill and memory modules", "hajimiri", "plain agent did best"), ("ClawTrace", "clawtrace", "no saving after a move")]))}
+     drawn("WebCoach", "webcoach", [("ReasoningBank", "reasoningbank", "fewer steps, more tokens")]))}
+  {card("", "2 · Whether a check is needed is not known in advance", check_fig() + '<div class="cd" style="margin-top:4px">Skipping a check saves a step only while the rule still holds</div>',
+     seen([("DRAFT", "draft", "learns tool conditions by trying"), ("SKILL.nb", "skillnb", "checks before reuse")]))}
+  {card("", "3 · Flexible is costly; cheap is brittle", tradeoff_fig(),
+     seen([("Metis", "metis", "keeps both text and code"), ("ActionEngine", "actionengine", "turns a site map into programs")]))}
 </div>
 <div class="lbl" style="text-align:center;margin-top:6px">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
 <div class="two" style="flex:none">
-  {card("", "4 · Finding the right change from a failure is costly, and not guaranteed", [
-     "The run record shows that a report was rejected, not whether the prompt, a skill or a check should change",
-     "The change found can be wrong, fix only some failures, or break other tasks"],
-     works(("HarnessFix", "harnessfix"), ("ESPO", "espo"), ("DRAFT", "draft")))}
-  {card("", "5 · Learning, with its testing, can cost more than the mistakes it removes", [
-     "To trust a change, it must be re-run on many reports, and those runs cost money",
-     "Learning pays off only after enough reports: the break-even " + tex("n^{*}", 11) + " of page 1"],
-     works(("SICA", "sica"), ("ADAS", "adas"), ("GEA", "gea")))}
+  {card("", "4 · Finding the cause behind an error message", cause_fig() + '<div class="cd" style="margin-top:2px">Each possible cause costs a check; the right one may come late, or never</div>',
+     seen([("HarnessFix", "harnessfix", "locates the faulty step and code"), ("ESPO", "espo", "sorts errors before rewriting")]))}
+  {card("", "5 · Testing a change costs money, and can cost more than it saves", breakeven_fig() + '<div class="cd" style="margin-top:2px">Stop before the break-even, and learning cost more than it saved</div>',
+     seen([("AI Agents That Matter", "ref-ai-agents-that-matter", "late break-even"), ("SICA", "sica", "large bill, small saving")]))}
 </div></div>""",
   chip=("#ad", "Appendix D"))
 
@@ -589,7 +688,7 @@ NOTE = "One row per work in our literature table; a work in two classes counts i
 slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works in four classes",
   crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
   callout=f"<p><b>Of {n1} works that change what sits outside the model, {a1[0]} measured the seconds or dollars of running tasks, {b1[0]} what learning cost, and {d1[0]} tested on unseen tasks.</b></p>",
-  body=fx({"C": DN, "S": UP, "R": KEEP}, legend=False) + class_table([
+  body=fx({"C": DN, "S": UP}, legend=False) + class_table([
     ("1提示", "the prompt, instructions or context read on the next task",
      "ACE: offline adaptation lifts AppWorld from 42.4 to 59.4 (with labels), and takes 9,517 s against GEPA’s 53,898 s — DeepSeek-V3.1 " + c("ace")),
     ("1记忆", "retrievable experience: successes, failures, workflows",
@@ -605,7 +704,7 @@ slide("s06", "How a run record becomes a change, and what the change costs",
   crumb="direction 1 · C_m′(p) ↓ after the change · C_learn ↑ at three points: diagnosis, candidates, re-tests",
   callout="<p><b>Every step after reading the run records costs model calls, and these costs are rarely reported next to the savings.</b></p>",
   body=f"""
-{fx({"C": DN, "S": UP, "R": KEEP})}
+{fx({"C": DN, "S": UP})}
 <div class="flow" style="margin:10px 0 4px">
  <div class="stp key"><span class="n">1 · INPUT</span>Run records, failed and successful, with their time and cost</div><div class="arr">→</div>
  <div class="stp"><span class="n">2 · DIAGNOSE</span>Find failures and waste; locate the step and the code responsible<span class="tagc">costs: diagnosis calls</span></div><div class="arr">→</div>
@@ -624,7 +723,7 @@ slide("s06", "How a run record becomes a change, and what the change costs",
 slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kinds of knowledge",
   crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
   callout=f"<p><b>Of {n2} works that keep knowledge about the environment, {a2[0]} measured the seconds or dollars of running tasks, {b2[0]} what exploring cost, and {d2[0]} tested on unseen tasks.</b></p>",
-  body=fx({"C": DN, "S": UP, "R": KEEP}, legend=False) + class_table([
+  body=fx({"C": DN, "S": UP}, legend=False) + class_table([
     ("2A预测后果", "what the page will look like after an action",
      "WMA: 140.3 s vs 748.3 s and $0.4 vs $2.7 per instruction against tree search, 16.6% vs 19.2% success — WebArena, GPT-4o " + c("wma")),
     ("2B说明事实前提", "tool parameters and errors; facts and traps of the site",
