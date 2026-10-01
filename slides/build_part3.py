@@ -282,39 +282,32 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
 
 slide("s02", "Example: a web agent that files expense reports",
   crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
-  callout="<p><b>Our running example: a web agent files expense reports, each task a new report in the same system. On its first hotel report it does not know that a hotel expense needs check-in and check-out dates, so it submits, gets an error and redoes the form. Once it has learned that rule, every later hotel report skips the rework.</b></p>",
+  callout="<p><b>Our running example: a web agent files expense reports; each task is a new report in the same system. Not knowing one rule of the form, that a hotel expense needs check-in and check-out dates, sends the agent into a rework loop.</b></p>",
   body=f"""
-<div class="lbl">Before learning: the first hotel report, 8 steps</div>
-<div class="flow tight">
- <div class="stp"><span class="n">1</span>Open a new expense report</div><div class="arr">→</div>
- <div class="stp"><span class="n">2</span>Choose the expense type: Hotel</div><div class="arr">→</div>
- <div class="stp"><span class="n">3</span>Upload the receipt</div><div class="arr">→</div>
- <div class="stp"><span class="n">4</span>Submit</div><div class="arr">→</div>
- <div class="stp rw"><span class="n">5</span>Error: check-in and check-out dates are required</div><div class="arr">→</div>
- <div class="stp rw"><span class="n">6</span>Find the date fields and fill them</div><div class="arr">→</div>
- <div class="stp rw"><span class="n">7</span>Submit again</div><div class="arr">→</div>
- <div class="stp key"><span class="n">8</span>Check the saved report</div>
+<div class="lbl">One hotel report, before the agent knows the rule</div>
+<div style="width:100%"><svg width="1180" height="140" viewBox="0 0 1180 140" style="width:100%;height:auto;display:block"><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#b3600c"/></marker></defs><rect x="0" y="34" width="128" height="58" rx="4" style="fill:#fff;stroke:#cdd5dd"/><text x="9" y="48" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">1</text><text x="9" y="63" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">Open a new</text><text x="9" y="76" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">expense report</text><rect x="152" y="34" width="128" height="58" rx="4" style="fill:#fff;stroke:#cdd5dd"/><text x="161" y="48" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">2</text><text x="161" y="63" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">Choose the expense</text><text x="161" y="76" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">type: Hotel</text><rect x="304" y="34" width="128" height="58" rx="4" style="fill:#fff;stroke:#cdd5dd"/><text x="313" y="48" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">3</text><text x="313" y="63" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">Upload the receipt</text><rect x="456" y="34" width="128" height="58" rx="4" style="fill:#fff;stroke:var(--accent)"/><text x="465" y="48" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">4</text><text x="465" y="63" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">Submit</text><rect x="648" y="34" width="128" height="58" rx="4" style="fill:#fbeede;stroke:#e2b98b"/><text x="657" y="48" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">5</text><text x="657" y="63" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--warn)">Error: check-in and</text><text x="657" y="76" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--warn)">check-out dates</text><text x="657" y="89" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--warn)">are required</text><rect x="800" y="34" width="128" height="58" rx="4" style="fill:#fbeede;stroke:#e2b98b"/><text x="809" y="48" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">6</text><text x="809" y="63" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--warn)">Find the date fields</text><text x="809" y="76" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--warn)">and fill them</text><rect x="1052" y="34" width="128" height="58" rx="4" style="fill:#fff;stroke:var(--accent)"/><text x="1061" y="48" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">7</text><text x="1061" y="63" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">Check the saved</text><text x="1061" y="76" style="font:12px 'IBM Plex Sans',sans-serif;fill:var(--ink)">report</text><path d="M130,63 H149" style="stroke:#7d8a96;fill:none" marker-end="url(#ah2)"/><path d="M282,63 H301" style="stroke:#7d8a96;fill:none" marker-end="url(#ah2)"/><path d="M434,63 H453" style="stroke:#7d8a96;fill:none" marker-end="url(#ah2)"/><path d="M586,63 H645" style="stroke:#b3600c;fill:none" marker-end="url(#ah3)"/><text x="616" y="56" text-anchor="middle" style="font:10px 'IBM Plex Mono',monospace;fill:var(--warn)">rejected</text><path d="M778,63 H797" style="stroke:#b3600c;fill:none" marker-end="url(#ah3)"/><path d="M864,93 V116 H520 V96" style="stroke:#b3600c;fill:none;stroke-width:1.4" marker-end="url(#ah3)"/><text x="692" y="132" text-anchor="middle" style="font:11px 'IBM Plex Mono',monospace;fill:var(--warn)">rework loop: submit again, until the form is accepted</text><path d="M520,33 V16 H1116 V30" style="stroke:#7d8a96;fill:none" marker-end="url(#ah2)"/><text x="818" y="11" text-anchor="middle" style="font:10px 'IBM Plex Mono',monospace;fill:var(--mute)">accepted</text></svg></div>
+<div class="two" style="margin-top:8px;flex:none">
+  {card("WITHOUT LEARNING", "The loop is paid again on every hotel report",
+        ["Its extra model calls and seconds are part of " + tex(r"\bar{v}(m)", 11) + ", for each of the " + tex("n", 11) + " reports"], "")}
+  {card("LEARNING THE RULE ONCE", "The rule is learned once, at cost " + tex(r"C_{\mathrm{learn}}", 11) + "; later reports skip the loop",
+        [tex(r"\bar{v}(m^{\prime})<\bar{v}(m)", 11) + "; it pays off after " + tex(r"n^{*}", 11) + " reports (page 1)"], "")}
 </div>
-<div class="illus" style="margin:4px 0 0 50.6%;width:36.4%;text-align:center;color:var(--warn)">rework: the agent did not know the rule</div>
-<div class="lbl" style="margin-top:8px">After learning the rule “Hotel → check-in and check-out dates required”: every later hotel report, 6 steps</div>
-<div class="flow tight">
- <div class="stp"><span class="n">1</span>Open a new expense report</div><div class="arr">→</div>
- <div class="stp"><span class="n">2</span>Choose the expense type: Hotel</div><div class="arr">→</div>
- <div class="stp"><span class="n">3</span>Upload the receipt</div><div class="arr">→</div>
- <div class="stp" style="border-color:var(--accent);background:#eef4f8"><span class="n">4 · new</span>Fill the check-in and check-out dates</div><div class="arr">→</div>
- <div class="stp"><span class="n">5</span>Submit: accepted</div><div class="arr">→</div>
- <div class="stp key"><span class="n">6</span>Check the saved report</div><div class="arr" style="visibility:hidden">→</div>
- <div class="stp" style="border:none;background:none"></div><div class="arr" style="visibility:hidden">→</div>
- <div class="stp" style="border:none;background:none"></div>
+<div class="two" style="margin-top:10px;flex:none;grid-template-columns:1fr 1.25fr">
+ <div><div class="lbl">In this example</div>
+  <ul class="symlist">
+   <li><b>Environment</b>: the expense system, its forms, the fields each expense type requires, the actions it allows</li>
+   <li><b>Run record</b>: the steps above, with the error message, and the time and cost of each step</li>
+  </ul></div>
+ <div><div class="lbl">What learning may change here (model weights fixed)</div>
+  <ul class="symlist">
+   <li><b>Memory</b>: the note “Hotel → check-in and check-out dates required”</li>
+   <li><b>Prompt</b>: an instruction to fill the dates before submitting a hotel expense</li>
+   <li><b>Skill or tool</b>: a function that fills every field a hotel expense requires</li>
+   <li><b>Control code</b>: a check of the required fields before each submit</li>
+  </ul></div>
 </div>
-<div class="lbl" style="margin-top:12px">Definitions</div>
-<div class="defs4 tight">
- <div><b>Task</b>A goal, its input data and a starting state, with a check of the result that the agent does not control.</div>
- <div><b>Environment</b>The website’s interface, its rules and the actions it permits; it stays the same while records change.</div>
- <div><b>Run record</b>What one execution observed and did, the feedback it got, its outcome, its time and its cost.</div>
- <div><b>Learning</b>An update that outlives a task and changes something outside the model: a prompt, a memory, a skill or tool, or control code.</div>
-</div>
-<div class="lbl" style="margin-top:10px">Scope</div><div style="font-size:12.5px;line-height:1.45;color:var(--ink2)">The same problem arises for any agent that repeats a workflow in one software environment: a website, a desktop application, a mobile app or a set of tool APIs. Our first experiments use web agents.</div>""")
+<div class="path" style="margin-top:12px"><span class="pl" style="width:auto;margin-right:10px">SCOPE</span><span class="s">this example: expense reports on a website</span>→<span class="s">any workflow repeated in one software environment</span>→<span class="s">websites · desktop applications · mobile apps · tool APIs</span><span class="illus" style="margin:0 0 0 10px">first experiments: web agents</span></div>
+""")
 
 slide("s03", "Five difficulties, each tied to a term of the formula",
   crumb="difficulties from our problem framing · each card names the term it sits in",
