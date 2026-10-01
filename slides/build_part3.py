@@ -306,7 +306,7 @@ slide("s02", "Example: a web agent that files expense reports",
    <li><b>Control code</b>: a check of the required fields before each submit</li>
   </ul></div>
 </div>
-<div class="path" style="margin-top:12px"><span class="pl" style="width:auto;margin-right:10px">SCOPE</span><span class="s">this example: expense reports on a website</span>→<span class="s">any workflow repeated in one software environment</span>→<span class="s">websites · desktop applications · mobile apps · tool APIs</span><span class="illus" style="margin:0 0 0 10px">first experiments: web agents</span></div>
+<div class="path" style="margin-top:12px"><span class="pl" style="width:auto;margin-right:10px">SCOPE</span><span class="s">this example: expense reports on a website</span>→<span class="s">any workflow repeated in one software environment</span>→<span class="s">websites · desktop applications · mobile apps · tool APIs</span></div>
 """)
 
 slide("s03", "Five difficulties, each tied to a term of the formula",
