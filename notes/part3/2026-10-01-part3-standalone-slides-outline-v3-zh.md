@@ -10,14 +10,16 @@
 
 ## 1. 主线
 
-沿用第一、二部分已有的公式和符号，不另起一套。第三部分只新增三个符号：$m'$、$T_{\text{setup}}$ 和 $n^*$。
+符号与第一、二部分保持一致；第一、二部分的符号若要改写，必须两边一起改。第三部分只新增三个符号：$m'$、$T_{\text{setup}}$ 和 $n^*$。
+
+**页面不引用第一、二部分（Edwin，2026-10-01）。** 这份 slides 要能单独看懂，所以公式的出处写文献；我们自己定义的写“our definition”，不写“见第几部分第几页”。
 
 | 公式 | 含义 | 出处 |
 |---|---|---|
-| $v(m,p)=\dfrac{C_m(p)}{R_m(p)}$，$T_{\text{success}}(m,p)=\dfrac{\mathbb{E}[T_{\text{attempt}}]}{R_m(p)}$ | 设计 $m$（模型 + 外围程序）做任务 $p$，每次成功的美元和秒数 | 第一部分第 2 页；Erol et al., 2026（Cost-of-Pass，ICLR 2026） |
-| $v_n(m',p)=\dfrac{C_{\text{setup}}}{n}+\dfrac{C_{m'}(p)}{R_{m'}(p)}$ | $m'$ 是同一个模型、外围程序经学习改过的设计；学习花费 $C_{\text{setup}}$ 摊到它服务的 $n$ 个任务上 | 第二部分附录 B8；固定成本加可变成本见 Kapoor et al., 2025 §3；一次准备、$n$ 次运行见 LATM（Cai et al., 2024） |
-| $\min\big(T_{\text{success}}(m',p),\,v_n(m',p)\big)$，约束 $R_{m'}(p)\ge R_0$ | 第一部分的目标，计入准备成本；成功率在没参与学习的任务上测 | 第一部分第 2 页；$R_0$ 为自定 |
-| $n^*=\dfrac{C_{\text{setup}}}{v(m,p)-v(m',p)}$ | 回本点：做完多少个任务后，学习花费被省下的钱抵消 | 由上面第二行推出（calc.）；Kapoor et al., 2025 §3.2 做的是同一种比较（联合优化在约 1,350 个任务后总成本更低） |
+| $v(m,p)=\dfrac{C_m(p)}{R_m(p)}$，$T_{\text{success}}(m,p)=\dfrac{\mathbb{E}[T_{\text{attempt}}]}{R_m(p)}$ | 设计 $m$（模型 + 外围程序）做任务 $p$，每次成功的美元和秒数 | 美元：Erol et al., 2026（Cost-of-Pass，ICLR 2026）；时间：our definition，写法相同 |
+| $v_n(m',p)=\dfrac{C_{\text{setup}}}{n}+\dfrac{C_{m'}(p)}{R_{m'}(p)}$ | $m'$ 是同一个模型、外围程序经学习改过的设计；学习花费 $C_{\text{setup}}$ 摊到它服务的 $n$ 个任务上 | our definition，组合了 Kapoor et al., 2025 §3 的“固定成本 + 可变成本”和 LATM（Cai et al., 2024）的“一次准备、$n$ 次运行” |
+| $\min\big(T_{\text{success}}(m',p),\,v_n(m',p)\big)$，约束 $R_{m'}(p)\ge R_0$ | 时间和费用作为一对一起降低，计入准备成本；成功率在没参与学习的任务上测 | our definition |
+| $n^*=\dfrac{C_{\text{setup}}}{v(m,p)-v(m',p)}$ | 回本点：做完多少个任务后，学习花费被省下的钱抵消 | our definition，由第二行推出；Kapoor et al., 2025 §3.2 做的是同一种比较（联合优化在约 1,350 个任务后总成本更低） |
 
 符号约定（同第一部分）：
 
@@ -40,7 +42,7 @@
 | 页 | 英文标题 | 唯一结论 | 公式项 | 版面 | 附录 | 来源 |
 |---|---|---|---|---|---|---|
 | 0 | Learning to do repeated web tasks faster and more cheaply | 封面 | — | 封面 | — | 新增 |
-| 1 | The problem: the same workflow with new inputs, in less time and for less money at the same success rate | 定义问题；沿用第一、二部分的公式 | 全式 | 四行公式（注出处）+ 2 卡片 | A1 | v1 p1 + 第一部分第 2 页 + 第二部分 B8 |
+| 1 | Problem: make repeated tasks faster and cheaper | 定义问题；沿用第一、二部分的公式 | 全式 | 四行公式（注出处）+ 2 卡片 | A1 | v1 p1 + 第一部分第 2 页 + 第二部分 B8 |
 | 2 | Where one expense report loses time | 重复摸索和返工是可以学掉的部分；顺带定义四个词 | $C_{m'}(p)$ | 示意操作记录 + 定义栏 | — | v2 p2、p5，例子改成报销单 |
 | 3 | Five difficulties, each tied to a term of the formula | 五个挑战 | 逐项 | 5 卡片 | — | v1 p2 |
 | 4 | Acceleration and self-improvement overlap in 16 of 178 agent methods | 交集小 | — | 2×2 表 + 2 卡片 | A1 | v1 p3 |
@@ -56,10 +58,10 @@
 
 ## 3. 第一段：问题（第 1–4 页）
 
-### 第 1 页　The problem: the same workflow with new inputs, in less time and for less money at the same success rate
+### 第 1 页　Problem: make repeated tasks faster and cheaper
 
 - **结论：** 同一流程、每次输入不同的任务，靠学习改外围程序、模型不动。学到的设计在计入准备成本之后，每个任务更快、更省，并且成功率不低于事先定的下限，才算划算。
-- **公式：** §1 表格的四行，每行在页面上都注明出处。下面另列 $C_{\text{setup}}$ 和 $T_{\text{setup}}$ 的含义。
+- **公式：** §1 表格的四行，每行在页面上都注明出处（文献或 our definition）。下面逐个解释 $m$、$p$、$n$、$C_m(p)$、$R_m(p)$、$T_{\text{attempt}}$、$C_{\text{setup}}$、$T_{\text{setup}}$，因为读者可能没看过第一、二部分。
 - **卡片：**
   1. **学习的花费要算进去。** 例子：ActionEngine 每个任务 27 s 对 87 s、$0.05 对 $0.40，但这两个数不含探索和预热；把探索算进去，要 39–101 个任务才回本，而且仍未计预热（WebArena 655 题，Claude Opus 4.6，对照 Claude Code；附表 L558）。
   2. **第一版固定模型权重**，只改提示、记忆、技能与工具、控制代码。这是实验范围，不是“加速”的普遍定义。
@@ -257,3 +259,8 @@ callout 依据文献文档 §5 方向一第 5 条：核对过的文献里，没�
 
 - 第一、二段（封面 + 第 1–10 页）、附录 A1–A10 和参考文献已做成页面：[slides/part3.html](../../slides/part3.html)，生成器 [slides/build_part3.py](../../slides/build_part3.py)。41 页全部通过版面检查。
 - References：本大纲引用的工作的完整条目（正式发表处与实际读的版本分开）见 [两方向文献文档 References](2026-10-01-two-directions-literature-zh.md#references)；Kapoor et al., 2025 见 [第一版大纲 References](2026-10-01-part3-standalone-slides-outline-zh.md#references)。slides 的参考文献页由生成器从这两处转写成英文。
+- 版面约定（Edwin，2026-10-01）：
+  - 标题下不加小字行；
+  - 每页底部列出本页引用的参考文献，用作者–年份的规范格式；
+  - 符号在第一次出现的那行公式旁定义；
+  - 每句话都要有用，学术 slides 的写法，简洁。

@@ -5,7 +5,8 @@ Sections I (the problem) and II (how far existing work has got), pages 1–10 of
 notes/part3/2026-10-01-part3-standalone-slides-outline-v3-zh.md; section III (our plan) waits for discussion.
 Page anatomy, CSS, helpers and navigation are build_deck.py's (imported, not changed). Numbers come from
 notes/part3/2026-10-01-two-directions-literature-zh.md (§5, §6 table; row data in slides/part3-data/rows.json),
-the calibration and problem-framing notes, and Part 2's checked WALT figure.
+the calibration and problem-framing notes, and the checked WALT set-up figure. The deck stands alone: sources are
+the literature, or 'our definition'; earlier Parts and their pages are never cited.
 
 Usage: python3 slides/build_part3.py [--fonts DIR]
 """
@@ -55,7 +56,40 @@ def short(name):
     sur = first.split(",")[0].strip() if "," in first else first.split()[-1]
     return f"{sur}{etal}, {year}", first
 
+def _au(a):
+    out = []
+    for x in [y.strip() for y in a.split(";") if y.strip()]:
+        if x.startswith("et al"):
+            out.append("et al.")
+            continue
+        sur, given = ([y.strip() for y in x.split(",", 1)] if "," in x else (x.split()[-1], " ".join(x.split()[:-1])))
+        ini = " ".join(g[0] + "." for g in given.replace("-", " ").split() if g[0].isalpha())
+        out.append(f"{sur}, {ini}" if ini else sur)
+    if out and out[-1] == "et al.":
+        return ", ".join(out[:-1]) + ", et al."
+    return out[0] if len(out) == 1 else ", ".join(out[:-1]) + ", &amp; " + out[-1]
+
+def fmt_ref(anchor, full=False):
+    """A reference in author–year form: Surname, I., … (Year). Title. Venue. The full form adds the formal link and the version read."""
+    name, raw = REFDB[anchor]
+    m = re.match(r"(.+?)\s(\d{4}[a-z]?)\.\s(.+)$", raw)
+    if anchor == "ref-p1-cop" or not m:
+        return raw if anchor == "ref-p1-cop" else en(raw)
+    authors, year, rest = m.groups()
+    title, _, after = rest.partition(". ")
+    venue = re.split(r"\s*(?:\[正式引用链接\]|正式引用链接|实际读的版本|; OpenReview|; DOI)", after)[0].strip().rstrip(".")
+    venue = re.split(r"[;,]\s*(?:decision|Poster|Oral|Spotlight|OpenReview|proceedings|Session)", venue)[0].strip().rstrip(".")
+    out = f"{_au(authors)} ({year}). {en(title)}. <i>{en(venue)}</i>."
+    if full:
+        f = re.search(r"\[正式引用链接\]\((https?://[^)]+)\)", raw)
+        r = re.search(r"实际读的版本：\[版本链接（([^）]+)）\]\((https?://[^)]+)\)（([^，）]+)(?:，版本日期：([0-9-]+))?", raw)
+        out += f' Formal: <a href="{f.group(1)}">link</a>.' if f else " Formal link: not recorded."
+        if r:
+            out += f' Version read: <a href="{r.group(2)}">{r.group(1)}</a>, {en(r.group(3).replace("版本号未记录", "version not recorded"))}' + (f", {r.group(4)}" if r.group(4) else "") + "."
+    return out
+
 USED = []          # anchors in order of first citation
+PAGE = []          # anchors cited on the page being built; slide() lists them at its foot
 def cite(*keys):
     """keys: row indices of the §6 table, or 'ref-…' anchors. Returns '(Surname et al., 2026; …)'."""
     out = []
@@ -63,6 +97,8 @@ def cite(*keys):
         a = k if isinstance(k, str) else re.findall(r"#(ref-[^)]+)\)", ROWS[k]["cite"])[0]
         if a not in USED:
             USED.append(a)
+        if a not in PAGE:
+            PAGE.append(a)
         out.append(FORM[a])
     return "(" + "; ".join(out) + ")"
 
@@ -82,6 +118,10 @@ for f, anchors in _seen.items():          # two works with one short form: add t
 # ---------------------------------------------------------------- page store and render (build_deck's anatomy)
 S = []
 def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind="main", cover=False, label=None):
+    refs = PAGE[:]
+    PAGE.clear()
+    if kind == "main" and refs:
+        body += bd.page_refs_html(sorted((fmt_ref(a) for a in refs), key=lambda r: re.sub("<[^>]+>", "", r).lower()), small=True)
     S.append(dict(id=id_, title=title, body=body, crumb=crumb, callout=callout, foot=foot, chip=chip, kind=kind,
                   cover=cover, label=label))
 
@@ -115,7 +155,7 @@ EXTRA_CSS = r"""
 .path span.s.rw{background:#fbeede;border-color:#e2b98b;color:var(--warn)}
 .path .pl{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;color:var(--mute);width:150px}
 .mk{white-space:nowrap;letter-spacing:3px;font-size:12px;color:var(--accent)}
-.tbl.p3t td{font-size:11.5px;line-height:1.3;padding:5px 7px 5px 5px}
+.tbl.p3t td{font-size:11.2px;line-height:1.28;padding:4px 7px 4px 5px}
 .tbl.p3t td.c{text-align:center;font-family:'IBM Plex Mono',Menlo,monospace;font-size:12px;color:var(--ink)}
 .tbl.p3t tr.tot td{font-weight:700;border-top:1px solid var(--accent)}
 .tbl.p3t a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px}
@@ -124,6 +164,11 @@ EXTRA_CSS = r"""
 .refs3{columns:2;column-gap:26px;font-size:9.6px;line-height:1.32;color:var(--ink2);padding-left:0;list-style:none;margin:0}
 .refs3 li{break-inside:avoid;margin:0 0 4px}
 .refs3 a{color:var(--accent);text-decoration:none}
+.symgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px 20px;font-size:11.3px;line-height:1.36;color:var(--ink2)}
+#help{display:none!important}
+.p3refs{margin-top:auto;border-top:none;box-shadow:0 -1px 0 var(--rule)}
+.p3refs .pgrefs li{margin-bottom:0;line-height:10px}
+.p3refs .p3rh{line-height:12px}
 """
 
 def render(font_dir=None):
@@ -146,8 +191,6 @@ def render(font_dir=None):
             parts.append(s["body"])
         else:
             parts.append(f'<div class="head"><div class="label">{label}</div><h1>{s["title"]}</h1></div><div class="rule"></div>')
-            if s["crumb"]:
-                parts.append(f'<div class="crumb">{esc(s["crumb"])}</div>')
             parts.append('<div class="content">')
             if s["callout"]:
                 parts.append(f'<div class="callout">{s["callout"]}</div>')
@@ -157,7 +200,7 @@ def render(font_dir=None):
             if s["chip"]:
                 parts.append(f'<a class="chip" href="{s["chip"][0]}">{esc(s["chip"][1])}{" ↗" if s["chip"][0] != "#back" else ""}</a>')
         parts.append('</section>')
-    parts.append('</div><div id="help">← → move · B back · #sNN links a page</div>')
+    parts.append('</div><div id="help"></div>')   # kept empty and hidden: the shared script and the fit check look it up
     parts.append(f'<script>{bd.JS}</script></body></html>')
     return "".join(parts)
 
@@ -165,8 +208,8 @@ def render(font_dir=None):
 bd.FX["per task"] = [("op", r"v_n(m^{\prime},p)="), ("S", r"\dfrac{C_{\mathrm{setup}}}{n}"), ("op", "+"),
                      ("C", r"\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}"), ("op", r"\quad\mathrm{s.t.}\ "), ("R", r"R_{m^{\prime}}(p)\geq R_0")]
 DN, UP, KEEP = bd.DN, bd.UP, bd.KEEP
-def fx(marks):
-    return bd.fx(("per task", marks))
+def fx(marks, legend=True):
+    return bd.fx(("per task", marks), legend=legend)
 
 C_EXEC, C_LEARN, QQ = tex(r"C_{m^{\prime}}(p)", 13), tex(r"C_{\mathrm{setup}}", 13), tex(r"R_{m^{\prime}}(p)\geq R_0", 13)
 
@@ -191,45 +234,31 @@ slide("s00", "Learning across tasks", kind="title", cover=True, body="""
 # =====================================================================
 # I · The problem
 # =====================================================================
-slide("s01", "The problem: the same workflow with new inputs, in less time and for less money at the same success rate",
-  crumb="Part 1’s cost per success, with Part 2’s set-up spread over the n tasks it serves · time is reported beside money, never added to it",
-  callout="<p><b>For tasks that repeat one workflow with new inputs, learning changes the harness around a fixed model. It pays off when the learned design is faster and cheaper per task, its set-up included, at a success rate no lower than a level fixed in advance.</b></p>",
+slide("s01", "Problem: make repeated tasks faster and cheaper",
+  crumb="cost per success, with a one-time set-up spread over the n tasks it serves · time is reported beside money, never added to it",
+  callout="<p><b>An agent runs the same workflow many times with new inputs. What it learns on earlier tasks should lower the time and money of later tasks, with the cost of learning counted, without lowering the success rate.</b></p>",
   body=f"""
-<div class="two" style="grid-template-columns:1.55fr 1fr">
- <div>
-  {table(["formula", "what it says", "source"], [
-    [tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)},\quad T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 13),
-     "dollars and seconds per success of design " + tex("m", 11) + " (model + harness) on task " + tex("p", 11),
-     "Part 1, page 2; " + cite("ref-p1-cop")],
+{table(["formula", "meaning and symbols", "source"], [
+    [tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)}", 13) + "<br>" + tex(r"T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 13),
+     "<b>Dollars and seconds per success.</b> " + tex("m", 11) + ": a design, the model plus the program around it (the harness); " + tex("p", 11) + ": one task; " + tex("C_m(p)", 11) + ": expected dollars of one attempt; " + tex("R_m(p)", 11) + ": chance that one attempt succeeds; " + tex(r"T_{\mathrm{attempt}}", 11) + ": seconds of one attempt, " + tex(r"\mathbb{E}", 11) + " its expected value; " + tex("v", 11) + ", " + tex(r"T_{\mathrm{success}}", 11) + ": expected dollars and seconds per success, retrying until the task succeeds",
+     "dollars: " + cite("ref-p1-cop") + "; seconds: our definition, same form"],
     [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{setup}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 13),
-     tex(r"m^{\prime}", 11) + ": the same model, its harness changed by learning; the learning bill " + tex(r"C_{\mathrm{setup}}", 11) + " is spread over the " + tex("n", 11) + " tasks it serves",
-     "Part 2, App. B8; fixed and variable cost " + cite("ref-ai-agents-that-matter") + ", §3; one set-up over n runs " + cite(46)],
-    [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)\ \ \mathrm{s.t.}\ \ R_{m^{\prime}}(p)\geq R_0", 13),
-     "Part 1’s goal with the set-up included; success measured on tasks not used for learning",
-     "Part 1, page 2; " + tex("R_0", 11) + " self-defined"],
+     "<b>Dollars per task after learning, set-up included.</b> " + tex(r"m^{\prime}", 11) + ": the same model with its harness changed by learning; " + tex(r"C_{\mathrm{setup}}", 11) + ": dollars spent on learning (exploring, proposing and checking changes, keeping them up to date), each counted once; " + tex("n", 11) + ": tasks the learned design serves; " + tex("v_n", 11) + ": expected dollars per task, set-up included",
+     "our definition, from fixed plus variable cost " + cite("ref-ai-agents-that-matter") + ", §3, and one set-up over n runs " + cite(46)],
+    [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)\quad\mathrm{s.t.}\quad R_{m^{\prime}}(p)\geq R_0", 12),
+     "<b>The goal: both lower, success held.</b> " + tex("R_0", 11) + ": lowest acceptable success rate, fixed in advance and measured on tasks not used for learning; time spent learning offline, " + tex(r"T_{\mathrm{setup}}", 11) + ", is reported beside " + tex(r"T_{\mathrm{success}}", 11) + " and not spread over tasks",
+     "our definition"],
     [tex(r"n^{*}=\dfrac{C_{\mathrm{setup}}}{v(m,p)-v(m^{\prime},p)}", 13),
-     "break-even: the number of tasks after which learning has paid for itself",
-     "calc. from row 2; the same comparison in " + cite("ref-ai-agents-that-matter") + ", §3.2"],
-  ], ["44%", "33%", "23%"], cls="tbl p3t")}
-  <ul class="symlist" style="margin-top:8px">
-   <li>{tex(r"C_{\mathrm{setup}}", 11)} — exploring, proposing and checking changes, and keeping them up to date, each counted once</li>
-   <li>{tex(r"T_{\mathrm{setup}}", 11)} — the offline learning time, reported beside {tex(r"T_{\mathrm{success}}", 11)} and not spread over tasks (self-defined)</li>
-  </ul>
- </div>
- <div class="stack">
-  {card("LEARNING IS CHARGED · " + C_LEARN, "A saving per task counts only once the learning behind it is paid back",
-        ["27 s vs 87 s and $0.05 vs $0.40 per task without exploration and warm-up; with exploration, break-even after 39–101 tasks, warm-up still excluded — ActionEngine, WebArena (655 tasks), Claude Opus 4.6, vs Claude Code " + c("actionengine")], "")}
-  {card("SCOPE", "First version: the model weights stay fixed; prompts, memory, skills and tools, and control code may change",
-        ["Our experimental scope, not a definition of acceleration: serving, model choice, caching and parallel calls are other routes"], "")}
- </div>
-</div>""",
+     "<b>Break-even.</b> " + tex("n^{*}", 11) + ": the number of tasks after which " + tex(r"v_n(m^{\prime},p)", 11) + " falls below " + tex("v(m,p)", 11),
+     "our definition, from row 2; the same comparison in " + cite("ref-ai-agents-that-matter") + ", §3.2"],
+  ], ["37%", "43%", "20%"], cls="tbl p3t")}""",
   chip=("#a01", "Appendix A1"))
 
 slide("s02", "Where one expense report loses time",
   crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
   callout="<p><b>Some steps of a run are needed to do the task; others rediscover the form or redo work after an error. Only the second kind can be learned away, and which steps are which is not known before the agent has run.</b></p>",
   body=f"""
-<div class="lbl">One run, as the agent experiences it</div>
+<div class="lbl">One run</div>
 <div class="flow">
  <div class="stp"><span class="n">1</span>Open a new expense report</div><div class="arr">→</div>
  <div class="stp"><span class="n">2</span>Choose the expense type: Hotel</div><div class="arr">→</div>
@@ -240,19 +269,19 @@ slide("s02", "Where one expense report loses time",
  <div class="stp rw"><span class="n">7</span>Submit again</div><div class="arr">→</div>
  <div class="stp key"><span class="n">8</span>Check the saved report</div>
 </div>
-<div class="path"><span class="pl">WITH A LEARNED RULE</span><span class="s">1</span>→<span class="s">2</span>→<span class="s">3</span>→<span class="s">fill the dates</span>→<span class="s">4</span>→<span class="s">8</span><span class="illus" style="margin:0 0 0 10px">steps 5–7 (orange) are the rework a rule could remove; each costs a model call, page time and tokens</span></div>
-<div class="lbl" style="margin-top:22px">Four words used on every page</div>
+<div class="path"><span class="pl">WITH A LEARNED RULE</span><span class="s">1</span>→<span class="s">2</span>→<span class="s">3</span>→<span class="s">fill the dates</span>→<span class="s">4</span>→<span class="s">8</span><span class="illus" style="margin:0 0 0 10px">orange: rework that a learned rule removes</span></div>
+<div class="lbl" style="margin-top:22px">Definitions</div>
 <div class="defs4">
  <div><b>Task</b>A goal, its input data and a starting state, with a check of the result that the agent does not control.</div>
  <div><b>Environment</b>The website’s interface, its rules and the actions it permits; it stays the same while records change.</div>
  <div><b>Run record</b>What one execution observed and did, the feedback it got, its outcome, its time and its cost.</div>
  <div><b>Learning</b>An update that outlives a task and changes something outside the model: a prompt, a memory, a skill or tool, or control code.</div>
 </div>
-<div class="illus" style="margin-top:14px">Illustrative: the environment is not yet chosen and the form rule is invented; no numbers on this page.</div>""")
+<div class="illus" style="margin-top:14px">Illustrative example; the form rule is invented.</div>""")
 
 slide("s03", "Five difficulties, each tied to a term of the formula",
   crumb="difficulties from our problem framing · each card names the term it sits in",
-  callout="<p><b>A faster agent is easy to claim and hard to prove: the bottleneck is the whole run, what can be removed is not known in advance, a failure does not name its fix, learned material must transfer and stay cheap to read, and proving a saving costs money.</b></p>",
+  callout="<p><b>Five difficulties separate a faster agent from a proven one.</b></p>",
   body=f"""
 <div class="rows5 big" style="flex:1">
   {card("1 · THE WHOLE RUN · " + C_EXEC, "Fewer actions can still mean a longer task, so judge by end-to-end time and money",
@@ -277,13 +306,13 @@ slide("s04", "Acceleration and self-improvement overlap in 16 of 178 agent metho
    <tr><td>running time is a main goal</td><td class="n hl">16</td><td class="n">30</td></tr>
    <tr><td>running time is not a main goal</td><td class="n">88</td><td class="n">44</td></tr>
   </tbody></table>
-  <div class="figcap">“Learns or improves”: reuses experience, explores the environment, or keeps rewriting prompts, skills, memory or harness code; training the model alone does not count. A work without a time goal may still cut cost or steps.</div>
+  <div class="figcap">Learns or improves: reuses experience, explores the environment, or rewrites prompts, skills, memory or harness code; model training alone does not count.</div>
  </div>
  <div class="stack">
   {card("NOT ONLY SUCCESS", "Self-improving agents do not all optimise success alone",
         ["SICA and SpeedRunner also target cost or usage " + c("sica", "speedrunner")], "")}
-  {card("TWO DENOMINATORS", "This page counts 178 agent methods; pages 5–10 count the 102 works checked one by one for the two directions",
-        ["The two counts come from different corpora and are not added or compared"], "")}
+  {card("TWO CORPORA", "178 agent methods here; 102 works checked one by one on pages 5–10",
+        ["The two counts come from different corpora and are not compared"], "")}
  </div>
 </div>""",
   chip=("#a01", "Appendix A1"))
@@ -331,9 +360,9 @@ n2, a2, b2, d2 = tally(D2)
 NOTE = "One row per work in our literature table; a work in two classes counts in both. Yes / partly: our initial judgment from the table cells (calc.), defined in Appendix A1."
 
 slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works in four classes",
-  crumb="C_m′(p) ↓ is the aim · C_setup ↑ is the price · R_m′(p) ≥ R_0 must hold",
+  crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
   callout=f"<p><b>Of {n1} works that change what sits outside the model, {a1[0]} measured the seconds or dollars of running tasks, {b1[0]} what learning cost, and {d1[0]} tested on unseen tasks.</b></p>",
-  body=fx({"C": DN, "S": UP, "R": KEEP}) + class_table([
+  body=fx({"C": DN, "S": UP, "R": KEEP}, legend=False) + class_table([
     ("1提示", "the prompt, instructions or context read on the next task",
      "ACE: offline adaptation lifts AppWorld from 42.4 to 59.4 (with labels), and takes 9,517 s against GEPA’s 53,898 s — DeepSeek-V3.1 " + c("ace")),
     ("1记忆", "retrievable experience: successes, failures, workflows",
@@ -342,12 +371,12 @@ slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works i
      "AXIS: 29.9 s vs 59.5 s and $0.2 vs $0.4 per task, 84% vs 52% success, against UFO on 50 Microsoft Word tasks; learning cost not reported " + c("axis")),
     ("1框架", "the outer program: tools, control loop, the improver itself",
      "SICA: $1.91 → $1.70 and 130.2 → 114.5 s per task, for a whole run of about $7,000; the benchmark that picked the agent also scored it " + c("sica")),
-  ], D1) + f'<div class="figcap">{NOTE}</div>',
+  ], D1) + '<div class="figcap">Yes · partly: our initial judgment from the per-work table (calc.; Appendix A1). A work in two classes counts in both.</div>',
   chip=("#a02", "Appendix A2–A5"))
 
 slide("s06", "How a run record becomes a change, and what the change costs",
   crumb="direction 1 · C_m′(p) ↓ after the change · C_setup ↑ at three points: diagnosis, candidates, re-tests",
-  callout="<p><b>The loop reads run records, finds failures and waste, proposes a change to a prompt, a memory, a skill or the code, re-tests it, and keeps it or rolls it back. Every arrow but the first costs model calls.</b></p>",
+  callout="<p><b>Every step after reading the run records costs model calls, and these costs are rarely reported next to the savings.</b></p>",
   body=f"""
 {fx({"C": DN, "S": UP, "R": KEEP})}
 <div class="flow" style="margin:10px 0 4px">
@@ -366,9 +395,9 @@ slide("s06", "How a run record becomes a change, and what the change costs",
   chip=("#a05", "Appendix A5"))
 
 slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kinds of knowledge",
-  crumb="C_m′(p) ↓ is the aim · C_setup ↑ is the exploring · a kept rule must still hold when the site changes",
+  crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
   callout=f"<p><b>Of {n2} works that keep knowledge about the environment, {a2[0]} measured the seconds or dollars of running tasks, {b2[0]} what exploring cost, and {d2[0]} tested on unseen tasks.</b></p>",
-  body=fx({"C": DN, "S": UP, "R": KEEP}) + class_table([
+  body=fx({"C": DN, "S": UP, "R": KEEP}, legend=False) + class_table([
     ("2A预测后果", "what the page will look like after an action",
      "WMA: 140.3 s vs 748.3 s and $0.4 vs $2.7 per instruction against tree search, 16.6% vs 19.2% success — WebArena, GPT-4o " + c("wma")),
     ("2B说明事实前提", "tool parameters and errors; facts and traps of the site",
@@ -377,7 +406,7 @@ slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kin
      "MobileGPT: −62.5% latency and −68.8% cost on repeated tasks with human-repaired paths; exploring took 10–15 min per app, $10.78 in all " + c("mobilegpt")),
     ("2D探索练习", "self-set practice tasks, turned into tools",
      "WALT: 50.1% and 52.9% success on WebArena and VisualWebArena; exploring and checking cost $1.67 per tool, repaid after about 14 uses " + c("walt")),
-  ], D2) + f'<div class="figcap">{NOTE} Three environments that check the final state, such as AppWorld {c("appworld")}, learn nothing; Appendix A6.</div>',
+  ], D2) + f'<div class="figcap">Yes · partly: our initial judgment from the per-work table (calc.; Appendix A1). A work in two classes counts in both.</div>',
   chip=("#a06", "Appendix A6–A9"))
 
 slide("s08", "Exploring a site, keeping a checked rule, and using it on the next task",
@@ -393,9 +422,9 @@ slide("s08", "Exploring a site, keeping a checked rule, and using it on the next
 <div class="path"><span class="pl">WITH THE NOTE</span><span class="s">fill the dates</span>→<span class="s">submit</span>→<span class="s">check</span><span class="illus" style="margin:0 0 0 10px">illustrative paths, not measured</span></div>
 <div class="two" style="margin-top:12px">
   {card("REAL CALLS CORRECT THE DESCRIPTION", "Trying an action and reading its result can fix what a description gets wrong",
-        ["DRAFT found by calling a tool that it needs a valid person_id, and wrote that condition back into the tool’s documentation " + c("draft")], "")}
+        ["DRAFT learned from a real call that a tool needs a valid person_id, and wrote it into the tool’s documentation " + c("draft")], "")}
   {card("ONE OBSERVATION IS NOT A RULE", "A rule written from one observation can be wrong, and a local check can miss it",
-        ["DRAFT once generalised from a single error message; SkillWeaver’s local checks let broken functions through " + c("draft", "skillweaver")], "")}
+        ["DRAFT generalised from one error message; SkillWeaver’s local checks passed broken functions " + c("draft", "skillweaver")], "")}
 </div>""",
   chip=("#a09", "Appendix A9"))
 
@@ -421,7 +450,7 @@ slide("s10", "The closest works save time or money on repeated tasks; none count
   body=table(["work", "what it learns", "what it shows: one number and its conditions", "what is left out"], [
     [f"<b>ActionEngine</b><div class='wcite'>{c('actionengine')}</div>", "a state-machine map of the site, with templates",
      "91.2% success (73.1% without the warmed-up map); 27 s vs 87 s and $0.05 vs $0.40 per task against Claude Code — WebArena, 655 tasks, Claude Opus 4.6",
-     "exploration and warm-up are outside the per-task numbers; break-even after 39–101 tasks still leaves warm-up out"],
+     "per-task numbers exclude exploration and warm-up; break-even after 39–101 tasks still omits warm-up"],
     [f"<b>WALT</b><div class='wcite'>{c('walt')}</div>", "tools written from exploring each site",
      "$1.67 per tool to explore and check it, repaid after about 14 uses", "repairing tools after deployment is left to future work"],
     [f"<b>SpeedRunner</b><div class='wcite'>{c('speedrunner')}</div>", "programmatic skills",
@@ -494,12 +523,12 @@ apx_pages("a10", "The works closest to ours", [i for i in CLOSEST if i < len(J)]
 # =====================================================================
 # References
 # =====================================================================
-refs = sorted(USED, key=lambda a: FORM[a].lower())
+refs = sorted(USED, key=lambda a: re.sub("<[^>]+>", "", fmt_ref(a)).lower())
 PER = 22
 for k in range(0, len(refs), PER):
     chunk = refs[k:k + PER]
     slide(f"r{k // PER + 1:02d}", "References" + (f" ({k // PER + 1}/{-(-len(refs) // PER)})" if len(refs) > PER else ""), kind="refs",
-          body='<ul class="refs3">' + "".join(f"<li><b>{FORM[a]}.</b> {en(REFDB[a][1])}</li>" for a in chunk) + "</ul>")
+          body='<ul class="refs3">' + "".join(f"<li>{fmt_ref(a, full=True)}</li>" for a in chunk) + "</ul>")
 
 def word_report():
     rows = []
@@ -507,6 +536,7 @@ def word_report():
         if s["kind"] != "main":
             continue
         text = re.sub(r"<svg.*?</svg>", " ", s["callout"] + " " + s["body"], flags=re.S)
+        text = re.sub(r'<div class="p3refs">.*?</ul></div>', " ", text, flags=re.S)
         text = re.sub(r'<div class="(?:cc|wcite|figcap)">.*?</div>', " ", text, flags=re.S)
         text = html.unescape(re.sub(r"<[^>]+>", " ", text))
         text = re.sub(r"\([^()]*\d{4}[a-z]?[^()]*\)", " ", text)
