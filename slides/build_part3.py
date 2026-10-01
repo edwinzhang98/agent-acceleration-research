@@ -380,7 +380,7 @@ slide("s03", "Five difficulties, grouped by the cost they affect (version A)",
   callout="<p><b>Three difficulties affect the cost of each task after learning; two affect the cost of learning itself.</b></p>",
   body=f"""
 <table class="tbl p3t p3d"><colgroup><col style="width:22%"><col style="width:26%"><col style="width:26%"><col style="width:26%"></colgroup>
-<thead><tr><th>difficulty</th><th colspan="3">what three works found (conditions: <a href="#ad">Appendix D ↗</a>)</th></tr></thead><tbody>
+<tbody>
 {grp("Cost per task after learning · " + tex(r"\bar{v}(m^{\prime})", 11))}
 {drow(1, "Fewer steps do not always save time", [
    ev("WebCoach", "webcoach", "actions 10.7 → 10.2, but 215 → 395 s per task"),
@@ -516,7 +516,7 @@ slide("s06", "How a run record becomes a change, and what the change costs",
 <div class="two" style="margin-top:12px">
   {card("IT WORKS", "Changes can be found and made automatically, with gains on the final tasks",
         ["Highest success in five of six settings and 76.0–91.8% fewer model calls at deployment — Growing Harness, BrowseComp-Plus and WebArena-Verified, three models, 50 final tasks per setting, three runs " + c("growing")], "")}
-  {card("THE BILL IS PARTIAL · " + C_LEARN, "Savings at deployment are usually reported without the learning that produced them",
+  {card("LEARNING COST LEFT OUT · " + C_LEARN, "Savings at deployment are usually reported without the learning that produced them",
         ["97.4K vs 112.6K tokens and 11.25 vs 14.55 turns per AppWorld task once the memory is frozen; the memory manager’s own calls are not included — Metis " + c("metis")], "")}
 </div>""",
   chip=("#a05", "Appendix A5"))
@@ -538,7 +538,7 @@ slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kin
 
 slide("s08", "Exploring a site, keeping a checked rule, and using it on the next task",
   crumb="direction 2 · the exploring is C_learn · the rule removes rework from C_m′(p) · it must be re-checked when the site changes",
-  callout="<p><b>The agent probes the form, writes down what it found together with where it applies and the evidence for it, and reads that note on the next task, so the error-and-retry loop of page 2 does not happen.</b></p>",
+  callout="<p><b>The agent probes the form, writes down what it found together with where it applies and the evidence for it, and reads that note on the next task, so the rework loop of the expense example does not happen.</b></p>",
   body=f"""
 <div class="panel3">
  <div><div class="lbl">1 · Explore the form</div>Change the expense type from Meal to Hotel. Two new required fields appear: check-in and check-out date. Submitting without them returns an error.</div>
