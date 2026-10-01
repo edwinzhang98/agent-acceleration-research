@@ -556,12 +556,12 @@ def tradeoff_fig():
     sv += _arr(f"M{x0} {y0} H{x1}") + _arr(f"M{x0} {y0} V{y1}")
     sv += _lbl(x1, y0 + 13, "cost per use →", anchor="end", size=9.5, col="var(--ink2)")
     sv += _lbl(x0, y0 + 13, "schematic", anchor="start", size=9, col="var(--accent)")
-    sv += f'<text transform="translate(22 {y0 - 4}) rotate(-90)" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--ink2)">flexible →</text>'
+    sv += f'<text transform="translate(22 {y0 - 4}) rotate(-90)" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--ink2)">generalizes →</text>'
     sv += '<path d="M78 84 C150 72 230 50 330 24" style="stroke:#dbe3ea;stroke-width:7;fill:none;stroke-linecap:round"/>'
     for (x, y, t, lx, ly, anc) in [(78, 84, "replayed script", 88, 92, "start"), (160, 68, "skill: steps + script", 170, 78, "start"),
                                    (245, 47, "note in memory", 255, 56, "start"), (330, 24, "note in every prompt", 322, 15, "end")]:
         sv += f'<circle cx="{x}" cy="{y}" r="5" style="fill:{A_}"/>' + _lbl(lx, ly, t, mono=False, size=10.5, col="var(--ink)", anchor=anc)
-    sv += f'<rect x="42" y="8" width="112" height="24" rx="12" style="fill:none;stroke:{A_};stroke-dasharray:4 3"/>' + _lbl(98, 24, "cheap and flexible?", anchor="middle", mono=False, size=10, col="var(--accent)")
+    sv += f'<rect x="42" y="8" width="112" height="24" rx="12" style="fill:none;stroke:{A_};stroke-dasharray:4 3"/>' + _lbl(98, 24, "cheap and general?", anchor="middle", mono=False, size=10, col="var(--accent)")
     return sv + '</svg>'
 
 def cause_fig():
@@ -631,7 +631,7 @@ slide("s03c", "Five difficulties (version C: diagrams)",
      drawn("WebCoach", "webcoach", [("ReasoningBank", "reasoningbank", "fewer steps, more tokens")]))}
   {card("", "2 · Whether a check is needed is not known in advance", check_fig() + '<div class="cd" style="margin-top:4px">Skipping a check saves a step only while the rule still holds</div>',
      seen([("DRAFT", "draft", "learns tool conditions by trying"), ("SKILL.nb", "skillnb", "checks before reuse")]))}
-  {card("", "3 · Flexible is costly; cheap is fragile", tradeoff_fig(),
+  {card("", "3 · A trade-off between generalization and cost per use", tradeoff_fig(),
      seen([("Metis", "metis", "keeps both text and code"), ("ActionEngine", "actionengine", "turns a site map into programs")]))}
 </div>
 <div class="lbl" style="text-align:center;margin-top:6px">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
