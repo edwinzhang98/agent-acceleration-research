@@ -1,0 +1,716 @@
+[
+ {
+  "i": 0,
+  "changes": "Text reflection added to next attempt on same task; model not updated",
+  "setting": "ALFWorld, QA, code; ALFWorld retried in same environment",
+  "effect": "ReAct GPT-3 prompt setting; ALFWorld cumulative 130 of 134 tasks; WebShop no improvement by four trials",
+  "timecost": "Report 12 consecutive trials; tokens, cost, time not reported; trial count ≠ steps"
+ },
+ {
+  "i": 1,
+  "changes": "Current output and feedback history for next round",
+  "setting": "Text rewriting, code, math; per-question testing with answer changes",
+  "effect": "GPT-4 code optimization 27.3% → 36.0%; GPT-3.5 math 64.1 → 64.1; compared with same model single generation",
+  "timecost": "Iteration limit 4; tokens, cost, time not reported"
+ },
+ {
+  "i": 2,
+  "changes": "Text variables; cross-question prompts or current-question solutions",
+  "setting": "Math, QA, code; prompt experiment split train/validation/test",
+  "effect": "gpt-3.5-turbo-0125 execution, gpt-4o feedback; Object Counting 77.8 → 91.9 vs DSPy 84.9; result table does not clearly mark split assignment",
+  "timecost": "Prompt optimization batch size 3, 12 iterations; 1+1+1 model calls per code round; time and cost not measured"
+ },
+ {
+  "i": 3,
+  "changes": "Module instructions and examples",
+  "setting": "Multi-hop QA, evidence retrieval, classification; final held-out test",
+  "effect": "Llama-3-8B HotPotQA test exact match 46.4 vs unoptimized 36.1, mean of 5 runs; Iris 88.6 vs Bootstrap RS 94.1",
+  "timecost": "Only trial budget evaluated; actual measured tokens, total calls, time, cost not reported"
+ },
+ {
+  "i": 4,
+  "changes": "Prompt text",
+  "setting": "Classification task; train, dev, test separated, but final candidate selection by test F1 not clarified",
+  "effect": "Default gpt-3.5-turbo; Jailbreak test F1 when matching total API query budget: single selection after search 0.80, greedy 0.82, multi-candidate search 0.85; ~3 steps to peak",
+  "timecost": "Author reported optimization sometimes past 1 hour, not per-setting timed table; deployment cost and time not measured"
+ },
+ {
+  "i": 5,
+  "changes": "Fixed text instructions in computational graph",
+  "setting": "GSM8K, BBH, BigCodeBench; main comparison uses held-out test",
+  "effect": "gpt-4o-mini execution, gpt-4-turbo feedback update: GSM8K 93.2 vs TextGrad 78.2; BigCodeBench 27.8 vs 27.6; run count not reported",
+  "timecost": "LIAR forward input tokens 273,300 vs removed neighbor info 289,850; optimization process metric, time and cost not measured"
+ },
+ {
+  "i": 6,
+  "changes": "Prompts, function code or text-representable parameters",
+  "setting": "BBH held-out questions, controlled held-out initial conditions, new chess positions",
+  "effect": "BBH with reasoning template overall 78.6 vs DSPy prompt optimization 71.6; optimizer GPT-4-0125-Preview, in-program model not clearly stated",
+  "timecost": "Word Sorting vs TextGrad: total experiment time 82.5 vs 211.1 min, including optimization, validation and testing; not per-question deployment latency"
+ },
+ {
+  "i": 7,
+  "changes": "Action prompts; separately train Longformer scorer, not all models frozen",
+  "setting": "Web, text environments, planning; main performance independence on held-out not clarified",
+  "effect": "GPT-4 average progress score 0.69 vs PromptAgent 0.61; WebArena 0.62 vs APO 0.64; progress score ≠ full-task success rate",
+  "timecost": "Time, cost, tokens or total calls not measured; some tasks with higher score need more steps, collisions also increase"
+ },
+ {
+  "i": 8,
+  "changes": "Online-maintained text, strategies and code snippets",
+  "setting": "Math, science QA; accumulated in single test stream",
+  "effect": "GPT-4o Game of 24: baseline 10%, fixed-prompt zero memory 19%, retrieved organized memory 99%; Claude 3.5 Sonnet baseline 12% → 14%",
+  "timecost": "AIME 2024 Claude: 370 / 494 / 1035 / 1831 tokens; memory version higher; token types and management overhead range unclear; time and cost not measured"
+ },
+ {
+  "i": 9,
+  "changes": "Node prompts, inter-agent connection probability; not LLM weights",
+  "setting": "GPT-3.5/GPT-4; MMLU, Crosswords, HumanEval",
+  "effect": "Crosswords same 20 questions optimization evaluation 0.465 → 0.575; HumanEval online 0.76 → 0.88",
+  "timecost": "MMLU optimization 5.32 USD, inference 1.82 USD; HumanEval with optimization total 28.46 USD vs 1.61 USD, cannot be viewed as same-scope deployment cost"
+ },
+ {
+  "i": 10,
+  "changes": "Instructions and action sequences; task-direct action program reuse",
+  "setting": "Knowledge base retrieval, multi-tool QA; training then testing official and human held-out queries",
+  "effect": "claude-3-opus STaRK Amazon/MAG/Prime top-1 hit rates 49.87 / 44.36 / 18.44 vs Reflexion 42.79 / 40.71 / 14.28",
+  "timecost": "Time and cost not measured; timeout-triggered rewrite is mechanism only, threshold not given"
+ },
+ {
+  "i": 11,
+  "changes": "Select prompts from successful trajectories and ensemble; fine-tuning branch not counted",
+  "setting": "GSM8K, HotPotQA; held-out test present, some report dev set only",
+  "effect": "GPT-3.5 GSM8K uncompiled vanilla test 25.2 vs CoT bootstrap+ensemble 81.6; architecture and prompt change together, not single factor",
+  "timecost": "Compilation needs minutes to tens of minutes per author estimate; deployment tokens, time, cost not measured"
+ },
+ {
+  "i": 12,
+  "changes": "Module prompts only, model frozen",
+  "setting": "QA, instructions, privacy rewriting, math; train validation test separated",
+  "effect": "Qwen3 8B AIME-2025: 32.00 vs MIPROv2 20.00, GRPO 38.00; overall advantage ≠ every task wins",
+  "timecost": "Per-task optimization rollout total 6871 / 3593 / 7051 / 2426 / 1839 / 1839; GRPO per item 24000; not model calls, time or cost"
+ },
+ {
+  "i": 13,
+  "changes": "Text context entries, model frozen",
+  "setting": "AppWorld, finance; offline held-out and online task stream tested separately",
+  "effect": "DeepSeek-V3.1 AppWorld: offline labeled 59.4, unlabeled 57.2, baseline 42.4; no warm-up online 56.1; FiNER unlabeled online 67.3 < baseline 70.7",
+  "timecost": "AppWorld offline adaptation 9517 s vs GEPA 53898 s; online FiNER 2.9 vs DC 17.7 dollars; adaptation cost metric; statistical scope has unexplained differences"
+ },
+ {
+  "i": 14,
+  "changes": "Infer text workflows from trajectories; action encapsulation has variants",
+  "setting": "WebArena online; Mind2Web cross-task, site, domain",
+  "effect": "GPT-4-0613 WebArena: 35.5 vs BrowserGym 23.5 success rate; compared input contains HTML, not strict same interface; Mind2Web full-task success rate 0.7—4.8",
+  "timecost": "WebArena average steps 5.9 vs author rerun with accessibility-tree-only BrowserGym 7.9; step comparison not same as 23.5 success-rate row"
+ },
+ {
+  "i": 15,
+  "changes": "Suggestion list and retrieved successful trajectories",
+  "setting": "HotpotQA, ALFWorld, WebShop; train and eval tasks separated",
+  "effect": "gpt-3.5-turbo-0613 ALFWorld single-attempt success 59% vs Reflexion after third retry 54%; different test budget",
+  "timecost": "Training retry limit 3 only; extraction calls, tokens, time or cost not measured"
+ },
+ {
+  "i": 16,
+  "changes": "Experience repository and retrieval value based on reward",
+  "setting": "Code, OS, database, ALFWorld, HLE; repeated training vs frozen memory with held-out separated",
+  "effect": "Held-out average success rate vs MemP +2.8 pp; ALFWorld +5.8, OS +2.6; different baseline foundation models",
+  "timecost": "HLE Gemini-3-pro average ~32K tokens per question across 10 epochs; whether measured per attempt unclear; no comparable MemP figures"
+ },
+ {
+  "i": 17,
+  "changes": "External experience value and generated relevance graph",
+  "setting": "Multimodal QA, code, tools, OS; freeze best round memory for held-out",
+  "effect": "Gemma-4-E4B-it LiveCodeBench: 51.43±2.86 vs RAG 50.48±1.65, MemRL 45.71±2.86; 3 seeds; best round selection not clarified",
+  "timecost": "Time, cost, tokens or calls not measured; 'faster learning' means per-round success rate"
+ },
+ {
+  "i": 18,
+  "changes": "Main config learns memory retrieval selection, reflection, rules; code evolution default off",
+  "setting": "Claude Haiku 4.5 multi-task allocation, Gemini 3.1 Flash-Lite work-order stream",
+  "effect": "Multi-task allocation test Sharpe 2.13 +/- 0.47; EvoTool 1.37 +/- 1.74, but difference p=0.39; planning evolution -1.72",
+  "timecost": "Author estimate full run $2.80, prediction ~$2, reflection evolution ~$0.80; latency not measured"
+ },
+ {
+  "i": 19,
+  "changes": "Environment facts, pitfalls, plans and callable code from repeated plans",
+  "setting": "AppWorld; offline train once, freeze memory then held-out test",
+  "effect": "GPT-4o official test TGC 60.1 vs no memory 51.8; resampled test 66.1 vs 54.8",
+  "timecost": "Official per-question execution 97.4K vs 112.6K tokens, 11.25 vs 14.55 turns; does not include Memory Manager; build 7.9M tokens without trajectory collection"
+ },
+ {
+  "i": 20,
+  "changes": "Expert agents, executable tools and experience",
+  "setting": "General assistant, math, QA, planning, embodied, shopping; main result test stream accumulation inferred as entries",
+  "effect": "GPT-5-chat ALFWorld 94.31 vs AFLOW 93.40, HotpotQA 60.80 same as AFLOW; cross-task memory analysis has separate held-out",
+  "timecost": "Tool average repair rounds 1.01 → 0.48; tokens, time cost not measured; rounds not convertible to them"
+ },
+ {
+  "i": 21,
+  "changes": "Multiple individual rules or example memory, champion broadcasts entire",
+  "setting": "CybORG CAGE-2 fixed attacker; train then freeze evaluation, same scenario",
+  "effect": "Gemini best example scheme reward -24.5 vs zero-shot -189.6, closer to zero is better; other attackers not tested",
+  "timecost": "Gemini rule scheme per-individual adaptation 7.3M +/- 1.6M tokens vs Reflexion 11.4M +/- 0.5M; time and cost not measured"
+ },
+ {
+  "i": 22,
+  "changes": "Multi-agent interaction, task and suggestion associative memory",
+  "setting": "QA, text embodied, planning; independent memory build vs held-out not clear",
+  "effect": "Qwen-2.5-14b + MacNet ALFWorld 58.21% → 79.10%; run count not reported",
+  "timecost": "AutoGen+PDDL relative to no memory 1.4×10^6 tokens more, score 10.32 higher; management cost not separated; time and cost not measured"
+ },
+ {
+  "i": 23,
+  "changes": "General and repo-level text suggestions, can include successful trajectory examples",
+  "setting": "SWE-bench Verified, 401 train, 45 test, also Lite trajectories",
+  "effect": "GPT-4o o1 extraction: full 40% vs AutoCodeRover 42%; text memory only 31%; whether extra Lite trajectories overlap not clarified",
+  "timecost": "Average turns 11.16 → 9.62; final context 11414.02 → 17544.93 tokens, not cumulative tokens; time and cost not measured"
+ },
+ {
+  "i": 24,
+  "changes": "Retrieval config, answer style and re-extracted memory for gaps",
+  "setting": "LoCoMo conversational QA, MemBench; main performance held-out independence not reported",
+  "effect": "GPT-4o LoCoMo F1 0.543 vs SimpleMem 0.432; evolution same question 30.5 → 54.3",
+  "timecost": "Single LoCoMo sample full evolution 25-35 min; retrieval 15 ms, validation ~2-3 s additional; no end-to-end latency"
+ },
+ {
+  "i": 25,
+  "changes": "Per-agent local experience pool and exploration/reuse router",
+  "setting": "Math, code, BBH, ALFWorld; held-out and retry count not reported",
+  "effect": "Qwen3-4B + AgentNet average accuracy 53.69 vs G-Memory 43.37, no memory 35.20",
+  "timecost": "Qwen3-8B BBH vs G-Memory token reduction 32% / 49% / 47%, unclear if judging included; no-memory still cheaper"
+ },
+ {
+  "i": 26,
+  "changes": "Failure-success experience graph, connecting failures to repair cases",
+  "setting": "Code and multi-hop QA; online stream and frozen graph 7:3 held-out",
+  "effect": "Qwen3-Coder-Flash HumanEval held-out: EXG-Reflexion 0.879 vs ExpeL 0.909; online has larger gains",
+  "timecost": "HumanEval baseline EXG: 1.20 vs Reflexion 1.83 model calls; LLM latency 3,259 vs 3,416 ms; total tokens 125,304 vs 117,378; cost-graph model not clear"
+ },
+ {
+  "i": 27,
+  "changes": "Cross-round action prompts for same task and 'how to change prompt' prompt learned offline",
+  "setting": "Jericho, WebArena-Lite, tau2-bench; new instances and new domains",
+  "effect": "Gemini-3-Flash action, GPT-5 adaptation; WebArena-Lite unseen domain W-AUC 0.766 vs TextGrad 0.728, 3 runs, not single success rate",
+  "timecost": "Jericho per session 860.9 s vs Static 593.2 s; 204.0 vs 231.0 calls; 364k vs 196k tokens; offline ~$30-70/benchmark"
+ },
+ {
+  "i": 28,
+  "changes": "Injectable memory fragments with utility weight and source",
+  "setting": "LoCoMo, FEVER, HotpotQA; independent build vs evaluation not clear",
+  "effect": "GPT-4o-mini FEVER: 66 vs G-Memory 62, no memory 57; HotpotQA 39 / 38 / 34",
+  "timecost": "FEVER prompt tokens 2.47M vs G-Memory 3.62M, no memory 1.65M; replay cost and time cost not measured"
+ },
+ {
+  "i": 29,
+  "changes": "Frozen model, update full-task and sub-task text memory; interface layer fixed",
+  "setting": "GPT-4o/Claude-3.5 OSWorld/WindowsAgentArena; ongoing evaluation update after exploration",
+  "effect": "GPT-4o OSWorld 20.58% vs literature baseline 11.21%; ablation subset full 26.15% vs no pre-exploration 15.38%, no independent frozen-memory held-out",
+  "timecost": "Checked entry does not report steps, time, tokens, cost or build cost"
+ },
+ {
+  "i": 30,
+  "changes": "Candidate trajectory pool for same task, rewriting, recombining and filtering",
+  "setting": "SWE-bench Verified; per-question search, not cross-question held-out memory",
+  "effect": "GPT-4o: Pass@1 40.4% vs SWE-Agent 22.4%, SWE-Search 32.6%; internal multi-candidate, not single trajectory",
+  "timecost": "Default 10 candidates; max API cost graph unit unclear; actual tokens, time cost not measured"
+ },
+ {
+  "i": 31,
+  "changes": "External trajectory summary, additional Coach injects suggestions to action model",
+  "setting": "WebVoyager 643 real-time web tasks; dynamic library accumulates same-stream same-task but excludes same-task-ID retrieval",
+  "effect": "Skywork-38B + Qwen3-8B Coach: 0.614 vs 0.473; Qwen-VL-7B main table 0.311 vs 0.328",
+  "timecost": "Skywork average per question 215 → 395 s, actions 10.7 → 10.2; time includes extra inference; no token cost measurement"
+ },
+ {
+  "i": 32,
+  "changes": "Text experience pool extracted from success and failure trajectories",
+  "setting": "WebArena, SWE-bench; online single-task stream",
+  "effect": "WebArena Gemini-2.5-flash success rate 40.5 → 48.8; Shopping judge accuracy 72.7%",
+  "timecost": "WebArena average ReAct steps 9.7 → 8.3; another table total tokens 50,847.4 → 53,054.5, baseline foundation not specified; time and cost not measured"
+ },
+ {
+  "i": 33,
+  "changes": "Text reflection retrieved by task similarity",
+  "setting": "WebArena, same-task redo vs similar new-task tested separately",
+  "effect": "AgentOccam gpt-4o-2024-08-06; 80% build, 20% test new-task setup; reflection vs no memory +11 points; old success task best only 84%",
+  "timecost": "Same-task redo average steps 11.92 → 10.08; new task step reduction 29.1%; time cost not measured; build reports one trajectory per task only"
+ },
+ {
+  "i": 34,
+  "changes": "Case library; parameter branch additionally trains two-layer MLP retrieval scorer",
+  "setting": "GAIA and research QA; GAIA validation set builds library then test set",
+  "effect": "GPT-4.1 planning, o3 execution: GAIA validation Pass@3 87.88%, test set using only validation-accumulated library 79.40%; different protocols",
+  "timecost": "Each level sample 10 questions; GAIA L1 input/output 26k/4.7k, L3 121k/9.8k tokens; not complete learning cost, no savings comparison"
+ },
+ {
+  "i": 35,
+  "changes": "Per-app page-subtask graph and action sequence",
+  "setting": "Mobile apps; cold start then warm start same task with parameter change",
+  "effect": "GPT-4-turbo; with human repair ablation warm start 98.75%; main table without human repair cannot mix",
+  "timecost": "Human-repair path warm start vs same prompt Derive-only: latency -62.5%, cost -68.8%; offline explore per app 10 to 15 minutes, total $10.78"
+ },
+ {
+  "i": 36,
+  "changes": "Playwright function library from web exploration, includes usage notes and page prerequisites",
+  "setting": "GPT-4o WebArena; self-practice then test benchmark tasks",
+  "effect": "Success rate 22.6 → 29.8; online human-judged subset 40.2 → 56.2, Cars 11.1 → 11.1",
+  "timecost": "Per site 160 exploration iterations; checked entry does not report runtime and exploration time cost"
+ },
+ {
+  "i": 37,
+  "changes": "Executable Minecraft skills, completed and failed task tables",
+  "setting": "GPT-4; MineDojo/Mineflayer; exploration vs new worlds no task separation",
+  "effect": "New world each unseen task 3/3 success; ReAct, Reflexion, AutoGPT 0/3 within 50 prompting iterations",
+  "timecost": "'15.3× faster' is prompt-iteration ratio to unlock wood tools; seconds, tokens, dollars checked entry not reported"
+ },
+ {
+  "i": 38,
+  "changes": "Frozen model, accumulate text experience and raw tool result knowledge base; no explicit environment-rules model",
+  "setting": "QwQ-32B GAIA/WebWalkerQA/BrowseComp; pre-fill library with same-batch task simulation",
+  "effect": "WebWalkerQA 52.1 vs WebThinker-32B-RL 46.5; GAIA 47.6 below its 48.5; no held-out split",
+  "timecost": "Checked entry does not report measured cost or time"
+ },
+ {
+  "i": 39,
+  "changes": "Deploy skill documentation; execution model and framework fixed",
+  "setting": "GPT/Qwen; QA, table, document, math, ALFWorld; independent test",
+  "effect": "GPT-5.5 direct dialogue average 58.8 → 82.3 vs no skill; best per-cell baseline average 76.9",
+  "timecost": "Training tokens e.g. SpreadsheetBench 21.4M; cost per question inconsistent scope; deployment per-task usage and time not reported"
+ },
+ {
+  "i": 40,
+  "changes": "Logic skill rules, proposition mapping, plan templates",
+  "setting": "Jackal/PX4 planning and simulation; GPT-5-nano skill generation, GPT-4o-mini planning",
+  "effect": "Automated rules satisfy 96.8, task completion 86.5; LLM-Planner 90.3/89.3; new prompt safety 92–100%, completion 80–96%",
+  "timecost": "Author reported under 20 minutes per skill; skill execution time and cost not reported"
+ },
+ {
+  "i": 41,
+  "changes": "Prompts, tool/agent/memory/environment code and scheme version",
+  "setting": "GAIA, HLE, GPQA, AIME; mainly Gemini 3 Flash Preview, browse component different models",
+  "effect": "HLE 55.2 → 59.6; GAIA Validation 89.70 → 93.33; independent evolution split not stated",
+  "timecost": "Author rough estimate simple task 30 seconds/5k tokens, complex 10 minutes/100k; no Vanilla/Evolved cost comparison"
+ },
+ {
+  "i": 42,
+  "changes": "SOP, script, hierarchical memory; fixed tool interface",
+  "setting": "Multiple models; local task, web, repeated download and research tasks",
+  "effect": "Same GPT-5.4 repeated download 102 seconds → ~66 seconds; not held-out; five long tasks success 100%, vs Claude Code 100%, OpenClaw 80%",
+  "timecost": "Repeated download tokens 200,439 → 100,000; five long tasks 220.8 s vs OpenClaw 183.1 s; evolution cost not separated"
+ },
+ {
+  "i": 43,
+  "changes": "Biomedical tool pool, reasoning template",
+  "setting": "Claude 4 Sonnet + Gemini 2.5 Pro; HLE biomedical, LAB-Bench subset",
+  "effect": "HLE 14% → 26%; LitQA ~52% → 63% with trial budget increase; clear evolution/held-out separation missing",
+  "timecost": "Only trials 1x to 9x reported; time/token/cost not reported"
+ },
+ {
+  "i": 44,
+  "changes": "Rewrite natural-language tool documentation, do not train execution model",
+  "setting": "GPT-4o writes docs, GPT-4o/mini/Llama-3-70B use; RestBench, ToolBench",
+  "effect": "GPT-4o TMDB correct-path rate 88.00 vs ReAct 71.00; tool path includes standard subsequence, not final-state check",
+  "timecost": "Checked entry does not report run and improvement call total, tokens, time, cost"
+ },
+ {
+  "i": 45,
+  "changes": "Text skill library + independently-trained SFT/RL management model",
+  "setting": "Frozen Qwen3.5-35B-A3B or GPT-5.4-mini; programming and environment repair",
+  "effect": "Qwen execution policy average 29.32 → 40.35; skill library built from test-set prerun, excluding current-task source, not strict online stream",
+  "timecost": "Average reasoning steps 44.12 → 35.99; success-task scope inconsistent; manager RL ~210 hours, SFT ~20 hours"
+ },
+ {
+  "i": 46,
+  "changes": "Python tools + call examples + tool cache",
+  "setting": "GPT-4 create; GPT-3.5 Turbo/GPT-4 use; logic, bracket, sorting, schedule held-out",
+  "effect": "GPT-3.5 Turbo Dyck Language 20.4 → 92.2; GPT-4 Logical Deduction 88.8 → 86.6",
+  "timecost": "Only O(nc+C) parse cost and call-budget design; time/tokens/dollars not measured"
+ },
+ {
+  "i": 47,
+  "changes": "Successful-trajectory tools abstracted into MCP toolbox, retrieval select",
+  "setting": "Claude-Sonnet-4 manage + GPT-4.1 browse; GAIA validation set build, retest",
+  "effect": "GAIA pass@1 75.15% → 83.03%; PathVQA/HLE build-test relationship not explained",
+  "timecost": "GAIA average generated tokens 12,305 → 10,394; build cost and latency not measured"
+ },
+ {
+  "i": 48,
+  "changes": "Frozen model, update program tool library; semantic memory is design component, experiment mainly validates tools",
+  "setting": "GAIA dev set learn, private test; self-created table tasks then SheetCopilot-20 test",
+  "effect": "GPT-4 SheetCopilot-20 Pass@1 60% vs no learning 0%; GAIA Level 3 both 6.12%",
+  "timecost": "GAIA Level 1 table average time 118 vs 124 s; Level 2 221 vs 239 s; no-learning cost"
+ },
+ {
+  "i": 49,
+  "changes": "GitHub repo integration, Docker environment, experience summary",
+  "setting": "GPT-4, GPT-3.5; OpenAct; rerun experience experiment separate",
+  "effect": "GPT-4 51-question environment/experience reuse 47.0 → 82.3; main table first-time task 47.3 vs ReAct 24.6, average scope not fully recomputable",
+  "timecost": "Time/tokens/dollars checked entry not reported"
+ },
+ {
+  "i": 50,
+  "changes": "Per-target-task skill script + substitute test",
+  "setting": "Opus 4.6/Claude Code, GPT 5.2/Codex; SkillsBench; same-task skill build then rescore",
+  "effect": "SkillsBench no skill → OpenSkill 25.5% → 43.6%, 25.0% → 42.1%; 5 evals per skill",
+  "timecost": "Opus average run 465.0 → 845.4 s; skill build ~749K tokens/39 min; per-stage includes estimates, totals not fully compatible"
+ },
+ {
+  "i": 51,
+  "changes": "Skill documentation, code and co-improved substitute test",
+  "setting": "Opus 4.6/Claude Code, GPT-5.2/Codex; SkillsBench same-question improvement and test",
+  "effect": "Opus pass rate 30.6% → 71.1%, manual skill 53.5%; not held-out generalization",
+  "timecost": "Average 4.1 validation cycle, 2.4 ground-truth round; seconds/tokens/dollars not measured"
+ },
+ {
+  "i": 52,
+  "changes": "Extract and merge MCP toolbox from frozen teacher trajectories for frozen student",
+  "setting": "GPT-3.5, Qwen3-8B, LLaMA3.1-8B; Game of 24, medical VQA; held-out relationship not stated",
+  "effect": "GPT-3.5 Game of 24 accuracy 34.3±3.2 → 82.7±0.6; build 100 validation examples",
+  "timecost": "Only tool-call proportion reported; call count, time, tokens, dollars not measured"
+ },
+ {
+  "i": 53,
+  "changes": "Abstract and retrieve Python functions from solutions",
+  "setting": "GPT-4 build tools, GPT-3.5 Turbo main execution; VQA, TabMWP, MATH algebra; train source and eval separate",
+  "effect": "GPT-3.5 TabMWP 80.6 → 88.4, but same toolbox BM25 is 89.2; GQA SAcc 35.0 → 45.4",
+  "timecost": "Tool build author estimate ~$2,500; runtime cost not measured"
+ },
+ {
+  "i": 54,
+  "changes": "Prompts, tools, node flow; model weights fixed",
+  "setting": "GPT-3.5/GPT-4; QA, math, code, composition; split not explained",
+  "effect": "GPT-4 MATH 60.7 vs Agents 56.0; standard benchmark disables tools, cannot prove tool creation effective",
+  "timecost": "Time and cost checked entry not reported"
+ },
+ {
+  "i": 55,
+  "changes": "Fixed small framework forward() program",
+  "setting": "GPT-4o search, GPT-3.5 execution; ARC, QA reasoning held-out test",
+  "effect": "DROP F1 79.4 vs 65.8; MGSM 53.4 vs 39.0, each strongest hand-written baseline",
+  "timecost": "One search + eval ~500 USD (ARC), 300 USD (reasoning); deployment per-question not measured"
+ },
+ {
+  "i": 56,
+  "changes": "OpenClaw code and tool-result mediation",
+  "setting": "DeepSeek V3.2; claweval same four-task failures and retest",
+  "effect": "Average grader score 0.2526 → 0.6100, 3 per-question; no held-out task",
+  "timecost": "Only iteration-1 convergence reported; time/tokens/dollars not measured"
+ },
+ {
+  "i": 57,
+  "changes": "Reward skill and tool-specification text library, vision model frozen",
+  "setting": "Qwen2.5-VL-7B/Gemini-2.0-Flash; image editing ranking",
+  "effect": "Qwen average 45.7 vs bare model 30.3, trained EditReward 42.0; do not treat downstream image-model training as no-training evidence",
+  "timecost": "77 iteration scale only reported; tokens/seconds/dollars not measured"
+ },
+ {
+  "i": 58,
+  "changes": "Python improver self-improve by calling fixed model",
+  "setting": "GPT-4, GPT-3.5, Mixtral; small algorithm problems; held-out and new-task transfer",
+  "effect": "GPT-4-selected improver transfer 3SAT 21.2% → 75.1%; GPT-3.5, Mixtral average degrade",
+  "timecost": "LPN ~3 thousand GPT-4 calls per round each run; deployment time dollars not measured"
+ },
+ {
+  "i": 59,
+  "changes": "Agent code + search-tree expand/eval schedule",
+  "setting": "SWE-bench, Polyglot; SWE GPT-5 modify, GPT-5-mini test",
+  "effect": "Same 800-eval budget SWE-Verified-60 40% → 56.7%; filter overlap SWE Lite held-out 34.8% → 40.1%",
+  "timecost": "Optimization allocated CPU-hours: SWE 517 vs DGM 1231; not per-question deployment latency"
+ },
+ {
+  "i": 60,
+  "changes": "Policy code and self-modifying program",
+  "setting": "GPT-4o optimize, GPT-3.5 bounded execution; QA/math held-out test",
+  "effect": "Bounded MGSM 64.2±3.4 vs Meta Agent Search 53.4±3.5; free version calls stronger model incomparable",
+  "timecost": "Full evolution author estimate ~$15; per-question execution cost and time not measured"
+ },
+ {
+  "i": 61,
+  "changes": "Workflow logic blocks and configuration",
+  "setting": "gpt-4o-mini; math/code; train-test split present, candidate-scoring split not clear",
+  "effect": "MATH 58.5 vs MermaidFlow 55.4; MATH → GSM8K 92.89 vs AFlow 91.95",
+  "timecost": "Single GSM8K round evaluation $0.45, Judge $0.01; deployment time and cost not measured"
+ },
+ {
+  "i": 62,
+  "changes": "Task-type branching prompts, tools, infrastructure",
+  "setting": "Sonnet4.6 execute, Opus4.6 modify; prediction market, security challenge, event forecast online stream",
+  "effect": "CTF-Dojo 37.2 → 50.2; FutureX 31.0 → 47.3, but A-Evolve 47.5",
+  "timecost": "FutureX average time 244.4 → 47.6 s; PolyBench 18.2 → 42.2 s; improver tokens not saved, evolution overhead not counted"
+ },
+ {
+  "i": 63,
+  "changes": "Online modify prompts, sub-agents, skills, memory; separate weight-training experiment",
+  "setting": "Pokémon Red/Emerald continuous no reset; Gemini series",
+  "effect": "Emerald Pro fixed 24 hours: improve from start 100% milestone, $130 median vs minimal framework 98%, $215; Flash-Lite improve reverse decline",
+  "timecost": "Measured per-run API cost; main behavior cost is button-press, not model call; improver cost not separately reported"
+ },
+ {
+  "i": 64,
+  "changes": "Execution and evaluator code co-modify; search-score shell fixed",
+  "setting": "GPT-5.5; code, paper, proof",
+  "effect": "Polyglot held-out 71.7% vs HGM-H 69.9%, 119 vs 116 questions; each domain each baseline once",
+  "timecost": "Baseline-score search tokens 1.35x-1.72x fewer; deployment per-question cost and time not measured"
+ },
+ {
+  "i": 65,
+  "changes": "Multiple parent agents share trajectories then modify framework code",
+  "setting": "SWE-bench/Polyglot; Haiku4.5 then Sonnet4.5, o1 reflection",
+  "effect": "Report SWE 71.0%, Polyglot 88.3%, but latter inconsistent with claimed 50-question held-out denominator; not use as generalization-gain evidence",
+  "timecost": "Full cycle estimate USD 13,000 / USD 1,500; no per-question post-evolution cost change"
+ },
+ {
+  "i": 66,
+  "changes": "Executor and improver shared Python program",
+  "setting": "Code, paper review, math grading; robot reward design has separate PPO training",
+  "effect": "Transfer improver to math grading imp@50=0.630, initial 0.0; 200 iterations 0.640 vs 0.610 not significant",
+  "timecost": "Self-modify ~33M tokens, paper review + robot eval 0.506M/iteration; total and breakdown not fully compatible"
+ },
+ {
+  "i": 67,
+  "changes": "Self-complete Python code, tools and oversight mechanism",
+  "setting": "Sonnet3.5(v2), o3-mini; fixed coding subset and synthetic-file task",
+  "effect": "SWE peak 17% → 53%, final accuracy 0.51; same baseline for agent selection, not held-out",
+  "timecost": "Cross-four-benchmark full-attempt per-question average: final $1.91 → $1.70, 130.2 → 114.5 s; tokens 0.24 → 0.30 M; full cycle ~$7,000"
+ },
+ {
+  "i": 68,
+  "changes": "Frozen target-outside execution hooks; separate engineering model train SFT+GRPO",
+  "setting": "Qwen3.5-9B; WebShop, ALFWorld, DBBench",
+  "effect": "Main table same-batch 44.3% → 53.6%; also generate from 10 failures, 1,270 held-out +8.9 +/- 1.5 pp",
+  "timecost": "GPU config and training data number, actual time/tokens/dollars not measured"
+ },
+ {
+  "i": 69,
+  "changes": "Prompts, code, tool wrappers one release candidate",
+  "setting": "Sonnet4.5/Claude Code; SWE, WebArena, StableToolBench",
+  "effect": "SWE Lite 11.0% → 22.0%, Verified 15.0% → 30.0%; protocol keeps test, table naming not clear",
+  "timecost": "StableToolBench 11 rounds only; time/tokens/dollars not measured"
+ },
+ {
+  "i": 70,
+  "changes": "Frozen model outside Python tools and workflow; search process fixed",
+  "setting": "Sonnet3.5(New) modify, SWE same model, Polyglot o3-mini execute",
+  "effect": "SWE subset 20.0% → 50.0%; Polyglot full 14.2% → 30.7%, full includes search items",
+  "timecost": "80 iterations, single SWE run ~2 weeks; post-improvement per-question cost/latency not measured"
+ },
+ {
+  "i": 71,
+  "changes": "Per-question script create; framework unchanged, discard tool after completion",
+  "setting": "SWE-bench Verified/Pro; multiple backbone",
+  "effect": "Gemini3Pro success 74.2% → 77.4%; 50-question GPT-5-Nano 44.0% → 14.0%",
+  "timecost": "Same Gemini average per-question cost $0.46 → $0.48; no offline evolution does not mean total cost down"
+ },
+ {
+  "i": 72,
+  "changes": "Policy, skill rules, step manual text; ReAct loop unchanged",
+  "setting": "Qwen2.5-7B ALFWorld; Qwen3-30B WebShop; independent test",
+  "effect": "ALFWorld 69.3% vs ReAct 64.6%, but below Dynamic Cheatsheet 70.7 and difference not significant",
+  "timecost": "Tau-bench 190 meta+selection calls total; call scope not clear; time/tokens not measured"
+ },
+ {
+  "i": 73,
+  "changes": "Train page-change prediction and scoring model; task execution model frozen",
+  "setting": "GPT-4o WebArena same-environment synthetic instruction learn; also Mind2Web train/test",
+  "effect": "WebArena 16.6% vs no-action-selection 12.8%, still below tree-search 19.2%; Mind2Web cross-task AWM+WMA 25.4% vs AWM w/o EF 15.3%",
+  "timecost": "Per-instruction 140.3 s vs search 748.3 s; table API $0.4 vs $2.7; learn-collection cost not reported; training ~3 GPU hours total scope unclear"
+ },
+ {
+  "i": 74,
+  "changes": "Save location, event, time and access graph; additionally train VPT-Nav, not all models frozen",
+  "setting": "Minecraft pixel control, sparse resource and long-horizon navigation; Steve-1 execute",
+  "effect": "Same sequence A-B-A task repeat A step count reduce; long-horizon ~70 tasks vs baselines <10, exact values in graph only",
+  "timecost": "Memory query 11.24 ms vs FIFO 438.46 ms, not task time; navigator ~23 single-GPU training hours"
+ },
+ {
+  "i": 75,
+  "changes": "Train context encoder, causal graph and change-prediction network; no language model",
+  "setting": "Chemical unseen state, Magnetic manipulator arm; CEM planning",
+  "effect": "Fork n=2 predict 63.18 ± 13.94 vs FCDL 57.82 ± 9.90; full model not every ablation winner",
+  "timecost": "Only training rounds and param size tested; no time/GPU hours/intervention cost"
+ },
+ {
+  "i": 76,
+  "changes": "Build resettable apps and tasks, state checker; no agent improvement",
+  "setting": "API programming operation simulate app; Test-N and Test-C include unseen app",
+  "effect": "GPT4O ReAct TGC 48.8% / 30.2%; fixed agent benchmark score, not learning gain",
+  "timecost": "Current-price estimate ReAct Test-N $0.7/task; judge average under 0.6 seconds, only checker"
+ },
+ {
+  "i": 77,
+  "changes": "Frozen model, store code-branch coverage graph and test history, change test-candidate selection",
+  "setting": "RepoExploreBench/TestGenEval Lite; each program independent empty library, no cross-task held-out",
+  "effect": "Gemini 3 Flash TestGenEval Lite N=24 execution average branch 108.9 vs Greedy 61.5; coverage increase but more test fail",
+  "timecost": "Execution count equal, model calls not equal; no total time/tokens/cost"
+ },
+ {
+  "i": 78,
+  "changes": "Update software guide and curriculum, co-train actor and interface judge, beyond directional bound",
+  "setting": "UI-TARS-7B OSWorld app subset; checked entry does not report held-out detail",
+  "effect": "Success 11.3% → 34.5%, latter first specialize then distill then generalist train; direct all-app train 30.6%, mean of three",
+  "timecost": "1k train iterations, 8 A100 80GB; no GPU hours, total time, tokens"
+ },
+ {
+  "i": 79,
+  "changes": "All models frozen, only modify environment model context: real change record, semantic rule, predict filter",
+  "setting": "Word2World predict, AgentBoard plan; memory cross-attempt and cross-task persist, Gemma-4-26B-A4B",
+  "effect": "ALFWorld predict exact-match 52.88 vs 3.60; plan best-of-5 26.12% vs 23.88%, first-try 19.4 below 22.4",
+  "timecost": "Predict eval average 1.48 s/change vs zero-shot 1.05 s; total 5.24 vs 3.72 GPU hours; not plan-task cost"
+ },
+ {
+  "i": 80,
+  "changes": "State-action graph, locator and descriptor, online general-purpose repair write-back",
+  "setting": "WebArena 655 tasks, Claude Opus 4.6; template warm-up then eval, patcher off",
+  "effect": "91.2%; no warm-up graph 73.1%",
+  "timecost": "27 s vs 87 s; $0.05 vs $0.40, both per-task relative Claude Code; no explore/warm-up; break-even 39-101 tasks and missing warm-up"
+ },
+ {
+  "i": 81,
+  "changes": "New action script, parameter constraint and tool description",
+  "setting": "WebArena, VisualWebArena; GPT-5 plan, GPT-5-mini execute",
+  "effect": "Average success 50.1% / 52.9%; same structure no-tool control best +30.7% relative, includes parser and verifier co-change",
+  "timecost": "Steps best improve 1.4x; offline tokens, dollars, time not reported"
+ },
+ {
+  "i": 82,
+  "changes": "Frozen-model executable skill library, add/remove/modify functions",
+  "setting": "ScienceWorld, BabyAI, Crafter; gpt-5.4-mini; 200 online task, 30 held-out, 3 seed",
+  "effect": "BabyAI from ReAct ~67% to near-perfect; Crafter all-method average achievement unlock <30%",
+  "timecost": "BabyAI usage ~one eighth; output-tokens vs dollars graph scope conflict, learning total cost not reported"
+ },
+ {
+  "i": 83,
+  "changes": "Python skill add to action library",
+  "setting": "WebArena online stream, no separate train set; claude-3.5-sonnet",
+  "effect": "40.4% vs plain Claude 32.7%; average action 5.0 vs 5.6, one skill = one action",
+  "timecost": "Learn tokens, dollars, time not reported; step scope not equal to raw operations"
+ },
+ {
+  "i": 84,
+  "changes": "Prompts, tool description, orchestration, config, adapter and validation script",
+  "setting": "GAIA, SWE-bench Verified, AppWorld, Terminal-Bench 2.0 Verified; GPT-5 mini",
+  "effect": "Initial system to patched completion +6.3 to +18.4 percentage points; mean of three runs",
+  "timecost": "AppWorld offline patch 37.2 million tokens; execution-phase time/cost not reported"
+ },
+ {
+  "i": 85,
+  "changes": "Stirrup prompts, tools, skills, context, validation and end logic",
+  "setting": "ITBench / EnterpriseOps-Gym / AutomationBench, GPT-5.4",
+  "effect": "Held-out increment +31.7 / +15.1 / +29.3 pp",
+  "timecost": "All-benchmark per-task inference cost estimate -17% / -53% / -29%; offline optimize cost not reported"
+ },
+ {
+  "i": 86,
+  "changes": "App documentation, synthetic script and local model weight",
+  "setting": "DroidTask 158 task/13 app; Llama3.1 8B fine-tune; per-author explore and synthesis not look test set",
+  "effect": "54.4% vs same fine-tune step-by-step AutoDroid 43.9%",
+  "timecost": "Phone model inference 46.3 s vs 669.2 s; does not include UI execution; offline prep and fine-tune separate"
+ },
+ {
+  "i": 87,
+  "changes": "Page/element relation memory and high-level action",
+  "setting": "AppAgent 50 task/9 app; GPT-4o; five per-question",
+  "effect": "With chain memory then add action: success 70.8% → 71.4%; steps 9.1 → 5.7",
+  "timecost": "Per-task tokens 9.26k → 4.94k; per-step time 23 → 16 s, successful-task-only, build cost unclear"
+ },
+ {
+  "i": 88,
+  "changes": "Frozen model and tools, only modify shared executable code",
+  "setting": "BrowseComp-Plus, WebArena-Verified × gpt-oss-120b/20b, Qwen3.5-4B; 50 final task per setting, 3 runs",
+  "effect": "Five of six groups highest success, one group -0.7 pp; deployment model calls -76.0-91.8%",
+  "timecost": "Deployment inference cost -74.4-98.6%, not evaluator/offline improver; no break-even"
+ },
+ {
+  "i": 89,
+  "changes": "Data-dependency executable workflow",
+  "setting": "AppWorld one Venmo intent, three instance; author hand-translates execution",
+  "effect": "Same instance tool calls 34 → 11; hold-one-instance 15 of 21 state test pass",
+  "timecost": "Tool call only; compile cost and net save not tested"
+ },
+ {
+  "i": 90,
+  "changes": "Parameterized GUI trajectory memory, precondition and lifecycle",
+  "setting": "OSWorld-Verified 159 task with established memory; same-task second try change resolution, codex-gpt-5.5-medium",
+  "effect": "91.2% vs Synapse 91.8%",
+  "timecost": "Median tokens 20,370 vs 586,386; time 127.5 s vs 315.7 s; first build median ~572k tokens/4.5 min counted success-only"
+ },
+ {
+  "i": 91,
+  "changes": "Shared interface graph, parameter structure, response format, auth description",
+  "setting": "94 domain read, single machine, hot cache third pass, include only aligned-output fields",
+  "effect": "Average request time 950 ms vs Playwright 3,404 ms",
+  "timecost": "Measure end-to-end request time; 20-new-domain cold discover median 8,200 ms, publish success 18/20; no task cost"
+ },
+ {
+  "i": 92,
+  "changes": "Text step, code, pre/post check and version library, frozen model",
+  "setting": "WebArena-Verified 812 task, gpt-5.3-codex, shared framework different reasoning intensity",
+  "effect": "Single round 53.7%, +3.9 pp next; three perturbation reruns consistency 91.7%",
+  "timecost": "Internal maintain/update 36k tokens per success, execution included unclear; no dollars or time"
+ },
+ {
+  "i": 93,
+  "changes": "Only modify post-task experience library, add environment read-only probe",
+  "setting": "CLBench 40 question, unreported structure change; gpt-5.4; five paired run",
+  "effect": "Pass 39% → 73%; executor per-question SQL query 8.8 → 4.7",
+  "timecost": "Full execution $3.38 → $1.68; no experience-build and probe-maintain"
+ },
+ {
+  "i": 94,
+  "changes": "Control AWM, ASI, ReasoningBank vs plain executor budget config",
+  "setting": "WebArena four domain, Gemini 3 Flash, three run",
+  "effect": "Vanilla-IB success 44.78%, 73.6K total tokens/question, that model four-config best simultaneously",
+  "timecost": "Token only; plain 15 step+pruning, enhance 10 step, near-equal budget"
+ },
+ {
+  "i": 95,
+  "changes": "Trajectory-summary exported skill document, frozen model",
+  "setting": "SpreadsheetBench 30 held-out, OpenClaw + gpt-5.4; also migrate SkillsBench",
+  "effect": "Remove delete patch after two-type sum degrade 5 → 14; migrate post cost median not decrease",
+  "timecost": "Execution cost with cache; SkillsBench median $0.143 vs $0.144; extract cost not reported"
+ },
+ {
+  "i": 96,
+  "changes": "Natural-language module prompt",
+  "setting": "Seven text benchmark, each 500 held-out; Claude Sonnet 4.5",
+  "effect": "Main optimize single average 74.67% vs GEPA 70.91%; prompt 1,004 vs 1,878 character",
+  "timecost": "PUPA optimize ~3.4M tokens, 2h 13m; no deployment acceleration measured"
+ },
+ {
+  "i": 97,
+  "changes": "Model fixed, modify run-framework context/tool mechanisms",
+  "setting": "EdgeBench, GPT-5.6 Sol; held-out count statement inconsistent",
+  "effect": "Full config score 44.8 → 42.0, token stream -49.0%; Performance config 44.8 → 47.2, -6.1%",
+  "timecost": "Measure input/cache/output token stream; not total-search tokens, dollars or time"
+ },
+ {
+  "i": 98,
+  "changes": "Translate UI trajectory into API-code skill",
+  "setting": "Microsoft Word, 50-task feasibility; location entry incomplete learn/test split list",
+  "effect": "Relative UFO: 84.0% vs 52.0%, 2.0 vs 3.2 step",
+  "timecost": "29.9 s vs 59.5 s; backend $0.2 vs $0.4; full learn cost location entry not reported"
+ },
+ {
+  "i": 99,
+  "changes": "Reuse code plan on tools, execution dispatch",
+  "setting": "Five app, GPT-4.1/Gemini-2.5-Flash/Gemini-2.5-Pro average",
+  "effect": "Planner average 11.7 s vs Browser-Use 122.1 s; 10.4x speedup",
+  "timecost": "End-to-end time includes planning; plan score only dimensionless agent rank; offline total cost location entry not reported"
+ },
+ {
+  "i": 100,
+  "changes": "URL template, answer structure and low-cost execution path",
+  "setting": "WebVoyager/WebShop, WebVoyager/AgentOccam/BrowserUse framework",
+  "effect": "Cost median 1.9x lower, latency -33.4%, reported accuracy no decrease",
+  "timecost": "Per-task dollars and end-to-end time, include fail and retry; offline amortize location entry not reported"
+ },
+ {
+  "i": 101,
+  "changes": "Supervise policy model output multi-action block using skill boundary, deploy no skill library",
+  "setting": "ALFWorld, ScienceWorld; location entry does not list per-setting model and run count",
+  "effect": "Success improve 7.0%-31.3%, decision round best -78.9%; percentage meaning not itemized",
+  "timecost": "Only decision round and training step given; no time or dollars saved"
+ }
+]
