@@ -589,8 +589,8 @@ def cause_fig():
 
 def breakeven_fig():
     """Difficulty 5 (schematic): total cost over reports, without learning, and with learning, testing and upkeep after changes."""
-    sv = f'<svg width="600" height="120" viewBox="0 0 600 120" style="width:100%;height:auto;display:block">{DEFS_}'
-    x0, y0, x1, y1 = 40, 92, 596, 4
+    sv = f'<svg width="600" height="112" viewBox="0 0 600 112" style="width:100%;height:auto;display:block">{DEFS_}'
+    x0, y0, x1, y1 = 40, 86, 596, 4
     sv += _arr(f"M{x0} {y0} H{x1}") + _arr(f"M{x0} {y0} V{y1}")
     sv += _lbl(x1, y0 + 13, "number of reports filed →", anchor="end", size=9.5, col="var(--ink2)")
     sv += f'<text transform="translate(28 {y0 - 2}) rotate(-90)" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--ink2)">total cost →</text>'
@@ -618,9 +618,9 @@ def breakeven_fig():
     sv += _lbl(296, learn(300, 66) + 14, "repair after the site changes", mono=False, size=9.5, col="var(--ink2)")
     c1, c2 = cross(66), cross(50)
     if c1:
-        sv += f'<circle cx="{c1[0]:.0f}" cy="{c1[1]:.0f}" r="4" style="fill:{A_}"/><path d="M{c1[0]:.0f} {c1[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c1[0], y0 + 13, "break-even", anchor="middle", mono=False, size=10, col="var(--accent)") + _lbl(c1[0], y0 + 25, "n*", anchor="middle", mono=False, size=11, col="var(--accent)", bold=True)
+        sv += f'<circle cx="{c1[0]:.0f}" cy="{c1[1]:.0f}" r="4" style="fill:{A_}"/><path d="M{c1[0]:.0f} {c1[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c1[0], y0 + 13, "break-even", anchor="middle", mono=False, size=10, col="var(--accent)") + _lbl(c1[0], y0 + 24, "n*", anchor="middle", mono=False, size=11, col="var(--accent)", bold=True)
     if c2:
-        sv += f'<circle cx="{c2[0]:.0f}" cy="{c2[1]:.0f}" r="3.5" style="fill:#fff;stroke:{A_}"/><path d="M{c2[0]:.0f} {c2[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c2[0], y0 + 13, "break-even,", anchor="middle", mono=False, size=10, col="var(--accent)") + _lbl(c2[0], y0 + 25, "more testing", anchor="middle", mono=False, size=10, col="var(--accent)")
+        sv += f'<circle cx="{c2[0]:.0f}" cy="{c2[1]:.0f}" r="3.5" style="fill:#fff;stroke:{A_}"/><path d="M{c2[0]:.0f} {c2[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c2[0], y0 + 13, "break-even,", anchor="middle", mono=False, size=10, col="var(--accent)") + _lbl(c2[0], y0 + 24, "more testing", anchor="middle", mono=False, size=10, col="var(--accent)")
     sv += _lbl(52, 12, "learning and testing are paid first", mono=False, size=10, col="var(--ink2)") + _arr("M60 16 L44 62")
     return sv + '</svg>'
 
