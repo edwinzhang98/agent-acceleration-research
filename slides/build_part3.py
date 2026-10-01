@@ -132,6 +132,8 @@ EXTRA_CSS = r"""
 .stp .n{display:block;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;color:var(--mute);margin-bottom:2px}
 .stp.rw{background:#fbeede;border-color:#e2b98b;color:var(--warn)}
 .stp.key{border-color:var(--accent)}
+.flow.tight .stp{padding:5px 8px;font-size:12px;line-height:1.28}
+.defs4.tight div{font-size:12px;line-height:1.35;padding-top:4px}
 .arr{align-self:center;color:var(--mute);font-size:13px;flex:none}
 .tagc{display:block;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;color:var(--warn);margin-top:4px}
 .lbl{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:2px 0 6px}
@@ -280,10 +282,10 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
 
 slide("s02", "Example: a web agent that files expense reports",
   crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
-  callout="<p><b>Our running example: a web agent files expense reports, and each task is a new report in the same expense system. Some of its steps are needed to file the report; others rediscover the form or redo work after an error. Only the second kind can be learned away.</b></p>",
+  callout="<p><b>Our running example: a web agent files expense reports, each task a new report in the same system. On its first hotel report it does not know that a hotel expense needs check-in and check-out dates, so it submits, gets an error and redoes the form. Once it has learned that rule, every later hotel report skips the rework.</b></p>",
   body=f"""
-<div class="lbl">One run: a hotel expense</div>
-<div class="flow">
+<div class="lbl">Before learning: the first hotel report, 8 steps</div>
+<div class="flow tight">
  <div class="stp"><span class="n">1</span>Open a new expense report</div><div class="arr">→</div>
  <div class="stp"><span class="n">2</span>Choose the expense type: Hotel</div><div class="arr">→</div>
  <div class="stp"><span class="n">3</span>Upload the receipt</div><div class="arr">→</div>
@@ -293,16 +295,26 @@ slide("s02", "Example: a web agent that files expense reports",
  <div class="stp rw"><span class="n">7</span>Submit again</div><div class="arr">→</div>
  <div class="stp key"><span class="n">8</span>Check the saved report</div>
 </div>
-<div class="illus" style="margin:4px 0 0 50.6%;width:36.4%;text-align:center;color:var(--warn)">rework that a learned rule removes</div>
-<div class="path" style="margin-top:10px"><span class="pl" style="width:auto;margin-right:10px">WITH THE RULE “HOTEL NEEDS CHECK-IN AND CHECK-OUT DATES”</span><span class="s">1</span>→<span class="s">2</span>→<span class="s">3</span>→<span class="s">fill the dates</span>→<span class="s">4</span>→<span class="s">8</span><span class="illus" style="margin:0 0 0 10px">the dates are filled before submitting: no error, no second submission</span></div>
-<div class="lbl" style="margin-top:22px">Definitions</div>
-<div class="defs4">
+<div class="illus" style="margin:4px 0 0 50.6%;width:36.4%;text-align:center;color:var(--warn)">rework: the agent did not know the rule</div>
+<div class="lbl" style="margin-top:8px">After learning the rule “Hotel → check-in and check-out dates required”: every later hotel report, 6 steps</div>
+<div class="flow tight">
+ <div class="stp"><span class="n">1</span>Open a new expense report</div><div class="arr">→</div>
+ <div class="stp"><span class="n">2</span>Choose the expense type: Hotel</div><div class="arr">→</div>
+ <div class="stp"><span class="n">3</span>Upload the receipt</div><div class="arr">→</div>
+ <div class="stp" style="border-color:var(--accent);background:#eef4f8"><span class="n">4 · new</span>Fill the check-in and check-out dates</div><div class="arr">→</div>
+ <div class="stp"><span class="n">5</span>Submit: accepted</div><div class="arr">→</div>
+ <div class="stp key"><span class="n">6</span>Check the saved report</div><div class="arr" style="visibility:hidden">→</div>
+ <div class="stp" style="border:none;background:none"></div><div class="arr" style="visibility:hidden">→</div>
+ <div class="stp" style="border:none;background:none"></div>
+</div>
+<div class="lbl" style="margin-top:12px">Definitions</div>
+<div class="defs4 tight">
  <div><b>Task</b>A goal, its input data and a starting state, with a check of the result that the agent does not control.</div>
  <div><b>Environment</b>The website’s interface, its rules and the actions it permits; it stays the same while records change.</div>
  <div><b>Run record</b>What one execution observed and did, the feedback it got, its outcome, its time and its cost.</div>
  <div><b>Learning</b>An update that outlives a task and changes something outside the model: a prompt, a memory, a skill or tool, or control code.</div>
 </div>
-<div class="lbl" style="margin-top:20px">Scope</div><div style="font-size:12.5px;line-height:1.45;color:var(--ink2)">The same problem arises for any agent that repeats a workflow in one software environment: a website, a desktop application, a mobile app or a set of tool APIs. Our first experiments use web agents.</div>""")
+<div class="lbl" style="margin-top:10px">Scope</div><div style="font-size:12.5px;line-height:1.45;color:var(--ink2)">The same problem arises for any agent that repeats a workflow in one software environment: a website, a desktop application, a mobile app or a set of tool APIs. Our first experiments use web agents.</div>""")
 
 slide("s03", "Five difficulties, each tied to a term of the formula",
   crumb="difficulties from our problem framing · each card names the term it sits in",
