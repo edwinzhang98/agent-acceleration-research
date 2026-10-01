@@ -275,11 +275,11 @@ slide("s01", "Problem: make repeated tasks faster and cheaper",
 <div class="figcap" style="margin-top:6px">Each source’s original formula, and what we changed and why: <a href="#a00">Appendix A0 ↗</a></div>""",
   chip=("#a00", "Appendix A0"))
 
-slide("s02", "Where one expense report loses time",
+slide("s02", "Example: a web agent that files expense reports",
   crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
-  callout="<p><b>Some steps of a run are needed to do the task; others rediscover the form or redo work after an error. Only the second kind can be learned away, and which steps are which is not known before the agent has run.</b></p>",
+  callout="<p><b>Our running example: a web agent files expense reports, and each task is a new report in the same expense system. Some of its steps are needed to file the report; others rediscover the form or redo work after an error. Only the second kind can be learned away.</b></p>",
   body=f"""
-<div class="lbl">One run</div>
+<div class="lbl">One run: a hotel expense</div>
 <div class="flow">
  <div class="stp"><span class="n">1</span>Open a new expense report</div><div class="arr">→</div>
  <div class="stp"><span class="n">2</span>Choose the expense type: Hotel</div><div class="arr">→</div>
@@ -298,7 +298,8 @@ slide("s02", "Where one expense report loses time",
  <div><b>Run record</b>What one execution observed and did, the feedback it got, its outcome, its time and its cost.</div>
  <div><b>Learning</b>An update that outlives a task and changes something outside the model: a prompt, a memory, a skill or tool, or control code.</div>
 </div>
-<div class="illus" style="margin-top:14px">Illustrative example; the form rule is invented.</div>""")
+<div class="lbl" style="margin-top:20px">Scope</div><div style="font-size:12.5px;line-height:1.45;color:var(--ink2)">The same problem arises for any agent that repeats a workflow in one software environment: a website, a desktop application, a mobile app or a set of tool APIs. Our first experiments use web agents.</div>
+<div class="illus" style="margin-top:12px">Illustrative example; the form rule is invented.</div>""")
 
 slide("s03", "Five difficulties, each tied to a term of the formula",
   crumb="difficulties from our problem framing · each card names the term it sits in",
