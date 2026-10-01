@@ -473,27 +473,37 @@ def drawn(main, key, also):
     """'Drawn from X. Also seen in: Y, what it saw · Z, what it saw' — the figure shows one work; the others found the same."""
     return f"Drawn from {main} {c(key)}. Also: " + " · ".join(f"{n} {c(k)}, {w}" for n, k, w in also)
 
+def seen(also):
+    """For a schematic figure: the works that saw it, with what each saw."""
+    return "Seen in: " + " · ".join(f"{n} {c(k)}, {w}" for n, k, w in also)
+
 def _lbl(x, y, t, anchor="start", size=10.5, mono=True, col="var(--mute)", bold=False):
     f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
     return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{t}</text>'
 
 def blocks_fig():
-    """Difficulty 2: the first report of a kind is explored and stored; later ones replay; a new kind starts over."""
+    """Difficulty 2: time per report over a sequence of reports (schematic). The first report of a kind is explored
+    and its path stored; later reports of that kind replay it; a new kind is explored again."""
     G, O = "#c9d5df", "#f2c79a"
-    rows = [("FIRST", "googgoggog", "solve, then store the path"),
-            ("LATER", "gggggg", "replay the stored path"),
-            ("NEW KIND", "goggoogog", "start over")]
-    sv = '<svg width="400" height="100" viewBox="0 0 400 100" style="width:100%;height:auto;display:block">'
-    for r, (lab, pat, note) in enumerate(rows):
-        y = 4 + r * 24
-        sv += _lbl(0, y + 13, lab)
-        x = 64
-        for ch in pat:
-            sv += f'<rect x="{x}" y="{y}" width="13" height="18" rx="2" style="fill:{G if ch == "g" else O}"/>'
-            x += 15
-        sv += _lbl(x + 6, y + 13, note, mono=False, size=11.5, col="var(--ink)")
-    sv += f'<rect x="64" y="80" width="12" height="9" rx="2" style="fill:{G}"/>' + _lbl(80, 88, "needed step", mono=False, col="var(--ink2)")
-    sv += f'<rect x="160" y="80" width="12" height="9" rx="2" style="fill:{O}"/>' + _lbl(176, 88, "search or rework", mono=False, col="var(--ink2)")
+    need, search = [26, 24, 25, 24, 26, 27, 25, 24, 26, 25], [44, 0, 0, 0, 0, 46, 0, 0, 0, 0]
+    base, x0, bw, gap = 80, 34, 24, 9
+    xs = [x0 + k * (bw + gap) for k in range(10)]
+    sv = '<svg width="400" height="106" viewBox="0 0 400 106" style="width:100%;height:auto;display:block">'
+    sv += f'<path d="M{x0-6} {base} H{xs[-1] + bw + 4}" style="stroke:#9fb3c0"/>'
+    sv += f'<text transform="translate(12 {base - 34}) rotate(-90)" text-anchor="middle" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--mute)">time per report</text>'
+    for k in range(10):
+        sv += f'<rect x="{xs[k]}" y="{base - need[k]}" width="{bw}" height="{need[k]}" rx="2" style="fill:{G}"/>'
+        if search[k]:
+            sv += f'<rect x="{xs[k]}" y="{base - need[k] - search[k] - 1}" width="{bw}" height="{search[k]}" rx="2" style="fill:{O}"/>'
+        sv += _lbl(xs[k] + bw/2, base + 11, str(k + 1), anchor="middle", size=9.5)
+    sv += _lbl(xs[0] + bw + 6, 16, "explore, then store the path", mono=False, size=10.5, col="var(--ink)")
+    sv += _lbl(xs[5] + bw + 6, 16, "a new kind: explore again", mono=False, size=10.5, col="var(--ink)")
+    yb = base - 33
+    sv += f'<path d="M{xs[1]} {yb+4} V{yb} H{xs[4] + bw} V{yb+4}" style="stroke:#7d8a96;fill:none"/>'
+    sv += _lbl((xs[1] + xs[4] + bw) / 2, yb - 4, "replay the stored path", anchor="middle", mono=False, size=10.5, col="var(--ink)")
+    sv += _lbl(x0, base + 24, "report", size=9.5)
+    sv += f'<rect x="{x0 + 52}" y="{base + 16}" width="12" height="9" rx="2" style="fill:{G}"/>' + _lbl(x0 + 68, base + 24, "needed steps", mono=False, col="var(--ink2)")
+    sv += f'<rect x="{x0 + 152}" y="{base + 16}" width="12" height="9" rx="2" style="fill:{O}"/>' + _lbl(x0 + 168, base + 24, "search and rework", mono=False, col="var(--ink2)")
     return sv + '</svg>'
 
 def reading_fig():
@@ -515,7 +525,7 @@ slide("s03c", "Five difficulties (version C: diagrams for 1–3)",
   {card("", "1 · Fewer steps do not always save time", steps_fig() + '<div class="cd" style="margin-top:4px">Each step got longer: judge a report by its seconds, not its steps</div>',
      drawn("WebCoach", "webcoach", [("ReasoningBank", "reasoningbank", "fewer steps, more tokens"), ("GenericAgent", "genericagent", "fewer tokens, more time")]))}
   {card("", "2 · What can be skipped is known only after a run has succeeded", blocks_fig() + '<div class="cd" style="margin-top:4px">Savings start only after one report of a kind has gone through</div>',
-     drawn("EchoPath", "echopath", [("MobileGPT", "mobilegpt", "saves after exploring"), ("ActionEngine", "actionengine", "needs a warm-up")]))}
+     seen([("EchoPath", "echopath", "replays only solved tasks"), ("MobileGPT", "mobilegpt", "saves after exploring"), ("ActionEngine", "actionengine", "needs a warm-up")]))}
   {card("", "3 · What was learned must help on new tasks and be cheap to read", reading_fig() + '<div class="cd" style="margin-top:4px">Notes are re-read on every call; they must pay off on new reports</div>',
      drawn("SEDM", "sedm", [("skill and memory modules", "hajimiri", "plain agent did best"), ("ClawTrace", "clawtrace", "no saving after a move")]))}
 </div>
