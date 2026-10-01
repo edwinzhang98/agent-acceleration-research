@@ -10,39 +10,45 @@
 
 ## 1. 主线
 
-全篇用一条公式串起来，写法同第二部分（每页标出它讲的是公式里哪一项）：
+沿用第一、二部分已有的公式和符号，不另起一套。第三部分只新增三个符号：$m'$、$T_{\text{setup}}$ 和 $n^*$。
 
-$$C_{\text{total}}(N)=C_{\text{learn}}+\sum_{i=1}^{N}C_{\text{exec},i}\qquad\text{约束：}\ \hat Q\ \ge\ Q_0$$
-
-- $N$：学习之后做的任务数，同一流程，每次输入不同。
-- $C_{\text{learn}}$：探索、生成修改、验证、维护的花费，各计一次。
-- $C_{\text{exec},i}$：第 $i$ 个任务的执行花费，包括读入学到的东西的开销，也包括失败和重试。
-- $\hat Q$：在留出任务上测得的完成质量；$Q_0$ 是事先定的下限。
-- 时间单独报，不和费用加成一个分数：每个任务用户等多久 $T_i$ 报分布；离线学习的工期 $T_{\text{learn}}$ 另报。依据：[问题定义 §一](2026-09-30-agent-acceleration-problem-framing-zh.md)。
-- **回本点** $N^{*}$：累计节省 $\sum_i (C^{\text{base}}_{\text{exec},i}-C_{\text{exec},i})$ 第一次超过 $C_{\text{learn}}$ 时的任务数。这是本稿给的定义（calc. 口径），不是某篇论文的公式。
-
-三段对应关系：
-
-| 段 | 讲什么 | 和公式的关系 |
+| 公式 | 含义 | 出处 |
 |---|---|---|
-| 一、问题 | 要省什么、为什么难 | 把每一项讲清楚 |
-| 二、现有研究 | 两个方向各自降下了哪一项、付出了哪一项 | 方向一主要降 $C_{\text{exec}}$，代价是 $C_{\text{learn}}$；方向二同样如此，另外还要验证学到的规则是否仍然适用 |
-| 三、我们的计划 | 两个研究问题和实验 | 待讨论 |
+| $v(m,p)=\dfrac{C_m(p)}{R_m(p)}$，$T_{\text{success}}(m,p)=\dfrac{\mathbb{E}[T_{\text{attempt}}]}{R_m(p)}$ | 设计 $m$（模型 + 外围程序）做任务 $p$，每次成功的美元和秒数 | 第一部分第 2 页；Erol et al., 2026（Cost-of-Pass，ICLR 2026） |
+| $v_n(m',p)=\dfrac{C_{\text{setup}}}{n}+\dfrac{C_{m'}(p)}{R_{m'}(p)}$ | $m'$ 是同一个模型、外围程序经学习改过的设计；学习花费 $C_{\text{setup}}$ 摊到它服务的 $n$ 个任务上 | 第二部分附录 B8；固定成本加可变成本见 Kapoor et al., 2025 §3；一次准备、$n$ 次运行见 LATM（Cai et al., 2024） |
+| $\min\big(T_{\text{success}}(m',p),\,v_n(m',p)\big)$，约束 $R_{m'}(p)\ge R_0$ | 第一部分的目标，计入准备成本；成功率在没参与学习的任务上测 | 第一部分第 2 页；$R_0$ 为自定 |
+| $n^*=\dfrac{C_{\text{setup}}}{v(m,p)-v(m',p)}$ | 回本点：做完多少个任务后，学习花费被省下的钱抵消 | 由上面第二行推出（calc.）；Kapoor et al., 2025 §3.2 做的是同一种比较（联合优化在约 1,350 个任务后总成本更低） |
+
+符号约定（同第一部分）：
+
+- $m$ = 设计（模型 + 外围程序），$p$ = 任务；
+- $N$、$i$、$j$ 是一次尝试内的步数、第几步、第几次调用，第三部分不用来表示任务；
+- $n$ = 任务数，同第二部分。
+
+**$C_{\text{setup}}$ 的范围：** 探索、生成修改、验证，以及维护，各计一次。第二部分附录 B8 原来的写法是“一次性构建成本”。为了前后一致，这次把那里的定义一并改成“一次构建，以及在论文报告了的情况下的维护”。B8 表里各篇的数字不变，因为这些论文都只报了一次性构建。
+
+**时间：** 用户等待用第一部分的 $T_{\text{success}}$。离线学习工期记为 $T_{\text{setup}}$（自定），单独报，不摊到任务上。问题定义 §一里的第三项“计算资源占用”目前没上页面。
+
+**各段和公式的关系：**
+
+- 第一段（问题）：把每一项讲清楚；
+- 第二段（现有研究）：两个方向都想降 $C_{m'}(p)$，代价是 $C_{\text{setup}}$，同时 $R_{m'}(p)\ge R_0$ 要守住；
+- 第三段（计划）：待讨论。
 
 ## 2. 全篇结构
 
 | 页 | 英文标题 | 唯一结论 | 公式项 | 版面 | 附录 | 来源 |
 |---|---|---|---|---|---|---|
 | 0 | Learning to do repeated web tasks faster and more cheaply | 封面 | — | 封面 | — | 新增 |
-| 1 | The problem: the same workflow, new inputs, less time and money at the same quality | 定义问题，按任务流记总账 | 全式 | 公式 + 3 卡片 | A1 | v1 p1 + v2 p1 公式 |
-| 2 | Where one expense report loses time | 重复摸索和返工是可以学掉的部分；顺带定义四个词 | $C_{\text{exec},i}$ | 示意操作记录 + 定义栏 | — | v2 p2、p5，例子改成报销单 |
+| 1 | The problem: the same workflow with new inputs, in less time and for less money at the same success rate | 定义问题；沿用第一、二部分的公式 | 全式 | 四行公式（注出处）+ 2 卡片 | A1 | v1 p1 + 第一部分第 2 页 + 第二部分 B8 |
+| 2 | Where one expense report loses time | 重复摸索和返工是可以学掉的部分；顺带定义四个词 | $C_{m'}(p)$ | 示意操作记录 + 定义栏 | — | v2 p2、p5，例子改成报销单 |
 | 3 | Five difficulties, each tied to a term of the formula | 五个挑战 | 逐项 | 5 卡片 | — | v1 p2 |
 | 4 | Acceleration and self-improvement overlap in 16 of 178 agent methods | 交集小 | — | 2×2 表 + 2 卡片 | A1 | v1 p3 |
-| 5 | Learning from the agent's own runs: 93 works in four classes | 方向一做到哪 | $C_{\text{exec}}$↓，$C_{\text{learn}}$↑ | 总表 | A2–A5 | v1 p4 + 文献文档 §2 |
+| 5 | Learning from the agent's own runs: 93 works in four classes | 方向一做到哪 | $C_{m'}(p)$↓，$C_{\text{setup}}$↑ | 总表 | A2–A5 | v1 p4 + 文献文档 §2 |
 | 6 | How a run record becomes a change, and what the change costs | 方向一机制 | 同上 | 机制图 + 2 卡片 | A4、A5 | v2 p9 |
 | 7 | Learning the environment: 29 works keep four kinds of knowledge | 方向二做到哪 | 同上 | 总表 | A6–A9 | v1 p5 + v2 p7 |
 | 8 | Exploring a site, keeping a checked rule, using it on the next task | 方向二机制 | 同上 | 机制图（报销单）+ 2 卡片 | A7、A9 | v2 p6 |
-| 9 | Across both directions: what learning costs is rarely counted | 共同问题与矛盾 | $C_{\text{learn}}$、$\hat Q$ | 4 卡片 | A1 | 文献文档 §5 |
+| 9 | Across both directions: what learning costs is rarely counted | 共同问题与矛盾 | $C_{\text{setup}}$、$R_{m'}(p)$ | 4 卡片 | A1 | 文献文档 §5 |
 | 10 | The closest works save time or money on repeated tasks; none counts the whole loop | 最相近工作的进展与缺口 | 全式 | 6 行表 | A10 | v1 p6 + 文献文档 §4 |
 | 11–16 | 第三段，待讨论 | 见 §5 | | | | |
 | R | References | | | | | |
@@ -50,15 +56,14 @@ $$C_{\text{total}}(N)=C_{\text{learn}}+\sum_{i=1}^{N}C_{\text{exec},i}\qquad\tex
 
 ## 3. 第一段：问题（第 1–4 页）
 
-### 第 1 页　The problem: the same workflow, new inputs, less time and money at the same quality
+### 第 1 页　The problem: the same workflow with new inputs, in less time and for less money at the same success rate
 
-- **结论：** 同一流程反复出现、每次输入不同的任务，在质量不低于事先定的下限时，降低每个任务的时间和费用。会学习的系统要按整串任务记总账。
-- **公式：** 主线公式，加 $T_i$、$T_{\text{learn}}$ 和回本点 $N^*$。符号逐个在页上解释。
-- **卡片，各一个例子：**
-  1. **时间和费用分开报，不加成一个分数。** 依据问题定义 §一，以及 Kapoor et al., 2025（质量与费用联合优化的先例）。
-  2. **学习的花费要算进总账。** 例子：ActionEngine 每个任务 27 s 对 87 s、$0.05 对 $0.40，但这两个数不含探索和预热；把探索算进去，要 39–101 个任务才回本，而且仍未计预热（WebArena 655 题，Claude Opus 4.6，对照 Claude Code；附表 L558）。
-  3. **第一版固定模型权重，只改提示、记忆、工具和控制程序。** 这是实验范围，不是“加速”的普遍定义（问题定义 §一 末段）。
-- **附录：** A1（口径）。
+- **结论：** 同一流程、每次输入不同的任务，靠学习改外围程序、模型不动。学到的设计在计入准备成本之后，每个任务更快、更省，并且成功率不低于事先定的下限，才算划算。
+- **公式：** §1 表格的四行，每行在页面上都注明出处。下面另列 $C_{\text{setup}}$ 和 $T_{\text{setup}}$ 的含义。
+- **卡片：**
+  1. **学习的花费要算进去。** 例子：ActionEngine 每个任务 27 s 对 87 s、$0.05 对 $0.40，但这两个数不含探索和预热；把探索算进去，要 39–101 个任务才回本，而且仍未计预热（WebArena 655 题，Claude Opus 4.6，对照 Claude Code；附表 L558）。
+  2. **第一版固定模型权重**，只改提示、记忆、技能与工具、控制代码。这是实验范围，不是“加速”的普遍定义。
+- **附录：** A1。
 
 ### 第 2 页　Where one expense report loses time
 
@@ -81,11 +86,11 @@ $$C_{\text{total}}(N)=C_{\text{learn}}+\sum_{i=1}^{N}C_{\text{exec},i}\qquad\tex
 
 | 挑战 | 公式项 | 例子（数字和条件） | 出处 |
 |---|---|---|---|
-| 1 瓶颈在整个执行过程，看局部量会看错 | $C_{\text{exec},i}$、$T_i$ | WebCoach：动作 10.7 → 10.2，但每题 215 → 395 s（WebVoyager 643 个实时网页任务，Skywork-38B + Qwen3-8B 教练；时间含额外推理） | Liu et al., 2025；附表 L509 |
-| 2 哪些交互必要、哪些可省，事先不知道 | $C_{\text{exec},i}$ 中可省的部分 | EchoPath：重放已存记忆，中位时间 315.7 → 127.5 s，但只在首遍已成功入库的 159 个任务上；首遍建库中位约 572k token、4.5 分钟（OSWorld-Verified，codex-gpt-5.5-medium） | Zhao et al., 2026；L568 |
-| 3 看见失败不等于知道怎样改 | $C_{\text{learn}}$ | HarnessFix：完成率提高 6.3–18.4 个百分点（GPT-5 mini，四个基准，三次运行均值），AppWorld 上离线修补用了 37.2M token | Chen et al., 2026；L562 |
-| 4 经验要能用到新任务，读它本身也要便宜 | $C_{\text{exec},i}$ 中读经验的开销 | 预算近似匹配时，不加技能和记忆的普通 agent 最好：44.78%，每题 73.6K token（WebArena 四个域，Gemini 3 Flash，三次运行） | Hajimiri et al., 2026；L572 |
-| 5 证明省了钱，本身也花钱 | $C_{\text{learn}}$（含评测） | SICA：每题平均 $1.91 → $1.70、130.2 → 114.5 s（四个基准全部尝试的任务），整轮约 $7,000；按此算约 33,000 个任务才回本（calc.，假设每题节省对之后的任务不变） | Robeyns et al., 2025；L545 |
+| 1 瓶颈在整个执行过程，看局部量会看错 | $C_{m'}(p)$、$T_{\text{success}}$ | WebCoach：动作 10.7 → 10.2，但每题 215 → 395 s（WebVoyager 643 个实时网页任务，Skywork-38B + Qwen3-8B 教练；时间含额外推理） | Liu et al., 2025；附表 L509 |
+| 2 哪些交互必要、哪些可省，事先不知道 | $C_{m'}(p)$ 中可省的部分 | EchoPath：重放已存记忆，中位时间 315.7 → 127.5 s，但只在首遍已成功入库的 159 个任务上；首遍建库中位约 572k token、4.5 分钟（OSWorld-Verified，codex-gpt-5.5-medium） | Zhao et al., 2026；L568 |
+| 3 看见失败不等于知道怎样改 | $C_{\text{setup}}$ | HarnessFix：完成率提高 6.3–18.4 个百分点（GPT-5 mini，四个基准，三次运行均值），AppWorld 上离线修补用了 37.2M token | Chen et al., 2026；L562 |
+| 4 经验要能用到新任务，读它本身也要便宜 | $C_{m'}(p)$ 中读经验的开销 | 预算近似匹配时，不加技能和记忆的普通 agent 最好：44.78%，每题 73.6K token（WebArena 四个域，Gemini 3 Flash，三次运行） | Hajimiri et al., 2026；L572 |
+| 5 证明省了钱，本身也花钱 | $C_{\text{setup}}$（含评测） | SICA：每题平均 $1.91 → $1.70、130.2 → 114.5 s（四个基准全部尝试的任务），整轮约 $7,000；按此算$n^*$ 约 33,000 个任务（calc.，按每次尝试的节省算，假设之后每题节省不变） | Robeyns et al., 2025；L545 |
 
 ### 第 4 页　Acceleration and self-improvement overlap in 16 of 178 agent methods
 

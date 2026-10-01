@@ -30,6 +30,7 @@ def _refs_from(path):
     return {a: (n, r) for a, n, r in re.findall(r'<a id="(ref-[^"]+)"></a>\s*\n\s*- \*\*(.+?)\*\* — (.+)', t)}
 
 REFDB = {**_refs_from(V1), **_refs_from(LIT)}
+REFDB["ref-p1-cop"] = ("Erol et al., 2026", bd.refs_for("cop")[0])   # Part 1's source for cost per success
 EN = [("arXiv 预印本", "arXiv preprint"), ("预印本", "arXiv"), ("实际读的版本：", "Version read: "), ("版本日期：", ""),
       ("初版日期：", "first version "), ("主会", "main conference"), ("日程已列", "listed in the programme"),
       ("论文集待刊", "proceedings forthcoming"), ("正式题名", "formal title"), ("未记录", "not recorded"),
@@ -161,13 +162,13 @@ def render(font_dir=None):
     return "".join(parts)
 
 # ---------------------------------------------------------------- the formula that runs through the deck
-bd.FX["cost"] = [("op", r"C_{\mathrm{total}}(N)="), ("L", r"C_{\mathrm{learn}}"), ("op", "+"), ("N", r"\sum_{i=1}^{N}"),
-                 ("X", r"C_{\mathrm{exec},i}"), ("op", r"\quad\mathrm{subject\ to}\quad"), ("Q", r"\hat{Q}\geq Q_0")]
+bd.FX["per task"] = [("op", r"v_n(m^{\prime},p)="), ("S", r"\dfrac{C_{\mathrm{setup}}}{n}"), ("op", "+"),
+                     ("C", r"\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}"), ("op", r"\quad\mathrm{s.t.}\ "), ("R", r"R_{m^{\prime}}(p)\geq R_0")]
 DN, UP, KEEP = bd.DN, bd.UP, bd.KEEP
 def fx(marks):
-    return bd.fx(("cost", marks))
+    return bd.fx(("per task", marks))
 
-C_EXEC, C_LEARN, QQ = tex(r"C_{\mathrm{exec},i}", 13), tex(r"C_{\mathrm{learn}}", 13), tex(r"\hat{Q}\geq Q_0", 13)
+C_EXEC, C_LEARN, QQ = tex(r"C_{m^{\prime}}(p)", 13), tex(r"C_{\mathrm{setup}}", 13), tex(r"R_{m^{\prime}}(p)\geq R_0", 13)
 
 # Row indices in slides/part3-data/rows.json (= the §6 table of the literature document, in order)
 R = dict(ace=13, awm=14, axis=98, sica=67, wma=73, draft=44, mobilegpt=35, walt=81, harnessfix=84, growing=88,
@@ -190,36 +191,42 @@ slide("s00", "Learning across tasks", kind="title", cover=True, body="""
 # =====================================================================
 # I · The problem
 # =====================================================================
-slide("s01", "The problem: the same workflow with new inputs, in less time and for less money at the same quality",
-  crumb="the formula that runs through the deck · time is reported beside it, never added to it",
-  callout="<p><b>For tasks that repeat one workflow with new inputs, the aim is to lower the time and the money each task takes while quality stays at or above a level fixed in advance. A system that learns is charged for its learning across the whole stream of tasks.</b></p>",
+slide("s01", "The problem: the same workflow with new inputs, in less time and for less money at the same success rate",
+  crumb="Part 1’s cost per success, with Part 2’s set-up spread over the n tasks it serves · time is reported beside money, never added to it",
+  callout="<p><b>For tasks that repeat one workflow with new inputs, learning changes the harness around a fixed model. It pays off when the learned design is faster and cheaper per task, its set-up included, at a success rate no lower than a level fixed in advance.</b></p>",
   body=f"""
-<div class="two" style="grid-template-columns:1.15fr 1fr">
+<div class="two" style="grid-template-columns:1.55fr 1fr">
  <div>
-  <div class="eqbig">{tex(r"C_{\mathrm{total}}(N)=C_{\mathrm{learn}}+\sum_{i=1}^{N}C_{\mathrm{exec},i}\quad\mathrm{subject\ to}\quad\hat{Q}\geq Q_0", 21)}</div>
-  <ul class="symlist">
-   <li>{tex("N", 12)} — tasks done after learning: the same workflow, new inputs each time</li>
-   <li>{tex(r"C_{\mathrm{learn}}", 12)} — exploring, proposing changes, checking and maintaining them, each counted once</li>
-   <li>{tex(r"C_{\mathrm{exec},i}", 12)} — running task {tex("i", 12)}, including reading what was learned, failed attempts and retries</li>
-   <li>{tex(r"\hat{Q}", 12)} — quality measured on tasks not used for learning; {tex("Q_0", 12)} is fixed before the experiment</li>
-   <li>{tex("T_i", 12)} — how long the user waits for task {tex("i", 12)}, reported as a distribution; {tex(r"T_{\mathrm{learn}}", 12)}, the offline learning time, is reported apart</li>
+  {table(["formula", "what it says", "source"], [
+    [tex(r"v(m,p)=\dfrac{C_m(p)}{R_m(p)},\quad T_{\mathrm{success}}(m,p)=\dfrac{\mathbb{E}[T_{\mathrm{attempt}}]}{R_m(p)}", 13),
+     "dollars and seconds per success of design " + tex("m", 11) + " (model + harness) on task " + tex("p", 11),
+     "Part 1, page 2; " + cite("ref-p1-cop")],
+    [tex(r"v_n(m^{\prime},p)=\dfrac{C_{\mathrm{setup}}}{n}+\dfrac{C_{m^{\prime}}(p)}{R_{m^{\prime}}(p)}", 13),
+     tex(r"m^{\prime}", 11) + ": the same model, its harness changed by learning; the learning bill " + tex(r"C_{\mathrm{setup}}", 11) + " is spread over the " + tex("n", 11) + " tasks it serves",
+     "Part 2, App. B8; fixed and variable cost " + cite("ref-ai-agents-that-matter") + ", §3; one set-up over n runs " + cite(46)],
+    [tex(r"\min\ \left(T_{\mathrm{success}}(m^{\prime},p),\ v_n(m^{\prime},p)\right)\ \ \mathrm{s.t.}\ \ R_{m^{\prime}}(p)\geq R_0", 13),
+     "Part 1’s goal with the set-up included; success measured on tasks not used for learning",
+     "Part 1, page 2; " + tex("R_0", 11) + " self-defined"],
+    [tex(r"n^{*}=\dfrac{C_{\mathrm{setup}}}{v(m,p)-v(m^{\prime},p)}", 13),
+     "break-even: the number of tasks after which learning has paid for itself",
+     "calc. from row 2; the same comparison in " + cite("ref-ai-agents-that-matter") + ", §3.2"],
+  ], ["44%", "33%", "23%"], cls="tbl p3t")}
+  <ul class="symlist" style="margin-top:8px">
+   <li>{tex(r"C_{\mathrm{setup}}", 11)} — exploring, proposing and checking changes, and keeping them up to date, each counted once</li>
+   <li>{tex(r"T_{\mathrm{setup}}", 11)} — the offline learning time, reported beside {tex(r"T_{\mathrm{success}}", 11)} and not spread over tasks (self-defined)</li>
   </ul>
-  <div class="eqbig" style="padding-top:12px">{tex(r"N^{*}=\min\{N:\ \sum_{i=1}^{N}(C^{\mathrm{base}}_{\mathrm{exec},i}-C_{\mathrm{exec},i})\geq C_{\mathrm{learn}}\}", 15)}</div>
-  <div class="figcap">Break-even {tex("N^{*}", 10)}: the first task count at which the summed saving over the unchanged agent pays for the learning (our definition).</div>
  </div>
  <div class="stack">
-  {card("TIME AND MONEY", "Time and money are reported side by side, not added into one score",
-        ["Optimising accuracy and cost jointly is established practice, so it is not our contribution " + cite("ref-ai-agents-that-matter")], "")}
   {card("LEARNING IS CHARGED · " + C_LEARN, "A saving per task counts only once the learning behind it is paid back",
         ["27 s vs 87 s and $0.05 vs $0.40 per task without exploration and warm-up; with exploration, break-even after 39–101 tasks, warm-up still excluded — ActionEngine, WebArena (655 tasks), Claude Opus 4.6, vs Claude Code " + c("actionengine")], "")}
-  {card("SCOPE", "First version: the model weights stay fixed; prompts, memory, skills and tools, and the control code may change",
+  {card("SCOPE", "First version: the model weights stay fixed; prompts, memory, skills and tools, and control code may change",
         ["Our experimental scope, not a definition of acceleration: serving, model choice, caching and parallel calls are other routes"], "")}
  </div>
 </div>""",
   chip=("#a01", "Appendix A1"))
 
 slide("s02", "Where one expense report loses time",
-  crumb="term: C_exec,i — the part of a run that is repeated discovery or rework",
+  crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
   callout="<p><b>Some steps of a run are needed to do the task; others rediscover the form or redo work after an error. Only the second kind can be learned away, and which steps are which is not known before the agent has run.</b></p>",
   body=f"""
 <div class="lbl">One run, as the agent experiences it</div>
@@ -257,7 +264,7 @@ slide("s03", "Five difficulties, each tied to a term of the formula",
   {card("4 · TRANSFER AND READING · " + C_EXEC, "Learned material has to help on new tasks and be cheap to read",
         ["With token budgets roughly matched, the plain agent without skills or memory did best: 44.78% success at 73.6K tokens per task — WebArena, four domains, Gemini 3 Flash, three runs " + c("hajimiri")], "")}
   {card("5 · PROVING THE SAVING · " + C_LEARN, "Showing that a change saves money costs money itself",
-        ["$1.91 → $1.70 and 130.2 → 114.5 s per task on four benchmarks, for a whole run of about $7,000: about 33,000 tasks to break even at that saving (calc.) — SICA " + c("sica")], "")}
+        ["$1.91 → $1.70 and 130.2 → 114.5 s per task on four benchmarks, for a whole run of about $7,000: n* ≈ 33,000 tasks at that saving per attempt (calc.) — SICA " + c("sica")], "")}
 </div>""")
 
 slide("s04", "Acceleration and self-improvement overlap in 16 of 178 agent methods",
@@ -324,9 +331,9 @@ n2, a2, b2, d2 = tally(D2)
 NOTE = "One row per work in our literature table; a work in two classes counts in both. Yes / partly: our initial judgment from the table cells (calc.), defined in Appendix A1."
 
 slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works in four classes",
-  crumb="C_exec,i ↓ is the aim · C_learn ↑ is the price · Q̂ must hold",
+  crumb="C_m′(p) ↓ is the aim · C_setup ↑ is the price · R_m′(p) ≥ R_0 must hold",
   callout=f"<p><b>Of {n1} works that change what sits outside the model, {a1[0]} measured the seconds or dollars of running tasks, {b1[0]} what learning cost, and {d1[0]} tested on unseen tasks.</b></p>",
-  body=fx({"X": DN, "L": UP, "Q": KEEP}) + class_table([
+  body=fx({"C": DN, "S": UP, "R": KEEP}) + class_table([
     ("1提示", "the prompt, instructions or context read on the next task",
      "ACE: offline adaptation lifts AppWorld from 42.4 to 59.4 (with labels), and takes 9,517 s against GEPA’s 53,898 s — DeepSeek-V3.1 " + c("ace")),
     ("1记忆", "retrievable experience: successes, failures, workflows",
@@ -339,10 +346,10 @@ slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works i
   chip=("#a02", "Appendix A2–A5"))
 
 slide("s06", "How a run record becomes a change, and what the change costs",
-  crumb="direction 1 · C_exec,i ↓ after the change · C_learn ↑ at three points: diagnosis, candidates, re-tests",
+  crumb="direction 1 · C_m′(p) ↓ after the change · C_setup ↑ at three points: diagnosis, candidates, re-tests",
   callout="<p><b>The loop reads run records, finds failures and waste, proposes a change to a prompt, a memory, a skill or the code, re-tests it, and keeps it or rolls it back. Every arrow but the first costs model calls.</b></p>",
   body=f"""
-{fx({"X": DN, "L": UP, "Q": KEEP})}
+{fx({"C": DN, "S": UP, "R": KEEP})}
 <div class="flow" style="margin:10px 0 4px">
  <div class="stp key"><span class="n">1 · INPUT</span>Run records, failed and successful, with their time and cost</div><div class="arr">→</div>
  <div class="stp"><span class="n">2 · DIAGNOSE</span>Find failures and waste; locate the step and the code responsible<span class="tagc">costs: diagnosis calls</span></div><div class="arr">→</div>
@@ -359,9 +366,9 @@ slide("s06", "How a run record becomes a change, and what the change costs",
   chip=("#a05", "Appendix A5"))
 
 slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kinds of knowledge",
-  crumb="C_exec,i ↓ is the aim · C_learn ↑ is the exploring · a kept rule must still hold when the site changes",
+  crumb="C_m′(p) ↓ is the aim · C_setup ↑ is the exploring · a kept rule must still hold when the site changes",
   callout=f"<p><b>Of {n2} works that keep knowledge about the environment, {a2[0]} measured the seconds or dollars of running tasks, {b2[0]} what exploring cost, and {d2[0]} tested on unseen tasks.</b></p>",
-  body=fx({"X": DN, "L": UP, "Q": KEEP}) + class_table([
+  body=fx({"C": DN, "S": UP, "R": KEEP}) + class_table([
     ("2A预测后果", "what the page will look like after an action",
      "WMA: 140.3 s vs 748.3 s and $0.4 vs $2.7 per instruction against tree search, 16.6% vs 19.2% success — WebArena, GPT-4o " + c("wma")),
     ("2B说明事实前提", "tool parameters and errors; facts and traps of the site",
@@ -374,7 +381,7 @@ slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kin
   chip=("#a06", "Appendix A6–A9"))
 
 slide("s08", "Exploring a site, keeping a checked rule, and using it on the next task",
-  crumb="direction 2 · the exploring is C_learn · the rule removes rework from C_exec,i · it must be re-checked when the site changes",
+  crumb="direction 2 · the exploring is C_setup · the rule removes rework from C_m′(p) · it must be re-checked when the site changes",
   callout="<p><b>The agent probes the form, writes down what it found together with where it applies and the evidence for it, and reads that note on the next task, so the error-and-retry loop of page 2 does not happen.</b></p>",
   body=f"""
 <div class="panel3">
@@ -393,7 +400,7 @@ slide("s08", "Exploring a site, keeping a checked rule, and using it on the next
   chip=("#a09", "Appendix A9"))
 
 slide("s09", "Across both directions, what learning costs is rarely counted",
-  crumb="C_learn rarely itemised · Q̂ hard to prove · fewer steps ≠ less time or money",
+  crumb="C_setup rarely itemised · R_m′(p) ≥ R_0 hard to prove · fewer steps ≠ less time or money",
   callout="<p><b>The learning bill is rarely itemised, proving that a change is correct is the weak link, and a saving measured as fewer steps, or in one setting, does not guarantee less time or money elsewhere.</b></p>",
   body=f"""
 <div class="cards4" style="flex:1">
@@ -409,7 +416,7 @@ slide("s09", "Across both directions, what learning costs is rarely counted",
   chip=("#a01", "Appendix A1"))
 
 slide("s10", "The closest works save time or money on repeated tasks; none counts the whole loop",
-  crumb="the whole formula · what each closest work measured, and what it left out",
+  crumb="v_n(m′,p) · what each closest work measured, and what it left out",
   callout="<p><b>In the works we checked, no single result covers all of these at once: any task stream, no training, automatic location of failures and waste, protection of old abilities, every learning and maintenance cost counted, and a net saving over time.</b></p>",
   body=table(["work", "what it learns", "what it shows: one number and its conditions", "what is left out"], [
     [f"<b>ActionEngine</b><div class='wcite'>{c('actionengine')}</div>", "a state-machine map of the site, with templates",

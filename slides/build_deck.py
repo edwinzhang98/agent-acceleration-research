@@ -1765,7 +1765,7 @@ B("b8-0", "B8 · 1/2", "B8 · Cost per success, set-up included, for the Part 2 
   body=f"""
 <div class="eqtab">
 {eqrow("per task", "set-up spread", ["amort"],
-       tex(r"C_{\mathrm{setup}}", 11) + ": one-time cost of building the code, tools or memories; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{setup}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
+       tex(r"C_{\mathrm{setup}}", 11) + ": cost of building the code, tools or memories once, and of keeping them up to date where a work reports it; " + tex("n", 11) + ": tasks it serves; the second term is Part 1’s " + tex("v(m,p)", 11) + ", each task retried until it succeeds, so per task = per success. Against a baseline of cost per success " + tex(r"v_{\mathrm{base}}", 11) + " it pays off once " + tex(r"n>C_{\mathrm{setup}}/(v_{\mathrm{base}}-v(m,p))", 11) + ", which needs " + tex(r"v(m,p)<v_{\mathrm{base}}", 11) + " (calc.).",
        "fixed + variable cost: " + CITE2['kapoor25'] + ", §3 (in words); one tool-making stage (a few large-model calls to propose, verify and wrap a tool, once per task type) spread over n cheap calls, O(nc + C) with C, c the cost of one large- and one small-model call: " + CITE2['latm'] + ", Table 2 · per success: " + CITE2['cop'] + ", Eq. 2", "adapted", fs=12.5)}
 </div>
 <div class="twocol">
