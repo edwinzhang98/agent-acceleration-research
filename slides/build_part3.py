@@ -82,7 +82,10 @@ def fmt_ref(anchor, full=False):
     title, _, after = rest.partition(". ")
     venue = re.split(r"\s*(?:\[正式引用链接\]|正式引用链接|实际读的版本|; OpenReview|; DOI)", after)[0].strip().rstrip(".")
     venue = re.split(r"[;,]\s*(?:decision|Poster|Oral|Spotlight|OpenReview|proceedings|Session)", venue)[0].strip().rstrip(".")
-    out = f"{_au(authors)} ({year}). {en(title)}. <i>{en(venue)}</i>."
+    v_en = en(venue)
+    if not full:   # page foot: the venue in short; the reference pages keep the full entry
+        v_en = re.split(r";|, (?:main|Main|Conference|conference|paper|workshop paper|Poster|poster|Findings track|Session|research paper)", v_en)[0].strip()
+    out = f"{_au(authors)} ({year}). {en(title)}. <i>{v_en}</i>."
     if full:
         f = re.search(r"\[正式引用链接\]\((https?://[^)]+)\)", raw)
         r = re.search(r"实际读的版本：\[版本链接（([^）]+)）\]\((https?://[^)]+)\)（([^，）]+)(?:，版本日期：([0-9-]+))?", raw)
@@ -127,7 +130,8 @@ def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind
     refs = PAGE[:]
     PAGE.clear()
     if kind == "main" and refs:
-        body += bd.page_refs_html(sorted((fmt_ref(a) for a in refs), key=lambda r: re.sub("<[^>]+>", "", r).lower()), small=True)
+        rh = bd.page_refs_html(sorted((fmt_ref(a) for a in refs), key=lambda r: re.sub("<[^>]+>", "", r).lower()), small=True)
+        body += rh.replace('class="pgrefs sm"', 'class="pgrefs sm c3"') if len(refs) > 10 else rh
     S.append(dict(id=id_, title=title, body=body, crumb=crumb, callout=callout, foot=foot, chip=chip, kind=kind,
                   cover=cover, label=label))
 
@@ -170,6 +174,9 @@ EXTRA_CSS = r"""
 .tbl.p3d td{font-size:11.2px;line-height:1.28;padding:3px 8px 3px 5px}
 .tbl.p3d td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:var(--ink)}
 .tbl.p3d tr.grp td{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:#f3f7fa;text-align:center;padding:3px}
+.card .cc{font-family:'IBM Plex Sans',sans-serif;font-size:10.5px}
+.pgrefs.c3{columns:3;column-gap:20px}
+.tightcards .card{padding:8px 11px;gap:3px}.tightcards .cv{font-size:14px}.tightcards .cd{font-size:12px;line-height:1.34}.tightcards .lbl{margin:0 0 4px}
 .tbl.p3t a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px}
 .tbl.p3a{font-size:10px;line-height:1.3}.tbl.p3a td{padding:3px 6px 3px 4px}
 .tbl.p3a td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:10px;color:var(--ink)}
@@ -369,7 +376,7 @@ def grp(label):
 def drow(n, claim, cells):
     return f'<tr><td><b>{n} · {claim}</b></td>' + "".join(f"<td>{x}</td>" for x in cells) + "</tr>"
 
-slide("s03", "Five difficulties, grouped by the cost they affect",
+slide("s03", "Five difficulties, grouped by the cost they affect (version A)",
   callout="<p><b>Three difficulties affect the cost of each task after learning; two affect the cost of learning itself.</b></p>",
   body=f"""
 <table class="tbl p3t p3d"><colgroup><col style="width:22%"><col style="width:26%"><col style="width:26%"><col style="width:26%"></colgroup>
@@ -388,15 +395,53 @@ slide("s03", "Five difficulties, grouped by the cost they affect",
    ev("ClawTrace", "clawtrace", "moved to SkillsBench, median cost per task $0.143 vs $0.144: no saving"),
    ev("SEDM", "sedm", "its memory raised the prompt on FEVER to 2.47M tokens, from 1.65M without memory")])}
 {grp("Cost of learning · " + tex(r"C_{\mathrm{learn}}", 11))}
-{drow(4, "A failure does not say how to fix it; finding a fix costs model calls", [
+{drow(4, "Finding the right change from a failure is costly, and not guaranteed", [
    ev("HarnessFix", "harnessfix", "completion +6.3 to +18.4 points, for 37.2M tokens of repairs on AppWorld"),
    ev("ESPO", "espo", "about 3.4M tokens and 2 h 13 min to optimise one prompt (PUPA)"),
    ev("GEPA", "gepa", "1,839–7,051 rollouts to optimise the prompts of one benchmark")])}
-{drow(5, "Checking that a change saves money also costs money", [
+{drow(5, "Learning, with its testing, can cost more than the mistakes it removes", [
    ev("SICA", "sica", "about $7,000 for one full run, to save $0.21 per task (calc.)"),
    ev("ADAS", "adas", "about $500 for one search and its evaluation on ARC"),
    ev("GEA", "gea", "about $13,000 for one full evolution (author estimate)")])}
 </tbody></table>""",
+  chip=("#ad", "Appendix D"))
+
+def works(*pairs):
+    return "Works: " + " · ".join(f"{n} {c(k)}" for n, k in pairs)
+
+slide("s03b", "Five difficulties, explained (version B)",
+  body=f"""<div class="tightcards">
+<div class="lbl" style="text-align:center">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
+<div class="cards3" style="flex:none">
+  {card("", "1 · Fewer steps do not always save time", [
+     "A learned hint, or a second model that coaches, adds reading and thinking to every step",
+     "Steps differ in cost: skipping two clicks saves little if each remaining step waits longer",
+     "So judge a report by its seconds and dollars, not by its step count"],
+     works(("WebCoach", "webcoach"), ("ReasoningBank", "reasoningbank"), ("GenericAgent", "genericagent")))}
+  {card("", "2 · What can be skipped is known only after a run has succeeded", [
+     "Before the first hotel report goes through, the agent cannot tell the rework from the necessary steps",
+     "Savings start once a successful run is stored, and storing it costs a full first pass",
+     "A kind of report never seen before still starts from scratch"],
+     works(("EchoPath", "echopath"), ("MobileGPT", "mobilegpt"), ("ActionEngine", "actionengine")))}
+  {card("", "3 · What was learned must help on new tasks and be cheap to read", [
+     "A note learned on hotel reports may not help with meal or travel reports",
+     "Every note in the prompt is read again on every call; too many notes cost more than they save",
+     "A misleading note can even lower the success rate"],
+     works(("skill and memory modules", "hajimiri"), ("ClawTrace", "clawtrace"), ("SEDM", "sedm")))}
+</div>
+<div class="lbl" style="text-align:center;margin-top:6px">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
+<div class="two" style="flex:none">
+  {card("", "4 · Finding the right change from a failure is costly, and not guaranteed", [
+     "The run record shows that a report was rejected, not whether the prompt, a skill or a check should change",
+     "Diagnosing, writing a change and re-running tasks all cost model calls",
+     "The change found can be wrong, fix only some failures, or break other tasks"],
+     works(("HarnessFix", "harnessfix"), ("ESPO", "espo"), ("DRAFT", "draft")))}
+  {card("", "5 · Learning, with its testing, can cost more than the mistakes it removes", [
+     "To trust a change, it must be re-run on many reports, and those runs cost money",
+     "Without learning, the agent simply pays for its rework on each report",
+     "Learning pays off only after enough reports: the break-even " + tex("n^{*}", 11) + " of page 1"],
+     works(("SICA", "sica"), ("ADAS", "adas"), ("GEA", "gea")))}
+</div></div>""",
   chip=("#ad", "Appendix D"))
 
 # =====================================================================
