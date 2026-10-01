@@ -176,7 +176,7 @@ EXTRA_CSS = r"""
 .tbl.p3d tr.grp td{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:#f3f7fa;text-align:center;padding:3px}
 .card .cc{font-family:'IBM Plex Sans',sans-serif;font-size:10.5px}
 .pgrefs.c3{columns:3;column-gap:20px}
-.tightcards .card{padding:8px 11px;gap:3px}.tightcards .cv{font-size:14px}.tightcards .cd{font-size:12px;line-height:1.34}.tightcards .lbl{margin:0 0 4px}
+.tightcards .card{padding:8px 11px;gap:3px}.tightcards .cc{font-size:10px;line-height:1.3}.tightcards .cv{font-size:14px}.tightcards .cd{font-size:12px;line-height:1.34}.tightcards .lbl{margin:0 0 4px}
 .tbl.p3t a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px}
 .tbl.p3a{font-size:10px;line-height:1.3}.tbl.p3a td{padding:3px 6px 3px 4px}
 .tbl.p3a td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:10px;color:var(--ink)}
@@ -469,33 +469,64 @@ def steps_fig():
     sv += '<text x="56" y="92" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--mute)">length = seconds per task · per step 20.1 → 38.7 s (calc.)</text>'
     return sv + '</svg>'
 
-slide("s03c", "Five difficulties, with a diagram for the first (version C)",
+def drawn(main, key, also):
+    """'Drawn from X. Also seen in: Y, what it saw · Z, what it saw' — the figure shows one work; the others found the same."""
+    return f"Drawn from {main} {c(key)}. Also: " + " · ".join(f"{n} {c(k)}, {w}" for n, k, w in also)
+
+def _lbl(x, y, t, anchor="start", size=10.5, mono=True, col="var(--mute)", bold=False):
+    f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
+    return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{t}</text>'
+
+def blocks_fig():
+    """Difficulty 2: the first report of a kind is explored and stored; later ones replay; a new kind starts over."""
+    G, O = "#c9d5df", "#f2c79a"
+    rows = [("FIRST", "googgoggog", "solve, then store the path"),
+            ("LATER", "gggggg", "replay the stored path"),
+            ("NEW KIND", "goggoogog", "start over")]
+    sv = '<svg width="400" height="100" viewBox="0 0 400 100" style="width:100%;height:auto;display:block">'
+    for r, (lab, pat, note) in enumerate(rows):
+        y = 4 + r * 24
+        sv += _lbl(0, y + 13, lab)
+        x = 64
+        for ch in pat:
+            sv += f'<rect x="{x}" y="{y}" width="13" height="18" rx="2" style="fill:{G if ch == "g" else O}"/>'
+            x += 15
+        sv += _lbl(x + 6, y + 13, note, mono=False, size=11.5, col="var(--ink)")
+    sv += f'<rect x="64" y="80" width="12" height="9" rx="2" style="fill:{G}"/>' + _lbl(80, 88, "needed step", mono=False, col="var(--ink2)")
+    sv += f'<rect x="160" y="80" width="12" height="9" rx="2" style="fill:{O}"/>' + _lbl(176, 88, "search or rework", mono=False, col="var(--ink2)")
+    return sv + '</svg>'
+
+def reading_fig():
+    """Difficulty 3: SEDM on FEVER, prompt tokens over the run without and with its memory (difference calc.)."""
+    G, O = "#c9d5df", "#f2c79a"
+    sc = 230 / 2.47
+    sv = '<svg width="400" height="100" viewBox="0 0 400 100" style="width:100%;height:auto;display:block">'
+    sv += _lbl(0, 17, "NO MEMORY") + f'<rect x="76" y="4" width="{1.65*sc:.0f}" height="18" rx="2" style="fill:{G}"/>' + _lbl(76 + 1.65*sc + 6, 17, "1.65M tokens read", mono=False, size=11.5, col="var(--ink)")
+    sv += _lbl(0, 45, "MEMORY") + f'<rect x="76" y="32" width="{1.65*sc:.0f}" height="18" rx="2" style="fill:{G}"/>' + f'<rect x="{76 + 1.65*sc + 1:.0f}" y="32" width="{0.82*sc:.0f}" height="18" rx="2" style="fill:{O}"/>' + _lbl(76 + 2.47*sc + 6, 45, "2.47M", mono=False, size=11.5, col="var(--ink)", bold=True)
+    sv += f'<rect x="76" y="62" width="12" height="9" rx="2" style="fill:{G}"/>' + _lbl(92, 70, "the task’s own prompt", mono=False, col="var(--ink2)")
+    sv += f'<rect x="220" y="62" width="12" height="9" rx="2" style="fill:{O}"/>' + _lbl(236, 70, "memory, read again on every call", mono=False, col="var(--ink2)")
+    sv += _lbl(76, 90, "prompt tokens over the FEVER run; +0.82M calc.", size=9.5)
+    return sv + '</svg>'
+
+slide("s03c", "Five difficulties (version C: diagrams for 1–3)",
   body=f"""<div class="tightcards">
 <div class="lbl" style="text-align:center">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
 <div class="cards3" style="flex:none">
   {card("", "1 · Fewer steps do not always save time", steps_fig() + '<div class="cd" style="margin-top:4px">Each step got longer: judge a report by its seconds, not its steps</div>',
-     works(("WebCoach", "webcoach"), ("ReasoningBank", "reasoningbank"), ("GenericAgent", "genericagent")))}
-  {card("", "2 · What can be skipped is known only after a run has succeeded", [
-     "Before the first hotel report goes through, the agent cannot tell the rework from the necessary steps",
-     "Savings start once a successful run is stored, and storing it costs a full first pass",
-     "A kind of report never seen before still starts from scratch"],
-     works(("EchoPath", "echopath"), ("MobileGPT", "mobilegpt"), ("ActionEngine", "actionengine")))}
-  {card("", "3 · What was learned must help on new tasks and be cheap to read", [
-     "A note learned on hotel reports may not help with meal or travel reports",
-     "Every note in the prompt is read again on every call; too many notes cost more than they save",
-     "A misleading note can even lower the success rate"],
-     works(("skill and memory modules", "hajimiri"), ("ClawTrace", "clawtrace"), ("SEDM", "sedm")))}
+     drawn("WebCoach", "webcoach", [("ReasoningBank", "reasoningbank", "fewer steps, more tokens"), ("GenericAgent", "genericagent", "fewer tokens, more time")]))}
+  {card("", "2 · What can be skipped is known only after a run has succeeded", blocks_fig() + '<div class="cd" style="margin-top:4px">Savings start only after one report of a kind has gone through</div>',
+     drawn("EchoPath", "echopath", [("MobileGPT", "mobilegpt", "saves after exploring"), ("ActionEngine", "actionengine", "needs a warm-up")]))}
+  {card("", "3 · What was learned must help on new tasks and be cheap to read", reading_fig() + '<div class="cd" style="margin-top:4px">Notes are re-read on every call; they must pay off on new reports</div>',
+     drawn("SEDM", "sedm", [("skill and memory modules", "hajimiri", "plain agent did best"), ("ClawTrace", "clawtrace", "no saving after a move")]))}
 </div>
 <div class="lbl" style="text-align:center;margin-top:6px">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
 <div class="two" style="flex:none">
   {card("", "4 · Finding the right change from a failure is costly, and not guaranteed", [
      "The run record shows that a report was rejected, not whether the prompt, a skill or a check should change",
-     "Diagnosing, writing a change and re-running tasks all cost model calls",
      "The change found can be wrong, fix only some failures, or break other tasks"],
      works(("HarnessFix", "harnessfix"), ("ESPO", "espo"), ("DRAFT", "draft")))}
   {card("", "5 · Learning, with its testing, can cost more than the mistakes it removes", [
      "To trust a change, it must be re-run on many reports, and those runs cost money",
-     "Without learning, the agent simply pays for its rework on each report",
      "Learning pays off only after enough reports: the break-even " + tex("n^{*}", 11) + " of page 1"],
      works(("SICA", "sica"), ("ADAS", "adas"), ("GEA", "gea")))}
 </div></div>""",
