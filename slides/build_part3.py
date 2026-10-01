@@ -444,6 +444,63 @@ slide("s03b", "Five difficulties, explained (version B)",
 </div></div>""",
   chip=("#ad", "Appendix D"))
 
+def steps_fig():
+    """Difficulty 1 as two timelines: WebCoach, 10.7 steps in 215 s against 10.2 steps in 395 s (time per step calc.)."""
+    W0, sc = 56, 0.55            # left margin for row labels; px per second
+    def row(y, n, sec, extra, label, right):
+        out = f'<text x="0" y="{y+13}" style="font:10.5px \'IBM Plex Mono\',monospace;fill:var(--mute)">{label}</text>'
+        per = sec / n
+        x = W0
+        full, frac = int(n), n - int(n)
+        for k in range(full + (1 if frac > 0.05 else 0)):
+            f = 1 if k < full else frac
+            wb = (per - extra) * sc * f; we = extra * sc * f
+            out += f'<rect x="{x:.1f}" y="{y}" width="{max(wb-1.5,1):.1f}" height="18" rx="2" style="fill:#c9d5df"/>'
+            if extra:
+                out += f'<rect x="{x+wb-1.5:.1f}" y="{y}" width="{max(we-1.5,1):.1f}" height="18" rx="2" style="fill:#f2c79a"/>'
+            x += (wb + we)
+        out += f'<text x="{x+8:.1f}" y="{y+13}" style="font:12px \'IBM Plex Sans\',sans-serif;fill:var(--ink)">{right}</text>'
+        return out
+    sv = '<svg width="400" height="96" viewBox="0 0 400 96" style="width:100%;height:auto;display:block">'
+    sv += row(4, 10.7, 215, 0, "BEFORE", "<tspan font-weight=\'700\'>10.7</tspan> steps · 215 s")
+    sv += row(34, 10.2, 395, 395/10.2 - 215/10.7, "AFTER", "<tspan font-weight=\'700\'>10.2</tspan> steps · 395 s")
+    sv += '<rect x="56" y="68" width="12" height="9" rx="2" style="fill:#c9d5df"/><text x="72" y="76" style="font:10.5px \'IBM Plex Sans\',sans-serif;fill:var(--ink2)">one step</text>'
+    sv += '<rect x="132" y="68" width="12" height="9" rx="2" style="fill:#f2c79a"/><text x="148" y="76" style="font:10.5px \'IBM Plex Sans\',sans-serif;fill:var(--ink2)">extra reading and thinking in each step</text>'
+    sv += '<text x="56" y="92" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--mute)">length = seconds per task · per step 20.1 → 38.7 s (calc.)</text>'
+    return sv + '</svg>'
+
+slide("s03c", "Five difficulties, with a diagram for the first (version C)",
+  body=f"""<div class="tightcards">
+<div class="lbl" style="text-align:center">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
+<div class="cards3" style="flex:none">
+  {card("", "1 · Fewer steps do not always save time", steps_fig() + '<div class="cd" style="margin-top:4px">Each step got longer: judge a report by its seconds, not its steps</div>',
+     works(("WebCoach", "webcoach"), ("ReasoningBank", "reasoningbank"), ("GenericAgent", "genericagent")))}
+  {card("", "2 · What can be skipped is known only after a run has succeeded", [
+     "Before the first hotel report goes through, the agent cannot tell the rework from the necessary steps",
+     "Savings start once a successful run is stored, and storing it costs a full first pass",
+     "A kind of report never seen before still starts from scratch"],
+     works(("EchoPath", "echopath"), ("MobileGPT", "mobilegpt"), ("ActionEngine", "actionengine")))}
+  {card("", "3 · What was learned must help on new tasks and be cheap to read", [
+     "A note learned on hotel reports may not help with meal or travel reports",
+     "Every note in the prompt is read again on every call; too many notes cost more than they save",
+     "A misleading note can even lower the success rate"],
+     works(("skill and memory modules", "hajimiri"), ("ClawTrace", "clawtrace"), ("SEDM", "sedm")))}
+</div>
+<div class="lbl" style="text-align:center;margin-top:6px">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
+<div class="two" style="flex:none">
+  {card("", "4 · Finding the right change from a failure is costly, and not guaranteed", [
+     "The run record shows that a report was rejected, not whether the prompt, a skill or a check should change",
+     "Diagnosing, writing a change and re-running tasks all cost model calls",
+     "The change found can be wrong, fix only some failures, or break other tasks"],
+     works(("HarnessFix", "harnessfix"), ("ESPO", "espo"), ("DRAFT", "draft")))}
+  {card("", "5 · Learning, with its testing, can cost more than the mistakes it removes", [
+     "To trust a change, it must be re-run on many reports, and those runs cost money",
+     "Without learning, the agent simply pays for its rework on each report",
+     "Learning pays off only after enough reports: the break-even " + tex("n^{*}", 11) + " of page 1"],
+     works(("SICA", "sica"), ("ADAS", "adas"), ("GEA", "gea")))}
+</div></div>""",
+  chip=("#ad", "Appendix D"))
+
 # =====================================================================
 # II · How far existing work has got
 # =====================================================================
