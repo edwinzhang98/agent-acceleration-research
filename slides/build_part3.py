@@ -482,28 +482,30 @@ def _lbl(x, y, t, anchor="start", size=10.5, mono=True, col="var(--mute)", bold=
     return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{t}</text>'
 
 def blocks_fig():
-    """Difficulty 2: time per report over a sequence of reports (schematic). The first report of a kind is explored
-    and its path stored; later reports of that kind replay it; a new kind is explored again."""
-    G, O = "#c9d5df", "#f2c79a"
-    need, search = [26, 24, 25, 24, 26, 27, 25, 24, 26, 25], [44, 0, 0, 0, 0, 46, 0, 0, 0, 0]
-    base, x0, bw, gap = 80, 34, 24, 9
-    xs = [x0 + k * (bw + gap) for k in range(10)]
-    sv = '<svg width="400" height="106" viewBox="0 0 400 106" style="width:100%;height:auto;display:block">'
-    sv += f'<path d="M{x0-6} {base} H{xs[-1] + bw + 4}" style="stroke:#9fb3c0"/>'
-    sv += f'<text transform="translate(12 {base - 34}) rotate(-90)" text-anchor="middle" style="font:9.5px \'IBM Plex Mono\',monospace;fill:var(--mute)">time per report</text>'
-    for k in range(10):
-        sv += f'<rect x="{xs[k]}" y="{base - need[k]}" width="{bw}" height="{need[k]}" rx="2" style="fill:{G}"/>'
-        if search[k]:
-            sv += f'<rect x="{xs[k]}" y="{base - need[k] - search[k] - 1}" width="{bw}" height="{search[k]}" rx="2" style="fill:{O}"/>'
-        sv += _lbl(xs[k] + bw/2, base + 11, str(k + 1), anchor="middle", size=9.5)
-    sv += _lbl(xs[0] + bw + 6, 16, "explore, then store the path", mono=False, size=10.5, col="var(--ink)")
-    sv += _lbl(xs[5] + bw + 6, 16, "a new kind: explore again", mono=False, size=10.5, col="var(--ink)")
-    yb = base - 33
-    sv += f'<path d="M{xs[1]} {yb+4} V{yb} H{xs[4] + bw} V{yb+4}" style="stroke:#7d8a96;fill:none"/>'
-    sv += _lbl((xs[1] + xs[4] + bw) / 2, yb - 4, "replay the stored path", anchor="middle", mono=False, size=10.5, col="var(--ink)")
-    sv += _lbl(x0, base + 24, "report", size=9.5)
-    sv += f'<rect x="{x0 + 52}" y="{base + 16}" width="12" height="9" rx="2" style="fill:{G}"/>' + _lbl(x0 + 68, base + 24, "needed steps", mono=False, col="var(--ink2)")
-    sv += f'<rect x="{x0 + 152}" y="{base + 16}" width="12" height="9" rx="2" style="fill:{O}"/>' + _lbl(x0 + 168, base + 24, "search and rework", mono=False, col="var(--ink2)")
+    """Difficulty 2 (schematic): during the first run the steps cannot be told apart; once it succeeds, looking back
+    shows which were needed and which were search or rework; the next report of that kind skips the latter."""
+    G, O, U = "#c9d5df", "#f2c79a", "#eef2f5"
+    pat = "goggoogog"
+    x0, bw, gap = 112, 20, 4
+    def row(y, label, kind):
+        out = _lbl(0, y + 13, label, size=9.5)
+        x = x0
+        for ch in pat:
+            if kind == "next" and ch == "o":
+                continue
+            fill = U if kind == "first" else (G if ch == "g" else O)
+            out += f'<rect x="{x}" y="{y}" width="{bw}" height="18" rx="2" style="fill:{fill};stroke:{"#c9d5df" if kind == "first" else "none"}"/>'
+            if kind == "first":
+                out += _lbl(x + bw/2, y + 13, "?", anchor="middle", mono=False, size=11, col="var(--mute)")
+            x += bw + gap
+        out += _lbl(x + 2, y + 13, "✓", mono=False, size=13, col="var(--accent)", bold=True)
+        return out
+    sv = '<svg width="400" height="100" viewBox="0 0 400 100" style="width:100%;height:auto;display:block">'
+    sv += row(2, "FIRST RUN", "first")
+    sv += row(28, "LOOKING BACK", "back")
+    sv += row(54, "NEXT REPORT", "next")
+    sv += f'<rect x="{x0}" y="84" width="12" height="9" rx="2" style="fill:{G}"/>' + _lbl(x0 + 16, 92, "needed", mono=False, col="var(--ink2)")
+    sv += f'<rect x="{x0 + 70}" y="84" width="12" height="9" rx="2" style="fill:{O}"/>' + _lbl(x0 + 86, 92, "search or rework, skipped next time", mono=False, col="var(--ink2)")
     return sv + '</svg>'
 
 def reading_fig():
@@ -524,7 +526,7 @@ slide("s03c", "Five difficulties (version C: diagrams for 1–3)",
 <div class="cards3" style="flex:none">
   {card("", "1 · Fewer steps do not always save time", steps_fig() + '<div class="cd" style="margin-top:4px">Each step got longer: judge a report by its seconds, not its steps</div>',
      drawn("WebCoach", "webcoach", [("ReasoningBank", "reasoningbank", "fewer steps, more tokens"), ("GenericAgent", "genericagent", "fewer tokens, more time")]))}
-  {card("", "2 · What can be skipped is known only after a run has succeeded", blocks_fig() + '<div class="cd" style="margin-top:4px">Savings start only after one report of a kind has gone through</div>',
+  {card("", "2 · What can be skipped is known only after a run has succeeded", blocks_fig() + '<div class="cd" style="margin-top:4px">Only a run that succeeded shows which steps were needed</div>',
      seen([("EchoPath", "echopath", "replays only solved tasks"), ("MobileGPT", "mobilegpt", "saves after exploring"), ("ActionEngine", "actionengine", "needs a warm-up")]))}
   {card("", "3 · What was learned must help on new tasks and be cheap to read", reading_fig() + '<div class="cd" style="margin-top:4px">Notes are re-read on every call; they must pay off on new reports</div>',
      drawn("SEDM", "sedm", [("skill and memory modules", "hajimiri", "plain agent did best"), ("ClawTrace", "clawtrace", "no saving after a move")]))}
