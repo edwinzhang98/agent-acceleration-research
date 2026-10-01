@@ -565,30 +565,31 @@ def tradeoff_fig():
     return sv + '</svg>'
 
 def cause_fig():
-    """Difficulty 4 (schematic): one error message, several possible causes checked one by one; the cost of checking grows."""
-    sv = f'<svg width="600" height="96" viewBox="0 0 600 96" style="width:100%;height:auto;display:block">{DEFS_}'
-    sv += _box(0, 22, 112, 34, ["Error: over the", "meal limit"], "o", size=10.5)
-    sv += _lbl(132, 12, "possible causes, checked one by one", size=9.5, col="var(--ink2)")
-    causes = ["wrong type?", "typo in amount?", "limit changed?", "wrong currency?"]
+    """Difficulty 4 (schematic): one error message, possible causes of different kinds checked one by one; the cost of checking grows."""
+    sv = f'<svg width="600" height="100" viewBox="0 0 600 100" style="width:100%;height:auto;display:block">{DEFS_}'
+    sv += _box(0, 18, 112, 34, ["Error: over the", "meal limit"], "o", size=10.5)
+    sv += _lbl(132, 10, "possible causes, of different kinds, checked one by one", size=9.5, col="var(--ink2)")
+    causes = [("reasoning", "wrong type?"), ("rule", "limit changed?"), ("interaction", "wrong field?"), ("tool", "amount misread?")]
     W, GAP, X0 = 100, 8, 132
-    sv += _arr(f"M112 39 H{X0 - 3}")
-    for k, t in enumerate(causes):
+    sv += _arr(f"M112 35 H{X0 - 3}")
+    for k, (kind, q) in enumerate(causes):
         x = X0 + k * (W + GAP)
-        sv += _box(x, 20, W, 24, [t], "g", size=10)
-        h = 8 * (k + 1)
-        sv += f'<rect x="{x}" y="{80 - h}" width="{W}" height="{h}" rx="2" style="fill:#f2c79a"/>'
+        sv += f'<rect x="{x}" y="18" width="{W}" height="34" rx="3" style="fill:#fff;stroke:#c9d5df"/>'
+        sv += _lbl(x + 6, 31, kind, size=9, col="var(--accent)") + _lbl(x + 6, 45, q, mono=False, size=10.5, col="var(--ink)")
+        h = 6 * (k + 1)
+        sv += f'<rect x="{x}" y="{86 - h}" width="{W}" height="{h}" rx="2" style="fill:#f2c79a"/>'
         if k < len(causes) - 1:
-            sv += _arr(f"M{x + W} 32 H{x + W + GAP - 1}")
+            sv += _arr(f"M{x + W} 35 H{x + W + GAP - 1}")
     xe = X0 + 4 * (W + GAP)
-    sv += _lbl(xe + 2, 37, "…?", mono=False, size=13, col="var(--mute)", bold=True)
-    sv += _lbl(X0, 92, "cost of checking so far →", size=9, col="var(--warn)")
+    sv += _lbl(xe + 2, 40, "…?", mono=False, size=13, col="var(--mute)", bold=True)
+    sv += _lbl(X0, 97, "cost of checking so far →", size=9, col="var(--warn)")
     sv += _lbl(0, 76, "the cause may be found", mono=False, size=10, col="var(--ink2)") + _lbl(0, 89, "late, or not at all", mono=False, size=10, col="var(--ink2)")
-    sv += '<text x="598" y="10" text-anchor="end" style="font:9px \'IBM Plex Mono\',monospace;fill:var(--accent)">schematic</text>'
+    sv += _lbl(598, 10, "schematic", anchor="end", size=9, col="var(--accent)")
     return sv + '</svg>'
 
 def breakeven_fig():
     """Difficulty 5 (schematic): total cost over reports, without learning, and with learning, testing and upkeep after changes."""
-    sv = f'<svg width="600" height="110" viewBox="0 0 600 110" style="width:100%;height:auto;display:block">{DEFS_}'
+    sv = f'<svg width="600" height="120" viewBox="0 0 600 120" style="width:100%;height:auto;display:block">{DEFS_}'
     x0, y0, x1, y1 = 40, 92, 596, 4
     sv += _arr(f"M{x0} {y0} H{x1}") + _arr(f"M{x0} {y0} V{y1}")
     sv += _lbl(x1, y0 + 13, "number of reports filed →", anchor="end", size=9.5, col="var(--ink2)")
@@ -614,12 +615,12 @@ def breakeven_fig():
     sv += f'<path d="M{x0} {y0} L500 {nl(500):.1f}" style="stroke:#7d8a96;stroke-width:2;fill:none"/>' + _lbl(506, 11, "no learning", mono=False, size=10.5, col="var(--ink)")
     sv += f'<path d="{path(66)}" style="stroke:{A_};stroke-width:2;fill:none"/>' + _lbl(506, 38, "with learning", mono=False, size=10.5, col="var(--accent)")
     sv += f'<path d="{path(50)}" style="stroke:{A_};stroke-width:1.5;stroke-dasharray:5 4;fill:none"/>' + _lbl(506, 24, "more testing", mono=False, size=10, col="var(--accent)")
-    sv += _lbl(296, learn(300, 66) + 14, "upkeep after a change", mono=False, size=9.5, col="var(--ink2)")
+    sv += _lbl(296, learn(300, 66) + 14, "repair after the site changes", mono=False, size=9.5, col="var(--ink2)")
     c1, c2 = cross(66), cross(50)
     if c1:
-        sv += f'<circle cx="{c1[0]:.0f}" cy="{c1[1]:.0f}" r="4" style="fill:{A_}"/><path d="M{c1[0]:.0f} {c1[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c1[0], y0 + 13, "n*", anchor="middle", mono=False, size=11, col="var(--accent)", bold=True)
+        sv += f'<circle cx="{c1[0]:.0f}" cy="{c1[1]:.0f}" r="4" style="fill:{A_}"/><path d="M{c1[0]:.0f} {c1[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c1[0], y0 + 13, "break-even", anchor="middle", mono=False, size=10, col="var(--accent)") + _lbl(c1[0], y0 + 25, "n*", anchor="middle", mono=False, size=11, col="var(--accent)", bold=True)
     if c2:
-        sv += f'<circle cx="{c2[0]:.0f}" cy="{c2[1]:.0f}" r="3.5" style="fill:#fff;stroke:{A_}"/><path d="M{c2[0]:.0f} {c2[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c2[0], y0 + 13, "later", anchor="middle", mono=False, size=10, col="var(--accent)")
+        sv += f'<circle cx="{c2[0]:.0f}" cy="{c2[1]:.0f}" r="3.5" style="fill:#fff;stroke:{A_}"/><path d="M{c2[0]:.0f} {c2[1]:.0f} V{y0}" style="stroke:{A_};stroke-dasharray:2 3"/>' + _lbl(c2[0], y0 + 13, "break-even,", anchor="middle", mono=False, size=10, col="var(--accent)") + _lbl(c2[0], y0 + 25, "more testing", anchor="middle", mono=False, size=10, col="var(--accent)")
     sv += _lbl(52, 12, "learning and testing are paid first", mono=False, size=10, col="var(--ink2)") + _arr("M60 16 L44 62")
     return sv + '</svg>'
 
@@ -637,8 +638,8 @@ slide("s03c", "Five difficulties (version C: diagrams)",
 <div class="lbl" style="text-align:center;margin-top:6px">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
 <div class="two" style="flex:none">
   {card("", "4 · Finding the cause behind an error message", cause_fig() + '<div class="cd" style="margin-top:2px">Each possible cause costs a check; the right one may come late, or never</div>',
-     seen([("HarnessFix", "harnessfix", "locates the faulty step and code"), ("ESPO", "espo", "sorts errors before rewriting")]))}
-  {card("", "5 · Testing a change costs money, and can cost more than it saves", breakeven_fig() + '<div class="cd" style="margin-top:2px">Stop before the break-even, and learning cost more than it saved</div>',
+     seen([("HarnessFix", "harnessfix", "finds the faulty step"), ("ESPO", "espo", "sorts errors first")]))}
+  {card("", "5 · Testing a change costs money, and can cost more than it saves", breakeven_fig() + '<div class="cd" style="margin-top:2px">If fewer than ' + tex("n^{*}", 11) + ' reports come, learning costs more than it saves</div>',
      seen([("AI Agents That Matter", "ref-ai-agents-that-matter", "late break-even"), ("SICA", "sica", "large bill, small saving")]))}
 </div></div>""",
   chip=("#ad", "Appendix D"))
