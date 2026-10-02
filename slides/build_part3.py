@@ -207,6 +207,7 @@ EXTRA_CSS = r"""
 .tbl.p3t a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px}
 .tbl.p3a{font-size:10px;line-height:1.3}.tbl.p3a td{padding:3px 6px 3px 4px}
 .tbl.p3a td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:10px;color:var(--ink)}
+.tbl.p3a.xs td{font-size:9px;line-height:1.25;padding:1.5px 5px 1.5px 3px}.tbl.p3a.xs td:first-child{font-size:9px}.tbl.p3a.xs .pill{font-size:8.5px;padding:0 5px}.tbl.p3a.xs .xid{font-size:9px}
 .refs3{columns:2;column-gap:26px;font-size:9.6px;line-height:1.32;color:var(--ink2);padding-left:0;list-style:none;margin:0}
 .refs3 li{break-inside:avoid;margin:0 0 4px}
 .refs3 a{color:var(--accent);text-decoration:none}
@@ -703,6 +704,13 @@ _LED = next(l for l in _xread("LEDGER.md").splitlines() if l.startswith("| `LOD-
 LED_PASS = re.search(r"\| (\d+/\d+) \|", _LED).group(1)
 FOLIO = next(x for x in XA["expenses"] if x["situation"] == "LOD-FOLIO-PERSONAL")
 APPB_USERS = [s["id"] for s in XF["appendix"] if "APPB-PERSONAL" in s["provisions"]]
+# Pass counts by handling: every time a travel situation was scored in a valid trip-run (the ledger of 2026-09-20; calc.)
+LPASS = {}
+for _m in (re.match(r"\| `([^`]+)`.*?\| (\d+)/(\d+) \|", l) for l in _xread("LEDGER.md").splitlines() if l.startswith("| `")):
+    if _m and _m.group(1) in XSIT:
+        _a = LPASS.setdefault(XSIT[_m.group(1)]["judgment"], [0, 0]); _a[0] += int(_m.group(2)); _a[1] += int(_m.group(3))
+def lpct(j):
+    return round(100 * LPASS[j][0] / LPASS[j][1])
 
 EXTRA_CSS += r"""
 .dshot{display:block;max-width:100%;border:1px solid var(--rule);border-radius:3px;background:#fff}
@@ -827,19 +835,20 @@ def xhand(j, defn, img, img_style, ex):
     return (f'<div class="xbox" style="display:flex;flex-direction:column;gap:6px">'
             f'<div>{hp(j)} <b style="font-size:15px">{JUDG[j]}</b> <span class="xnote">situations</span></div>'
             f'<div>{defn}</div><div style="flex:1;min-height:0;display:flex;align-items:flex-start;justify-content:center">{ximg(img, img_style)}</div>'
-            f'<div class="xnote">{ex}</div></div>')
+            f'<div class="xnote">{ex}</div>'
+            f'<div style="border-top:1px dashed var(--rule);padding-top:4px;font-size:11px">passed <b>{LPASS[j][0]} of {LPASS[j][1]}</b> tests ({lpct(j)}%)</div></div>')
 slide("x04", "Five ways a document can be handled", deck="v2",
-  callout=f"<p><b>Every situation has one correct handling; {N_SIT - JUDG['none']} of the {N_SIT} ask for more than copying the receipt onto an expense line, and these judgment calls are where an agent goes wrong.</b></p>",
+  callout=f"<p><b>Every situation has one correct handling; {N_SIT - JUDG['none']} of the {N_SIT} ask for more than copying the receipt, and those are where the agent fails: a situation needing a flag passed {lpct('flag')}% of its tests, plain filing {lpct('none')}%.</b></p>",
   body=f"""<div class="xgrid" style="grid-template-columns:repeat(5,1fr);flex:1">
   {xhand("none", "one expense line, as the receipt reads", "united.png", "width:100%", f'{xid("AIR-COACH-DIRECT")} a coach ticket bought from the airline → one airfare line')}
   {xhand("flag", "one line, and a note for a person to decide before the report is submitted", "reg-virtual.png", "width:100%", f'{xid("REG-VIRTUAL")} an online-only conference → a registration line, flagged')}
-  {xhand("split", "one receipt becomes two lines, on two accounts", "purple-pig.png", "max-height:205px;max-width:100%", f'{xid("MEAL-BUSINESS-ALCOHOL")} lunch with two cocktails → 94.07 business meal with the attendees, 41.84 to entertainment (52611), flagged')}
-  {xhand("exclude", "the allowable part is filed; the full total must not appear", "folio-chicago.png", "max-height:205px;max-width:100%", f'{xid("LOD-FOLIO-PERSONAL")} → 1,120.60 for room and tax, not the folio’s 1,182.59')}
+  {xhand("split", "one receipt becomes two lines, on two accounts", "purple-pig.png", "max-height:172px;max-width:100%", f'{xid("MEAL-BUSINESS-ALCOHOL")} lunch with two cocktails → 94.07 business meal with the attendees, 41.84 to entertainment (52611), flagged')}
+  {xhand("exclude", "the allowable part is filed; the full total must not appear", "folio-chicago.png", "max-height:172px;max-width:100%", f'{xid("LOD-FOLIO-PERSONAL")} → 1,120.60 for room and tax, not the folio’s 1,182.59')}
   {xhand("skip", "no line at all, and the reason is said", "jetblue.png", "width:100%", f'{xid("AIR-COMPANION")} the spouse’s ticket on the traveler’s booking → no line; the traveler’s own ticket is filed')}
 </div>
 <div class="xgrid" style="grid-template-columns:1fr 1fr">
   <div class="xbox"><div class="xk">a flag has a level · non-travel data</div><b>notice</b>: filed as it is, the reader is told something — supplies paid out of pocket, with GW’s preferred P-Card named ({xid("NC-SELF-PAID")})<br><b>needs review</b>: a person must decide — a computer under $5,000 bought by the traveler, filed under 52193, since GW IT orders computers</div>
-  <div class="xbox"><div class="xk">judgment call</div>a situation whose answer is more than copying the receipt: every handling except “file”, {N_SIT - JUDG['none']} of {N_SIT}. The answer key states the handling, so a score shows whether the agent judged right, not only whether it filled the form.</div>
+  <div class="xbox"><div class="xk">judgment call</div>a situation whose answer is more than copying the receipt: every handling except “file”, {N_SIT - JUDG['none']} of {N_SIT}. <span class="xnote">Tests: each time a travel situation was scored in a valid trip-run, from the situation ledger of 20 September (calc.); 8 of the 9 situations never passed need a flag.</span></div>
 </div>""", chip=("#e2", "Appendix E2"), page_refs=False)
 
 # ---------------------------------------------------------------- D5 · families
@@ -1600,6 +1609,127 @@ for cat, title, aid in CLASS[:8]:
 CLOSEST = [80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 14, 32, 35, 36, 19, 42, 68, 28]
 apx_pages("a10", "The works closest to ours", [i for i in CLOSEST if i < len(J)])
 apx_pages("ad", "Evidence behind the five difficulties", [31, 32, 42, 90, 35, 80, 94, 95, 28, 84, 96, 12, 67, 55, 65], lab="D")
+
+# =====================================================================
+# Part 3 short deck · Appendix E: the data module in full (part3-v2 only), from the same ExpenseAI snapshot
+# =====================================================================
+def xpages(aid, lab, title, header, rows, widths, budget, note="", cls="tbl p3a", per=None):
+    """Paginate a table by the length of its text, or by a fixed number of rows (per); every page repeats the header."""
+    pages, cur, size = [], [], 0
+    for r in rows:
+        n = sum(len(re.sub(r"<[^>]+>", "", str(c))) for c in r) + 30
+        if cur and (len(cur) >= per if per else size + n > budget):
+            pages.append(cur); cur, size = [], 0
+        cur.append(r); size += n
+    if cur:
+        pages.append(cur)
+    for k, p in enumerate(pages):
+        many = len(pages) > 1
+        slide(aid if k == 0 else f"{aid}-{k + 1}", f"{lab} · {title}" + (f" ({k + 1}/{len(pages)})" if many else ""),
+              label=f"{lab} · {k + 1}/{len(pages)}" if many else lab, kind="appendix", chip=("#back", "← back"), deck="v2",
+              body=table(header, p, widths, cls=cls) + (f'<div class="figcap">{note}</div>' if note else ""))
+
+_USES = {}
+for _s in XF["appendix"]:
+    for _p in _s["provisions"]:
+        _USES[_p] = _USES.get(_p, 0) + 1
+xpages("e1", "E1", "The 160 provisions", ["provision", "page or source", "the rule, as recorded", "can an agent act on it?", "situations"],
+       [[xid(p["id"]), esc(p["page"]), esc(p["text"]), "yes" if p["actionable"] else "no: " + esc(p["why_not"]), str(_USES.get(p["id"], 0))]
+        for p in XP["provisions"]],
+       ["14%", "16%", "48%", "15%", "7%"], 3000,
+       note=f"Travel provisions first ({_PV['travel']['total']}, from the manual, rev. 2024-02-21), then those for expenses outside travel ({_PV['non_travel']['total']}). Situations: how many situations cite the provision. Source: ExpenseAI benchmark/pool/coverage.py and coverage_newcats.py.")
+
+_BASIS = {"policy": "manual", "user decision": "decision", "search": "looked up", "experience": "experience", "real receipt": "receipt"}
+def _scope(sc):
+    return "; ".join(x.replace("city=", "").replace("persona=", "").replace("funding=", "").replace("_", " ") for x in sc.split("; ")) if sc else "any"
+xpages("e2", "E2", "The 267 situations", ["situation", "the document and its circumstance", "family", "handling", "form work", "conditions", "basis", "trips"],
+       [[xid(s["id"]), esc(s["title"]), s["family"].replace("_", " "), hp(s["judgment"]), s["difficulty"], esc(_scope(s["scope"])),
+         ", ".join(_BASIS.get(b, b) for b in s["basis_kinds"]), " ".join(s["trips"]) or "—"] for s in XF["appendix"]],
+       ["18%", "34%", "8%", "9%", "6%", "12%", "9%", "4%"], 0, per=20, cls="tbl p3a xs",
+       note=f"Travel first ({N_TRAV}), then the others ({N_NON}), by family. Trips: the trips that use the situation. Source: ExpenseAI facts of 2026-09-22.")
+
+_LATEST = XF["records"]["latest_score_per_trip"]
+xpages("e3", "E3", "The 23 trips", ["trip", "report name", "traveler", "funding", "cities", "days", "documents", "lines", "not filed", "flags", "latest score"],
+       [[f'<b>{t["letter"]}</b>', esc(t["report_name"]), t["persona"].replace("_", " "), t["funding"], esc((t["city"] or "no travel") + (" + " + t["foreign_city"] if t["foreign_city"] else "")),
+         str(t["days"] or "—"), str(t["files_total"]), str(t["expected_lines"]) + (f' + {t["per_diem_days"]} per-diem days' if t["per_diem_days"] else ""),
+         str(t["skips"]), str(t["flags"]), f'{_LATEST[t["folder"]]["overall_pct"]}%' if _LATEST.get(t["folder"], {}).get("overall_pct") is not None else "—"]
+        for t in XF["trips"]["per_trip"]],
+       ["4%", "24%", "10%", "9%", "17%", "5%", "7%", "10%", "6%", "5%", "8%"], 6000, cls="tbl p3a xs",
+       note="Documents: the files the agent sees, the trip notes included. Lines: the expense lines the answer key expects. Latest score: the last valid batch of each trip, checks passed ÷ checks. Source: ExpenseAI facts of 2026-09-22.")
+
+_TERMS = [
+    ("policy", "the rules the reports must follow: GW’s travel and business expense manual, GW web pages and federal rules", "manual App. B p.30–31"),
+    ("provision", "one rule of the policy, recorded with its page or link; actionable if it decides how a document is filed", "APPB-PERSONAL"),
+    ("situation", "one case the policy decides, apart from any trip: a kind of document, its conditions, the correct handling and its basis", "LOD-FOLIO-PERSONAL"),
+    ("conditions (scope)", "where a situation applies: the kind of city, the traveler, the funding", "LOD-FOLIO-INTERNET-GRANT: on a federal grant"),
+    ("family", "the kind of expense a situation is about; 10 in travel, 11 outside it", "lodging"),
+    ("handling", "what must become of a document: file · file + flag · separate out · file part · not filed", "file part"),
+    ("judgment call", "a situation whose answer is more than copying the receipt", "MEAL-BUSINESS-ALCOHOL"),
+    ("form work (difficulty)", "how much filling the correct entry takes: simple or complex", "complex: the nightly itemization"),
+    ("trap", "a deliberate contradiction or duplicate among the documents", "AIR-WIFI-OTHER-CARRIER"),
+    ("basis", "what an answer rests on: the manual or a GW rule, our decision, a source we looked up, experience, one of our receipts", "AIR-COMPANION: manual p.25"),
+    ("instance", "one generated copy of a situation: one to three documents and their answer key", "Hyatt Regency Chicago folio"),
+    ("answer key", "what a correct report contains: lines, flags, documents left out, totals that must not appear, summary mentions", "amount 1120.60; unreduced total 1182.59"),
+    ("expense line", "one entry of a Concur report: account, amount, date, vendor, currency and the fields its account requires", "53104 US lodging, 1,120.60"),
+    ("flag", "a note the agent leaves for a person to decide before submitting; in non-travel data either a notice or needs review", "the alcohol split of a business lunch"),
+    ("itemization", "a lodging line broken down night by night, room rate and tax", "four nights, 08-10 to 08-13"),
+    ("not in Concur", "a real expense that goes through another channel, so it is not filed", "a $6,450 workstation: fixed assets"),
+    ("per diem", "on a foreign leg, meals paid as a daily allowance instead of from receipts", "trip E, London"),
+    ("trip", "a traveler’s story and its situations in one folder: one Concur report", "trip A, MOSS 2026 Chicago"),
+    ("trip notes", "the traveler’s own notes in the folder: purpose, dates, funding, remarks and attendees", "trip_notes.txt"),
+    ("turn", "one instruction to the agent with a few of the trip’s documents; a trip takes two to six", "turn 2: the folio and the confirmation"),
+    ("run", "one turn’s execution, recorded step by step: page seen, decision, actions, screenshot", "trip A: 4 runs, 212 steps"),
+    ("export", "the report read back from Concur after a run", "actual.json"),
+    ("score", "checks passed ÷ checks in the answer key, reported by dimension", "trip A: 84 of 87, 96.6%"),
+    ("ledger", "each situation’s record across batches: tested how often, passed how often", "LOD-FOLIO-PERSONAL: 3/3"),
+]
+xpages("e4", "E4", "Terms", ["term", "meaning", "example"], [[f"<b>{a}</b>", esc(b), esc(c)] for a, b, c in _TERMS],
+       ["16%", "58%", "26%"], 4200)
+
+xpages("e5", "E5", "The policy’s sources", ["source", "what it is", "link"],
+       [[xid("manual"), "GW Travel, Entertainment and Business Expense Reimbursement Manual, rev. 2024-02-21: the page numbers on the data pages", "ibuy.gwu.edu"]]
+       + [[xid(s["id"]), esc(s["title"]), f'<a href="{esc(s["url"])}">{esc(s["url"].split("//")[1][:60])}</a>'] for s in XP["sources"]],
+       ["17%", "53%", "30%"], 3700,
+       note=f"The manual, and the {len(XP['sources'])} web sources registered for the expenses outside travel. Source: ExpenseAI benchmark/pool/coverage_newcats.py.")
+
+_amt = lambda x: x.get("amount", "") or ""
+_e6 = [[esc(x["receipt"]), esc(x["expense_type"]), _amt(x) + (f' <span class="xnote">not {x["unreduced_total"]}</span>' if x.get("unreduced_total") else ""),
+        xid(x["situation"]), hp(XSIT[x["situation"]]["judgment"]) if x["situation"] in XSIT else ""] for x in XA["expenses"]]
+xpages("e6", "E6", "Trip A’s answer key: the expected lines", ["document", "account", "amount", "situation", "handling"], _e6,
+       ["31%", "29%", "13%", "17%", "10%"], 9000, cls="tbl p3a xs",
+       note=f"{len(XA['expenses'])} expected lines of trip A, MOSS 2026 Chicago (testing_cases/trip_a_chicago/expected.json).")
+slide("e6b", "E6 · Trip A’s answer key: documents left out, flags, and the score", label="E6 · leave out, flags, score", kind="appendix",
+      chip=("#back", "← back"), deck="v2",
+      body=f"""<div class="xgrid" style="grid-template-columns:1.1fr 1fr;flex:1">
+ <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+  {table(["document left out", "why", "situation"], [[esc(x["receipt"]), esc(x["reason"]), xid(x["situation"])] for x in XA["skip"]], ["37%", "41%", "22%"], cls="tbl p3a")}
+  {table(["flag required", "must mention one of", "why"], [[xid(x["situation"]), esc(", ".join(x["contains"])), esc(x["why"])] for x in XA["flags"]], ["27%", "25%", "48%"], cls="tbl p3a")}
+ </div>
+ <div style="min-width:0"><div class="xk">score.txt in full · batch 20260914-02</div><div class="dcode" style="font-size:8.6px;line-height:1.32">{esc(_SCORE.strip())}</div></div>
+</div>""")
+
+_NUMS = [
+    ("160 provisions; 149 actionable", "provisions.travel / non_travel: total, actionable", "facts.json"),
+    ("267 situations: 169 travel, 98 non-travel", "situations.totals", "facts.json"),
+    ("handling 71 · 97 · 6 · 15 · 78; 196 judgment calls", "situations.judgment.all (196 = 267 − 71, calc.)", "facts.json"),
+    ("form work: simple 204, complex 63", "situations.difficulty.all", "facts.json"),
+    ("21 families: 10 travel, 11 non-travel", "situations.families", "facts.json"),
+    ("conditions: city, traveler, funding counts", "situations.scope", "facts.json"),
+    ("traps 19", "situations.with_trap.all", "facts.json"),
+    ("basis: 228 · 104 · 73 · 64 · 19", "situations.basis_kinds.situations_with_kind.all", "facts.json"),
+    ("801 instances, 903 files, 31 layouts", "pool.travel / non_travel; pool.templates", "facts.json"),
+    ("12 cities, 6 airlines, 22 people, 11 conferences", "world", "facts.json"),
+    ("23 trips: 382 documents, 257 lines, 134 not filed, 192 flags", "trips.subtotals (all 23)", "facts.json"),
+    ("all 169 travel situations used; 94 of 98 others", "situations.trip_coverage", "facts.json"),
+    ("trip A: 84 of 87 checks, 96.6%", "the dimensions of score.txt, summed (calc.)", "trip_a/score.txt"),
+    ("trip A: 4 turns, 212 steps, $7.22, 24 minutes", "the four “turn N → done” lines of the batch log, summed (calc.)", "trip_a/log.txt"),
+    ("the folio’s line, nights and totals", "expenses[situation = LOD-FOLIO-PERSONAL]", "trip_a/expected.json"),
+    ("LOD-FOLIO-PERSONAL passed 3/3", "its row", "LEDGER.md"),
+    ("pass counts by handling: 243/253 · 84/134 · 7/10 · 33/39 · 115/126", "passed/tested of each travel situation, summed by its handling (calc.)", "LEDGER.md + facts.json"),
+]
+xpages("e7", "E7", "Where every number on the data pages comes from", ["number", "field or computation", "file"],
+       [[esc(a), esc(b), f'<span class="xid">{c}</span>'] for a, b, c in _NUMS], ["38%", "44%", "18%"], 5000, cls="tbl p3t",
+       note="Files in slides/part3-data/expenseai/, copied by snapshot.py from the ExpenseAI repository (commit ee98f59); facts.json is ExpenseAI’s facts file of 2026-09-22, made by its scripts/deck_facts.py.")
 
 # =====================================================================
 # References
