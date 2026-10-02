@@ -797,20 +797,52 @@ def prompt_paths_fig():
     keys = [(150, "k", "decides what is kept: only if it scores better"), (440, "o", "kept without a test"), (590, "g", "other steps")]
     return paths_fig(paths, segs, "THE PROMPT READ ON THE NEXT REPORT", keys, H=290, X=[150, 320, 490, 660], W=152, start_y=104, mid="pa")
 
-def memory_paths_fig():
-    """Experience memory: from earlier runs, four paths into a store that each new report searches."""
-    paths = [
-        ("1 · STORE ON A LABEL", "the model’s or the task’s label · no test · usually online", [["the model, or the task’s", "result, labels the run"], ["extract a workflow,", "a lesson or a case"], ["append it to the store"]], "ggo", 46, 46),
-        ("2 · KEEP ONLY WHAT SCORES BETTER", "re-runs · kept if better · before use", [["a candidate lesson"], ["re-run tasks with it", "and without it"], ["keep it if the gain beats", "its extra time and tokens"]], "ggk", 106, 76),
-        ("3 · CHECK THE CAUSE ON THE SITE", "the site’s answers · fact checked, effect untested", [["a failure, or waste", "in a successful run"], ["probe the site, read-only,", "to confirm the cause"], ["write, narrow or drop", "a fact or a trap"]], "ggo", 166, 119),
-        ("4 · REWARDS RANK THE ENTRIES", "the task’s reward · ranked by value · training runs, then frozen", [["entries retrieved for", "a training task"], ["the task’s reward updates", "each one’s value"], ["later: retrieve by", "similarity and value"]], "gkg", 226, 181),
-    ]
-    segs = [(22, 88, "workflows and lessons", "Hotel: type → dates → amount → submit", "“Fill the dates before submitting”", "#eef4f8"),
-            (88, 150, "site facts and traps", "“Dates are typed DD/MM/YYYY”", "“No dates: the form rejects it”", "#eef4f8"),
-            (150, 212, "a value on each entry", "up when the reports using it pass,", "down when they fail", "#eef4f8"),
-            (212, 272, "for each new report", "the relevant entries join its prompt,", "chosen by similarity, or also by value", "#f6f8fa")]
-    keys = [(150, "k", "decided by a measured score: re-runs or rewards"), (450, "o", "kept without a test"), (600, "g", "other steps")]
-    return paths_fig(paths, segs, "THE MEMORY STORE", keys, H=278, X=[150, 344, 538], W=176, start_y=99, mid="pm")
+def memory_check_fig():
+    """Experience memory as one pipeline: earlier runs -> extract an entry -> one of four checks -> the store -> the next report.
+    The works differ in the check; check 4 scores entries after use (the dashed loop back from the next report)."""
+    A, O, G, INK, SUB = "#0f5a85", "#b3600c", "#7d8a96", "#1b2733", "#3b4a57"
+    STY = {"g": ("#f6f8fa", "#c9d5df"), "k": ("#eef4f8", A), "o": ("#fbeede", "#e2b98b"), "w": ("#fff", A)}
+    H = 262
+    sv = (f'<svg width="1180" height="{H}" viewBox="0 0 1180 {H}" style="width:100%;height:auto;display:block">'
+          '<defs><marker id="pm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
+    def t(x, y, s_, size=11, col=INK, mono=False, anchor="start", bold=False):
+        f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
+        return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{s_}</text>'
+    def rect(x, y, w, h, kd, rx=3):
+        fill, stroke = STY[kd]
+        return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" style="fill:{fill};stroke:{stroke}"/>'
+    def arr(d, dash=False):
+        return f'<path d="{d}" style="stroke:#7d8a96;fill:none{";stroke-dasharray:4 3" if dash else ""}" marker-end="url(#pm)"/>'
+    sv += rect(0, 81, 112, 74, "w", 4) + t(11, 105, "earlier runs", 12.5, bold=True) + t(11, 122, "trajectories and", 10.5, SUB) + t(11, 136, "their outcomes", 10.5, SUB)
+    sv += arr("M112 118 H131")
+    sv += rect(134, 88, 170, 60, "g") + t(144, 111, "extract an entry", 12, bold=True) + t(144, 127, "a workflow, a lesson,", 10.5, SUB) + t(144, 141, "a case or a site fact", 10.5, SUB)
+    X0, W0, XS = 330, 360, 722
+    for yc, kd, lines, n in [
+            (34, "o", ["1 · no check: store it as it is"], "13 works"),
+            (90, "k", ["2 · re-run tasks with it and without it;", "keep it if the gain beats its time and tokens"], "3 works"),
+            (146, "k", ["3 · check it on the site, read-only;", "keep it only if the site confirms it"], "2 works"),
+            (202, "k", ["4 · keep it; each task that uses it later", "raises its score if it passes, lowers it if not"], "4 works")]:
+        sv += arr(f"M304 118 C318 118 318 {yc} {X0 - 3} {yc}")
+        sv += rect(X0, yc - 21, W0, 42, kd)
+        y0 = yc - (len(lines) - 1) * 7 + 4
+        for k, l in enumerate(lines):
+            sv += t(X0 + 8, y0 + k * 14, l, 11)
+        sv += t(X0 + W0 - 8, yc + 4, n, 9.5, G, mono=True, anchor="end")
+        sv += arr(f"M{X0 + W0} {yc} H{XS - 3}")
+    sv += rect(XS, 10, 262, 214, "k", 0)
+    sv += t(XS + 10, 28, "MEMORY · ONE ENTRY PER LINE", 9.5, A, mono=True) + t(XS + 252, 28, "score (4)", 9, G, mono=True, anchor="end")
+    rows = [("Hotel: type → dates → amount → submit", "0.9"), ("“Fill the dates before submitting”", "0.8"),
+            ("an accepted hotel report (a case)", "0.6"), ("“Dates are typed DD/MM/YYYY”", ""), ("“No dates: the form rejects it”", "")]
+    for k, (e, sc) in enumerate(rows):
+        y = 60 + k * 32
+        sv += f'<line x1="{XS}" y1="{y - 20}" x2="{XS + 262}" y2="{y - 20}" style="stroke:#c9d5df"/>'
+        sv += t(XS + 10, y, e, 10.5, SUB) + (t(XS + 252, y, sc, 10.5, A, mono=True, anchor="end") if sc else "")
+    sv += arr(f"M{XS + 262} 118 H1005")
+    sv += rect(1008, 80, 172, 76, "w", 4) + t(1018, 102, "next report", 12, bold=True) + t(1018, 119, "reads only the entries", 10.5, SUB) + t(1018, 133, "closest to it; with 4,", 10.5, SUB) + t(1018, 147, "the best-scored first", 10.5, SUB)
+    sv += arr("M1094 156 V244 H510 V227", dash=True) + t(XS + 10, 239, "4 · pass: score up · fail: score down", 9.5, A, mono=True)
+    sv += rect(0, H - 18, 14, 8, "o", 2) + t(20, H - 10, "stored without a check", 10, SUB)
+    sv += rect(170, H - 18, 14, 8, "k", 2) + t(190, H - 10, "checked", 10, SUB)
+    return sv + '</svg>'
 
 slide("s05p", "Learning prompts and context: three paths to the next prompt",
   callout="<p><b>All three paths start from earlier runs and end in the prompt read on the next report; they differ in which part of the prompt they write and whether a change is tested.</b></p>",
@@ -829,16 +861,16 @@ def wl(*pairs):
     """Works with their citations: 'AWM (Wang et al., 2025a) · ReasoningBank (…)'."""
     return " · ".join(f"{n} {cite(i)}" for n, i in pairs)
 
-slide("s05m", "Learning experience memory: four ways to judge what is stored",
-  callout="<p><b>Each path turns earlier runs into entries that later reports search; they differ in how an entry is judged, and most works store it without a test.</b></p>",
+slide("s05m", "Learning experience memory: four ways to check an entry",
+  callout="<p><b>All works share one pipeline, from earlier runs to entries that a new report reads; they differ in how an entry is checked, and most store it unchecked.</b></p>",
   body=f"""
-<div style="width:100%">{memory_paths_fig()}</div>
-<div class="figcap" style="margin:2px 0 4px">A label needs no re-run, so labelled entries can be added online, report by report; tests and rewards need many scored runs, so FORGE, MemRL and MemQ learn offline, then freeze.</div>
+<div style="width:100%">{memory_check_fig()}</div>
+<div class="figcap" style="margin:2px 0 4px">Unchecked entries need no extra runs, so they can be added online, report by report; re-runs and scores need many runs, so FORGE, MemRL and MemQ learn offline, then freeze.</div>
 {table(["path", "works"], [
-    ["1 · Store on a label", wl(("AWM", 14), ("ReasoningBank", 32), ("ExpeL", 15), ("CTIM-Rover", 23), ("Agent S", 29), ("EXG", 26), ("MobileGPT", 35), ("G-Memory", 22), ("DecentMem", 25), ("WebCoach", 31), ("ReAP", 33), ("Mem²Evolve", 20), ("Memento", 34))],
-    ["2 · Keep only what scores better", wl(("SEDM", 28), ("FORGE", 21), ("EvolveMem", 24))],
-    ["3 · Check the cause on the site", wl(("Metis", 19), ("Grounding Agent Memory", 93))],
-    ["4 · Rewards rank the entries", wl(("MemRL", 16), ("MemQ", 17), ("AEL", 18), ("Memento’s trained scorer", 34))],
+    ["1 · No check", wl(("AWM", 14), ("ReasoningBank", 32), ("ExpeL", 15), ("CTIM-Rover", 23), ("Agent S", 29), ("EXG", 26), ("MobileGPT", 35), ("G-Memory", 22), ("DecentMem", 25), ("WebCoach", 31), ("ReAP", 33), ("Mem²Evolve", 20), ("Memento", 34))],
+    ["2 · Re-run with and without", wl(("SEDM", 28), ("FORGE", 21), ("EvolveMem", 24))],
+    ["3 · Check on the site", wl(("Metis", 19), ("Grounding Agent Memory", 93))],
+    ["4 · Scored by later tasks", wl(("MemRL", 16), ("MemQ", 17), ("AEL", 18), ("Memento’s trained scorer", 34))],
     ["Other works of this class", wl(("ACE", 13), ("Dynamic Cheatsheet", 8)) + ": the previous page’s playbook · " + wl(("SE-Agent", 30), ("Meta-TTL", 27)) + ": one task only · " + citet(94) + ": a comparison with a plain agent"],
   ], ["17%", "83%"], cls="tbl p3t ptab")}""",
   chip=("#a03p", "Appendix A3"), page_refs=False)
@@ -1039,7 +1071,7 @@ def memory_paths_apx():
     W_ = lambda n, i, d: f"<b>{n}</b> {cite(i)}: {d}"
     slide("a03p", "A3 · Experience memory: what each work adds, by path", label="A3 · paths", kind="appendix", chip=("#back", "← back"),
       body=table(["path", "works, and what each adds"], [
-        ["1 · Store on a label", ul([
+        ["1 · No check", ul([
             W_("AWM", 14, "workflows induced from runs the model judged successful, appended and never re-ranked"),
             W_("ReasoningBank", 32, "lessons from failures as well as successes, judged by a model without answers and appended directly"),
             W_("ExpeL", 15, "successful runs, plus advice drawn from comparing successes and failures; the model edits and votes on the advice, and low-voted advice is deleted"),
@@ -1053,14 +1085,14 @@ def memory_paths_apx():
             W_("ReAP", 33, "a written reflection on every training run, retrieved by task similarity"),
             W_("Mem²Evolve", 20, "experience plus new tools and expert agents; tools are repaired with tests drawn from the model’s critique, the experience is not checked"),
             W_("Memento", 34, "a library of cases, appended and retrieved by similarity")])],
-        ["2 · Keep only what scores better", ul([
+        ["2 · Re-run with and without", ul([
             W_("SEDM", 28, "each candidate entry is replayed with and without it and admitted on the reward gain minus latency and token penalties; later down-weighted, merged or deleted by use"),
             W_("FORGE", 21, "several agents, each with its own memory of rules or examples; the best in a check episode copies its whole memory to the others; frozen at a threshold"),
             W_("EvolveMem", 24, "retrieval settings, answer style and re-extracted memory, changed from failure logs; large drops rolled back; the best round chosen on the same questions")])],
-        ["3 · Check the cause on the site", ul([
+        ["3 · Check on the site", ul([
             W_("Metis", 19, "after a failure the reflector probes the environment for the cause, after a success it looks for waste; facts and traps kept as text; recurring plans become code that must compile with its dependencies"),
             W_("Grounding Agent Memory", 93, "after each task, candidate entries are checked with targeted read-only queries; the queries and the final score decide to add, narrow, delete or skip")])],
-        ["4 · Rewards rank the entries", ul([
+        ["4 · Scored by later tasks", ul([
             W_("MemRL", 16, "the environment’s reward updates the value of each entry used; retrieval by similarity and value"),
             W_("MemQ", 17, "the benchmark’s binary reward is passed along where each entry came from; retrieval by similarity and value; nothing is deleted"),
             W_("AEL", 18, "learns from the environment’s reward how to choose what to retrieve, with reflection and rules; code changes off by default"),
