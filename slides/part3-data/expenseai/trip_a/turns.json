@@ -1,0 +1,52 @@
+[
+  {
+    "turn": 1,
+    "files": [
+      "American Airlines DCA-ORD receipt.pdf",
+      "American Airlines checked bag receipt.pdf",
+      "American Airlines seat assignment receipt.pdf",
+      "American Airlines ticket change receipt (later return).pdf",
+      "MOSS Association registration receipt (with membership).pdf",
+      "MOSS Association tutorial add-on receipt.pdf"
+    ],
+    "text": "REHEARSAL ON THE REAL CONCUR SITE — never submit, never use ready_to_submit; end every turn with `done`. Work only on the report named below. Read trip_notes.txt (and mileage_log.txt if present) first: they carry the purpose, the attendees, the remarks that decide several files. Apply the institution policy: file what it allows, leave out what it does not and say so, split what must be split, and `flag` every judgment call with its basis. Not every file is an expense. Attach each receipt to its line. Turn 1: create the expense report 'MOSS 2026 Chicago' — business purpose: Present a paper at MOSS 2026 (Midwest Optimization & Systems Symposium), Chicago IL, Aug 11–13 2026, and meet the symposium's benchmark working group; travel type Domestic; funding Non-Grant; Oracle Alias: pick any alias from the search as a PLACEHOLDER and flag it. Then add the lines for these files: American Airlines DCA-ORD receipt.pdf; American Airlines checked bag receipt.pdf; American Airlines seat assignment receipt.pdf; American Airlines ticket change receipt (later return).pdf; MOSS Association registration receipt (with membership).pdf; MOSS Association tutorial add-on receipt.pdf. Call done with a COMPACT summary (one line per line added, one line per open item; under 25 lines)."
+  },
+  {
+    "turn": 2,
+    "files": [
+      "Hyatt Regency Chicago folio.pdf",
+      "Hyatt Regency Chicago reservation confirmation.pdf"
+    ],
+    "text": "REHEARSAL ON THE REAL CONCUR SITE — never submit, never use ready_to_submit; end every turn with `done`. Work only on the report named below. Read trip_notes.txt (and mileage_log.txt if present) first: they carry the purpose, the attendees, the remarks that decide several files. Apply the institution policy: file what it allows, leave out what it does not and say so, split what must be split, and `flag` every judgment call with its basis. Not every file is an expense. Attach each receipt to its line. Turn 2: continue on the report 'MOSS 2026 Chicago'. Handle lodging (itemize every folio by night: room rate + tax per night; leave personal charges out) — the files: Hyatt Regency Chicago folio.pdf; Hyatt Regency Chicago reservation confirmation.pdf. Call done with a COMPACT summary (one line per line added, one line per open item; under 25 lines)."
+  },
+  {
+    "turn": 3,
+    "files": [
+      "Quartino Ristorante check.pdf",
+      "Quartino Ristorante check (2).pdf",
+      "RPM Steak dinner check.pdf",
+      "The Purple Pig business lunch check.pdf",
+      "Uber Eats Lou Malnati's Pizzeria.pdf",
+      "RPM Steak lunch check (large tip).pdf",
+      "Intelligentsia Coffee — Millennium Park coffee.pdf"
+    ],
+    "text": "REHEARSAL ON THE REAL CONCUR SITE — never submit, never use ready_to_submit; end every turn with `done`. Work only on the report named below. Read trip_notes.txt (and mileage_log.txt if present) first: they carry the purpose, the attendees, the remarks that decide several files. Apply the institution policy: file what it allows, leave out what it does not and say so, split what must be split, and `flag` every judgment call with its basis. Not every file is an expense. Attach each receipt to its line. Turn 3: continue on the report 'MOSS 2026 Chicago'. Handle meals (attendees from trip_notes.txt; alcohol split off to 52611; international days are per diem, not actual cost) — the files: Quartino Ristorante check.pdf; Quartino Ristorante check (2).pdf; RPM Steak dinner check.pdf; The Purple Pig business lunch check.pdf; Uber Eats Lou Malnati's Pizzeria.pdf; RPM Steak lunch check (large tip).pdf; Intelligentsia Coffee — Millennium Park coffee.pdf. Call done with a COMPACT summary (one line per line added, one line per open item; under 25 lines)."
+  },
+  {
+    "turn": 4,
+    "files": [
+      "Uber Aug 10 920 AM.pdf",
+      "Uber Aug 11 955 PM.pdf",
+      "Uber Aug 12 348 PM.pdf",
+      "Uber Aug 11 receipt.pdf",
+      "Uber Aug 11 UPDATED receipt.pdf",
+      "Flash Cab Company receipt.pdf",
+      "CTA fare receipt.pdf",
+      "Poster printing.pdf",
+      "Newsstand receipt.pdf",
+      "Golf with the collaborators.pdf",
+      "Conference program.pdf"
+    ],
+    "text": "REHEARSAL ON THE REAL CONCUR SITE — never submit, never use ready_to_submit; end every turn with `done`. Work only on the report named below. Read trip_notes.txt (and mileage_log.txt if present) first: they carry the purpose, the attendees, the remarks that decide several files. Apply the institution policy: file what it allows, leave out what it does not and say so, split what must be split, and `flag` every judgment call with its basis. Not every file is an expense. Attach each receipt to its line. Turn 4: continue on the report 'MOSS 2026 Chicago'. Handle ground transportation, mileage (from mileage_log.txt, if present), everything else, and the documents that are not receipts — the files: Uber Aug 10 920 AM.pdf; Uber Aug 11 955 PM.pdf; Uber Aug 12 348 PM.pdf; Uber Aug 11 receipt.pdf; Uber Aug 11 UPDATED receipt.pdf; Flash Cab Company receipt.pdf; CTA fare receipt.pdf; Poster printing.pdf; Newsstand receipt.pdf; Golf with the collaborators.pdf; Conference program.pdf. Then check that EVERY file in the folder has been either filed or deliberately left out, write the Report Header Comment (Report Details → Report Header → Comment → Save) listing every document left out and why in one clause each, report the report total, and call done with a COMPACT summary of this turn's lines and every open item (under 30 lines)."
+  }
+]

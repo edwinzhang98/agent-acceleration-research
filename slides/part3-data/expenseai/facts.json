@@ -1,0 +1,7838 @@
+{
+  "generated_by": "scripts/deck_facts.py",
+  "repo": "ExpenseAI",
+  "situations": {
+    "totals": {
+      "travel": 169,
+      "non_travel": 98,
+      "all": 267
+    },
+    "families": {
+      "travel": {
+        "ground": 42,
+        "airfare": 33,
+        "other": 30,
+        "lodging": 22,
+        "meals": 22,
+        "registration": 9,
+        "documents": 7,
+        "foreign": 2,
+        "funding": 1,
+        "timing": 1
+      },
+      "non_travel": {
+        "extended": 17,
+        "supplies": 17,
+        "ovpr_unselectable": 13,
+        "events": 12,
+        "recruiting": 10,
+        "software": 7,
+        "memberships": 6,
+        "subscriptions": 6,
+        "pcard": 4,
+        "mixed": 3,
+        "relocation": 3
+      },
+      "all": {
+        "ground": 42,
+        "airfare": 33,
+        "other": 30,
+        "lodging": 22,
+        "meals": 22,
+        "extended": 17,
+        "supplies": 17,
+        "ovpr_unselectable": 13,
+        "events": 12,
+        "recruiting": 10,
+        "registration": 9,
+        "documents": 7,
+        "software": 7,
+        "memberships": 6,
+        "subscriptions": 6,
+        "pcard": 4,
+        "mixed": 3,
+        "relocation": 3,
+        "foreign": 2,
+        "funding": 1,
+        "timing": 1
+      }
+    },
+    "judgment": {
+      "travel": {
+        "flag": 56,
+        "none": 52,
+        "skip": 45,
+        "exclude": 13,
+        "split": 3
+      },
+      "non_travel": {
+        "flag": 41,
+        "skip": 33,
+        "none": 19,
+        "split": 3,
+        "exclude": 2
+      },
+      "all": {
+        "flag": 97,
+        "skip": 78,
+        "none": 71,
+        "exclude": 15,
+        "split": 6
+      }
+    },
+    "difficulty": {
+      "travel": {
+        "simple": 118,
+        "complex": 51
+      },
+      "non_travel": {
+        "simple": 86,
+        "complex": 12
+      },
+      "all": {
+        "simple": 204,
+        "complex": 63
+      }
+    },
+    "with_trap": {
+      "travel": 19,
+      "non_travel": 0,
+      "all": 19
+    },
+    "scope": {
+      "city_class": {
+        "travel": {
+          "domestic": 83,
+          "any": 60,
+          "foreign": 17,
+          "local": 9
+        },
+        "non_travel": {
+          "any": 95,
+          "domestic": 2,
+          "foreign": 1
+        },
+        "all": {
+          "any": 155,
+          "domestic": 85,
+          "foreign": 18,
+          "local": 9
+        }
+      },
+      "persona": {
+        "travel": {
+          "(any / unrestricted)": 155,
+          "staff": 9,
+          "student": 5
+        },
+        "non_travel": {
+          "(any / unrestricted)": 69,
+          "staff": 13,
+          "faculty_fulltime": 11,
+          "student": 3,
+          "faculty_parttime": 2
+        },
+        "all": {
+          "(any / unrestricted)": 224,
+          "staff": 22,
+          "faculty_fulltime": 11,
+          "student": 8,
+          "faculty_parttime": 2
+        }
+      },
+      "funding": {
+        "travel": {
+          "(any / unrestricted)": 165,
+          "grant": 4
+        },
+        "non_travel": {
+          "(any / unrestricted)": 83,
+          "non_grant": 8,
+          "grant": 7
+        },
+        "all": {
+          "(any / unrestricted)": 248,
+          "grant": 11,
+          "non_grant": 8
+        }
+      },
+      "other_keys": {
+        "max_days": 1,
+        "min_days": 1
+      }
+    },
+    "basis_kinds": {
+      "basis_entries": {
+        "travel": {
+          "policy": 175,
+          "experience": 31,
+          "user decision": 19,
+          "real receipt": 18,
+          "search": 10
+        },
+        "non_travel": {
+          "search": 131,
+          "user decision": 125,
+          "policy": 86,
+          "experience": 36,
+          "real receipt": 1
+        },
+        "all": {
+          "policy": 261,
+          "user decision": 144,
+          "search": 141,
+          "experience": 67,
+          "real receipt": 19
+        }
+      },
+      "situations_with_kind": {
+        "travel": {
+          "policy": 159,
+          "experience": 30,
+          "user decision": 19,
+          "real receipt": 18,
+          "search": 10
+        },
+        "non_travel": {
+          "user decision": 85,
+          "policy": 69,
+          "search": 63,
+          "experience": 34,
+          "real receipt": 1
+        },
+        "all": {
+          "policy": 228,
+          "user decision": 104,
+          "search": 73,
+          "experience": 64,
+          "real receipt": 19
+        }
+      }
+    },
+    "trip_coverage": {
+      "travel": {
+        "referenced_by_at_least_one_trip": 169,
+        "referenced_by_no_trip_count": 0,
+        "referenced_by_no_trip": []
+      },
+      "non_travel": {
+        "referenced_by_at_least_one_trip": 94,
+        "referenced_by_no_trip_count": 4,
+        "referenced_by_no_trip": [
+          "PCARD-GUEST-AIRFARE",
+          "PCARD-PERSONAL-CHARGE",
+          "PCARD-SUBSCRIPTION",
+          "PCARD-SUPPLIES-AMAZON"
+        ]
+      }
+    }
+  },
+  "provisions": {
+    "note": "Non-travel situations cite travel provisions too, so 'used by a situation' counts both catalogues; the own-pool figure stands beside it.",
+    "sources_non_travel": 60,
+    "travel": {
+      "total": 83,
+      "actionable": 74,
+      "non_actionable": 9,
+      "non_actionable_detail": [
+        {
+          "id": "AIR-MEDICAL",
+          "page": "p.9",
+          "why_not": "an EEO letter is an HR document, never in a receipt folder"
+        },
+        {
+          "id": "AIR-CHARTER",
+          "page": "p.11",
+          "why_not": "an executive approval process, not a receipt"
+        },
+        {
+          "id": "LOD-GUEST",
+          "page": "p.14",
+          "why_not": "arranging a guest's booking is not a traveler's reimbursement"
+        },
+        {
+          "id": "GT-RENTAL-ACCIDENT",
+          "page": "p.16–17",
+          "why_not": "an incident report, not an expense"
+        },
+        {
+          "id": "GT-CHARTER-BUS",
+          "page": "p.18",
+          "why_not": "a contract, not a receipt"
+        },
+        {
+          "id": "ADVANCE",
+          "page": "p.18–19",
+          "why_not": "an advance is reconciled against the report, not filed from a receipt"
+        },
+        {
+          "id": "APPROVAL",
+          "page": "p.7, p.23",
+          "why_not": "routing happens after submission"
+        },
+        {
+          "id": "STUDENT-DELEGATE",
+          "page": "p.26",
+          "why_not": "who submits is a Concur role, not a receipt"
+        },
+        {
+          "id": "APPA-NONEMPLOYEE",
+          "page": "App. A p.28",
+          "why_not": "paid by GW, not reimbursed to the traveler"
+        }
+      ],
+      "actionable_referenced_by_a_situation": 74,
+      "actionable_referenced_by_own_pool_only": 74,
+      "actionable_with_zero_situations": [],
+      "non_actionable_that_are_referenced_count": 3,
+      "non_actionable_that_are_referenced": [
+        "APPA-NONEMPLOYEE",
+        "APPROVAL",
+        "LOD-GUEST"
+      ]
+    },
+    "non_travel": {
+      "total": 77,
+      "actionable": 75,
+      "non_actionable": 2,
+      "non_actionable_detail": [
+        {
+          "id": "NC-OVPR-ROUTING",
+          "page": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+          "why_not": "routing happens after submission"
+        },
+        {
+          "id": "NC-RELOC-STAFF",
+          "page": "https://hr.gwu.edu/why-gw; owner decision 2026-09-17 (no. 9)",
+          "why_not": "no GW rule to test against — the owner's decision is not to invent one"
+        }
+      ],
+      "actionable_referenced_by_a_situation": 75,
+      "actionable_referenced_by_own_pool_only": 75,
+      "actionable_with_zero_situations": [],
+      "non_actionable_that_are_referenced_count": 1,
+      "non_actionable_that_are_referenced": [
+        "NC-OVPR-ROUTING"
+      ]
+    }
+  },
+  "pool": {
+    "travel": {
+      "instances": 507,
+      "per_situation": 3,
+      "documents_in_answers": 546,
+      "files_on_disk": 546,
+      "files_by_extension": {
+        "pdf": 507,
+        "txt": 39
+      },
+      "templates_used": {
+        "generic": 126,
+        "airline": 60,
+        "hotel_folio": 48,
+        "restaurant": 48,
+        "notes": 39,
+        "registration": 30,
+        "rental": 30,
+        "uber": 24,
+        "trip_extra": 18,
+        "approval_memo": 15,
+        "amtrak": 12,
+        "taxi": 12,
+        "card_slip": 9,
+        "airbnb": 6,
+        "airline_change": 6,
+        "blackcar": 6,
+        "fare_comparison": 6,
+        "gas": 6,
+        "level3": 6,
+        "noshow": 6,
+        "toll": 6,
+        "affidavit": 3,
+        "booking_confirmation": 3,
+        "deposit": 3,
+        "ota_hotel": 3,
+        "program": 3,
+        "refund": 3,
+        "statement": 3,
+        "transit": 3,
+        "ubereats": 3
+      },
+      "templates_used_count": 30
+    },
+    "non_travel": {
+      "instances": 294,
+      "per_situation": 3,
+      "documents_in_answers": 357,
+      "files_on_disk": 357,
+      "files_by_extension": {
+        "pdf": 348,
+        "txt": 9
+      },
+      "templates_used": {
+        "generic": 150,
+        "invoice": 90,
+        "letter": 39,
+        "registration": 27,
+        "airline": 18,
+        "notes": 9,
+        "approval_memo": 6,
+        "hotel_folio": 6,
+        "restaurant": 6,
+        "amtrak": 3,
+        "trip_extra": 3
+      },
+      "templates_used_count": 11
+    },
+    "templates": {
+      "pdf_templates_in_render_py": 31,
+      "pdf_template_names": [
+        "affidavit",
+        "airbnb",
+        "airline",
+        "airline_change",
+        "amtrak",
+        "approval_memo",
+        "blackcar",
+        "booking_confirmation",
+        "card_slip",
+        "deposit",
+        "fare_comparison",
+        "gas",
+        "generic",
+        "hotel_folio",
+        "invoice",
+        "letter",
+        "level3",
+        "noshow",
+        "ota_hotel",
+        "program",
+        "refund",
+        "registration",
+        "rental",
+        "restaurant",
+        "statement",
+        "taxi",
+        "toll",
+        "transit",
+        "trip_extra",
+        "uber",
+        "ubereats"
+      ],
+      "text_document_kinds": [
+        "notes"
+      ],
+      "pdf_templates_never_used": []
+    }
+  },
+  "world": {
+    "us_cities": 6,
+    "us_city_names": [
+      "Boston, Massachusetts",
+      "Chicago, Illinois",
+      "Atlanta, Georgia",
+      "San Francisco, California",
+      "New York, New York",
+      "Seattle, Washington"
+    ],
+    "local_places": 2,
+    "local_place_names": [
+      "Washington, District of Columbia",
+      "Bethesda, Maryland"
+    ],
+    "foreign_cities": 4,
+    "foreign_city_names": [
+      "Montreal, Quebec",
+      "Toronto, Ontario",
+      "London, United Kingdom",
+      "Paris, France"
+    ],
+    "cities_total": 12,
+    "airlines": 6,
+    "us_carriers": 4,
+    "people": {
+      "traveler": 1,
+      "collaborators": 6,
+      "guests": 10,
+      "gw_colleagues": 2,
+      "spouses": 3,
+      "total": 22
+    },
+    "conferences": 11,
+    "rental_companies": 6,
+    "vehicle_classes": 6,
+    "society_offices": 12
+  },
+  "trips": {
+    "count": 23,
+    "per_trip": [
+      {
+        "letter": "A",
+        "folder": "trip_a_chicago",
+        "report_name": "MOSS 2026 Chicago",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Chicago, Illinois",
+        "foreign_city": null,
+        "days": 4,
+        "foreign_days": null,
+        "filed": "2026-08-19",
+        "files_total": 27,
+        "files_by_ext": {
+          "pdf": 26,
+          "txt": 1
+        },
+        "expected_lines": 23,
+        "per_diem_days": 0,
+        "skips": 5,
+        "excludes": 1,
+        "not_in_concur": 0,
+        "flags": 6,
+        "flags_by_level": {
+          "(no level)": 6
+        },
+        "traps": 2,
+        "situations_rows": 25,
+        "situations_distinct": 22,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-BAG",
+          "AIR-CHANGE-REASON",
+          "AIR-COACH-DIRECT",
+          "AIR-SEAT-ECONOMY",
+          "DOC-PROGRAM",
+          "GT-TAXI",
+          "GT-TRANSIT",
+          "GT-UBER",
+          "GT-UBER-TIP-UPDATED",
+          "LOD-BOOKING-CONF",
+          "LOD-FOLIO-PERSONAL",
+          "MEAL-BUSINESS-ALCOHOL",
+          "MEAL-COFFEE-SMALL",
+          "MEAL-DELIVERY",
+          "MEAL-TIP-EXCESSIVE",
+          "MEAL-TRAVEL-BIG-ITEMIZED",
+          "MEAL-TRAVEL-SMALL",
+          "OTH-CLUB-FEES",
+          "OTH-NEWSPAPER",
+          "OTH-POSTER",
+          "REG-MEMBERSHIP-PAID",
+          "REG-WORKSHOP"
+        ],
+        "total_usd_lines": "3541.79",
+        "total_usd_all_lines": "3541.79",
+        "turns": 4,
+        "max_files_per_turn": 11
+      },
+      {
+        "letter": "B",
+        "folder": "trip_b_boston_montreal",
+        "report_name": "NEDS 2026 Boston + Montreal",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Boston, Massachusetts",
+        "foreign_city": "Montreal, Quebec",
+        "days": 4,
+        "foreign_days": 3,
+        "filed": "2026-09-05",
+        "files_total": 26,
+        "files_by_ext": {
+          "pdf": 24,
+          "txt": 2
+        },
+        "expected_lines": 18,
+        "per_diem_days": 4,
+        "skips": 8,
+        "excludes": 1,
+        "not_in_concur": 0,
+        "flags": 7,
+        "flags_by_level": {
+          "(no level)": 7
+        },
+        "traps": 3,
+        "situations_rows": 24,
+        "situations_distinct": 22,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-COACH-INTL",
+          "AIR-PASSPORT",
+          "AIR-REFUNDED",
+          "DOC-APPROVAL-ORPHAN",
+          "DOC-PROGRAM",
+          "FX-BOTH-CURRENCIES",
+          "GT-LIMO-NOAPPROVAL",
+          "GT-RAIL-ACELA-BUSINESS",
+          "GT-RENTAL-INTL-STAFF",
+          "GT-TRANSIT",
+          "GT-UBER",
+          "LOD-FOLIO",
+          "LOD-FOREIGN",
+          "MEAL-BUSINESS",
+          "MEAL-GROUP-FUNCTION",
+          "MEAL-INTL-PERDIEM",
+          "MEAL-TRAVEL-SMALL",
+          "OTH-ATM-FEE",
+          "OTH-FX-FEE-STATEMENT",
+          "OTH-PHONE-ROAMING",
+          "REG-PLAIN",
+          "TA-INTL-ITINERARY"
+        ],
+        "total_usd_lines": "4584.23",
+        "total_usd_all_lines": "5303.42",
+        "turns": 4,
+        "max_files_per_turn": 12
+      },
+      {
+        "letter": "C",
+        "folder": "trip_c_atlanta_grant",
+        "report_name": "SEAM 2026 Atlanta (NSF award)",
+        "persona": "staff",
+        "funding": "Grant (federal)",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Atlanta, Georgia",
+        "foreign_city": null,
+        "days": 3,
+        "foreign_days": null,
+        "filed": "2026-07-21",
+        "files_total": 25,
+        "files_by_ext": {
+          "pdf": 24,
+          "txt": 1
+        },
+        "expected_lines": 18,
+        "per_diem_days": 0,
+        "skips": 8,
+        "excludes": 0,
+        "not_in_concur": 0,
+        "flags": 10,
+        "flags_by_level": {
+          "(no level)": 10
+        },
+        "traps": 2,
+        "situations_rows": 23,
+        "situations_distinct": 22,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-ECREDIT",
+          "AIR-WIFI",
+          "DOC-CARD-DETAIL-BARE",
+          "FUND-GRANT-ENTERTAINMENT",
+          "GT-GAS-PERSONAL",
+          "GT-PARKING",
+          "GT-RENTAL-FUEL",
+          "GT-RENTAL-PREFERRED",
+          "GT-RENTAL-TOLL",
+          "GT-STALE-STAFF",
+          "GT-UBER-DUP-IDENTICAL",
+          "LOD-FOLIO-INTERNET-GRANT",
+          "LOD-NOSHOW",
+          "MEAL-AFFIDAVIT",
+          "MEAL-BUSINESS-ALCOHOL-GRANT",
+          "MEAL-COFFEE-SMALL",
+          "MEAL-TRAVEL-BIG-SLIP",
+          "MEAL-TRAVEL-SMALL",
+          "OTH-LUGGAGE-STORAGE",
+          "OTH-SUPPLIES",
+          "OTH-VENDOR-INVOICE",
+          "REG-PCARD"
+        ],
+        "total_usd_lines": "2458.57",
+        "total_usd_all_lines": "2458.57",
+        "turns": 4,
+        "max_files_per_turn": 13
+      },
+      {
+        "letter": "D",
+        "folder": "trip_d_sf_student",
+        "report_name": "WCAI 2026 San Francisco",
+        "persona": "student",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "San Francisco, California",
+        "foreign_city": null,
+        "days": 7,
+        "foreign_days": null,
+        "filed": "2026-08-15",
+        "files_total": 19,
+        "files_by_ext": {
+          "pdf": 18,
+          "txt": 1
+        },
+        "expected_lines": 12,
+        "per_diem_days": 0,
+        "skips": 7,
+        "excludes": 1,
+        "not_in_concur": 0,
+        "flags": 5,
+        "flags_by_level": {
+          "(no level)": 5
+        },
+        "traps": 3,
+        "situations_rows": 18,
+        "situations_distinct": 16,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-COMPANION",
+          "AIR-INSURANCE",
+          "DOC-NOTES-PERDIEM-DOMESTIC",
+          "GT-PARKING-FINE",
+          "GT-RENTAL-STUDENT-NONPREFERRED",
+          "GT-STALE-STUDENT",
+          "GT-UBER",
+          "LOD-FOLIO-LAUNDRY-LONG",
+          "MEAL-COFFEE-SMALL",
+          "MEAL-TRAVEL-SMALL",
+          "MEAL-WITH-SPOUSE",
+          "OTH-TOILETRIES",
+          "OTH-VACCINATION-FLU",
+          "OTH-VALET",
+          "REG-BANQUET",
+          "REG-PLAIN"
+        ],
+        "total_usd_lines": "3296.18",
+        "total_usd_all_lines": "3296.18",
+        "turns": 4,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "E",
+        "folder": "trip_e_nyc_london_grant",
+        "report_name": "ICML-East 2026 NYC + London",
+        "persona": "staff",
+        "funding": "Grant (federal)",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "New York, New York",
+        "foreign_city": "London, United Kingdom",
+        "days": 3,
+        "foreign_days": 5,
+        "filed": "2026-08-02",
+        "files_total": 21,
+        "files_by_ext": {
+          "pdf": 20,
+          "txt": 1
+        },
+        "expected_lines": 16,
+        "per_diem_days": 6,
+        "skips": 5,
+        "excludes": 0,
+        "not_in_concur": 0,
+        "flags": 11,
+        "flags_by_level": {
+          "(no level)": 11
+        },
+        "traps": 2,
+        "situations_rows": 23,
+        "situations_distinct": 23,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-AGENCY",
+          "AIR-BAG-EXCESS",
+          "AIR-CLUB",
+          "AIR-FOREIGN-CARRIER-GRANT",
+          "AIR-GLOBAL-ENTRY",
+          "DOC-CARD-DETAIL-ITEMIZED",
+          "DOC-NOTES-PURPOSE-INADEQUATE",
+          "FX-HANDWRITTEN",
+          "GT-SHUTTLE",
+          "GT-TAXI-FOREIGN",
+          "GT-UBER",
+          "LOD-FOREIGN",
+          "LOD-OTA",
+          "MEAL-ATTENDEE-APPROVER",
+          "MEAL-INTERNAL-STAFF",
+          "MEAL-INTL-PERDIEM",
+          "OTH-BOOKS-RESEARCH",
+          "OTH-CARD-LATE-FEE",
+          "OTH-VACCINATION-REQUIRED",
+          "REG-ABSTRACT-FEE",
+          "REG-VIRTUAL",
+          "TA-INTL-ITINERARY",
+          "TA-INTL-PROVIDED-MEALS"
+        ],
+        "total_usd_lines": "2821.46",
+        "total_usd_all_lines": "4367.95",
+        "turns": 4,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "F",
+        "folder": "trip_f_seattle_staff",
+        "report_name": "PNW Stats 2026 Seattle",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Seattle, Washington",
+        "foreign_city": null,
+        "days": 6,
+        "foreign_days": null,
+        "filed": "2026-08-07",
+        "files_total": 21,
+        "files_by_ext": {
+          "pdf": 20,
+          "txt": 1
+        },
+        "expected_lines": 13,
+        "per_diem_days": 0,
+        "skips": 8,
+        "excludes": 1,
+        "not_in_concur": 0,
+        "flags": 7,
+        "flags_by_level": {
+          "(no level)": 7
+        },
+        "traps": 3,
+        "situations_rows": 19,
+        "situations_distinct": 19,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-CHANGE-NOREASON",
+          "AIR-EXTRA-LEGROOM",
+          "AIR-IBUY-PRETRIP",
+          "AIR-MILES-UPGRADE-COPAY",
+          "AIR-PRIORITY",
+          "GT-PERSONAL-DETOUR",
+          "GT-RENTAL-CARWASH",
+          "GT-RENTAL-FUEL-DATE-MISMATCH",
+          "GT-RENTAL-OTHER-NOCDW",
+          "GT-RENTAL-REPAIR",
+          "LOD-FOLIO",
+          "LOD-FOLIO-ROOMSERVICE-BIG",
+          "MEAL-DUP-SLIP-ITEMIZED",
+          "MEAL-TRAVEL-SMALL",
+          "OTH-CLOTHING",
+          "OTH-EVENT-DECOR",
+          "OTH-HAIRCUT",
+          "OTH-LUGGAGE-PURCHASE",
+          "TIME-REG-OLD-BUT-FINE"
+        ],
+        "total_usd_lines": "3417.87",
+        "total_usd_all_lines": "3417.87",
+        "turns": 4,
+        "max_files_per_turn": 9
+      },
+      {
+        "letter": "G",
+        "folder": "trip_g_boston_paris_staff",
+        "report_name": "NEMS 2026 Boston + Paris",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Boston, Massachusetts",
+        "foreign_city": "Paris, France",
+        "days": 6,
+        "foreign_days": 4,
+        "filed": "2026-08-18",
+        "files_total": 21,
+        "files_by_ext": {
+          "pdf": 19,
+          "txt": 2
+        },
+        "expected_lines": 11,
+        "per_diem_days": 5,
+        "skips": 10,
+        "excludes": 1,
+        "not_in_concur": 0,
+        "flags": 7,
+        "flags_by_level": {
+          "(no level)": 7
+        },
+        "traps": 1,
+        "situations_rows": 19,
+        "situations_distinct": 19,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-PREMIUM-LONGHAUL-MEMO",
+          "GT-LIMO-MEMO",
+          "GT-RAIL-ACELA-FIRST",
+          "GT-TAXI-FOREIGN",
+          "LOD-DEPOSIT-DUP",
+          "LOD-FOREIGN",
+          "LOD-SUITE",
+          "MEAL-INTL-PERDIEM",
+          "MEAL-TRAVEL-BIG-ITEMIZED",
+          "OTH-DEPENDENT-CARE",
+          "OTH-ENTERTAINMENT-LAVISH",
+          "OTH-HOTEL-INTERNET-SEPARATE",
+          "OTH-LOST-PROPERTY",
+          "OTH-PAYMENT-INDIVIDUAL",
+          "OTH-PET-CARE",
+          "OTH-SPORTS-EQUIPMENT",
+          "REG-MEMBERSHIP-ONLY",
+          "TA-INTL-ITINERARY",
+          "TA-INTL-PROVIDED-MEALS"
+        ],
+        "total_usd_lines": "7890.86",
+        "total_usd_all_lines": "8773.87",
+        "turns": 4,
+        "max_files_per_turn": 11
+      },
+      {
+        "letter": "H",
+        "folder": "trip_h_chicago_toronto_student",
+        "report_name": "MWAI 2026 Chicago + Toronto",
+        "persona": "student",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Chicago, Illinois",
+        "foreign_city": "Toronto, Ontario",
+        "days": 6,
+        "foreign_days": 3,
+        "filed": "2026-08-24",
+        "files_total": 18,
+        "files_by_ext": {
+          "pdf": 17,
+          "txt": 1
+        },
+        "expected_lines": 10,
+        "per_diem_days": 4,
+        "skips": 8,
+        "excludes": 2,
+        "not_in_concur": 0,
+        "flags": 4,
+        "flags_by_level": {
+          "(no level)": 4
+        },
+        "traps": 0,
+        "situations_rows": 17,
+        "situations_distinct": 17,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-CANCEL-PENALTY",
+          "AIR-COACH-INTL",
+          "AIR-COMPANION-MEMO",
+          "AIR-MILES-AWARD",
+          "GT-RENTAL-INTL-STUDENT",
+          "GT-RENTAL-VAN15",
+          "GT-UBER",
+          "LOD-AIRBNB-STUDENT",
+          "LOD-COMPANION-SURCHARGE",
+          "LOD-FOREIGN",
+          "MEAL-INTL-PERDIEM",
+          "MEAL-WITH-SPOUSE",
+          "OTH-CHARITY",
+          "OTH-GIFT-NOAPPROVAL",
+          "OTH-MEDICINE",
+          "REG-PLAIN",
+          "TA-INTL-ITINERARY"
+        ],
+        "total_usd_lines": "3663.72",
+        "total_usd_all_lines": "4266.60",
+        "turns": 4,
+        "max_files_per_turn": 6
+      },
+      {
+        "letter": "I",
+        "folder": "trip_i_atlanta_staff",
+        "report_name": "SEAM Follow-up 2026 Atlanta",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Atlanta, Georgia",
+        "foreign_city": null,
+        "days": 8,
+        "foreign_days": null,
+        "filed": "2026-08-30",
+        "files_total": 14,
+        "files_by_ext": {
+          "pdf": 13,
+          "txt": 1
+        },
+        "expected_lines": 12,
+        "per_diem_days": 0,
+        "skips": 2,
+        "excludes": 3,
+        "not_in_concur": 0,
+        "flags": 5,
+        "flags_by_level": {
+          "(no level)": 5
+        },
+        "traps": 1,
+        "situations_rows": 12,
+        "situations_distinct": 12,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-INDIRECT-COMPARISON",
+          "AIR-PREMIUM-NOMEMO",
+          "AIR-WIFI-OTHER-CARRIER",
+          "GT-RENTAL-PREFERRED-EXTRA-INSURANCE",
+          "GT-RENTAL-PREPAID-FUEL",
+          "GT-RENTAL-TOLL",
+          "GT-UBER",
+          "LOD-FOLIO-INROOM-ALCOHOL",
+          "LOD-PERSONAL-DAYS",
+          "MEAL-BUSINESS",
+          "MEAL-TRAVEL-SMALL",
+          "OTH-VALET"
+        ],
+        "total_usd_lines": "3883.88",
+        "total_usd_all_lines": "3883.88",
+        "turns": 4,
+        "max_files_per_turn": 5
+      },
+      {
+        "letter": "J",
+        "folder": "trip_j_nyc_rail_staff",
+        "report_name": "NYC Data Week 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "New York, New York",
+        "foreign_city": null,
+        "days": 10,
+        "foreign_days": null,
+        "filed": "2026-09-08",
+        "files_total": 13,
+        "files_by_ext": {
+          "pdf": 12,
+          "txt": 1
+        },
+        "expected_lines": 10,
+        "per_diem_days": 0,
+        "skips": 3,
+        "excludes": 0,
+        "not_in_concur": 0,
+        "flags": 1,
+        "flags_by_level": {
+          "(no level)": 1
+        },
+        "traps": 0,
+        "situations_rows": 11,
+        "situations_distinct": 11,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "DOC-PROGRAM",
+          "GT-BUS",
+          "GT-RAIL-COACH",
+          "GT-TRANSIT",
+          "GT-UBER",
+          "LOD-FOLIO-LAUNDRY-LONG",
+          "LOD-RESORT-FEE",
+          "MEAL-COFFEE-SMALL",
+          "MEAL-TRAVEL-SMALL",
+          "OTH-GIFT-MEMO",
+          "REG-PLAIN"
+        ],
+        "total_usd_lines": "3920.58",
+        "total_usd_all_lines": "3920.58",
+        "turns": 4,
+        "max_files_per_turn": 7
+      },
+      {
+        "letter": "K",
+        "folder": "trip_k_sf_staff",
+        "report_name": "BayML 2026 San Francisco",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "San Francisco, California",
+        "foreign_city": null,
+        "days": 9,
+        "foreign_days": null,
+        "filed": "2026-09-14",
+        "files_total": 15,
+        "files_by_ext": {
+          "pdf": 13,
+          "txt": 2
+        },
+        "expected_lines": 13,
+        "per_diem_days": 0,
+        "skips": 2,
+        "excludes": 0,
+        "not_in_concur": 0,
+        "flags": 7,
+        "flags_by_level": {
+          "(no level)": 7
+        },
+        "traps": 1,
+        "situations_rows": 14,
+        "situations_distinct": 14,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-INDIRECT-NOCOMPARISON",
+          "AIR-OOP-PRETRIP",
+          "AIR-PCARD-PAID",
+          "GT-MILEAGE-AIRPORT-DROPOFF",
+          "GT-RENTAL-OTHER-CDW",
+          "GT-RENTAL-SPECIALTY",
+          "GT-UBER",
+          "LOD-AIRBNB-STAFF",
+          "LOD-CANCEL-FEE-AIRLINE",
+          "LOD-FOLIO-INTERNET",
+          "LOD-FOLIO-ROOMSERVICE-SMALL",
+          "MEAL-COFFEE-SMALL",
+          "MEAL-TRAVEL-SMALL",
+          "REG-WORKSHOP"
+        ],
+        "total_usd_lines": "4928.21",
+        "total_usd_all_lines": "4928.21",
+        "turns": 4,
+        "max_files_per_turn": 4
+      },
+      {
+        "letter": "L",
+        "folder": "trip_l_local_dc",
+        "report_name": "Local travel Aug-Sep 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Washington, District of Columbia",
+        "foreign_city": null,
+        "days": 3,
+        "foreign_days": null,
+        "filed": "2026-09-08",
+        "files_total": 7,
+        "files_by_ext": {
+          "pdf": 5,
+          "txt": 2
+        },
+        "expected_lines": 6,
+        "per_diem_days": 0,
+        "skips": 4,
+        "excludes": 2,
+        "not_in_concur": 0,
+        "flags": 3,
+        "flags_by_level": {
+          "(no level)": 3
+        },
+        "traps": 0,
+        "situations_rows": 9,
+        "situations_distinct": 9,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "GT-EZPASS-MIXED",
+          "GT-MILEAGE-COMMUTE",
+          "GT-MILEAGE-FROM-HOME",
+          "GT-MILEAGE-OFFICE",
+          "GT-MILEAGE-TWO-TRAVELERS",
+          "MEAL-CELEBRATION",
+          "MEAL-LOCAL-BUSINESS",
+          "MEAL-LOCAL-IN-MEETING",
+          "MEAL-LOCAL-PERSONAL"
+        ],
+        "total_usd_lines": "208.71",
+        "total_usd_all_lines": "208.71",
+        "turns": 2,
+        "max_files_per_turn": 4
+      },
+      {
+        "letter": "M",
+        "folder": "trip_m_boston_drive_staff",
+        "report_name": "Boston site visit Sep 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Boston, Massachusetts",
+        "foreign_city": null,
+        "days": 4,
+        "foreign_days": null,
+        "filed": "2026-09-16",
+        "files_total": 7,
+        "files_by_ext": {
+          "pdf": 5,
+          "txt": 2
+        },
+        "expected_lines": 6,
+        "per_diem_days": 0,
+        "skips": 1,
+        "excludes": 1,
+        "not_in_concur": 0,
+        "flags": 2,
+        "flags_by_level": {
+          "(no level)": 2
+        },
+        "traps": 1,
+        "situations_rows": 6,
+        "situations_distinct": 6,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "DOC-DATE-VS-NOTES",
+          "GT-DRIVE-200PLUS-NO-QUOTE",
+          "GT-PARKING",
+          "LOD-FOLIO-LAUNDRY-SHORT",
+          "MEAL-TRAVEL-SMALL",
+          "REG-MEMBERSHIP-COMP"
+        ],
+        "total_usd_lines": "2471.32",
+        "total_usd_all_lines": "2471.32",
+        "turns": 4,
+        "max_files_per_turn": 3
+      },
+      {
+        "letter": "N",
+        "folder": "trip_n_nyc_drive_staff",
+        "report_name": "NYU seminar Sep 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "New York, New York",
+        "foreign_city": null,
+        "days": 2,
+        "foreign_days": null,
+        "filed": "2026-09-09",
+        "files_total": 6,
+        "files_by_ext": {
+          "pdf": 4,
+          "txt": 2
+        },
+        "expected_lines": 4,
+        "per_diem_days": 0,
+        "skips": 2,
+        "excludes": 1,
+        "not_in_concur": 0,
+        "flags": 1,
+        "flags_by_level": {
+          "(no level)": 1
+        },
+        "traps": 0,
+        "situations_rows": 4,
+        "situations_distinct": 4,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "GT-CAR-IN-LIEU-OF-AIR",
+          "GT-PARKING",
+          "LOD-FOLIO-PARKING",
+          "MEAL-TRAVEL-SMALL"
+        ],
+        "total_usd_lines": "1028.57",
+        "total_usd_all_lines": "1028.57",
+        "turns": 3,
+        "max_files_per_turn": 3
+      },
+      {
+        "letter": "O",
+        "folder": "trip_o_london_staff",
+        "report_name": "Alan Turing Inst. visit 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "New York, New York",
+        "foreign_city": "London, United Kingdom",
+        "days": 1,
+        "foreign_days": 4,
+        "filed": "2026-08-27",
+        "files_total": 7,
+        "files_by_ext": {
+          "pdf": 6,
+          "txt": 1
+        },
+        "expected_lines": 4,
+        "per_diem_days": 5,
+        "skips": 3,
+        "excludes": 0,
+        "not_in_concur": 0,
+        "flags": 2,
+        "flags_by_level": {
+          "(no level)": 2
+        },
+        "traps": 0,
+        "situations_rows": 7,
+        "situations_distinct": 7,
+        "situations_from_non_travel_pool": 0,
+        "situations": [
+          "AIR-OUTSIDE-REIMBURSED",
+          "AIR-PREMIUM-LONGHAUL-NOMEMO",
+          "GT-TAXI-FOREIGN",
+          "GT-TRANSIT",
+          "LOD-FOREIGN",
+          "MEAL-INTL-PERDIEM",
+          "TA-INTL-ITINERARY"
+        ],
+        "total_usd_lines": "3303.97",
+        "total_usd_all_lines": "4494.98",
+        "turns": 4,
+        "max_files_per_turn": 2
+      },
+      {
+        "letter": "P",
+        "folder": "trip_p_boston_london_postdoc",
+        "report_name": "BCSS 2026 Boston + London",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Boston, Massachusetts",
+        "foreign_city": "London, United Kingdom",
+        "days": 3,
+        "foreign_days": 4,
+        "filed": "2026-09-16",
+        "files_total": 29,
+        "files_by_ext": {
+          "pdf": 28,
+          "txt": 1
+        },
+        "expected_lines": 21,
+        "per_diem_days": 5,
+        "skips": 9,
+        "excludes": 1,
+        "not_in_concur": 7,
+        "flags": 24,
+        "flags_by_level": {
+          "needs_review": 11,
+          "notice": 11,
+          "(no level)": 2
+        },
+        "traps": 0,
+        "situations_rows": 25,
+        "situations_distinct": 25,
+        "situations_from_non_travel_pool": 13,
+        "situations": [
+          "AIR-BAG",
+          "AIR-COACH-DIRECT",
+          "AIR-COACH-INTL",
+          "CAPITAL-COPIER-PURCHASE",
+          "CAPITAL-FABRICATION-GOV-OWNED",
+          "CLOUD-AWS-GRANT",
+          "EQUIPMENT-GOV-OWNED",
+          "EVENT-INTL-FLOWERS",
+          "FX-BOTH-CURRENCIES",
+          "GT-RENTAL-FUEL",
+          "GT-RENTAL-INTL-STAFF",
+          "GT-RENTAL-PREFERRED",
+          "LOD-FOLIO",
+          "LOD-FOREIGN",
+          "MEAL-BUSINESS-ALCOHOL",
+          "OFFICE-NOTARY-FEE",
+          "OTH-ATM-FEE",
+          "RECRUIT-CAREER-FAIR-BOOTH",
+          "ROOM-COWORK-MONTHLY-DESK",
+          "ROOM-HOTEL-MEETING-ROOM",
+          "SUBJ-ADVANCE-RECONCILE",
+          "SUBS-JOURNAL-GRANT",
+          "TA-INTL-ITINERARY",
+          "TEL-HOTSPOT-GRANT",
+          "TRAINEE-T32-SYMPOSIUM"
+        ],
+        "total_usd_lines": "5045.89",
+        "total_usd_all_lines": "7138.58",
+        "turns": 6,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "Q",
+        "folder": "trip_q_new_faculty_no_travel",
+        "report_name": "New lab start-up Aug–Sep 2026",
+        "persona": "faculty_fulltime",
+        "funding": "Non-Grant",
+        "no_travel": true,
+        "travel_type": "No Travel",
+        "city": null,
+        "foreign_city": null,
+        "days": null,
+        "foreign_days": null,
+        "filed": "2026-09-18",
+        "files_total": 30,
+        "files_by_ext": {
+          "pdf": 29,
+          "txt": 1
+        },
+        "expected_lines": 16,
+        "per_diem_days": 0,
+        "skips": 15,
+        "excludes": 0,
+        "not_in_concur": 14,
+        "flags": 38,
+        "flags_by_level": {
+          "notice": 28,
+          "needs_review": 10
+        },
+        "traps": 0,
+        "situations_rows": 26,
+        "situations_distinct": 26,
+        "situations_from_non_travel_pool": 26,
+        "situations": [
+          "CAPITAL-CONFERENCE-TABLE",
+          "CAPITAL-FABRICATION-GW-OWNED",
+          "CAPITAL-LAB-INSTRUMENT",
+          "CAPITAL-VEHICLE-DEPOSIT",
+          "CONF-LOCAL-REGISTRATION",
+          "CONSTRUCTION-LAB-RENOVATION",
+          "CONSULT-AIRFARE-EMPLOYEE-PAID",
+          "DUES-SOCIETY-ANNUAL",
+          "EMPLOYEE-STAFF-OUTING",
+          "LEASE-COPIER-FIRST-PAYMENT",
+          "PERMIT-DRONE-FAA-REG",
+          "POST-FEDEX-SHIPMENT",
+          "PROMO-ITEMS-NO-APPROVAL",
+          "RECRUIT-DINNER-ALCOHOL",
+          "RECRUIT-EMPLOYEE-PAID-HOTEL",
+          "RECRUIT-JOB-AD-PERSONALCARD",
+          "RELOC-FACULTY-MOVERS",
+          "SEMINAR-LOCAL-FEE",
+          "SERVICE-FOREIGN-TRANSLATOR",
+          "SERVICE-TRANSCRIPTION-SOW",
+          "SOFT-AI-TOOL",
+          "SOFT-SAAS-ANNUAL",
+          "SUPP-LAPTOP-SELFBUY",
+          "SUPP-MISC-MOVING-BOXES",
+          "SUPP-WORKSTATION-CAPITAL",
+          "TRAINING-ONLINE-COURSE"
+        ],
+        "total_usd_lines": "5912.08",
+        "total_usd_all_lines": "5912.08",
+        "turns": 4,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "R",
+        "folder": "trip_r_adjunct_no_travel",
+        "report_name": "Fall 2026 teaching expenses",
+        "persona": "faculty_parttime",
+        "funding": "Non-Grant",
+        "no_travel": true,
+        "travel_type": "No Travel",
+        "city": null,
+        "foreign_city": null,
+        "days": null,
+        "foreign_days": null,
+        "filed": "2026-09-18",
+        "files_total": 12,
+        "files_by_ext": {
+          "pdf": 11,
+          "txt": 1
+        },
+        "expected_lines": 7,
+        "per_diem_days": 0,
+        "skips": 5,
+        "excludes": 2,
+        "not_in_concur": 2,
+        "flags": 8,
+        "flags_by_level": {
+          "notice": 5,
+          "needs_review": 3
+        },
+        "traps": 0,
+        "situations_rows": 9,
+        "situations_distinct": 9,
+        "situations_from_non_travel_pool": 9,
+        "situations": [
+          "BOOK-RESEARCH-TEXT",
+          "DUES-PTFPDF-OVERCAP",
+          "EVENT-FLOWERS",
+          "PRINT-POSTER-LOCAL",
+          "PROGRAM-DESIGN-WORKSHOP",
+          "RELOC-PARTTIME-FACULTY",
+          "SUBS-NEWS-PERSONAL",
+          "SUPP-MIXED-PERSONAL",
+          "SUPP-OVER75-SLIP"
+        ],
+        "total_usd_lines": "1109.55",
+        "total_usd_all_lines": "1109.55",
+        "turns": 2,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "S",
+        "folder": "trip_s_lab_purchases_postdoc",
+        "report_name": "Lab supplies and equipment Sep 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": true,
+        "travel_type": "No Travel",
+        "city": null,
+        "foreign_city": null,
+        "days": null,
+        "foreign_days": null,
+        "filed": "2026-09-18",
+        "files_total": 11,
+        "files_by_ext": {
+          "pdf": 10,
+          "txt": 1
+        },
+        "expected_lines": 10,
+        "per_diem_days": 0,
+        "skips": 1,
+        "excludes": 0,
+        "not_in_concur": 0,
+        "flags": 5,
+        "flags_by_level": {
+          "needs_review": 5
+        },
+        "traps": 0,
+        "situations_rows": 10,
+        "situations_distinct": 10,
+        "situations_from_non_travel_pool": 10,
+        "situations": [
+          "BIND-REPORT-COPIES",
+          "FUEL-FLEET-VAN",
+          "LAB-BENCH-STOOLS",
+          "LAB-SUPPLIES-DRYICE",
+          "LAB-SUPPLIES-GRANT",
+          "LIB-DOC-DELIVERY",
+          "LIB-SUPPLIES-ARCHIVE",
+          "PHOTO-SUPPLIES-FIELD",
+          "PRINT-SUPPLIES-TONER",
+          "SUPP-SHREDDER-OFFICE"
+        ],
+        "total_usd_lines": "3120.55",
+        "total_usd_all_lines": "3120.55",
+        "turns": 2,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "T",
+        "folder": "trip_t_postdoc_no_travel",
+        "report_name": "Lab subscriptions and services Sep 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": true,
+        "travel_type": "No Travel",
+        "city": null,
+        "foreign_city": null,
+        "days": null,
+        "foreign_days": null,
+        "filed": "2026-09-18",
+        "files_total": 13,
+        "files_by_ext": {
+          "pdf": 12,
+          "txt": 1
+        },
+        "expected_lines": 6,
+        "per_diem_days": 0,
+        "skips": 7,
+        "excludes": 0,
+        "not_in_concur": 3,
+        "flags": 10,
+        "flags_by_level": {
+          "notice": 8,
+          "needs_review": 2
+        },
+        "traps": 0,
+        "situations_rows": 10,
+        "situations_distinct": 10,
+        "situations_from_non_travel_pool": 10,
+        "situations": [
+          "CLOUD-AWS-MONTHLY",
+          "CLOUD-PERSONAL-STORAGE",
+          "DUES-HEALTH-CLUB",
+          "GIFT-NOAPPROVAL",
+          "RECRUIT-SIGNING-BONUS",
+          "SUBJ-CASH-OWN-POCKET",
+          "SUBS-INVOICE-UNPAID",
+          "SUBS-JOURNAL-ANNUAL",
+          "SUBS-MONTHLY-STALE",
+          "SUPP-STAPLES-LOCAL"
+        ],
+        "total_usd_lines": "799.81",
+        "total_usd_all_lines": "799.81",
+        "turns": 2,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "U",
+        "folder": "trip_u_student_no_travel",
+        "report_name": "PhD student purchases Sep 2026",
+        "persona": "student",
+        "funding": "Non-Grant",
+        "no_travel": true,
+        "travel_type": "No Travel",
+        "city": null,
+        "foreign_city": null,
+        "days": null,
+        "foreign_days": null,
+        "filed": "2026-09-18",
+        "files_total": 14,
+        "files_by_ext": {
+          "pdf": 13,
+          "txt": 1
+        },
+        "expected_lines": 7,
+        "per_diem_days": 0,
+        "skips": 7,
+        "excludes": 0,
+        "not_in_concur": 2,
+        "flags": 9,
+        "flags_by_level": {
+          "notice": 6,
+          "needs_review": 3
+        },
+        "traps": 0,
+        "situations_rows": 9,
+        "situations_distinct": 9,
+        "situations_from_non_travel_pool": 9,
+        "situations": [
+          "CLOUD-INVOICE-UNPAID",
+          "EVENT-EMPLOYEE-BIRTHDAY",
+          "GIFT-APPROVED-MEMO",
+          "PROMO-ITEMS-GRANT",
+          "SUBJ-GIFTCARDS-SELFBOUGHT",
+          "SUBS-MONTHLY-STALE-STUDENT",
+          "SUPP-AMAZON-PERSONALCARD",
+          "SUPP-GRANT-FEDERAL",
+          "SUPP-PERSONAL-SCHOOL"
+        ],
+        "total_usd_lines": "1250.12",
+        "total_usd_all_lines": "1250.12",
+        "turns": 2,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "V",
+        "folder": "trip_v_faculty_no_travel",
+        "report_name": "Assistant professor expenses Sep 2026",
+        "persona": "faculty_fulltime",
+        "funding": "Non-Grant",
+        "no_travel": true,
+        "travel_type": "No Travel",
+        "city": null,
+        "foreign_city": null,
+        "days": null,
+        "foreign_days": null,
+        "filed": "2026-09-18",
+        "files_total": 13,
+        "files_by_ext": {
+          "pdf": 11,
+          "txt": 2
+        },
+        "expected_lines": 5,
+        "per_diem_days": 0,
+        "skips": 8,
+        "excludes": 0,
+        "not_in_concur": 5,
+        "flags": 11,
+        "flags_by_level": {
+          "needs_review": 6,
+          "notice": 5
+        },
+        "traps": 0,
+        "situations_rows": 9,
+        "situations_distinct": 9,
+        "situations_from_non_travel_pool": 9,
+        "situations": [
+          "DUES-AIRLINE-LOUNGE-ANNUAL",
+          "DUES-DEPT-INVOICE-UNPAID",
+          "DUES-FULLTIME-SAME-DUES",
+          "EVENT-FOREIGN-SPEAKER-AIRFARE",
+          "EVENT-SPEAKER-HONORARIUM",
+          "RECRUIT-CANDIDATE-DINNER",
+          "RECRUIT-JOB-AD-GRANT",
+          "RELOC-FACULTY-HOUSEHUNT",
+          "SOFT-SITE-LICENSE-DUP"
+        ],
+        "total_usd_lines": "1981.41",
+        "total_usd_all_lines": "1981.41",
+        "turns": 2,
+        "max_files_per_turn": 8
+      },
+      {
+        "letter": "W",
+        "folder": "trip_w_seattle_recruiting",
+        "report_name": "Seattle student recruiting Sep 2026",
+        "persona": "staff",
+        "funding": "Non-Grant",
+        "no_travel": false,
+        "travel_type": null,
+        "city": "Seattle, Washington",
+        "foreign_city": null,
+        "days": 3,
+        "foreign_days": null,
+        "filed": "2026-09-18",
+        "files_total": 13,
+        "files_by_ext": {
+          "pdf": 10,
+          "txt": 3
+        },
+        "expected_lines": 9,
+        "per_diem_days": 0,
+        "skips": 6,
+        "excludes": 4,
+        "not_in_concur": 3,
+        "flags": 9,
+        "flags_by_level": {
+          "notice": 9
+        },
+        "traps": 0,
+        "situations_rows": 9,
+        "situations_distinct": 9,
+        "situations_from_non_travel_pool": 8,
+        "situations": [
+          "DUES-BUNDLED-SPLIT",
+          "DUES-IN-TRIP-FOLDER",
+          "EVENT-RECEPTION-ALCOHOL",
+          "LOD-FOLIO",
+          "PROMO-ITEMS-LICENSED",
+          "RECRUIT-CANDIDATE-SELFPAID",
+          "RECRUIT-HEADHUNTER-INVOICE",
+          "RECRUIT-TRIP-RECRUIT-STUDENTS",
+          "SUPP-ON-TRIP"
+        ],
+        "total_usd_lines": "4219.27",
+        "total_usd_all_lines": "4219.27",
+        "turns": 3,
+        "max_files_per_turn": 7
+      }
+    ],
+    "subtotals": [
+      {
+        "group": "A–O (travel)",
+        "trips": 15,
+        "files_total": 247,
+        "expected_lines": 176,
+        "per_diem_days": 24,
+        "skips": 76,
+        "excludes": 14,
+        "not_in_concur": 0,
+        "flags": 78,
+        "traps": 19,
+        "situations_rows": 231,
+        "turns": 57,
+        "situations_distinct_union": 169,
+        "total_usd_lines": "51419.92",
+        "total_usd_all_lines": "56362.50"
+      },
+      {
+        "group": "P–W (non-travel data)",
+        "trips": 8,
+        "files_total": 135,
+        "expected_lines": 81,
+        "per_diem_days": 5,
+        "skips": 58,
+        "excludes": 7,
+        "not_in_concur": 36,
+        "flags": 114,
+        "traps": 0,
+        "situations_rows": 107,
+        "turns": 23,
+        "situations_distinct_union": 106,
+        "total_usd_lines": "23438.68",
+        "total_usd_all_lines": "25531.37"
+      },
+      {
+        "group": "all 23",
+        "trips": 23,
+        "files_total": 382,
+        "expected_lines": 257,
+        "per_diem_days": 29,
+        "skips": 134,
+        "excludes": 21,
+        "not_in_concur": 36,
+        "flags": 192,
+        "traps": 19,
+        "situations_rows": 338,
+        "turns": 80,
+        "situations_distinct_union": 263,
+        "total_usd_lines": "74858.60",
+        "total_usd_all_lines": "81893.87"
+      }
+    ]
+  },
+  "expense_types": {
+    "distinct_expense_type_values": 43,
+    "per_type": {
+      "52191-NON-CAPITALIZED INSTRUCTIONAL & LAB FURNITURE EQUIPMENT": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "52193-NON-CAPITALIZED COMPUTING EQUIPMENT": {
+        "lines": 1,
+        "trips": [
+          "Q"
+        ],
+        "trip_count": 1
+      },
+      "52195-OTHER NON-CAPITALIZED FURNITURE & EQUIPMENT": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "52211-MEMBERSHIPS": {
+        "lines": 6,
+        "trips": [
+          "G",
+          "Q",
+          "R",
+          "V",
+          "W"
+        ],
+        "trip_count": 5
+      },
+      "52221-SUBSCRIPTIONS/PERIODICALS": {
+        "lines": 8,
+        "trips": [
+          "P",
+          "Q",
+          "T",
+          "U"
+        ],
+        "trip_count": 4
+      },
+      "52231-BOOKS": {
+        "lines": 1,
+        "trips": [
+          "R"
+        ],
+        "trip_count": 1
+      },
+      "52441-PERMITS LICENSES & FEES": {
+        "lines": 1,
+        "trips": [
+          "Q"
+        ],
+        "trip_count": 1
+      },
+      "52611-ENTERTAINMENT": {
+        "lines": 9,
+        "trips": [
+          "A",
+          "C",
+          "G",
+          "H",
+          "J",
+          "P",
+          "Q",
+          "W"
+        ],
+        "trip_count": 8
+      },
+      "52612-SPECIAL EVENTS/BUSINESS RELATIONS": {
+        "lines": 4,
+        "trips": [
+          "R",
+          "T",
+          "U",
+          "W"
+        ],
+        "trip_count": 4
+      },
+      "52613-NON US SPECIAL EVENTS/BUSINESS RELATIONS": {
+        "lines": 1,
+        "trips": [
+          "P"
+        ],
+        "trip_count": 1
+      },
+      "52641-RECRUITING EXPENSE": {
+        "lines": 1,
+        "trips": [
+          "P"
+        ],
+        "trip_count": 1
+      },
+      "52691-MISCELLANEOUS OFFICE EXPENSE": {
+        "lines": 1,
+        "trips": [
+          "P"
+        ],
+        "trip_count": 1
+      },
+      "52716-AUDIOVISUAL/LIBRARY SERVICES": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "52721-PROGRAM DEVELOPMENT ACTIVITY": {
+        "lines": 1,
+        "trips": [
+          "R"
+        ],
+        "trip_count": 1
+      },
+      "53101-US AIRFARE EXPENSE": {
+        "lines": 26,
+        "trips": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "O",
+          "P",
+          "W"
+        ],
+        "trip_count": 14
+      },
+      "53102-US BUSINESS MEALS": {
+        "lines": 39,
+        "trips": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "P",
+          "Q",
+          "V"
+        ],
+        "trip_count": 17
+      },
+      "53103-US LOCAL TRANSPORTATION": {
+        "lines": 40,
+        "trips": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P"
+        ],
+        "trip_count": 16
+      },
+      "53104-US LODGING EXPENSE": {
+        "lines": 29,
+        "trips": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "M",
+          "N",
+          "O",
+          "P",
+          "W"
+        ],
+        "trip_count": 16
+      },
+      "53111-US OTHER TRAVEL AND RELATED EXPENSE": {
+        "lines": 18,
+        "trips": [
+          "A",
+          "B",
+          "C",
+          "E",
+          "F",
+          "G",
+          "I",
+          "P"
+        ],
+        "trip_count": 8
+      },
+      "53112-NON US OTHER TRAVEL AND RELATED EXPENSE": {
+        "lines": 3,
+        "trips": [
+          "B",
+          "P"
+        ],
+        "trip_count": 2
+      },
+      "53131-TRAVEL-NON-GWU PERSONNEL": {
+        "lines": 2,
+        "trips": [
+          "Q",
+          "V"
+        ],
+        "trip_count": 2
+      },
+      "53241-SEMINAR FEES": {
+        "lines": 1,
+        "trips": [
+          "Q"
+        ],
+        "trip_count": 1
+      },
+      "53251-CONFERENCE/SEMINAR/TRAINING EXPENSE": {
+        "lines": 16,
+        "trips": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "H",
+          "J",
+          "K",
+          "M",
+          "Q",
+          "W"
+        ],
+        "trip_count": 12
+      },
+      "53311-TELEPHONE - DIRECT": {
+        "lines": 1,
+        "trips": [
+          "P"
+        ],
+        "trip_count": 1
+      },
+      "53411-POSTAGE/EXPRESS MAIL - NON-GW": {
+        "lines": 1,
+        "trips": [
+          "Q"
+        ],
+        "trip_count": 1
+      },
+      "54111-OFFICE SUPPLIES": {
+        "lines": 6,
+        "trips": [
+          "R",
+          "T",
+          "U",
+          "W"
+        ],
+        "trip_count": 4
+      },
+      "54112-LIBRARY SUPPLIES": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "54121-LABORATORY SUPPLIES": {
+        "lines": 2,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "54151-PRINTING SUPPLIES": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "54511-FUEL-GASOLINE AND OIL": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "54531-PHOTOGRAPHIC SUPPLIES": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "54541-MISCELLANEOUS SUPPLIES": {
+        "lines": 1,
+        "trips": [
+          "Q"
+        ],
+        "trip_count": 1
+      },
+      "55112-CONSULTANTS TRAVEL": {
+        "lines": 1,
+        "trips": [
+          "Q"
+        ],
+        "trip_count": 1
+      },
+      "55151-ADVERTISING": {
+        "lines": 2,
+        "trips": [
+          "Q",
+          "V"
+        ],
+        "trip_count": 2
+      },
+      "55152-PUBLICITY & PROMOTION": {
+        "lines": 3,
+        "trips": [
+          "Q",
+          "U",
+          "W"
+        ],
+        "trip_count": 3
+      },
+      "55511-NON-GW PRINTING/REPRODUCTION": {
+        "lines": 1,
+        "trips": [
+          "R"
+        ],
+        "trip_count": 1
+      },
+      "55513-BINDING": {
+        "lines": 1,
+        "trips": [
+          "S"
+        ],
+        "trip_count": 1
+      },
+      "55541-PAYMENTS TO SUBJECTS": {
+        "lines": 1,
+        "trips": [
+          "P"
+        ],
+        "trip_count": 1
+      },
+      "55567-CLOUD COMPUTING SERVICES": {
+        "lines": 4,
+        "trips": [
+          "P",
+          "Q",
+          "T",
+          "V"
+        ],
+        "trip_count": 4
+      },
+      "55591-BUILDING/ROOM/FACILITY RENTAL (SHORT TERM)": {
+        "lines": 1,
+        "trips": [
+          "P"
+        ],
+        "trip_count": 1
+      },
+      "56311-BUILDING/ROOM/FACILITY RENTAL OCCUPANCY": {
+        "lines": 1,
+        "trips": [
+          "P"
+        ],
+        "trip_count": 1
+      },
+      "PERSONAL CAR MILEAGE": {
+        "lines": 6,
+        "trips": [
+          "K",
+          "L",
+          "M",
+          "N"
+        ],
+        "trip_count": 4
+      },
+      "US CAR RENTAL": {
+        "lines": 10,
+        "trips": [
+          "B",
+          "C",
+          "D",
+          "F",
+          "I",
+          "K",
+          "P"
+        ],
+        "trip_count": 7
+      }
+    },
+    "selectable_types_85": {
+      "list_used": "gw_policy_data/reports/CONCUR_CATEGORY_INVENTORY.md — the numbered '85 个实际出现的费用选项' table (85 rows, 84 account codes; 53103 appears twice)",
+      "list_size": 85,
+      "covered_by_at_least_one_expected_line": 42,
+      "covered_list": [
+        "52191-NON-CAPITALIZED INSTRUCTIONAL & LAB FURNITURE EQUIPMENT",
+        "52193-NON-CAPITALIZED COMPUTING EQUIPMENT",
+        "52195-OTHER NON-CAPITALIZED FURNITURE & EQUIPMENT",
+        "52211-MEMBERSHIPS",
+        "52221-SUBSCRIPTIONS/PERIODICALS",
+        "52231-BOOKS",
+        "52441-PERMITS LICENSES & FEES",
+        "52611-ENTERTAINMENT",
+        "52612-SPECIAL EVENTS/BUSINESS RELATIONS",
+        "52613-NON US SPECIAL EVENTS/BUSINESS RELATIONS",
+        "52641-RECRUITING EXPENSE",
+        "52691-MISCELLANEOUS OFFICE EXPENSE",
+        "52716-AUDIOVISUAL/LIBRARY SERVICES",
+        "52721-PROGRAM DEVELOPMENT ACTIVITY",
+        "53101-US AIRFARE EXPENSE",
+        "53102-US BUSINESS MEALS",
+        "53103-PERSONAL CAR MILEAGE",
+        "53103-US LOCAL TRANSPORTATION",
+        "53104-US LODGING EXPENSE",
+        "53111-US OTHER TRAVEL AND RELATED EXPENSE",
+        "53112-NON US OTHER TRAVEL AND RELATED EXPENSE",
+        "53131-TRAVEL-NON-GWU PERSONNEL",
+        "53241-SEMINAR FEES",
+        "53251-CONFERENCE/SEMINAR/TRAINING EXPENSE",
+        "53311-TELEPHONE - DIRECT",
+        "53411-POSTAGE/EXPRESS MAIL - NON-GW",
+        "54111-OFFICE SUPPLIES",
+        "54112-LIBRARY SUPPLIES",
+        "54121-LABORATORY SUPPLIES",
+        "54151-PRINTING SUPPLIES",
+        "54511-FUEL-GASOLINE AND OIL",
+        "54531-PHOTOGRAPHIC SUPPLIES",
+        "54541-MISCELLANEOUS SUPPLIES",
+        "55112-CONSULTANTS TRAVEL",
+        "55151-ADVERTISING",
+        "55152-PUBLICITY & PROMOTION",
+        "55511-NON-GW PRINTING/REPRODUCTION",
+        "55513-BINDING",
+        "55541-PAYMENTS TO SUBJECTS",
+        "55567-CLOUD COMPUTING SERVICES",
+        "55591-BUILDING/ROOM/FACILITY RENTAL (SHORT TERM)",
+        "56311-BUILDING/ROOM/FACILITY RENTAL OCCUPANCY"
+      ],
+      "ambiguous_loose_labels": {
+        "US CAR RENTAL": [
+          "53105-US RENTAL CAR EXPENSE",
+          "53149-NON US RENTAL CAR EXPENSE"
+        ]
+      },
+      "covered_upper_bound_if_ambiguous_counted": 44,
+      "uncovered_count": 43
+    },
+    "ovpr_accounts": {
+      "total": 44,
+      "method": "leading 5-digit code of expected.json expenses[].expense_type (plus bare codes in expense_type_contains_any); for not_in_concur, 5-digit codes in the skip entry's reason/channel text plus the codes listed in flags[].contains of the same situation",
+      "covered_by_expected_line": 23,
+      "covered_by_expected_line_list": [
+        "52193",
+        "52221",
+        "52441",
+        "52611",
+        "52612",
+        "52613",
+        "52641",
+        "52691",
+        "52721",
+        "53101",
+        "53102",
+        "53103",
+        "53104",
+        "53111",
+        "53112",
+        "53131",
+        "54541",
+        "55112",
+        "55151",
+        "55152",
+        "55541",
+        "55591",
+        "56311"
+      ],
+      "covered_by_not_in_concur_item": 19,
+      "covered_by_not_in_concur_item_list": [
+        "52131",
+        "52611",
+        "52612",
+        "52615",
+        "52691",
+        "53132",
+        "53211",
+        "55161",
+        "55541",
+        "55561",
+        "58323",
+        "58417",
+        "58516",
+        "58522",
+        "58523",
+        "58524",
+        "58535",
+        "58536",
+        "58691"
+      ],
+      "covered_by_either": 38,
+      "covered_by_neither": [
+        "53105",
+        "53145",
+        "53146",
+        "53147",
+        "53148",
+        "53149"
+      ]
+    }
+  },
+  "records": {
+    "runs": {
+      "run_dirs": 266,
+      "by_agent": {
+        "concur": 265,
+        "form-filling": 1
+      },
+      "by_day": {
+        "20260908": 5,
+        "20260910": 6,
+        "20260911": 16,
+        "20260913": 80,
+        "20260914": 113,
+        "20260918": 15,
+        "20260921": 31
+      },
+      "total_steps": 7496,
+      "total_frames": 7498
+    },
+    "demos": {
+      "episodes": 9,
+      "tasks": {
+        "recorder smoke test": 9
+      },
+      "all_smoke_tests": true
+    },
+    "batches": {
+      "batch_report_files": 26,
+      "batch_dirs_on_disk": 26,
+      "trip_runs": 64,
+      "trip_runs_by_status": {
+        "ok": 57,
+        "crashed: ConnectionRefusedError(61, \"Connect call failed ('127.0.0.1', 8765)\")": 5,
+        "aborted before start: could not start a fresh session (is Concur still logged in?)": 1,
+        "crashed: ConnectionClosedError(Close(code=1012, reason=''), Close(code=1012, reason=''), True)": 1
+      },
+      "steps_cost_lines": 64,
+      "cost_a_sum_of_batch_report_lines": "241.42",
+      "cost_b_sum_of_readme_column": "241.42",
+      "cost_b_rows": 26,
+      "cost_difference_b_minus_a": "0.00"
+    },
+    "latest_score_per_trip": {
+      "trip_a_chicago": {
+        "batch": "20260914-02",
+        "overall_pct": 96.6
+      },
+      "trip_b_boston_montreal": {
+        "batch": "20260914-02",
+        "overall_pct": 96.6
+      },
+      "trip_c_atlanta_grant": {
+        "batch": "20260914-02",
+        "overall_pct": 93.4
+      },
+      "trip_d_sf_student": {
+        "batch": "20260914-02",
+        "overall_pct": 100.0
+      },
+      "trip_e_nyc_london_grant": {
+        "batch": "20260914-02",
+        "overall_pct": 90.7
+      },
+      "trip_f_seattle_staff": {
+        "batch": "20260914-02",
+        "overall_pct": 93.7
+      },
+      "trip_g_boston_paris_staff": {
+        "batch": "20260914-03",
+        "overall_pct": 97.0
+      },
+      "trip_h_chicago_toronto_student": {
+        "batch": "20260914-03",
+        "overall_pct": 92.9
+      },
+      "trip_i_atlanta_staff": {
+        "batch": "20260914-04",
+        "overall_pct": 100.0
+      },
+      "trip_j_nyc_rail_staff": {
+        "batch": "20260914-05",
+        "overall_pct": 100.0
+      },
+      "trip_k_sf_staff": {
+        "batch": "20260914-06",
+        "overall_pct": 94.5
+      },
+      "trip_l_local_dc": {
+        "batch": "20260914-06",
+        "overall_pct": 86.2
+      },
+      "trip_m_boston_drive_staff": {
+        "batch": "20260914-06",
+        "overall_pct": 87.0
+      },
+      "trip_n_nyc_drive_staff": {
+        "batch": "20260914-06",
+        "overall_pct": 100.0
+      },
+      "trip_o_london_staff": {
+        "batch": "20260914-01",
+        "overall_pct": 100.0
+      },
+      "trip_p_boston_london_postdoc": {
+        "batch": "20260921-01",
+        "overall_pct": 78.5
+      },
+      "trip_q_new_faculty_no_travel": {
+        "batch": "20260921-01",
+        "overall_pct": 89.4
+      },
+      "trip_r_adjunct_no_travel": {
+        "batch": "20260921-01",
+        "overall_pct": 72.5,
+        "corrected_by_reexport_pct": 76.2
+      },
+      "trip_s_lab_purchases_postdoc": {
+        "batch": "20260921-01",
+        "overall_pct": 87.8
+      },
+      "trip_t_postdoc_no_travel": {
+        "batch": "20260921-01",
+        "overall_pct": 93.3
+      },
+      "trip_u_student_no_travel": {
+        "batch": "20260921-01",
+        "overall_pct": 87.0
+      },
+      "trip_v_faculty_no_travel": {
+        "batch": "20260921-01",
+        "overall_pct": 78.3
+      },
+      "trip_w_seattle_recruiting": {
+        "batch": "20260921-01",
+        "overall_pct": 100.0
+      }
+    },
+    "reexported_scores": [
+      {
+        "trip": "trip_r_adjunct_no_travel",
+        "batch": "20260921-01",
+        "score_txt_pct": 72.5,
+        "score_reexport_pct": 76.2,
+        "reexport_is_newer": true
+      }
+    ]
+  },
+  "ledger": {
+    "title": "实验侧总账 — 169 个情形各测过几次、过了几次",
+    "generation_line": "_由 `scripts/situation_ledger.py` 于 2026-09-20 05:52 生成。每跑完一批重跑一次。设计侧的对应文档是 `gw_policy_data/reports/POLICY_READING.md`。有答案快照的批次用快照重算（精确）；更早的批次读当时的 score 文件，按单据名映射到情形（数据后来重新生成过的单据映射不上，那一趟就不计）。因基础设施故障作废的运行（API 余额不足、没有一轮到达 agent、运行未正常结束、某轮出错且零花费）整趟不计入任何统计，列在文末。符号：✓ 通过 · ✗ 未通过（括号里是原因） · ○ 可报可不报且已说明。批次号只写后五位（`13-05` = 20260913-05），字母是 trip。_",
+    "generated_at": "2026-09-20 05:52",
+    "summary_bullets": [
+      "- 情形总数 169；有过有效测量的 169；至少通过一次的 160；测过但从未通过的 9；从未有效测量的 0。",
+      "- 纳入的运行：41 趟，25 个批次；因基础设施故障排除 8 趟（不计入任何统计，见文末）。"
+    ]
+  },
+  "rulebook": {
+    "rules_md": {
+      "path": "policies/gwu/RULES.md",
+      "lines": 371,
+      "top_level_numbered_sections": 16,
+      "numbered_section_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "lettered_sub_items": [
+        "1b"
+      ],
+      "markdown_h2_sections": [
+        "What the agent must do at fill time",
+        "Outside travel — non-travel purchases, and documents not filed in Concur",
+        "Skip these — unallowable (partial list, Appendix B p30–31)",
+        "GW Concur expense types seen on the portal (confirm in the picker)",
+        "Reference (for people and the compliance check)"
+      ]
+    },
+    "lessons": {
+      "entries_parsed": 48,
+      "by_status": {
+        "rule": 48
+      },
+      "headings_by_markdown_section": {
+        "(preamble)": 1,
+        "Candidates (seen, not yet promoted)": 8,
+        "Rules (injected into the agent prompt)": 40
+      },
+      "inbox_entries": 55
+    }
+  },
+  "appendix": [
+    {
+      "pool": "travel",
+      "id": "AIR-COACH-DIRECT",
+      "family": "airfare",
+      "title": "Coach ticket bought from the airline",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-COACH",
+        "AIR-LOWEST",
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "A",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-COACH-INTL",
+      "family": "airfare",
+      "title": "Coach ticket to a foreign city, bought in USD",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=foreign",
+      "provisions": [
+        "AIR-COACH",
+        "AIR-LOWEST"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "B",
+        "H",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-AGENCY",
+      "family": "airfare",
+      "title": "Coach ticket booked through iBuy+ Travel / Travel Leaders",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-COACH",
+        "AIR-IBUY-60"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-IBUY-PRETRIP",
+      "family": "airfare",
+      "title": "iBuy+ ticket for NEXT month's trip, claimed now",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-IBUY-60",
+        "TIME-PRE-TRIP"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-OOP-PRETRIP",
+      "family": "airfare",
+      "title": "Airline-direct ticket for a trip not yet taken",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "TIME-PRE-TRIP"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-BAG",
+      "family": "airfare",
+      "title": "First checked bag fee",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-ANCILLARY-OK"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "A",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-BAG-EXCESS",
+      "family": "airfare",
+      "title": "Sports-equipment baggage fee (bicycle)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-EXCESS-BAG"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-WIFI",
+      "family": "airfare",
+      "title": "In-flight Wi-Fi",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-ANCILLARY-OK",
+        "APPA-TELECOM"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-WIFI-OTHER-CARRIER",
+      "family": "airfare",
+      "title": "In-flight Wi-Fi receipt from an airline the traveler did not fly",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-ANCILLARY-OK",
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-SEAT-ECONOMY",
+      "family": "airfare",
+      "title": "Paid advance seat assignment inside economy",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-ANCILLARY-OK",
+        "AIR-ANCILLARY-NO"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-EXTRA-LEGROOM",
+      "family": "airfare",
+      "title": "Extra-legroom seat upgrade",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-ANCILLARY-NO"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-PRIORITY",
+      "family": "airfare",
+      "title": "Priority boarding",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-ANCILLARY-NO"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-PREMIUM-NOMEMO",
+      "family": "airfare",
+      "title": "First class on a short domestic flight, no approval in the folder",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-COACH",
+        "AIR-FIRST"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-PREMIUM-LONGHAUL-MEMO",
+      "family": "airfare",
+      "title": "Business class on a 7-hour international segment, with the dean's memo",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=foreign; persona=staff",
+      "provisions": [
+        "AIR-COACH"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-PREMIUM-LONGHAUL-NOMEMO",
+      "family": "airfare",
+      "title": "Business class on a 7-hour segment, memo missing",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=foreign; persona=staff",
+      "provisions": [
+        "AIR-COACH"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "O"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-ECREDIT",
+      "family": "airfare",
+      "title": "Ticket paid partly with an airline eCredit of unknown origin",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-UNUSED",
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-MILES-AWARD",
+      "family": "airfare",
+      "title": "Award ticket paid with miles (only taxes charged)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-MILES"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-MILES-UPGRADE-COPAY",
+      "family": "airfare",
+      "title": "Coach fare plus a cash co-pay for a miles upgrade",
+      "judgment": "exclude",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-MILES"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-REFUNDED",
+      "family": "airfare",
+      "title": "Ticket later refunded in full (refund confirmation in the folder)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-UNUSED",
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-CHANGE-NOREASON",
+      "family": "airfare",
+      "title": "Fare difference for a changed flight, no reason given",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-CHANGE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-CHANGE-REASON",
+      "family": "airfare",
+      "title": "Fare difference for a changed flight, reason in the notes",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-CHANGE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-CANCEL-PENALTY",
+      "family": "airfare",
+      "title": "Airline cancellation penalty for a business-caused cancellation",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-CHANGE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-COMPANION",
+      "family": "airfare",
+      "title": "Ticket for the traveler's spouse on the same booking",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "COMPANION"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-COMPANION-MEMO",
+      "family": "airfare",
+      "title": "Spouse's ticket with the Vice President's written pre-approval",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "COMPANION"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-INDIRECT-COMPARISON",
+      "family": "airfare",
+      "title": "Personal stop-over routing, with the direct-fare screenshot",
+      "judgment": "exclude",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-INDIRECT",
+        "AIR-LOWEST"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-INDIRECT-NOCOMPARISON",
+      "family": "airfare",
+      "title": "Personal stop-over routing without a fare comparison",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "AIR-INDIRECT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-FOREIGN-CARRIER-GRANT",
+      "family": "airfare",
+      "title": "Non-US carrier on a federal grant (Fly America)",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=foreign; funding=grant",
+      "provisions": [
+        "AIR-FLY-AMERICA",
+        "AIR-FEDERAL-ECON"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-CLUB",
+      "family": "airfare",
+      "title": "Airport lounge day pass",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "AIR-CLUB"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-INSURANCE",
+      "family": "airfare",
+      "title": "Trip / baggage insurance bought with the ticket",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-INSURANCE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-GLOBAL-ENTRY",
+      "family": "airfare",
+      "title": "Global Entry / TSA PreCheck application fee",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "AIR-TRUSTED-TRAVELER"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-PASSPORT",
+      "family": "airfare",
+      "title": "Passport renewal / visa fee before an international trip",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=foreign; persona=staff",
+      "provisions": [
+        "AIR-TRUSTED-TRAVELER",
+        "APPA-VACCINE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-PCARD-PAID",
+      "family": "airfare",
+      "title": "Ticket paid with the GW P-Card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "PCARD"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "AIR-OUTSIDE-REIMBURSED",
+      "family": "airfare",
+      "title": "Ticket the host institution reimburses",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "OUTSIDE-SOURCE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "O"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO",
+      "family": "lodging",
+      "title": "Hotel folio, several nights at varying rates",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-STANDARD",
+        "LOD-ITEMIZE",
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt",
+        "search"
+      ],
+      "trips": [
+        "B",
+        "F",
+        "P",
+        "W"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-PERSONAL",
+      "family": "lodging",
+      "title": "Folio with a movie, minibar and health-club charge on it",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-ITEMIZE",
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-LAUNDRY-SHORT",
+      "family": "lodging",
+      "title": "Laundry on a four-day trip",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=domestic; max_days=4",
+      "provisions": [
+        "LOD-LAUNDRY"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "M"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-LAUNDRY-LONG",
+      "family": "lodging",
+      "title": "Laundry on a seven-day trip",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic; min_days=6",
+      "provisions": [
+        "LOD-LAUNDRY"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D",
+        "J"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-PARKING",
+      "family": "lodging",
+      "title": "Hotel valet parking on the folio",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "APPA-MISC",
+        "GT-MILEAGE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "N"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-ROOMSERVICE-BIG",
+      "family": "lodging",
+      "title": "Room-service dinner over $75 on the folio, no itemised ticket",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "DOC-75",
+        "APPA-MISC"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-ROOMSERVICE-SMALL",
+      "family": "lodging",
+      "title": "Room-service breakfast under $75 on the folio",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "APPA-MISC",
+        "MEAL-TRAVEL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-INTERNET",
+      "family": "lodging",
+      "title": "Hotel internet charge on the folio",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "APPA-TELECOM"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-INTERNET-GRANT",
+      "family": "lodging",
+      "title": "Hotel internet on a federal research grant",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic; funding=grant",
+      "provisions": [
+        "APPA-TELECOM",
+        "MEAL-GRANT-UNRESTRICTED"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOLIO-INROOM-ALCOHOL",
+      "family": "lodging",
+      "title": "In-room bar alcohol on the folio",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "APPB-PERSONAL",
+        "MEAL-ALCOHOL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-OTA",
+      "family": "lodging",
+      "title": "Expedia-style prepaid receipt: nightly prices and one tax total",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-ITEMIZE",
+        "LOD-PREPAID"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-FOREIGN",
+      "family": "lodging",
+      "title": "Foreign hotel folio in the local currency",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=foreign",
+      "provisions": [
+        "FOREIGN-CURRENCY",
+        "LOD-ITEMIZE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "B",
+        "E",
+        "G",
+        "H",
+        "O",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-NOSHOW",
+      "family": "lodging",
+      "title": "No-show charge for a reservation not cancelled",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-NOSHOW",
+        "APPB-PENALTIES"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-CANCEL-FEE-AIRLINE",
+      "family": "lodging",
+      "title": "Hotel cancellation fee caused by an airline cancellation",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-NOSHOW",
+        "APPB-PENALTIES"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-AIRBNB-STAFF",
+      "family": "lodging",
+      "title": "Airbnb stay by a staff member",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic; persona=staff",
+      "provisions": [
+        "LOD-P2P"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-AIRBNB-STUDENT",
+      "family": "lodging",
+      "title": "Airbnb stay by a student, no prior approval in the folder",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic; persona=student",
+      "provisions": [
+        "LOD-P2P"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-SUITE",
+      "family": "lodging",
+      "title": "Junior suite instead of a standard room",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-STANDARD"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-PERSONAL-DAYS",
+      "family": "lodging",
+      "title": "Two personal nights added to the stay",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-PERSONAL-DAYS"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-COMPANION-SURCHARGE",
+      "family": "lodging",
+      "title": "Additional-guest charge for the spouse on the folio",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "COMPANION"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-DEPOSIT-DUP",
+      "family": "lodging",
+      "title": "Deposit receipt plus the final folio that applies it",
+      "judgment": "skip",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-DEPOSIT",
+        "REPORT-ONE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-BOOKING-CONF",
+      "family": "lodging",
+      "title": "Reservation confirmation with no payment taken",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "LOD-RESORT-FEE",
+      "family": "lodging",
+      "title": "Mandatory destination / resort fee on the folio",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "LOD-STANDARD"
+      ],
+      "basis_kinds": [
+        "experience"
+      ],
+      "trips": [
+        "J"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-TRAVEL-SMALL",
+      "family": "meals",
+      "title": "Travel meal alone, under $75",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-TRAVEL"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt",
+        "user decision"
+      ],
+      "trips": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F",
+        "I",
+        "J",
+        "K",
+        "M",
+        "N"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-TRAVEL-BIG-ITEMIZED",
+      "family": "meals",
+      "title": "Travel meal over $75 with the itemised check",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "DOC-75",
+        "MEAL-TRAVEL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "A",
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-TRAVEL-BIG-SLIP",
+      "family": "meals",
+      "title": "Meal over $75 with only the card slip",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "DOC-75",
+        "DOC-AFFIDAVIT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-DELIVERY",
+      "family": "meals",
+      "title": "Food delivery to the hotel with fees and a tip",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-TRAVEL",
+        "APPA-TIPS"
+      ],
+      "basis_kinds": [
+        "real receipt",
+        "user decision"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-BUSINESS",
+      "family": "meals",
+      "title": "Business dinner with collaborators, no alcohol",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-BUSINESS",
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "B",
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-BUSINESS-ALCOHOL",
+      "family": "meals",
+      "title": "Business meal with wine on the check",
+      "judgment": "split",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-ALCOHOL",
+        "MEAL-BUSINESS"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "A",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-BUSINESS-ALCOHOL-GRANT",
+      "family": "meals",
+      "title": "Business meal with wine, on a federal grant",
+      "judgment": "split",
+      "difficulty": "complex",
+      "scope": "city=domestic; funding=grant",
+      "provisions": [
+        "MEAL-ALCOHOL",
+        "MEAL-GRANT-UNRESTRICTED"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-GROUP-FUNCTION",
+      "family": "meals",
+      "title": "Group dinner for twelve with the invitation list",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-BUSINESS"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-TIP-EXCESSIVE",
+      "family": "meals",
+      "title": "Lunch with a tip near 80%",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "APPA-TIPS"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-INTL-PERDIEM",
+      "family": "meals",
+      "title": "Meal receipt from an international day",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=foreign",
+      "provisions": [
+        "MEAL-PERDIEM-INTL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "B",
+        "E",
+        "G",
+        "H",
+        "O"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "TA-INTL-ITINERARY",
+      "family": "meals",
+      "title": "Per diem for the foreign leg, claimed through Concur's Travel Allowance itinerary",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=foreign",
+      "provisions": [
+        "MEAL-PERDIEM-INTL",
+        "MEAL-PERDIEM-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "B",
+        "E",
+        "G",
+        "H",
+        "O",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "TA-INTL-PROVIDED-MEALS",
+      "family": "meals",
+      "title": "Meals provided abroad (the host's lunch and dinner), deducted from the per diem",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=foreign",
+      "provisions": [
+        "MEAL-PERDIEM-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "E",
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-LOCAL-PERSONAL",
+      "family": "meals",
+      "title": "Lunch alone on a local (< 50 mile) business day",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=local",
+      "provisions": [
+        "LOCAL-50"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-LOCAL-IN-MEETING",
+      "family": "meals",
+      "title": "Lunch during an all-day local meeting",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=local",
+      "provisions": [
+        "LOCAL-50"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-LOCAL-BUSINESS",
+      "family": "meals",
+      "title": "Local lunch with a visiting collaborator",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=local",
+      "provisions": [
+        "MEAL-BUSINESS",
+        "LOCAL-50"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-CELEBRATION",
+      "family": "meals",
+      "title": "Cake for a lab member's birthday",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=local",
+      "provisions": [
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-WITH-SPOUSE",
+      "family": "meals",
+      "title": "Dinner for two where the second person is the spouse",
+      "judgment": "exclude",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "COMPANION",
+        "MEAL-TRAVEL"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "D",
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-AFFIDAVIT",
+      "family": "meals",
+      "title": "Meal with no receipt, covered by a Missing Receipt Acknowledgement form",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "DOC-AFFIDAVIT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-DUP-SLIP-ITEMIZED",
+      "family": "meals",
+      "title": "Itemised check AND card slip for the same meal",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "DOC-75",
+        "REPORT-ONE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-ATTENDEE-APPROVER",
+      "family": "meals",
+      "title": "Business lunch where one attendee is the report's approver",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-BUSINESS"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-INTERNAL-STAFF",
+      "family": "meals",
+      "title": "Working lunch with two GW colleagues on the trip",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-BUSINESS"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "MEAL-COFFEE-SMALL",
+      "family": "meals",
+      "title": "Coffee and a pastry",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MEAL-TRAVEL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "A",
+        "C",
+        "D",
+        "J",
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-UBER",
+      "family": "ground",
+      "title": "Ride-share between airport, hotel and venue",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "GT-AIRPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "H",
+        "I",
+        "J",
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-UBER-TIP-UPDATED",
+      "family": "ground",
+      "title": "Original and UPDATED ride receipts (tip added afterwards)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-AIRPORT",
+        "REPORT-ONE"
+      ],
+      "basis_kinds": [
+        "real receipt",
+        "search"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-UBER-DUP-IDENTICAL",
+      "family": "ground",
+      "title": "The same ride receipt saved twice under two names",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "REPORT-ONE"
+      ],
+      "basis_kinds": [
+        "real receipt"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-TAXI",
+      "family": "ground",
+      "title": "Taxi with a printed meter receipt",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-AIRPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-TAXI-FOREIGN",
+      "family": "ground",
+      "title": "Taxi abroad, receipt in the local currency",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=foreign",
+      "provisions": [
+        "FOREIGN-CURRENCY",
+        "GT-AIRPORT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E",
+        "G",
+        "O"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-TRANSIT",
+      "family": "ground",
+      "title": "Public transit fare-machine receipt",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "GT-AIRPORT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "A",
+        "B",
+        "J",
+        "O"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-SHUTTLE",
+      "family": "ground",
+      "title": "Airport shuttle van",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-AIRPORT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RAIL-ACELA-BUSINESS",
+      "family": "ground",
+      "title": "Acela Business Class instead of a flight",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RAIL"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RAIL-ACELA-FIRST",
+      "family": "ground",
+      "title": "Acela First Class (upgrade from Business)",
+      "judgment": "exclude",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RAIL"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RAIL-COACH",
+      "family": "ground",
+      "title": "Northeast Regional coach ticket",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RAIL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "J"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-BUS",
+      "family": "ground",
+      "title": "Intercity bus ticket home from New York / Boston",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RAIL",
+        "GT-MODE"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "J"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-PREFERRED",
+      "family": "ground",
+      "title": "Hertz / Enterprise / National rental, no extra insurance",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RENTAL-PREFERRED",
+        "GT-RENTAL-CLASS"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-OTHER-CDW",
+      "family": "ground",
+      "title": "Avis / Budget rental WITH CDW and liability bought",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic; persona=staff",
+      "provisions": [
+        "GT-RENTAL-PREFERRED"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-OTHER-NOCDW",
+      "family": "ground",
+      "title": "Avis / Budget rental WITHOUT the required insurance",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic; persona=staff",
+      "provisions": [
+        "GT-RENTAL-PREFERRED"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-PREFERRED-EXTRA-INSURANCE",
+      "family": "ground",
+      "title": "Hertz rental with an LDW bought although insurance is included",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RENTAL-PREFERRED"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-PREPAID-FUEL",
+      "family": "ground",
+      "title": "Rental with the prepaid fuel option",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RENTAL-FUEL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-FUEL",
+      "family": "ground",
+      "title": "Gas station receipt for the rental car",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RENTAL-FUEL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-FUEL-DATE-MISMATCH",
+      "family": "ground",
+      "title": "Refuel receipt dated two days AFTER the rental was returned",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RENTAL-FUEL",
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-SPECIALTY",
+      "family": "ground",
+      "title": "Premium SUV / luxury rental without approval",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-RENTAL-CLASS"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-INTL-STAFF",
+      "family": "ground",
+      "title": "Rental abroad by staff with CDW and liability",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=foreign; persona=staff",
+      "provisions": [
+        "GT-RENTAL-INTL",
+        "FOREIGN-CURRENCY"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "B",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-INTL-STUDENT",
+      "family": "ground",
+      "title": "Rental abroad by a student",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=foreign; persona=student",
+      "provisions": [
+        "GT-RENTAL-INTL",
+        "GT-RENTAL-STUDENT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-VAN15",
+      "family": "ground",
+      "title": "15-passenger van rented by a student group",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic; persona=student",
+      "provisions": [
+        "GT-RENTAL-STUDENT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-STUDENT-NONPREFERRED",
+      "family": "ground",
+      "title": "Student rents from a non-preferred company",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic; persona=student",
+      "provisions": [
+        "GT-RENTAL-STUDENT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-CARWASH",
+      "family": "ground",
+      "title": "Car wash receipt",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-FINES"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-REPAIR",
+      "family": "ground",
+      "title": "Tire repair receipt",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-FINES"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-PARKING-FINE",
+      "family": "ground",
+      "title": "Parking citation",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-FINES"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-GAS-PERSONAL",
+      "family": "ground",
+      "title": "Gas for personal car",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-GAS-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-RENTAL-TOLL",
+      "family": "ground",
+      "title": "Toll charges while driving the rental",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-MILEAGE",
+        "GT-RENTAL-FUEL"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "C",
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-EZPASS-MIXED",
+      "family": "ground",
+      "title": "E-ZPass statement mixing trip tolls with commute tolls",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=local",
+      "provisions": [
+        "GT-MILEAGE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-MILEAGE-OFFICE",
+      "family": "ground",
+      "title": "Mileage from the office to a meeting and back",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=local",
+      "provisions": [
+        "GT-MILEAGE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-MILEAGE-COMMUTE",
+      "family": "ground",
+      "title": "Commute logged as mileage",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=local",
+      "provisions": [
+        "GT-MILEAGE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-MILEAGE-FROM-HOME",
+      "family": "ground",
+      "title": "Mileage logged from home when the office is closer",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=local",
+      "provisions": [
+        "GT-MILEAGE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-MILEAGE-TWO-TRAVELERS",
+      "family": "ground",
+      "title": "Two colleagues in one car, both logging mileage",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=local",
+      "provisions": [
+        "GT-MILEAGE-TWO"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "L"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-MILEAGE-AIRPORT-DROPOFF",
+      "family": "ground",
+      "title": "Spouse drives the traveler to the airport and back",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-AIRPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-CAR-IN-LIEU-OF-AIR",
+      "family": "ground",
+      "title": "Drove 420 miles instead of flying, with the airfare comparison",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-CAR-IN-LIEU",
+        "GT-MODE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "N"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-DRIVE-200PLUS-NO-QUOTE",
+      "family": "ground",
+      "title": "Drove more than 200 miles with no cost comparison",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-MODE",
+        "GT-CAR-IN-LIEU"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "M"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-PARKING",
+      "family": "ground",
+      "title": "Parking garage receipt at the meeting venue",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "GT-MILEAGE",
+        "APPA-MISC"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C",
+        "M",
+        "N"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-LIMO-NOAPPROVAL",
+      "family": "ground",
+      "title": "Black-car service without the VP's written pre-approval in the folder",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-PRIVATE-CAR"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-LIMO-MEMO",
+      "family": "ground",
+      "title": "Private sedan service with the VP's written pre-approval",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=domestic",
+      "provisions": [
+        "GT-PRIVATE-CAR"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-STALE-STAFF",
+      "family": "ground",
+      "title": "Ride receipt from a different trip, more than 60 days old (staff)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "TIME-30-60",
+        "REPORT-ONE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-STALE-STUDENT",
+      "family": "ground",
+      "title": "Old receipt from an earlier trip (student — 60-day rule waived)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=student",
+      "provisions": [
+        "TIME-30-60"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "GT-PERSONAL-DETOUR",
+      "family": "ground",
+      "title": "Ride to a personal destination during the trip",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-PLAIN",
+      "family": "registration",
+      "title": "Conference registration",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt"
+      ],
+      "trips": [
+        "B",
+        "D",
+        "H",
+        "J"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-MEMBERSHIP-PAID",
+      "family": "registration",
+      "title": "Registration invoice with a paid society membership on it",
+      "judgment": "split",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MISC-75",
+        "APPB-CLUBS"
+      ],
+      "basis_kinds": [
+        "experience",
+        "real receipt",
+        "search"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-MEMBERSHIP-COMP",
+      "family": "registration",
+      "title": "Registration with a complimentary ($0) membership line",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "real receipt"
+      ],
+      "trips": [
+        "M"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-WORKSHOP",
+      "family": "registration",
+      "title": "Pre-conference tutorial add-on",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "A",
+        "K"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-BANQUET",
+      "family": "registration",
+      "title": "Optional conference banquet ticket",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MEAL-BUSINESS",
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-PCARD",
+      "family": "registration",
+      "title": "Registration paid with the GW P-Card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "PCARD"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-ABSTRACT-FEE",
+      "family": "registration",
+      "title": "Abstract submission / publication fee",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "experience"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-MEMBERSHIP-ONLY",
+      "family": "registration",
+      "title": "Society membership dues on their own",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-CLUBS",
+        "REPORT-ONE"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "REG-VIRTUAL",
+      "family": "registration",
+      "title": "Online-only conference registration",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "REPORT-ONE"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-HOTEL-INTERNET-SEPARATE",
+      "family": "other",
+      "title": "Hotel Wi-Fi day pass receipt",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPA-TELECOM"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-PHONE-ROAMING",
+      "family": "other",
+      "title": "Mobile roaming charges",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=foreign",
+      "provisions": [
+        "APPA-TELECOM"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-POSTER",
+      "family": "other",
+      "title": "Poster printing",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-LUGGAGE-STORAGE",
+      "family": "other",
+      "title": "Luggage storage",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPA-MISC"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-VALET",
+      "family": "other",
+      "title": "Valet parking at the meeting venue",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPA-MISC"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D",
+        "I"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-NEWSPAPER",
+      "family": "other",
+      "title": "Newsstand receipt",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-READING"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-BOOKS-RESEARCH",
+      "family": "other",
+      "title": "Conference proceedings volume",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-READING"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-CARD-LATE-FEE",
+      "family": "other",
+      "title": "Credit-card late fee",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-CARDFEES"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-CLOTHING",
+      "family": "other",
+      "title": "Clothing bought on the trip",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-HAIRCUT",
+      "family": "other",
+      "title": "Haircut",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-LUGGAGE-PURCHASE",
+      "family": "other",
+      "title": "Replacement suitcase",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-LUGGAGE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-TOILETRIES",
+      "family": "other",
+      "title": "Pharmacy receipt (toiletries)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-MEDICINE",
+      "family": "other",
+      "title": "Over-the-counter medicine",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-VACCINATION-REQUIRED",
+      "family": "other",
+      "title": "Travel clinic — required vaccination",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPA-VACCINE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-VACCINATION-FLU",
+      "family": "other",
+      "title": "Flu shot",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPA-VACCINE",
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-GIFT-NOAPPROVAL",
+      "family": "other",
+      "title": "Flowers for the session chair",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-SPECIAL-OCCASION",
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-EVENT-DECOR",
+      "family": "other",
+      "title": "Table decorations for the GW-hosted reception",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-CHARITY",
+      "family": "other",
+      "title": "Donation receipt",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-CHARITY"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "H"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-LOST-PROPERTY",
+      "family": "other",
+      "title": "Replacement of a stolen charger",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-LOST"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-DEPENDENT-CARE",
+      "family": "other",
+      "title": "Babysitter while away",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-DEPENDENT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-PET-CARE",
+      "family": "other",
+      "title": "Dog boarding",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-DEPENDENT"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-CLUB-FEES",
+      "family": "other",
+      "title": "Golf with the collaborators",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-CLUBS",
+        "ENT-TASTE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "A"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-ENTERTAINMENT-LAVISH",
+      "family": "other",
+      "title": "VIP table at a club for the collaborators, no VP approval in the folder",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "ENT-TASTE",
+        "MEAL-ALCOHOL"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-SUPPLIES",
+      "family": "other",
+      "title": "Office supplies bought on the trip",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "experience"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-SPORTS-EQUIPMENT",
+      "family": "other",
+      "title": "Running shoes",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-CLUBS",
+        "APPB-PERSONAL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-ATM-FEE",
+      "family": "other",
+      "title": "ATM withdrawal abroad — the operator and foreign-transaction fees are conversion fees",
+      "judgment": "exclude",
+      "difficulty": "simple",
+      "scope": "city=foreign",
+      "provisions": [
+        "FOREIGN-CURRENCY"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "B",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-FX-FEE-STATEMENT",
+      "family": "other",
+      "title": "Card statement excerpt with foreign-transaction fees",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=foreign",
+      "provisions": [
+        "DOC-LEVEL3",
+        "FOREIGN-CURRENCY"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-PAYMENT-INDIVIDUAL",
+      "family": "other",
+      "title": "Cash paid to a student helper, handwritten receipt",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "G"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-VENDOR-INVOICE",
+      "family": "other",
+      "title": "An unpaid vendor invoice (Net 30) in the folder",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "OTH-GIFT-MEMO",
+      "family": "other",
+      "title": "Flowers for a retiring collaborator, with the dean's written approval",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-SPECIAL-OCCASION",
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "J"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "DOC-PROGRAM",
+      "family": "documents",
+      "title": "Conference program (agenda)",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "real receipt"
+      ],
+      "trips": [
+        "A",
+        "B",
+        "J"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "DOC-APPROVAL-ORPHAN",
+      "family": "documents",
+      "title": "An approval memo for an expense that is not in the folder",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPROVAL"
+      ],
+      "basis_kinds": [
+        "experience"
+      ],
+      "trips": [
+        "B"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "DOC-CARD-DETAIL-ITEMIZED",
+      "family": "documents",
+      "title": "Card transaction detail WITH items (valid as a receipt for goods)",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "DOC-LEVEL3"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "DOC-CARD-DETAIL-BARE",
+      "family": "documents",
+      "title": "Card transaction detail WITHOUT items (not a receipt)",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "DOC-LEVEL3"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "DOC-NOTES-PERDIEM-DOMESTIC",
+      "family": "documents",
+      "title": "Traveler asks for per diem on a domestic trip",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "MEAL-PERDIEM-INTL"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "D"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "DOC-NOTES-PURPOSE-INADEQUATE",
+      "family": "documents",
+      "title": "Notes give only 'Attend conference' as the purpose",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "PURPOSE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "DOC-DATE-VS-NOTES",
+      "family": "documents",
+      "title": "Taxi receipt printed after the time the notes say the traveler left the city",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "DOC-75"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "M"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "FUND-GRANT-ENTERTAINMENT",
+      "family": "funding",
+      "title": "Entertainment receipt on a federal grant",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=domestic; funding=grant",
+      "provisions": [
+        "MEAL-GRANT-UNRESTRICTED",
+        "ENT-TASTE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "C"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "FX-BOTH-CURRENCIES",
+      "family": "foreign",
+      "title": "Taxi card slip showing the local amount AND a dynamic-currency-conversion USD amount",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=foreign",
+      "provisions": [
+        "FOREIGN-CURRENCY"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "B",
+        "P"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "FX-HANDWRITTEN",
+      "family": "foreign",
+      "title": "Foreign receipt with the traveler's handwritten USD conversion",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=foreign",
+      "provisions": [
+        "FOREIGN-CURRENCY"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "E"
+      ]
+    },
+    {
+      "pool": "travel",
+      "id": "TIME-REG-OLD-BUT-FINE",
+      "family": "timing",
+      "title": "Registration paid 100 days before the trip",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "TIME-30-60"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "F"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBS-JOURNAL-ANNUAL",
+      "family": "subscriptions",
+      "title": "Annual journal subscription paid on the personal card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SUBS-BUSINESS",
+        "NC-SELF-PAID",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBS-JOURNAL-GRANT",
+      "family": "subscriptions",
+      "title": "Same journal subscription, report charged to a federal grant",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=grant",
+      "provisions": [
+        "NC-SUBS-BUSINESS",
+        "NC-GRANT-ADMIN-COSTS",
+        "NC-OVPR-ROUTING",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBS-NEWS-PERSONAL",
+      "family": "subscriptions",
+      "title": "Personal digital newspaper subscription",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-READING",
+        "NC-SUBS-BUSINESS"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBS-MONTHLY-STALE",
+      "family": "subscriptions",
+      "title": "Three monthly subscription charges, the oldest over 60 days (staff)",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-TIME-60-TRANSACTION",
+        "TIME-30-60",
+        "NC-SUBS-BUSINESS",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBS-MONTHLY-STALE-STUDENT",
+      "family": "subscriptions",
+      "title": "Same three monthly charges, student (60-day limit waived)",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=student",
+      "provisions": [
+        "NC-TIME-60-TRANSACTION",
+        "TIME-30-60",
+        "NC-SUBS-BUSINESS",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBS-INVOICE-UNPAID",
+      "family": "subscriptions",
+      "title": "Unpaid institutional subscription renewal invoice billed to GW",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SOFT-SAAS-ANNUAL",
+      "family": "software",
+      "title": "Annual software subscription bought with a click-through licence",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SW-TYPE-UNNAMED",
+        "NC-SW-SECURITY-ASSESSMENT",
+        "NC-CLICK-THROUGH",
+        "NC-SALES-TAX",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SOFT-SITE-LICENSE-DUP",
+      "family": "software",
+      "title": "Individual MATLAB licence although GW has a site licence",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-GW-ALREADY-PROVIDES",
+        "NC-SW-TYPE-UNNAMED",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SOFT-AI-TOOL",
+      "family": "software",
+      "title": "ChatGPT Plus monthly charge",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-AI-TOOLS-LIST",
+        "NC-SW-SECURITY-ASSESSMENT",
+        "NC-SW-TYPE-UNNAMED",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CLOUD-AWS-MONTHLY",
+      "family": "software",
+      "title": "Paid AWS monthly invoice on the personal card",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=any",
+      "provisions": [
+        "NC-CLOUD-BILL",
+        "NC-SW-SECURITY-ASSESSMENT",
+        "VENDOR-INVOICE",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CLOUD-AWS-GRANT",
+      "family": "software",
+      "title": "Same AWS invoice, federal grant",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=any; funding=grant",
+      "provisions": [
+        "NC-CLOUD-BILL",
+        "NC-SW-SECURITY-ASSESSMENT",
+        "NC-GRANT-ADMIN-COSTS",
+        "VENDOR-INVOICE",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CLOUD-INVOICE-UNPAID",
+      "family": "software",
+      "title": "Unpaid cloud invoice billed to the department",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CLOUD-PERSONAL-STORAGE",
+      "family": "software",
+      "title": "Personal iCloud+ family storage plan",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-PERSONAL",
+        "NC-SCOPE"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "BOOK-RESEARCH-TEXT",
+      "family": "extended",
+      "title": "Reference book bought for research or teaching",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-BOOKS",
+        "APPB-READING",
+        "DOC-75",
+        "NC-SALES-TAX"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-STAPLES-LOCAL",
+      "family": "supplies",
+      "title": "Office supplies bought locally on the personal card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SUPPLIES-TYPE",
+        "NC-SELF-PAID",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-GRANT-FEDERAL",
+      "family": "supplies",
+      "title": "Same Staples receipt, federal grant",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=grant",
+      "provisions": [
+        "NC-GRANT-ADMIN-COSTS",
+        "NC-SUPPLIES-TYPE",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-OVER75-SLIP",
+      "family": "supplies",
+      "title": "Supplies over $75 with only the card slip",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "DOC-75",
+        "MISC-75",
+        "NC-SUPPLIES-TYPE",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-MIXED-PERSONAL",
+      "family": "supplies",
+      "title": "One Target receipt with office supplies and toiletries",
+      "judgment": "exclude",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-PERSONAL",
+        "NC-SUPPLIES-TYPE",
+        "NC-SALES-TAX",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-PERSONAL-SCHOOL",
+      "family": "supplies",
+      "title": "Staples receipt for a child's school supplies",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-DEPENDENT",
+        "APPB-PERSONAL",
+        "NC-SCOPE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-AMAZON-PERSONALCARD",
+      "family": "supplies",
+      "title": "Amazon.com order (personal account) shipped to the office",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=student",
+      "provisions": [
+        "NC-AMAZON-PERSONAL",
+        "NC-SUPPLIES-TYPE",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-LAPTOP-SELFBUY",
+      "family": "supplies",
+      "title": "Laptop bought at Best Buy on the personal card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-COMPUTER-GWIT"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-WORKSTATION-CAPITAL",
+      "family": "supplies",
+      "title": "GPU workstation of $6,450 bought personally",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-CAPITALIZED-5000",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-ON-TRIP",
+      "family": "mixed",
+      "title": "Office supplies receipt in a trip folder (mixed report)",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=domestic",
+      "provisions": [
+        "NC-MIXED-REPORT",
+        "NC-SUPPLIES-TYPE",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-SOCIETY-ANNUAL",
+      "family": "memberships",
+      "title": "Professional society dues on their own",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-DUES-PROFESSIONAL",
+        "NC-SELF-PAID",
+        "NC-NO-TRAVEL-REPORT",
+        "APPB-CLUBS"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-IN-TRIP-FOLDER",
+      "family": "mixed",
+      "title": "Society dues receipt found in a trip folder",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-MIXED-REPORT",
+        "NC-DUES-PROFESSIONAL",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-BUNDLED-SPLIT",
+      "family": "mixed",
+      "title": "Registration receipt with a paid membership line — true split",
+      "judgment": "split",
+      "difficulty": "complex",
+      "scope": "city=any",
+      "provisions": [
+        "NC-MIXED-REPORT",
+        "NC-DUES-PROFESSIONAL",
+        "NC-SEMINAR-FEES",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "policy",
+        "real receipt",
+        "user decision"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-PTFPDF-OVERCAP",
+      "family": "memberships",
+      "title": "Part-time faculty dues of $150 under the professional-development fund",
+      "judgment": "exclude",
+      "difficulty": "complex",
+      "scope": "city=any; persona=faculty_parttime",
+      "provisions": [
+        "NC-DUES-PTFPDF",
+        "NC-DUES-PROFESSIONAL"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-FULLTIME-SAME-DUES",
+      "family": "memberships",
+      "title": "Same $150 dues receipt, full-time faculty",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-DUES-PTFPDF",
+        "NC-DUES-PROFESSIONAL",
+        "NC-SELF-PAID"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-HEALTH-CLUB",
+      "family": "memberships",
+      "title": "Annual gym membership",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "APPB-CLUBS",
+        "APPB-PERSONAL",
+        "NC-SCOPE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-AIRLINE-LOUNGE-ANNUAL",
+      "family": "memberships",
+      "title": "Annual United Club membership",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "AIR-CLUB",
+        "NC-SCOPE"
+      ],
+      "basis_kinds": [
+        "policy"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "DUES-DEPT-INVOICE-UNPAID",
+      "family": "memberships",
+      "title": "Unpaid society invoice for the department's institutional membership",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "VENDOR-INVOICE",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EVENT-FLOWERS",
+      "family": "events",
+      "title": "Flowers for a university event",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-EVENT-FLOWERS",
+        "NC-EVENT-TYPE-52612",
+        "NC-NO-TRAVEL-REPORT",
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EVENT-RECEPTION-ALCOHOL",
+      "family": "events",
+      "title": "Catered university reception with wine and beer",
+      "judgment": "split",
+      "difficulty": "complex",
+      "scope": "city=any",
+      "provisions": [
+        "NC-EVENT-TYPE-52612",
+        "MEAL-ALCOHOL",
+        "MEAL-BUSINESS"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EVENT-EMPLOYEE-BIRTHDAY",
+      "family": "events",
+      "title": "Balloons and a banner for a colleague's birthday",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "ENT-CELEBRATION",
+        "NC-EVENT-TYPE-52612",
+        "NC-SCOPE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "GIFT-APPROVED-MEMO",
+      "family": "events",
+      "title": "Retirement gift with the dean's written pre-approval",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=any",
+      "provisions": [
+        "NC-EVENT-TYPE-52612",
+        "APPB-SPECIAL-OCCASION",
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "GIFT-NOAPPROVAL",
+      "family": "events",
+      "title": "Same gift, no approval in the folder",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-EVENT-TYPE-52612",
+        "APPB-SPECIAL-OCCASION",
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EVENT-SPEAKER-HONORARIUM",
+      "family": "events",
+      "title": "Seminar speaker's honorarium paid personally by Zelle",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "VENDOR-INVOICE",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PRINT-POSTER-LOCAL",
+      "family": "extended",
+      "title": "Poster and flyer printing for an on-campus event",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-PRINTING",
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "POST-FEDEX-SHIPMENT",
+      "family": "extended",
+      "title": "Overnight shipment of samples to a collaborator",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-POSTAGE",
+        "MISC-75"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-CANDIDATE-DINNER",
+      "family": "recruiting",
+      "title": "Dinner with a faculty candidate, no alcohol",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-RECRUIT-MEAL",
+        "MEAL-BUSINESS",
+        "DOC-75",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-DINNER-ALCOHOL",
+      "family": "recruiting",
+      "title": "Candidate dinner with two glasses of wine",
+      "judgment": "split",
+      "difficulty": "complex",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-RECRUIT-MEAL",
+        "MEAL-ALCOHOL",
+        "MEAL-BUSINESS",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-EMPLOYEE-PAID-HOTEL",
+      "family": "recruiting",
+      "title": "Employee paid the candidate's hotel night on a personal card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-RECRUIT-EMPLOYEE-PAID",
+        "APPA-NONEMPLOYEE",
+        "LOD-GUEST",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-TRIP-RECRUIT-STUDENTS",
+      "family": "recruiting",
+      "title": "Employee's own trip to recruit students — ordinary travel",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=domestic; persona=staff",
+      "provisions": [
+        "NC-RECRUIT-OWN-TRIP",
+        "AIR-COACH",
+        "PURPOSE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-JOB-AD-PERSONALCARD",
+      "family": "recruiting",
+      "title": "Job advertisement paid personally",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-RECRUIT-JOB-AD",
+        "VENDOR-INVOICE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-JOB-AD-GRANT",
+      "family": "recruiting",
+      "title": "Same job advertisement, federal grant",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=grant; persona=faculty_fulltime",
+      "provisions": [
+        "NC-RECRUIT-JOB-AD",
+        "VENDOR-INVOICE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-CANDIDATE-SELFPAID",
+      "family": "recruiting",
+      "title": "The candidate's own receipts and reimbursement request",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-RECRUIT-CANDIDATE-RECEIPTS",
+        "NC-NOT-IN-CONCUR",
+        "APPA-NONEMPLOYEE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-HEADHUNTER-INVOICE",
+      "family": "recruiting",
+      "title": "Search firm's fee invoice",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-RECRUIT-SEARCH-FIRM",
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-SIGNING-BONUS",
+      "family": "recruiting",
+      "title": "Offer letter with a signing bonus filed as 'to be reimbursed'",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-RECRUIT-SIGNING-BONUS",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EVENT-FOREIGN-SPEAKER-AIRFARE",
+      "family": "events",
+      "title": "Employee paid a foreign guest lecturer's airfare",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-FOREIGN-VISITOR",
+        "NC-RECRUIT-EMPLOYEE-PAID",
+        "APPA-NONEMPLOYEE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RELOC-FACULTY-MOVERS",
+      "family": "relocation",
+      "title": "New assistant professor's moving-company invoice",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-RELOC-FACULTY-LUMP-SUM",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RELOC-FACULTY-HOUSEHUNT",
+      "family": "relocation",
+      "title": "New faculty house-hunting trip before the start date",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_fulltime",
+      "provisions": [
+        "NC-RELOC-FACULTY-LUMP-SUM",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "V"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RELOC-PARTTIME-FACULTY",
+      "family": "relocation",
+      "title": "Part-time faculty member's U-Haul receipt",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=faculty_parttime",
+      "provisions": [
+        "NC-RELOC-PARTTIME-NONE",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PCARD-SUBSCRIPTION",
+      "family": "pcard",
+      "title": "Journal subscription receipt showing the GW P-Card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-PCARD-RECEIPT-FILED",
+        "PCARD",
+        "NC-SUBS-BUSINESS",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": []
+    },
+    {
+      "pool": "non_travel",
+      "id": "PCARD-GUEST-AIRFARE",
+      "family": "pcard",
+      "title": "Candidate's ticket booked as Guest Traveler on the department P-Card",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-PCARD-RECEIPT-FILED",
+        "PCARD",
+        "APPA-NONEMPLOYEE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": []
+    },
+    {
+      "pool": "non_travel",
+      "id": "PCARD-SUPPLIES-AMAZON",
+      "family": "pcard",
+      "title": "Amazon Business order paid with the P-Card, tax exempt",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-PCARD-RECEIPT-FILED",
+        "PCARD",
+        "NC-SUPPLIES-TYPE",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": []
+    },
+    {
+      "pool": "non_travel",
+      "id": "PCARD-PERSONAL-CHARGE",
+      "family": "pcard",
+      "title": "Personal purchase on the GW P-Card",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "APPB-PERSONAL",
+        "PCARD",
+        "NC-PCARD-RECEIPT-FILED"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy"
+      ],
+      "trips": []
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBJ-GIFTCARDS-SELFBOUGHT",
+      "family": "extended",
+      "title": "Gift cards bought personally for study participants",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=student",
+      "provisions": [
+        "NC-GIFT-CARDS",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "TEL-HOTSPOT-GRANT",
+      "family": "extended",
+      "title": "Mobile hotspot data plan charged to a federal grant",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=grant; persona=staff",
+      "provisions": [
+        "NC-TELEPHONE-TYPE",
+        "APPA-TELECOM",
+        "MEAL-GRANT-UNRESTRICTED",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CONF-LOCAL-REGISTRATION",
+      "family": "extended",
+      "title": "Registration for a conference in Washington (no travel)",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SEMINAR-FEES",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SEMINAR-LOCAL-FEE",
+      "family": "extended",
+      "title": "Attendance fee for a one-day seminar in Washington",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SEMINAR-FEES",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "TRAINING-ONLINE-COURSE",
+      "family": "extended",
+      "title": "Online training course the project's PI asked for",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-TRAINING-COURSE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PERMIT-DRONE-FAA-REG",
+      "family": "extended",
+      "title": "FAA registration fee for three research drones",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-PERMIT-FEE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EVENT-INTL-FLOWERS",
+      "family": "events",
+      "title": "Table flowers for a GW reception abroad",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=foreign; funding=non_grant",
+      "provisions": [
+        "NC-EVENT-FOREIGN",
+        "NC-EVENT-FLOWERS",
+        "ENT-CELEBRATION",
+        "FOREIGN-CURRENCY"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "RECRUIT-CAREER-FAIR-BOOTH",
+      "family": "recruiting",
+      "title": "Employer booth at a regional STEM career fair",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=non_grant",
+      "provisions": [
+        "NC-RECRUIT-BOOTH",
+        "VENDOR-INVOICE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "OFFICE-NOTARY-FEE",
+      "family": "supplies",
+      "title": "Notary fee for a sponsor certification",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=non_grant",
+      "provisions": [
+        "NC-OFFICE-NOT-SUPPLY",
+        "NC-TYPE-UNDEFINED",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PROGRAM-DESIGN-WORKSHOP",
+      "family": "events",
+      "title": "Workshop fee to develop a new master's program",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=non_grant",
+      "provisions": [
+        "NC-PROGRAM-DEVELOPMENT",
+        "NC-TYPE-UNDEFINED",
+        "NC-SEMINAR-FEES",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "R"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-MISC-MOVING-BOXES",
+      "family": "supplies",
+      "title": "Moving boxes and packing material for a lab move",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any; funding=non_grant",
+      "provisions": [
+        "NC-MISC-SUPPLIES",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CONSULT-AIRFARE-EMPLOYEE-PAID",
+      "family": "extended",
+      "title": "Employee bought a contracted consultant's airfare",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-CONSULTANT-TRAVEL",
+        "APPA-NONEMPLOYEE",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PROMO-ITEMS-LICENSED",
+      "family": "events",
+      "title": "Logo tote bags and stickers for a public science festival",
+      "judgment": "none",
+      "difficulty": "complex",
+      "scope": "city=any; funding=non_grant",
+      "provisions": [
+        "NC-PROMO-ITEMS",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search"
+      ],
+      "trips": [
+        "W"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PROMO-ITEMS-GRANT",
+      "family": "events",
+      "title": "Same promotional items, report on a federal grant",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=any; funding=grant",
+      "provisions": [
+        "NC-PROMO-GRANT",
+        "NC-PROMO-ITEMS",
+        "MEAL-GRANT-UNRESTRICTED",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "U"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PROMO-ITEMS-NO-APPROVAL",
+      "family": "events",
+      "title": "Same promotional items, no artwork approval in the folder",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=non_grant",
+      "provisions": [
+        "NC-PROMO-ITEMS",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBJ-ADVANCE-RECONCILE",
+      "family": "extended",
+      "title": "Reconciling a human-subjects cash advance",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-SUBJECT-ADVANCE",
+        "NC-SUBJECT-PAYMENTS",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUBJ-CASH-OWN-POCKET",
+      "family": "extended",
+      "title": "Same payment log, paid from the researcher's own cash",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-SUBJECT-CASH-PERSONAL",
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "T"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "ROOM-HOTEL-MEETING-ROOM",
+      "family": "extended",
+      "title": "Half-day hotel meeting room for a partner workshop",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-ROOM-SHORT-TERM",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "ROOM-COWORK-MONTHLY-DESK",
+      "family": "extended",
+      "title": "Monthly coworking desk for a field study",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-ROOM-OCCUPANCY",
+        "NC-TYPE-UNDEFINED",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "LEASE-COPIER-FIRST-PAYMENT",
+      "family": "ovpr_unselectable",
+      "title": "First payment of a copier lease the person signed and paid",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-LEASE-COPIER",
+        "NC-CONTRACT-SIGNATURE",
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EMPLOYEE-STAFF-OUTING",
+      "family": "ovpr_unselectable",
+      "title": "Chair-approved staff recognition outing paid personally",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-EMPLOYEE-AWARD",
+        "NC-NOT-IN-CONCUR",
+        "ENT-CELEBRATION"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "TRAINEE-T32-SYMPOSIUM",
+      "family": "ovpr_unselectable",
+      "title": "T32 trainee's train ticket to a one-day symposium",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any; persona=staff",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-TRAINEE-TRAVEL",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SERVICE-FOREIGN-TRANSLATOR",
+      "family": "ovpr_unselectable",
+      "title": "Unpaid EUR invoice of a translator in Portugal",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-FOREIGN-SERVICE-PAYEE",
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SERVICE-TRANSCRIPTION-SOW",
+      "family": "ovpr_unselectable",
+      "title": "Unsigned statement of work of a transcription firm",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-SERVICE-CONTRACT",
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CONSTRUCTION-LAB-RENOVATION",
+      "family": "ovpr_unselectable",
+      "title": "Paid deposit for renovation work in a GW lab",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-CONSTRUCTION-FPCM",
+        "NC-CONTRACT-SIGNATURE",
+        "NC-NOT-IN-CONCUR",
+        "VENDOR-INVOICE"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CAPITAL-CONFERENCE-TABLE",
+      "family": "ovpr_unselectable",
+      "title": "Conference table of $6,380 bought personally",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-CAPITAL-ASSETS",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CAPITAL-VEHICLE-DEPOSIT",
+      "family": "ovpr_unselectable",
+      "title": "Deposit on a used pickup truck for field work",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-VEHICLE-FLEET",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CAPITAL-FABRICATION-GW-OWNED",
+      "family": "ovpr_unselectable",
+      "title": "Parts under $5,000 each for a GW-owned instrument build",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-FABRICATION",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CAPITAL-FABRICATION-GOV-OWNED",
+      "family": "ovpr_unselectable",
+      "title": "Parts under $5,000 each for a cryostat test rig on a federal contract that gives title to the Government",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-FABRICATION",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CAPITAL-COPIER-PURCHASE",
+      "family": "ovpr_unselectable",
+      "title": "A 44-inch large-format printer of $6,400 bought outright on a personal card",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-CAPITAL-ASSETS",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "CAPITAL-LAB-INSTRUMENT",
+      "family": "ovpr_unselectable",
+      "title": "Refrigerated centrifuge of $8,450 with installation, bought personally",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-CAPITAL-ASSETS",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "Q"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "EQUIPMENT-GOV-OWNED",
+      "family": "ovpr_unselectable",
+      "title": "A UV-Vis spectrophotometer bought for a federal contract: government property",
+      "judgment": "skip",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-OVPR-NOT-SELECTABLE",
+        "NC-GOVERNMENT-PROPERTY",
+        "NC-NOT-IN-CONCUR"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search"
+      ],
+      "trips": [
+        "P"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "LAB-SUPPLIES-GRANT",
+      "family": "supplies",
+      "title": "Laboratory consumables charged to the federal award",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any; funding=grant",
+      "provisions": [
+        "NC-LAB-SUPPLIES",
+        "NC-GRANT-ADMIN-COSTS",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "LAB-SUPPLIES-DRYICE",
+      "family": "supplies",
+      "title": "Dry ice and a shipper for a sample shipment",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-LAB-SUPPLIES",
+        "NC-SUPPLIES-BY-KIND",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "LAB-BENCH-STOOLS",
+      "family": "supplies",
+      "title": "Four lab bench stools bought out of pocket",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any; funding=non_grant",
+      "provisions": [
+        "NC-LAB-EQUIPMENT",
+        "NC-STANDARDIZATION",
+        "NC-CAPITALIZED-5000",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "SUPP-SHREDDER-OFFICE",
+      "family": "supplies",
+      "title": "A cross-cut shredder for the lab's office",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-LAB-EQUIPMENT",
+        "NC-SUPPLIES-BY-KIND",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PRINT-SUPPLIES-TONER",
+      "family": "supplies",
+      "title": "Toner and plotter paper for the lab's printer",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SUPPLIES-BY-KIND",
+        "NC-TYPE-UNDEFINED",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "PHOTO-SUPPLIES-FIELD",
+      "family": "supplies",
+      "title": "Memory cards and batteries for photographing field samples",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SUPPLIES-BY-KIND",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "LIB-SUPPLIES-ARCHIVE",
+      "family": "supplies",
+      "title": "Archival boxes and sleeves for the project's field notebooks",
+      "judgment": "flag",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-SUPPLIES-BY-KIND",
+        "NC-TYPE-UNDEFINED",
+        "NC-SALES-TAX",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "BIND-REPORT-COPIES",
+      "family": "extended",
+      "title": "Three copies of the final report bound at a shop",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-BINDING-ALONE",
+        "NC-PRINTING",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "LIB-DOC-DELIVERY",
+      "family": "extended",
+      "title": "Document-delivery fees for three articles",
+      "judgment": "none",
+      "difficulty": "simple",
+      "scope": "city=any",
+      "provisions": [
+        "NC-AV-LIBRARY-SERVICES",
+        "NC-SUBS-BUSINESS",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    },
+    {
+      "pool": "non_travel",
+      "id": "FUEL-FLEET-VAN",
+      "family": "extended",
+      "title": "Fuel an employee paid for a GW fleet van",
+      "judgment": "flag",
+      "difficulty": "complex",
+      "scope": "city=any",
+      "provisions": [
+        "NC-FLEET-FUEL",
+        "GT-GAS-PERSONAL",
+        "NC-NO-TRAVEL-REPORT"
+      ],
+      "basis_kinds": [
+        "experience",
+        "policy",
+        "search",
+        "user decision"
+      ],
+      "trips": [
+        "S"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+── per-expense ──
+  ✓ American Airlines DCA-ORD receipt.pdf           501.40 USD  
+  ✓ American Airlines checked bag receipt.pdf        35.00 USD  
+  ✓ American Airlines seat assignment receipt.pd     34.00 USD  
+  ✓ American Airlines ticket change receipt (lat    108.00 USD  
+  ✓ Hyatt Regency Chicago folio.pdf                1120.60 USD  
+  ✓ Quartino Ristorante check.pdf                    39.27 USD  
+  ✓ Quartino Ristorante check (2).pdf                42.49 USD  
+  ✓ RPM Steak dinner check.pdf                       91.53 USD  
+  ✓ The Purple Pig business lunch check.pdf          94.07 USD  
+  ✓ The Purple Pig business lunch check.pdf          41.84 USD  
+  ✓ Uber Eats Lou Malnati's Pizzeria.pdf             40.46 USD  
+  ✗ RPM Steak lunch check (large tip).pdf            70.61 USD  MISSING
+  ✓ Intelligentsia Coffee — Millennium Park coff     12.02 USD  
+  ✓ Uber Aug 10 920 AM.pdf                           59.90 USD  
+  ✗ Uber Aug 11 955 PM.pdf                           20.10 USD  MISSING
+  ✓ Uber Aug 12 348 PM.pdf                           20.85 USD  
+  ✓ Uber Aug 11 UPDATED receipt.pdf                  21.35 USD  
+  ✓ Flash Cab Company receipt.pdf                    52.80 USD  
+  ✓ CTA fare receipt.pdf                             15.00 USD  
+  ✓ MOSS Association registration receipt (with     590.00 USD  
+  ✓ MOSS Association tutorial add-on receipt.pdf     90.00 USD  
+  ✓ Poster printing.pdf                             125.50 USD  
+  ✓ Golf with the collaborators.pdf                 315.00 USD  
+
+── dimensions ──
+  coverage         21/23
+  expense_type     21/21
+  basic_fields     21/21
+  itemization      1/1
+  attendees        1/1
+  skip_respected   5/5
+  exclusions       1/1
+  flags_required   5/6
+  comments_in_concur 6/6
+  summary_mentions 2/2
+  travel_allowance n/a
+  stray_lines      1
+  blocking_errors  0
+  submittable      True
+  ⚠ FLAG MISSING: AIR-SEAT-ECONOMY — expected a flag mentioning one of ['seat']
+  ⚠ 1 line(s) in the report match no expected line: 71.77 53102-US BUSINESS MEALS
+
+OVERALL: 96.6%  |  submittable: True

@@ -1,0 +1,30 @@
+American Airlines DCA-ORD receipt.pdf
+American Airlines checked bag receipt.pdf
+American Airlines seat assignment receipt.pdf
+American Airlines ticket change receipt (later return).pdf
+CTA fare receipt.pdf
+Conference program.pdf
+Flash Cab Company receipt.pdf
+Golf with the collaborators.pdf
+Hyatt Regency Chicago folio.pdf
+Hyatt Regency Chicago reservation confirmation.pdf
+Intelligentsia Coffee — Millennium Park coffee.pdf
+MANIFEST.md
+MOSS Association registration receipt (with membership).pdf
+MOSS Association tutorial add-on receipt.pdf
+Newsstand receipt.pdf
+Poster printing.pdf
+Quartino Ristorante check (2).pdf
+Quartino Ristorante check.pdf
+RPM Steak dinner check.pdf
+RPM Steak lunch check (large tip).pdf
+The Purple Pig business lunch check.pdf
+Uber Aug 10 920 AM.pdf
+Uber Aug 11 955 PM.pdf
+Uber Aug 11 UPDATED receipt.pdf
+Uber Aug 11 receipt.pdf
+Uber Aug 12 348 PM.pdf
+Uber Eats Lou Malnati's Pizzeria.pdf
+expected.json
+trip_notes.txt
+turns.json

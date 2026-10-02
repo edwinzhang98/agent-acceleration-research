@@ -1,0 +1,584 @@
+{
+  "_comment": "Answer key for testing_cases/trip_a_chicago, assembled by scripts/gen_trip.py from the situation pool (benchmark/pool). Each line carries the situation it came from; see MANIFEST.md.",
+  "trip": {
+    "name": "trip_a_chicago",
+    "report_name": "MOSS 2026 Chicago",
+    "purpose": "Present a paper at MOSS 2026 (Midwest Optimization & Systems Symposium), Chicago IL, Aug 11–13 2026, and meet the symposium's benchmark working group",
+    "traveler": "Changhong Zhang",
+    "persona": "staff",
+    "funding": "Non-Grant",
+    "expected_total_usd_lines": "3541.79",
+    "expected_total_usd_all_lines": "3541.79",
+    "cad_usd_rate_for_scoring": "0.73",
+    "filed": "2026-08-19"
+  },
+  "expenses": [
+    {
+      "receipt": "American Airlines DCA-ORD receipt.pdf",
+      "expense_type": "53101-US AIRFARE EXPENSE",
+      "vendor": "American Airlines",
+      "date": "2026-07-06",
+      "amount": "501.40",
+      "currency": "USD",
+      "requires": {
+        "airfare_fields": {
+          "class_of_service": "Coach/Economy",
+          "source_of_purchase": "Airline Direct",
+          "ticket_number": "0017347122556"
+        }
+      },
+      "expense_type_contains_any": [
+        "AIRFARE"
+      ],
+      "date_alternatives": [
+        "2026-08-10"
+      ],
+      "situation": "AIR-COACH-DIRECT"
+    },
+    {
+      "receipt": "American Airlines checked bag receipt.pdf",
+      "expense_type": "53111-US OTHER TRAVEL AND RELATED EXPENSE",
+      "vendor": "American Airlines",
+      "date": "2026-08-10",
+      "amount": "35.00",
+      "currency": "USD",
+      "requires": {},
+      "expense_type_contains_any": [
+        "OTHER TRAVEL",
+        "AIRFARE",
+        "BAGGAGE"
+      ],
+      "situation": "AIR-BAG"
+    },
+    {
+      "receipt": "American Airlines seat assignment receipt.pdf",
+      "expense_type": "53111-US OTHER TRAVEL AND RELATED EXPENSE",
+      "vendor": "American Airlines",
+      "date": "2026-07-21",
+      "amount": "34.00",
+      "currency": "USD",
+      "requires": {},
+      "expense_type_contains_any": [
+        "OTHER TRAVEL",
+        "AIRFARE",
+        "SEAT"
+      ],
+      "situation": "AIR-SEAT-ECONOMY"
+    },
+    {
+      "receipt": "American Airlines ticket change receipt (later return).pdf",
+      "expense_type": "53101-US AIRFARE EXPENSE",
+      "vendor": "American Airlines",
+      "date": "2026-08-12",
+      "amount": "108.00",
+      "currency": "USD",
+      "requires": {},
+      "expense_type_contains_any": [
+        "AIRFARE"
+      ],
+      "situation": "AIR-CHANGE-REASON"
+    },
+    {
+      "receipt": "Hyatt Regency Chicago folio.pdf",
+      "expense_type": "53104-US LODGING EXPENSE",
+      "vendor": "Hyatt Regency Chicago",
+      "date": "2026-08-14",
+      "amount": "1120.60",
+      "currency": "USD",
+      "requires": {
+        "itemization": {
+          "type": "lodging_grid",
+          "nights": [
+            {
+              "date": "2026-08-10",
+              "room_rate": "297.00",
+              "room_tax": "47.53"
+            },
+            {
+              "date": "2026-08-11",
+              "room_rate": "253.00",
+              "room_tax": "40.49"
+            },
+            {
+              "date": "2026-08-12",
+              "room_rate": "181.00",
+              "room_tax": "28.97"
+            },
+            {
+              "date": "2026-08-13",
+              "room_rate": "235.00",
+              "room_tax": "37.61"
+            }
+          ]
+        }
+      },
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "LODGING",
+        "HOTEL"
+      ],
+      "date_alternatives": [
+        "2026-08-10"
+      ],
+      "situation": "LOD-FOLIO-PERSONAL",
+      "unreduced_total": "1182.59"
+    },
+    {
+      "receipt": "Quartino Ristorante check.pdf",
+      "expense_type": "53102-US BUSINESS MEALS",
+      "vendor": "Quartino Ristorante",
+      "date": "2026-08-11",
+      "amount": "39.27",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "MEAL"
+      ],
+      "situation": "MEAL-TRAVEL-SMALL"
+    },
+    {
+      "receipt": "Quartino Ristorante check (2).pdf",
+      "expense_type": "53102-US BUSINESS MEALS",
+      "vendor": "Quartino Ristorante",
+      "date": "2026-08-12",
+      "amount": "42.49",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "MEAL"
+      ],
+      "situation": "MEAL-TRAVEL-SMALL"
+    },
+    {
+      "receipt": "RPM Steak dinner check.pdf",
+      "expense_type": "53102-US BUSINESS MEALS",
+      "vendor": "RPM Steak",
+      "date": "2026-08-13",
+      "amount": "91.53",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "MEAL"
+      ],
+      "situation": "MEAL-TRAVEL-BIG-ITEMIZED"
+    },
+    {
+      "receipt": "The Purple Pig business lunch check.pdf",
+      "expense_type": "53102-US BUSINESS MEALS",
+      "vendor": "The Purple Pig",
+      "date": "2026-08-12",
+      "amount": "94.07",
+      "currency": "USD",
+      "requires": {
+        "attendees": [
+          {
+            "first": "Lena",
+            "last": "Hoffmann",
+            "type": "guest"
+          },
+          {
+            "first": "Ana",
+            "last": "Ferreira",
+            "type": "guest"
+          },
+          {
+            "first": "Changhong",
+            "last": "Zhang",
+            "type": "employee"
+          }
+        ]
+      },
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "MEAL"
+      ],
+      "amount_alternatives": [
+        "103.91"
+      ],
+      "situation": "MEAL-BUSINESS-ALCOHOL"
+    },
+    {
+      "receipt": "The Purple Pig business lunch check.pdf",
+      "expense_type": "52611-ENTERTAINMENT",
+      "vendor": "The Purple Pig",
+      "date": "2026-08-12",
+      "amount": "41.84",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "52611",
+        "ENTERTAINMENT",
+        "ALCOHOL"
+      ],
+      "amount_alternatives": [
+        "32.00"
+      ],
+      "situation": "MEAL-BUSINESS-ALCOHOL"
+    },
+    {
+      "receipt": "Uber Eats Lou Malnati's Pizzeria.pdf",
+      "expense_type": "53102-US BUSINESS MEALS",
+      "vendor": "Lou Malnati's Pizzeria",
+      "date": "2026-08-10",
+      "amount": "40.46",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "MEAL"
+      ],
+      "_note": "vendor may be recorded as Uber Eats",
+      "vendor_alternatives": [
+        "Uber Eats"
+      ],
+      "situation": "MEAL-DELIVERY"
+    },
+    {
+      "receipt": "RPM Steak lunch check (large tip).pdf",
+      "expense_type": "53102-US BUSINESS MEALS",
+      "vendor": "RPM Steak",
+      "date": "2026-08-11",
+      "amount": "70.61",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "MEAL"
+      ],
+      "amount_alternatives": [
+        "103.01"
+      ],
+      "situation": "MEAL-TIP-EXCESSIVE"
+    },
+    {
+      "receipt": "Intelligentsia Coffee — Millennium Park coffee.pdf",
+      "expense_type": "53102-US BUSINESS MEALS",
+      "vendor": "Intelligentsia Coffee",
+      "date": "2026-08-13",
+      "amount": "12.02",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "MEAL"
+      ],
+      "situation": "MEAL-COFFEE-SMALL"
+    },
+    {
+      "receipt": "Uber Aug 10 920 AM.pdf",
+      "expense_type": "53103-US LOCAL TRANSPORTATION",
+      "vendor": "Uber",
+      "date": "2026-08-10",
+      "amount": "59.90",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "LOCAL TRANSPORTATION",
+        "TRANSPORTATION"
+      ],
+      "situation": "GT-UBER"
+    },
+    {
+      "receipt": "Uber Aug 11 955 PM.pdf",
+      "expense_type": "53103-US LOCAL TRANSPORTATION",
+      "vendor": "Uber",
+      "date": "2026-08-11",
+      "amount": "20.10",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "LOCAL TRANSPORTATION",
+        "TRANSPORTATION"
+      ],
+      "situation": "GT-UBER"
+    },
+    {
+      "receipt": "Uber Aug 12 348 PM.pdf",
+      "expense_type": "53103-US LOCAL TRANSPORTATION",
+      "vendor": "Uber",
+      "date": "2026-08-12",
+      "amount": "20.85",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "LOCAL TRANSPORTATION",
+        "TRANSPORTATION"
+      ],
+      "situation": "GT-UBER"
+    },
+    {
+      "receipt": "Uber Aug 11 UPDATED receipt.pdf",
+      "expense_type": "53103-US LOCAL TRANSPORTATION",
+      "vendor": "Uber",
+      "date": "2026-08-11",
+      "amount": "21.35",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "LOCAL TRANSPORTATION",
+        "TAXI",
+        "GROUND"
+      ],
+      "situation": "GT-UBER-TIP-UPDATED"
+    },
+    {
+      "receipt": "Flash Cab Company receipt.pdf",
+      "expense_type": "53103-US LOCAL TRANSPORTATION",
+      "vendor": "Flash Cab Company",
+      "date": "2026-08-12",
+      "amount": "52.80",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "LOCAL TRANSPORTATION",
+        "TAXI",
+        "GROUND"
+      ],
+      "situation": "GT-TAXI"
+    },
+    {
+      "receipt": "CTA fare receipt.pdf",
+      "expense_type": "53103-US LOCAL TRANSPORTATION",
+      "vendor": "CTA",
+      "date": "2026-08-11",
+      "amount": "15.00",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "LOCAL TRANSPORTATION",
+        "TRANSIT",
+        "GROUND"
+      ],
+      "situation": "GT-TRANSIT"
+    },
+    {
+      "receipt": "MOSS Association registration receipt (with membership).pdf",
+      "expense_type": "53251-CONFERENCE/SEMINAR/TRAINING EXPENSE",
+      "vendor": "MOSS Association",
+      "date": "2026-06-11",
+      "amount": "590.00",
+      "currency": "USD",
+      "requires": {},
+      "expense_type_contains_any": [
+        "CONFERENCE"
+      ],
+      "amount_alternatives": [
+        "770.00"
+      ],
+      "situation": "REG-MEMBERSHIP-PAID"
+    },
+    {
+      "receipt": "MOSS Association tutorial add-on receipt.pdf",
+      "expense_type": "53251-CONFERENCE/SEMINAR/TRAINING EXPENSE",
+      "vendor": "MOSS Association",
+      "date": "2026-07-01",
+      "amount": "90.00",
+      "currency": "USD",
+      "requires": {},
+      "expense_type_contains_any": [
+        "CONFERENCE"
+      ],
+      "situation": "REG-WORKSHOP"
+    },
+    {
+      "receipt": "Poster printing.pdf",
+      "expense_type": "53111-US OTHER TRAVEL AND RELATED EXPENSE",
+      "vendor": "FedEx Office Print & Ship Center",
+      "date": "2026-08-08",
+      "amount": "125.50",
+      "currency": "USD",
+      "requires": {},
+      "city": "Washington, District of Columbia",
+      "expense_type_contains_any": [
+        "OTHER TRAVEL",
+        "CONFERENCE",
+        "SUPPLIES",
+        "PRINTING"
+      ],
+      "situation": "OTH-POSTER"
+    },
+    {
+      "receipt": "Golf with the collaborators.pdf",
+      "expense_type": "52611-ENTERTAINMENT",
+      "vendor": "Chicago Public Golf Course",
+      "date": "2026-08-12",
+      "amount": "315.00",
+      "currency": "USD",
+      "requires": {},
+      "city": "Chicago, Illinois",
+      "expense_type_contains_any": [
+        "ENTERTAINMENT",
+        "SPECIAL EVENTS",
+        "OTHER"
+      ],
+      "situation": "OTH-CLUB-FEES"
+    }
+  ],
+  "skip": [
+    {
+      "receipt": "Hyatt Regency Chicago reservation confirmation.pdf",
+      "reason": "a reservation confirmation is not a receipt — no payment was taken",
+      "situation": "LOD-BOOKING-CONF"
+    },
+    {
+      "receipt": "Uber Aug 11 receipt.pdf",
+      "reason": "superseded by the updated receipt for the same ride",
+      "amount": "17.35",
+      "duplicate_of": "Uber Aug 11 UPDATED receipt.pdf",
+      "situation": "GT-UBER-TIP-UPDATED"
+    },
+    {
+      "receipt": "Newsstand receipt.pdf",
+      "reason": "newspapers and magazines are personal",
+      "amount": "14.87",
+      "situation": "OTH-NEWSPAPER"
+    },
+    {
+      "receipt": "Conference program.pdf",
+      "reason": "reference material, not an expense",
+      "situation": "DOC-PROGRAM"
+    },
+    {
+      "receipt": "trip_notes.txt",
+      "reason": "reference material, not an expense",
+      "situation": "notes"
+    }
+  ],
+  "flags": [
+    {
+      "contains": [
+        "seat"
+      ],
+      "basis": "policy",
+      "why": "p.10 allows advance seat assignment within economy; Appendix B lists window/aisle seat fees as unallowable",
+      "situation": "AIR-SEAT-ECONOMY",
+      "item": "AIR-SEAT-ECONOMY"
+    },
+    {
+      "contains": [
+        "alcohol",
+        "wine",
+        "52611",
+        "entertainment"
+      ],
+      "basis": "policy",
+      "why": "allocation of tax and tip to the alcohol line",
+      "situation": "MEAL-BUSINESS-ALCOHOL",
+      "item": "MEAL-BUSINESS-ALCOHOL"
+    },
+    {
+      "contains": [
+        "tip",
+        "gratuity",
+        "excessive"
+      ],
+      "basis": "assumption",
+      "why": "",
+      "situation": "MEAL-TIP-EXCESSIVE",
+      "item": "MEAL-TIP-EXCESSIVE"
+    },
+    {
+      "contains": [
+        "membership",
+        "dues"
+      ],
+      "basis": "assumption",
+      "why": "",
+      "situation": "REG-MEMBERSHIP-PAID",
+      "item": "REG-MEMBERSHIP-PAID"
+    },
+    {
+      "contains": [
+        "poster",
+        "printing",
+        "type"
+      ],
+      "basis": "assumption",
+      "why": "",
+      "situation": "OTH-POSTER",
+      "item": "OTH-POSTER"
+    },
+    {
+      "contains": [
+        "group event",
+        "preauthoriz",
+        "pre-authoriz",
+        "golf",
+        "approval"
+      ],
+      "basis": "missing_document",
+      "why": "golf is allowable only as part of a pre-authorised group event; no pre-authorisation in the folder — ask for it",
+      "request_words": [
+        "attach",
+        "provide",
+        "supply",
+        "obtain",
+        "request",
+        "missing",
+        "not in the folder",
+        "none in the folder",
+        "not attached",
+        "no written",
+        "before submission",
+        "before submitting",
+        "confirm",
+        "pending"
+      ],
+      "situation": "OTH-CLUB-FEES",
+      "item": "OTH-CLUB-FEES"
+    }
+  ],
+  "summary_mentions": [
+    {
+      "item": "LOD-FOLIO-PERSONAL",
+      "contains": "minibar"
+    },
+    {
+      "item": "LOD-FOLIO-PERSONAL",
+      "contains": "movie"
+    },
+    {
+      "item": "LOD-FOLIO-PERSONAL",
+      "contains": "health club"
+    },
+    {
+      "item": "LOD-FOLIO-PERSONAL",
+      "contains": "fitness"
+    },
+    {
+      "item": "MEAL-BUSINESS-ALCOHOL",
+      "contains": "wine"
+    },
+    {
+      "item": "MEAL-BUSINESS-ALCOHOL",
+      "contains": "alcohol"
+    }
+  ],
+  "traps": [
+    {
+      "situation": "LOD-BOOKING-CONF",
+      "files": [
+        "Hyatt Regency Chicago reservation confirmation.pdf"
+      ],
+      "trap": "A reservation confirmation for the same stay the folio bills, with no payment taken; do not file it as a second lodging line."
+    },
+    {
+      "situation": "GT-UBER-TIP-UPDATED",
+      "files": [
+        "Uber Aug 11 receipt.pdf",
+        "Uber Aug 11 UPDATED receipt.pdf"
+      ],
+      "trap": "An original and an UPDATED receipt for the same ride (the tip added afterwards); file the ride once at the updated amount and leave the original out."
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+ExpenseAI repository: /Users/edwin/projects/ExpenseAI
+commit: ee98f59 2026-09-24 16:06:20 -0400 Describe the Grant/Non Grant picker as the list of accounts it is (P-059)

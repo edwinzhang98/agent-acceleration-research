@@ -1,0 +1,72 @@
+[04:49:28]    fresh session: app sign-in + Concur selected, login re-detected
+[04:49:28]    compliance toggle OFF for the fill turns: app stage compliance=False no_submit=True
+[04:49:28] == trip_a_chicago: portal https://us2.concursolutions.com/home logged_in=True
+[04:49:55]    focus: {'ok': True, 'focus': 'trip_a_chicago', 'name': 'trip_a_chicago', 'receipts': 27}
+[04:49:55]    turn 1 (6 files) …
+[04:50:18]     (warn) combobox did not commit id=eai-ff3x69-24: no option matched
+[04:50:32]     (warn) flag [assumption] Oracle Alias = (100123) NON BASE RESERVE - SEAS: Department will supply the correct Oracle Alias; used (100123) NON BASE RESERVE - SEAS as a p
+[04:53:20]     (warn) flag [policy] MOSS Association registration — amount filed = 590.00: Registration $770 bundled with MOSS Association Membership 2026-2027 ($180). Per GW policy 
+[04:54:39]     (done) DONE: Report: MOSS 2026 Chicago | #13E5R5 | Not Submitted | $1,358.40 | 6 lines
+
+— 07/06/2026 · 53101 US AIRFARE · American Airlines · $501.40 · American Airlin
+[04:54:39]    turn 1 → done, 46 steps, $1.14, 284 s
+[04:54:39]    turn 2 (2 files) …
+[04:55:02]     (warn) flag [policy] Hyatt Regency Chicago — amount filed = 1120.60: Folio total $1182.59 reduced by $61.99: In-Room Movie $14.99 (Aug 11), Minibar $22.00 (Aug 12), He
+[04:55:55]     (error) Action 'upload' failed: Page.wait_for_selector: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator("[data-eai-id=\"eai-gih20h-0\"]")
+
+[04:56:55]     (done) DONE: Report: MOSS 2026 Chicago | #13E5R5 | Not Submitted | ~$2,479 | 7 lines
+
+Turn 2 added:
+— 08/10/2026 · 53104 US LODGING · Hyatt Regency Chicago · $1,120.60
+[04:56:55]    turn 2 → done, 19 steps, $0.52, 136 s
+[04:56:55]    turn 3 (7 files) …
+[04:57:12]     (warn) flag [policy] RPM Steak lunch 08/11 — tip = 71.77: Tip $43.20 on $59.81 pre-tip total is 72% — excessive per GW policy App. B ('not excessive'). Filed $71.77 (f
+[04:57:18]     (warn) flag [policy] The Purple Pig 08/12 — alcohol split = 103.91 food / 32.00 alcohol: Business lunch $135.91 includes 2x Old Fashioned @ $16 each = $32 alcohol; per
+[05:00:00]     (error) Action 'click' failed: Page.click: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator("[data-eai-id=\"eai-puqo0z-42\"]")
+    - locator resolved to <labe
+[05:01:15]     (error) Action 'click' failed: Page.click: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator("[data-eai-id=\"eai-dppo0b-1\"]")
+    - locator resolved to <butto
+[05:05:07]     (done) DONE: Report: MOSS 2026 Chicago | #13E5R5 | Not Submitted | $2,912.45 | 15 lines
+
+Turn 3 added (7 meal receipts → 8 lines):
+— 08/11/2026 · 53102 US BUSINESS MEA
+[05:05:07]    turn 3 → done, 73 steps, $2.43, 491 s
+[05:05:07]    turn 4 (11 files) …
+[05:05:22]     (warn) flag [receipt] Uber Aug 11 ride amount = 21.35: Three receipts exist for the Aug 11 Uber ride (151 E Wacker → 225 N Columbus): original $17.35, '955 PM' $20.10,
+[05:05:29]     (warn) flag [missing_document] Golf with collaborators 08/12 — VP pre-approval = 315.00: Golf green fees x3 and cart rental $315 at Chicago Public Golf Course; per GW 
+[05:06:52]     (error) Action 'click' failed: Page.wait_for_selector: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator("[data-eai-id=\"eai-wgnb4h-81\"]") to be visible
+
+[05:07:47]     (error) Action 'click' failed: Page.wait_for_selector: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator("[data-eai-id=\"eai-jkedp8-84\"]") to be visible
+
+[05:10:10]     (warn) flag [assumption] Poster printing — expense type = 53111-US OTHER TRAVEL AND RELATED EXPENSE: Conference poster printing ($125.50, FedEx Office DC, Aug 8) filed
+[05:11:28]     (error) Action 'click' failed: Page.wait_for_selector: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator("[data-eai-id=\"eai-eq6fyw-90\"]") to be visible
+
+[05:12:46]     (error) Action 'click' failed: Page.click: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator("[data-eai-id=\"eai-pv03er-5\"]")
+    - locator resolved to <butto
+[05:14:18]     (done) DONE: Report: MOSS 2026 Chicago | #13E5R5 | Not Submitted | $3,522.85 | 22 lines
+
+Turn 4 lines added:
+— 08/10/2026 · 53103 LOCAL TRANSPORT · Uber · $59.90 · Ube
+[05:14:18]    turn 4 → done, 74 steps, $3.13, 550 s
+[05:17:29]    export rc=0:   53251-CONFERENCE/SEMINAR/TRAINING EXPENSE    2026-06-11  MOSS Association                590.00
+[05:17:29]    OVERALL: 96.6%  |  submittable: True
+[05:17:34]    compliance step (rehearsal) on report 13E5R5 (https://us2.concursolutions.com/nui/expense/reports/AD548526DE9040D0B324) …
+[05:17:34]    compliance toggle ON for the check: app stage compliance=True no_submit=True
+[05:17:37]     (done) READY TO SUBMIT — handing to compliance gate
+[05:17:38]    compliance turn ended (ready_to_submit) — waiting up to 600 s for the verdict line
+[05:18:35]    compliance toggle OFF after the step: app stage compliance=False
+[05:18:35]    compliance → 🧪 REHEARSAL — compliance check done — Found 6 violations; corrections were not applied (rehearsal — report only). 6 unverified (the quoted rule is not in the policy text) — review them by hand. — 6 violations — nothing was submitted (NO_SUBMIT) — record: /Users/edwin/projects/ExpenseAI/local_data/co

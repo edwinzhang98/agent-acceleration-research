@@ -136,14 +136,14 @@ for f, anchors in _seen.items():          # two works with one short form: add t
 
 # ---------------------------------------------------------------- page store and render (build_deck's anatomy)
 S = []
-def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind="main", cover=False, label=None, page_refs=True):
+def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind="main", cover=False, label=None, page_refs=True, deck="both"):
     refs = PAGE[:]
     PAGE.clear()
     if kind == "main" and refs and page_refs:
         rh = bd.page_refs_html(sorted((fmt_ref(a) for a in refs), key=lambda r: re.sub("<[^>]+>", "", r).lower()), small=True)
         body += rh.replace('class="pgrefs sm"', 'class="pgrefs sm c3"') if len(refs) > 8 else rh
     S.append(dict(id=id_, title=title, body=body, crumb=crumb, callout=callout, foot=foot, chip=chip, kind=kind,
-                  cover=cover, label=label))
+                  cover=cover, label=label, deck=deck))
 
 TAG = "AGENT ACCELERATION · STABLE ENVIRONMENT"
 EXTRA_CSS = r"""
@@ -237,6 +237,8 @@ def render(font_dir=None, keep=None):
              + [s for s in S if s["kind"] == "appendix"])
     if keep:
         order = [s for s in order if s["id"] in keep]
+    else:
+        order = [s for s in order if s["deck"] != "v2"]       # pages made for the short deck only
     for s in order:
         if s["kind"] in ("main", "refs"):
             n += 1
@@ -653,6 +655,379 @@ slide("s03c", "Five difficulties, grouped by the cost they affect",
      seen([("AI Agents That Matter", "ref-ai-agents-that-matter", "late break-even"), ("SICA", "sica", "large bill, small saving")]))}
 </div></div>""",
   chip=("#ad", "Appendix D"))
+
+# =====================================================================
+# Part 3 short deck (part3-v2 only) · the data module: how the ExpenseAI tasks and their answer keys are made
+# Edwin, 2026-10-02: every concept with a definition and an example, screenshots, one hotel folio followed throughout.
+# Data and images: slides/part3-data/expenseai/, copied from the ExpenseAI repository by snapshot.py.
+# =====================================================================
+import base64
+XD = os.path.join(HERE, "part3-data", "expenseai")
+def _xload(*p):
+    return json.load(open(os.path.join(XD, *p), encoding="utf-8"))
+def _xread(*p):
+    return open(os.path.join(XD, *p), encoding="utf-8").read()
+XF, XP, XA = _xload("facts.json"), _xload("provisions.json"), _xload("trip_a", "expected.json")
+XSIT = {s["id"]: s for s in XF["appendix"]}
+XPROV = {p["id"]: p for p in XP["provisions"]}
+_XIMG = {}
+def ximg(name, style=""):
+    if name not in _XIMG:
+        _XIMG[name] = base64.b64encode(open(os.path.join(XD, "img", name), "rb").read()).decode()
+    return f'<img class="dshot" style="{style}" alt="{name[:-4]}" src="data:image/png;base64,{_XIMG[name]}">'
+
+HANDLING = {"none": "file", "flag": "file + flag", "split": "separate out", "exclude": "file part", "skip": "not filed"}
+def hp(j):
+    return f'<span class="pill h-{j}">{HANDLING[j]}</span>'
+def xid(i):
+    return f'<span class="xid">{i}</span>'
+
+# The numbers: ExpenseAI's facts file of 2026-09-22 (no commit since has touched the pool, the trips or the policy).
+_S, _PV, _PO, _W = XF["situations"], XF["provisions"], XF["pool"], XF["world"]
+N_SIT, N_TRAV, N_NON = _S["totals"]["all"], _S["totals"]["travel"], _S["totals"]["non_travel"]
+JUDG, DIFF = _S["judgment"]["all"], _S["difficulty"]["all"]
+N_PROV = _PV["travel"]["total"] + _PV["non_travel"]["total"]
+N_ACT = _PV["travel"]["actionable"] + _PV["non_travel"]["actionable"]
+N_INST = _PO["travel"]["instances"] + _PO["non_travel"]["instances"]
+N_FILES = _PO["travel"]["files_on_disk"] + _PO["non_travel"]["files_on_disk"]
+T_ALL = next(g for g in XF["trips"]["subtotals"] if g["trips"] == 23)
+TRIP_A = next(t for t in XF["trips"]["per_trip"] if t["letter"] == "A")
+# Trip A, batch 20260914-02: its score file and the four turns of its log
+_SCORE = _xread("trip_a", "score.txt")
+DIMS = re.findall(r"^\s+(\w+)\s+(\d+)/(\d+)\s*$", _SCORE, flags=re.M)
+CHK_OK, CHK_ALL = sum(int(a) for _, a, _b in DIMS), sum(int(b) for _, _a, b in DIMS)
+OVERALL = re.search(r"OVERALL: ([\d.]+)%", _SCORE).group(1)
+TURNS = re.findall(r"turn (\d) → done, (\d+) steps, \$([\d.]+), (\d+) s", _xread("trip_a", "log.txt"))
+RUN_STEPS, RUN_USD, RUN_S = sum(int(t[1]) for t in TURNS), sum(float(t[2]) for t in TURNS), sum(int(t[3]) for t in TURNS)
+_LED = next(l for l in _xread("LEDGER.md").splitlines() if l.startswith("| `LOD-FOLIO-PERSONAL`"))
+LED_PASS = re.search(r"\| (\d+/\d+) \|", _LED).group(1)
+FOLIO = next(x for x in XA["expenses"] if x["situation"] == "LOD-FOLIO-PERSONAL")
+APPB_USERS = [s["id"] for s in XF["appendix"] if "APPB-PERSONAL" in s["provisions"]]
+
+EXTRA_CSS += r"""
+.dshot{display:block;max-width:100%;border:1px solid var(--rule);border-radius:3px;background:#fff}
+.dcap{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);line-height:1.35;margin-top:3px}
+.xk{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.xk a{color:inherit;text-decoration:none}
+.xid{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;color:var(--accent)}
+.pill{display:inline-block;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;line-height:1.35;border:1px solid var(--rule);border-radius:9px;padding:0 7px;white-space:nowrap;vertical-align:1px;background:#fff;color:var(--ink2)}
+.pill.h-flag{background:#fbeede;border-color:#e2b98b;color:var(--warn)}
+.pill.h-split,.pill.h-exclude{background:#eef4f8;border-color:var(--accent);color:var(--accent)}
+.pill.h-skip{background:#f1f3f5;border-style:dashed;color:var(--mute)}
+.dcode{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px;line-height:1.42;background:#f6f8fa;border:1px solid var(--rule);border-radius:3px;padding:7px 9px;white-space:pre;overflow:hidden;color:var(--ink)}
+.dcode .c{color:var(--mute)}.dcode .a{color:var(--accent);font-weight:600}.dcode .w{color:var(--warn);font-weight:600}
+.xchain{display:grid;grid-template-columns:1fr 14px 1fr 14px 1fr 14px 1fr 14px 1fr 14px 1fr;align-items:stretch;flex:1;min-height:0}
+.xstep{border:1px solid var(--rule);border-radius:4px;padding:9px 10px;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.34;background:#fff;min-width:0;overflow:hidden}
+.xstep .n{font-size:24px;font-weight:700;line-height:1}
+.xstep .ex{border-top:1px dashed var(--rule);padding-top:6px;font-size:11.5px;color:var(--ink2)}
+.xarr{align-self:center;text-align:center;color:var(--mute);font-size:13px}
+.xcard{border:1px solid var(--accent);border-radius:4px;background:#fff;font-size:12px;line-height:1.36}
+.xcard .r{display:grid;grid-template-columns:86px 1fr;gap:8px;padding:5px 10px;border-top:1px solid var(--rule)}
+.xcard .r:first-child{border-top:none}
+.xcard .k{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.xgrid{display:grid;gap:10px;min-height:0}
+.xbox{border:1px solid var(--rule);border-radius:4px;padding:7px 10px;background:#fff;font-size:12px;line-height:1.36;min-width:0}
+.xbox.k{border-color:var(--accent)}
+.xnote{font-size:11.5px;color:var(--ink2);line-height:1.36}
+.xfiles{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.8px;line-height:1.5;color:var(--ink)}
+.xfiles .h{color:var(--mute)}
+.xt{width:100%;border-collapse:collapse;font-size:11.5px;line-height:1.32}
+.xt td{border-top:1px solid var(--rule);padding:4px 6px 4px 0;vertical-align:top}
+.xt td.n{font-weight:700;font-size:13px;white-space:nowrap}
+"""
+
+# ---------------------------------------------------------------- D1 · the chain
+def xstep(kick, n, label, href, defn, ex, img=""):
+    return (f'<div class="xstep"><div class="xk"><a href="#{href}">{kick} ↗</a></div>'
+            f'<div><span class="n">{n}</span> <b>{label}</b></div><div>{defn}</div>'
+            f'<div class="ex">{ex}</div>{img}</div>')
+_arrow = '<div class="xarr">→</div>'
+slide("x01", "From the expense policy to a scored report, in five steps", deck="v2",
+  callout="<p><b>We break GW’s expense policy into rules, write each case a rule decides as a situation, generate documents and an answer key for it, bundle situations into expense reports, and score each report the agent files against its key.</b></p>",
+  body=f"""<div class="xk" style="margin-bottom:0">followed through this section: one hotel folio with personal charges on it, from trip A (Chicago)</div>
+<div class="xchain">{_arrow.join([
+    xstep("source", "", "The policy", "x02", "GW’s travel and business expense manual, and 60 web sources: GW pages and federal rules",
+          "Manual App. B p.30–31: in-room movies, alcohol and health clubs are personal, not reimbursable", ximg("manual-appb.png")),
+    xstep("step 1", N_PROV, "provisions", "x02", "one rule of the policy, with its page or link",
+          f'{xid("APPB-PERSONAL")} personal charges are unallowable<br>{xid("LOD-ITEMIZE")} a hotel folio is itemized by night',
+          '<div class="dcode" style="white-space:pre-wrap;font-size:9.3px">APPB-PERSONAL · App. B p.30–31\n“Clothing, shoes, jewelry, toiletries, medicines, in-room movies and alcohol, health club, …”</div>'),
+    xstep("step 2", N_SIT, "situations", "x03", "one case a rule decides: a kind of document, its conditions and the correct handling",
+          f'{xid("LOD-FOLIO-PERSONAL")} a folio with a movie, a minibar charge and a health-club fee on it {hp("exclude")}',
+          '<div class="dcode" style="white-space:pre-wrap;font-size:9.3px">document  hotel folio\nextras    movie, minibar, gym\nhandling  file part\nanswer    room + tax, by night</div>'),
+    xstep("step 3", N_INST, "instances", "x07", "a generated copy of a situation: documents that look real, with their answer key",
+          f'Hyatt Regency Chicago folio, total 1,182.59; the key: one lodging line of {FOLIO["amount"]}, over 4 nights', ximg("folio-chicago-top.png")),
+    xstep("step 4", T_ALL["trips"], "trips", "x08", "a traveler’s story and its situations in one folder: one expense report",
+          f'trip A, “MOSS 2026 Chicago”: {TRIP_A["files_total"] - 1} documents and the trip notes; {TRIP_A["expected_lines"]} expected lines',
+          '<div class="xfiles" style="font-size:9.3px">· Hyatt … folio.pdf<br>· Purple Pig … check.pdf<br>· Uber … UPDATED receipt.pdf<br>· … 23 more, trip_notes.txt<br><span class="h">hidden: expected.json</span></div>'),
+    xstep("step 5", "", "runs and scores", "x09", "the agent files the report in Concur; we read it back and check it against the key",
+          f'trip A: {CHK_OK} of {CHK_ALL} checks passed ({OVERALL}%); the folio’s line passed all of them', ximg("concur-itemize.png")),
+])}</div>""", page_refs=False)
+
+# ---------------------------------------------------------------- D2 · provisions
+_appb = XPROV["APPB-PERSONAL"]
+slide("x02", f"Provisions: the policy as {N_PROV} rules, each with its page or link", deck="v2",
+  callout=f"<p><b>A provision is one rule of the policy, recorded with its page or link; the {N_ACT} rules an agent can act on while filing are each tested by at least one situation.</b></p>",
+  body=f"""<div class="xgrid" style="grid-template-columns:1.08fr 1fr;flex:1">
+ <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
+  <div class="xk">what the manual says · Appendix B, p.30–31</div>
+  {ximg("manual-appb.png", "width:100%")}
+  <div class="dcap">highlighted: the personal charges the manual excludes</div>
+  <div class="xgrid" style="grid-template-columns:1.25fr 1fr 1fr;gap:7px">
+   <div class="xbox k"><div class="xk">recorded as a provision</div>{xid("APPB-PERSONAL")} · App. B p.30–31<br><span class="xnote">“{esc(_appb["text"])}”</span></div>
+   <div class="xbox"><div class="xk">tested by {len(APPB_USERS)} situations</div>{", ".join(xid(u) for u in APPB_USERS[:4])}, …</div>
+   <div class="xbox"><div class="xk">read by the agent</div>distilled into its rulebook, rules.md, under “Skip these — unallowable”</div>
+  </div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+  <div class="xbox"><div class="xk">kind 1 · where a provision comes from</div><table class="xt">
+   <tr><td class="n">{_PV["travel"]["total"]}</td><td><b>the manual</b> (rev. 2024-02-21)<br>{xid("LOD-ITEMIZE")} p.12–13: a hotel folio is itemized by night, room rate and tax; personal charges on it are left out</td></tr>
+   <tr><td class="n">{_PV["non_travel"]["total"]}</td><td><b>{XF["provisions"]["sources_non_travel"]} web sources</b>: GW pages and federal rules, for expenses outside travel<br>{xid("NC-SELF-PAID")}: subscriptions, supplies, cloud services and dues paid out of pocket are filed, with a notice that GW prefers its P-Card or iBuy+</td></tr></table></div>
+  <div class="xbox"><div class="xk">kind 2 · can an agent act on it while filing?</div><table class="xt">
+   <tr><td class="n">{N_ACT}</td><td><b>yes</b>: it decides how a document is filed<br>{xid("APPB-PERSONAL")}, on the left</td></tr>
+   <tr><td class="n">{N_PROV - N_ACT}</td><td><b>no</b>: it acts before or after filing<br>{xid("ADVANCE")} p.18–19: a travel advance is reconciled against the report, not filed from a receipt</td></tr></table></div>
+  <div class="xnote">Listing the {N_PROV - N_ACT} keeps “the whole policy is covered” honest: it means every rule an agent can act on, not only the convenient ones.</div>
+ </div>
+</div>""",
+  foot="Source: The George Washington University (2024). Travel, Entertainment and Business Expense Reimbursement Manual, rev. 2024-02-21.",
+  chip=("#e1", "Appendix E1"), page_refs=False)
+
+# ---------------------------------------------------------------- D3 · a situation
+def xrows(rows):
+    return '<div class="xcard">' + "".join(f'<div class="r"><div class="k">{k}</div><div>{v}</div></div>' for k, v in rows) + "</div>"
+slide("x03", "Situation: a document, its conditions and its correct handling", deck="v2",
+  callout="<p><b>A situation is one case the policy decides, apart from any trip; the same document under other conditions is another situation.</b></p>",
+  body=f"""<div class="xgrid" style="grid-template-columns:1.1fr 1fr;flex:1">
+ <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
+  <div class="xk">one situation, as we wrote it</div>
+  <div class="xgrid" style="grid-template-columns:1.55fr 1fr;gap:9px">
+   {xrows([("situation", f'{xid("LOD-FOLIO-PERSONAL")}<br>family: lodging'),
+           ("document", "a hotel folio with an in-room movie, a minibar charge and a health-club fee on it"),
+           ("conditions", "a trip to a US city; any traveler; any funding"),
+           ("handling", f'{hp("exclude")} the room and its tax only, itemized by night'),
+           ("answer key", "one lodging line, night by night; the folio’s total must not appear as a line"),
+           ("basis", "manual p.12–13 and App. B p.30–31; one of our own hotel folios"),
+           ("form work", "complex: the nights are entered on a second screen")])}
+   <div>{ximg("folio-chicago.png", "width:100%")}<div class="dcap">one generated copy (trip A): the three personal charges and the total are highlighted</div></div>
+  </div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
+  <div class="xk">the same document, other conditions</div>
+  {ximg("westin-internet.png", "width:100%;max-height:150px;object-fit:cover;object-position:top")}
+  <div class="dcap">a folio with a high-speed internet charge on it</div>
+  <div class="xgrid" style="grid-template-columns:1fr 1fr;gap:8px">
+   {xrows([("situation", xid("LOD-FOLIO-INTERNET")), ("condition", "paid from department funds"), ("handling", hp("none")), ("answer key", "one lodging line, the internet included")])}
+   {xrows([("situation", xid("LOD-FOLIO-INTERNET-GRANT")), ("condition", "paid from a federal research grant"), ("handling", hp("flag")), ("answer key", "one lodging line, and a flag: internet is unallowable on the grant")])}
+  </div>
+  <div class="xnote">{N_SIT} situations: {N_TRAV} in travel, {N_NON} outside it. None is tied to a trip: each can be generated for any city, dates, traveler and funding its conditions allow.</div>
+ </div>
+</div>""", chip=("#e2", "Appendix E2"), page_refs=False)
+
+# ---------------------------------------------------------------- D4 · the five handlings
+def xhand(j, defn, img, img_style, ex):
+    return (f'<div class="xbox" style="display:flex;flex-direction:column;gap:6px">'
+            f'<div>{hp(j)} <b style="font-size:15px">{JUDG[j]}</b> <span class="xnote">situations</span></div>'
+            f'<div>{defn}</div><div style="flex:1;min-height:0;display:flex;align-items:flex-start;justify-content:center">{ximg(img, img_style)}</div>'
+            f'<div class="xnote">{ex}</div></div>')
+slide("x04", "Five ways a document can be handled", deck="v2",
+  callout=f"<p><b>Every situation has one correct handling; {N_SIT - JUDG['none']} of the {N_SIT} ask for more than copying the receipt onto an expense line, and these judgment calls are where an agent goes wrong.</b></p>",
+  body=f"""<div class="xgrid" style="grid-template-columns:repeat(5,1fr);flex:1">
+  {xhand("none", "one expense line, as the receipt reads", "united.png", "width:100%", f'{xid("AIR-COACH-DIRECT")} a coach ticket bought from the airline → one airfare line')}
+  {xhand("flag", "one line, and a note for a person to decide before the report is submitted", "reg-virtual.png", "width:100%", f'{xid("REG-VIRTUAL")} an online-only conference → a registration line, flagged')}
+  {xhand("split", "one receipt becomes two lines, on two accounts", "purple-pig.png", "max-height:205px;max-width:100%", f'{xid("MEAL-BUSINESS-ALCOHOL")} lunch with two cocktails → 94.07 business meal with the attendees, 41.84 to entertainment (52611), flagged')}
+  {xhand("exclude", "the allowable part is filed; the full total must not appear", "folio-chicago.png", "max-height:205px;max-width:100%", f'{xid("LOD-FOLIO-PERSONAL")} → 1,120.60 for room and tax, not the folio’s 1,182.59')}
+  {xhand("skip", "no line at all, and the reason is said", "jetblue.png", "width:100%", f'{xid("AIR-COMPANION")} the spouse’s ticket on the traveler’s booking → no line; the traveler’s own ticket is filed')}
+</div>
+<div class="xgrid" style="grid-template-columns:1fr 1fr">
+  <div class="xbox"><div class="xk">a flag has a level · non-travel data</div><b>notice</b>: filed as it is, the reader is told something — supplies paid out of pocket, with GW’s preferred P-Card named ({xid("NC-SELF-PAID")})<br><b>needs review</b>: a person must decide — a computer under $5,000 bought by the traveler, filed under 52193, since GW IT orders computers</div>
+  <div class="xbox"><div class="xk">judgment call</div>a situation whose answer is more than copying the receipt: every handling except “file”, {N_SIT - JUDG['none']} of {N_SIT}. The answer key states the handling, so a score shows whether the agent judged right, not only whether it filled the form.</div>
+</div>""", chip=("#e2", "Appendix E2"), page_refs=False)
+
+# ---------------------------------------------------------------- D5 · families
+_FAM = XF["situations"]["families"]
+def xfam(name, n, img, sid_, j, what):
+    pic = ximg(img, "width:100%;max-height:74px;object-fit:cover;object-position:top") if img else ""
+    return (f'<div class="xbox" style="display:flex;flex-direction:column;gap:4px;padding:6px 8px">'
+            f'<div><b>{name}</b> · {n}</div>{pic}<div style="font-size:11px;line-height:1.3">{xid(sid_)} {hp(j)}<br>{what}</div></div>')
+_tf, _nf = _FAM["travel"], _FAM["non_travel"]
+slide("x05", f"What the situations are about: {len(_tf) + len(_nf)} families of expense", deck="v2",
+  callout=f"<p><b>Each situation belongs to one family, the kind of expense it is about: {len(_tf)} families in travel and {len(_nf)} outside it, so every kind of expense the policy decides has situations of its own.</b></p>",
+  body=f"""<div class="xk" style="margin:0">travel · {N_TRAV} situations</div>
+<div class="xgrid" style="grid-template-columns:repeat(7,1fr);gap:7px">
+  {xfam("airfare", _tf["airfare"], "united.png", "AIR-COACH-DIRECT", "none", "a coach ticket")}
+  {xfam("lodging", _tf["lodging"], "folio-chicago-top.png", "LOD-FOLIO-PERSONAL", "exclude", "a folio with personal charges")}
+  {xfam("meals", _tf["meals"], "purple-pig.png", "MEAL-BUSINESS-ALCOHOL", "split", "a business lunch with alcohol")}
+  {xfam("ground", _tf["ground"], "uber.png", "GT-UBER-TIP-UPDATED", "skip", "a ride receipt replaced by an updated one")}
+  {xfam("registration", _tf["registration"], "reg-virtual.png", "REG-VIRTUAL", "flag", "an online-only conference")}
+  {xfam("other", _tf["other"], "golf.png", "OTH-CLUB-FEES", "flag", "golf with collaborators")}
+  {xfam("documents", _tf["documents"], "program.png", "DOC-PROGRAM", "skip", "a conference program: not a receipt")}
+</div>
+<div class="xgrid" style="grid-template-columns:repeat(3,1fr);gap:7px">
+  <div class="xbox" style="font-size:11px;padding:5px 8px"><b>foreign</b> · {_tf["foreign"]} &nbsp;{xid("FX-BOTH-CURRENCIES")} {hp("flag")} a card slip in the local currency and in dollars</div>
+  <div class="xbox" style="font-size:11px;padding:5px 8px"><b>funding</b> · {_tf["funding"]} &nbsp;{xid("FUND-GRANT-ENTERTAINMENT")} {hp("skip")} entertainment on a federal grant</div>
+  <div class="xbox" style="font-size:11px;padding:5px 8px"><b>timing</b> · {_tf["timing"]} &nbsp;{xid("TIME-REG-OLD-BUT-FINE")} {hp("none")} a registration paid 100 days before the trip</div>
+</div>
+<div class="xk" style="margin:4px 0 0">non-travel · {N_NON} situations</div>
+<div class="xgrid" style="grid-template-columns:repeat(3,1fr) 2.3fr;gap:7px">
+  {xfam("memberships", _nf["memberships"], "dues.png", "DUES-SOCIETY-ANNUAL", "flag", "professional society dues")}
+  {xfam("supplies", _nf["supplies"], "workstation.png", "SUPP-WORKSTATION-CAPITAL", "skip", "a $6,450 workstation: not in Concur")}
+  {xfam("relocation", _nf["relocation"], "movers.png", "RELOC-FACULTY-MOVERS", "skip", "movers for a new professor: paid through payroll")}
+  <div class="xbox" style="font-size:11px;line-height:1.5;padding:6px 9px">
+   <b>books, printing, postage, phone, other accounts</b> · {_nf["extended"]} {xid("BOOK-RESEARCH-TEXT")} {hp("none")}<br>
+   <b>accounts the test account cannot select</b> · {_nf["ovpr_unselectable"]} {xid("LEASE-COPIER-FIRST-PAYMENT")} {hp("skip")}<br>
+   <b>events, gifts, flowers</b> · {_nf["events"]} {xid("EVENT-FLOWERS")} {hp("none")}<br>
+   <b>recruiting</b> · {_nf["recruiting"]} {xid("RECRUIT-CANDIDATE-DINNER")} {hp("none")}<br>
+   <b>software</b> · {_nf["software"]} {xid("SOFT-SAAS-ANNUAL")} {hp("flag")}<br>
+   <b>subscriptions</b> · {_nf["subscriptions"]} {xid("SUBS-JOURNAL-ANNUAL")} {hp("flag")}<br>
+   <b>paid with the GW P-Card</b> · {_nf["pcard"]} {xid("PCARD-SUBSCRIPTION")} {hp("flag")}<br>
+   <b>non-travel receipts in a trip report</b> · {_nf["mixed"]} {xid("SUPP-ON-TRIP")} {hp("flag")}</div>
+</div>""", chip=("#e2", "Appendix E2"), page_refs=False)
+
+# ---------------------------------------------------------------- D6 · conditions, form work, traps, basis
+_sc = XF["situations"]["scope"]
+_bk = XF["situations"]["basis_kinds"]["situations_with_kind"]["all"]
+slide("x06", "Conditions, form work, traps, and the basis of every answer", deck="v2",
+  callout="<p><b>Each situation also states where it applies, how much form work it takes, whether it hides a deliberate contradiction, and what its answer rests on.</b></p>",
+  body=f"""<div class="xgrid" style="grid-template-columns:1fr 1fr;grid-template-rows:auto auto;flex:1">
+ <div class="xbox"><div class="xk">conditions · where it applies</div>
+  <table class="xt">
+   <tr><td style="width:62px"><b>city</b></td><td>US city {_sc["city_class"]["all"]["domestic"]} · abroad {_sc["city_class"]["all"]["foreign"]} · local, within 50 miles {_sc["city_class"]["all"]["local"]} · any {_sc["city_class"]["all"]["any"]}<br>a lunch on a local business day: {xid("MEAL-LOCAL-PERSONAL")} {hp("skip")}; the same lunch inside an all-day local meeting: {xid("MEAL-LOCAL-IN-MEETING")} {hp("flag")}</td></tr>
+   <tr><td><b>traveler</b></td><td>staff {_sc["persona"]["all"]["staff"]} · student {_sc["persona"]["all"]["student"]} · faculty {_sc["persona"]["all"]["faculty_fulltime"] + _sc["persona"]["all"]["faculty_parttime"]} · anyone {_sc["persona"]["all"]["(any / unrestricted)"]}<br>an Airbnb stay is flagged for staff (discouraged) and for a student without the advisor’s written approval: {xid("LOD-AIRBNB-STAFF")}, {xid("LOD-AIRBNB-STUDENT")}</td></tr>
+   <tr><td><b>funding</b></td><td>federal grant {_sc["funding"]["all"]["grant"]} · not a grant {_sc["funding"]["all"]["non_grant"]} · any {_sc["funding"]["all"]["(any / unrestricted)"]}<br>hotel internet: filed on department funds, flagged on a grant (previous pages)</td></tr>
+  </table></div>
+ <div class="xbox" style="display:grid;grid-template-columns:1fr 1.05fr;gap:9px"><div><div class="xk">form work · how much filling it takes</div>
+  <b>simple</b> · {DIFF["simple"]}: one line from the receipt, {xid("AIR-COACH-DIRECT")}<br><b>complex</b> · {DIFF["complex"]}: more fields or a second screen, such as the folio’s four nights, {xid("LOD-FOLIO-PERSONAL")}<br><span class="xnote">Reported apart from the handling, so a score shows whether the agent filled the form badly or judged badly.</span></div>
+  <div>{ximg("concur-itemize.png", "width:100%;max-height:148px;object-fit:cover;object-position:bottom")}<div class="dcap">the folio’s nights, as the agent entered them in Concur</div></div></div>
+ <div class="xbox" style="display:grid;grid-template-columns:1fr 1fr;gap:9px"><div><div class="xk">trap · a deliberate contradiction</div>
+  <b>{_S["with_trap"]["all"]}</b> travel situations hide one, to test whether the agent reads documents against each other.<br>{xid("AIR-WIFI-OTHER-CARRIER")} {hp("flag")} a Wi-Fi receipt from an airline the traveler did not fly: file the fee, flag the mismatch</div>
+  <div>{ximg("wifi.png", "width:100%;max-height:118px;object-fit:cover;object-position:top")}<div class="dcap">a Wi-Fi pass on an airline other than the one the trip used</div></div></div>
+ <div class="xbox"><div class="xk">basis · what the answer rests on (situations with each kind)</div>
+  <table class="xt">
+   <tr><td class="n">{_bk["policy"]}</td><td>a page of the manual or a GW rule · {xid("AIR-COMPANION")}: manual p.25, a companion only with the VP’s approval</td></tr>
+   <tr><td class="n">{_bk["user decision"]}</td><td>our decision, dated, where the policy is silent · {xid("LOD-AIRBNB-STUDENT")}</td></tr>
+   <tr><td class="n">{_bk["search"]}</td><td>a source we looked up · {xid("DUES-SOCIETY-ANNUAL")}</td></tr>
+   <tr><td class="n">{_bk["experience"]}</td><td>experience, said as such: several answers are accepted · {xid("GT-TAXI")}</td></tr>
+   <tr><td class="n">{_bk["real receipt"]}</td><td>one of our own receipts · {xid("DOC-PROGRAM")}</td></tr>
+  </table></div>
+</div>""", chip=("#e2", "Appendix E2–E4"), page_refs=False)
+
+# ---------------------------------------------------------------- D7 · an instance and its answer key
+def _key_code():
+    n = FOLIO["requires"]["itemization"]["nights"]
+    nights = "\n".join(f'               {x["date"][5:]}  {x["room_rate"]:>7} + {x["room_tax"]:>6} tax' for x in n)
+    return (f'<span class="c">// the expected line for the folio, trip A</span>\n'
+            f'"receipt": "{FOLIO["receipt"]}",\n"expense_type": "{FOLIO["expense_type"]}",\n'
+            f'"amount": <span class="a">"{FOLIO["amount"]}"</span>,  "currency": "{FOLIO["currency"]}",\n'
+            f'"requires": itemization by night:\n{nights}\n'
+            f'"unreduced_total": <span class="w">"{FOLIO["unreduced_total"]}"</span>  <span class="c">← must not appear as a line</span>\n'
+            f'"situation": "{FOLIO["situation"]}"')
+def xinst(img, cap):
+    return f'<div style="display:grid;grid-template-columns:300px 1fr;gap:10px;align-items:center">{ximg(img, "width:300px")}<div class="xnote">{cap}</div></div>'
+slide("x07", "Instance: generated documents with their answer key", deck="v2",
+  callout="<p><b>An instance is one generated copy of a situation: one to three documents that look real, and their answer key, written by the same code.</b></p>",
+  body=f"""<div class="xgrid" style="grid-template-columns:1fr 1.02fr;flex:1">
+ <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+  <div class="xk">three instances of {xid("LOD-FOLIO-PERSONAL")} · every situation has three, {N_INST} in all</div>
+  {xinst("folio-boston.png", "<b>Boston</b><br>Westin Copley Place<br>4 nights from 24 August")}
+  {xinst("folio-palmer.png", "<b>Chicago</b><br>Palmer House<br>3 nights from 13 July")}
+  {xinst("folio-atlanta.png", "<b>Atlanta</b><br>Hyatt Regency<br>5 nights from 14 September")}
+  <div class="xnote"><b>What changes</b>: the city, hotel, dates, nights, rates, taxes and the personal charges. <b>What stays</b>: the rule tested and the correct handling.</div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+  <div class="xk">the answer key · what the scorer checks</div>
+  <div class="dcode">{_key_code()}</div>
+  <div class="xbox"><div class="xk">what an answer key can hold</div>
+   the <b>lines</b> a report must contain: account, amount, date, vendor, currency, nights, attendees · the <b>flags</b> that must be raised, with the words they must use · the <b>documents to leave out</b>, with the reason · the <b>totals that must not appear</b> · what the agent’s <b>summary</b> must mention</div>
+  <div class="xgrid" style="grid-template-columns:1fr 1fr;gap:8px">
+   <div class="xbox"><div class="xk">where the realism comes from</div>{_W["cities_total"]} cities with their real tax rules, airports and vendors · {_W["airlines"]} airlines · {_W["people"]["total"]} people · {_W["conferences"]} conferences · {_PO["templates"]["pdf_templates_in_render_py"]} document layouts copied from real receipts</div>
+   <div class="xbox"><div class="xk">why it can be trusted</div>amounts are computed to the cent before the document is drawn · seeded, so a rerun gives the same files · every PDF says it is a synthetic test document · {N_INST} instances, {N_FILES} files</div>
+  </div>
+ </div>
+</div>""", chip=("#e2", "Appendix E2"), page_refs=False)
+
+# ---------------------------------------------------------------- D8 · a trip
+_files = [f for f in _xread("trip_a", "files.txt").split("\n") if f]
+_hidden = ["expected.json", "MANIFEST.md", "turns.json"]
+_shown = [f for f in _files if f not in _hidden]
+_pdfs = [f for f in _shown if f.endswith(".pdf")]
+_pick = ["Hyatt Regency Chicago folio.pdf", "Hyatt Regency Chicago reservation confirmation.pdf", "The Purple Pig business lunch check.pdf",
+         "American Airlines DCA-ORD receipt.pdf", "American Airlines seat assignment receipt.pdf", "Uber Aug 11 receipt.pdf",
+         "Uber Aug 11 UPDATED receipt.pdf", "Newsstand receipt.pdf", "Golf with the collaborators.pdf", "Conference program.pdf"]
+_notes = _xread("trip_a", "trip_notes.txt").split("\n")
+_tj = _xload("trip_a", "turns.json")
+_turn_what = {1: "the flights, the seat, the bag, the changed return, the registration and the tutorial",
+              2: "the hotel folio and the reservation confirmation", 3: "the meals", 4: "ground transport and the rest"}
+def _wrap(t, w=74):
+    out, line = [], ""
+    for word in t.split(" "):
+        if len(line) + len(word) + 1 > w:
+            out.append(line); line = "  " + word
+        else:
+            line = (line + " " + word) if line else word
+    return out + [line]
+_notes_html = "\n".join(esc(l) for raw in _notes[:12] for l in _wrap(raw) if raw is not None)
+slide("x08", "Trip: a story and its situations, filed as one expense report", deck="v2",
+  callout="<p><b>A trip puts a traveler’s story and the situations it contains into one folder, which the agent files as one Concur report, a few documents per turn; the answer key stays hidden from the agent.</b></p>",
+  body=f"""<div class="xgrid" style="grid-template-columns:0.95fr 1.25fr 1fr;flex:1">
+ <div class="xbox"><div class="xk">the folder · trip A, Chicago</div>
+  <div class="xfiles"><b>the agent sees</b> · {len(_pdfs)} documents and the notes<br>{"<br>".join(("▸ " if f in _pick[:2] else "· ") + esc(f) for f in _pick)}<br>· … {len(_pdfs) - len(_pick)} more · trip_notes.txt<br><br><b>hidden from the agent</b><br><span class="h">· expected.json — the answer key<br>· MANIFEST.md — the situations in the trip<br>· turns.json — the instructions, turn by turn</span></div></div>
+ <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+  <div class="xk">trip_notes.txt, as the agent reads it</div>
+  <div class="dcode" style="white-space:pre-wrap;font-size:9.6px">{_notes_html}</div>
+  <div class="xnote">The notes decide several documents: who sat at the Purple Pig lunch, why the return flight was changed.</div>
+ </div>
+ <div class="xbox"><div class="xk">the turns · one recorded run each</div>
+  {"".join(f'<div style="margin:0 0 5px"><b>turn {t["turn"]}</b> · {len(t["files"])} files: {_turn_what[t["turn"]]}</div>' for t in _tj)}
+  <div class="xnote" style="margin-top:6px">Every turn begins: never submit; read trip_notes.txt first; file what the policy allows, leave out what it does not and say why, split what must be split, and flag every judgment call with its basis.</div></div>
+</div>
+<div class="xgrid" style="grid-template-columns:1fr 1.15fr 1fr;gap:9px">
+ <div class="xbox"><div class="xk">a trip must be consistent</div>one way to travel and one ticket for the trip · one hotel at a time · fuel dated the day the car is returned · no two situations at one merchant on one day</div>
+ <div class="xbox"><div class="xk">{T_ALL["trips"]} trips</div><b>A–O</b>, 15 travel trips, use all {N_TRAV} travel situations · <b>P–W</b>, 8 reports outside travel or mixed, use {XF["situations"]["trip_coverage"]["non_travel"]["referenced_by_at_least_one_trip"]} of the {N_NON} others · {T_ALL["files_total"]} documents, {T_ALL["expected_lines"]} lines, {T_ALL["skips"]} documents not filed, {T_ALL["flags"]} flags</div>
+ <div class="xbox"><div class="xk">per diem</div>on a foreign leg, meals are paid as a daily allowance, so a meal receipt from that leg is not filed ({xid("MEAL-INTL-PERDIEM")}); trip E, New York and London, claims {next(t for t in XF["trips"]["per_trip"] if t["letter"] == "E")["per_diem_days"]} days</div>
+</div>""", chip=("#e3", "Appendix E3"), page_refs=False)
+
+# ---------------------------------------------------------------- D9 · scoring
+def _score_code():
+    lines = _SCORE.splitlines()
+    keep = []
+    for l in lines:
+        if ("Hyatt Regency Chicago folio" in l or "MISSING" in l or l.startswith("── per") or "American Airlines DCA-ORD" in l) and "⚠" not in l:
+            keep.append(l)
+    dims = [l for l in lines if re.match(r"^\s+\w+\s+(\d+/\d+)\s*$", l)]
+    tail = [l for l in lines if l.lstrip().startswith("⚠") or l.startswith("OVERALL")]
+    body = keep[:1] + ["  …"] + keep[1:] + ["", "── dimensions ──"] + dims + [""] + tail
+    out = []
+    for l in body:
+        l = re.sub(r"(\S) {3,}", r"\1   ", l) if ("✓" in l or "✗" in l) else l
+        e = esc(l if len(l) <= 74 else l[:73] + "…")
+        if "Hyatt Regency Chicago folio" in l:
+            e = f'<span class="a">{e}</span>'
+        elif "MISSING" in l or "⚠" in l:
+            e = f'<span class="w">{e}</span>'
+        out.append(e)
+    return "\n".join(out)
+slide("x09", "Scoring a filed report against its answer key", deck="v2",
+  callout=f"<p><b>After a run we read the report back from Concur and check it against the key: trip A passed {CHK_OK} of {CHK_ALL} checks ({OVERALL}%), its folio line passed every one, and the misses say exactly what went wrong.</b></p>",
+  body=f"""<div class="xgrid" style="grid-template-columns:1fr 1.12fr 0.95fr;flex:1">
+ <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+  <div class="xk">what the agent filed · turn 2</div>
+  {ximg("concur-form.png", "width:100%;max-height:172px;object-fit:cover;object-position:bottom")}
+  {ximg("concur-itemize.png", "width:100%;max-height:150px;object-fit:cover;object-position:bottom")}
+  <div class="dcap">Concur after turn 2: the lodging line of {FOLIO["amount"]} with the deduction explained in its comment, and the four nights itemized</div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+  <div class="xk">score.txt · trip A, batch 20260914-02</div>
+  <div class="dcode" style="font-size:9.4px;line-height:1.36">{_score_code()}</div>
+ </div>
+ <div class="xbox" style="font-size:11.5px">
+  <div class="xk">the terms</div>
+  <b>run</b>: one turn, recorded step by step: the page seen, the decision, the actions, a screenshot. Trip A took {len(TURNS)} turns, {RUN_STEPS} steps, ${RUN_USD:.2f} and {round(RUN_S / 60)} minutes.<br>
+  <b>export</b>: the report read back from Concur after the run.<br>
+  <b>score</b>: checks passed ÷ checks in the key, reported by dimension.<br>
+  <b>not scored by machine</b>: the wording of the business purpose, the Oracle alias, the mileage calculator’s fields, whether an approval is attached; a person reads them in the trajectory.<br>
+  <b>ledger</b>: each situation’s record across batches: {xid("LOD-FOLIO-PERSONAL")} passed {LED_PASS}.<br><br>
+  <span class="xnote">For learning across reports this gives, per report, a success score, the steps, the dollars and the seconds; and the same situations recur from trip to trip.</span></div>
+</div>""",
+  chip=("#e6", "Appendix E6"), page_refs=False)
 
 # =====================================================================
 # II · How far existing work has got
@@ -1253,8 +1628,9 @@ if __name__ == "__main__":
     font_dir = sys.argv[sys.argv.index("--fonts") + 1] if "--fonts" in sys.argv else None
     out = render(font_dir)
     open(OUT, "w", encoding="utf-8").write(out)
-    open(OUT_V2, "w", encoding="utf-8").write(render(font_dir, keep=KEEP_V2))
-    print(f"wrote {OUT_V2} (pages: {', '.join(KEEP_V2)})")
+    keep = KEEP_V2 + [s["id"] for s in S if s["deck"] == "v2"]
+    open(OUT_V2, "w", encoding="utf-8").write(render(font_dir, keep=keep))
+    print(f"wrote {OUT_V2} ({len(keep)} pages)")
     left = sorted(set(re.findall(r"[\u4e00-\u9fff]+", re.sub(r"<[^>]+>", " ", out))))
     print(f"wrote {OUT} ({len(out) / 1024:.0f} KB, {len(S)} pages, {len(refs)} references)")
     print("  Chinese left on pages:", left[:40] if left else "none")

@@ -1,0 +1,1586 @@
+{
+ "provisions": [
+  {
+   "pool": "travel",
+   "id": "AIR-COACH",
+   "page": "p.9",
+   "text": "Coach/economy for domestic and international; premium economy/business need written pre-approval by president/VP/dean attached; OCONUS segments > 5 h and CONUS segments > 5 h allow premium economy/business for faculty and staff",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-MEDICAL",
+   "page": "p.9",
+   "text": "Accommodation other than coach for a medical condition goes through EEO/ER; no medical information on the report",
+   "actionable": false,
+   "why_not": "an EEO letter is an HR document, never in a receipt folder"
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-FEDERAL-ECON",
+   "page": "p.10",
+   "text": "Federally funded travel must be booked as economy airfare",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-LOWEST",
+   "page": "p.10",
+   "text": "Lowest available airfare: direct route, at most two connections, no extra stays, standard bags, usually a restricted coach fare",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-MILES",
+   "page": "p.9",
+   "text": "Tickets bought with frequent-flyer miles are not reimbursed; miles may be used to upgrade if the fare paid is the lowest; the cost of a paid upgrade is the traveler's",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-IBUY-60",
+   "page": "p.9",
+   "text": "Out-of-pocket tickets bought through iBuy+ Travel / Travel Leaders can be claimed within 60 days of purchase regardless of travel dates",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-FLY-AMERICA",
+   "page": "p.10",
+   "text": "Airfare on a US government grant must be on a US carrier (Fly America / Open Skies)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-ANCILLARY-OK",
+   "page": "p.10",
+   "text": "Standard checked bags, in-flight Wi-Fi and advance seat assignment within economy are paid",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-ANCILLARY-NO",
+   "page": "p.10, App. B p.30",
+   "text": "Priority boarding, exit row, extra legroom, Economy Plus, window/aisle seat fees are not paid unless pre-approved (premium economy for segments > 5 h)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-TRUSTED-TRAVELER",
+   "page": "p.10, App. A p.28",
+   "text": "Passport, visa, Global Entry and TSA PreCheck fees for employees who travel routinely, subject to departmental approval",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-INDIRECT",
+   "page": "p.10–11",
+   "text": "Indirect or interrupted routes are paid at the lower of the actual fare and the direct-route fare, documented with a screenshot at booking",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-CHANGE",
+   "page": "p.11, App. A p.28",
+   "text": "Change/cancellation penalties are allowable when documented with a business reason",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-UNUSED",
+   "page": "p.11",
+   "text": "Unused tickets and credits belong to the university; refunds must be requested",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-CHARTER",
+   "page": "p.11",
+   "text": "Charter aircraft need prior written approval of the President/EVP/CFO/Provost and Risk Management",
+   "actionable": false,
+   "why_not": "an executive approval process, not a receipt"
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-CLUB",
+   "page": "App. B p.30",
+   "text": "Airline club membership fees are unallowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-EXCESS-BAG",
+   "page": "App. A p.28, App. B p.30",
+   "text": "Baggage of a personal nature (golf clubs, skis, bicycles, surfboards) is unallowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "AIR-FIRST",
+   "page": "App. B p.30",
+   "text": "First class is unallowable except as an EEO medical accommodation",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "MEAL-BUSINESS",
+   "page": "p.11–12",
+   "text": "A business meal has two or more persons, business discussed; each attendee's name and the business purpose go on the line; group functions need the announcement or invitation list; attendees may not be an approver of the report",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "MEAL-TRAVEL",
+   "page": "p.12",
+   "text": "Travel meals are ordinary meals away from home on GW business, at actual cost",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "MEAL-PERDIEM-INTL",
+   "page": "p.12",
+   "text": "Per diem is used only for international travel (State Department rates built into Concur); per diem days need no receipts",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "MEAL-PERDIEM-CONCUR",
+   "page": "p.12",
+   "text": "The international meal per diem is claimed through Concur's Travel Allowance itinerary (the State Department rates are built in, pre-populated by the system); meals a host or a conference provided are marked there",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "MEAL-ALCOHOL",
+   "page": "p.12–13, App. A p.28",
+   "text": "Alcohol is separated from the meal and charged to 52611 – Entertainment; never to a federal grant",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "MEAL-GRANT-UNRESTRICTED",
+   "page": "p.12",
+   "text": "Alcohol and entertainment that cannot be charged to a sponsored award go to an unrestricted account",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "DOC-75",
+   "page": "p.12, p.24",
+   "text": "Supporting documents are required for every expense over $75; itemised receipts for meals over $75, including meals on a hotel bill",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "DOC-LEVEL3",
+   "page": "p.13, App. D p.33",
+   "text": "Level 3 / rich card data counts as a receipt for goods only when items are listed and the total matches; never for airfare, hotel, rental car or train",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "DOC-AFFIDAVIT",
+   "page": "p.13, p.24–25",
+   "text": "The Missing Receipt Affidavit (in Concur) or the Acknowledgement form replaces an itemised meal receipt; missing receipts are never accepted for airfare, hotel, trains or cars",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-STANDARD",
+   "page": "p.13",
+   "text": "A standard room, cost kept to a minimum; conference block rates booked directly are fine",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-P2P",
+   "page": "p.13",
+   "text": "Peer-to-peer lodging (Airbnb): faculty/staff strongly discouraged; students prohibited without prior written approval of the advisor's office and Risk Management",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-DEPOSIT",
+   "page": "p.14",
+   "text": "Deposits should be on a P-Card; deposit receipts list room nights and the rate per night; a group deposit needs the traveler names",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-GUEST",
+   "page": "p.14",
+   "text": "Booking a hotel for a visitor: the hotel is paid in full in advance only when the rate requires prepayment; card numbers are never e-mailed",
+   "actionable": false,
+   "why_not": "arranging a guest's booking is not a traveler's reimbursement"
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-PREPAID",
+   "page": "p.14",
+   "text": "Prepaid bargain rates are risky: non-refundable and unchangeable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-ITEMIZE",
+   "page": "p.12–13 (Documentation) + Concur",
+   "text": "The folio is itemised by night (room rate + tax per night); personal charges on the folio are left out",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-NOSHOW",
+   "page": "App. B p.30",
+   "text": "Hotel cancellation / no-show penalties from failing to cancel a guaranteed reservation are unallowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-LAUNDRY",
+   "page": "App. A p.28, App. B p.30",
+   "text": "Laundry/dry cleaning only on trips longer than five calendar days",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "LOD-PERSONAL-DAYS",
+   "page": "p.25",
+   "text": "Non-business days added for personal reasons are not paid unless the stay-over lowers the total cost, with documentation",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-MODE",
+   "page": "p.14",
+   "text": "Over 200 miles commercial air is generally most economical; 200 miles or less by bus, shuttle, ride service, taxi, rental or private car; more than 200 miles by car needs a quote showing it was most economical",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-AIRPORT",
+   "page": "p.15, App. A p.29",
+   "text": "Most economical means to and from the airport; a second party driving the traveler is paid at the mileage rate but not more than a taxi or shuttle would cost",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-RENTAL-PREFERRED",
+   "page": "p.15",
+   "text": "Hertz, Enterprise and National are preferred (insurance included at no extra charge); other companies: staff MUST buy CDW and liability coverage; students must rent from the preferred companies",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-RENTAL-FUEL",
+   "page": "p.15, App. A p.28",
+   "text": "Decline prepaid fuel and refuel before returning; gasoline for a rental is allowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-RENTAL-INTL",
+   "page": "p.16",
+   "text": "International rentals: staff must buy CDW and liability; students are not authorised to rent abroad",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-RENTAL-CLASS",
+   "page": "p.16",
+   "text": "Up to full-size; specialty vehicles (luxury, SUV, convertible) are not reimbursed without prior written VP/dean approval; the traveler pays the daily excess",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-RENTAL-STUDENT",
+   "page": "p.15",
+   "text": "Students: authorised-driver program, 20+, licensed, no 15-passenger vans, not for personal use",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-RENTAL-ACCIDENT",
+   "page": "p.16–17",
+   "text": "Accidents are reported to the agency, Risk Management and the police",
+   "actionable": false,
+   "why_not": "an incident report, not an expense"
+  },
+  {
+   "pool": "travel",
+   "id": "GT-MILEAGE",
+   "page": "p.16–17, App. A p.28",
+   "text": "Private car: mileage at the IRS rate from the normal place of business (not the residence), plus tolls and reasonable parking; commuting is never paid; Concur has a mileage calculator",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-MILEAGE-TWO",
+   "page": "p.17",
+   "text": "Two or more people in one car: mileage is paid to one person only",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-RAIL",
+   "page": "p.17, App. A p.28",
+   "text": "Rail and bus at the lowest fare with reserved seating when less expensive than air; evidence of the airfare comparison attached; Acela Business Class is allowable when more economical",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-CAR-IN-LIEU",
+   "page": "p.17–18",
+   "text": "A car in lieu of air is paid per mileage/rental rules but never more than the lowest available airfare, documented within two business days of approval",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-PRIVATE-CAR",
+   "page": "p.18, App. B p.30",
+   "text": "Private car services need the Vice President's written pre-approval attached; limos and cabs for extended distances are unallowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-CHARTER-BUS",
+   "page": "p.18",
+   "text": "Charter buses go through Travel Services with contract review",
+   "actionable": false,
+   "why_not": "a contract, not a receipt"
+  },
+  {
+   "pool": "travel",
+   "id": "GT-FINES",
+   "page": "App. B p.30",
+   "text": "Fines, tickets, car repairs and car washes are unallowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "GT-GAS-PERSONAL",
+   "page": "App. B p.30",
+   "text": "Gasoline for a personal vehicle is unallowable (mileage covers it)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "MISC-75",
+   "page": "p.18",
+   "text": "Miscellaneous expenses over $75 per transaction must be documented",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "ADVANCE",
+   "page": "p.18–19",
+   "text": "Travel advances $200–$2,500, reconciled within 30 days, unused repaid within 60 days",
+   "actionable": false,
+   "why_not": "an advance is reconciled against the report, not filed from a receipt"
+  },
+  {
+   "pool": "travel",
+   "id": "ENT-CELEBRATION",
+   "page": "p.19, App. B p.30",
+   "text": "Cakes, flowers, balloons for employee celebrations are not business expenses; decorations for university events are; gifts for an individual need prior written VP/dean approval attached",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "ENT-TASTE",
+   "page": "p.19",
+   "text": "Entertainment must advance a university business relationship, within good taste and reasonable limits",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "TIME-30-60",
+   "page": "p.6, p.22",
+   "text": "Submit within 30 days after the trip; out-of-pocket claims older than 60 days after the trip are not reimbursed; students are exempt from the 60-day limit",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "TIME-PRE-TRIP",
+   "page": "p.22",
+   "text": "Out-of-pocket travel cannot be claimed before the trip unless booked through iBuy+ Travel",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "REPORT-ONE",
+   "page": "p.22",
+   "text": "One report per trip; several one-line reports are discouraged",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "PURPOSE",
+   "page": "p.22, App. C p.32",
+   "text": "The business purpose says what, who, why and the benefit to GW; 'Attend conference' is inadequate",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "VENDOR-INVOICE",
+   "page": "p.23, App. B p.30",
+   "text": "'Is this a vendor invoice?' is yes only for a true invoice; expenses paid to service providers go through P-Card / invoice processing, and payments to individuals through Payables",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPROVAL",
+   "page": "p.7, p.23",
+   "text": "Nobody approves their own expenses; sponsored expenses route to OVPR",
+   "actionable": false,
+   "why_not": "routing happens after submission"
+  },
+  {
+   "pool": "travel",
+   "id": "STUDENT-DELEGATE",
+   "page": "p.26",
+   "text": "A GW employee acting as delegate submits a student's report",
+   "actionable": false,
+   "why_not": "who submits is a Concur role, not a receipt"
+  },
+  {
+   "pool": "travel",
+   "id": "LOCAL-50",
+   "page": "p.25, App. B p.30",
+   "text": "Local travel is under 50 miles one way: no personal meals or lodging — unless the mealtime falls within the hours of the meeting",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "COMPANION",
+   "page": "p.25",
+   "text": "Spouse/companion expenses only with VP pre-approval attached",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "OUTSIDE-SOURCE",
+   "page": "App. B p.30",
+   "text": "Expenses paid or reimbursed by an outside source are unallowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "FOREIGN-CURRENCY",
+   "page": "p.21, p.25",
+   "text": "Foreign receipts are recorded in the receipt's currency; Concur converts; never convert by hand",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "PCARD",
+   "page": "p.8",
+   "text": "The GW P-Card is the preferred payment method; P-Card charges are reconciled in Concur as card transactions, not as out-of-pocket lines",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPA-MISC",
+   "page": "App. A p.28",
+   "text": "Room service, luggage storage fees, valet parking are allowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPA-TELECOM",
+   "page": "App. A p.29",
+   "text": "Telephone, fax, internet and data costs are allowable but may not be charged to a federal research project",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPA-TIPS",
+   "page": "App. A p.29, App. B p.30",
+   "text": "Tips are allowable when customary and not excessive; excessive tipping is not",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPA-VACCINE",
+   "page": "App. A p.29",
+   "text": "Vaccinations and other medical costs when required for travel to specific destinations",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPA-NONEMPLOYEE",
+   "page": "App. A p.28",
+   "text": "Non-employee travel (applicants, guest lecturers, consultants) paid by GW on a P-Card",
+   "actionable": false,
+   "why_not": "paid by GW, not reimbursed to the traveler"
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-PERSONAL",
+   "page": "App. B p.30–31",
+   "text": "Clothing, shoes, jewelry, toiletries, medicines, in-room movies and alcohol, health club, babysitting, recreation, hairdressers, haircuts, personal care",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-CARDFEES",
+   "page": "App. B p.30",
+   "text": "Credit-card fees, annual membership, interest and late charges on personal cards",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-INSURANCE",
+   "page": "App. B p.30",
+   "text": "Life, accident, baggage, personal property or flight-interruption insurance premiums",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-LUGGAGE",
+   "page": "App. B p.30",
+   "text": "Luggage or briefcase purchase or repair",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-LOST",
+   "page": "App. B p.30",
+   "text": "Lost, broken or stolen property",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-READING",
+   "page": "App. B p.31",
+   "text": "Newspapers, magazines, books for personal use",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-CHARITY",
+   "page": "App. B p.30",
+   "text": "Charitable contributions go through University Payables",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-DEPENDENT",
+   "page": "App. B p.30–31",
+   "text": "Dependent care, pet care, home or lawn maintenance, other personal costs",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-CLUBS",
+   "page": "App. B p.30",
+   "text": "Golf/tennis/health/country club fees, memberships and sporting equipment unless part of a pre-authorised group event",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-PENALTIES",
+   "page": "App. B p.31",
+   "text": "Penalties and fees for violating airline, rail, hotel or reservation rules",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "travel",
+   "id": "APPB-SPECIAL-OCCASION",
+   "page": "App. B p.31",
+   "text": "Flowers, fruit, candy, balloons for specific individuals unless approved in advance by a VP or dean, with the approval attached",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SCOPE",
+   "page": "App. A p.28",
+   "text": "The manual applies to all expenses incurred for a university purpose regardless of the account charged: a non-travel business expense is judged by the same manual",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SELF-PAID",
+   "page": "owner decision 2026-09-17 (no. 4); Contract Process Guide (Procurement, 2025-04-30) p.7–8",
+   "text": "Subscriptions, office supplies, cloud services and membership dues paid out of pocket ARE reimbursable: file the line, with a notice that GW's preferred channel is P-Card / iBuy+ and that out-of-pocket reimbursement is to be confirmed by the department (GW's order of purchasing methods does not list self-payment, and no GW page allows or forbids it)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-MIXED-REPORT",
+   "page": "owner decision 2026-09-17 (no. 3); https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+   "text": "Mixed reports are allowed: a non-travel receipt found in a trip folder is filed ON that report with its dedicated expense type, plus a notice that it is a non-travel expense on a travel report (GW: a mix of Domestic and No Travel may pick either travel type)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-NO-TRAVEL-REPORT",
+   "page": "owner decision 2026-09-17 (no. 3); https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+   "text": "A purely non-travel folder is one report whose header answers 'What type of travel expenses are you claiming?' with No Travel; no Travel Allowance itinerary",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-NOT-IN-CONCUR",
+   "page": "owner decision 2026-09-17 (no. 13)",
+   "text": "A document that is not reimbursed through a Concur expense report, or for which this account has no expense type, gets no line: the agent says 'not filed in Concur' and names the right channel (Concur Invoice non-employee reimbursement, University Payables / supplier invoice, payroll through the Provost's office, the Gift Card Order Form in Request, GW IT purchasing)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-TIME-60-TRANSACTION",
+   "page": "p.22 (new manual p.23)",
+   "text": "Out-of-pocket claims older than 60 days from the transaction date, or from the completion of travel, as applicable, are not reimbursed; a non-travel purchase counts from its transaction date (our reading of 'as applicable'); students and guests are exempt",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SALES-TAX",
+   "page": "p.25 (new manual p.26)",
+   "text": "GW's sales-tax exemption does not apply to purchases made with personal funds: the tax on a self-paid receipt is part of the expense (the new manual adds that P-Card holders are responsible for obtaining the exemption)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-GRANT-ADMIN-COSTS",
+   "page": "https://compliance.gwu.edu/direct-charging-administrative-costs-associated-sponsored-projects",
+   "text": "Subscriptions, computers, general office supplies, memberships and postage are administrative costs: charged directly to a federal award only when integral to the project, allocable to it, budgeted or approved by the sponsor, and not also recovered as indirect costs",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-CLICK-THROUGH",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.33–35",
+   "text": "Accepting click-through terms is signing a contract; faculty and staff have no authority to sign for the university without a written delegation",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-OVPR-ROUTING",
+   "page": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+   "text": "On sponsored funds a report with a type on the OVPR list (52221, 52193, 52441, 52691, 54541, 52641, 53131, 55151, 55541 …) routes to OVPR; 52211, 54111, 55567, 52199 and 52231 are not on the list",
+   "actionable": false,
+   "why_not": "routing happens after submission"
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SUBS-BUSINESS",
+   "page": "App. B p.31; https://procurement.gwu.edu/appendix-procurement-competitive-exemptions-list (item 13)",
+   "text": "Only reading matter FOR PERSONAL USE is unallowable: a journal, database or news subscription for research or teaching is a business expense, type 52221-SUBSCRIPTIONS/PERIODICALS",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-GW-ALREADY-PROVIDES",
+   "page": "https://engineering.gwu.edu/software-licenses; https://research.gwu.edu/aaas-elemental-memberships; https://gwtoday.gwu.edu/students-leadership-collaborate-expand-free-digital-news-resources; experience",
+   "text": "What GW already provides at no cost — site-licensed software (MATLAB, Microsoft Office), the AAAS Elemental membership, the digital New York Times / Washington Post / Wall Street Journal — is filed when bought separately for business, with a needs_review flag asking why (no GW page forbids the purchase; the handling is our judgment)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SW-TYPE-UNNAMED",
+   "page": "owner decision 2026-09-17 (no. 5); owner decision D-043 (2026-09-18); https://controller.gwu.edu/capitalized-asset-management",
+   "text": "GW names no expense type for software subscriptions and SaaS licences: where the kind is unclear, 52199, 55567, 52441 or 52221 is accepted, with a needs_review flag 'GW does not say which expense type software takes' (the portal calls 52199 'MFA USE ONLY'; the Controller lists it as the general non-capitalized software account). An item that clearly is one kind takes that type and needs no type flag: a usage-billed cloud bill is 55567 (NC-CLOUD-BILL), a journal, database or periodical subscription 52221 (NC-SUBS-BUSINESS)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SW-SECURITY-ASSESSMENT",
+   "page": "https://procurement.gwu.edu/procurement-methods; Contract Process Guide (Procurement, 2025-04-30) p.6–7; owner decision 2026-09-17 (no. 6)",
+   "text": "All software and SaaS purchases, regardless of dollar amount, must have a GW IT security assessment, and technology hardware, software or cloud services cannot be bought on a P-Card without one: a self-paid software, cloud or AI-tool line carries a needs_review flag saying so (GW IT's own page is narrower: restricted data, a connection to GW systems)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-AI-TOOLS-LIST",
+   "page": "https://it.gwu.edu/ai-tools-status; https://it.gwu.edu/ai-guidance-and-best-practices; owner decision 2026-09-17 (no. 6)",
+   "text": "AI-tool subscriptions (ChatGPT, Claude) are reimbursable; they are not on GW IT's list of approved AI tools (Microsoft Copilot, Adobe Firefly, GW Chat, Box AI, Zoom AI, Google Gemini, NotebookLM), so the line carries a needs_review flag",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-CLOUD-BILL",
+   "page": "Concur Add Expense dialog, read 2026-09-15 (55567 is in the Other section); https://it.gwu.edu/research-cloud; owner decision 2026-09-17 (no. 6)",
+   "text": "A cloud bill (AWS, Google Cloud, Azure) paid personally is filed as 55567-CLOUD COMPUTING SERVICES, with the self-paid notice and the security-assessment flag; GW IT's Research Cloud offers researchers AWS resources",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SUPPLIES-TYPE",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.8; https://ibuy.gwu.edu/office-supplies-and-furniture; owner decision D-065 (2026-09-18)",
+   "text": "Office supplies are 54111-OFFICE SUPPLIES (the main type only: 52691-MISCELLANEOUS OFFICE EXPENSE is not accepted for plain supplies — it takes an office cost that is not a supply, NC-OFFICE-NOT-SUPPLY). GW's preferred way to buy them is an iBuy+ punch-out supplier paid by P-Card; bought out of pocket they are filed with the self-paid notice",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-AMAZON-PERSONAL",
+   "page": "https://ibuy.gwu.edu/amazon-business-account; experience",
+   "text": "GW's Amazon Business account takes the P-Card only; an order on a PERSONAL Amazon account is an ordinary self-paid purchase (our reading): file it with the self-paid notice",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-COMPUTER-GWIT",
+   "page": "owner decision 2026-09-17 (no. 7); https://it.gwu.edu/faculty-staff-workstation-initiative-guidelines",
+   "text": "A computer bought personally is filed under 52193-NON-CAPITALIZED COMPUTING EQUIPMENT when its unit price is under $5,000, with a needs_review flag: GW IT requires computers to be ordered through GW IT",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-CAPITALIZED-5000",
+   "page": "https://controller.gwu.edu/capitalized-asset-management; owner decision 2026-09-17 (no. 7)",
+   "text": "Equipment or software with a unit price of $5,000 or more and a useful life over one year is capitalized (58524-CAPITALIZED COMPUTER EQUIPMENT AND SOFTWARE), which this account cannot select: not in Concur — GW IT purchasing",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-DUES-PROFESSIONAL",
+   "page": "App. B p.30 (a partial listing, silent on professional dues); https://procurement.gwu.edu/appendix-procurement-competitive-exemptions-list (item 12); owner decision 2026-09-17 (no. 4)",
+   "text": "The manual has no clause on professional-society dues — App. B names only airline clubs, personal card fees and country, tennis, health or golf clubs. Dues of a professional society are 52211-MEMBERSHIPS, filed with the self-paid notice",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-DUES-PTFPDF",
+   "page": "https://facultyaffairs.gwu.edu/professional-development-fund",
+   "text": "Part-time Faculty Professional Development Fund: up to $100 of a professional organisation's membership is reimbursed (at most three awards and $1,400 per fiscal year), after the department's and the school's approval and the fund's own, claimed through Concur within 30 days of the activity; only part-time faculty eligible for good-faith consideration",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-MEAL",
+   "page": "owner decision 2026-09-17 (no. 8); p.11–12 (new manual p.12); App. C p.32",
+   "text": "A meal with a job candidate follows the business-meal rules — every attendee named, the purpose stated, alcohol split off to 52611; the type is 53102-US BUSINESS MEALS or 52641-RECRUITING EXPENSE",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-EMPLOYEE-PAID",
+   "page": "owner decision 2026-09-17 (no. 8); App. A p.28 (new manual p.29)",
+   "text": "App. A names non-employee travel (job applicants, guest lecturers, consultants) paid by GW on a P-Card. An employee who paid a candidate's hotel or airfare out of pocket files it — 53131-TRAVEL-NON-GWU PERSONNEL, the ordinary travel type or 52641 — with a needs_review flag",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-OWN-TRIP",
+   "page": "App. C p.32",
+   "text": "An employee's own trip to recruit or to interview is ordinary travel ('Travel to University of Washington to recruit students' is one of the manual's model purposes)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-JOB-AD",
+   "page": "owner decision 2026-09-17 (no. 8); https://hr.gwu.edu/sites/g/files/zaxdzs5691/files/2024-06/gw-advertising-6.pdf; https://compliance.gwu.edu/advertising-placement",
+   "text": "A job advertisement paid personally is filed under 55151-ADVERTISING or 52641 with a needs_review flag: fee-based postings are department funded, normally paid by P-Card or payment request and coordinated by Faculty Affairs or HR; advertising is generally unallowable on sponsored projects",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-CANDIDATE-RECEIPTS",
+   "page": "https://ibuy.gwu.edu/reimbursements-person-not-employee-or-student; p.26 (new manual p.27)",
+   "text": "A candidate's OWN out-of-pocket receipts are not an employee's expenses: a non-employee is reimbursed through Concur Invoice (invoice type 'Non-employee reimbursement': itemized receipts, a memo of the purpose, the payee's address) — not in Concur Expense",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-SEARCH-FIRM",
+   "page": "App. B p.30; https://procurement.gwu.edu/appendix-procurement-competitive-exemptions-list (item 42); https://hr.gwu.edu/special-circumstances",
+   "text": "A search firm's invoice is an expense paid to a service provider: University Payables / supplier invoice — not in Concur Expense",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-SIGNING-BONUS",
+   "page": "https://hr.gwu.edu/managing-compensation",
+   "text": "A signing bonus is compensation, not an expense: payroll — not in Concur (that it runs through payroll is our inference; the page does not say how it is paid)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-FOREIGN-VISITOR",
+   "page": "p.21 (new manual p.22)",
+   "text": "Inviting and paying foreign visitors: the visa type, the activity and the way of paying are settled with the Tax Department BEFORE the invitation; a payment made for a foreign candidate or visitor is filed with a needs_review flag",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RELOC-FACULTY-LUMP-SUM",
+   "page": "https://provost.gwu.edu/sites/g/files/zaxdzs5926/files/2025-07/2025%20GW%20Faculty%20Handbook.pdf §2.3; https://facultyaffairs.gwu.edu/relocation-and-moving-allowance-new-faculty; owner decision 2026-09-17 (no. 9)",
+   "text": "A new full-time faculty member's relocation is a lump sum from the Provost's office by rank — $3,000 assistant professor or instructor, $4,500 associate or full professor — paid through payroll and taxable, for any expense of the move including house-hunting trips; receipts only prove the move. Not a Concur expense report, and this account has no relocation type (53211-RELOCATION EXPENSE is not selectable)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RELOC-PARTTIME-NONE",
+   "page": "https://facultyaffairs.gwu.edu/relocation-and-moving-allowance-new-faculty; owner decision 2026-09-17 (no. 9)",
+   "text": "Part-time faculty, and full-time faculty appointed for one semester, have no relocation allowance",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RELOC-STAFF",
+   "page": "https://hr.gwu.edu/why-gw; owner decision 2026-09-17 (no. 9)",
+   "text": "Staff relocation: GW publishes no policy (the HR page lists only third-party moving discounts)",
+   "actionable": false,
+   "why_not": "no GW rule to test against — the owner's decision is not to invent one"
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-EVENT-FLOWERS",
+   "page": "p.19 (new manual p.19–20, which adds 'flowers')",
+   "text": "Table centerpieces, flowers and decorations for university events are allowable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-EVENT-TYPE-52612",
+   "page": "owner decision 2026-09-17 (no. 11); App. A p.28 (new manual p.29): 'alcohol must be charged to account 52611'",
+   "text": "Gifts for an individual and decorations or flowers for a university event are 52612-SPECIAL EVENTS/BUSINESS RELATIONS (the portal asks for attendees on it); 52611-ENTERTAINMENT is alcohol and the entertainment of business contacts",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-GIFT-CARDS",
+   "page": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines ('Purchase of Gift Cards', read 2026-09-18); owner decision 2026-09-17 (no. 13)",
+   "text": "Gift cards and cash equivalents need permission BEFORE the purchase: 'you must request permission to make the purchase via a Gift Card Order Form in iBuy+ under the Requests tab'. A card bought personally without it is not claimed on an expense report — not in Concur Expense (that it is then not filed at all is our reading: the page says nothing about claiming it afterwards)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-PCARD-RECEIPT-FILED",
+   "page": "owner decision 2026-09-17 (no. 10); p.8",
+   "text": "A receipt that shows it was paid with the GW P-Card is FILED anyway — Payment Type can only be Out of Pocket, this account has no card feed — with a needs_review flag and the line Comment 'P-Card transaction; the card is not linked to this account; once it is linked, replace this line with the card transaction or delete it.' (the original AIR-PCARD-PAID and REG-PCARD follow it too since 2026-09-18, with lesson L-023 rewritten)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-BOOKS",
+   "page": "App. B p.31; owner decision D-019",
+   "text": "A book for research or teaching is a business expense (only books for personal use are unallowable): type 52231-BOOKS",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-PRINTING",
+   "page": "experience (the manual does not mention printing or copying); Concur Add Expense dialog",
+   "text": "Printing, copying and binding by an outside shop: 55511-NON-GW PRINTING/REPRODUCTION, 52661-OFFICE COPYING - NOT GWU or 55513-BINDING",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-POSTAGE",
+   "page": "experience (the manual does not mention postage); https://compliance.gwu.edu/direct-charging-administrative-costs-associated-sponsored-projects",
+   "text": "Postage and express mail for university business: 53411-POSTAGE/EXPRESS MAIL - NON-GW; an administrative cost on a federal award",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-TELEPHONE-TYPE",
+   "page": "App. A p.29; Concur Add Expense dialog; owner decision D-065 (2026-09-18)",
+   "text": "Telephone, internet and data costs are allowable but never on a federal research project; outside a trip the type is 53311-TELEPHONE - DIRECT (the main type only: 53313-LONG DISTANCE USAGE is not accepted for a phone, hotspot or data plan)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SEMINAR-FEES",
+   "page": "App. A p.28 (new manual p.29)",
+   "text": "Fees for attendance at seminars and conference registration are allowable: 53241-SEMINAR FEES or 53251-CONFERENCE/SEMINAR/TRAINING EXPENSE",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-TRAINING-COURSE",
+   "page": "experience; App. A p.28 (new manual p.29) lists conference and seminar fees only; owner decision D-068 (2026-09-18)",
+   "text": "A job-related training course (an online course with a certificate that the supervisor or the project's PI asked for) is filed under 53251-CONFERENCE/SEMINAR/TRAINING EXPENSE, the one type whose name says training, with a needs_review flag: the manual lists conference registration and seminar fees as allowable and says nothing about training courses, so the type is our reading, to be confirmed",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SUBJECT-PAYMENTS",
+   "page": "p.21 (new manual p.22); https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+   "text": "Funds for distribution to human subjects can be advanced through iBuy+ Expense; payments to research subjects are 55541-PAYMENTS TO SUBJECTS (on the OVPR list). Gift cards for subjects go through the Gift Card Order Form, not a line (NC-GIFT-CARDS); whether a subject payment other than gift cards is filed under 55541-PAYMENTS TO SUBJECTS was not verified — no situation yet",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-OVPR-NOT-SELECTABLE",
+   "page": "owner decision 2026-09-17 (no. 13); owner decisions D-048, D-058 (2026-09-17) and D-067 (2026-09-18); https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+   "text": "An account on GW's OVPR list that this test account cannot select (52131, 52615, 53132, 53211, 55161, 55561, 58323, 58417, 58516, 58522, 58523, 58524, 58535, 58536, 58691) gets no line: the agent says the document is not filed in Concur, names the account by its code and name, and names the channel — never a nearby selectable type in its place",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-TYPE-UNDEFINED",
+   "page": "owner decision D-055 (2026-09-17); experience",
+   "text": "Where GW publishes no definition of the accounts that could take a line (52691 against 52441, 52721 against 53241 and 53251, 56311 against 55591), the defensible types are all accepted and the line carries a needs_review flag that the type is to be confirmed, in words tied to that line",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-PERMIT-FEE",
+   "page": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines (52441 on the OVPR list); https://www.faa.gov/uas/getting_started/register_drone; experience",
+   "text": "A permit, licence or registration fee a lab pays for university business (the FAA registration of research drones) is 52441-PERMITS LICENSES & FEES — GW publishes no definition; not 58335-FEES/PERMITS, a capital-project type in our reading, nor 53111",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-EVENT-FOREIGN",
+   "page": "p.19 (new manual p.19–20); owner decision 2026-09-17 (no. 11); p.21, p.25 (new manual p.22, p.26)",
+   "text": "Flowers or decorations for a university event bought on a foreign leg are 52613-NON US SPECIAL EVENTS/BUSINESS RELATIONS, the Foreign Travel Expense twin of 52612, recorded in the currency paid",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-RECRUIT-BOOTH",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) App. A p.50 (item 36); App. B p.30; owner decision 2026-09-17 (no. 8, by analogy)",
+   "text": "An employer booth at a career fair paid personally is filed under 52641-RECRUITING EXPENSE with a needs_review flag: booth space is normally paid by the department on a P-Card or a Payment Request, and App. B puts payments to a service provider under the P-Card and invoice-processing policies",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-OFFICE-NOT-SUPPLY",
+   "page": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines (52691 on the OVPR list); Concur Add Expense dialog (52691 heads the Supplies section); experience",
+   "text": "An office cost that is not a supply — a notary fee for a university document — is 52691-MISCELLANEOUS OFFICE EXPENSE; 52441 is accepted too, as GW defines neither (NC-TYPE-UNDEFINED)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-PROGRAM-DEVELOPMENT",
+   "page": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines; https://compliance.gwu.edu/identification-and-treatment-unallowable-costs-sponsored-projects; App. A p.28 (new manual p.29); Contract Process Guide (Procurement, 2025-04-30) App. A p.48 (item 14)",
+   "text": "A fee paid to develop a new academic program (a program-design workshop) is 52721-PROGRAM DEVELOPMENT ACTIVITY — read as not a fundraising account, since GW lists 52722 but not 52721 as unallowable on sponsored projects; 53241 and 53251 are accepted too (NC-TYPE-UNDEFINED)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-MISC-SUPPLIES",
+   "page": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines (54541 on the OVPR list, 54111 not); https://ibuy.gwu.edu/facilities-and-mro-supplies; owner decision D-064 (2026-09-18)",
+   "text": "Supplies that are neither office nor laboratory supplies — moving boxes and packing material for a lab move — are 54541-MISCELLANEOUS SUPPLIES, not 54111 or 54121; bought out of pocket they are filed without the preferred-channel notice, which D-064 keeps to subscriptions, cloud services, office supplies and dues",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-CONSULTANT-TRAVEL",
+   "page": "App. A p.28 (new manual p.29); Contract Process Guide (Procurement, 2025-04-30) p.3, p.45–46; https://taxdepartment.gwu.edu/worker-classification; owner decision 2026-09-17 (no. 8, by analogy)",
+   "text": "An employee who paid a contracted consultant's airfare files it under 55112-CONSULTANTS TRAVEL (53131 accepted) with a needs_review flag: GW pays a consultant's travel itself on a P-Card or on the consultant's invoice under the agreement; the consultant's own receipts are a non-employee reimbursement in Concur Invoice",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-PROMO-ITEMS",
+   "page": "https://business-services.gwu.edu/sites/g/files/zaxdzs6001/files/downloads/LTP_1920_8_Departmental%20Guidelines_Remediated.pdf; Contract Process Guide (Procurement, 2025-04-30) p.18; owner decision D-016 (2026-09-14); experience",
+   "text": "Promotional items bearing GW's marks are 55152-PUBLICITY & PROMOTION, made by a GW-licensed vendor after Licensing & Trademarks approved the artwork: the approval is attached to the line (our judgment), and without it the line is filed with a needs_review flag asking for it",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-PROMO-GRANT",
+   "page": "https://compliance.gwu.edu/identification-and-treatment-unallowable-costs-sponsored-projects; https://www.law.cornell.edu/cfr/text/2/200.421; p.12",
+   "text": "55152-PUBLICITY & PROMOTION is on GW's list of costs unallowable on sponsored projects and 2 CFR 200.421 bars promotional items: on a federal award the line carries a needs_review flag to move it to an unrestricted account",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SUBJECT-ADVANCE",
+   "page": "p.21 (new manual p.22); https://ibuy.gwu.edu/sites/g/files/zaxdzs4686/files/downloads/EXP%20%20Cash%20Advances%20-%20Requesting%20a%20Cash%20Advance%20032219.pdf; https://ibuy.gwu.edu/sites/g/files/zaxdzs4686/files/2024-08/EXP%20Cash%20Advances%20-%20Adding%20to%20a%20Report%20and%20Returning%20a%20Balance%20Aug%202024.pdf; https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+   "text": "Payments to research subjects made from a human-subjects cash advance are 55541-PAYMENTS TO SUBJECTS, filed once the subjects were paid, with the signed payment log; every advance must be applied to an expense report, and as this test account holds no advance the line carries a needs_review flag",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SUBJECT-CASH-PERSONAL",
+   "page": "App. B p.31; https://procurement.gwu.edu/sites/g/files/zaxdzs4691/files/2024-05/forte_participants_payment_procedures_052024.pdf; https://procurement.gwu.edu/procure-pay-resources; owner decision 2026-09-17 (no. 13)",
+   "text": "Cash a researcher paid study participants from their own pocket is not filed in Concur although 55541 is selectable: GW's route is Advarra (Forte) Participant Payments, or a method the Finance Division approves before the study (that the cash cannot be claimed afterwards is our reading)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-ROOM-SHORT-TERM",
+   "page": "https://procurement.gwu.edu/gw-hotel-event-requests; Contract Process Guide (Procurement, 2025-04-30) p.3, p.33–35; https://ibuy.gwu.edu/expense-reporting-helpful-guidelines",
+   "text": "A meeting room rented for part of a day is 55591-BUILDING/ROOM/FACILITY RENTAL (SHORT TERM), not lodging or an event cost; GW sources hotel meeting and event space through Procurement (Hotel & Event Request), so a room an employee booked and paid is filed with a needs_review flag",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-ROOM-OCCUPANCY",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.4, p.46; https://finance.gwu.edu/departments; owner decision D-055 (2026-09-17)",
+   "text": "A monthly desk or space membership is 56311-BUILDING/ROOM/FACILITY RENTAL OCCUPANCY (55591 accepted: GW defines neither); a licence for the use of space is a real-estate transaction for GW's Office of Real Estate that an employee does not sign, so the line carries a needs_review flag for each question",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-CONTRACT-SIGNATURE",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.33–34; https://procurement.gwu.edu/media/2141 p.34 (§6.1.2)",
+   "text": "Only individuals with a specific delegation of authority sign contracts that bind GW for goods, services, equipment or construction: a lease or a contractor's proposal an employee signed may not bind GW and the signer may become personally liable",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-LEASE-COPIER",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.3, p.46; https://procurement.gwu.edu/multi-function-device-suppliers; https://procurement.gwu.edu/media/2141 p.34 (§6.2)",
+   "text": "A lease of office equipment is a contract P2P processes (52131-LEASE-OFFICE EQUIPMENT, which this account cannot select): new copiers come only from GW's two contracted multifunction-device suppliers, requested on the order placement form through Gatekeeper; a payment on a lease an employee signed is not filed in Concur (not 52195 or 52691)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-EMPLOYEE-AWARD",
+   "page": "https://taxdepartment.gwu.edu/processing-gifts-prizes-and-awards-employees; https://hr.gwu.edu/recognition-and-positive-vibes; https://compliance.gwu.edu/taxation-gifts-prizes-and-awards-employees; p.19, App. B p.30",
+   "text": "Gifts, prizes and awards to employees — a recognition outing the chair approved as an On-the-Spot award — are 52615-EMPLOYEE SPECIAL ACTIVITY, which this account cannot select: not filed in Concur; University Payables pays or reimburses non-taxable awards through the Payment Request Form, and a missing expense type is asked of the iBuy Help Desk; not 52611, 52612 or 57121",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-TRAINEE-TRAVEL",
+   "page": "https://grants.nih.gov/grants/policy/nihgps/HTML5/section_11/11.3.8_allowable_and_unallowable_costs.htm (11.3.8.5); https://ibuy.gwu.edu/expense-reporting-helpful-guidelines; https://sponsoredprojects.gwu.edu/award-expenditures; experience",
+   "text": "Travel of a trainee appointed on a training grant is 53132-TRAINEE TRAVEL, which this account cannot select: not filed in Concur — the grant's program coordinator and the Research Support Team charge it to the training grant (our reading: GW publishes no trainee-travel procedure), or the iBuy Help Desk is asked to add the type; no ordinary 531xx type in its place",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-FOREIGN-SERVICE-PAYEE",
+   "page": "App. B p.31; https://procurement.gwu.edu/media/2141 p.8; https://procurement.gwu.edu/international-transactions; Contract Process Guide (Procurement, 2025-04-30) App. A p.50 (item 31); https://taxdepartment.gwu.edu/worker-classification-and-international-engagement-request-form-exemptions",
+   "text": "A foreign individual's unpaid invoice for a professional service (a translation) is 55161-NON-US PROFESSIONAL SERVICES, which this account cannot select: University Payables pays it — the payee registers as a supplier with form W-8BEN and the approved invoice is paid by EFT through a Payment Request, no purchase order; services of international individuals are never paid on a P-Card",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SERVICE-CONTRACT",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.5, p.34, p.40; https://procurement.gwu.edu/media/2141 p.8; p.23 (new manual p.24)",
+   "text": "A service bought under a statement of work is a contract P2P places — a purchasing requisition with the SOW, a purchase order, the invoices to University Payables — account 55561-CONTRACT SERVICE-OTHER in our reading, which this account cannot select; an unsigned statement of work is not proof of payment and nothing is filed",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-CONSTRUCTION-FPCM",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.16, p.33–34; https://procurement.gwu.edu/media/2141 p.34; App. B p.30",
+   "text": "Construction or renovation work in a GW building is 58323-OTHER CONSTRUCTION CONTRACTS, which this account cannot select: FPCM (Facilities Planning, Construction and Management) manages it and administers the construction contracts with P2P; a deposit an employee paid is not filed (not 58327-FIXED EQUIPMENT)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-CAPITAL-ASSETS",
+   "page": "https://controller.gwu.edu/capitalized-asset-management; https://compliance.gwu.edu/fixed-asset-management; https://compliance.gwu.edu/standardization-goods-equipment-and-services-purchasing; Contract Process Guide (Procurement, 2025-04-30) p.3",
+   "text": "Furniture, copiers and laboratory instruments of $5,000 or more a unit (shipping, handling and installation included) with a useful life over one year are capitalized — 58417, 58535, 58536, none of them selectable: bought through Procurement (a purchase order in EAS or iBuy+), capitalized and tagged by the Controller's Fixed Assets department; not filed in Concur, and no part of the invoice becomes a line",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-VEHICLE-FLEET",
+   "page": "Contract Process Guide (Procurement, 2025-04-30) p.3, p.34; https://transportation.gwu.edu/fleet; https://controller.gwu.edu/capitalized-asset-management",
+   "text": "A vehicle for GW is 58516-CAPITALIZED VEHICLES EXPENSE, which this account cannot select: P2P handles vehicle leasing and purchasing and Transportation and Logistics administers GW's vehicles (the shared motor pool); a deposit an employee paid on one is not filed",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-FABRICATION",
+   "page": "https://compliance.gwu.edu/fixed-asset-management; https://controller.gwu.edu/capitalized-asset-management; https://www.acquisition.gov/far/52.245-1",
+   "text": "Parts of a fabrication — a unique instrument of more than $5,000 assembled from parts, some or all under $5,000 — are capital even when each part is under $5,000: 58522-GW OWNED CAPITALIZED FABRICATION EQUIPMENT, or 58523-NON-GW OWNED CAPITALIZED FABRICATION EQUIPMENT when title vests in the sponsor; neither is selectable — the parts are bought through Procurement and the Fixed Assets department records the fabrication",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-GOVERNMENT-PROPERTY",
+   "page": "https://www.acquisition.gov/far/52.245-1; https://compliance.gwu.edu/fixed-asset-management; https://sponsoredprojects.gwu.edu/award-expenditures; experience",
+   "text": "Equipment whose title vests in the Government under a federal cost-reimbursement contract (FAR 52.245-1) is not a GW asset: 58691-EQUIPMENT-NOT GWU in our reading (no GW page defines it), which this account cannot select — bought through Procurement on the contract and recorded as government property by the Fixed Assets department",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-SUPPLIES-BY-KIND",
+   "page": "Concur Add Expense dialog, Supplies section (EXPENSE_CATEGORIES.md §1.1, read 2026-09-15); owner decision D-065 (2026-09-18); experience",
+   "text": "The Supplies section names the KIND of the goods — 54111 office, 54112 library, 54121 laboratory, 54131 linen, 54141 instructional, 54151 printing, 54161 athletic, 54531 photographic, 54541 miscellaneous: supplies of a named kind take that account, not the office type (54111) and not the residual one (54541, which is for supplies of no named kind — NC-MISC-SUPPLIES). Where the kind of the goods is itself arguable the defensible accounts are all accepted, with the type flag (NC-TYPE-UNDEFINED)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-LAB-SUPPLIES",
+   "page": "https://ibuy.gwu.edu/lab-supplies-equipment-0; https://compliance.gwu.edu/direct-charging-administrative-costs-associated-sponsored-projects; https://sponsoredprojects.gwu.edu/budget-cost-categories; Concur Add Expense dialog (54121 in the Supplies section)",
+   "text": "Consumables of a laboratory — reagents, gloves, pipette tips, dry ice — are 54121-LABORATORY SUPPLIES. They are a DIRECT cost of the research, not one of the administrative costs GW's direct-charging page lists (subscriptions, computers, general office supplies, memberships, postage): on a federal award a laboratory-supply line needs no administrative-cost flag and no sponsor-approval question (NC-GRANT-ADMIN-COSTS does not reach it)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-LAB-EQUIPMENT",
+   "page": "https://controller.gwu.edu/capitalized-asset-management; Concur Add Expense dialog, Equipment section; owner decision D-079 (2026-09-20)",
+   "text": "Furniture and equipment under $5,000 a unit is not capitalized (NC-CAPITALIZED-5000): the Equipment section splits it in two — 52191-NON-CAPITALIZED INSTRUCTIONAL & LAB FURNITURE EQUIPMENT for what furnishes a laboratory or a classroom, 52195-OTHER NON-CAPITALIZED FURNITURE & EQUIPMENT for the rest of an office. A computer stays 52193 (NC-COMPUTER-GWIT); an office device is equipment, not a supply (54111) and not a miscellaneous office expense (52691)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-STANDARDIZATION",
+   "page": "https://compliance.gwu.edu/standardization-goods-equipment-and-services-purchasing; Contract Process Guide (Procurement, 2025-04-30) p.3, p.8",
+   "text": "GW asks departments to buy furniture, equipment and services to the university's standards, through Procurement and its contracted suppliers, and to consult P2P before departing from them: furniture an employee bought out of pocket is filed with a needs_review flag naming the standardization policy (the page does not say the purchase is void — the flag asks, it does not refuse)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-BINDING-ALONE",
+   "page": "Concur Add Expense dialog, Printing/Copying section; experience (GW's manual does not mention printing, copying or binding)",
+   "text": "An outside shop's invoice for BINDING alone — no printing on it — is 55513-BINDING, the section's own type; 55511-NON-GW PRINTING/REPRODUCTION is printing and reproduction and 52661-OFFICE COPYING - NOT GWU is copying (NC-PRINTING covers an invoice that mixes them)",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-AV-LIBRARY-SERVICES",
+   "page": "Concur Add Expense dialog, Books/Subscriptions section; experience",
+   "text": "A library's SERVICE — document delivery, a copyright-cleared article, digitisation, an audiovisual service — is 52716-AUDIOVISUAL/LIBRARY SERVICES, next to 52221-SUBSCRIPTIONS/PERIODICALS and 52231-BOOKS in the same section: a service bought item by item is neither a subscription (nothing recurs) nor a book",
+   "actionable": true,
+   "why_not": ""
+  },
+  {
+   "pool": "non_travel",
+   "id": "NC-FLEET-FUEL",
+   "page": "https://transportation.gwu.edu/fleet; https://transportation.gwu.edu/fleet-rental; App. B p.30; Concur Add Expense dialog (54511 is the Vehicle Expense section's only type)",
+   "text": "Fuel an employee paid for a GW FLEET vehicle is filed under 54511-FUEL-GASOLINE AND OIL, with a needs_review flag: Transportation and Logistics settles a fleet rental's final costs 'by an interdepartmental assessment via a journal entry' and publishes nothing about fuel, so whether the fill-up belongs in that charge is to be confirmed. App. B's unallowable fuel is the fuel of a PERSONAL car, which mileage already pays for (GT-GAS-PERSONAL); a rental car's fuel on a trip stays with the trip's ground transportation",
+   "actionable": true,
+   "why_not": ""
+  }
+ ],
+ "sources": [
+  {
+   "id": "gw-new-manual",
+   "title": "GW Travel & Business Expense Reimbursement Manual, Rev. 9-09-26 (the pages quoted as 'new p.N')",
+   "url": "https://ibuy.gwu.edu/sites/g/files/zaxdzs4686/files/2026-09/Travel_Business_Expense_Reimbursement_Manual090826.pdf"
+  },
+  {
+   "id": "gw-expense-guidelines",
+   "title": "iBuy+ Expense Reporting Helpful Guidelines: travel type Domestic / International / No Travel ('a combination of Domestic and No Travel? Either selection is great'); the expense types that route to OVPR on sponsored funds",
+   "url": "https://ibuy.gwu.edu/expense-reporting-helpful-guidelines"
+  },
+  {
+   "id": "gw-nonemployee-reimbursement",
+   "title": "Reimbursements to a person who is not an employee or student: Concur Invoice, invoice type 'Non-employee reimbursement'",
+   "url": "https://ibuy.gwu.edu/reimbursements-person-not-employee-or-student"
+  },
+  {
+   "id": "gw-travel-guidelines",
+   "title": "iBuy+ Travel Helpful Guidelines: a visitor is booked as 'Guest Traveler'",
+   "url": "https://ibuy.gwu.edu/travel-helpful-guidelines"
+  },
+  {
+   "id": "gw-office-supplies",
+   "title": "iBuy+ office supplies and furniture: the contract suppliers",
+   "url": "https://ibuy.gwu.edu/office-supplies-and-furniture"
+  },
+  {
+   "id": "gw-amazon-business",
+   "title": "GW's Amazon Business account: P-Card only",
+   "url": "https://ibuy.gwu.edu/amazon-business-account"
+  },
+  {
+   "id": "gw-contract-guide",
+   "title": "Contract Process Guide (Procurement, 2025-04-30): iBuy+ is the preferred purchasing method (p.8); the order of purchasing methods (p.7); security assessment (p.6–7); click-through terms are contracts (p.33–35); the competitive-exemptions list (App. A p.48–50)",
+   "url": "https://procurement.gwu.edu/sites/g/files/zaxdzs4691/files/2025-05/Contract%20Process%20Guide%20Limited%20Ed%2004%2030%2025%20with%20Updated%20Signature%20Table%20as%20of%20May%208%202025.pdf"
+  },
+  {
+   "id": "gw-exemptions",
+   "title": "Competitive exemptions list: dues (12), subscriptions (13), software subscription renewals (15), advertising (30/32), search firms (42) — payable by P-Card or payment request, no purchase order needed",
+   "url": "https://procurement.gwu.edu/appendix-procurement-competitive-exemptions-list"
+  },
+  {
+   "id": "gw-procurement-methods",
+   "title": "Procurement methods: 'All software and SaaS purchases, regardless of dollar amount, must have a security assessment'",
+   "url": "https://procurement.gwu.edu/procurement-methods"
+  },
+  {
+   "id": "gw-pcard-overview",
+   "title": "P-Card overview and benefits",
+   "url": "https://procurement.gwu.edu/overview-benefits"
+  },
+  {
+   "id": "gw-cardholder",
+   "title": "P-Card cardholder responsibilities",
+   "url": "https://procurement.gwu.edu/cardholder-responsibilities"
+  },
+  {
+   "id": "gw-direct-charging",
+   "title": "Direct charging of administrative costs to sponsored projects: subscriptions, computers, general office supplies, memberships, postage",
+   "url": "https://compliance.gwu.edu/direct-charging-administrative-costs-associated-sponsored-projects"
+  },
+  {
+   "id": "gw-standardization",
+   "title": "Standardization of goods, equipment and services",
+   "url": "https://compliance.gwu.edu/standardization-goods-equipment-and-services-purchasing"
+  },
+  {
+   "id": "gw-it-risk",
+   "title": "GW IT cybersecurity risk assessments: when one is required",
+   "url": "https://it.gwu.edu/cybersecurity-risk-assessments"
+  },
+  {
+   "id": "gw-ai-tools",
+   "title": "GW IT: status of AI tools — the approved list",
+   "url": "https://it.gwu.edu/ai-tools-status"
+  },
+  {
+   "id": "gw-ai-guidance",
+   "title": "GW IT: AI guidance and best practices — use only tools approved through procurement and risk review",
+   "url": "https://it.gwu.edu/ai-guidance-and-best-practices"
+  },
+  {
+   "id": "gw-workstation",
+   "title": "Faculty/staff workstation guidelines: 'All computer purchases must be ordered through GW IT'",
+   "url": "https://it.gwu.edu/faculty-staff-workstation-initiative-guidelines"
+  },
+  {
+   "id": "gw-research-cloud",
+   "title": "GW IT Research Cloud: self-service AWS resources for researchers",
+   "url": "https://it.gwu.edu/research-cloud"
+  },
+  {
+   "id": "gw-capitalization",
+   "title": "Controller: capitalized asset management — $5,000 unit price; 58524 capitalized, 52193 / 52199 not",
+   "url": "https://controller.gwu.edu/capitalized-asset-management"
+  },
+  {
+   "id": "gw-osp-budget",
+   "title": "Sponsored projects: budget cost categories",
+   "url": "https://sponsoredprojects.gwu.edu/budget-cost-categories"
+  },
+  {
+   "id": "gw-osp-expenditures",
+   "title": "Sponsored projects: 'alcohol, entertainment, advertising, and proposal costs are generally not allowable'",
+   "url": "https://sponsoredprojects.gwu.edu/award-expenditures"
+  },
+  {
+   "id": "gw-site-licenses",
+   "title": "SEAS software licenses: MATLAB, Microsoft Office and other site licences",
+   "url": "https://engineering.gwu.edu/software-licenses"
+  },
+  {
+   "id": "gw-aaas",
+   "title": "GW is an AAAS institutional member: the Elemental membership is free to faculty, postdocs and students",
+   "url": "https://research.gwu.edu/aaas-elemental-memberships"
+  },
+  {
+   "id": "gw-free-news",
+   "title": "GW Today 2020-11-09: free digital New York Times, Washington Post and Wall Street Journal for students, faculty and staff",
+   "url": "https://gwtoday.gwu.edu/students-leadership-collaborate-expand-free-digital-news-resources"
+  },
+  {
+   "id": "gw-ptfpdf",
+   "title": "Part-time Faculty Professional Development Fund: 'Up to one hundred dollars of membership for a professional organization may be reimbursed'",
+   "url": "https://facultyaffairs.gwu.edu/professional-development-fund"
+  },
+  {
+   "id": "gw-relocation",
+   "title": "Relocation and moving allowance for new faculty: a lump sum in the normal paycheck; none for part-time or one-semester faculty",
+   "url": "https://facultyaffairs.gwu.edu/relocation-and-moving-allowance-new-faculty"
+  },
+  {
+   "id": "gw-faculty-handbook",
+   "title": "GW Faculty Handbook (2025) §2.3 Transition Assistance for New Full-Time Faculty: $3,000 / $4,500, taxable",
+   "url": "https://provost.gwu.edu/sites/g/files/zaxdzs5926/files/2025-07/2025%20GW%20Faculty%20Handbook.pdf"
+  },
+  {
+   "id": "gw-hr-why-gw",
+   "title": "HR 'Why GW?': third-party moving discounts only — no staff relocation policy",
+   "url": "https://hr.gwu.edu/why-gw"
+  },
+  {
+   "id": "gw-hr-compensation",
+   "title": "HR Managing Compensation: signing bonuses",
+   "url": "https://hr.gwu.edu/managing-compensation"
+  },
+  {
+   "id": "gw-hr-special",
+   "title": "HR special circumstances: external search firms",
+   "url": "https://hr.gwu.edu/special-circumstances"
+  },
+  {
+   "id": "gw-hr-advertising",
+   "title": "HR advertising chart (2024-06): fee-based options are department / school / division funded",
+   "url": "https://hr.gwu.edu/sites/g/files/zaxdzs5691/files/2024-06/gw-advertising-6.pdf"
+  },
+  {
+   "id": "gw-ad-placement",
+   "title": "Advertising placement policy: who coordinates which advertisement",
+   "url": "https://compliance.gwu.edu/advertising-placement"
+  },
+  {
+   "id": "cfr-200-454",
+   "title": "2 CFR 200.454 Memberships, subscriptions, and professional activity costs",
+   "url": "https://www.law.cornell.edu/cfr/text/2/200.454"
+  },
+  {
+   "id": "cfr-200-463",
+   "title": "2 CFR 200.463 Recruiting costs",
+   "url": "https://www.law.cornell.edu/cfr/text/2/200.463"
+  },
+  {
+   "id": "cfr-200-464",
+   "title": "2 CFR 200.464 Relocation costs of employees",
+   "url": "https://www.law.cornell.edu/cfr/text/2/200.464"
+  },
+  {
+   "id": "gw-unallowable-costs",
+   "title": "Identification and Treatment of Unallowable Costs on Sponsored Projects Policy: the accounts excluded from federal claims — 52612 and 55152 among them, 52722 but not 52721 (the '-policy' URL of the brief returns 404)",
+   "url": "https://compliance.gwu.edu/identification-and-treatment-unallowable-costs-sponsored-projects"
+  },
+  {
+   "id": "gw-mro-supplies",
+   "title": "iBuy+ Facilities and MRO supplies: Home Depot is one of GW's contracted suppliers",
+   "url": "https://ibuy.gwu.edu/facilities-and-mro-supplies"
+  },
+  {
+   "id": "gw-hotel-event-requests",
+   "title": "Procurement: Hotel & Event Requests — hotel meeting and event space sourced through a CVENT request; the assigned buyer executes and releases the PO; invoices go to University Payables (no dollar threshold stated)",
+   "url": "https://procurement.gwu.edu/gw-hotel-event-requests"
+  },
+  {
+   "id": "gw-finance-departments",
+   "title": "Finance Division departments: the Office of Real Estate sources, negotiates and administers off-campus space leases",
+   "url": "https://finance.gwu.edu/departments"
+  },
+  {
+   "id": "gw-merchandise-guidelines",
+   "title": "Licensing & Trademark Program, departmental merchandise guidelines (undated, 2019–20): items with GW's marks come from a GW-licensed vendor; the artwork is approved first (go.gwu.edu/merchapproval)",
+   "url": "https://business-services.gwu.edu/sites/g/files/zaxdzs6001/files/downloads/LTP_1920_8_Departmental%20Guidelines_Remediated.pdf"
+  },
+  {
+   "id": "gw-cash-advance-request",
+   "title": "iBuy+ Expense: Requesting a Cash Advance (2019) — requested by the employee, approved by the department and Procurement, deposited to the employee's payroll account",
+   "url": "https://ibuy.gwu.edu/sites/g/files/zaxdzs4686/files/downloads/EXP%20%20Cash%20Advances%20-%20Requesting%20a%20Cash%20Advance%20032219.pdf"
+  },
+  {
+   "id": "gw-cash-advance-apply",
+   "title": "iBuy+ Expense: Cash Advances — Adding to a Report and Returning a Balance (Aug 2024): 'ALL CASH ADVANCES MUST BE APPLIED TO AN EXPENSE REPORT AND SUBMITTED'",
+   "url": "https://ibuy.gwu.edu/sites/g/files/zaxdzs4686/files/2024-08/EXP%20Cash%20Advances%20-%20Adding%20to%20a%20Report%20and%20Returning%20a%20Balance%20Aug%202024.pdf"
+  },
+  {
+   "id": "gw-forte-sop",
+   "title": "Standard Operating Procedures for the Forte (Advarra) Participant Payments System (May 2024): Advarra replaces gift cards and their expense reports; another method is set with the Finance Division and noted in the IRB application",
+   "url": "https://procurement.gwu.edu/sites/g/files/zaxdzs4691/files/2024-05/forte_participants_payment_procedures_052024.pdf"
+  },
+  {
+   "id": "gw-procure-pay-resources",
+   "title": "Procure-to-Pay resources: 'The Advarra Participant Payments solution is the university's preferred payment option for research study participants'",
+   "url": "https://procurement.gwu.edu/procure-pay-resources"
+  },
+  {
+   "id": "gw-procurement-manual",
+   "title": "GW Procurement Manual, Version 6.1 (June 13, 2024), the PDF the Procurement Manual page links: p.8 new suppliers register in iSupply, invoices go to University Payables, 'Do not pay for services from international individuals on a p-card'; p.34 §6.1.2 only delegated individuals sign contracts, §6.2 capital and operational leases (the specification read v6.0 of 2024-04-16, where §6.1.2 and §6.2 were on p.33)",
+   "url": "https://procurement.gwu.edu/media/2141"
+  },
+  {
+   "id": "gw-mfd-suppliers",
+   "title": "P2P multi-function device suppliers: every new printer or copier comes from one of two contracted vendors, requested on the order placement form through Gatekeeper; a purchase option exists",
+   "url": "https://procurement.gwu.edu/multi-function-device-suppliers"
+  },
+  {
+   "id": "gw-international-transactions",
+   "title": "Procurement: international transactions — the payee registers with a W-8BEN / W-8BEN-E; an approved invoice, no PO needed, EFT recommended",
+   "url": "https://procurement.gwu.edu/international-transactions"
+  },
+  {
+   "id": "gw-worker-classification",
+   "title": "Tax Department: worker classification — an independent contractor is classified first and paid through University Payables",
+   "url": "https://taxdepartment.gwu.edu/worker-classification"
+  },
+  {
+   "id": "gw-worker-classification-exemptions",
+   "title": "Tax Department: worker classification and international engagement request form exemptions — language services, translation included",
+   "url": "https://taxdepartment.gwu.edu/worker-classification-and-international-engagement-request-form-exemptions"
+  },
+  {
+   "id": "gw-tax-employee-awards",
+   "title": "Tax Department: processing gifts, prizes and awards to employees — charged to account 52615; non-taxable ones paid or reimbursed by University Payables through the Payment Request Form; 57121 is not for employees",
+   "url": "https://taxdepartment.gwu.edu/processing-gifts-prizes-and-awards-employees"
+  },
+  {
+   "id": "gw-hr-recognition",
+   "title": "HR recognition: On-the-Spot Awards may be group events or outings, up to $100 per individual per year",
+   "url": "https://hr.gwu.edu/recognition-and-positive-vibes"
+  },
+  {
+   "id": "gw-taxation-employee-gifts",
+   "title": "Taxation of gifts, prizes and awards to employees: de minimis non-cash gifts up to $100; departments generally may not use the P-Card for awards",
+   "url": "https://compliance.gwu.edu/taxation-gifts-prizes-and-awards-employees"
+  },
+  {
+   "id": "gw-fixed-asset-policy",
+   "title": "Fixed Asset Management Policy: fixed assets are bought on a PO in EAS or through iBuy+; a fabrication (a unique asset over $5,000 built from parts, some or all under $5,000) is reported to the Fixed Assets Department; government property defined",
+   "url": "https://compliance.gwu.edu/fixed-asset-management"
+  },
+  {
+   "id": "gw-fleet",
+   "title": "Transportation and Logistics: fleet — the assignment, use and replacement of university vehicles; a shared motor pool of vans and trucks",
+   "url": "https://transportation.gwu.edu/fleet"
+  },
+  {
+   "id": "gw-fleet-rental",
+   "title": "Transportation and Logistics: fleet rental — a unit reserves a vehicle in the Fleet Commander system; 'Payment for the final costs incurred during the rental period will be processed by an interdepartmental assessment via a journal entry'. The page says nothing about fuel or refuelling (read 2026-09-20)",
+   "url": "https://transportation.gwu.edu/fleet-rental"
+  },
+  {
+   "id": "gw-lab-supplies",
+   "title": "iBuy+ Lab Supplies & Equipment: the category page of GW's contracted laboratory suppliers (the page carries the heading and the navigation only — no supplier list, no procedure, read 2026-09-20)",
+   "url": "https://ibuy.gwu.edu/lab-supplies-equipment-0"
+  },
+  {
+   "id": "faa-drone-registration",
+   "title": "FAA: register a drone under Part 107 — $5 a drone, valid three years",
+   "url": "https://www.faa.gov/uas/getting_started/register_drone"
+  },
+  {
+   "id": "nih-gps-trainee-costs",
+   "title": "NIH Grants Policy Statement 11.3.8: allowable and unallowable costs of training grants — trainee travel (11.3.8.5), the trainee appointed at the time of travel",
+   "url": "https://grants.nih.gov/grants/policy/nihgps/HTML5/section_11/11.3.8_allowable_and_unallowable_costs.htm"
+  },
+  {
+   "id": "far-52-245-1",
+   "title": "FAR 52.245-1 Government Property: under a cost-reimbursement contract title to purchased property vests in the Government on delivery, to fabricated property on issuance, processing or reimbursement (e)(3)",
+   "url": "https://www.acquisition.gov/far/52.245-1"
+  },
+  {
+   "id": "cfr-200-421",
+   "title": "2 CFR 200.421 Advertising and public relations: costs of promotional items and memorabilia are unallowable",
+   "url": "https://www.law.cornell.edu/cfr/text/2/200.421"
+  }
+ ]
+}
