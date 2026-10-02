@@ -740,32 +740,30 @@ slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works i
   ], D1) + '<div class="figcap">Yes · partly: our initial judgment from the per-work table (calc.; Appendix A1). A work in two classes counts in both.</div>',
   chip=("#a02", "Appendix A2–A5"))
 
-def prompt_paths_fig():
-    """One flowchart for prompt learning: from earlier runs (trajectories and outcomes), three paths into the next prompt."""
+def paths_fig(paths, segs, head, keys, *, H, X, W, start_y, mid):
+    """One flowchart for a class of direction 1: earlier runs (left) through paths of small steps (middle)
+    into what they write (right). paths: (name, tags, steps, kinds, yc, ytarget[, note]); one kind per step:
+    g other, k decided by a measured score, o kept without a test. segs: (y0, y1, head, line 1, line 2, fill)."""
     A, O, G = "#0f5a85", "#b3600c", "#7d8a96"
-    sv = ('<svg width="1180" height="290" viewBox="0 0 1180 290" style="width:100%;height:auto;display:block">'
-          '<defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
+    sv = (f'<svg width="1180" height="{H}" viewBox="0 0 1180 {H}" style="width:100%;height:auto;display:block">'
+          f'<defs><marker id="{mid}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
     def t(x, y, s_, size=11, col="#1b2733", mono=False, anchor="start", bold=False):
         f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
         return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{s_}</text>'
+    STY = {"g": ("#f6f8fa", "#c9d5df"), "k": ("#eef4f8", A), "o": ("#fbeede", "#e2b98b")}
     def box(x, yc, lines, kind="g", w=152):
-        fill, stroke = {"g": ("#f6f8fa", "#c9d5df"), "k": ("#eef4f8", A), "o": ("#fbeede", "#e2b98b")}[kind]
+        fill, stroke = STY[kind]
         out = f'<rect x="{x}" y="{yc - 16}" width="{w}" height="32" rx="3" style="fill:{fill};stroke:{stroke}"/>'
         y0 = yc - (len(lines) - 1) * 6.5 + 4
         for k, l in enumerate(lines):
             out += t(x + 7, y0 + k * 13, l, 11, "#1b2733", bold=(kind == "k"))
         return out
-    arr = lambda d: f'<path d="{d}" style="stroke:#7d8a96;fill:none" marker-end="url(#pa)"/>'
-    sv += f'<rect x="0" y="104" width="124" height="74" rx="4" style="fill:#fff;stroke:{A}"/>'
-    sv += t(12, 128, "earlier runs", 12.5, bold=True) + t(12, 145, "trajectories and", 10.5, "#3b4a57") + t(12, 159, "their outcomes", 10.5, "#3b4a57")
-    X, W = [150, 320, 490, 660], 152
-    paths = [
-        ("1 · REWRITE THE INSTRUCTIONS", "answers · kept if better · offline", [["failures, or good runs", "beside bad ones"], ["model says what went", "wrong or what differed"], ["rewrite: several", "candidates"], ["score on validation", "reports, keep the best"]], "gggk", 62, 54),
-        ("2 · SUCCESSFUL RUNS AS EXAMPLES", "task metric · kept if better · offline", [["keep runs that", "succeeded"], ["turn them into", "worked examples"], ["score example sets,", "keep the best"]], "ggk", 142, 132),
-        ("3 · GROW A PLAYBOOK", "the model’s own reading · no test · online", [["after each report, a", "reflector writes lessons"], ["a curator adds or", "merges notes"]], "go", 222, 202),
-    ]
-    for name, tags, steps, kinds, yc, ytarget in paths:
-        sv += arr(f"M124 141 C138 141 138 {yc} {X[0] - 3} {yc}")
+    arr = lambda d: f'<path d="{d}" style="stroke:#7d8a96;fill:none" marker-end="url(#{mid})"/>'
+    ys = start_y + 37
+    sv += f'<rect x="0" y="{start_y}" width="124" height="74" rx="4" style="fill:#fff;stroke:{A}"/>'
+    sv += t(12, start_y + 24, "earlier runs", 12.5, bold=True) + t(12, start_y + 41, "trajectories and", 10.5, "#3b4a57") + t(12, start_y + 55, "their outcomes", 10.5, "#3b4a57")
+    for name, tags, steps, kinds, yc, ytarget, *note in paths:
+        sv += arr(f"M124 {ys} C138 {ys} 138 {yc} {X[0] - 3} {yc}")
         sv += t(X[0], yc - 22, name, 10, A, mono=True) + t(X[0] + 8 + len(name) * 6.1, yc - 22, tags, 9.5, G, mono=True)
         for k, (st, kd) in enumerate(zip(steps, kinds)):
             sv += box(X[k], yc, st, kd, W)
@@ -773,21 +771,46 @@ def prompt_paths_fig():
                 sv += arr(f"M{X[k] + W} {yc} H{X[k + 1] - 3}")
         xe = X[len(steps) - 1] + W
         sv += arr(f"M{xe} {yc} C{xe + 40} {yc} 860 {ytarget} 896 {ytarget}")
-        if kinds[-1] == "o":
-            sv += t(X[1] + W + 8, yc + 16, "no test per change", 9.5, O, mono=True)
-    sv += f'<rect x="150" y="262" width="14" height="8" rx="2" style="fill:#eef4f8;stroke:{A}"/>' + t(170, 270, "decides what is kept: only if it scores better", 10, "#3b4a57")
-    sv += f'<rect x="440" y="262" width="14" height="8" rx="2" style="fill:#fbeede;stroke:#e2b98b"/>' + t(460, 270, "kept without a test", 10, "#3b4a57")
-    sv += f'<rect x="590" y="262" width="14" height="8" rx="2" style="fill:#f6f8fa;stroke:#c9d5df"/>' + t(610, 270, "other steps", 10, "#3b4a57")
-    sv += t(900, 14, "THE PROMPT READ ON THE NEXT REPORT", 9.5, A, mono=True)
+        if note:
+            sv += t(xe + 8, yc + 16, note[0], 9.5, O, mono=True)
+    for x, kd, label in keys:
+        fill, stroke = STY[kd]
+        sv += f'<rect x="{x}" y="{H - 28}" width="14" height="8" rx="2" style="fill:{fill};stroke:{stroke}"/>' + t(x + 20, H - 20, label, 10, "#3b4a57")
+    sv += t(900, 14, head, 9.5, A, mono=True)
+    for y0, y1, hd, l1, l2, fill in segs:
+        sv += f'<rect x="898" y="{y0}" width="282" height="{y1 - y0}" style="fill:{fill};stroke:#c9d5df"/>'
+        sv += t(908, y0 + 17, hd, 11, A if fill != "#f6f8fa" else G, bold=True)
+        sv += t(908, y0 + 33, l1, 10.5, "#3b4a57") + (t(908, y0 + 47, l2, 10.5, "#3b4a57") if l2 else "")
+    return sv + '</svg>'
+
+def prompt_paths_fig():
+    """Prompt learning: from earlier runs (trajectories and outcomes), three paths into the next prompt."""
+    paths = [
+        ("1 · REWRITE THE INSTRUCTIONS", "answers · kept if better · offline", [["failures, or good runs", "beside bad ones"], ["model says what went", "wrong or what differed"], ["rewrite: several", "candidates"], ["score on validation", "reports, keep the best"]], "gggk", 62, 54),
+        ("2 · SUCCESSFUL RUNS AS EXAMPLES", "task metric · kept if better · offline", [["keep runs that", "succeeded"], ["turn them into", "worked examples"], ["score example sets,", "keep the best"]], "ggk", 142, 132),
+        ("3 · GROW A PLAYBOOK", "the model’s own reading · no test · online", [["after each report, a", "reflector writes lessons"], ["a curator adds or", "merges notes"]], "go", 222, 202, "no test per change"),
+    ]
     segs = [(24, 92, "instructions", "“For a hotel expense, fill the", "dates before submitting”", "#eef4f8"),
             (92, 160, "worked examples", "an accepted hotel report", "", "#eef4f8"),
             (160, 236, "playbook of notes", "“Hotel → dates required”", "“Meal → under the daily limit”", "#eef4f8"),
             (236, 284, "this report and its history", "not learned: new every time", "", "#f6f8fa")]
-    for y0, y1, head, l1, l2, fill in segs:
-        sv += f'<rect x="898" y="{y0}" width="282" height="{y1 - y0}" style="fill:{fill};stroke:#c9d5df"/>'
-        sv += t(908, y0 + 17, head, 11, A if fill != "#f6f8fa" else G, bold=True)
-        sv += t(908, y0 + 33, l1, 10.5, "#3b4a57") + (t(908, y0 + 47, l2, 10.5, "#3b4a57") if l2 else "")
-    return sv + '</svg>'
+    keys = [(150, "k", "decides what is kept: only if it scores better"), (440, "o", "kept without a test"), (590, "g", "other steps")]
+    return paths_fig(paths, segs, "THE PROMPT READ ON THE NEXT REPORT", keys, H=290, X=[150, 320, 490, 660], W=152, start_y=104, mid="pa")
+
+def memory_paths_fig():
+    """Experience memory: from earlier runs, four paths into a store that each new report searches."""
+    paths = [
+        ("1 · STORE ON A LABEL", "the model’s or the task’s label · no test · usually online", [["the model, or the task’s", "result, labels the run"], ["extract a workflow,", "a lesson or a case"], ["append it to the store"]], "ggo", 46, 46),
+        ("2 · KEEP ONLY WHAT SCORES BETTER", "re-runs · kept if better · before use", [["a candidate lesson"], ["re-run tasks with it", "and without it"], ["keep it if the gain beats", "its extra time and tokens"]], "ggk", 106, 76),
+        ("3 · CHECK THE CAUSE ON THE SITE", "the site’s answers · fact checked, effect untested", [["a failure, or waste", "in a successful run"], ["probe the site, read-only,", "to confirm the cause"], ["write, narrow or drop", "a fact or a trap"]], "ggo", 166, 119),
+        ("4 · REWARDS RANK THE ENTRIES", "the task’s reward · ranked by value · training runs, then frozen", [["entries retrieved for", "a training task"], ["the task’s reward updates", "each one’s value"], ["later: retrieve by", "similarity and value"]], "gkg", 226, 181),
+    ]
+    segs = [(22, 88, "workflows and lessons", "Hotel: type → dates → amount → submit", "“Fill the dates before submitting”", "#eef4f8"),
+            (88, 150, "site facts and traps", "“Dates are typed DD/MM/YYYY”", "“No dates: the form rejects it”", "#eef4f8"),
+            (150, 212, "a value on each entry", "up when the reports using it pass,", "down when they fail", "#eef4f8"),
+            (212, 272, "for each new report", "the relevant entries join its prompt,", "chosen by similarity, or also by value", "#f6f8fa")]
+    keys = [(150, "k", "decided by a measured score: re-runs or rewards"), (450, "o", "kept without a test"), (600, "g", "other steps")]
+    return paths_fig(paths, segs, "THE MEMORY STORE", keys, H=278, X=[150, 344, 538], W=176, start_y=99, mid="pm")
 
 slide("s05p", "Learning prompts and context: three paths to the next prompt",
   callout="<p><b>All three paths start from earlier runs and end in the prompt read on the next report; they differ in which part of the prompt they write and whether a change is tested.</b></p>",
@@ -802,25 +825,23 @@ slide("s05p", "Learning prompts and context: three paths to the next prompt",
   ], ["17%", "83%"], cls="tbl p3t ptab")}""",
   chip=("#a02", "Appendix A2"), page_refs=False)
 
-slide("s06", "How a run record becomes a change, and what the change costs",
-  crumb="direction 1 · C_m′(p) ↓ after the change · C_learn ↑ at three points: diagnosis, candidates, re-tests",
-  callout="<p><b>Every step after reading the run records costs model calls, and these costs are rarely reported next to the savings.</b></p>",
+def wl(*pairs):
+    """Works with their citations: 'AWM (Wang et al., 2025a) · ReasoningBank (…)'."""
+    return " · ".join(f"{n} {cite(i)}" for n, i in pairs)
+
+slide("s05m", "Learning experience memory: four ways to judge what is stored",
+  callout="<p><b>Each path turns earlier runs into entries that later reports search; they differ in how an entry is judged, and most works store it without a test.</b></p>",
   body=f"""
-{fx({"C": DN, "S": UP})}
-<div class="flow" style="margin:10px 0 4px">
- <div class="stp key"><span class="n">1 · INPUT</span>Run records, failed and successful, with their time and cost</div><div class="arr">→</div>
- <div class="stp"><span class="n">2 · DIAGNOSE</span>Find failures and waste; locate the step and the code responsible<span class="tagc">costs: diagnosis calls</span></div><div class="arr">→</div>
- <div class="stp"><span class="n">3 · PROPOSE</span>A change to one of: prompt · memory · skill or tool · control code<span class="tagc">costs: candidate generation</span></div><div class="arr">→</div>
- <div class="stp"><span class="n">4 · RE-TEST</span>On tasks not used to find the change; old tasks must still pass<span class="tagc">costs: re-runs of tasks</span></div><div class="arr">→</div>
- <div class="stp key"><span class="n">5 · DECIDE</span>Keep the change, or roll it back</div>
-</div>
-<div class="two" style="margin-top:12px">
-  {card("IT WORKS", "Changes can be found and made automatically, with gains on the final tasks",
-        ["Highest success in five of six settings and 76.0–91.8% fewer model calls at deployment — Growing Harness, BrowseComp-Plus and WebArena-Verified, three models, 50 final tasks per setting, three runs " + c("growing")], "")}
-  {card("LEARNING COST LEFT OUT · " + C_LEARN, "Savings at deployment are usually reported without the learning that produced them",
-        ["97.4K vs 112.6K tokens and 11.25 vs 14.55 turns per AppWorld task once the memory is frozen; the memory manager’s own calls are not included — Metis " + c("metis")], "")}
-</div>""",
-  chip=("#a05", "Appendix A5"))
+<div style="width:100%">{memory_paths_fig()}</div>
+<div class="figcap" style="margin:2px 0 4px">A label needs no re-run, so labelled entries can be added online, report by report; tests and rewards need many scored runs, so FORGE, MemRL and MemQ learn offline, then freeze.</div>
+{table(["path", "works"], [
+    ["1 · Store on a label", wl(("AWM", 14), ("ReasoningBank", 32), ("ExpeL", 15), ("CTIM-Rover", 23), ("Agent S", 29), ("EXG", 26), ("MobileGPT", 35), ("G-Memory", 22), ("DecentMem", 25), ("WebCoach", 31), ("ReAP", 33), ("Mem²Evolve", 20), ("Memento", 34))],
+    ["2 · Keep only what scores better", wl(("SEDM", 28), ("FORGE", 21), ("EvolveMem", 24))],
+    ["3 · Check the cause on the site", wl(("Metis", 19), ("Grounding Agent Memory", 93))],
+    ["4 · Rewards rank the entries", wl(("MemRL", 16), ("MemQ", 17), ("AEL", 18), ("Memento’s trained scorer", 34))],
+    ["Other works of this class", wl(("ACE", 13), ("Dynamic Cheatsheet", 8)) + ": the previous page’s playbook · " + wl(("SE-Agent", 30), ("Meta-TTL", 27)) + ": one task only · " + citet(94) + ": a comparison with a plain agent"],
+  ], ["17%", "83%"], cls="tbl p3t ptab")}""",
+  chip=("#a03p", "Appendix A3"), page_refs=False)
 
 slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kinds of knowledge",
   crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
@@ -1013,7 +1034,48 @@ def apx_pages(aid, title, ids, lab=None):
               body=table(["work", "venue", "what it changes", "where it was tested", "effect, with conditions", "time, money, learning cost", "marks"],
                          [arow(i) for i in p], ["11%", "8%", "15%", "17%", "21%", "21%", "7%"], cls="tbl p3a") + f'<div class="figcap">{LEG}</div>')
 
+def memory_paths_apx():
+    """Appendix A3, first page: the memory page's paths, one line per work: what it stores and how its entries are judged."""
+    W_ = lambda n, i, d: f"<b>{n}</b> {cite(i)}: {d}"
+    slide("a03p", "A3 · Experience memory: what each work adds, by path", label="A3 · paths", kind="appendix", chip=("#back", "← back"),
+      body=table(["path", "works, and what each adds"], [
+        ["1 · Store on a label", ul([
+            W_("AWM", 14, "workflows induced from runs the model judged successful, appended and never re-ranked"),
+            W_("ReasoningBank", 32, "lessons from failures as well as successes, judged by a model without answers and appended directly"),
+            W_("ExpeL", 15, "successful runs, plus advice drawn from comparing successes and failures; the model edits and votes on the advice, and low-voted advice is deleted"),
+            W_("CTIM-Rover", 23, "ExpeL-style advice, general and per code repository, edited by model votes"),
+            W_("Agent S", 29, "whole-task and subtask memories; a self-evaluator judges success without answers"),
+            W_("EXG", 26, "a graph linking each failure to the attempt that fixed it; all runs kept, entries with a fix preferred when reading"),
+            W_("MobileGPT", 35, "a graph of each app’s pages and subtasks with their actions, saved when a task completes"),
+            W_("G-Memory", 22, "linked memory of several agents’ exchanges, tasks and advice, filtered by the environment’s success signal and by relevance"),
+            W_("DecentMem", 25, "a store for each agent and a router between exploring and reuse; all new experience joins the long-term store"),
+            W_("WebCoach", 31, "summaries of all runs; a separate coach model decides when to pass advice to the acting model"),
+            W_("ReAP", 33, "a written reflection on every training run, retrieved by task similarity"),
+            W_("Mem²Evolve", 20, "experience plus new tools and expert agents; tools are repaired with tests drawn from the model’s critique, the experience is not checked"),
+            W_("Memento", 34, "a library of cases, appended and retrieved by similarity")])],
+        ["2 · Keep only what scores better", ul([
+            W_("SEDM", 28, "each candidate entry is replayed with and without it and admitted on the reward gain minus latency and token penalties; later down-weighted, merged or deleted by use"),
+            W_("FORGE", 21, "several agents, each with its own memory of rules or examples; the best in a check episode copies its whole memory to the others; frozen at a threshold"),
+            W_("EvolveMem", 24, "retrieval settings, answer style and re-extracted memory, changed from failure logs; large drops rolled back; the best round chosen on the same questions")])],
+        ["3 · Check the cause on the site", ul([
+            W_("Metis", 19, "after a failure the reflector probes the environment for the cause, after a success it looks for waste; facts and traps kept as text; recurring plans become code that must compile with its dependencies"),
+            W_("Grounding Agent Memory", 93, "after each task, candidate entries are checked with targeted read-only queries; the queries and the final score decide to add, narrow, delete or skip")])],
+        ["4 · Rewards rank the entries", ul([
+            W_("MemRL", 16, "the environment’s reward updates the value of each entry used; retrieval by similarity and value"),
+            W_("MemQ", 17, "the benchmark’s binary reward is passed along where each entry came from; retrieval by similarity and value; nothing is deleted"),
+            W_("AEL", 18, "learns from the environment’s reward how to choose what to retrieve, with reflection and rules; code changes off by default"),
+            W_("Memento", 34, "one version trains a two-layer network to score the cases")])],
+        ["Not memory across tasks", ul([
+            f"<b>ACE</b> {cite(13)}, <b>Dynamic Cheatsheet</b> {cite(8)}: a playbook in the prompt, kept and rewritten by the model (<a href=\"#s05p\">prompts and context</a>, path 3)",
+            W_("SE-Agent", 30, "a pool of candidate runs for one task, rewritten, recombined and filtered"),
+            W_("Meta-TTL", 27, "notes between attempts at one task; how to write them is learned offline and updated only if validation tasks improve")])],
+        ["Compared with a plain agent", ul([
+            f"<b>{citet(94)}</b>: on four WebArena domains with Gemini 3 Flash, three runs, a plain agent given 15 steps and trimmed pages had both the highest success, 44.78%, and the fewest tokens, 73.6K per task, against AWM, ASI and ReasoningBank given 10 steps; the budgets match only roughly"])],
+      ], ["15%", "85%"], cls="tbl p3t"))
+
 for cat, title, aid in CLASS[:8]:
+    if aid == "a03":
+        memory_paths_apx()
     apx_pages(aid, title, ids_of(cat) + (ids_of("2E判分环境") if aid == "a06" else []))
 CLOSEST = [80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 14, 32, 35, 36, 19, 42, 68, 28]
 apx_pages("a10", "The works closest to ours", [i for i in CLOSEST if i < len(J)])
