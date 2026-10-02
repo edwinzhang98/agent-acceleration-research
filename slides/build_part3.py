@@ -199,6 +199,7 @@ svg .node.nd rect{fill:#f3f7fa;stroke:var(--accent);stroke-dasharray:5 3}
 .fig-loop2.sm svg.big-svg{width:960px}
 .mleg span.k{display:inline-block;width:22px;height:12px;border-radius:6px;vertical-align:-2px;margin-right:6px}
 .symgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px 20px;font-size:11.3px;line-height:1.36;color:var(--ink2)}
+.symgrid.sm{font-size:10.5px;line-height:1.3;gap:2px 18px;margin-top:6px;border-top:1px solid var(--rule);padding-top:5px}
 #help{display:none!important}
 .p3refs{margin-top:auto;border-top:none;box-shadow:0 -1px 0 var(--rule)}
 .p3refs .pgrefs li{margin-bottom:0;line-height:10px}
@@ -270,10 +271,36 @@ def p1(k):
     return FORM[a]
 
 def mech_svg():
+    """Part 1's agent loop (one attempt), with learning's effects marked and the loop across tasks drawn around it:
+    End -> run record -> learning (C_learn) -> updated harness -> next task. Badges mark where the harness acts:
+    P prompt and memory, S skills and tools, C control code."""
     svg = bd.loop_svg(hl=("n-steps", "n-calls", "n-succ"), cls="big-svg", big=True)
     for id_, cls in (("n-rtok", "xh"), ("n-read", "nd")):
         svg = re.sub(r'(id="ah\d+-' + id_ + r'" class="node(?: pill)?)"', r'\1 ' + cls + '"', svg)
-    return svg
+    svg = svg.replace('viewBox="0 0 1200 196"', 'viewBox="-46 0 1246 256"', 1)
+    A, M = "#0f5a85", "#7d8a96"
+    o = ('<defs><marker id="oa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">'
+         f'<path d="M0 0 L10 5 L0 10 z" style="fill:{A}"/></marker></defs>')
+    y = 228
+    seg = lambda d, end=True: f'<path d="{d}" style="stroke:{A};stroke-width:1.6;fill:none"' + (' marker-end="url(#oa)"' if end else '') + '/>'
+    def box(x0, x1, inner):
+        return (f'<rect x="{x0}" y="{y - 14}" width="{x1 - x0}" height="28" rx="14" style="fill:#eef4f8;stroke:{A}"/>'
+                f'<text x="{(x0 + x1) / 2}" y="{y + 5}" text-anchor="middle" style="font:13px \'IBM Plex Sans\',sans-serif;fill:#1b2733">{inner}</text>')
+    o += seg(f"M1140 118 V{y} H1062")
+    o += box(940, 1060, "run record")
+    o += seg(f"M940 {y} H862")
+    o += box(650, 860, 'learning, at cost C<tspan baseline-shift="sub" font-size="9">learn</tspan>')
+    o += seg(f"M650 {y} H572")
+    o += box(120, 570, '<tspan font-weight="700" fill="' + A + '">updated harness:</tspan> P prompt, memory · S skills, tools · C control code')
+    o += seg(f"M120 {y} H-28 V62 H10")
+    o += f'<text transform="translate(-36 150) rotate(-90)" text-anchor="middle" style="font:12px \'IBM Plex Mono\',monospace;fill:{A}">next task</text>'
+    o += f'<text x="1068" y="{y - 22}" style="font:11px \'IBM Plex Mono\',monospace;fill:{A}">ACROSS TASKS</text>'
+    def badge(x, yy, ch):
+        return (f'<circle cx="{x}" cy="{yy}" r="9" style="fill:{A}"/>'
+                f'<text x="{x}" y="{yy + 4.5}" text-anchor="middle" style="font:700 12px \'IBM Plex Sans\',sans-serif;fill:#fff">{ch}</text>')
+    o += badge(184, 14, "C") + badge(260, 146, "P") + badge(762, 42, "S") + badge(1044, 104, "C")
+    head, _, tail = svg.rpartition("</svg>")   # only the outer figure, not the formula images inside it
+    return head + o + "</svg>" + tail
 
 
 
@@ -335,16 +362,26 @@ slide("s1m", "How an agent runs a task, and where learning changes it",
   callout="<p><b>One attempt is a loop of steps. Learning changes the harness to cut steps, model calls and failures; the price is a longer prompt.</b></p>",
   body=f"""
 <div class="fig-loop2 sm">{mech_svg()}</div>
-<div class="mleg"><span><span class="k" style="background:var(--accent)"></span>learning aims to lower it, or to raise success</span><span><span class="k" style="background:#fbeede;border:1px solid #e2b98b"></span>grows in exchange: learned material is read in the prompt</span><span><span class="k" style="background:#f3f7fa;border:1px dashed var(--accent)"></span>a possible direction: a stable prompt prefix is read from the cache</span><span><a href="#a00-2">every symbol: Appendix A0 ↗</a></span></div>
-<div class="bridge">One attempt adds up to {tex(r"T_{\mathrm{attempt}}=\Sigma_{i}\,(D_i+E_i)-T_{\mathrm{saving}}", 11)} <span class="src">(adapted from {p1("isp")}; {p1("asyncfc")})</span> and {tex(r"c_m(p)=\Sigma_{i,j,\kappa}\,n^{\kappa}_{ij}\,c_{\kappa}(\mu_{ij})+x_{\mathrm{env}}\,c_{\mathrm{env}}", 11)} <span class="src">(adapted from {FORM["ref-p1-cop"]})</span>; page 1’s {tex("C_m(p)", 11)} is the expected {tex("c_m(p)", 11)}</div>
-<div class="path" style="margin:4px 0 2px 60px"><span class="pl" style="width:auto;margin-right:10px">ACROSS TASKS</span><span class="s">run record</span>→<span class="s">learning, at cost {tex(r"C_{\mathrm{learn}}", 10)}</span>→<span class="s">updated harness: prompt · memory · skills and tools · control code</span>→<span class="s">next task</span></div>
-{bd.defs2([
-  (r"N,\ i", "steps in one attempt; one step is one observe–decide–act–wait round", p1("isp")),
-  (r"J_i", "model calls in step " + tex("i", 12) + ": planner, judge, retries", "self-defined"),
-  (r"R_m(p)", "chance that one attempt of agent " + tex("m", 12) + " on task " + tex("p", 12) + " succeeds", cite("ref-p1-cop")[1:-1]),
-  (r"|H_{a,i}|", "length of the prompt agent " + tex("a", 12) + " reads in step " + tex("i", 12) + " (" + tex("a", 12) + ": which agent, when several share a task); learned notes make it longer", p1("yuan")),
-  (r"\mathrm{prefill}", "reading the prompt before writing; input already in the cache is read faster and billed at a lower price", p1("anth-b")),
-])}""")
+<div class="mleg"><span><span class="k" style="background:var(--accent)"></span>learning aims to lower it, or to raise success</span><span><span class="k" style="background:#fbeede;border:1px solid #e2b98b"></span>grows in exchange: learned material is read in the prompt</span><span><span class="k" style="background:#f3f7fa;border:1px dashed var(--accent)"></span>a possible direction: a stable prompt prefix is read from the cache</span><span><a href="#a00-2">symbol sources: A0 ↗</a></span></div>
+<div class="bridge">One attempt adds up to {tex(r"T_{\mathrm{attempt}}=\Sigma_{i}\,(D_i+E_i)-T_{\mathrm{saving}}", 11)} <span class="src">(adapted from {p1("isp")}; {p1("asyncfc")})</span> and {tex(r"c_m(p)=\Sigma_{i,j,\kappa}\,n^{\kappa}_{ij}\,c_{\kappa}(\mu_{ij})+x_{\mathrm{env}}\,c_{\mathrm{env}}", 11)} <span class="src">(adapted from {cite("ref-p1-cop")[1:-1]})</span></div>
+
+<div class="symgrid sm">
+ <div>{tex(r"N,\ i", 10)} steps in one attempt; step index (observe, decide, act, wait)</div>
+ <div>{tex(r"J_i,\ j", 10)} model calls in step {tex("i", 10)} (e.g. plan, check, retry); {tex("j", 10)} numbers them</div>
+ <div>{tex(r"\ell_{ij}", 10)} how long the {tex("j", 10)}-th model call of step {tex("i", 10)} takes</div>
+ <div>{tex(r"D_i,\ E_i", 10)} model time of step {tex("i", 10)}; all its other time</div>
+ <div>{tex(r"\mathrm{TTFT}_{ij}", 10)} time to the first output token: queue and prefill</div>
+ <div>{tex(r"n^{\mathrm{out}}_{ij},\ \mathrm{TPOT}_{ij}", 10)} output tokens; time per output token</div>
+ <div>{tex(r"T_{\mathrm{saving}}", 10)} time hidden by doing things at once</div>
+ <div>{tex(r"o_{a,i},\ z_{a,i},\ \Phi", 10)} tokens the step’s observation adds; the call’s output; chat template</div>
+ <div>{tex(r"|H_{a,i}|,\ a", 10)} prompt length agent {tex("a", 10)} reads in step {tex("i", 10)}; which agent, when several share a task</div>
+ <div>{tex(r"n^{\kappa}_{ij},\ \kappa", 10)} tokens of billing class {tex(r"\kappa", 10)}: cached, cache-written, uncached, output</div>
+ <div>{tex(r"c_{\kappa}(\mu),\ \mu", 10)} price per token of class {tex(r"\kappa", 10)} on the model {tex(r"\mu", 10)} that serves the call</div>
+ <div>{tex(r"x_{\mathrm{env}},\ c_{\mathrm{env}}", 10)} billed environment use; its price per unit</div>
+ <div>{tex(r"R_m(p)", 10)} chance that one attempt of agent {tex("m", 10)} on task {tex("p", 10)} succeeds</div>
+ <div>{tex(r"c_m(p)", 10)} dollars of one attempt; its expectation is page 1’s {tex("C_m(p)", 10)}</div>
+ <div>{tex(r"\mathrm{prefill}", 10)} reading the prompt; cached input is read faster and billed lower</div>
+</div>""")
 
 slide("s02", "Example: a web agent that files expense reports",
   crumb="term: C_m′(p) — the part of a run that is repeated discovery or rework",
@@ -865,6 +902,8 @@ slide("a00-2", "A0 · Every symbol in the agent loop", label="A0 · 2/2", kind="
   (r"n^{\mathrm{hit}},\ n^{\mathrm{w}},\ n^{\mathrm{unc}}", "input tokens read from the cache, written to it, or uncached", p1("anth-b") + "; " + p1("tokenpilot") + "; " + p1("sglang")),
   (r"c_{\kappa}(\mu),\ \kappa,\ \mu", "price per token of billing class " + tex(r"\kappa", 12) + " on serving model " + tex(r"\mu", 12), "adapted from " + FORM["ref-p1-cop"]),
   (r"x_{\mathrm{env}},\ c_{\mathrm{env}}", "billed environment usage (e.g. sandbox hours); its price per unit", FORM["ref-p1-cop"] + " (adapted)"),
+  (r"n^{\kappa}_{ij}", "tokens of billing class " + tex(r"\kappa", 12) + " in call " + tex("j", 12) + " of step " + tex("i", 12), FORM["ref-p1-cop"] + " (adapted); " + p1("anth-b")),
+  (r"c_m(p)", "dollars of one attempt of agent " + tex("m", 12) + " on task " + tex("p", 12) + "; its expectation is " + tex("C_m(p)", 12), FORM["ref-p1-cop"]),
   (r"R_m(p)", "chance that one attempt of agent " + tex("m", 12) + " on task " + tex("p", 12) + " succeeds", cite("ref-p1-cop")[1:-1]),
 ])}""")
 
