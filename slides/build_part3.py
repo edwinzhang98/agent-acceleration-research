@@ -725,20 +725,51 @@ def mech(title, works, flow, example, twist, tags):
 def wk3(*keys):
     return " · ".join(f"{PN[k]} {c_idx(PW[k])}" for k in keys)
 
-slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works in four classes",
-  crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
-  callout=f"<p><b>Of {n1} works that change what sits outside the model, {a1[0]} measured the seconds or dollars of running tasks, {b1[0]} what learning cost, and {d1[0]} tested on unseen tasks.</b></p>",
-  body=fx({"C": DN, "S": UP}, legend=False) + class_table([
-    ("1提示", "the prompt, instructions or context read on the next task",
-     "ACE: offline adaptation lifts AppWorld from 42.4 to 59.4 (with labels), and takes 9,517 s against GEPA’s 53,898 s — DeepSeek-V3.1 " + c("ace")),
-    ("1记忆", "retrievable experience: successes, failures, workflows",
-     "AWM: 35.5% vs 23.5% success on WebArena (the baseline also reads HTML), 5.9 vs 7.9 steps against an accessibility-tree BrowserGym — GPT-4-0613 " + c("awm")),
-    ("1技能", "callable functions, scripts, skill documents",
-     "AXIS: 29.9 s vs 59.5 s and $0.2 vs $0.4 per task, 84% vs 52% success, against UFO on 50 Microsoft Word tasks; learning cost not reported " + c("axis")),
-    ("1框架", "the outer program: tools, control loop, the improver itself",
-     "SICA: $1.91 → $1.70 and 130.2 → 114.5 s per task, for a whole run of about $7,000; the benchmark that picked the agent also scored it " + c("sica")),
-  ], D1) + '<div class="figcap">Yes · partly: our initial judgment from the per-work table (calc.; Appendix A1). A work in two classes counts in both.</div>',
-  chip=("#a02", "Appendix A2–A5"))
+def wl(*pairs):
+    """Works with their citations: 'AWM (Wang et al., 2025a) · ReasoningBank (…)'."""
+    return " · ".join(f"{n} {cite(i)}" for n, i in pairs)
+
+def sw(kd):
+    """A small colour swatch matching the class pages' keys (o: no check)."""
+    fill, stroke = {"o": ("#fbeede", "#e2b98b"), "k": ("#eef4f8", "#0f5a85"), "d": ("#d5e5f0", "#0f5a85")}[kd]
+    return f'<span style="display:inline-block;width:12px;height:8px;border:1px solid {stroke};background:{fill};border-radius:2px;margin-right:5px;vertical-align:0"></span>'
+
+def mode(n, *parts):
+    """One cell of the overview: the number of works, then examples grouped by how they test."""
+    return f'<b style="font-size:14px">{n}</b>' + ("" if not parts else " · " + " · ".join(parts))
+
+def what(name, page, eg):
+    return f'<b>{name}</b> <a href="#{page}">↗</a><div class="wcite" style="font-family:\'IBM Plex Sans\',sans-serif;color:var(--mut)">{eg}</div>'
+
+slide("s05", "Direction 1 · What is changed, and how a change is kept",
+  callout="<p><b>Every work changes the prompt, the memory, the skills or the whole harness, and then uses a change at once, keeps it only if a test passes, or keeps all changes and picks by score; only three put time or money into that choice.</b></p>",
+  body=fx({"C": DN, "S": UP}, legend=False) + table(
+    ["what is changed", sw("o") + "used at once, no test", "kept only if a test passes", "all kept, picked by score"], [
+    [what("Prompt and context", "s05p", "“Fill the dates before submitting”"),
+     mode(2, "a growing playbook: " + wl(("ACE", 13), ("Dynamic Cheatsheet", 8))),
+     mode(10, "a better validation score: " + wl(("AvaTaR", 10), ("MIPRO", 3), ("DSPy", 11))),
+     mode(1, "candidates that win on some tasks: " + wl(("GEPA", 12)))],
+    [what("Experience memory", "s05m", "an entry: the hotel workflow"),
+     mode(13, wl(("AWM", 14), ("ReasoningBank", 32))),
+     mode(5, "an ablation: " + wl(("SEDM", 28)), "a site check: " + wl(("Metis", 19))),
+     mode(4, "scores from later tasks: " + wl(("MemRL", 16), ("MemQ", 17)))],
+    [what("Skills and tools", "s05s", "fill_hotel(dates, amount)"),
+     mode(3, wl(("SpeedRunner", 82), ("AppAgentX", 87))),
+     mode(28, "it runs: " + wl(("SkillWeaver", 36)), "a model says so: " + wl(("Voyager", 37)), "known answers: " + wl(("LATM", 46))),
+     mode("—")],
+    [what("Whole harness", "s05h", "check required fields before submitting"),
+     mode(6, wl(("Continual Harness", 63), ("Live-SWE-agent", 71))),
+     mode(18, "the same tasks: " + wl(("SICA", 67)), "separate tasks: " + wl(("AgentDevel", 69), ("HarnessFix", 84))),
+     mode(5, "an archive of versions: " + wl(("DGM", 70), ("HGM", 59)))],
+  ], ["19%", "23%", "35%", "23%"], cls="tbl p3t") + f"""
+<div class="two tightcards" style="margin-top:10px;flex:0 0 auto">
+  {card("WHAT A TEST MEASURES", "Success, almost always; time or money rarely",
+        [f"Time, tokens or money enter the keep rule only in SEDM {cite(28)}, SICA {cite(67)} and SoL-Pi {cite(97)}"], "")}
+  {card("WHERE IT IS TESTED", "On the tasks a change came from, or on separate ones",
+        ["Only separate tasks show that success holds on new reports; in the whole-harness class, 10 of 29 works use them (calc.)"], "")}
+</div>
+<div class="figcap" style="margin-top:6px">Of the {n1} works, {a1[0]} measured the seconds or dollars of running tasks, {b1[0]} what learning cost, and {d1[0]} tested on unseen tasks (initial judgment, calc.; Appendix A1). A work in two cells counts in both; works that only retry one task, train a model or compare modules are listed on the class pages.</div>""",
+  chip=("#a02", "Appendix A2–A5"), page_refs=False)
 
 def paths_fig(paths, segs, head, keys, *, H, X, W, start_y, mid):
     """One flowchart for a class of direction 1: earlier runs (left) through paths of small steps (middle)
@@ -907,10 +938,6 @@ slide("s05p", "Learning prompts and context: three paths to the next prompt",
     ["Same task only", f"Reflexion {cite(PW['reflexion'])}, Self-Refine {cite(PW['selfrefine'])}: notes kept only for retrying the same task, dropped before the next one"],
   ], ["17%", "83%"], cls="tbl p3t ptab")}""",
   chip=("#a02", "Appendix A2"), page_refs=False)
-
-def wl(*pairs):
-    """Works with their citations: 'AWM (Wang et al., 2025a) · ReasoningBank (…)'."""
-    return " · ".join(f"{n} {cite(i)}" for n, i in pairs)
 
 slide("s05m", "Learning experience memory: four ways to check an entry",
   callout="<p><b>All works share one pipeline, from earlier runs to entries that a new report reads; they differ in how an entry is checked, and most store it unchecked.</b></p>",
