@@ -19,6 +19,10 @@ import build_deck as bd                     # builds Parts 1–2 in memory; noth
 from build_deck import tex, card, table, esc
 
 OUT = os.path.join(HERE, "part3.html")
+# Edwin, 2026-10-02: a second, shorter deck — the cover (title and subtitle only), the expense example and the five
+# difficulties, to be followed by the data pages of the ExpenseAI deck. part3.html stays as it is.
+OUT_V2 = os.path.join(HERE, "part3-v2.html")
+KEEP_V2 = ["s00", "s02", "s03c", "ad", "ad-2"]
 ROWS = json.load(open(os.path.join(HERE, "part3-data", "rows.json"), encoding="utf-8"))
 TR = {r["i"]: r for r in json.load(open(os.path.join(HERE, "part3-data", "translated.json"), encoding="utf-8"))}
 LIT = os.path.join(ROOT, "notes", "part3", "2026-10-01-two-directions-literature-zh.md")
@@ -224,13 +228,15 @@ svg .node.nd rect{fill:#f3f7fa;stroke:var(--accent);stroke-dasharray:5 3}
 .p3refs .p3rh{line-height:12px}
 """
 
-def render(font_dir=None):
+def render(font_dir=None, keep=None):
     parts = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
              '<title>Agent acceleration in a stable environment</title>', '<style>', bd.font_css(font_dir), bd.CSS, EXTRA_CSS, '</style></head><body>',
              '<div id="stage">']
     n = 0
     order = ([s for s in S if s["kind"] not in ("appendix", "refs")] + [s for s in S if s["kind"] == "refs"]
              + [s for s in S if s["kind"] == "appendix"])
+    if keep:
+        order = [s for s in order if s["id"] in keep]
     for s in order:
         if s["kind"] in ("main", "refs"):
             n += 1
@@ -241,7 +247,7 @@ def render(font_dir=None):
             label = ""
         parts.append(f'<section class="slide {s["kind"]}" id="{s["id"]}">')
         if s["cover"]:
-            parts.append(s["body"])
+            parts.append(re.sub(r'<ol class="cover-q">.*?</ol>', "", s["body"], flags=re.S) if keep else s["body"])
         else:
             parts.append(f'<div class="head"><div class="label">{label}</div><h1>{s["title"]}</h1></div><div class="rule"></div>')
             parts.append('<div class="content">')
@@ -1247,6 +1253,8 @@ if __name__ == "__main__":
     font_dir = sys.argv[sys.argv.index("--fonts") + 1] if "--fonts" in sys.argv else None
     out = render(font_dir)
     open(OUT, "w", encoding="utf-8").write(out)
+    open(OUT_V2, "w", encoding="utf-8").write(render(font_dir, keep=KEEP_V2))
+    print(f"wrote {OUT_V2} (pages: {', '.join(KEEP_V2)})")
     left = sorted(set(re.findall(r"[\u4e00-\u9fff]+", re.sub(r"<[^>]+>", " ", out))))
     print(f"wrote {OUT} ({len(out) / 1024:.0f} KB, {len(S)} pages, {len(refs)} references)")
     print("  Chinese left on pages:", left[:40] if left else "none")

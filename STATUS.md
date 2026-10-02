@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-01, by Claude Code (Part 3 deck: experience-memory page added, run-record page removed) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-02, by Claude Code (Part 3 short deck started: cover, example, difficulties; ExpenseAI data pages to follow) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -42,6 +42,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Next (in order)
 
+- [ ] Part 3 short deck (Edwin, 2026-10-02): `slides/part3-v2.html` / `.pdf` — cover (title and subtitle), the expense example, the five difficulties (+ Appendix D), built by `build_part3.py` next to `part3.html`, which stays as it is. Next: bring over the data pages of the ExpenseAI introduction deck (`~/projects/ExpenseAI/gw_policy_data/reports/slides/preview/20260922-project-intro.pdf`; data = pages 4–15, scoring = page 19) after Edwin picks them; the example and difficulties pages still use v̄(m), C_learn and n* defined on part3's page 1.
 - [ ] Part 3 existing-work pages (Edwin, 2026-10-01): one flowchart page per class of direction 1 (shared start “earlier runs: trajectories and their outcomes”, paths, colour key for which step decides what is kept, offline/online line, works by path). Done: prompts and context, experience memory, skills and tools, whole harness (the last three drawn as one pipeline forked at the check, via `check_fig()`). The direction-1 overview (s05) is now the summary table: what is changed (prompt, memory, skills and tools, whole harness) × how a change is kept (used at once / kept only if a test passes / all kept and picked by score), with two notes (what a test measures; where it is tested). Next: direction 2 and the shared-problems page (put Hajimiri et al.'s plain-agent comparison there; it is listed only in Appendix A3 for now).
 - [ ] Part 3 deck navigation (Edwin, 2026-10-01; after the content is settled): “← back” on an appendix page returns to the page it was opened from, so after moving between appendix pages it no longer reaches the main page. Make it return to the last main page visited (Part 3 deck only, or in the shared script if Parts 1–2 should change too).
 
@@ -57,6 +58,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-10-02 — Claude Code — Part 3 short deck `slides/part3-v2.html` / `.pdf` started at Edwin's request: cover with title and subtitle only, the expense example, the five difficulties and Appendix D, written by `build_part3.py` (`KEEP_V2`) beside the full `part3.html`, which is unchanged. Located the ExpenseAI introduction deck whose data pages are to follow. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 direction-1 overview (page 5) rebuilt as Edwin's summary: four things changed × three ways a change is kept, with counts and example works per cell (from the four class pages), a note that time, tokens or money enter the keep rule only in SEDM, SICA and SoL-Pi, a note that only separate tasks show success holds on new reports (10 of 29 in the whole-harness class), and the coverage line kept at the foot. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 skills page: the five checks reworded as the question each answers (No check; Does it run? run once; Right result? against known answers; Right result? a model says so; Keeps the rules? a checker proves that no possible path breaks the rules), after Edwin found the earlier labels unclear; reordered so the three checks that do not use answers sit together and the check against known answers comes last. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3: skills-and-tools page (five checks: none, run it, known answers, a model judges, formal check; the skill library shows guide, tool note, function and program with what each saves at run time) and whole-harness page (four ways to accept a new version: at once, archive, same tasks, separate tasks; a version list and a dashed next-round loop), both listing only the works per check; the memory page's checks renamed in Edwin's terms (No check, Ablation, Site check, Score) with check 4 stating that a task using the entry raises its score if it passes and lowers it if it fails. Three figures now share `check_fig()`. No E/D changes.
