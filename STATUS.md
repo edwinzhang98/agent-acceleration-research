@@ -56,6 +56,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-10-01 — Claude Code — Part 3 mechanism page: the updated-harness box in the loop across tasks now uses the same dark P/S/C badges as the figure; TTFT's definition carries prefill (reading the prompt; cached input is cheaper). No E/D changes.
+- 2026-10-01 — Claude Code — Part 3 mechanism page: plainer definitions of o_{a,i} (what the step saw), z_{a,i} and Φ (what the model wrote, wrapped in the chat format when it goes back into the prompt) and R_m(p) (probability of success, judged by an external check after the attempt). No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 mechanism page legend: dark = learning aims to improve it; orange = always paid in exchange (learned text read in the prompt, and the learning bill, now orange in the outer loop); a second line explains the P/S/C badges (where the updated harness acts) and lists what may go either way (calls per step, non-model time, success). No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 mechanism page: the loop across tasks drawn into the figure (End → run record → learning at C_learn → updated harness → back to Observe for the next task) with badges where the harness acts (P prompt and memory on the prompt length, S skills and tools on Act, C control code on the calls per step and on the stop rule); the separate text row removed. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 mechanism page: clearer definitions of j (numbers the model calls within a step: plan, check, retry), ℓ_ij (how long the j-th call takes) and μ (the model that serves a call); symbol-source link shortened; Erol et al. registered in the page references. No E/D changes.

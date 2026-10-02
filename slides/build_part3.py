@@ -291,8 +291,13 @@ def mech_svg():
     o += box(940, 1060, "run record")
     o += seg(f"M940 {y} H862")
     o += box(650, 860, 'learning, at cost C<tspan baseline-shift="sub" font-size="9">learn</tspan>').replace('fill:#eef4f8;stroke:' + A, 'fill:#fbeede;stroke:#e2b98b')
-    o += seg(f"M650 {y} H572")
-    o += box(120, 570, '<tspan font-weight="700" fill="' + A + '">updated harness:</tspan> P prompt, memory · S skills, tools · C control code')
+    o += seg(f"M650 {y} H614")
+    o += f'<rect x="120" y="{y - 14}" width="492" height="28" rx="14" style="fill:#eef4f8;stroke:{A}"/>'
+    o += f'<text x="134" y="{y + 5}" style="font:700 13px \'IBM Plex Sans\',sans-serif;fill:{A}">updated harness:</text>'
+    for cx, ch, label in ((258, "P", "prompt, memory"), (395, "S", "skills, tools"), (505, "C", "control code")):
+        o += (f'<circle cx="{cx}" cy="{y}" r="9" style="fill:{A}"/>'
+              f'<text x="{cx}" y="{y + 4.5}" text-anchor="middle" style="font:700 12px \'IBM Plex Sans\',sans-serif;fill:#fff">{ch}</text>'
+              f'<text x="{cx + 13}" y="{y + 5}" style="font:13px \'IBM Plex Sans\',sans-serif;fill:#1b2733">{label}</text>')
     o += seg(f"M120 {y} H-28 V62 H10")
     o += f'<text transform="translate(-36 150) rotate(-90)" text-anchor="middle" style="font:12px \'IBM Plex Mono\',monospace;fill:{A}">next task</text>'
     o += f'<text x="1068" y="{y - 22}" style="font:11px \'IBM Plex Mono\',monospace;fill:{A}">ACROSS TASKS</text>'
@@ -369,20 +374,20 @@ slide("s1m", "How an agent runs a task, and where learning changes it",
 
 <div class="symgrid sm">
  <div>{tex(r"N,\ i", 10)} steps in one attempt; step index (observe, decide, act, wait)</div>
- <div>{tex(r"J_i,\ j", 10)} model calls in step {tex("i", 10)} (e.g. plan, check, retry); {tex("j", 10)} numbers them</div>
+ <div>{tex(r"J_i,\ j", 10)} model calls in step {tex("i", 10)} (plan, check, retry); {tex("j", 10)} numbers them</div>
  <div>{tex(r"\ell_{ij}", 10)} how long the {tex("j", 10)}-th model call of step {tex("i", 10)} takes</div>
  <div>{tex(r"D_i,\ E_i", 10)} model time of step {tex("i", 10)}; all its other time</div>
- <div>{tex(r"\mathrm{TTFT}_{ij}", 10)} time to the first output token: queue and prefill</div>
+ <div>{tex(r"\mathrm{TTFT}_{ij}", 10)} time to the first output token: queue, then prefill (reading the prompt; cached input is cheaper)</div>
  <div>{tex(r"n^{\mathrm{out}}_{ij},\ \mathrm{TPOT}_{ij}", 10)} output tokens; time per output token</div>
  <div>{tex(r"T_{\mathrm{saving}}", 10)} time hidden by doing things at once</div>
- <div>{tex(r"o_{a,i},\ z_{a,i},\ \Phi", 10)} tokens the step’s observation adds; the call’s output; chat template</div>
- <div>{tex(r"|H_{a,i}|,\ a", 10)} prompt length agent {tex("a", 10)} reads in step {tex("i", 10)}; which agent, when several share a task</div>
- <div>{tex(r"n^{\kappa}_{ij},\ \kappa", 10)} tokens of billing class {tex(r"\kappa", 10)}: cached, cache-written, uncached, output</div>
+ <div>{tex(r"o_{a,i}", 10)} what step {tex("i", 10)} saw: page, screenshot, tool result</div>
+ <div>{tex(r"z_{a,i},\ \Phi", 10)} what the model wrote in step {tex("i", 10)}; {tex(r"\Phi", 10)}: its chat format (role tags)</div>
+ <div>{tex(r"|H_{a,i}|,\ a", 10)} prompt length agent {tex("a", 10)} reads in step {tex("i", 10)}; {tex("a", 10)}: which agent, if several</div>
+ <div>{tex(r"n^{\kappa}_{ij},\ \kappa", 10)} tokens per billing class: cached, cache-written, uncached, output</div>
  <div>{tex(r"c_{\kappa}(\mu),\ \mu", 10)} price per token of class {tex(r"\kappa", 10)} on the model {tex(r"\mu", 10)} that serves the call</div>
  <div>{tex(r"x_{\mathrm{env}},\ c_{\mathrm{env}}", 10)} billed environment use; its price per unit</div>
- <div>{tex(r"R_m(p)", 10)} chance that one attempt of agent {tex("m", 10)} on task {tex("p", 10)} succeeds</div>
+ <div>{tex(r"R_m(p)", 10)} probability that one attempt succeeds, checked afterwards</div>
  <div>{tex(r"c_m(p)", 10)} dollars of one attempt; its expectation is page 1’s {tex("C_m(p)", 10)}</div>
- <div>{tex(r"\mathrm{prefill}", 10)} reading the prompt; cached input is read faster and billed lower</div>
 </div>""")
 
 slide("s02", "Example: a web agent that files expense reports",
