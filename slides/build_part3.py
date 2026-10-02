@@ -132,10 +132,10 @@ for f, anchors in _seen.items():          # two works with one short form: add t
 
 # ---------------------------------------------------------------- page store and render (build_deck's anatomy)
 S = []
-def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind="main", cover=False, label=None):
+def slide(id_, title, body="", *, crumb="", callout="", foot="", chip=None, kind="main", cover=False, label=None, page_refs=True):
     refs = PAGE[:]
     PAGE.clear()
-    if kind == "main" and refs:
+    if kind == "main" and refs and page_refs:
         rh = bd.page_refs_html(sorted((fmt_ref(a) for a in refs), key=lambda r: re.sub("<[^>]+>", "", r).lower()), small=True)
         body += rh.replace('class="pgrefs sm"', 'class="pgrefs sm c3"') if len(refs) > 8 else rh
     S.append(dict(id=id_, title=title, body=body, crumb=crumb, callout=callout, foot=foot, chip=chip, kind=kind,
@@ -183,6 +183,10 @@ EXTRA_CSS = r"""
 .card .cc{font-family:'IBM Plex Sans',sans-serif;font-size:10.5px}
 .pgrefs.c3{columns:3;column-gap:20px}
 .tightcards .card{padding:8px 11px;gap:3px}.tightcards .cc{font-size:10px;line-height:1.3}.tightcards .cv{font-size:14px}.tightcards .cd{font-size:12px;line-height:1.34}.tightcards .lbl{margin:0 0 4px}
+.tbl.ds td{font-size:11.5px;line-height:1.3;padding:5px 6px;vertical-align:top}
+.tbl.ds td:first-child{font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:12px;color:var(--ink)}
+.opt{display:inline-block;border:1px solid var(--rule);border-radius:4px;padding:2px 7px;margin:2px 5px 2px 0;background:#fff;color:var(--ink2)}
+.opt b{color:var(--accent);font-weight:600;margin-right:4px}
 .tbl.p3t a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10px}
 .tbl.p3a{font-size:10px;line-height:1.3}.tbl.p3a td{padding:3px 6px 3px 4px}
 .tbl.p3a td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:10px;color:var(--ink)}
@@ -737,6 +741,45 @@ D2 = [i for i, r in enumerate(J) if any(x.startswith("2") and x != "2E判分环�
 n1, a1, b1, d1 = tally(D1)
 n2, a2, b2, d2 = tally(D2)
 NOTE = "One row per work in our literature table; a work in two classes counts in both. Yes / partly: our initial judgment from the table cells (calc.), defined in Appendix A1."
+
+PW = dict(reflexion=0, selfrefine=1, textgrad=2, mipro=3, protegi=4, semback=5, trace=6, promst=7, dc=8, gptswarm=9, avatar=10, dspy=11, gepa=12, ace=13)
+PN = dict(reflexion="Reflexion", selfrefine="Self-Refine", textgrad="TextGrad", mipro="MIPRO", protegi="ProTeGi", semback="semantic backpropagation",
+          trace="Trace", promst="PROMST", dc="Dynamic Cheatsheet", gptswarm="GPTSwarm", avatar="AvaTaR", dspy="DSPy", gepa="GEPA", ace="ACE")
+
+def c_idx(i):
+    return cite(i)
+
+def opt(label, *works):
+    return f'<span class="opt"><b>{label}</b> ' + " · ".join(PN[w] for w in works) + '</span>'
+
+def dsrow(choice, *opts):
+    return f'<tr><td>{choice}</td><td>' + "".join(opts) + '</td></tr>'
+
+slide("s05p", "Learning prompts and context: one loop, four design choices",
+  callout="<p><b>All of them turn feedback from runs into text the model reads next time; they differ in four design choices.</b></p>",
+  body=f"""
+<table class="tbl ds"><colgroup><col style="width:17%"><col style="width:83%"></colgroup><tbody>
+{dsrow("Which text changes", opt("instructions", "protegi", "mipro", "gepa", "promst"), opt("examples in the prompt", "dspy", "mipro"),
+       opt("a growing playbook of notes", "dc", "ace"), opt("several program parts at once", "textgrad", "trace", "semback", "gptswarm"),
+       opt("notes for the next try of the same task", "reflexion", "selfrefine"))}
+{dsrow("Where feedback comes from", opt("answers or a scoring rule", "protegi", "mipro", "dspy", "textgrad", "promst"), opt("good runs contrasted with bad ones", "avatar"),
+       opt("the model reads runs, no answers", "dc", "ace"), opt("whether a retry succeeded", "reflexion"))}
+{dsrow("How a change is accepted", opt("only if a validation score improves", "textgrad", "semback"), opt("keep candidates that win on some validation tasks", "gepa"),
+       opt("cheap search, then the best full evaluation", "mipro"), opt("no test per change: entries merged and de-duplicated", "ace", "dc"))}
+{dsrow("When it is updated", opt("once, offline, then frozen", "protegi", "mipro", "dspy", "gepa"), opt("along the stream of tasks", "dc", "ace"),
+       opt("between retries of one task", "reflexion", "selfrefine"))}
+</tbody></table>
+<div class="cards3" style="flex:none;margin-top:8px">
+  {card("IDEA · CONTRAST", "Learn from good versus bad runs",
+        ["AvaTaR splits runs by their answers and asks the model what the good ones did differently"], "")}
+  {card("IDEA · GROW, DON’T REWRITE", "Add and merge notes, don’t rewrite",
+        ["Rewriting everything can drop old experience; ACE adds, merges and de-duplicates entries"], "")}
+  {card("IDEA · COST IN THE SCORE", "Put the run’s cost into the score",
+        ["In PROMST, higher scores came with more steps; the authors propose adding step penalties to the score"], "")}
+</div>
+<div class="figcap" style="margin-top:6px"><b>Still missing for us:</b> the cost of searching and validating is rarely reported next to the improved agent’s run time; only PROMST puts efficiency into the objective; without reliable answers, feedback can pollute the context (ACE on FiNER).</div>
+<div class="figcap">Works (full entries in the References): """ + " · ".join(f"{PN[k]} {c_idx(v)}" for k, v in PW.items()) + """</div>""",
+  chip=("#a02", "Appendix A2"), page_refs=False)
 
 slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works in four classes",
   crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
