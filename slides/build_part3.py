@@ -443,73 +443,8 @@ def grp(label):
 def drow(n, claim, cells):
     return f'<tr><td><b>{n} · {claim}</b></td>' + "".join(f"<td>{x}</td>" for x in cells) + "</tr>"
 
-slide("s03", "Five difficulties, grouped by the cost they affect (version A)",
-  callout="<p><b>Three difficulties affect the cost of each task after learning; two affect the cost of learning itself.</b></p>",
-  body=f"""
-<table class="tbl p3t p3d"><colgroup><col style="width:22%"><col style="width:26%"><col style="width:26%"><col style="width:26%"></colgroup>
-<tbody>
-{grp("Cost per task after learning · " + tex(r"\bar{v}(m^{\prime})", 11))}
-{drow(1, "Fewer steps do not always save time", [
-   ev("WebCoach", "webcoach", "actions 10.7 → 10.2, but 215 → 395 s per task"),
-   ev("ReasoningBank", "reasoningbank", "steps 9.7 → 8.3, but total tokens 50,847 → 53,055 in another table"),
-   ev("GenericAgent", "genericagent", "fewest tokens on some tasks, yet slower than OpenClaw on five long tasks: 220.8 vs 183.1 s")])}
-{drow(2, "What can be skipped is known only after a run has succeeded", [
-   ev("EchoPath", "echopath", "315.7 → 127.5 s per task, only for 159 tasks already solved; storing one took ~572k tokens"),
-   ev("MobileGPT", "mobilegpt", "−62.5% latency, −68.8% cost on repeated tasks, after 10–15 min of exploring each app"),
-   ev("ActionEngine", "actionengine", "91.2% with a warmed-up site map, 73.1% without; exploring pays off after 39–101 tasks")])}
-{drow(3, "What was learned must help on new tasks and be cheap to read", [
-   ev("Skill and memory modules", "hajimiri", "with budgets roughly matched, the plain agent did best: 44.78% at 73.6K tokens per task"),
-   ev("ClawTrace", "clawtrace", "moved to SkillsBench, median cost per task $0.143 vs $0.144: no saving"),
-   ev("SEDM", "sedm", "its memory raised the prompt on FEVER to 2.47M tokens, from 1.65M without memory")])}
-{grp("Cost of learning · " + tex(r"C_{\mathrm{learn}}", 11))}
-{drow(4, "Finding the right change from a failure is costly, and not guaranteed", [
-   ev("HarnessFix", "harnessfix", "completion +6.3 to +18.4 points, for 37.2M tokens of repairs on AppWorld"),
-   ev("ESPO", "espo", "about 3.4M tokens and 2 h 13 min to optimise one prompt (PUPA)"),
-   ev("GEPA", "gepa", "1,839–7,051 rollouts to optimise the prompts of one benchmark")])}
-{drow(5, "Learning, with its testing, can cost more than the mistakes it removes", [
-   ev("SICA", "sica", "about $7,000 for one full run, to save $0.21 per task (calc.)"),
-   ev("ADAS", "adas", "about $500 for one search and its evaluation on ARC"),
-   ev("GEA", "gea", "about $13,000 for one full evolution (author estimate)")])}
-</tbody></table>""",
-  chip=("#ad", "Appendix D"))
-
 def works(*pairs):
     return "Works: " + " · ".join(f"{n} {c(k)}" for n, k in pairs)
-
-slide("s03b", "Five difficulties, explained (version B)",
-  body=f"""<div class="tightcards">
-<div class="lbl" style="text-align:center">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
-<div class="cards3" style="flex:none">
-  {card("", "1 · Fewer steps do not always save time", [
-     "A learned hint, or a second model that coaches, adds reading and thinking to every step",
-     "Steps differ in cost: skipping two clicks saves little if each remaining step waits longer",
-     "So judge a report by its seconds and dollars, not by its step count"],
-     works(("WebCoach", "webcoach"), ("ReasoningBank", "reasoningbank"), ("GenericAgent", "genericagent")))}
-  {card("", "2 · What can be skipped is known only after a run has succeeded", [
-     "Before the first hotel report goes through, the agent cannot tell the rework from the necessary steps",
-     "Savings start once a successful run is stored, and storing it costs a full first pass",
-     "A kind of report never seen before still starts from scratch"],
-     works(("EchoPath", "echopath"), ("MobileGPT", "mobilegpt"), ("ActionEngine", "actionengine")))}
-  {card("", "3 · What was learned must help on new tasks and be cheap to read", [
-     "A note learned on hotel reports may not help with meal or travel reports",
-     "Every note in the prompt is read again on every call; too many notes cost more than they save",
-     "A misleading note can even lower the success rate"],
-     works(("skill and memory modules", "hajimiri"), ("ClawTrace", "clawtrace"), ("SEDM", "sedm")))}
-</div>
-<div class="lbl" style="text-align:center;margin-top:6px">Cost of learning · {tex(r"C_{\mathrm{learn}}", 11)}</div>
-<div class="two" style="flex:none">
-  {card("", "4 · Finding the right change from a failure is costly, and not guaranteed", [
-     "The run record shows that a report was rejected, not whether the prompt, a skill or a check should change",
-     "Diagnosing, writing a change and re-running tasks all cost model calls",
-     "The change found can be wrong, fix only some failures, or break other tasks"],
-     works(("HarnessFix", "harnessfix"), ("ESPO", "espo"), ("DRAFT", "draft")))}
-  {card("", "5 · Learning, with its testing, can cost more than the mistakes it removes", [
-     "To trust a change, it must be re-run on many reports, and those runs cost money",
-     "Without learning, the agent simply pays for its rework on each report",
-     "Learning pays off only after enough reports: the break-even " + tex("n^{*}", 11) + " of page 1"],
-     works(("SICA", "sica"), ("ADAS", "adas"), ("GEA", "gea")))}
-</div></div>""",
-  chip=("#ad", "Appendix D"))
 
 def steps_fig():
     """Difficulty 1 as two timelines: WebCoach, 10.7 steps in 215 s against 10.2 steps in 395 s (time per step calc.)."""
@@ -691,7 +626,7 @@ def breakeven_fig():
     sv += _lbl(52, 12, "learning and testing are paid first", mono=False, size=10, col="var(--ink2)") + _arr("M60 16 L44 62")
     return sv + '</svg>'
 
-slide("s03c", "Five difficulties (version C: diagrams)",
+slide("s03c", "Five difficulties, grouped by the cost they affect",
   body=f"""<div class="tightcards">
 <div class="lbl" style="text-align:center">Cost per task after learning · {tex(r"\bar{v}(m^{\prime})", 11)}</div>
 <div class="cards3" style="flex:none">
@@ -788,34 +723,6 @@ def mech(title, works, flow, example, twist, tags):
 def wk3(*keys):
     return " · ".join(f"{PN[k]} {c_idx(PW[k])}" for k in keys)
 
-slide("s05p", "Learning prompts and context: four mechanisms",
-  callout="<p><b>All four turn feedback from runs into text the model reads next time; they differ in how that text is found and kept.</b></p>",
-  body=f"""
-<div class="mgrid">
-{mech("1 · Score and rewrite", wk3("protegi", "textgrad", "gepa", "mipro"),
-      mflow("run training reports", "collect failures", "model says what went wrong", "rewrite the instruction: candidates", "!score on validation reports, keep the best"),
-      "“Submit the report” becomes “For a hotel expense, fill the dates before submitting”",
-      "GEPA keeps candidates that win on some tasks; MIPRO searches instructions and examples together",
-      ["feedback: answers or scores", "kept if: score improves", "offline, then frozen"])}
-{mech("2 · Successful runs as examples", wk3("dspy", "mipro"),
-      mflow("run the agent", "keep runs that succeeded", "put them in the prompt as worked examples", "!score example sets, keep the best"),
-      "a complete, accepted hotel report shown as a worked example",
-      "no rewriting: the model learns from its own good runs",
-      ["feedback: task metric", "kept if: score improves", "offline, then frozen"])}
-{mech("3 · Grow a playbook", wk3("ace", "dc"),
-      mflow("finish a report", "a reflector writes lessons", "!a curator adds or merges notes", "next report reads the playbook"),
-      "playbook: “Hotel → dates required”, “Meal → under the daily limit”",
-      "no test per change; ACE adds and merges, Dynamic Cheatsheet rewrites the sheet and can drop old notes",
-      ["feedback: the model’s reading", "kept: always", "updated along the stream"])}
-{mech("4 · Contrast good and bad runs", wk3("avatar"),
-      mflow("split runs by their answers", "!a comparator explains what the good runs did", "rewrite the instructions"),
-      "“good runs entered the dates before submitting; bad runs did not”",
-      "learns from differences, not from single failures",
-      ["feedback: answers", "offline, then frozen"])}
-</div>
-<div class="figcap" style="margin-top:6px">Not reused across tasks: notes for the next try of the same task, as in Reflexion {cite(PW["reflexion"])} and Self-Refine {cite(PW["selfrefine"])}. <b>Still missing for us:</b> the cost of finding and testing a change is rarely reported next to the improved agent’s run time; only PROMST {cite(PW["promst"])} puts the run’s cost into the score.</div>""",
-  chip=("#a02", "Appendix A2"), page_refs=False)
-
 slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works in four classes",
   crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
   callout=f"<p><b>Of {n1} works that change what sits outside the model, {a1[0]} measured the seconds or dollars of running tasks, {b1[0]} what learning cost, and {d1[0]} tested on unseen tasks.</b></p>",
@@ -830,6 +737,65 @@ slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works i
      "SICA: $1.91 → $1.70 and 130.2 → 114.5 s per task, for a whole run of about $7,000; the benchmark that picked the agent also scored it " + c("sica")),
   ], D1) + '<div class="figcap">Yes · partly: our initial judgment from the per-work table (calc.; Appendix A1). A work in two classes counts in both.</div>',
   chip=("#a02", "Appendix A2–A5"))
+
+def prompt_paths_fig():
+    """One flowchart for the four prompt-learning mechanisms: from earlier run records, four paths, into the next prompt."""
+    A, O, G = "#0f5a85", "#b3600c", "#7d8a96"
+    sv = ('<svg width="1180" height="300" viewBox="0 0 1180 300" style="width:100%;height:auto;display:block">'
+          '<defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
+    def t(x, y, s_, size=11, col="#1b2733", w=400, mono=False, anchor="start", bold=False):
+        f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
+        return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{s_}</text>'
+    def box(x, yc, lines, kind="g", w=150):
+        fill, stroke = {"g": ("#f6f8fa", "#c9d5df"), "k": ("#eef4f8", A), "o": ("#fbeede", "#e2b98b")}[kind]
+        out = f'<rect x="{x}" y="{yc - 16}" width="{w}" height="32" rx="3" style="fill:{fill};stroke:{stroke}"/>'
+        y0 = yc - (len(lines) - 1) * 6.5 + 4
+        for k, l in enumerate(lines):
+            out += t(x + 7, y0 + k * 13, l, 11, "#1b2733", bold=(kind == "k"))
+        return out
+    arr = lambda d: f'<path d="{d}" style="stroke:#7d8a96;fill:none" marker-end="url(#pa)"/>'
+    # start
+    sv += f'<rect x="0" y="116" width="124" height="70" rx="4" style="fill:#fff;stroke:{A}"/>'
+    sv += t(10, 140, "run records of", 11.5) + t(10, 155, "earlier reports", 11.5) + t(10, 172, "steps, errors, outcome", 9, "#7d8a96")
+    rows = [52, 124, 196, 268]
+    X = [150, 320, 490, 660]
+    W = 152
+    paths = [
+        ("1 · SCORE AND REWRITE", "answers · kept if better · offline", [["collect the failures"], ["model says what", "went wrong"], ["rewrite: several", "candidates"], ["score on validation,", "keep the best"]], [0, 0, 0, 1], 52),
+        ("2 · SUCCESSFUL RUNS AS EXAMPLES", "task metric · kept if better · offline", [["keep runs that", "succeeded"], ["turn them into", "worked examples"], ["score example sets,", "keep the best"]], [0, 0, 1], 124),
+        ("3 · GROW A PLAYBOOK", "model’s reading · kept always · along the stream", [["a reflector", "writes lessons"], ["a curator adds or", "merges notes"]], [0, 2], 196),
+        ("4 · CONTRAST GOOD AND BAD RUNS", "answers · offline", [["split runs by", "their answers"], ["comparator: what did", "the good runs do?"], ["rewrite the", "instructions"]], [0, 1, 0], 72),
+    ]
+    for (name, tags, steps, kinds, ytarget), yc in zip(paths, rows):
+        sv += arr(f"M124 151 C136 151 136 {yc} {X[0] - 3} {yc}")
+        sv += t(X[0], yc - 22, name, 10, A, mono=True) + t(X[0] + 8 + len(name) * 6.1, yc - 22, tags, 9.5, G, mono=True)
+        for k, (st, kd) in enumerate(zip(steps, kinds)):
+            sv += box(X[k], yc, st, "kgo"[[1, 0, 2].index(kd)] if kd in (0, 1, 2) else "g", W)
+            if k < len(steps) - 1:
+                sv += arr(f"M{X[k] + W} {yc} H{X[k + 1] - 3}")
+        xe = X[len(steps) - 1] + W
+        sv += arr(f"M{xe} {yc} C{xe + 40} {yc} 860 {ytarget} 896 {ytarget}")
+        if kinds[-1] == 2:
+            sv += t(X[1] + W + 8, yc + 16, "no test per change", 9.5, O, mono=True)
+    # the next prompt
+    sv += t(900, 14, "THE PROMPT READ ON THE NEXT REPORT", 9.5, A, mono=True)
+    segs = [(24, 100, "instructions", "“For a hotel expense, fill the", "dates before submitting”", "#eef4f8"),
+            (100, 150, "worked examples", "an accepted hotel report", "", "#eef4f8"),
+            (150, 228, "playbook of notes", "“Hotel → dates required”", "“Meal → under the daily limit”", "#eef4f8"),
+            (228, 292, "this report and its history", "not learned: new every time", "", "#f6f8fa")]
+    for y0, y1, head, l1, l2, fill in segs:
+        sv += f'<rect x="898" y="{y0}" width="282" height="{y1 - y0}" style="fill:{fill};stroke:#c9d5df"/>'
+        sv += t(908, y0 + 17, head, 11, A if fill != "#f6f8fa" else G, bold=True)
+        sv += t(908, y0 + 33, l1, 10.5, "#3b4a57") + (t(908, y0 + 47, l2, 10.5, "#3b4a57") if l2 else "")
+    return sv + '</svg>'
+
+slide("s05p", "Learning prompts and context: four paths to the next prompt",
+  callout="<p><b>All four paths start from earlier runs and end in the prompt read on the next report; they differ in which part of the prompt they write and how they decide to keep it.</b></p>",
+  body=f"""
+<div style="width:100%">{prompt_paths_fig()}</div>
+<div class="figcap" style="margin-top:4px">Within a path: GEPA keeps candidates that win on some tasks; MIPRO searches instructions and examples together; Dynamic Cheatsheet rewrites the whole sheet and can drop old notes, ACE adds and merges. Reflexion and Self-Refine write notes only for the next try of the same task. <b>Still missing for us:</b> the cost of finding and testing a change is rarely reported next to the improved agent’s run time; only PROMST puts the run’s cost into the score.</div>
+<div class="figcap">Works: 1 · ProTeGi {cite(PW["protegi"])}, TextGrad {cite(PW["textgrad"])}, GEPA {cite(PW["gepa"])}, MIPRO {cite(PW["mipro"])} · 2 · DSPy {cite(PW["dspy"])} · 3 · ACE {cite(PW["ace"])}, Dynamic Cheatsheet {cite(PW["dc"])} · 4 · AvaTaR {cite(PW["avatar"])} · Reflexion {cite(PW["reflexion"])} · Self-Refine {cite(PW["selfrefine"])} · PROMST {cite(PW["promst"])}</div>""",
+  chip=("#a02", "Appendix A2"), page_refs=False)
 
 slide("s06", "How a run record becomes a change, and what the change costs",
   crumb="direction 1 · C_m′(p) ↓ after the change · C_learn ↑ at three points: diagnosis, candidates, re-tests",
