@@ -194,6 +194,8 @@ EXTRA_CSS = r"""
 .mtw{font-size:11.5px;color:var(--ink2)}
 .mtags span{display:inline-block;font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--accent);border:1px solid #c9d5df;border-radius:9px;padding:0 6px;margin:0 4px 0 0}
 .mworks{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
+.tbl.ptab td{font-size:10.5px;line-height:1.28;padding:2px 6px 2px 4px}
+.tbl.ptab td:first-child{font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:11px;color:var(--ink)}
 .tbl.ds td{font-size:11.5px;line-height:1.3;padding:5px 6px;vertical-align:top}
 .tbl.ds td:first-child{font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:12px;color:var(--ink)}
 .opt{display:inline-block;border:1px solid var(--rule);border-radius:4px;padding:2px 7px;margin:2px 5px 2px 0;background:#fff;color:var(--ink2)}
@@ -741,7 +743,7 @@ slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works i
 def prompt_paths_fig():
     """One flowchart for the four prompt-learning mechanisms: from earlier run records, four paths, into the next prompt."""
     A, O, G = "#0f5a85", "#b3600c", "#7d8a96"
-    sv = ('<svg width="1180" height="300" viewBox="0 0 1180 300" style="width:100%;height:auto;display:block">'
+    sv = ('<svg width="1180" height="306" viewBox="0 0 1180 306" style="width:100%;height:auto;display:block">'
           '<defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
     def t(x, y, s_, size=11, col="#1b2733", w=400, mono=False, anchor="start", bold=False):
         f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
@@ -756,7 +758,7 @@ def prompt_paths_fig():
     arr = lambda d: f'<path d="{d}" style="stroke:#7d8a96;fill:none" marker-end="url(#pa)"/>'
     # start
     sv += f'<rect x="0" y="116" width="124" height="70" rx="4" style="fill:#fff;stroke:{A}"/>'
-    sv += t(10, 140, "run records of", 11.5) + t(10, 155, "earlier reports", 11.5) + t(10, 172, "steps, errors, outcome", 9, "#7d8a96")
+    sv += t(14, 146, "earlier runs", 12.5, bold=True) + t(14, 163, "(trajectories)", 11, "#7d8a96")
     rows = [52, 124, 196, 268]
     X = [150, 320, 490, 660]
     W = 152
@@ -764,7 +766,7 @@ def prompt_paths_fig():
         ("1 · SCORE AND REWRITE", "answers · kept if better · offline", [["collect the failures"], ["model says what", "went wrong"], ["rewrite: several", "candidates"], ["score on validation,", "keep the best"]], [0, 0, 0, 1], 52),
         ("2 · SUCCESSFUL RUNS AS EXAMPLES", "task metric · kept if better · offline", [["keep runs that", "succeeded"], ["turn them into", "worked examples"], ["score example sets,", "keep the best"]], [0, 0, 1], 124),
         ("3 · GROW A PLAYBOOK", "model’s reading · kept always · along the stream", [["a reflector", "writes lessons"], ["a curator adds or", "merges notes"]], [0, 2], 196),
-        ("4 · CONTRAST GOOD AND BAD RUNS", "answers · offline", [["split runs by", "their answers"], ["comparator: what did", "the good runs do?"], ["rewrite the", "instructions"]], [0, 1, 0], 72),
+        ("4 · CONTRAST GOOD AND BAD RUNS", "answers · kept if better · offline", [["split runs by", "their answers"], ["compare: what did", "the good runs do?"], ["rewrite the", "instructions"], ["keep the best", "candidate"]], [0, 0, 0, 1], 72),
     ]
     for (name, tags, steps, kinds, ytarget), yc in zip(paths, rows):
         sv += arr(f"M124 151 C136 151 136 {yc} {X[0] - 3} {yc}")
@@ -777,6 +779,10 @@ def prompt_paths_fig():
         sv += arr(f"M{xe} {yc} C{xe + 40} {yc} 860 {ytarget} 896 {ytarget}")
         if kinds[-1] == 2:
             sv += t(X[1] + W + 8, yc + 16, "no test per change", 9.5, O, mono=True)
+    # colour key
+    sv += f'<rect x="150" y="292" width="14" height="8" rx="2" style="fill:#eef4f8;stroke:{A}"/>' + t(170, 300, "decides what is kept: only if it scores better", 10, "#3b4a57")
+    sv += f'<rect x="440" y="292" width="14" height="8" rx="2" style="fill:#fbeede;stroke:#e2b98b"/>' + t(460, 300, "kept without a test", 10, "#3b4a57")
+    sv += f'<rect x="590" y="292" width="14" height="8" rx="2" style="fill:#f6f8fa;stroke:#c9d5df"/>' + t(610, 300, "other steps", 10, "#3b4a57")
     # the next prompt
     sv += t(900, 14, "THE PROMPT READ ON THE NEXT REPORT", 9.5, A, mono=True)
     segs = [(24, 100, "instructions", "“For a hotel expense, fill the", "dates before submitting”", "#eef4f8"),
@@ -793,8 +799,13 @@ slide("s05p", "Learning prompts and context: four paths to the next prompt",
   callout="<p><b>All four paths start from earlier runs and end in the prompt read on the next report; they differ in which part of the prompt they write and how they decide to keep it.</b></p>",
   body=f"""
 <div style="width:100%">{prompt_paths_fig()}</div>
-<div class="figcap" style="margin-top:4px">Within a path: GEPA keeps candidates that win on some tasks; MIPRO searches instructions and examples together; Dynamic Cheatsheet rewrites the whole sheet and can drop old notes, ACE adds and merges. Reflexion and Self-Refine write notes only for the next try of the same task. <b>Still missing for us:</b> the cost of finding and testing a change is rarely reported next to the improved agent’s run time; only PROMST puts the run’s cost into the score.</div>
-<div class="figcap">Works: 1 · ProTeGi {cite(PW["protegi"])}, TextGrad {cite(PW["textgrad"])}, GEPA {cite(PW["gepa"])}, MIPRO {cite(PW["mipro"])} · 2 · DSPy {cite(PW["dspy"])} · 3 · ACE {cite(PW["ace"])}, Dynamic Cheatsheet {cite(PW["dc"])} · 4 · AvaTaR {cite(PW["avatar"])} · Reflexion {cite(PW["reflexion"])} · Self-Refine {cite(PW["selfrefine"])} · PROMST {cite(PW["promst"])}</div>""",
+{table(["path", "works, and what each adds"], [
+    ["1 · Score and rewrite", f"ProTeGi {cite(PW['protegi'])}: rewrites from a summary of errors · TextGrad {cite(PW['textgrad'])}: written critiques passed back through the program’s parts · semantic backpropagation {cite(PW['semback'])}: the same, with an update gate · Trace {cite(PW['trace'])}: prompts and code changed together · PROMST {cite(PW['promst'])}: human-written error rules and a learned scorer · GEPA {cite(PW['gepa'])}: keeps candidates that win on some tasks · MIPRO {cite(PW['mipro'])}: instructions and examples searched together · ESPO {cite(96)}: sorts errors before rewriting · GPTSwarm {cite(PW['gptswarm'])}: the prompts and links of an agent graph"],
+    ["2 · Successful runs as examples", f"DSPy {cite(PW['dspy'])}: successful traces become examples · MIPRO {cite(PW['mipro'])}: also searches the examples"],
+    ["3 · Grow a playbook", f"ACE {cite(PW['ace'])}: adds, updates and de-duplicates entries · Dynamic Cheatsheet {cite(PW['dc'])}: the model keeps, rewrites and deletes entries itself"],
+    ["4 · Contrast good and bad runs", f"AvaTaR {cite(PW['avatar'])}: compares good and bad runs by their answers"],
+    ["Same task only", f"Reflexion {cite(PW['reflexion'])}, Self-Refine {cite(PW['selfrefine'])}: notes for the next try of the same task, not reused across tasks"],
+  ], ["17%", "83%"], cls="tbl p3t ptab")}""",
   chip=("#a02", "Appendix A2"), page_refs=False)
 
 slide("s06", "How a run record becomes a change, and what the change costs",
