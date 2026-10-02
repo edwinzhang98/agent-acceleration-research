@@ -741,14 +741,14 @@ slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works i
   chip=("#a02", "Appendix A2–A5"))
 
 def prompt_paths_fig():
-    """One flowchart for the four prompt-learning mechanisms: from earlier run records, four paths, into the next prompt."""
+    """One flowchart for prompt learning: from earlier runs (trajectories and outcomes), three paths into the next prompt."""
     A, O, G = "#0f5a85", "#b3600c", "#7d8a96"
-    sv = ('<svg width="1180" height="306" viewBox="0 0 1180 306" style="width:100%;height:auto;display:block">'
+    sv = ('<svg width="1180" height="290" viewBox="0 0 1180 290" style="width:100%;height:auto;display:block">'
           '<defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
-    def t(x, y, s_, size=11, col="#1b2733", w=400, mono=False, anchor="start", bold=False):
+    def t(x, y, s_, size=11, col="#1b2733", mono=False, anchor="start", bold=False):
         f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
         return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{s_}</text>'
-    def box(x, yc, lines, kind="g", w=150):
+    def box(x, yc, lines, kind="g", w=152):
         fill, stroke = {"g": ("#f6f8fa", "#c9d5df"), "k": ("#eef4f8", A), "o": ("#fbeede", "#e2b98b")}[kind]
         out = f'<rect x="{x}" y="{yc - 16}" width="{w}" height="32" rx="3" style="fill:{fill};stroke:{stroke}"/>'
         y0 = yc - (len(lines) - 1) * 6.5 + 4
@@ -756,55 +756,49 @@ def prompt_paths_fig():
             out += t(x + 7, y0 + k * 13, l, 11, "#1b2733", bold=(kind == "k"))
         return out
     arr = lambda d: f'<path d="{d}" style="stroke:#7d8a96;fill:none" marker-end="url(#pa)"/>'
-    # start
-    sv += f'<rect x="0" y="116" width="124" height="70" rx="4" style="fill:#fff;stroke:{A}"/>'
-    sv += t(14, 146, "earlier runs", 12.5, bold=True) + t(14, 163, "(trajectories)", 11, "#7d8a96")
-    rows = [52, 124, 196, 268]
-    X = [150, 320, 490, 660]
-    W = 152
+    sv += f'<rect x="0" y="104" width="124" height="74" rx="4" style="fill:#fff;stroke:{A}"/>'
+    sv += t(12, 128, "earlier runs", 12.5, bold=True) + t(12, 145, "trajectories and", 10.5, "#3b4a57") + t(12, 159, "their outcomes", 10.5, "#3b4a57")
+    X, W = [150, 320, 490, 660], 152
     paths = [
-        ("1 · SCORE AND REWRITE", "answers · kept if better · offline", [["collect the failures"], ["model says what", "went wrong"], ["rewrite: several", "candidates"], ["score on validation,", "keep the best"]], [0, 0, 0, 1], 52),
-        ("2 · SUCCESSFUL RUNS AS EXAMPLES", "task metric · kept if better · offline", [["keep runs that", "succeeded"], ["turn them into", "worked examples"], ["score example sets,", "keep the best"]], [0, 0, 1], 124),
-        ("3 · GROW A PLAYBOOK", "model’s reading · kept always · along the stream", [["a reflector", "writes lessons"], ["a curator adds or", "merges notes"]], [0, 2], 196),
-        ("4 · CONTRAST GOOD AND BAD RUNS", "answers · kept if better · offline", [["split runs by", "their answers"], ["compare: what did", "the good runs do?"], ["rewrite the", "instructions"], ["keep the best", "candidate"]], [0, 0, 0, 1], 72),
+        ("1 · REWRITE THE INSTRUCTIONS", "answers · kept if better · offline", [["failures, or good runs", "beside bad ones"], ["model says what went", "wrong or what differed"], ["rewrite: several", "candidates"], ["score on validation", "reports, keep the best"]], "gggk", 62, 54),
+        ("2 · SUCCESSFUL RUNS AS EXAMPLES", "task metric · kept if better · offline", [["keep runs that", "succeeded"], ["turn them into", "worked examples"], ["score example sets,", "keep the best"]], "ggk", 142, 132),
+        ("3 · GROW A PLAYBOOK", "the model’s own reading · no test · online", [["after each report, a", "reflector writes lessons"], ["a curator adds or", "merges notes"]], "go", 222, 202),
     ]
-    for (name, tags, steps, kinds, ytarget), yc in zip(paths, rows):
-        sv += arr(f"M124 151 C136 151 136 {yc} {X[0] - 3} {yc}")
+    for name, tags, steps, kinds, yc, ytarget in paths:
+        sv += arr(f"M124 141 C138 141 138 {yc} {X[0] - 3} {yc}")
         sv += t(X[0], yc - 22, name, 10, A, mono=True) + t(X[0] + 8 + len(name) * 6.1, yc - 22, tags, 9.5, G, mono=True)
         for k, (st, kd) in enumerate(zip(steps, kinds)):
-            sv += box(X[k], yc, st, "kgo"[[1, 0, 2].index(kd)] if kd in (0, 1, 2) else "g", W)
+            sv += box(X[k], yc, st, kd, W)
             if k < len(steps) - 1:
                 sv += arr(f"M{X[k] + W} {yc} H{X[k + 1] - 3}")
         xe = X[len(steps) - 1] + W
         sv += arr(f"M{xe} {yc} C{xe + 40} {yc} 860 {ytarget} 896 {ytarget}")
-        if kinds[-1] == 2:
+        if kinds[-1] == "o":
             sv += t(X[1] + W + 8, yc + 16, "no test per change", 9.5, O, mono=True)
-    # colour key
-    sv += f'<rect x="150" y="292" width="14" height="8" rx="2" style="fill:#eef4f8;stroke:{A}"/>' + t(170, 300, "decides what is kept: only if it scores better", 10, "#3b4a57")
-    sv += f'<rect x="440" y="292" width="14" height="8" rx="2" style="fill:#fbeede;stroke:#e2b98b"/>' + t(460, 300, "kept without a test", 10, "#3b4a57")
-    sv += f'<rect x="590" y="292" width="14" height="8" rx="2" style="fill:#f6f8fa;stroke:#c9d5df"/>' + t(610, 300, "other steps", 10, "#3b4a57")
-    # the next prompt
+    sv += f'<rect x="150" y="262" width="14" height="8" rx="2" style="fill:#eef4f8;stroke:{A}"/>' + t(170, 270, "decides what is kept: only if it scores better", 10, "#3b4a57")
+    sv += f'<rect x="440" y="262" width="14" height="8" rx="2" style="fill:#fbeede;stroke:#e2b98b"/>' + t(460, 270, "kept without a test", 10, "#3b4a57")
+    sv += f'<rect x="590" y="262" width="14" height="8" rx="2" style="fill:#f6f8fa;stroke:#c9d5df"/>' + t(610, 270, "other steps", 10, "#3b4a57")
     sv += t(900, 14, "THE PROMPT READ ON THE NEXT REPORT", 9.5, A, mono=True)
-    segs = [(24, 100, "instructions", "“For a hotel expense, fill the", "dates before submitting”", "#eef4f8"),
-            (100, 150, "worked examples", "an accepted hotel report", "", "#eef4f8"),
-            (150, 228, "playbook of notes", "“Hotel → dates required”", "“Meal → under the daily limit”", "#eef4f8"),
-            (228, 292, "this report and its history", "not learned: new every time", "", "#f6f8fa")]
+    segs = [(24, 92, "instructions", "“For a hotel expense, fill the", "dates before submitting”", "#eef4f8"),
+            (92, 160, "worked examples", "an accepted hotel report", "", "#eef4f8"),
+            (160, 236, "playbook of notes", "“Hotel → dates required”", "“Meal → under the daily limit”", "#eef4f8"),
+            (236, 284, "this report and its history", "not learned: new every time", "", "#f6f8fa")]
     for y0, y1, head, l1, l2, fill in segs:
         sv += f'<rect x="898" y="{y0}" width="282" height="{y1 - y0}" style="fill:{fill};stroke:#c9d5df"/>'
         sv += t(908, y0 + 17, head, 11, A if fill != "#f6f8fa" else G, bold=True)
         sv += t(908, y0 + 33, l1, 10.5, "#3b4a57") + (t(908, y0 + 47, l2, 10.5, "#3b4a57") if l2 else "")
     return sv + '</svg>'
 
-slide("s05p", "Learning prompts and context: four paths to the next prompt",
-  callout="<p><b>All four paths start from earlier runs and end in the prompt read on the next report; they differ in which part of the prompt they write and how they decide to keep it.</b></p>",
+slide("s05p", "Learning prompts and context: three paths to the next prompt",
+  callout="<p><b>All three paths start from earlier runs and end in the prompt read on the next report; they differ in which part of the prompt they write and whether a change is tested.</b></p>",
   body=f"""
 <div style="width:100%">{prompt_paths_fig()}</div>
+<div class="figcap" style="margin:2px 0 4px">Tested changes need answers and re-runs, so they are found offline and then frozen; untested notes are cheap, so they can be added online, report by report.</div>
 {table(["path", "works, and what each adds"], [
-    ["1 · Score and rewrite", f"ProTeGi {cite(PW['protegi'])}: rewrites from a summary of errors · TextGrad {cite(PW['textgrad'])}: written critiques passed back through the program’s parts · semantic backpropagation {cite(PW['semback'])}: the same, with an update gate · Trace {cite(PW['trace'])}: prompts and code changed together · PROMST {cite(PW['promst'])}: human-written error rules and a learned scorer · GEPA {cite(PW['gepa'])}: keeps candidates that win on some tasks · MIPRO {cite(PW['mipro'])}: instructions and examples searched together · ESPO {cite(96)}: sorts errors before rewriting · GPTSwarm {cite(PW['gptswarm'])}: the prompts and links of an agent graph"],
+    ["1 · Rewrite the instructions", f"AvaTaR {cite(PW['avatar'])}: compares good and bad runs instead of failures alone · ProTeGi {cite(PW['protegi'])}: rewrites from a summary of errors · TextGrad {cite(PW['textgrad'])}: written critiques passed back through the program’s parts · semantic backpropagation {cite(PW['semback'])}: the same, with an update gate · Trace {cite(PW['trace'])}: prompts and code changed together · PROMST {cite(PW['promst'])}: human-written error rules and a learned scorer · GEPA {cite(PW['gepa'])}: keeps candidates that win on some tasks · MIPRO {cite(PW['mipro'])}: instructions and examples searched together · ESPO {cite(96)}: sorts errors before rewriting · GPTSwarm {cite(PW['gptswarm'])}: the prompts and links of an agent graph"],
     ["2 · Successful runs as examples", f"DSPy {cite(PW['dspy'])}: successful traces become examples · MIPRO {cite(PW['mipro'])}: also searches the examples"],
-    ["3 · Grow a playbook", f"ACE {cite(PW['ace'])}: adds, updates and de-duplicates entries · Dynamic Cheatsheet {cite(PW['dc'])}: the model keeps, rewrites and deletes entries itself"],
-    ["4 · Contrast good and bad runs", f"AvaTaR {cite(PW['avatar'])}: compares good and bad runs by their answers"],
-    ["Same task only", f"Reflexion {cite(PW['reflexion'])}, Self-Refine {cite(PW['selfrefine'])}: notes for the next try of the same task, not reused across tasks"],
+    ["3 · Grow a playbook", f"ACE {cite(PW['ace'])}: adds, updates and de-duplicates entries; built offline, then grown online · Dynamic Cheatsheet {cite(PW['dc'])}: the model keeps, rewrites and deletes entries itself"],
+    ["Same task only", f"Reflexion {cite(PW['reflexion'])}, Self-Refine {cite(PW['selfrefine'])}: notes kept only for retrying the same task, dropped before the next one"],
   ], ["17%", "83%"], cls="tbl p3t ptab")}""",
   chip=("#a02", "Appendix A2"), page_refs=False)
 
