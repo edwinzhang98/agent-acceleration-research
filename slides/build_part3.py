@@ -797,14 +797,16 @@ def prompt_paths_fig():
     keys = [(150, "k", "decides what is kept: only if it scores better"), (440, "o", "kept without a test"), (590, "g", "other steps")]
     return paths_fig(paths, segs, "THE PROMPT READ ON THE NEXT REPORT", keys, H=290, X=[150, 320, 490, 660], W=152, start_y=104, mid="pa")
 
-def memory_check_fig():
-    """Experience memory as one pipeline: earlier runs -> extract an entry -> one of four checks -> the store -> the next report.
-    The works differ in the check; check 4 scores entries after use (the dashed loop back from the next report)."""
-    A, O, G, INK, SUB = "#0f5a85", "#b3600c", "#7d8a96", "#1b2733", "#3b4a57"
-    STY = {"g": ("#f6f8fa", "#c9d5df"), "k": ("#eef4f8", A), "o": ("#fbeede", "#e2b98b"), "w": ("#fff", A)}
-    H = 262
+def check_fig(*, H, mid, yc0, start, shared, opts, X0, W0, store, nxt, keys, loop=None, bh=21, XS=722, WS=262, NX=1008, NW=172):
+    """One pipeline for a class of direction 1, forked at the step where its works differ (how a change is checked):
+    start -> shared step -> one of several checks (with the number of works) -> the store -> the next report.
+    opts: (yc, kind, lines, count); kinds: o no check, k checked, d checked against known answers or separate tasks.
+    store: (y0, h, header, header_right, rows, row_y0, row_dy); a row is (text, right text[, second line]).
+    loop: (path, label, x, y) for a dashed feedback arrow; keys: (x, y, kind, label)."""
+    A, G, INK, SUB = "#0f5a85", "#7d8a96", "#1b2733", "#3b4a57"
+    STY = {"g": ("#f6f8fa", "#c9d5df"), "k": ("#eef4f8", A), "o": ("#fbeede", "#e2b98b"), "w": ("#fff", A), "d": ("#d5e5f0", A)}
     sv = (f'<svg width="1180" height="{H}" viewBox="0 0 1180 {H}" style="width:100%;height:auto;display:block">'
-          '<defs><marker id="pm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
+          f'<defs><marker id="{mid}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker></defs>')
     def t(x, y, s_, size=11, col=INK, mono=False, anchor="start", bold=False):
         f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
         return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{s_}</text>'
@@ -812,37 +814,86 @@ def memory_check_fig():
         fill, stroke = STY[kd]
         return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" style="fill:{fill};stroke:{stroke}"/>'
     def arr(d, dash=False):
-        return f'<path d="{d}" style="stroke:#7d8a96;fill:none{";stroke-dasharray:4 3" if dash else ""}" marker-end="url(#pm)"/>'
-    sv += rect(0, 81, 112, 74, "w", 4) + t(11, 105, "earlier runs", 12.5, bold=True) + t(11, 122, "trajectories and", 10.5, SUB) + t(11, 136, "their outcomes", 10.5, SUB)
-    sv += arr("M112 118 H131")
-    sv += rect(134, 88, 170, 60, "g") + t(144, 111, "extract an entry", 12, bold=True) + t(144, 127, "a workflow, a lesson,", 10.5, SUB) + t(144, 141, "a case or a site fact", 10.5, SUB)
-    X0, W0, XS = 330, 360, 722
-    for yc, kd, lines, n in [
-            (34, "o", ["1 · no check: store it as it is"], "13 works"),
-            (90, "k", ["2 · re-run the same tasks with it and without it;", "keep it if the gain beats its time and tokens"], "3 works"),
-            (146, "k", ["3 · check it on the site, read-only;", "keep it only if the site shows it is correct"], "2 works"),
-            (202, "k", ["4 · keep it; each task that uses it later", "raises its score if it passes, lowers it if not"], "4 works")]:
-        sv += arr(f"M304 118 C318 118 318 {yc} {X0 - 3} {yc}")
-        sv += rect(X0, yc - 21, W0, 42, kd)
+        return f'<path d="{d}" style="stroke:#7d8a96;fill:none{";stroke-dasharray:4 3" if dash else ""}" marker-end="url(#{mid})"/>'
+    sv += rect(0, yc0 - 37, 112, 74, "w", 4) + t(11, yc0 - 13, start[0], 12.5, bold=True) + t(11, yc0 + 4, start[1], 10.5, SUB) + t(11, yc0 + 18, start[2], 10.5, SUB)
+    sv += arr(f"M112 {yc0} H131")
+    sv += rect(134, yc0 - 30, 170, 60, "g") + t(144, yc0 - 7, shared[0], 12, bold=True) + t(144, yc0 + 9, shared[1], 10.5, SUB) + t(144, yc0 + 23, shared[2], 10.5, SUB)
+    for yc, kd, lines, n in opts:
+        sv += arr(f"M304 {yc0} C318 {yc0} 318 {yc} {X0 - 3} {yc}")
+        sv += rect(X0, yc - bh, W0, 2 * bh, kd)
         y0 = yc - (len(lines) - 1) * 7 + 4
         for k, l in enumerate(lines):
-            sv += t(X0 + 8, y0 + k * 14, l, 11)
+            sv += t(X0 + 8, y0 + k * 14, l.replace("<b>", '<tspan style="font-weight:700">').replace("</b>", "</tspan>"), 11, bold=(kd == "d"))
         sv += t(X0 + W0 - 8, yc + 4, n, 9.5, G, mono=True, anchor="end")
-        sv += arr(f"M{X0 + W0} {yc} C{X0 + W0 + 18} {yc} {XS - 16} 118 {XS - 3} 118")
-    sv += rect(XS, 10, 262, 214, "k", 0)
-    sv += t(XS + 10, 28, "MEMORY · ONE ENTRY PER LINE", 9.5, A, mono=True) + t(XS + 252, 28, "score (4)", 9, G, mono=True, anchor="end")
-    rows = [("Hotel: type → dates → amount → submit", "0.9"), ("“Fill the dates before submitting”", "0.8"),
-            ("an accepted hotel report (a case)", "0.6"), ("“Dates are typed DD/MM/YYYY”", ""), ("“No dates: the form rejects it”", "")]
-    for k, (e, sc) in enumerate(rows):
-        y = 60 + k * 32
-        sv += f'<line x1="{XS}" y1="{y - 20}" x2="{XS + 262}" y2="{y - 20}" style="stroke:#c9d5df"/>'
-        sv += t(XS + 10, y, e, 10.5, SUB) + (t(XS + 252, y, sc, 10.5, A, mono=True, anchor="end") if sc else "")
-    sv += arr(f"M{XS + 262} 118 H1005")
-    sv += rect(1008, 80, 172, 76, "w", 4) + t(1018, 102, "next report", 12, bold=True) + t(1018, 119, "reads only the entries", 10.5, SUB) + t(1018, 133, "closest to it; with 4,", 10.5, SUB) + t(1018, 147, "the best-scored first", 10.5, SUB)
-    sv += arr("M1094 156 V244 H510 V227", dash=True) + t(XS + 10, 239, "4 · pass: score up · fail: score down", 9.5, A, mono=True)
-    sv += rect(0, H - 18, 14, 8, "o", 2) + t(20, H - 10, "stored without a check", 10, SUB)
-    sv += rect(170, H - 18, 14, 8, "k", 2) + t(190, H - 10, "checked", 10, SUB)
+        sv += arr(f"M{X0 + W0} {yc} C{X0 + W0 + 18} {yc} {XS - 16} {yc0} {XS - 3} {yc0}")
+    sy, sh, head, head_r, rows, ry0, rdy = store
+    sv += rect(XS, sy, WS, sh, "k", 0)
+    sv += t(XS + 10, sy + 18, head, 9.5, A, mono=True) + (t(XS + WS - 10, sy + 18, head_r, 9, G, mono=True, anchor="end") if head_r else "")
+    for k, (e, right, *second) in enumerate(rows):
+        y = ry0 + k * rdy
+        sv += f'<line x1="{XS}" y1="{y - 20}" x2="{XS + WS}" y2="{y - 20}" style="stroke:#c9d5df"/>'
+        sv += t(XS + 10, y, e, 10.5, SUB) + (t(XS + WS - 10, y, right, 10.5, A, mono=True, anchor="end") if right else "")
+        if second:
+            sv += t(XS + 10, y + 15, second[0], 10, A)
+    sv += arr(f"M{XS + WS} {yc0} H{NX - 3}")
+    sv += rect(NX, yc0 - 38, NW, 76, "w", 4) + t(NX + 10, yc0 - 16, nxt[0], 12, bold=True)
+    for k, l in enumerate(nxt[1:]):
+        sv += t(NX + 10, yc0 + 1 + k * 14, l, 10.5, SUB)
+    if loop:
+        sv += arr(loop[0], dash=True) + t(loop[2], loop[3], loop[1], 9.5, A, mono=True)
+    for x, y, kd, label in keys:
+        sv += rect(x, y, 14, 8, kd, 2) + t(x + 20, y + 8, label, 10, SUB)
     return sv + '</svg>'
+
+def memory_check_fig():
+    """Experience memory: the works differ in how an entry is checked; check 4 scores entries after use (dashed loop)."""
+    return check_fig(H=262, mid="pm", yc0=118, X0=330, W0=360,
+        start=("earlier runs", "trajectories and", "their outcomes"),
+        shared=("extract an entry", "a workflow, a lesson,", "a case or a site fact"),
+        opts=[(34, "o", ["1 · <b>No check:</b> stored as soon as it is extracted"], "13 works"),
+              (90, "k", ["2 · <b>Ablation:</b> the same tasks with and without it;", "kept if the gain beats its time and tokens"], "3 works"),
+              (146, "k", ["3 · <b>Site check:</b> the site confirms it is correct;", "whether it helps is not tested"], "2 works"),
+              (202, "k", ["4 · <b>Score:</b> a task that uses it raises its score", "if the task passes, lowers it if the task fails"], "4 works")],
+        store=(10, 214, "MEMORY · ONE ENTRY PER LINE", "score (4)",
+               [("Hotel: type → dates → amount → submit", "0.9"), ("“Fill the dates before submitting”", "0.8"),
+                ("an accepted hotel report (a case)", "0.6"), ("“Dates are typed DD/MM/YYYY”", ""), ("“No dates: the form rejects it”", "")], 60, 32),
+        nxt=("next report", "reads only the entries", "closest to it; with 4,", "the best-scored first"),
+        loop=("M1094 156 V244 H510 V227", "4 · pass: score up · fail: score down", 732, 239),
+        keys=[(0, 244, "o", "stored without a check"), (170, 244, "k", "checked")])
+
+def skills_check_fig():
+    """Skills and tools: the works differ in how a skill is checked; the library shows the forms a skill takes and what each saves."""
+    return check_fig(H=262, mid="ps", yc0=122, X0=330, W0=360, bh=20,
+        start=("earlier runs", "trajectories, or tasks", "set for practice"),
+        shared=("write a skill", "from steps that repeat", "across the runs"),
+        opts=[(26, "o", ["1 · <b>No check:</b> added as written"], "3 works"),
+              (74, "k", ["2 · <b>Run it:</b> no error, it compiles,", "or the page responds as expected"], "12 works"),
+              (122, "d", ["3 · Known answers: its output is compared with", "the answers of tasks or tests that have them"], "5 works"),
+              (170, "k", ["4 · <b>A model judges:</b> it writes the tests", "or decides whether the skill worked"], "10 works"),
+              (218, "k", ["5 · <b>Formal check:</b> a checker proves the plan", "follows rules a person wrote"], "1 work")],
+        store=(10, 222, "SKILL LIBRARY · ONE SKILL PER LINE", "",
+               [("guide: “type, dates, amount, then submit”", "", "the model still takes every step"),
+                ("tool note: “date field: DD/MM/YYYY”", "", "read when the model calls the tool"),
+                ("function: fill_hotel(dates, amount)", "", "one model call for several steps"),
+                ("program: file_hotel_expense.py", "", "no model calls unless a check fails")], 58, 46),
+        nxt=("next report", "uses a matching skill", "in place of the steps", "it covers"),
+        keys=[(0, 248, "o", "added without a check"), (160, 248, "k", "checked, not against answers"), (370, 248, "d", "checked against known answers")])
+
+def harness_check_fig():
+    """Whole harness: the works differ in how a new version is accepted; the kept version is improved again (dashed loop)."""
+    return check_fig(H=270, mid="ph", yc0=118, X0=330, W0=360,
+        start=("current agent", "its prompts, tools", "and control code"),
+        shared=("write a new version", "from the scores and", "logs of runs on tasks"),
+        opts=[(34, "o", ["1 · <b>At once:</b> used right away; the agent", "itself or a script decides"], "6 works"),
+              (90, "k", ["2 · <b>Archive:</b> every version that runs is kept;", "the best-scoring ones are improved next"], "5 works"),
+              (146, "k", ["3 · <b>Same tasks:</b> kept if it scores best on", "the tasks it was built from"], "8 works"),
+              (202, "d", ["4 · Separate tasks: kept only if it does", "better on new tasks; some need old ones to pass"], "10 works")],
+        store=(10, 214, "THE AGENT’S VERSIONS · ONE PER LINE", "",
+               [("v1 · the starting agent", ""), ("v2 · checks required fields first", "kept"), ("v3 · fills the form in one call", "kept"),
+                ("v4 · skips the review page", "dropped"), ("v5 · retries a rejected submit once", "kept")], 60, 32),
+        nxt=("next report", "runs on the newest", "kept version"),
+        loop=("M853 224 V256 H56 V158", "next round: the newest kept version is improved again", 340, 251),
+        keys=[(0, 6, "o", "used without a test"), (0, 22, "k", "scored on the tasks it came from"), (0, 38, "d", "tested on separate tasks")])
 
 slide("s05p", "Learning prompts and context: three paths to the next prompt",
   callout="<p><b>All three paths start from earlier runs and end in the prompt read on the next report; they differ in which part of the prompt they write and whether a change is tested.</b></p>",
@@ -866,14 +917,43 @@ slide("s05m", "Learning experience memory: four ways to check an entry",
   body=f"""
 <div style="width:100%">{memory_check_fig()}</div>
 <div class="figcap" style="margin:2px 0 4px">Unchecked entries need no extra runs, so they can be added online, report by report; re-runs and scores need many runs, so FORGE, MemRL and MemQ learn offline, then freeze.</div>
-{table(["path", "works"], [
+{table(["check", "works"], [
     ["1 · No check", wl(("AWM", 14), ("ReasoningBank", 32), ("ExpeL", 15), ("CTIM-Rover", 23), ("Agent S", 29), ("EXG", 26), ("MobileGPT", 35), ("G-Memory", 22), ("DecentMem", 25), ("WebCoach", 31), ("ReAP", 33), ("Mem²Evolve", 20), ("Memento", 34))],
-    ["2 · Re-run with and without", wl(("SEDM", 28), ("FORGE", 21), ("EvolveMem", 24))],
-    ["3 · Check on the site", wl(("Metis", 19), ("Grounding Agent Memory", 93))],
-    ["4 · Scored by later tasks", wl(("MemRL", 16), ("MemQ", 17), ("AEL", 18), ("Memento’s trained scorer", 34))],
+    ["2 · Ablation", wl(("SEDM", 28), ("FORGE", 21), ("EvolveMem", 24))],
+    ["3 · Site check", wl(("Metis", 19), ("Grounding Agent Memory", 93))],
+    ["4 · Score", wl(("MemRL", 16), ("MemQ", 17), ("AEL", 18), ("Memento’s trained scorer", 34))],
     ["Other works of this class", wl(("ACE", 13), ("Dynamic Cheatsheet", 8)) + ": the previous page’s playbook · " + wl(("SE-Agent", 30), ("Meta-TTL", 27)) + ": one task only · " + citet(94) + ": a comparison with a plain agent"],
   ], ["17%", "83%"], cls="tbl p3t ptab")}""",
   chip=("#a03p", "Appendix A3"), page_refs=False)
+
+slide("s05s", "Learning skills and tools: five ways to check a skill",
+  callout="<p><b>All works turn steps that repeat into a skill the next report can use; they differ in how a skill is checked, and only five compare it with known answers.</b></p>",
+  body=f"""
+<div style="width:100%">{skills_check_fig()}</div>
+<div class="figcap" style="margin:2px 0 4px">Answers exist only for prepared tasks, so those skills are built offline; a run check needs only the site, so skills can also come from practice (SkillWeaver) or live tasks (ASI).</div>
+{table(["check", "works"], [
+    ["1 · No check", wl(("SpeedRunner", 82), ("AppAgentX", 87), ("ClawTrace/CostCraft", 95))],
+    ["2 · Run it", wl(("SkillWeaver", 36), ("Metis", 19), ("DRAFT", 44), ("GenericAgent", 42), ("ActionEngine", 80), ("ASI", 83), ("WALT", 81), ("TraceCompiler", 89), ("EchoPath", 90), ("SKILL.nb", 92), ("AXIS", 98), ("Skim", 100))],
+    ["3 · Known answers", wl(("LATM", 46), ("CRAFT", 53), ("SkillOpt", 39), ("Alita-G", 47), ("AgentDistill", 52))],
+    ["4 · A model judges", wl(("Mem²Evolve", 20), ("Voyager", 37), ("OS-Copilot", 48), ("OpenSkill", 50), ("CoEvoSkills", 51), ("STELLA", 43), ("AgentOrchestra", 41), ("OpenAgent", 49), ("MetaAgent", 38), ("Agent S", 29))],
+    ["5 · Formal check", wl(("VASO", 40))],
+    ["Other works of this class", wl(("CODESKILL", 45), ("Space", 101)) + ": train a model · " + citet(94) + ": a comparison with a plain agent"],
+  ], ["17%", "83%"], cls="tbl p3t ptab")}""",
+  chip=("#a04", "Appendix A4"), page_refs=False)
+
+slide("s05h", "Learning the whole harness: four ways to accept a new version",
+  callout="<p><b>All works run the agent, read the results and write a new version of its code; they differ in how a version is accepted, and fewer than half test it on new tasks.</b></p>",
+  body=f"""
+<div style="width:100%">{harness_check_fig()}</div>
+<div class="figcap" style="margin:2px 0 4px">Checks 2–4 run every version on tasks, and that evaluation is most of what a search costs (ADAS, JudgeFlow, GEA, RQGM); check 1 skips it, at the risk of breaking what worked.</div>
+{table(["check", "works"], [
+    ["1 · At once", wl(("Continual Harness", 63), ("Live-SWE-agent", 71), ("Gödel Agent", 60), ("Adaptive Auto-Harness", 62), ("GenericAgent", 42), ("Agent JIT Compilation", 99))],
+    ["2 · Archive", wl(("ADAS", 55), ("DGM", 70), ("HGM", 59), ("GEA", 65), ("Hyperagents", 66))],
+    ["3 · Same tasks", wl(("SICA", 67), ("STOP", 58), ("MOSS", 56), ("Symbolic Learning", 54), ("GPTSwarm", 9), ("JudgeFlow", 61), ("EvolveMem", 24), ("SEDM", 28))],
+    ["4 · Separate tasks", wl(("Trace", 6), ("RewardHarness", 57), ("RSEA", 72), ("StarHarness", 85), ("HarnessFix", 84), ("Growing Harness", 88), ("AgentDevel", 69), ("SoL-Pi", 97), ("RQGM", 64), ("AEL", 18))],
+    ["Other works of this class", wl(("Harness-R1", 68)) + ": trains the model that writes the changes"],
+  ], ["17%", "83%"], cls="tbl p3t ptab")}""",
+  chip=("#a05", "Appendix A5"), page_refs=False)
 
 slide("s07", f"Direction 2 · Learning the environment: {n2} works keep four kinds of knowledge",
   crumb="counts: one row per work in our literature table, a work in two classes counted in both · yes / partly: initial judgment from table cells (calc.), Appendix A1",
@@ -1085,14 +1165,14 @@ def memory_paths_apx():
             W_("ReAP", 33, "a written reflection on every training run, retrieved by task similarity"),
             W_("Mem²Evolve", 20, "experience plus new tools and expert agents; tools are repaired with tests drawn from the model’s critique, the experience is not checked"),
             W_("Memento", 34, "a library of cases, appended and retrieved by similarity")])],
-        ["2 · Re-run with and without", ul([
+        ["2 · Ablation", ul([
             W_("SEDM", 28, "each candidate entry is replayed with and without it and admitted on the reward gain minus latency and token penalties; later down-weighted, merged or deleted by use"),
             W_("FORGE", 21, "several agents, each with its own memory of rules or examples; the best in a check episode copies its whole memory to the others; frozen at a threshold"),
             W_("EvolveMem", 24, "retrieval settings, answer style and re-extracted memory, changed from failure logs; large drops rolled back; the best round chosen on the same questions")])],
-        ["3 · Check on the site", ul([
+        ["3 · Site check", ul([
             W_("Metis", 19, "after a failure the reflector probes the environment for the cause, after a success it looks for waste; facts and traps kept as text; recurring plans become code that must compile with its dependencies"),
             W_("Grounding Agent Memory", 93, "after each task, candidate entries are checked with targeted read-only queries; the queries and the final score decide to add, narrow, delete or skip")])],
-        ["4 · Scored by later tasks", ul([
+        ["4 · Score", ul([
             W_("MemRL", 16, "the environment’s reward updates the value of each entry used; retrieval by similarity and value"),
             W_("MemQ", 17, "the benchmark’s binary reward is passed along where each entry came from; retrieval by similarity and value; nothing is deleted"),
             W_("AEL", 18, "learns from the environment’s reward how to choose what to retrieve, with reflection and rules; code changes off by default"),
