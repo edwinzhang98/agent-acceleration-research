@@ -56,6 +56,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-10-01 — Claude Code — Part 3 mechanism page legend: dark = learning aims to improve it; orange = always paid in exchange (learned text read in the prompt, and the learning bill, now orange in the outer loop); a second line explains the P/S/C badges (where the updated harness acts) and lists what may go either way (calls per step, non-model time, success). No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 mechanism page: the loop across tasks drawn into the figure (End → run record → learning at C_learn → updated harness → back to Observe for the next task) with badges where the harness acts (P prompt and memory on the prompt length, S skills and tools on Act, C control code on the calls per step and on the stop rule); the separate text row removed. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 mechanism page: clearer definitions of j (numbers the model calls within a step: plan, check, retry), ℓ_ij (how long the j-th call takes) and μ (the model that serves a call); symbol-source link shortened; Erol et al. registered in the page references. No E/D changes.
 - 2026-10-01 — Claude Code — Part 3 mechanism page: every symbol in the figure and in the two sums is now defined on the page (a compact three-column list, including n^κ_ij and c_m(p)); each symbol's source stays in Appendix A0 2/2, which gains n^κ_ij and c_m(p); page-foot references list only the works cited in the page text. No E/D changes.

@@ -193,13 +193,14 @@ EXTRA_CSS = r"""
 .cover-q li{margin-bottom:6px}
 svg .node.xh rect{fill:#fbeede;stroke:#e2b98b}
 svg .node.nd rect{fill:#f3f7fa;stroke:var(--accent);stroke-dasharray:5 3}
-.mleg{display:flex;gap:16px;font-size:11px;color:var(--ink2);margin:4px 0 0 40px}
+.mleg{display:flex;gap:16px;font-size:11px;color:var(--ink2);margin:2px 0 0 40px}
 .bridge{font-size:12px;color:var(--ink2);margin:2px 0 0 40px;line-height:1.45}.bridge .src{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
+.mleg .kb{display:inline-block;width:15px;height:15px;border-radius:8px;background:#0f5a85;color:#fff;font:700 10px 'IBM Plex Sans',sans-serif;text-align:center;line-height:15px;margin-right:3px;vertical-align:-3px}
 .mleg a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px}
-.fig-loop2.sm svg.big-svg{width:960px}
+.fig-loop2.sm svg.big-svg{width:900px}
 .mleg span.k{display:inline-block;width:22px;height:12px;border-radius:6px;vertical-align:-2px;margin-right:6px}
 .symgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px 20px;font-size:11.3px;line-height:1.36;color:var(--ink2)}
-.symgrid.sm{font-size:10.5px;line-height:1.3;gap:2px 18px;margin-top:6px;border-top:1px solid var(--rule);padding-top:5px}
+.symgrid.sm{font-size:10.5px;line-height:1.28;gap:1px 18px;margin-top:4px;border-top:1px solid var(--rule);padding-top:4px}
 #help{display:none!important}
 .p3refs{margin-top:auto;border-top:none;box-shadow:0 -1px 0 var(--rule)}
 .p3refs .pgrefs li{margin-bottom:0;line-height:10px}
@@ -289,7 +290,7 @@ def mech_svg():
     o += seg(f"M1140 118 V{y} H1062")
     o += box(940, 1060, "run record")
     o += seg(f"M940 {y} H862")
-    o += box(650, 860, 'learning, at cost C<tspan baseline-shift="sub" font-size="9">learn</tspan>')
+    o += box(650, 860, 'learning, at cost C<tspan baseline-shift="sub" font-size="9">learn</tspan>').replace('fill:#eef4f8;stroke:' + A, 'fill:#fbeede;stroke:#e2b98b')
     o += seg(f"M650 {y} H572")
     o += box(120, 570, '<tspan font-weight="700" fill="' + A + '">updated harness:</tspan> P prompt, memory · S skills, tools · C control code')
     o += seg(f"M120 {y} H-28 V62 H10")
@@ -362,7 +363,8 @@ slide("s1m", "How an agent runs a task, and where learning changes it",
   callout="<p><b>One attempt is a loop of steps. Learning changes the harness to cut steps, model calls and failures; the price is a longer prompt.</b></p>",
   body=f"""
 <div class="fig-loop2 sm">{mech_svg()}</div>
-<div class="mleg"><span><span class="k" style="background:var(--accent)"></span>learning aims to lower it, or to raise success</span><span><span class="k" style="background:#fbeede;border:1px solid #e2b98b"></span>grows in exchange: learned material is read in the prompt</span><span><span class="k" style="background:#f3f7fa;border:1px dashed var(--accent)"></span>a possible direction: a stable prompt prefix is read from the cache</span><span><a href="#a00-2">symbol sources: A0 ↗</a></span></div>
+<div class="mleg"><span><span class="k" style="background:var(--accent)"></span>learning aims to improve it</span><span><span class="k" style="background:#fbeede;border:1px solid #e2b98b"></span>always paid: learned text in the prompt; the learning bill</span><span><span class="k" style="background:#f3f7fa;border:1px dashed var(--accent)"></span>possible direction: a cached, stable prompt prefix</span><span><a href="#a00-2">symbol sources: A0 ↗</a></span></div>
+<div class="mleg"><span><span class="kb">P</span><span class="kb">S</span><span class="kb">C</span> where the updated harness acts: prompt and memory · skills and tools · control code</span><span>may go either way: calls per step, non-model time, success</span></div>
 <div class="bridge">One attempt adds up to {tex(r"T_{\mathrm{attempt}}=\Sigma_{i}\,(D_i+E_i)-T_{\mathrm{saving}}", 11)} <span class="src">(adapted from {p1("isp")}; {p1("asyncfc")})</span> and {tex(r"c_m(p)=\Sigma_{i,j,\kappa}\,n^{\kappa}_{ij}\,c_{\kappa}(\mu_{ij})+x_{\mathrm{env}}\,c_{\mathrm{env}}", 11)} <span class="src">(adapted from {cite("ref-p1-cop")[1:-1]})</span></div>
 
 <div class="symgrid sm">
