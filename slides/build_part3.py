@@ -870,7 +870,7 @@ def skills_check_fig():
               (74, "k", ["2 · <b>Does it run?</b> Run it once: no error,", "it compiles, or the page reacts as expected"], "12 works"),
               (122, "d", ["3 · Right result? Compared with known", "answers on prepared tasks that have them"], "5 works"),
               (170, "k", ["4 · <b>Right result?</b> A model says so,", "or runs tests that a model wrote"], "10 works"),
-              (218, "k", ["5 · <b>Keeps the rules?</b> Not run: a checker tries", "every path against rules a person wrote"], "1 work")],
+              (218, "k", ["5 · <b>Keeps the rules?</b> A checker proves that no", "possible path breaks rules a person wrote"], "1 work")],
         store=(10, 222, "SKILL LIBRARY · ONE SKILL PER LINE", "",
                [("guide: “type, dates, amount, then submit”", "", "the model still takes every step"),
                 ("tool note: “date field: DD/MM/YYYY”", "", "read when the model calls the tool"),
