@@ -819,8 +819,8 @@ def memory_check_fig():
     X0, W0, XS = 330, 360, 722
     for yc, kd, lines, n in [
             (34, "o", ["1 · no check: store it as it is"], "13 works"),
-            (90, "k", ["2 · re-run tasks with it and without it;", "keep it if the gain beats its time and tokens"], "3 works"),
-            (146, "k", ["3 · check it on the site, read-only;", "keep it only if the site confirms it"], "2 works"),
+            (90, "k", ["2 · re-run the same tasks with it and without it;", "keep it if the gain beats its time and tokens"], "3 works"),
+            (146, "k", ["3 · check it on the site, read-only;", "keep it only if the site shows it is correct"], "2 works"),
             (202, "k", ["4 · keep it; each task that uses it later", "raises its score if it passes, lowers it if not"], "4 works")]:
         sv += arr(f"M304 118 C318 118 318 {yc} {X0 - 3} {yc}")
         sv += rect(X0, yc - 21, W0, 42, kd)
@@ -828,7 +828,7 @@ def memory_check_fig():
         for k, l in enumerate(lines):
             sv += t(X0 + 8, y0 + k * 14, l, 11)
         sv += t(X0 + W0 - 8, yc + 4, n, 9.5, G, mono=True, anchor="end")
-        sv += arr(f"M{X0 + W0} {yc} H{XS - 3}")
+        sv += arr(f"M{X0 + W0} {yc} C{X0 + W0 + 18} {yc} {XS - 16} 118 {XS - 3} 118")
     sv += rect(XS, 10, 262, 214, "k", 0)
     sv += t(XS + 10, 28, "MEMORY · ONE ENTRY PER LINE", 9.5, A, mono=True) + t(XS + 252, 28, "score (4)", 9, G, mono=True, anchor="end")
     rows = [("Hotel: type → dates → amount → submit", "0.9"), ("“Fill the dates before submitting”", "0.8"),
