@@ -183,6 +183,17 @@ EXTRA_CSS = r"""
 .card .cc{font-family:'IBM Plex Sans',sans-serif;font-size:10.5px}
 .pgrefs.c3{columns:3;column-gap:20px}
 .tightcards .card{padding:8px 11px;gap:3px}.tightcards .cc{font-size:10px;line-height:1.3}.tightcards .cv{font-size:14px}.tightcards .cd{font-size:12px;line-height:1.34}.tightcards .lbl{margin:0 0 4px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.mcard{border:1px solid var(--rule);border-radius:4px;padding:8px 11px;background:#fff;display:flex;flex-direction:column;gap:4px}
+.mtitle{font-weight:700;font-size:14px;color:var(--ink)}
+.mflow{display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+.mst{border:1px solid #c9d5df;border-radius:3px;padding:2px 6px;font-size:11.5px;color:var(--ink2);background:#f6f8fa}
+.mst.key{border-color:var(--accent);background:#eef4f8;color:var(--ink);font-weight:600}
+.marr{color:var(--mute);font-size:12px}.marr.loop{color:var(--accent);font-size:14px}
+.mex{font-size:11.5px;color:var(--ink2)}.mex b{color:var(--accent);font-weight:600}
+.mtw{font-size:11.5px;color:var(--ink2)}
+.mtags span{display:inline-block;font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--accent);border:1px solid #c9d5df;border-radius:9px;padding:0 6px;margin:0 4px 0 0}
+.mworks{font-family:'IBM Plex Mono',Menlo,monospace;font-size:9.5px;color:var(--mute)}
 .tbl.ds td{font-size:11.5px;line-height:1.3;padding:5px 6px;vertical-align:top}
 .tbl.ds td:first-child{font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:12px;color:var(--ink)}
 .opt{display:inline-block;border:1px solid var(--rule);border-radius:4px;padding:2px 7px;margin:2px 5px 2px 0;background:#fff;color:var(--ink2)}
@@ -755,30 +766,54 @@ def opt(label, *works):
 def dsrow(choice, *opts):
     return f'<tr><td>{choice}</td><td>' + "".join(opts) + '</td></tr>'
 
-slide("s05p", "Learning prompts and context: one loop, four design choices",
-  callout="<p><b>All of them turn feedback from runs into text the model reads next time; they differ in four design choices.</b></p>",
+def mflow(*steps, loop=True):
+    """A mechanism as a row of small steps; the last arrow loops back when loop=True."""
+    out = '<div class="mflow">'
+    for k, st in enumerate(steps):
+        cls = "mst key" if st.startswith("!") else "mst"
+        out += f'<span class="{cls}">{st.lstrip("!")}</span>'
+        if k < len(steps) - 1:
+            out += '<span class="marr">→</span>'
+    if loop:
+        out += '<span class="marr loop">↺</span>'
+    return out + '</div>'
+
+def mech(title, works, flow, example, twist, tags):
+    return (f'<div class="mcard"><div class="mtitle">{title}</div>{flow}'
+            f'<div class="mex"><b>e.g.</b> {example}</div>'
+            f'<div class="mtw">{twist}</div>'
+            f'<div class="mtags">' + "".join(f'<span>{t}</span>' for t in tags) + f'</div>'
+            f'<div class="mworks">{works}</div></div>')
+
+def wk3(*keys):
+    return " · ".join(f"{PN[k]} {c_idx(PW[k])}" for k in keys)
+
+slide("s05p", "Learning prompts and context: four mechanisms",
+  callout="<p><b>All four turn feedback from runs into text the model reads next time; they differ in how that text is found and kept.</b></p>",
   body=f"""
-<table class="tbl ds"><colgroup><col style="width:17%"><col style="width:83%"></colgroup><tbody>
-{dsrow("Which text changes", opt("instructions", "protegi", "mipro", "gepa", "promst"), opt("examples in the prompt", "dspy", "mipro"),
-       opt("a growing playbook of notes", "dc", "ace"), opt("several program parts at once", "textgrad", "trace", "semback", "gptswarm"),
-       opt("notes for the next try of the same task", "reflexion", "selfrefine"))}
-{dsrow("Where feedback comes from", opt("answers or a scoring rule", "protegi", "mipro", "dspy", "textgrad", "promst"), opt("good runs contrasted with bad ones", "avatar"),
-       opt("the model reads runs, no answers", "dc", "ace"), opt("whether a retry succeeded", "reflexion"))}
-{dsrow("How a change is accepted", opt("only if a validation score improves", "textgrad", "semback"), opt("keep candidates that win on some validation tasks", "gepa"),
-       opt("cheap search, then the best full evaluation", "mipro"), opt("no test per change: entries merged and de-duplicated", "ace", "dc"))}
-{dsrow("When it is updated", opt("once, offline, then frozen", "protegi", "mipro", "dspy", "gepa"), opt("along the stream of tasks", "dc", "ace"),
-       opt("between retries of one task", "reflexion", "selfrefine"))}
-</tbody></table>
-<div class="cards3" style="flex:none;margin-top:8px">
-  {card("IDEA · CONTRAST", "Learn from good versus bad runs",
-        ["AvaTaR splits runs by their answers and asks the model what the good ones did differently"], "")}
-  {card("IDEA · GROW, DON’T REWRITE", "Add and merge notes, don’t rewrite",
-        ["Rewriting everything can drop old experience; ACE adds, merges and de-duplicates entries"], "")}
-  {card("IDEA · COST IN THE SCORE", "Put the run’s cost into the score",
-        ["In PROMST, higher scores came with more steps; the authors propose adding step penalties to the score"], "")}
+<div class="mgrid">
+{mech("1 · Score and rewrite", wk3("protegi", "textgrad", "gepa", "mipro"),
+      mflow("run training reports", "collect failures", "model says what went wrong", "rewrite the instruction: candidates", "!score on validation reports, keep the best"),
+      "“Submit the report” becomes “For a hotel expense, fill the dates before submitting”",
+      "GEPA keeps candidates that win on some tasks; MIPRO searches instructions and examples together",
+      ["feedback: answers or scores", "kept if: score improves", "offline, then frozen"])}
+{mech("2 · Successful runs as examples", wk3("dspy", "mipro"),
+      mflow("run the agent", "keep runs that succeeded", "put them in the prompt as worked examples", "!score example sets, keep the best"),
+      "a complete, accepted hotel report shown as a worked example",
+      "no rewriting: the model learns from its own good runs",
+      ["feedback: task metric", "kept if: score improves", "offline, then frozen"])}
+{mech("3 · Grow a playbook", wk3("ace", "dc"),
+      mflow("finish a report", "a reflector writes lessons", "!a curator adds or merges notes", "next report reads the playbook"),
+      "playbook: “Hotel → dates required”, “Meal → under the daily limit”",
+      "no test per change; ACE adds and merges, Dynamic Cheatsheet rewrites the sheet and can drop old notes",
+      ["feedback: the model’s reading", "kept: always", "updated along the stream"])}
+{mech("4 · Contrast good and bad runs", wk3("avatar"),
+      mflow("split runs by their answers", "!a comparator explains what the good runs did", "rewrite the instructions"),
+      "“good runs entered the dates before submitting; bad runs did not”",
+      "learns from differences, not from single failures",
+      ["feedback: answers", "offline, then frozen"])}
 </div>
-<div class="figcap" style="margin-top:6px"><b>Still missing for us:</b> the cost of searching and validating is rarely reported next to the improved agent’s run time; only PROMST puts efficiency into the objective; without reliable answers, feedback can pollute the context (ACE on FiNER).</div>
-<div class="figcap">Works (full entries in the References): """ + " · ".join(f"{PN[k]} {c_idx(v)}" for k, v in PW.items()) + """</div>""",
+<div class="figcap" style="margin-top:6px">Not reused across tasks: notes for the next try of the same task, as in Reflexion {cite(PW["reflexion"])} and Self-Refine {cite(PW["selfrefine"])}. <b>Still missing for us:</b> the cost of finding and testing a change is rarely reported next to the improved agent’s run time; only PROMST {cite(PW["promst"])} puts the run’s cost into the score.</div>""",
   chip=("#a02", "Appendix A2"), page_refs=False)
 
 slide("s05", f"Direction 1 · Learning from the agent’s own runs: {n1} works in four classes",
