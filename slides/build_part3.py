@@ -824,7 +824,7 @@ slide("s02b", "Example: a web agent that files expense reports in Concur", deck=
 </div>""", page_refs=False)
 
 _s3 = next(x for x in S if x["id"] == "s03c")
-S.append(dict(_s3, id="s03cb", deck="v2", body=_s3["body"].replace('["submit"]', '["save"]').replace(">submit<", ">save<")))
+S.append(dict(_s3, id="s03cb", deck="v2", body=_s3["body"].replace("Whether a check is needed is not known in advance", "Which observations can we safely skip?").replace('["submit"]', '["save"]').replace(">submit<", ">save<")))
 
 # ---------------------------------------------------------------- D1 · the chain
 def xstep(kick, n, label, href, defn, ex, img=""):
