@@ -802,6 +802,42 @@ def example_fig():
     return sv + "</svg>"
 
 _LF = XL["failed"]
+def error_counts_fig():
+    """Counts, not loop counts or cost weights; each group has its own zero-based scale."""
+    ink, muted, rule = "#1b2733", "#6f7d8a", "#d9e1e7"
+    orange, blue, gray = "#b3600c", "#0f5a85", "#7d8a96"
+    sv = ['<svg xmlns="http://www.w3.org/2000/svg" width="410" height="198" viewBox="0 0 410 198" role="img" aria-labelledby="error-counts-title error-counts-desc" style="width:100%;height:auto;display:block;font-family:Arial,sans-serif">',
+          '<title id="error-counts-title">Recorded errors, grouped by measurement unit</title>',
+          '<desc id="error-counts-desc">Separate zero-based count scales. Concur error categories can overlap across runs. Action failures are classified by error text, not independently verified causes. Infrastructure counts come from 64 batch trip-runs.</desc>']
+    def label(x, y, text, size=10.2, color=ink, anchor="start", bold=False):
+        sv.append(f'<text x="{x}" y="{y}" font-family="Arial" font-size="{size}" fill="{color}" text-anchor="{anchor}" font-weight="{"bold" if bold else "normal"}">{esc(text)}</text>')
+    def group(y, title, rows, maximum, color):
+        label(0, y, title, color=color, bold=True)
+        label(410, y, f"0–{maximum}", size=9, color=muted, anchor="end")
+        for i, (name, value) in enumerate(sorted(rows, key=lambda row: row[1], reverse=True)):
+            baseline = y + 13 + 12 * i
+            width = 208 * value / maximum
+            label(0, baseline, name)
+            sv.append(f'<rect x="154" y="{baseline-8}" width="208" height="8" rx="1.5" fill="#f1f4f6"/>')
+            sv.append(f'<rect data-count="{value}" x="154" y="{baseline-8}" width="{width:.3f}" height="8" rx="1.5" fill="{color}"/>')
+            label(154 + width + 6, baseline, str(value), color=color, bold=True)
+    label(0, 10, "RECORDED ERRORS (CALC.)", size=9.7, color=muted)
+    group(27, "Concur errors · runs", [
+        ("Expense-line errors", XL["concur_error_runs"]["lines_with_errors"]),
+        ("Attendee errors", XL["concur_error_runs"]["attendee_errors"]),
+        ("Invalid character", XL["concur_error_runs"]["invalid_character"])], 40, orange)
+    sv.append(f'<path d="M0 71H410 M0 151H410" stroke="{rule}"/>')
+    group(83, f'Failed actions · {XL["failed_total"]} / {XL["actions"]:,}', [
+        ("Timeout", _LF["timeout"]), ("Incompatible action", _LF["wrong_action"]),
+        ("Stale element/page", _LF["page_redrawn"]), ("Blocking dialog", _LF["dialog_in_way"]),
+        ("Other", _LF["other"])], 180, blue)
+    batches = XF["records"]["batches"]
+    failed_trips = sum(v for k, v in batches["trip_runs_by_status"].items() if k != "ok")
+    group(164, f'Outside the agent · {failed_trips} / {batches["trip_runs"]} trip-runs', [
+        ("Crash / unable to start", failed_trips)], batches["trip_runs"], gray)
+    label(0, 194, "Separate scales · Concur categories may overlap", size=9, color=muted)
+    return "".join(sv) + "</svg>"
+
 slide("s02b", "Example: a web agent that files expense reports in Concur", deck="v2",
   callout="<p><b>Each task is a new expense report on the same Concur site, filed line by line; the agent never submits it. Two kinds of loop cost it steps, a rule of the site it does not know and an interface it does not handle, and both came back on later reports until someone wrote the fix down.</b></p>",
   body=f"""<div style="width:100%">{example_fig()}</div>
@@ -816,10 +852,7 @@ slide("s02b", "Example: a web agent that files expense reports in Concur", deck=
   {ximg("loop-notfound.png", "width:100%;max-height:118px;object-fit:cover;object-position:center 40%")}
   <div class="xnote">The line had been saved; the dialog said otherwise: 60 more saves, $4.20. Fixed in code: a save is judged by the line in the list.</div>
  </div>
- <div class="xbox" style="font-size:11px;line-height:1.38"><div class="xk">all {XL["runs"]} recorded runs (calc.)</div>
-  <b style="color:var(--warn)">rule loops</b>: lines with errors in {XL["concur_error_runs"]["lines_with_errors"]} runs · attendees with errors in {XL["concur_error_runs"]["attendee_errors"]} · an invalid character in {XL["concur_error_runs"]["invalid_character"]}<br>
-  <b style="color:var(--accent)">interface loops</b>: {XL["failed_total"]} of {XL["actions"]:,} actions failed (element not there in time {_LF["timeout"]} · wrong action for a control {_LF["wrong_action"]} · page redrawn after a save {_LF["page_redrawn"]} · a dialog in the way {_LF["dialog_in_way"]} · other {_LF["other"]}); no matching option {XL["no_option"]} times; one action repeated 3+ times in a row in {XL["stuck_runs"]} runs<br>
-  <b style="color:var(--mute)">outside the agent</b>: {sum(v for k, v in XF["records"]["batches"]["trip_runs_by_status"].items() if k != "ok")} of {XF["records"]["batches"]["trip_runs"]} trip-runs crashed or never started; run again</div>
+ <div class="xbox" style="padding:7px 10px">{error_counts_fig()}</div>
 </div>
 <div class="xgrid" style="grid-template-columns:1fr 1fr 1fr;gap:8px">
  <div class="xbox" style="padding:5px 10px"><span class="xk" style="color:var(--warn)">learning a rule →</span> a note: “no apostrophes in Business Purpose”, in the prompt, the memory or a store of site facts</div>
