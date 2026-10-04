@@ -256,7 +256,16 @@ def render(font_dir=None, keep=None):
             parts.append('<div class="content">')
             if s["callout"]:
                 parts.append(f'<div class="callout">{s["callout"]}</div>')
-            parts.append(f'<div class="body">{s["body"]}</div></div>')
+            body = s["body"]
+            if keep:
+                # The short deck omits the formula page and Appendix A1.
+                if s["id"] == "s02":
+                    payoff = (tex(r"\bar{v}(m^{\prime})<\bar{v}(m)", 11) + "; it pays off after "
+                              + tex(r"n^{*}", 11) + " reports (page 1)")
+                    body = body.replace(f'<ul class="cd"><li>{payoff}</li></ul>', "")
+                elif s["id"] in ("ad", "ad-2"):
+                    body = body.replace("; Appendix A1", "")
+            parts.append(f'<div class="body">{body}</div></div>')
             if s["foot"]:
                 parts.append(f'<div class="foot">{s["foot"]}</div>')
             if s["chip"]:
