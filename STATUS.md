@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 short-deck data-generation title clarified; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Part 3 short-deck policy-rule uses visualized; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -57,6 +57,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-04 — Codex — Replaced the provision page’s three disconnected cards and caption with a native SVG branch diagram: extract APPB-PERSONAL from the policy, then use it for 14 situation definitions and general agent policy guidance. A hotel-bill example makes the expected handling concrete. Short HTML and root preview synchronized; PDF pending. No E/D changes.
 
 - 2026-10-04 — Codex — Renamed the short deck’s data-pipeline overview to “How we generate the ExpenseAI evaluation data” to state the page’s purpose directly. Generator, short HTML and root preview synchronized; PDF pending. No E/D changes.
 

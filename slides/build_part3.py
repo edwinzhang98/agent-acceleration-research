@@ -894,18 +894,42 @@ slide("x01", "How we generate the ExpenseAI evaluation data", deck="v2",
 
 # ---------------------------------------------------------------- D2 · provisions
 _appb = XPROV["APPB-PERSONAL"]
+def provision_uses_fig():
+    """The extracted rule branches to test design and general agent guidance."""
+    blue, ink, muted, border = "#0f5a85", "#1b2733", "#6f7d8a", "#d9e1e7"
+    sv = ['<svg xmlns="http://www.w3.org/2000/svg" width="610" height="166" viewBox="0 0 610 166" role="img" aria-labelledby="provision-uses-title" style="width:100%;height:auto;display:block">',
+          '<title id="provision-uses-title">Extract a rule from the policy, then use it to design test situations and provide policy guidance to the agent.</title>']
+    def label(x, y, text, size=12, color=ink, bold=False):
+        sv.append(f'<text x="{x}" y="{y}" font-family="Arial" font-size="{size}" fill="{color}" font-weight="{"bold" if bold else "normal"}">{esc(text)}</text>')
+    sv.append(f'<path d="M106 0V24" fill="none" stroke="{blue}" stroke-width="1.4"/><polygon points="102,21 110,21 106,28" fill="{blue}"/>')
+    label(119, 15, "extract", 10, muted)
+    sv.append(f'<rect x="0.5" y="31" width="214" height="105" rx="4" fill="#eef4f8" stroke="{blue}"/>')
+    label(11, 48, "ONE POLICY RULE", 10, blue, True)
+    label(11, 70, "Personal expenses", 13, ink, True)
+    label(11, 87, "are not reimbursable.", 13, ink, True)
+    label(11, 109, "APPB-PERSONAL", 10.5, blue)
+    label(11, 125, "App. B, pp. 30–31", 10.5, muted)
+    sv.append(f'<path d="M215 84H246 M246 44V129 M246 44H275 M246 129H275" fill="none" stroke="{blue}" stroke-width="1.4"/>')
+    for y in (44, 129):
+        sv.append(f'<polygon points="271,{y-4} 278,{y} 271,{y+4}" fill="{blue}"/>')
+    sv.append(f'<rect x="279" y="5" width="330" height="79" rx="4" fill="#fff" stroke="{border}"/>')
+    label(290, 23, f"DESIGN {len(APPB_USERS)} TEST SITUATIONS", 10, blue, True)
+    label(290, 43, "Hotel bill: movie, minibar and gym fees", 11.7)
+    label(290, 60, "Expected: exclude those charges;", 11.7)
+    label(290, 75, "keep eligible lodging.", 11.7)
+    sv.append(f'<rect x="279" y="99" width="330" height="63" rx="4" fill="#fff" stroke="{border}"/>')
+    label(290, 116, "PROVIDE POLICY TO THE AGENT", 10, blue, True)
+    label(290, 135, "rules.md: “Skip these — unallowable”", 11.7)
+    label(290, 151, "Used while the agent files each report.", 11, muted)
+    return "".join(sv) + "</svg>"
+
 slide("x02", f"Provisions: the policy as {N_PROV} rules, each with its page or link", deck="v2",
   callout=f"<p><b>A provision is one rule of the policy, recorded with its page or link; the {N_ACT} rules an agent can act on while filing are each tested by at least one situation.</b></p>",
   body=f"""<div class="xgrid" style="grid-template-columns:1.08fr 1fr;flex:1">
  <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
   <div class="xk">what the manual says · Appendix B, p.30–31</div>
   {ximg("manual-appb.png", "width:100%")}
-  <div class="dcap">highlighted: the personal charges the manual excludes</div>
-  <div class="xgrid" style="grid-template-columns:1.25fr 1fr 1fr;gap:7px">
-   <div class="xbox k"><div class="xk">recorded as a provision</div>{xid("APPB-PERSONAL")} · App. B p.30–31<br><span class="xnote">“{esc(_appb["text"])}”</span></div>
-   <div class="xbox"><div class="xk">tested by {len(APPB_USERS)} situations</div>{", ".join(xid(u) for u in APPB_USERS[:4])}, …</div>
-   <div class="xbox"><div class="xk">read by the agent</div>distilled into its rulebook, rules.md, under “Skip these — unallowable”</div>
-  </div>
+  <div>{provision_uses_fig()}</div>
  </div>
  <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
   <div class="xbox"><div class="xk">kind 1 · where a provision comes from</div><table class="xt">
