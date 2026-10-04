@@ -48,3 +48,4 @@ v3 (current) → slides. Slides are built from v3 only.
 - Commit author email is the GitHub noreply address already set in this repo's config (GitHub blocks pushes that expose the real email).
 - Commit messages: what changed and why, one paragraph; mention the dossier IDs touched.
 - Do not force-push and do not rewrite history on `main`.
+- Slides workflow (Edwin, 2026-10-04): after each completed slide edit, perform the appropriate targeted checks, commit the task files, and push the commit to the existing remote branch. This is standing authorization; do not ask again for each push. Preserve unrelated uncommitted work.
