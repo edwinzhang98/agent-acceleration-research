@@ -871,7 +871,7 @@ def xstep(kick, n, label, href, defn, ex, img=""):
             f'<div><span class="n">{n}</span> <b>{label}</b></div><div>{defn}</div>'
             f'<div class="ex">{ex}</div>{img}</div>')
 _arrow = '<div class="xarr">→</div>'
-slide("x01", "From the expense policy to a scored report, in five steps", deck="v2",
+slide("x01", "How we generate the ExpenseAI evaluation data", deck="v2",
   callout="<p><b>We break GW’s expense policy into rules, write each case a rule decides as a situation, generate documents and an answer key for it, bundle situations into expense reports, and score each report the agent files against its key.</b></p>",
   body=f"""<div class="xk" style="margin-bottom:0">followed through this section: one hotel folio with personal charges on it, from trip A (Chicago)</div>
 <div class="xchain">{_arrow.join([
