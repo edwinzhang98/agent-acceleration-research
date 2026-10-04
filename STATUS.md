@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 short deck: legacy formula-page and Appendix A1 references removed) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Claude’s short-deck flowchart revision checked and local preview synchronized) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -58,6 +58,7 @@ This file is the index for anyone (human or thread) starting with an empty conte
 
 ## Log (newest first; one line per thread)
 
+- 2026-10-04 — Codex — Completed the handoff of Claude’s Part 3 short-deck revision (5872898): checked the two real rework loops and Save Expense wording in the existing HTML/PDF, synchronized the root preview copy, and preserved old page 01/02 links after their slide IDs changed. Slide content and PDF unchanged; challenge 2’s conceptual rewrite remains for discussion. No E/D changes.
 - 2026-10-04 — Claude Code — Part 3 short deck: its own example page (`s02b`), after Edwin noted that step 4 is not a submit and that the loop shown is not the only one: the real Concur flow (a line is saved and checked there; the agent never submits), a rule loop (trip A, 11 Sep: Business Purpose refuses the apostrophe in O'Hare; back twice on 14 Sep until the rule went into the prompt by hand, then gone) and an interface loop (trip R, 21 Sep, P-053: a save that worked looked failed, 60 more saves, $4.20), with counts over all 266 recorded runs from `loops.json` (calc.: 244 of 11,103 actions failed, no matching option 101 times, one action repeated 3+ times in 10 runs, Concur errors in 36 runs, 7 of 64 trip-runs crashed) and what learning takes away: rules as notes, the interface as code, infrastructure not learned. The short deck's difficulties page says save instead of submit. `part3.html` unchanged. No E/D changes.
 - 2026-10-04 — Codex — At Edwin’s request, removed the obsolete payoff bullet from short-deck page 01 and the missing Appendix A1 reference from both Appendix D pages. Short HTML/PDF synchronized and affected PDF pages visually checked; full Part 3 unchanged. Remaining symbols await review. No E/D changes.
 - 2026-10-02 — Claude Code — Part 3 short deck `part3-v2`: data module built as outlined (nine pages, 55 pages in all with Appendix E1–E7), from a snapshot of the ExpenseAI repository (ee98f59; facts of 2026-09-22) with its screenshots: the manual page, generated documents, trip A's folder, notes and answer key, the agent's Concur screens and score file; the handling page adds pass rates by handling from the situation ledger (calc.: file 96%, flag 63%). `part3.html` unchanged. No E/D changes.

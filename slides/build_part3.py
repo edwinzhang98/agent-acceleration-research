@@ -272,7 +272,13 @@ def render(font_dir=None, keep=None):
                 parts.append(f'<a class="chip" href="{s["chip"][0]}">{esc(s["chip"][1])}{" ↗" if s["chip"][0] != "#back" else ""}</a>')
         parts.append('</section>')
     parts.append('</div><div id="help"></div>')   # kept empty and hidden: the shared script and the fit check look it up
-    parts.append(f'<script>{bd.JS}</script></body></html>')
+    navigation = bd.JS
+    if keep:
+        # Preserve links opened before the short deck got its own first two pages.
+        navigation = navigation.replace(
+            "const h=location.hash.replace('#','');",
+            "const raw=location.hash.replace('#','');const h=({s02:'s02b',s03c:'s03cb'})[raw]||raw;")
+    parts.append(f'<script>{navigation}</script></body></html>')
     return "".join(parts)
 
 # ---------------------------------------------------------------- the formula that runs through the deck
