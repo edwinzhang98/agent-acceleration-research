@@ -806,36 +806,39 @@ def error_counts_fig():
     """Counts, not loop counts or cost weights; each group has its own zero-based scale."""
     ink, muted, rule = "#1b2733", "#6f7d8a", "#d9e1e7"
     orange, blue, gray = "#b3600c", "#0f5a85", "#7d8a96"
-    sv = ['<svg xmlns="http://www.w3.org/2000/svg" width="410" height="198" viewBox="0 0 410 198" role="img" aria-labelledby="error-counts-title error-counts-desc" style="width:100%;height:auto;display:block;font-family:Arial,sans-serif">',
+    sv = ['<svg xmlns="http://www.w3.org/2000/svg" width="410" height="200" viewBox="0 0 410 200" role="img" aria-labelledby="error-counts-title error-counts-desc" style="width:100%;height:auto;display:block;font-family:Arial,sans-serif">',
           '<title id="error-counts-title">Recorded errors, grouped by measurement unit</title>',
           '<desc id="error-counts-desc">Separate zero-based count scales. Concur error categories can overlap across runs. Action failures are classified by error text, not independently verified causes. Infrastructure counts come from 64 batch trip-runs.</desc>']
     def label(x, y, text, size=10.2, color=ink, anchor="start", bold=False):
         sv.append(f'<text x="{x}" y="{y}" font-family="Arial" font-size="{size}" fill="{color}" text-anchor="{anchor}" font-weight="{"bold" if bold else "normal"}">{esc(text)}</text>')
-    def group(y, title, rows, maximum, color):
+    def group(y, title, rows, maximum, color, unit, subtitle=""):
         label(0, y, title, color=color, bold=True)
-        label(410, y, f"0–{maximum}", size=9, color=muted, anchor="end")
+        label(410, y, f"Bar scale: 0–{maximum} {unit}", size=9, color=muted, anchor="end")
+        if subtitle:
+            label(0, y + 12, subtitle, size=9.5, color=muted)
         for i, (name, value) in enumerate(sorted(rows, key=lambda row: row[1], reverse=True)):
-            baseline = y + 13 + 12 * i
+            baseline = y + 13 + 12 * i + (12 if subtitle else 0)
             width = 208 * value / maximum
             label(0, baseline, name)
             sv.append(f'<rect x="154" y="{baseline-8}" width="208" height="8" rx="1.5" fill="#f1f4f6"/>')
             sv.append(f'<rect data-count="{value}" x="154" y="{baseline-8}" width="{width:.3f}" height="8" rx="1.5" fill="{color}"/>')
             label(154 + width + 6, baseline, str(value), color=color, bold=True)
-    label(0, 10, "RECORDED ERRORS (CALC.)", size=9.7, color=muted)
-    group(27, "Concur errors · runs", [
+    group(10, "Runs showing Concur errors", [
         ("Expense-line errors", XL["concur_error_runs"]["lines_with_errors"]),
         ("Attendee errors", XL["concur_error_runs"]["attendee_errors"]),
-        ("Invalid character", XL["concur_error_runs"]["invalid_character"])], 40, orange)
-    sv.append(f'<path d="M0 71H410 M0 151H410" stroke="{rule}"/>')
-    group(83, f'Failed actions · {XL["failed_total"]} / {XL["actions"]:,}', [
+        ("Invalid character", XL["concur_error_runs"]["invalid_character"])], 40, orange, "runs")
+    label(0, 60, "A run may appear in more than one category.", size=9, color=muted)
+    sv.append(f'<path d="M0 66H410 M0 158H410" stroke="{rule}"/>')
+    group(78, "Action failures", [
         ("Timeout", _LF["timeout"]), ("Incompatible action", _LF["wrong_action"]),
         ("Stale element/page", _LF["page_redrawn"]), ("Blocking dialog", _LF["dialog_in_way"]),
-        ("Other", _LF["other"])], 180, blue)
+        ("Other", _LF["other"])], 180, blue, "actions",
+        f'{XL["failed_total"]} failed actions out of {XL["actions"]:,} attempts ({100 * XL["failed_total"] / XL["actions"]:.1f}%)')
     batches = XF["records"]["batches"]
     failed_trips = sum(v for k, v in batches["trip_runs_by_status"].items() if k != "ok")
-    group(164, f'Outside the agent · {failed_trips} / {batches["trip_runs"]} trip-runs', [
-        ("Crash / unable to start", failed_trips)], batches["trip_runs"], gray)
-    label(0, 194, "Separate scales · Concur categories may overlap", size=9, color=muted)
+    group(170, "Batch-run failures", [
+        ("Crash / unable to start", failed_trips)], batches["trip_runs"], gray, "trip-runs")
+    label(0, 196, f'{failed_trips} failed trip-runs out of {batches["trip_runs"]} batch trip-runs (calc.).', size=9, color=muted)
     return "".join(sv) + "</svg>"
 
 slide("s02b", "Example: a web agent that files expense reports in Concur", deck="v2",
