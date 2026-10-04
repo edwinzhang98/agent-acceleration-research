@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 short-deck interface loops marked by stage; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Part 3 short-deck example dates removed; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -57,6 +57,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-04 — Codex — Removed the dates from the two short-deck example headings (trip A and trip R) at Edwin’s request. Generator, short HTML and root preview synchronized; PDF remains pending until this review round ends. No E/D changes.
 
 - 2026-10-04 — Codex — Marked one interface loop at each observed expense-flow stage (2–6), with a shared legend and trajectory anchors in the generator. Kept the rule loop and existing examples. Short HTML and root preview synchronized; PDF remains pending until this review round ends. No E/D changes.
 

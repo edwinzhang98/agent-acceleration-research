@@ -807,12 +807,12 @@ slide("s02b", "Example: a web agent that files expense reports in Concur", deck=
   body=f"""<div style="width:100%">{example_fig()}</div>
 <div class="xgrid" style="grid-template-columns:1.2fr 0.85fr 1.2fr;flex:1">
  <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
-  <div class="xk" style="color:var(--warn)">a rule of the site · trip A, 11 September</div>
+  <div class="xk" style="color:var(--warn)">a rule of the site · trip A</div>
   {ximg("loop-apostrophe.png", "width:100%;max-height:118px;object-fit:cover;object-position:top")}
   <div class="xnote">Concur refuses the apostrophe in “O'Hare”. It came back twice on 14 September; that evening the rule went into the agent’s prompt by hand, and it has not come back.</div>
  </div>
  <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
-  <div class="xk">the interface · trip R, 21 September</div>
+  <div class="xk">the interface · trip R</div>
   {ximg("loop-notfound.png", "width:100%;max-height:118px;object-fit:cover;object-position:center 40%")}
   <div class="xnote">The line had been saved; the dialog said otherwise: 60 more saves, $4.20. Fixed in code: a save is judged by the line in the list.</div>
  </div>
