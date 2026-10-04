@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 short-deck chart units clarified; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Part 3 short-deck chart scale labels removed; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -57,6 +57,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-04 — Codex — Removed the three chart scale-range labels at Edwin’s request; retained bar-end counts, group units and sample explanations. Generator, short HTML and root preview synchronized; PDF pending. No E/D changes.
 
 - 2026-10-04 — Codex — Clarified every error-chart bar scale with its unit and expanded both numerator/denominator labels into complete statements. Short HTML and root preview synchronized; PDF pending. No E/D changes.
 

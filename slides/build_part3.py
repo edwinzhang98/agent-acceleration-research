@@ -813,7 +813,6 @@ def error_counts_fig():
         sv.append(f'<text x="{x}" y="{y}" font-family="Arial" font-size="{size}" fill="{color}" text-anchor="{anchor}" font-weight="{"bold" if bold else "normal"}">{esc(text)}</text>')
     def group(y, title, rows, maximum, color, unit, subtitle=""):
         label(0, y, title, color=color, bold=True)
-        label(410, y, f"Bar scale: 0–{maximum} {unit}", size=9, color=muted, anchor="end")
         if subtitle:
             label(0, y + 12, subtitle, size=9.5, color=muted)
         for i, (name, value) in enumerate(sorted(rows, key=lambda row: row[1], reverse=True)):
