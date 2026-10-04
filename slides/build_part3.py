@@ -791,10 +791,14 @@ def example_fig():
     # the rule loop: Concur refuses the line; edit the field; save again
     sv += f'<path d="M{x5 + 40},{Y + H} V{Y + H + 30} H{x3 + W / 2} V{Y + H + 4}" style="stroke:{O};fill:none;stroke-width:1.5" marker-end="url(#ex2)"/>'
     sv += t((x3 + x5) / 2 + 60, Y + H + 47, "rule loop · Concur refuses the line: “You have entered an invalid character” (the apostrophe in O'Hare) → edit → save again", 10.5, O, mono=True, anchor="middle")
-    # the interface loop: the save worked, a dialog says it did not, save again
-    sv += f'<path d="M{x5 + 104},{Y} V{Y - 26} H{x5 + 134} V{Y - 3}" style="stroke:{A};fill:none;stroke-width:1.5;stroke-dasharray:5 3" marker-end="url(#ex3)"/>'
-    sv += t(x5 + 92, 14, "interface loop · the line was saved, but a “Not Found” dialog", 10.5, A, mono=True, anchor="end")
-    sv += t(x5 + 92, 28, "made it look failed → save again, 60 more times", 10.5, A, mono=True, anchor="end")
+    # One marker per observed stage, across runs; these are not five loops in one run.
+    # 2: D 20260914-064709-concur-a876 s3-5; 3: O 20260914-043542-concur-a943 s8-10.
+    # 4: N 20260914-182114-concur-17d1 s17-19; 5: R 20260921-030704-concur-56a7 (P-053).
+    # 6: P 20260918-184027-concur-7012 s6-8. Run paths are under ExpenseAI/local_data/runs/.
+    for n in (2, 3, 4, 5, 6):
+        x = (n - 1) * (W + GAP)
+        sv += f'<path data-interface-step="{n}" d="M{x + 50},{Y} V{Y - 24} H{x + 94} V{Y - 3}" style="stroke:{A};fill:none;stroke-width:1.5;stroke-dasharray:5 3" marker-end="url(#ex3)"/>'
+    sv += t(590, 14, "interface loop · an interaction fails or appears to fail → retry (observed across runs)", 10.5, A, mono=True, anchor="middle")
     return sv + "</svg>"
 
 _LF = XL["failed"]
