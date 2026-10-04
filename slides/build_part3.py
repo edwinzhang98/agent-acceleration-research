@@ -22,7 +22,7 @@ OUT = os.path.join(HERE, "part3.html")
 # Edwin, 2026-10-02: a second, shorter deck — the cover (title and subtitle only), the expense example and the five
 # difficulties, to be followed by the data pages of the ExpenseAI deck. part3.html stays as it is.
 OUT_V2 = os.path.join(HERE, "part3-v2.html")
-KEEP_V2 = ["s00", "s02", "s03c", "ad", "ad-2"]
+KEEP_V2 = ["s00", "ad", "ad-2"]           # plus every page made for the short deck (deck="v2"): its own example and difficulties pages first
 ROWS = json.load(open(os.path.join(HERE, "part3-data", "rows.json"), encoding="utf-8"))
 TR = {r["i"]: r for r in json.load(open(os.path.join(HERE, "part3-data", "translated.json"), encoding="utf-8"))}
 LIT = os.path.join(ROOT, "notes", "part3", "2026-10-01-two-directions-literature-zh.md")
@@ -752,6 +752,73 @@ EXTRA_CSS += r"""
 .xt td{border-top:1px solid var(--rule);padding:4px 6px 4px 0;vertical-align:top}
 .xt td.n{font-weight:700;font-size:13px;white-space:nowrap}
 """
+
+
+# ---------------------------------------------------------------- the short deck's own example page and difficulties page
+# Edwin, 2026-10-04: the example must show the real Concur flow (a line is saved, the report is never submitted by the
+# agent) and more than one loop: a rule of the site the agent does not know, and an interface it does not handle.
+XL = _xload("loops.json")
+def example_fig():
+    A, O, G, INK, SUB = "#0f5a85", "#b3600c", "#7d8a96", "#1b2733", "#3b4a57"
+    W, GAP, Y, H = 144, 28, 52, 50
+    steps = [("1", ["Open the trip’s", "expense report"]), ("2", ["Add an expense,", "choose its type"]),
+             ("3", ["Fill date, purpose,", "vendor, city, amount"]), ("4", ["Attach the receipt"]),
+             ("5", ["Save the expense:", "Concur checks it"]), ("6", ["Hotel only: itemize", "the nights, save"]),
+             ("7", ["Check the line in", "the report’s list"])]
+    sv = ('<svg width="1180" height="176" viewBox="0 0 1180 176" style="width:100%;height:auto;display:block"><defs>'
+          '<marker id="ex1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#7d8a96"/></marker>'
+          '<marker id="ex2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#b3600c"/></marker>'
+          '<marker id="ex3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0f5a85"/></marker></defs>')
+    def t(x, y, s_, size=12, col=INK, mono=False, anchor="start", bold=False):
+        f = "'IBM Plex Mono',monospace" if mono else "'IBM Plex Sans',sans-serif"
+        return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{"700 " if bold else ""}{size}px {f};fill:{col}">{s_}</text>'
+    for k, (n, lines) in enumerate(steps):
+        x = k * (W + GAP)
+        key = n == "5"
+        sv += f'<rect x="{x}" y="{Y}" width="{W}" height="{H}" rx="4" style="fill:#fff;stroke:{A if key else "#cdd5dd"};stroke-width:{1.4 if key else 1}"/>'
+        sv += t(x + 8, Y + 14, n, 10, G, mono=True)
+        for j, l in enumerate(lines):
+            sv += t(x + 8, Y + 29 + j * 14, l, 12, INK, bold=key and j == 0)
+        if k < len(steps) - 1:
+            sv += f'<path d="M{x + W + 2},{Y + H / 2} H{x + W + GAP - 3}" style="stroke:#7d8a96;fill:none" marker-end="url(#ex1)"/>'
+    x5, x3 = 4 * (W + GAP), 2 * (W + GAP)
+    # the rule loop: Concur refuses the line; edit the field; save again
+    sv += f'<path d="M{x5 + 40},{Y + H} V{Y + H + 30} H{x3 + W / 2} V{Y + H + 4}" style="stroke:{O};fill:none;stroke-width:1.5" marker-end="url(#ex2)"/>'
+    sv += t((x3 + x5) / 2 + 60, Y + H + 47, "rule loop · Concur refuses the line: “You have entered an invalid character” (the apostrophe in O'Hare) → edit → save again", 10.5, O, mono=True, anchor="middle")
+    # the interface loop: the save worked, a dialog says it did not, save again
+    sv += f'<path d="M{x5 + 104},{Y} V{Y - 26} H{x5 + 134} V{Y - 3}" style="stroke:{A};fill:none;stroke-width:1.5;stroke-dasharray:5 3" marker-end="url(#ex3)"/>'
+    sv += t(x5 + 92, 14, "interface loop · the line was saved, but a “Not Found” dialog", 10.5, A, mono=True, anchor="end")
+    sv += t(x5 + 92, 28, "made it look failed → save again, 60 more times", 10.5, A, mono=True, anchor="end")
+    return sv + "</svg>"
+
+_LF = XL["failed"]
+slide("s02b", "Example: a web agent that files expense reports in Concur", deck="v2",
+  callout="<p><b>Each task is a new expense report on the same Concur site, filed line by line; the agent never submits it. Two kinds of loop cost it steps, a rule of the site it does not know and an interface it does not handle, and both came back on later reports until someone wrote the fix down.</b></p>",
+  body=f"""<div style="width:100%">{example_fig()}</div>
+<div class="xgrid" style="grid-template-columns:1.2fr 0.85fr 1.2fr;flex:1">
+ <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+  <div class="xk" style="color:var(--warn)">a rule of the site · trip A, 11 September</div>
+  {ximg("loop-apostrophe.png", "width:100%;max-height:118px;object-fit:cover;object-position:top")}
+  <div class="xnote">Concur refuses the apostrophe in “O'Hare”. It came back twice on 14 September; that evening the rule went into the agent’s prompt by hand, and it has not come back.</div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+  <div class="xk">the interface · trip R, 21 September</div>
+  {ximg("loop-notfound.png", "width:100%;max-height:118px;object-fit:cover;object-position:center 40%")}
+  <div class="xnote">The line had been saved; the dialog said otherwise: 60 more saves, $4.20. Fixed in code: a save is judged by the line in the list.</div>
+ </div>
+ <div class="xbox" style="font-size:11px;line-height:1.38"><div class="xk">all {XL["runs"]} recorded runs (calc.)</div>
+  <b style="color:var(--warn)">rule loops</b>: lines with errors in {XL["concur_error_runs"]["lines_with_errors"]} runs · attendees with errors in {XL["concur_error_runs"]["attendee_errors"]} · an invalid character in {XL["concur_error_runs"]["invalid_character"]}<br>
+  <b style="color:var(--accent)">interface loops</b>: {XL["failed_total"]} of {XL["actions"]:,} actions failed (element not there in time {_LF["timeout"]} · wrong action for a control {_LF["wrong_action"]} · page redrawn after a save {_LF["page_redrawn"]} · a dialog in the way {_LF["dialog_in_way"]} · other {_LF["other"]}); no matching option {XL["no_option"]} times; one action repeated 3+ times in a row in {XL["stuck_runs"]} runs<br>
+  <b style="color:var(--mute)">outside the agent</b>: {sum(v for k, v in XF["records"]["batches"]["trip_runs_by_status"].items() if k != "ok")} of {XF["records"]["batches"]["trip_runs"]} trip-runs crashed or never started; run again</div>
+</div>
+<div class="xgrid" style="grid-template-columns:1fr 1fr 1fr;gap:8px">
+ <div class="xbox" style="padding:5px 10px"><span class="xk" style="color:var(--warn)">learning a rule →</span> a note: “no apostrophes in Business Purpose”, in the prompt, the memory or a store of site facts</div>
+ <div class="xbox" style="padding:5px 10px"><span class="xk">learning the interface →</span> code: “a save worked if the line is in the list”, as a skill, a tool or a harness change</div>
+ <div class="xbox" style="padding:5px 10px"><span class="xk" style="color:var(--mute)">outside the agent →</span> engineering and reruns: counted in time and cost, not against success; not learning</div>
+</div>""", page_refs=False)
+
+_s3 = next(x for x in S if x["id"] == "s03c")
+S.append(dict(_s3, id="s03cb", deck="v2", body=_s3["body"].replace('["submit"]', '["save"]').replace(">submit<", ">save<")))
 
 # ---------------------------------------------------------------- D1 · the chain
 def xstep(kick, n, label, href, defn, ex, img=""):

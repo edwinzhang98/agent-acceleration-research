@@ -1,0 +1,20 @@
+{
+ "runs": 266,
+ "actions": 11103,
+ "failed": {
+  "wrong_action": 42,
+  "timeout": 166,
+  "other": 7,
+  "page_redrawn": 17,
+  "dialog_in_way": 12
+ },
+ "failed_total": 244,
+ "no_option": 101,
+ "stuck_runs": 10,
+ "concur_error_runs": {
+  "lines_with_errors": 36,
+  "attendee_errors": 14,
+  "invalid_character": 3
+ },
+ "note": "computed by snapshot.py from local_data/runs (every recorded run); stuck = the same action on the same element 3+ times in a row"
+}
