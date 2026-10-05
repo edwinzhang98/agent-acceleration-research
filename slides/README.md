@@ -31,3 +31,9 @@ The PDF is exported with headless Chromium (Playwright: `page.pdf(width='1280px'
 ## State (2026-09-28)
 
 Part 1 rebuilt on 2026-09-28 on the literature-checked problem definition (`research/2026-09-28-problem-definition.md`; 31 pages) and Part 2 built the same day (`research/2026-09-28-part2-acceleration-by-term.md`); both await Edwin’s review. Main pages: at most about 250 words each, citations not counted (`word_report()` in the generator). Earlier: Part 1 had 21 pages after halving the first draft and cutting every card to one example; the earlier 9-page Module 1 draft is superseded (git history keeps it). The Chinese docs that are the content source are saved as markdown snapshots in `notes/` (2026-09-28; the Claude Docs remain the working copies Edwin comments on). 
+
+## Part 3 V2 trajectory section (2026-10-04)
+
+`part3-v2.html` / `part3-v2.pdf` now have 58 pages: one cover, 14 main pages and 43 appendix pages. The final three main pages (`x10`–`x12`, physical pages 13–15) show ExpenseAI's step distribution, recorded run time and repeated workflow, and two false-failure retry cases. They follow `x09` and precede `ad`; all previously present pages are preserved. The repository-root `part3-v2.html` is the synchronized local presentation entry.
+
+The generator remains `slides/build_part3.py`. Its aggregate-only snapshot, `slides/part3-data/expenseai/trajectory-summary.json`, records definitions, source locations and hashes, dates, exclusions and the current implementation status. Measurements come from the 24 September analysis of the 14–21 September cohort; they are not a new benchmark or a measured acceleration result. A step here is one model call, and elapsed time is the sum of included run durations, excluding gaps between turns. The current deck uses the existing system-font fallback; regenerate it with the same generator options. Export with Chromium at 1280 × 720 pixels in print media.

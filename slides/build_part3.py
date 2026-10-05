@@ -1209,6 +1209,86 @@ slide("x09", "Scoring a filed report against its answer key", deck="v2",
 </div>""",
   chip=("#e6", "Appendix E6"), page_refs=False)
 
+# ---------------------------------------------------------------- short deck: measured trajectories, after scoring and before the appendices
+# Historical measurements, not a benchmark of the current checkout. Definitions and provenance travel with the deck.
+XT = _xload("trajectory-summary.json")
+_ts, _tm = XT["scope"], XT["routine_phases"]
+_TSTYLE = """<style>
+.trj-row{display:grid;grid-template-columns:222px 1fr 78px;gap:12px;align-items:center;margin:13px 0;font-size:14px}
+.trj-track{height:20px;background:#edf2f5;border-radius:2px}.trj-bar{height:100%;background:var(--accent);border-radius:2px}
+.trj-num{font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right;color:var(--ink2)}
+.trj-panel{border:1px solid var(--rule);padding:17px 19px;border-radius:4px;font-size:14px;line-height:1.45;min-width:0}
+.trj-panel p{margin:9px 0}.trj-k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--accent);text-transform:uppercase;margin-bottom:9px}
+.trj-small{font-size:12px;line-height:1.4;color:var(--ink2)}
+.trj-flow{display:flex;align-items:center;gap:9px}.trj-flow>div{flex:1;padding:14px 10px;border:1px solid var(--rule);border-radius:4px;font-size:15px;line-height:1.35;text-align:center;background:#fff}
+.trj-flow>span{color:var(--mute)}.trj-flow .trj-decision{border-color:var(--accent);background:#eef4f8}
+.trj-call{display:block;font:10px 'IBM Plex Mono',monospace;color:var(--mute);margin-bottom:6px}
+.trj-case{border-top:3px solid var(--warn)}.trj-case h2{font-size:19px;line-height:1.25;margin:5px 0 11px}
+.trj-case .trj-path{font-size:14px;padding:12px 14px;background:#f8f3ed;line-height:1.55;margin:11px 0}
+.trj-status{border-top:1px solid var(--rule);padding-top:10px;margin-top:12px;font-size:12px;line-height:1.4}
+</style>"""
+def trajectory_bars():
+    rows = []
+    for name, n in XT["step_groups"]:
+        rows.append(f'<div class="trj-row"><div>{esc(name)}</div><div class="trj-track"><div class="trj-bar" style="width:{100*n/500:.3f}%" data-count="{n}"></div></div><div class="trj-num">{n} · {100*n/_ts["steps"]:.0f}%</div></div>')
+    return "".join(rows)
+
+slide("x10", "Where the trajectory’s steps go", deck="v2",
+  callout='<p><b>Opening a new expense is the largest phase: three navigation calls recur before the form can be filled.</b> The sample averages 101 model calls per report.</p>',
+  body=f"""{_TSTYLE}<div class="xgrid" style="grid-template-columns:1.8fr 1fr;flex:1;gap:18px">
+ <div class="trj-panel"><div class="trj-k">Steps by workflow phase · count and share</div>
+  {trajectory_bars()}
+  <div class="trj-small" style="margin-top:17px">Bars start at zero and use the same 0–500 step scale. Shares are rounded.<br>“Summary + other” includes turn summaries, waits, flags, review, receipts and dismissing dialogs.</div>
+ </div>
+ <div class="trj-panel" style="background:var(--card)"><div class="trj-k">What the sample measures</div>
+  <p><b>A step is one model call</b>, which can issue several actions. A turn is one user instruction; a report can take several turns.</p>
+  <p>15 trip-runs · 49 turns<br>1,512 steps · 157 expense lines</p>
+  <p>100.8 steps per report<br>9.6 steps per expense line <span class="trj-small">(calc.)</span></p>
+  <div style="border-top:1px solid var(--rule);padding-top:9px;margin-top:12px" class="trj-small"><b>Historical cohort v2</b>: batches 20260914-06 through 20260921-01, after the 14 September interaction fixes. Valid runs with scores; final compliance handoffs and trip R’s known 135-step faulty turn are excluded.</div>
+ </div>
+</div>""",
+  foot='SOURCE: ExpenseAI, 24 Sep 2026 analysis, §§0–2; trajectory-summary.json (primary run-record aggregate).', page_refs=False)
+
+_TFLOW = '<div class="trj-flow">' + '<span>→</span>'.join(
+    f'<div class="{"trj-decision" if i == 4 else ""}"><span class="trj-call">MODEL CALL {i}</span>{name}</div>'
+    for i, name in enumerate(['Add Expense', 'Manually Create', 'Select type', 'Fill form', 'Save'], 1)) + '</div>'
+slide("x11", "Model calls take most of the running time", deck="v2",
+  callout='<p><b>Repeated calls are a useful target for acceleration.</b> In the same 15 trip-runs, waiting for the model accounts for 70.8% of recorded elapsed time.</p>',
+  body=f"""<div class="trj-panel" style="padding:13px 18px">
+ <div class="trj-k">191.2 minutes in total · 12.7 minutes per report · summed runs, excluding gaps between turns</div>
+ <div style="display:flex;height:32px;border-radius:3px;overflow:hidden" role="img" aria-label="Model 70.8 percent; browser tools 27.2 percent; page reads and other overhead 2 percent">
+  <div style="width:70.8%;background:var(--accent)"></div><div style="width:27.2%;background:#8fa9ba"></div><div style="width:2%;background:#d9e1e7"></div>
+ </div>
+ <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:24px;margin-top:9px;font-size:14px"><div>Model calls · 70.8%<br><span class="trj-small">135.3 min</span></div><div>Browser tools · 27.2%<br><span class="trj-small">52.0 min</span></div><div>Page reads + other · 2.0%<br><span class="trj-small">3.8 min · components rounded</span></div></div>
+</div>
+<div class="trj-panel" style="padding:13px 18px"><div class="trj-k">A common ordinary expense line · five calls</div>{_TFLOW}
+ <div class="trj-small" style="margin-top:10px">This phase sequence appears in 72 of 126 ordinary expense lines. These lines exclude attendee work, hotel itemization and mileage.</div>
+</div>
+<div class="xgrid" style="grid-template-columns:1fr 1fr;gap:18px;flex:1">
+ <div class="trj-panel" style="padding:12px 18px"><div class="trj-k">What the phase analysis shows</div><b>Routine workflow phases account for many calls.</b><p style="margin:6px 0">They contain 57% of steps and 47.7% of model time: navigation, separate saves, header edits, waits, flags, review and dialog dismissal.</p></div>
+ <div class="trj-panel" style="padding:12px 18px"><div class="trj-k">What to test next</div><b>Combine predictable actions, with checks at each boundary.</b><p style="margin:6px 0">For example, open the expense form as one operation. Phase labels identify candidates; they do not show that every call is removable or establish a measured speedup.</p></div>
+</div>""",
+  foot='SOURCE: ExpenseAI, 24 Sep 2026 analysis, §§1–3; same v2 cohort and exclusions as the preceding page.', page_refs=False)
+
+slide("x12", "When success is misread, the agent repeats work", deck="v2",
+  callout='<p><b>Fewer calls require reliable feedback about what changed.</b> The trajectories expose a second problem: successful actions can look like failures and trigger unnecessary retries.</p>',
+  body="""<div class="xgrid" style="grid-template-columns:1fr 1fr;gap:18px;flex:1">
+ <div class="trj-panel trj-case"><div class="trj-k">Case 1 · trip R, 21 September</div><h2>A saved line is treated as unsaved</h2>
+  <div class="trj-path">Save succeeds → Concur says “Not Found”<br>→ agent retries saving → keeps retrying</div>
+  <p>The first $395 expense was already saved. Misreading the result added 124 steps and $4.20; the agent eventually asked the user to add it manually, risking a duplicate.</p>
+  <p class="trj-small">This entire 135-step turn is excluded from the preceding averages. It illustrates a failure loop, not normal report cost.</p>
+  <div class="trj-status"><b>Implemented:</b> check for the saved line and guard retries.<br><b>Still needed:</b> a live comparison to measure the effect.</div>
+ </div>
+ <div class="trj-panel trj-case"><div class="trj-k">Case 2 · historical dropdown feedback</div><h2>A selected value is reported as unmatched</h2>
+  <div class="trj-path">Option is selected → “No option matched”<br>→ agent reselects or changes the value</div>
+  <p>In 20 of 93 such feedback messages, the next observation already showed the selected value. Currency selection could oscillate between USD and GBP.</p>
+  <p class="trj-small">These counts cover the historical analysis sample, not only v2. They are feedback-message counts, not a v2 action failure rate.</p>
+  <div class="trj-status"><b>Patched on 24 September:</b> distinguish a failed match from an unconfirmed selection; read the value back.<br><b>Still needed:</b> TestTrack and live validation.</div>
+ </div>
+</div>
+<div class="trj-panel" style="padding:12px 18px;background:var(--card)"><b>The two priorities are complementary:</b> combine repeated navigation, and verify the result before retrying. Evaluate both by steps, elapsed time and the existing report score.</div>""",
+  foot='SOURCES: ExpenseAI analysis §5; P-053 / P-058; save_outcome.py and HANDOFF.md. Status checked 4 Oct 2026.', page_refs=False)
+
 # =====================================================================
 # II · How far existing work has got
 # =====================================================================

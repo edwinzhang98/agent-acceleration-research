@@ -1,0 +1,374 @@
+{
+  "title": "ExpenseAI trajectory measurements for Part 3 V2",
+  "snapshot_date": "2026-10-04",
+  "analysis_date": "2026-09-24",
+  "definitions": {
+    "step": "One model call, possibly containing multiple tool actions.",
+    "turn": "One user instruction recorded as one run.",
+    "scope": "15 scored trip-runs from batches 20260914-06 through 20260921-01; final compliance handoffs and trip R 20260921 turn 2 (135 steps) excluded. Historical cohort, not current-code validation.",
+    "time": "Sum of included run manifest start-to-end durations; excludes gaps between turns. Model and tool durations are separately recorded; observation/other is residual. Minutes rounded separately.",
+    "routine": "Heuristic phase grouping (navigation, separate save, header, wait, flag, review, dismiss), not a measured fraction of removable calls.",
+    "ordinary_sequence": "Phase pattern, not identical actions in every step; 72 of 126 ordinary lines."
+  },
+  "sources": [
+    {
+      "file": "local_data/analysis/step-anatomy/summary.json",
+      "source_url": "file:///Users/edwin/projects/ExpenseAI/local_data/analysis/step-anatomy/summary.json",
+      "sha256": "359343d6f480c65cdb5d89f31f8298f604ef52a316a20368ae260c2ba19cc95b",
+      "evidence_type": "primary internal run aggregate or implementation record",
+      "read_date": "2026-10-04"
+    },
+    {
+      "file": "gw_policy_data/reports/briefings/20260924-step-time-cost-anatomy.md",
+      "source_url": "file:///Users/edwin/projects/ExpenseAI/gw_policy_data/reports/briefings/20260924-step-time-cost-anatomy.md",
+      "sha256": "7e055da1a0cb8b6915de6c3e4b6de7549e39324d0b06165a76348364391c2d3a",
+      "evidence_type": "primary internal run aggregate or implementation record",
+      "read_date": "2026-10-04"
+    },
+    {
+      "file": "src/agents/save_outcome.py",
+      "source_url": "file:///Users/edwin/projects/ExpenseAI/src/agents/save_outcome.py",
+      "sha256": "0b575b27b357ec94a2d6115509f070f7071a6a376ea3ef2bdf07f1a857e98f2b",
+      "evidence_type": "primary internal run aggregate or implementation record",
+      "read_date": "2026-10-04"
+    },
+    {
+      "file": "gw_policy_data/reports/ISSUES.md",
+      "source_url": "file:///Users/edwin/projects/ExpenseAI/gw_policy_data/reports/ISSUES.md",
+      "sha256": "d2e830a0e85b8c4f878d55f3c8a970df6eb00cdf09aae12f202f22fd05135084",
+      "evidence_type": "primary internal run aggregate or implementation record",
+      "read_date": "2026-10-04"
+    },
+    {
+      "file": "docs/HANDOFF.md",
+      "source_url": "file:///Users/edwin/projects/ExpenseAI/docs/HANDOFF.md",
+      "sha256": "842c26753e7dec70680f1a7fecd1cd61c07e64c795e5819dcd73dc394beb0e50",
+      "evidence_type": "primary internal run aggregate or implementation record",
+      "read_date": "2026-10-04"
+    }
+  ],
+  "scope": {
+    "cohort": "v2",
+    "cost": 46.92,
+    "lines": 157,
+    "model_min": 135.3,
+    "model_pct": 70.8,
+    "observe_other_min": 3.8,
+    "observe_other_pct": 2.0,
+    "per_trip_cost": 3.13,
+    "per_trip_min": 12.7,
+    "per_trip_steps": 100.8,
+    "steps": 1512,
+    "steps_per_line": 9.63,
+    "tool_min": 52.0,
+    "tool_pct": 27.2,
+    "trip_runs": 15,
+    "turns": 49,
+    "wall_min": 191.2
+  },
+  "step_groups": [
+    [
+      "New-expense navigation",
+      492
+    ],
+    [
+      "Summary + other",
+      202
+    ],
+    [
+      "Expense form",
+      183
+    ],
+    [
+      "Report setup + header",
+      179
+    ],
+    [
+      "Attendees",
+      161
+    ],
+    [
+      "Save as a separate step",
+      156
+    ],
+    [
+      "Hotel, mileage + allowance",
+      139
+    ]
+  ],
+  "phases": [
+    {
+      "actions_per_step": 1.01,
+      "cost": 14.17,
+      "cost_pct": 30.2,
+      "model_min": 34.9,
+      "model_s_mean": 4.26,
+      "name": "新建费用导航（Add → 手工创建 → 选类型）",
+      "out_tok_mean": 102.0,
+      "phase": "nav",
+      "steps": 492,
+      "steps_pct": 32.5,
+      "tool_min": 9.9
+    },
+    {
+      "actions_per_step": 6.31,
+      "cost": 5.85,
+      "cost_pct": 12.5,
+      "model_min": 25.4,
+      "model_s_mean": 8.31,
+      "name": "填费用表单（可含上传、保存）",
+      "out_tok_mean": 359.0,
+      "phase": "form",
+      "steps": 183,
+      "steps_pct": 12.1,
+      "tool_min": 15.4
+    },
+    {
+      "actions_per_step": 2.02,
+      "cost": 5.82,
+      "cost_pct": 12.4,
+      "model_min": 12.8,
+      "model_s_mean": 4.79,
+      "name": "与会者",
+      "out_tok_mean": 135.0,
+      "phase": "attendees",
+      "steps": 161,
+      "steps_pct": 10.6,
+      "tool_min": 5.8
+    },
+    {
+      "actions_per_step": 1.27,
+      "cost": 4.74,
+      "cost_pct": 10.1,
+      "model_min": 11.2,
+      "model_s_mean": 4.3,
+      "name": "单独一步点保存",
+      "out_tok_mean": 106.0,
+      "phase": "save",
+      "steps": 156,
+      "steps_pct": 10.3,
+      "tool_min": 7.1
+    },
+    {
+      "actions_per_step": 1.38,
+      "cost": 3.56,
+      "cost_pct": 7.6,
+      "model_min": 7.3,
+      "model_s_mean": 4.66,
+      "name": "开场：主页、建单、打开报销单",
+      "out_tok_mean": 116.0,
+      "phase": "turn_setup",
+      "steps": 94,
+      "steps_pct": 6.2,
+      "tool_min": 3.3
+    },
+    {
+      "actions_per_step": 1.11,
+      "cost": 2.71,
+      "cost_pct": 5.8,
+      "model_min": 7.3,
+      "model_s_mean": 5.17,
+      "name": "表头：查看或修改",
+      "out_tok_mean": 136.0,
+      "phase": "header",
+      "steps": 85,
+      "steps_pct": 5.6,
+      "tool_min": 1.9
+    },
+    {
+      "actions_per_step": 2.57,
+      "cost": 1.67,
+      "cost_pct": 3.6,
+      "model_min": 5.0,
+      "model_s_mean": 4.95,
+      "name": "住宿逐晚明细",
+      "out_tok_mean": 187.0,
+      "phase": "itemize",
+      "steps": 60,
+      "steps_pct": 4.0,
+      "tool_min": 2.8
+    },
+    {
+      "actions_per_step": 1.59,
+      "cost": 1.39,
+      "cost_pct": 3.0,
+      "model_min": 4.2,
+      "model_s_mean": 5.11,
+      "name": "里程计算器",
+      "out_tok_mean": 161.0,
+      "phase": "mileage",
+      "steps": 49,
+      "steps_pct": 3.2,
+      "tool_min": 1.6
+    },
+    {
+      "actions_per_step": 1.0,
+      "cost": 1.72,
+      "cost_pct": 3.7,
+      "model_min": 12.2,
+      "model_s_mean": 14.89,
+      "name": "回合总结（done）",
+      "out_tok_mean": 593.0,
+      "phase": "done",
+      "steps": 49,
+      "steps_pct": 3.2,
+      "tool_min": 0.0
+    },
+    {
+      "actions_per_step": 1.0,
+      "cost": 1.07,
+      "cost_pct": 2.3,
+      "model_min": 2.0,
+      "model_s_mean": 3.17,
+      "name": "单独一步 wait",
+      "out_tok_mean": 65.0,
+      "phase": "wait",
+      "steps": 37,
+      "steps_pct": 2.4,
+      "tool_min": 1.5
+    },
+    {
+      "actions_per_step": 1.5,
+      "cost": 1.13,
+      "cost_pct": 2.4,
+      "model_min": 5.4,
+      "model_s_mean": 8.98,
+      "name": "单独一步 flag",
+      "out_tok_mean": 311.0,
+      "phase": "flag",
+      "steps": 36,
+      "steps_pct": 2.4,
+      "tool_min": 0.0
+    },
+    {
+      "actions_per_step": 1.0,
+      "cost": 1.01,
+      "cost_pct": 2.2,
+      "model_min": 2.3,
+      "model_s_mean": 4.2,
+      "name": "查看已有费用行",
+      "out_tok_mean": 98.0,
+      "phase": "review",
+      "steps": 33,
+      "steps_pct": 2.2,
+      "tool_min": 0.7
+    },
+    {
+      "actions_per_step": 1.9,
+      "cost": 0.84,
+      "cost_pct": 1.8,
+      "model_min": 2.3,
+      "model_s_mean": 4.51,
+      "name": "按天补贴向导",
+      "out_tok_mean": 150.0,
+      "phase": "per_diem",
+      "steps": 30,
+      "steps_pct": 2.0,
+      "tool_min": 1.0
+    },
+    {
+      "actions_per_step": 1.08,
+      "cost": 0.62,
+      "cost_pct": 1.3,
+      "model_min": 1.8,
+      "model_s_mean": 4.53,
+      "name": "单独一步附收据",
+      "out_tok_mean": 106.0,
+      "phase": "receipt",
+      "steps": 24,
+      "steps_pct": 1.6,
+      "tool_min": 0.6
+    },
+    {
+      "actions_per_step": 1.0,
+      "cost": 0.64,
+      "cost_pct": 1.4,
+      "model_min": 1.4,
+      "model_s_mean": 3.73,
+      "name": "关弹窗 / 取消",
+      "out_tok_mean": 89.0,
+      "phase": "dismiss",
+      "steps": 23,
+      "steps_pct": 1.5,
+      "tool_min": 0.4
+    }
+  ],
+  "routine_phases": {
+    "cost_pct": 54.3,
+    "model_min": 64.5,
+    "model_pct": 47.7,
+    "steps_pct": 57.0
+  },
+  "ordinary_lines": {
+    "by_steps": {
+      "10": 19,
+      "11": 9,
+      "12": 39,
+      "3": 8,
+      "4": 3,
+      "5": 83,
+      "6": 116,
+      "7": 80,
+      "8": 49,
+      "9": 34
+    },
+    "le5_pct": 21.4,
+    "lines": 440,
+    "v2_le5_pct": 65.9,
+    "v2_lines": 126,
+    "v2_mean": 5.63,
+    "v2_sequences": [
+      [
+        "nav → nav → nav → form → save",
+        72
+      ],
+      [
+        "nav → nav → nav → nav → form → save",
+        17
+      ],
+      [
+        "nav → form → save",
+        6
+      ],
+      [
+        "nav → nav → nav → form → save → flag → flag",
+        4
+      ],
+      [
+        "nav → nav → nav → form → form → save",
+        3
+      ],
+      [
+        "nav → nav → nav → form → save → flag",
+        3
+      ],
+      [
+        "nav → nav → nav → form → receipt → receipt → dismiss → save",
+        2
+      ],
+      [
+        "nav → nav → nav → nav → form → save → flag",
+        2
+      ]
+    ]
+  },
+  "cases": {
+    "save": {
+      "date": "2026-09-21",
+      "trip": "R",
+      "turn": 2,
+      "whole_turn_steps": 135,
+      "extra_steps": 124,
+      "extra_cost_usd": 4.2,
+      "initial_expense_usd": 395,
+      "status": "Saved-line checks and retry guards implemented; live comparison pending."
+    },
+    "dropdown": {
+      "analysis_date": "2026-09-24",
+      "feedback_messages": 93,
+      "selected_in_next_observation": 20,
+      "scope": "Historical all-run feedback-message sample, not v2-only.",
+      "status": "Patched 2026-09-24; TestTrack and live validation pending."
+    }
+  }
+}
