@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 page 03 source paths added; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Part 3 Chinese explanations for all 58 slides added; slide PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -57,6 +57,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-04 — Codex — Added Chinese page-by-page explanations for all 58 current short-deck slides (cover, 14 main pages and 43 appendix pages): `notes/part3/2026-10-04-part3-v2-slide-explanations-zh.md` and a matching HTML reader. Clarified workflow, data hierarchy, score denominators and trajectory-analysis limits using the current deck; verified complete ordered slide-link coverage. Slide source and outputs unchanged; existing PDF update pending. No E/D changes.
 
 - 2026-10-04 — Codex — Added verified ExpenseAI repository paths inside all six page 03 workflow boxes, with a shared repository-root label. Runs and scores now lists score artifacts and the raw trajectory directory separately. Preserved the existing trajectory section and all other pages; short HTML and root preview synchronized. PDF update pending. No E/D changes.
 
