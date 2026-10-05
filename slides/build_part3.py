@@ -993,7 +993,7 @@ slide("x04", "Five ways a document can be handled", deck="v2",
 </div>
 <div class="xgrid" style="grid-template-columns:1fr 1fr">
   <div class="xbox"><div class="xk">a flag has a level · non-travel data</div><b>notice</b>: filed as it is, the reader is told something — supplies paid out of pocket, with GW’s preferred P-Card named ({xid("NC-SELF-PAID")})<br><b>needs review</b>: a person must decide — a computer under $5,000 bought by the traveler, filed under 52193, since GW IT orders computers</div>
-  <div class="xbox"><div class="xk">Cases requiring policy judgment</div>a situation whose answer is more than copying the receipt: every handling except “file”, {N_SIT - JUDG['none']} of {N_SIT}. <span class="xnote">Tests: each time a travel situation was scored in a valid trip-run, from the situation ledger of 20 September (calc.); 8 of the 9 situations never passed need a flag.</span></div>
+  <div class="xbox"><div class="xk">judgment call</div>a situation whose answer is more than copying the receipt: every handling except “file”, {N_SIT - JUDG['none']} of {N_SIT}. <span class="xnote">Tests: each time a travel situation was scored in a valid trip-run, from the situation ledger of 20 September (calc.); 8 of the 9 situations never passed need a flag.</span></div>
 </div>""", chip=("#e2", "Appendix E2"), page_refs=False)
 
 # ---------------------------------------------------------------- D5 · families
