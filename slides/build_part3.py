@@ -1004,43 +1004,46 @@ slide("x04", "Five ways a document can be handled", deck="v2",
 
 # ---------------------------------------------------------------- D5 · families
 _FAM = XF["situations"]["families"]
-def xfam(name, n, img, sid_, j, what):
-    pic = ximg(img, "width:100%;max-height:74px;object-fit:cover;object-position:top") if img else ""
-    return (f'<div class="xbox" style="display:flex;flex-direction:column;gap:4px;padding:6px 8px">'
-            f'<div><b>{name}</b> · {n}</div>{pic}<div style="font-size:11px;line-height:1.3">{xid(sid_)} {hp(j)}<br>{what}</div></div>')
 _tf, _nf = _FAM["travel"], _FAM["non_travel"]
-slide("x05", f"What the situations are about: {len(_tf) + len(_nf)} families of expense", deck="v2",
-  callout=f"<p><b>Each situation belongs to one family, the kind of expense it is about: {len(_tf)} families in travel and {len(_nf)} outside it, so every kind of expense the policy decides has situations of its own.</b></p>",
-  body=f"""<div class="xk" style="margin:0">travel · {N_TRAV} situations</div>
-<div class="xgrid" style="grid-template-columns:repeat(7,1fr);gap:7px">
-  {xfam("airfare", _tf["airfare"], "united.png", "AIR-COACH-DIRECT", "none", "a coach ticket")}
-  {xfam("lodging", _tf["lodging"], "folio-chicago-top.png", "LOD-FOLIO-PERSONAL", "exclude", "a folio with personal charges")}
-  {xfam("meals", _tf["meals"], "purple-pig.png", "MEAL-BUSINESS-ALCOHOL", "split", "a business lunch with alcohol")}
-  {xfam("ground", _tf["ground"], "uber.png", "GT-UBER-TIP-UPDATED", "skip", "a ride receipt replaced by an updated one")}
-  {xfam("registration", _tf["registration"], "reg-virtual.png", "REG-VIRTUAL", "flag", "an online-only conference")}
-  {xfam("other", _tf["other"], "golf.png", "OTH-CLUB-FEES", "flag", "golf with collaborators")}
-  {xfam("documents", _tf["documents"], "program.png", "DOC-PROGRAM", "skip", "a conference program: not a receipt")}
-</div>
-<div class="xgrid" style="grid-template-columns:repeat(3,1fr);gap:7px">
-  <div class="xbox" style="font-size:11px;padding:5px 8px"><b>foreign</b> · {_tf["foreign"]} &nbsp;{xid("FX-BOTH-CURRENCIES")} {hp("flag")} a card slip in the local currency and in dollars</div>
-  <div class="xbox" style="font-size:11px;padding:5px 8px"><b>funding</b> · {_tf["funding"]} &nbsp;{xid("FUND-GRANT-ENTERTAINMENT")} {hp("skip")} entertainment on a federal grant</div>
-  <div class="xbox" style="font-size:11px;padding:5px 8px"><b>timing</b> · {_tf["timing"]} &nbsp;{xid("TIME-REG-OLD-BUT-FINE")} {hp("none")} a registration paid 100 days before the trip</div>
-</div>
-<div class="xk" style="margin:4px 0 0">non-travel · {N_NON} situations</div>
-<div class="xgrid" style="grid-template-columns:repeat(3,1fr) 2.3fr;gap:7px">
-  {xfam("memberships", _nf["memberships"], "dues.png", "DUES-SOCIETY-ANNUAL", "flag", "professional society dues")}
-  {xfam("supplies", _nf["supplies"], "workstation.png", "SUPP-WORKSTATION-CAPITAL", "skip", "a $6,450 workstation: not in Concur")}
-  {xfam("relocation", _nf["relocation"], "movers.png", "RELOC-FACULTY-MOVERS", "skip", "movers for a new professor: paid through payroll")}
-  <div class="xbox" style="font-size:11px;line-height:1.5;padding:6px 9px">
-   <b>books, printing, postage, phone, other accounts</b> · {_nf["extended"]} {xid("BOOK-RESEARCH-TEXT")} {hp("none")}<br>
-   <b>accounts the test account cannot select</b> · {_nf["ovpr_unselectable"]} {xid("LEASE-COPIER-FIRST-PAYMENT")} {hp("skip")}<br>
-   <b>events, gifts, flowers</b> · {_nf["events"]} {xid("EVENT-FLOWERS")} {hp("none")}<br>
-   <b>recruiting</b> · {_nf["recruiting"]} {xid("RECRUIT-CANDIDATE-DINNER")} {hp("none")}<br>
-   <b>software</b> · {_nf["software"]} {xid("SOFT-SAAS-ANNUAL")} {hp("flag")}<br>
-   <b>subscriptions</b> · {_nf["subscriptions"]} {xid("SUBS-JOURNAL-ANNUAL")} {hp("flag")}<br>
-   <b>paid with the GW P-Card</b> · {_nf["pcard"]} {xid("PCARD-SUBSCRIPTION")} {hp("flag")}<br>
-   <b>non-travel receipts in a trip report</b> · {_nf["mixed"]} {xid("SUPP-ON-TRIP")} {hp("flag")}</div>
-</div>""", chip=("#e2", "Appendix E2"), page_refs=False)
+def family_distribution_fig():
+    """Two distributions of situation definitions, using one common count scale."""
+    names = {
+        "ground": ["Ground transport"], "airfare": ["Airfare"], "other": ["Other travel expenses"],
+        "lodging": ["Lodging"], "meals": ["Meals"], "registration": ["Registration"],
+        "documents": ["Supporting documents"], "foreign": ["Foreign currency"],
+        "funding": ["Funding restrictions"], "timing": ["Payment timing"],
+        "extended": ["Books, printing, postage,", "phone & other accounts"],
+        "supplies": ["Supplies"], "ovpr_unselectable": ["Accounts unavailable to", "the test account"],
+        "events": ["Events, gifts & flowers"], "recruiting": ["Recruiting"], "software": ["Software"],
+        "memberships": ["Memberships"], "subscriptions": ["Subscriptions"],
+        "pcard": ["Paid with GW P-Card"], "mixed": ["Non-travel receipts", "in trip reports"],
+        "relocation": ["Relocation"]}
+    largest = max(max(_tf.values()), max(_nf.values()))
+    sv = ['<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="420" viewBox="0 0 1180 420" role="img" aria-labelledby="family-bars-title family-bars-desc" style="width:100%;height:auto;display:block">',
+          '<title id="family-bars-title">Distribution of 267 situation types: 169 travel and 98 non-travel</title>',
+          '<desc id="family-bars-desc">Two descending horizontal bar charts. Each situation is counted once. Bar lengths use the same scale. Handling labels and individual examples are omitted because this chart describes groups.</desc>']
+    def text(x, y, value, size=13.2, color="#1b2733", bold=False):
+        sv.append(f'<text x="{x}" y="{y}" font-family="Arial" font-size="{size}" fill="{color}" font-weight="{"bold" if bold else "normal"}">{esc(str(value))}</text>')
+    for left, title, data, total in ((0, "Travel", _tf, N_TRAV), (600, "Non-travel", _nf, N_NON)):
+        assert sum(data.values()) == total
+        sv.append(f'<rect x="{left + 0.5}" y="0.5" width="579" height="393" rx="4" fill="#fff" stroke="#d9e1e7"/>')
+        text(left + 18, 28, f"{title} · {total} situations", 20, "#0f5a85", True)
+        text(left + 18, 48, f"{len(data)} groups · number of situation types", 11.5, "#6f7d8a")
+        for i, (key, count) in enumerate(sorted(data.items(), key=lambda item: -item[1])):
+            center = 76 + 29 * i
+            lines = names[key]
+            for j, line in enumerate(lines):
+                text(left + 18, center + 4.4 + (j - (len(lines)-1)/2) * 14, line)
+            width = 265 * count / largest
+            sv.append(f'<rect data-family="{key}" data-count="{count}" x="{left + 247}" y="{center - 6}" width="{width:.3f}" height="12" rx="2" fill="#0f5a85"/>')
+            text(left + 247 + width + 8, center + 4.4, count, 13, "#0f5a85", True)
+    text(0, 416, "Both charts use the same count scale.", 10.5, "#6f7d8a")
+    return "".join(sv) + "</svg>"
+
+slide("x05", "Distribution of situations by group", deck="v2",
+  callout=f"<p><b>The dataset defines {N_SIT} situation types: {N_TRAV} travel and {N_NON} non-travel. Each situation type is counted once in its group.</b></p>",
+  body=f"""<div>{family_distribution_fig()}</div>""",
+  chip=("#e2", "Appendix E2"), page_refs=False)
 
 # ---------------------------------------------------------------- D6 · conditions, form work, traps, basis
 _sc = XF["situations"]["scope"]
