@@ -1099,10 +1099,21 @@ slide("x07", "Instance: generated documents with their answer key", deck="v2",
   <div class="xk">the answer key · what the scorer checks</div>
   <div class="dcode">{_key_code()}</div>
   <div class="xbox"><div class="xk">what an answer key can hold</div>
-   the <b>lines</b> a report must contain: account, amount, date, vendor, currency, nights, attendees · the <b>flags</b> that must be raised, with the words they must use · the <b>documents to leave out</b>, with the reason · the <b>totals that must not appear</b> · what the agent’s <b>summary</b> must mention</div>
-  <div class="xgrid" style="grid-template-columns:1fr 1fr;gap:8px">
-   <div class="xbox"><div class="xk">where the realism comes from</div>{_W["cities_total"]} cities with their real tax rules, airports and vendors · {_W["airlines"]} airlines · {_W["people"]["total"]} people · {_W["conferences"]} conferences · {_PO["templates"]["pdf_templates_in_render_py"]} document layouts copied from real receipts</div>
-   <div class="xbox"><div class="xk">why it can be trusted</div>amounts are computed to the cent before the document is drawn · seeded, so a rerun gives the same files · every PDF says it is a synthetic test document · {N_INST} instances, {N_FILES} files</div>
+   <ul style="margin:4px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:3px;line-height:1.35">
+    <li><b>Required expense lines:</b> account, amount, date, vendor, currency, nights and attendees.</li>
+    <li><b>Required flags:</b> issues to flag and the wording each flag must contain.</li>
+    <li><b>Documents to leave out:</b> which documents must not be filed, and why.</li>
+    <li><b>Forbidden totals:</b> amounts that must not appear as expense lines.</li>
+    <li><b>Final summary:</b> points the agent must mention in its completion message.</li>
+   </ul>
+  </div>
+  <div class="xbox"><div class="xk">how generation is kept consistent</div>
+   <ul style="margin:4px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:3px;line-height:1.35">
+    <li><b>Amounts:</b> computed to the cent before the documents are rendered.</li>
+    <li><b>Reproducibility:</b> the same inputs and random seed reproduce the same files.</li>
+    <li><b>Labeling:</b> every PDF identifies itself as a synthetic test document.</li>
+   </ul>
+   <div class="xnote" style="margin-top:5px">Generated: {N_INST} instances · {N_FILES} files.</div>
   </div>
  </div>
 </div>""", chip=("#e2", "Appendix E2"), page_refs=False)

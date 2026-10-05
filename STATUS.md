@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 situation distributions charted; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Part 3 answer-key and generation bullets clarified; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -57,6 +57,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-04 — Codex — Removed page 09’s realism/materials box. Rewrote answer-key requirements as five bullets and generation controls as three bullets under “How generation is kept consistent”, replacing the broader trust claim. Preserved the generated-instance/file counts. Source, short HTML and root preview synchronized; PDF pending. No E/D changes.
 
 - 2026-10-04 — Codex — Replaced page 07’s example cards and handling labels with two native SVG bar charts: 169 travel situations across 10 groups and 98 non-travel situations across 11 groups. Bars are sorted by count, labeled directly and share one scale; counts describe situation definitions. Clarified the title and removed the unsupported complete-policy-coverage claim. Source, short HTML and root preview synchronized; PDF pending. No E/D changes.
 
