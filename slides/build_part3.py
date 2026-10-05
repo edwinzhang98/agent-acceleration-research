@@ -866,14 +866,29 @@ _s3 = next(x for x in S if x["id"] == "s03c")
 S.append(dict(_s3, id="s03cb", deck="v2", body=_s3["body"].replace("Whether a check is needed is not known in advance", "Which observations can we safely skip?").replace('["submit"]', '["save"]').replace(">submit<", ">save<")))
 
 # ---------------------------------------------------------------- D1 · the chain
+# These are paths in the ExpenseAI source repository, not this deck's snapshot.
+_XPATHS = {
+    "The policy": [("Manual (2024)", "policies/gwu/GW-Travel-Entertainment-Business-Expense-Reimbursement-Manual-rev-2024-02-21.pdf")],
+    "provisions": [("Travel rules", "benchmark/pool/coverage.py"), ("Other rules", "benchmark/pool/coverage_newcats.py")],
+    "situations": [("Travel · sections B/C", "gw_policy_data/experiment/INTERPRETATION.md"), ("Other · sections B/C", "gw_policy_data/experiment_newcats/INTERPRETATION.md")],
+    "instances": [("Travel", "gw_policy_data/experiment/"), ("Other", "gw_policy_data/experiment_newcats/")],
+    "trips": [("All trip folders", "testing_cases/"), ("Trip A", "testing_cases/trip_a_chicago/")],
+    "runs and scores": [("Scores · local", "local_data/batches/<batch>/<trip>/"), ("Trajectory · local", "local_data/runs/<run-id>/")],
+}
 def xstep(kick, n, label, href, defn, ex, img=""):
+    paths = "".join(
+        f'<div><b style="color:var(--accent)">{esc(name)}</b>'
+        f'<code style="display:block;font:9.3px/1.3 Menlo,monospace;overflow-wrap:anywhere">{esc(path).replace("/", "/<wbr>")}</code></div>'
+        for name, path in _XPATHS[label])
+    note = '<div>Documents: <code>files/</code><br>Keys: <code>answers.json</code></div>' if label == "instances" else ""
     return (f'<div class="xstep"><div class="xk"><a href="#{href}">{kick} ↗</a></div>'
             f'<div><span class="n">{n}</span> <b>{label}</b></div><div>{defn}</div>'
-            f'<div class="ex">{ex}</div>{img}</div>')
+            f'<div class="ex">{ex}</div>{img}'
+            f'<div class="xpath" style="margin-top:auto;border-top:1px solid var(--rule);padding-top:6px;display:grid;gap:5px;font-size:10px;line-height:1.3">{paths}{note}</div></div>')
 _arrow = '<div class="xarr">→</div>'
 slide("x01", "How we generate the ExpenseAI evaluation data", deck="v2",
   callout="<p><b>We break GW’s expense policy into rules, write each case a rule decides as a situation, generate documents and an answer key for it, bundle situations into expense reports, and score each report the agent files against its key.</b></p>",
-  body=f"""<div class="xk" style="margin-bottom:0">followed through this section: one hotel folio with personal charges on it, from trip A (Chicago)</div>
+  body=f"""<div class="xk" style="margin-bottom:0;display:flex;justify-content:space-between;gap:12px"><span>example: one hotel folio with personal charges · trip A (Chicago)</span><span style="text-transform:none;letter-spacing:0">Paths relative to <b>~/projects/ExpenseAI/</b></span></div>
 <div class="xchain">{_arrow.join([
     xstep("source", "", "The policy", "x02", "GW’s travel and business expense manual, and 60 web sources: GW pages and federal rules",
           "Manual App. B p.30–31: in-room movies, alcohol and health clubs are personal, not reimbursable", ximg("manual-appb.png")),
