@@ -937,27 +937,28 @@ answer    room + tax, by night</div></div><div class="xarr">→</div><div class=
   <div class="xnote"><b>What changes</b>: the city, hotel, dates, nights, rates, taxes and the personal charges. <b>What stays</b>: the rule tested and the correct handling.</div>
  </div>
  <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
-  <div class="xk">the answer key · what the scorer checks</div>
-  <div class="dcode"><span class="c">// the expected line for the folio, trip A</span>
-"receipt": "Hyatt Regency Chicago folio.pdf",
-"expense_type": "53104-US LODGING EXPENSE",
-"amount": <span class="a">"1120.60"</span>,  "currency": "USD",
-"requires": itemization by night:
-               08-10   297.00 +  47.53 tax
-               08-11   253.00 +  40.49 tax
-               08-12   181.00 +  28.97 tax
-               08-13   235.00 +  37.61 tax
-"unreduced_total": <span class="w">"1182.59"</span>  <span class="c">← must not appear as a line</span>
-"situation": "LOD-FOLIO-PERSONAL"</div>
-  <div class="xbox"><div class="xk">what an answer key can hold</div>
-   <ul style="margin:4px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:3px;line-height:1.35">
-    <li><b>Required expense lines:</b> account, amount, date, vendor, currency, nights and attendees.</li>
-    <li><b>Required flags:</b> issues to flag and the wording each flag must contain.</li>
-    <li><b>Documents to leave out:</b> which documents must not be filed, and why.</li>
-    <li><b>Forbidden totals:</b> amounts that must not appear as expense lines.</li>
-    <li><b>Final summary:</b> points the agent must mention in its completion message.</li>
-   </ul>
-  </div>
+  <div class="xk">answer key · complete hotel expense record, trip A</div>
+  <div class="dcode" style="font-size:10.6px;line-height:1.30">{
+  <b style="color:#0f5a85;font-weight:700">"receipt"</b>: "Hyatt Regency Chicago folio.pdf",
+  <b style="color:#0f5a85;font-weight:700">"expense_type"</b>: "53104-US LODGING EXPENSE",
+  <b style="color:#0f5a85;font-weight:700">"vendor"</b>: "Hyatt Regency Chicago",
+  <b style="color:#0f5a85;font-weight:700">"date"</b>: "2026-08-14",
+  <b style="color:#0f5a85;font-weight:700">"amount"</b>: "1120.60",
+  <b style="color:#0f5a85;font-weight:700">"currency"</b>: "USD",
+  <b style="color:#0f5a85;font-weight:700">"requires"</b>: {
+    <b style="color:#0f5a85;font-weight:700">"itemization"</b>: {<b style="color:#0f5a85;font-weight:700">"type"</b>: "lodging_grid", <b style="color:#0f5a85;font-weight:700">"nights"</b>: [
+      {<b style="color:#0f5a85;font-weight:700">"date"</b>: "2026-08-10", <b style="color:#0f5a85;font-weight:700">"room_rate"</b>: "297.00", <b style="color:#0f5a85;font-weight:700">"room_tax"</b>: "47.53"},
+      {<b style="color:#0f5a85;font-weight:700">"date"</b>: "2026-08-11", <b style="color:#0f5a85;font-weight:700">"room_rate"</b>: "253.00", <b style="color:#0f5a85;font-weight:700">"room_tax"</b>: "40.49"},
+      {<b style="color:#0f5a85;font-weight:700">"date"</b>: "2026-08-12", <b style="color:#0f5a85;font-weight:700">"room_rate"</b>: "181.00", <b style="color:#0f5a85;font-weight:700">"room_tax"</b>: "28.97"},
+      {<b style="color:#0f5a85;font-weight:700">"date"</b>: "2026-08-13", <b style="color:#0f5a85;font-weight:700">"room_rate"</b>: "235.00", <b style="color:#0f5a85;font-weight:700">"room_tax"</b>: "37.61"}
+    ]}
+  },
+  <b style="color:#0f5a85;font-weight:700">"city"</b>: "Chicago, Illinois",
+  <b style="color:#0f5a85;font-weight:700">"expense_type_contains_any"</b>: ["LODGING", "HOTEL"],
+  <b style="color:#0f5a85;font-weight:700">"date_alternatives"</b>: ["2026-08-10"],
+  <b style="color:#0f5a85;font-weight:700">"situation"</b>: "LOD-FOLIO-PERSONAL",
+  <b style="color:#0f5a85;font-weight:700">"unreduced_total"</b>: "1182.59"
+}</div>
   <div class="xbox"><div class="xk">how generation is kept consistent</div>
    <ul style="margin:4px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:3px;line-height:1.35">
     <li><b>Amounts:</b> computed to the cent before the documents are rendered.</li>

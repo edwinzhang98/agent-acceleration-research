@@ -1075,14 +1075,29 @@ slide("x06", "Conditions, form work, traps, and the basis of every answer", deck
 
 # ---------------------------------------------------------------- D7 · an instance and its answer key
 def _key_code():
-    n = FOLIO["requires"]["itemization"]["nights"]
-    nights = "\n".join(f'               {x["date"][5:]}  {x["room_rate"]:>7} + {x["room_tax"]:>6} tax' for x in n)
-    return (f'<span class="c">// the expected line for the folio, trip A</span>\n'
-            f'"receipt": "{FOLIO["receipt"]}",\n"expense_type": "{FOLIO["expense_type"]}",\n'
-            f'"amount": <span class="a">"{FOLIO["amount"]}"</span>,  "currency": "{FOLIO["currency"]}",\n'
-            f'"requires": itemization by night:\n{nights}\n'
-            f'"unreduced_total": <span class="w">"{FOLIO["unreduced_total"]}"</span>  <span class="c">← must not appear as a line</span>\n'
-            f'"situation": "{FOLIO["situation"]}"')
+    # Show every field of this expense record, with compact but valid JSON.
+    lines = ["{"]
+    for i, (key, value) in enumerate(FOLIO.items()):
+        comma = "," if i < len(FOLIO) - 1 else ""
+        if key == "requires":
+            item = value["itemization"]
+            lines += ['  "requires": {',
+                      '    "itemization": {"type": ' + json.dumps(item["type"]) + ', "nights": [']
+            for n, night in enumerate(item["nights"]):
+                lines.append("      " + json.dumps(night, ensure_ascii=False) + ("," if n < len(item["nights"]) - 1 else ""))
+            lines += ['    ]}', '  }' + comma]
+        else:
+            lines.append("  " + json.dumps(key) + ": " + json.dumps(value, ensure_ascii=False) + comma)
+    lines.append("}")
+    raw = "\n".join(lines)
+    assert json.loads(raw) == FOLIO, "Displayed answer record must retain every field and value"
+    parts, pos = [], 0
+    for match in re.finditer(r'("(?:\\.|[^"\\])*")(?=\s*:)', raw):
+        parts.append(esc(raw[pos:match.start()]))
+        parts.append('<b style="color:#0f5a85;font-weight:700">' + esc(match.group()) + '</b>')
+        pos = match.end()
+    parts.append(esc(raw[pos:]))
+    return "".join(parts)
 def xinst(img, cap):
     return f'<div style="display:grid;grid-template-columns:300px 1fr;gap:10px;align-items:center">{ximg(img, "width:300px")}<div class="xnote">{cap}</div></div>'
 slide("x07", "Instance: generated documents with their answer key", deck="v2",
@@ -1096,17 +1111,8 @@ slide("x07", "Instance: generated documents with their answer key", deck="v2",
   <div class="xnote"><b>What changes</b>: the city, hotel, dates, nights, rates, taxes and the personal charges. <b>What stays</b>: the rule tested and the correct handling.</div>
  </div>
  <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
-  <div class="xk">the answer key · what the scorer checks</div>
-  <div class="dcode">{_key_code()}</div>
-  <div class="xbox"><div class="xk">what an answer key can hold</div>
-   <ul style="margin:4px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:3px;line-height:1.35">
-    <li><b>Required expense lines:</b> account, amount, date, vendor, currency, nights and attendees.</li>
-    <li><b>Required flags:</b> issues to flag and the wording each flag must contain.</li>
-    <li><b>Documents to leave out:</b> which documents must not be filed, and why.</li>
-    <li><b>Forbidden totals:</b> amounts that must not appear as expense lines.</li>
-    <li><b>Final summary:</b> points the agent must mention in its completion message.</li>
-   </ul>
-  </div>
+  <div class="xk">answer key · complete hotel expense record, trip A</div>
+  <div class="dcode" style="font-size:10.6px;line-height:1.30">{_key_code()}</div>
   <div class="xbox"><div class="xk">how generation is kept consistent</div>
    <ul style="margin:4px 0 0;padding-left:17px;display:flex;flex-direction:column;gap:3px;line-height:1.35">
     <li><b>Amounts:</b> computed to the cent before the documents are rendered.</li>

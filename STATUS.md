@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 answer-key and generation bullets clarified; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Part 3 complete hotel answer record displayed; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -57,6 +57,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-04 — Codex — Removed page 09’s generic answer-key explanation and displayed all 12 top-level fields of the hotel expense record, including every nested itemization value. Field names are bold blue; values use normal text. Parsed the displayed JSON back and checked equality with the source record. Generation-control bullets retained; short HTML and root preview synchronized; PDF pending. No E/D changes.
 
 - 2026-10-04 — Codex — Removed page 09’s realism/materials box. Rewrote answer-key requirements as five bullets and generation controls as three bullets under “How generation is kept consistent”, replacing the broader trust claim. Preserved the generated-instance/file counts. Source, short HTML and root preview synchronized; PDF pending. No E/D changes.
 
