@@ -1,6 +1,6 @@
 # STATUS — read this first
 
-**Last updated:** 2026-10-04, by Codex (Part 3 original judgment-call heading restored; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
+**Last updated:** 2026-10-04, by Codex (Part 3 judgment-call text and test unit clarified; PDF synchronization pending) · **Canonical document:** `Agent-Acceleration-Consolidated-Dossier-v3-2026-09-27.md` · **Current milestone:** v3 done → working toward **slides**
 
 This file is the index for anyone (human or thread) starting with an empty context. Read it, then open only the files it points to. Keep it under one screen. Update it before you finish a thread (see "How to update" at the bottom).
 
@@ -57,6 +57,8 @@ This file is the index for anyone (human or thread) starting with an empty conte
 - Which of the two dossier framings (JIT-with-deoptimization vs branch-prediction-for-stateful-UIs) leads the paper — dossier §5.6 recommends both in one MLSys submission.
 
 ## Log (newest first; one line per thread)
+
+- 2026-10-04 — Codex — Split page 06’s judgment-call explanation into Meaning, One test and Results (travel only). Defined a test as one situation scored in one valid trip-run, illustrated by 22 scored situations in Trip A (20260914-02), and clarified that ordinary filing is evaluated too. Verified the example against LEDGER.md; source, short HTML and root preview synchronized. PDF pending. No E/D changes.
 
 - 2026-10-04 — Codex — Restored the original page 06 “judgment call” heading after Edwin clarified that he requested an explanation, not a rename. This corrects the preceding mistaken interpretation. Generator, short HTML and root preview synchronized; PDF pending. No E/D changes.
 
